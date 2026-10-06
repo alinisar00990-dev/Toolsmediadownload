@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>PDFNexa - Free PDF Tools</title>
+
+    <!-- PDF Generator Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
 
     <style>
         * {
@@ -42,7 +46,6 @@
             text-decoration: none;
             color: #ffffff;
             margin-left: 20px;
-            transition: 0.3s;
         }
 
         .nav a:hover {
@@ -62,7 +65,6 @@
         .hero h1 {
             font-size: 46px;
             margin-bottom: 15px;
-            color: #ffffff;
         }
 
         .hero p {
@@ -99,7 +101,7 @@
             padding: 25px;
             text-align: center;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-            transition: transform 0.3s, border-color 0.3s;
+            transition: 0.3s;
         }
 
         .tool-card:hover {
@@ -109,7 +111,6 @@
 
         .tool-card h3 {
             margin-bottom: 10px;
-            color: #ffffff;
         }
 
         .tool-card p {
@@ -132,8 +133,96 @@
 
         .tool-card button:hover {
             background: #ffffff;
-            color: #542452;
             transform: scale(1.03);
+        }
+
+        /* JPG TO PDF TOOL */
+
+        .converter {
+            display: none;
+            max-width: 850px;
+            margin: 20px auto 60px;
+            padding: 30px;
+            background: #542452;
+            border: 1px solid rgba(255, 179, 154, 0.3);
+            border-radius: 18px;
+            text-align: center;
+        }
+
+        .converter h2 {
+            color: #FFB39A;
+            margin-bottom: 10px;
+        }
+
+        .converter p {
+            color: #e8d9e4;
+            margin-bottom: 20px;
+        }
+
+        .file-label {
+            display: inline-block;
+            background: #FFB39A;
+            color: #542452;
+            padding: 13px 22px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .file-label:hover {
+            background: #ffffff;
+        }
+
+        #imageInput {
+            display: none;
+        }
+
+        #preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .preview-item {
+            background: #2a1529;
+            border-radius: 10px;
+            padding: 8px;
+            overflow: hidden;
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 130px;
+            object-fit: contain;
+            border-radius: 7px;
+        }
+
+        .preview-item span {
+            display: block;
+            color: #e8d9e4;
+            font-size: 12px;
+            margin-top: 6px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        #createPdfBtn {
+            display: none;
+            margin-top: 25px;
+            border: none;
+            padding: 13px 24px;
+            border-radius: 8px;
+            background: #FFB39A;
+            color: #542452;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #createPdfBtn:hover {
+            background: #ffffff;
         }
 
         .about {
@@ -144,7 +233,6 @@
             background: #542452;
             border: 1px solid rgba(255, 179, 154, 0.25);
             border-radius: 18px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
         }
 
         .about h2 {
@@ -193,13 +281,10 @@
                 padding: 45px 20px;
             }
 
-            .tools h2 {
-                font-size: 26px;
-            }
-
-            .about {
+            .converter {
                 margin-left: 20px;
                 margin-right: 20px;
+                padding: 25px 18px;
             }
         }
     </style>
@@ -212,72 +297,151 @@
         <div class="logo">PDFNexa</div>
 
         <div>
-            <a href="#">Tools</a>
-            <a href="#">About</a>
+            <a href="#tools">Tools</a>
+            <a href="#about">About</a>
         </div>
     </div>
 </header>
 
+
 <section class="hero">
+
     <h1>Free PDF Tools Online</h1>
 
     <p>
         Simple, fast and easy-to-use PDF tools.
         Convert, merge, compress and manage your PDF files online.
     </p>
+
 </section>
 
-<section class="tools">
+
+<section class="tools" id="tools">
 
     <h2>Popular PDF Tools</h2>
 
     <div class="grid">
 
-        <div class="tool-card">
-            <h3>JPG to PDF</h3>
-            <p>Convert your JPG images into a PDF file.</p>
-            <button onclick="alert('JPG to PDF tool coming next!')">
-                Open Tool
-            </button>
-        </div>
+        <!-- JPG TO PDF -->
 
         <div class="tool-card">
+
+            <h3>JPG to PDF</h3>
+
+            <p>
+                Convert your JPG images into a PDF file.
+            </p>
+
+            <button onclick="openJpgTool()">
+                Open Tool
+            </button>
+
+        </div>
+
+
+        <!-- PDF TO JPG -->
+
+        <div class="tool-card">
+
             <h3>PDF to JPG</h3>
-            <p>Convert PDF pages into JPG images.</p>
+
+            <p>
+                Convert PDF pages into JPG images.
+            </p>
+
             <button onclick="alert('PDF to JPG tool coming soon!')">
                 Open Tool
             </button>
+
         </div>
 
+
+        <!-- MERGE PDF -->
+
         <div class="tool-card">
+
             <h3>Merge PDF</h3>
-            <p>Combine multiple PDF files into one document.</p>
+
+            <p>
+                Combine multiple PDF files into one document.
+            </p>
+
             <button onclick="alert('Merge PDF tool coming soon!')">
                 Open Tool
             </button>
+
         </div>
 
+
+        <!-- COMPRESS PDF -->
+
         <div class="tool-card">
+
             <h3>Compress PDF</h3>
-            <p>Reduce PDF file size quickly and easily.</p>
+
+            <p>
+                Reduce PDF file size quickly and easily.
+            </p>
+
             <button onclick="alert('Compress PDF tool coming soon!')">
                 Open Tool
             </button>
+
         </div>
 
+
+        <!-- PDF TO WORD -->
+
         <div class="tool-card">
+
             <h3>PDF to Word</h3>
-            <p>Convert PDF documents into editable Word files.</p>
+
+            <p>
+                Convert PDF documents into editable Word files.
+            </p>
+
             <button onclick="alert('PDF to Word tool coming soon!')">
                 Open Tool
             </button>
+
         </div>
 
     </div>
 
 </section>
 
-<section class="about">
+
+<!-- JPG TO PDF CONVERTER -->
+
+<section class="converter" id="jpgConverter">
+
+    <h2>JPG to PDF Converter</h2>
+
+    <p>
+        Select one or more JPG or PNG images to create a single PDF.
+    </p>
+
+    <label class="file-label" for="imageInput">
+        Select Images
+    </label>
+
+    <input
+        type="file"
+        id="imageInput"
+        accept="image/jpeg,image/png"
+        multiple
+    >
+
+    <div id="preview"></div>
+
+    <button id="createPdfBtn" onclick="createPDF()">
+        Create & Download PDF
+    </button>
+
+</section>
+
+
+<section class="about" id="about">
 
     <h2>Why PDFNexa?</h2>
 
@@ -288,9 +452,196 @@
 
 </section>
 
+
 <footer>
+
     © 2026 PDFNexa. All rights reserved.
+
 </footer>
+
+
+<script>
+
+    const imageInput = document.getElementById("imageInput");
+    const preview = document.getElementById("preview");
+    const createPdfBtn = document.getElementById("createPdfBtn");
+    const converter = document.getElementById("jpgConverter");
+
+    let selectedImages = [];
+
+
+    function openJpgTool() {
+
+        converter.style.display = "block";
+
+        converter.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }
+
+
+    imageInput.addEventListener("change", function () {
+
+        selectedImages = Array.from(this.files);
+
+        preview.innerHTML = "";
+
+        if (selectedImages.length === 0) {
+
+            createPdfBtn.style.display = "none";
+
+            return;
+
+        }
+
+
+        selectedImages.forEach(function(file) {
+
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+
+                const item = document.createElement("div");
+
+                item.className = "preview-item";
+
+                item.innerHTML = `
+                    <img src="${event.target.result}">
+                    <span>${file.name}</span>
+                `;
+
+                preview.appendChild(item);
+
+            };
+
+            reader.readAsDataURL(file);
+
+        });
+
+
+        createPdfBtn.style.display = "inline-block";
+
+    });
+
+
+    async function createPDF() {
+
+        if (selectedImages.length === 0) {
+
+            alert("Please select at least one image.");
+
+            return;
+
+        }
+
+
+        const { jsPDF } = window.jspdf;
+
+        const pdf = new jsPDF("p", "mm", "a4");
+
+
+        for (let i = 0; i < selectedImages.length; i++) {
+
+            const file = selectedImages[i];
+
+            const imageData = await readFileAsDataURL(file);
+
+
+            const img = new Image();
+
+            img.src = imageData;
+
+
+            await new Promise(function(resolve) {
+
+                img.onload = resolve;
+
+            });
+
+
+            const pageWidth = 210;
+            const pageHeight = 297;
+
+            const margin = 10;
+
+            const maxWidth = pageWidth - (margin * 2);
+            const maxHeight = pageHeight - (margin * 2);
+
+
+            let width = img.width;
+            let height = img.height;
+
+
+            const ratio = Math.min(
+                maxWidth / width,
+                maxHeight / height
+            );
+
+
+            width = width * ratio;
+            height = height * ratio;
+
+
+            const x = (pageWidth - width) / 2;
+            const y = (pageHeight - height) / 2;
+
+
+            if (i > 0) {
+
+                pdf.addPage();
+
+            }
+
+
+            let format = "JPEG";
+
+            if (file.type === "image/png") {
+
+                format = "PNG";
+
+            }
+
+
+            pdf.addImage(
+                imageData,
+                format,
+                x,
+                y,
+                width,
+                height
+            );
+
+        }
+
+
+        pdf.save("PDFNexa-Images.pdf");
+
+    }
+
+
+    function readFileAsDataURL(file) {
+
+        return new Promise(function(resolve, reject) {
+
+            const reader = new FileReader();
+
+            reader.onload = function() {
+
+                resolve(reader.result);
+
+            };
+
+            reader.onerror = reject;
+
+            reader.readAsDataURL(file);
+
+        });
+
+    }
+
+</script>
 
 </body>
 </html>
