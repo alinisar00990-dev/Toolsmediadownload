@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>PDFNexa - Free Online PDF Tools</title>
 
     <!-- LOCAL LIBRARIES -->
@@ -19,15 +20,15 @@
         body {
             font-family: Arial, Helvetica, sans-serif;
             background: #160c16;
-            color: white;
+            color: #ffffff;
             min-height: 100vh;
         }
 
         header {
             background: #542452;
+            border-bottom: 3px solid #FFB39A;
             padding: 24px 16px;
             text-align: center;
-            border-bottom: 3px solid #FFB39A;
         }
 
         header h1 {
@@ -55,8 +56,8 @@
 
         .intro h2 {
             color: #FFB39A;
-            margin-bottom: 8px;
             font-size: 25px;
+            margin-bottom: 8px;
         }
 
         .intro p {
@@ -75,7 +76,7 @@
             border: 1px solid #743871;
             border-radius: 14px;
             padding: 22px;
-            box-shadow: 0 7px 22px rgba(0,0,0,0.25);
+            box-shadow: 0 7px 22px rgba(0, 0, 0, 0.25);
         }
 
         .card h3 {
@@ -109,42 +110,44 @@
             cursor: not-allowed;
         }
 
-        .tool-workspace {
+        .workspace {
             display: none;
             background: #542452;
             border: 2px solid #FFB39A;
             border-radius: 15px;
             padding: 22px;
             margin-bottom: 30px;
+            box-shadow: 0 8px 24px rgba(0,0,0,.25);
         }
 
-        .tool-workspace h2 {
-            text-align: center;
+        .workspace h2 {
             color: #FFB39A;
+            text-align: center;
             margin-bottom: 8px;
         }
 
         .description {
+            color: #eaddea;
             text-align: center;
-            color: #e8d9e6;
             font-size: 14px;
             line-height: 1.5;
             margin-bottom: 20px;
         }
 
         .upload-box {
+            background: #381736;
             border: 2px dashed #FFB39A;
             border-radius: 12px;
             padding: 30px 15px;
-            background: #381736;
             text-align: center;
             cursor: pointer;
+            margin-bottom: 15px;
         }
 
         .upload-box strong {
+            display: block;
             color: #FFB39A;
             font-size: 17px;
-            display: block;
             margin-bottom: 7px;
         }
 
@@ -157,65 +160,66 @@
             display: none;
         }
 
+        .status {
+            color: #FFB39A;
+            text-align: center;
+            min-height: 24px;
+            margin: 14px 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
         .preview-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
             gap: 12px;
-            margin-top: 18px;
+            margin: 15px 0;
         }
 
-        .preview-item {
+        .preview-card {
             background: #341532;
             border: 1px solid #764173;
-            border-radius: 9px;
             padding: 6px;
+            border-radius: 9px;
         }
 
-        .preview-item img {
+        .preview-card img {
             width: 100%;
             height: 110px;
-            display: block;
             object-fit: contain;
-            background: white;
+            display: block;
+            background: #ffffff;
             border-radius: 6px;
         }
 
         .preview-label {
             color: #FFB39A;
-            font-size: 11px;
             text-align: center;
+            font-size: 11px;
             padding: 6px 2px;
         }
 
-        .small-download {
-            padding: 8px 5px;
+        .small-btn {
+            padding: 8px 4px;
             font-size: 11px;
         }
 
-        .status {
-            min-height: 24px;
-            text-align: center;
-            margin: 15px 0;
-            color: #FFB39A;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .main-action {
+        .action-button {
             display: none;
+            margin-top: 8px;
         }
 
         .close-button {
             margin-top: 10px;
             background: transparent;
-            border: 1px solid #FFB39A;
             color: #FFB39A;
+            border: 1px solid #FFB39A;
         }
 
         .privacy {
             text-align: center;
-            color: #cbbac9;
             font-size: 12px;
+            color: #cbbac9;
             margin-top: 15px;
         }
 
@@ -239,7 +243,7 @@
             }
 
             .card,
-            .tool-workspace {
+            .workspace {
                 padding: 17px;
             }
         }
@@ -255,86 +259,142 @@
 
 <main class="container">
 
-    <!-- JPG TO PDF -->
-    <section id="jpgWorkspace" class="tool-workspace">
+    <!-- JPG TO PDF WORKSPACE -->
+
+    <section id="jpgTool" class="workspace">
 
         <h2>JPG to PDF Converter</h2>
 
         <p class="description">
-            Select one or multiple JPG or PNG images and combine them into one PDF.
+            Select one or multiple JPG/PNG images and combine them into one PDF.
         </p>
 
-        <div id="jpgUploadBox" class="upload-box">
+        <div class="upload-box"
+             onclick="document.getElementById('jpgFiles').click()">
             <strong>📁 Choose Images</strong>
             <span>JPG, JPEG and PNG supported</span>
         </div>
 
         <input
-            id="jpgInput"
+            id="jpgFiles"
             class="hidden-input"
             type="file"
             accept="image/jpeg,image/png"
             multiple
+            onchange="jpgFilesSelected(this)"
         >
 
         <div id="jpgPreview" class="preview-grid"></div>
 
         <div id="jpgStatus" class="status"></div>
 
-        <button id="createPdfButton" class="main-action">
+        <button
+            id="jpgCreateButton"
+            class="action-button"
+            onclick="createJpgPdf()"
+        >
             Create & Download PDF
         </button>
 
-        <button id="closeJpgButton" class="close-button">
+        <button class="close-button" onclick="closeTools()">
             Close Tool
         </button>
 
         <p class="privacy">
-            Your images are processed directly in your browser.
+            Your files are processed directly in your browser.
         </p>
 
     </section>
 
 
-    <!-- PDF TO JPG -->
-    <section id="pdfJpgWorkspace" class="tool-workspace">
+    <!-- PDF TO JPG WORKSPACE -->
+
+    <section id="pdfJpgTool" class="workspace">
 
         <h2>PDF to JPG Converter</h2>
 
         <p class="description">
-            Upload a PDF and convert every page into a JPG image.
+            Select a PDF and convert its pages into JPG images.
         </p>
 
-        <div id="pdfUploadBox" class="upload-box">
+        <div class="upload-box"
+             onclick="document.getElementById('pdfJpgFile').click()">
             <strong>📄 Choose PDF</strong>
-            <span>Select one PDF file</span>
+            <span>Select one PDF document</span>
         </div>
 
         <input
-            id="pdfInput"
+            id="pdfJpgFile"
             class="hidden-input"
             type="file"
-            accept="application/pdf,.pdf"
+            accept=".pdf,application/pdf"
+            onchange="pdfJpgFileSelected(this)"
         >
 
         <div id="pdfJpgStatus" class="status"></div>
 
-        <button id="convertJpgButton" class="main-action">
+        <button
+            id="pdfJpgConvertButton"
+            class="action-button"
+            onclick="convertPdfToJpg()"
+        >
             Convert PDF to JPG
         </button>
 
         <div id="pdfJpgPreview" class="preview-grid"></div>
 
-        <button id="downloadAllButton" class="main-action">
-            Download All JPG Images
-        </button>
-
-        <button id="closePdfJpgButton" class="close-button">
+        <button class="close-button" onclick="closeTools()">
             Close Tool
         </button>
 
         <p class="privacy">
             Your PDF is processed directly in your browser.
+        </p>
+
+    </section>
+
+
+    <!-- MERGE PDF WORKSPACE -->
+
+    <section id="mergeTool" class="workspace">
+
+        <h2>Merge PDF</h2>
+
+        <p class="description">
+            Select two or more PDF files and combine them into one PDF.
+        </p>
+
+        <div class="upload-box"
+             onclick="document.getElementById('mergeFiles').click()">
+            <strong>📄 Choose PDF Files</strong>
+            <span>Select 2 or more PDF documents</span>
+        </div>
+
+        <input
+            id="mergeFiles"
+            class="hidden-input"
+            type="file"
+            accept=".pdf,application/pdf"
+            multiple
+            onchange="mergeFilesSelected(this)"
+        >
+
+        <div id="mergeStatus" class="status"></div>
+
+        <button
+            id="mergeButton"
+            class="action-button"
+            onclick="mergePdfs()"
+        >
+            Merge & Download PDF
+        </button>
+
+        <button class="close-button" onclick="closeTools()">
+            Close Tool
+        </button>
+
+        <p class="privacy">
+            Your PDFs are processed directly in your browser.
         </p>
 
     </section>
@@ -351,31 +411,50 @@
         <div class="card">
             <h3>JPG to PDF</h3>
             <p>Convert multiple JPG or PNG images into one downloadable PDF.</p>
-            <button id="openJpgButton">Open Tool</button>
+
+            <button onclick="openTool('jpgTool')">
+                Open Tool
+            </button>
         </div>
+
 
         <div class="card">
             <h3>PDF to JPG</h3>
             <p>Convert every page of a PDF document into a JPG image.</p>
-            <button id="openPdfJpgButton">Open Tool</button>
+
+            <button onclick="openTool('pdfJpgTool')">
+                Open Tool
+            </button>
         </div>
+
 
         <div class="card">
             <h3>Merge PDF</h3>
             <p>Combine multiple PDF documents into one PDF file.</p>
-            <button onclick="comingSoon('Merge PDF')">Open Tool</button>
+
+            <button onclick="openTool('mergeTool')">
+                Open Tool
+            </button>
         </div>
+
 
         <div class="card">
             <h3>Compress PDF</h3>
             <p>Reduce PDF file size for easier sharing and storage.</p>
-            <button onclick="comingSoon('Compress PDF')">Open Tool</button>
+
+            <button onclick="comingSoon('Compress PDF')">
+                Open Tool
+            </button>
         </div>
+
 
         <div class="card">
             <h3>PDF to Word</h3>
             <p>Convert your PDF documents into editable Word files.</p>
-            <button onclick="comingSoon('PDF to Word')">Open Tool</button>
+
+            <button onclick="comingSoon('PDF to Word')">
+                Open Tool
+            </button>
         </div>
 
     </section>
@@ -389,369 +468,635 @@
 
 
 <script>
-(function () {
+"use strict";
 
-    "use strict";
+/* =========================================================
+   PDF.JS LOCAL WORKER
+   ========================================================= */
 
-    /* PDF.JS LOCAL WORKER */
+if (window.pdfjsLib) {
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+        "./pdf.worker.min.js";
+}
 
-    if (window.pdfjsLib) {
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc = "./pdf.worker.min.js";
+
+/* =========================================================
+   GENERAL TOOL FUNCTIONS
+   ========================================================= */
+
+function closeTools() {
+
+    document.querySelectorAll(".workspace").forEach(function (tool) {
+        tool.style.display = "none";
+    });
+}
+
+
+function openTool(toolId) {
+
+    closeTools();
+
+    const tool = document.getElementById(toolId);
+
+    if (!tool) {
+        alert("Tool could not be opened.");
+        return;
+    }
+
+    tool.style.display = "block";
+
+    tool.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+
+function comingSoon(name) {
+
+    alert(name + " tool coming soon!");
+}
+
+
+function delay(ms) {
+
+    return new Promise(function (resolve) {
+        setTimeout(resolve, ms);
+    });
+}
+
+
+function downloadBlob(blob, filename) {
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = filename;
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+    setTimeout(function () {
+        URL.revokeObjectURL(url);
+    }, 15000);
+}
+
+
+/* =========================================================
+   JPG TO PDF
+   ========================================================= */
+
+let jpgSelectedFiles = [];
+let jpgObjectUrls = [];
+
+
+function clearJpgUrls() {
+
+    jpgObjectUrls.forEach(function (url) {
+        URL.revokeObjectURL(url);
+    });
+
+    jpgObjectUrls = [];
+}
+
+
+function jpgFilesSelected(input) {
+
+    clearJpgUrls();
+
+    const status =
+        document.getElementById("jpgStatus");
+
+    const preview =
+        document.getElementById("jpgPreview");
+
+    const button =
+        document.getElementById("jpgCreateButton");
+
+
+    jpgSelectedFiles =
+        Array.from(input.files || []).filter(function (file) {
+
+            return (
+                file.type === "image/jpeg" ||
+                file.type === "image/png"
+            );
+        });
+
+
+    preview.innerHTML = "";
+
+
+    if (jpgSelectedFiles.length === 0) {
+
+        status.textContent =
+            "Please select JPG or PNG images.";
+
+        button.style.display =
+            "none";
+
+        return;
     }
 
 
-    /* =========================================================
-       JPG TO PDF
-       ========================================================= */
+    jpgSelectedFiles.forEach(function (file, index) {
 
-    let selectedImages = [];
-    let jpgPreviewUrls = [];
+        const url =
+            URL.createObjectURL(file);
 
-    const jpgWorkspace = document.getElementById("jpgWorkspace");
-    const jpgInput = document.getElementById("jpgInput");
-    const jpgUploadBox = document.getElementById("jpgUploadBox");
-    const jpgPreview = document.getElementById("jpgPreview");
-    const jpgStatus = document.getElementById("jpgStatus");
-    const createPdfButton = document.getElementById("createPdfButton");
+        jpgObjectUrls.push(url);
 
-    document.getElementById("openJpgButton").addEventListener("click", function () {
-        closeAllTools();
-        jpgWorkspace.style.display = "block";
-        jpgWorkspace.scrollIntoView({ behavior: "smooth" });
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "preview-card";
+
+
+        const image =
+            document.createElement("img");
+
+        image.src =
+            url;
+
+
+        const label =
+            document.createElement("div");
+
+        label.className =
+            "preview-label";
+
+        label.textContent =
+            "Image " + (index + 1);
+
+
+        card.appendChild(image);
+        card.appendChild(label);
+
+        preview.appendChild(card);
     });
 
-    document.getElementById("closeJpgButton").addEventListener("click", function () {
-        jpgWorkspace.style.display = "none";
-    });
 
-    jpgUploadBox.addEventListener("click", function () {
-        jpgInput.click();
-    });
+    status.textContent =
+        jpgSelectedFiles.length +
+        (jpgSelectedFiles.length === 1
+            ? " image selected."
+            : " images selected.");
 
-    jpgInput.addEventListener("change", function (event) {
 
-        clearJpgPreviewUrls();
+    button.style.display =
+        "block";
+}
 
-        selectedImages = Array.from(event.target.files || []).filter(function (file) {
-            return file.type === "image/jpeg" || file.type === "image/png";
-        });
 
-        jpgPreview.innerHTML = "";
-        jpgStatus.textContent = "";
+async function createJpgPdf() {
 
-        if (!selectedImages.length) {
-            createPdfButton.style.display = "none";
-            jpgStatus.textContent = "Please select JPG or PNG images.";
-            return;
-        }
+    const status =
+        document.getElementById("jpgStatus");
 
-        selectedImages.forEach(function (file, index) {
+    const button =
+        document.getElementById("jpgCreateButton");
 
-            const url = URL.createObjectURL(file);
-            jpgPreviewUrls.push(url);
 
-            const item = document.createElement("div");
-            item.className = "preview-item";
+    if (
+        !window.PDFLib ||
+        !window.PDFLib.PDFDocument
+    ) {
 
-            const image = document.createElement("img");
-            image.src = url;
+        status.textContent =
+            "Local PDF engine could not load.";
 
-            const label = document.createElement("div");
-            label.className = "preview-label";
-            label.textContent = "Image " + (index + 1);
+        return;
+    }
 
-            item.appendChild(image);
-            item.appendChild(label);
-            jpgPreview.appendChild(item);
-        });
 
-        jpgStatus.textContent =
-            selectedImages.length +
-            (selectedImages.length === 1 ? " image selected." : " images selected.");
+    if (!jpgSelectedFiles.length) {
 
-        createPdfButton.style.display = "block";
-    });
+        status.textContent =
+            "Please select images first.";
 
-    createPdfButton.addEventListener("click", async function () {
+        return;
+    }
 
-        if (!window.PDFLib || !window.PDFLib.PDFDocument) {
-            jpgStatus.textContent = "Local PDF engine could not load.";
-            return;
-        }
 
-        if (!selectedImages.length) {
-            return;
-        }
+    button.disabled = true;
 
-        createPdfButton.disabled = true;
-        createPdfButton.textContent = "Creating PDF...";
+    button.textContent =
+        "Creating PDF...";
 
-        try {
 
-            const pdf = await window.PDFLib.PDFDocument.create();
+    try {
 
-            for (let i = 0; i < selectedImages.length; i++) {
+        const pdf =
+            await window.PDFLib.PDFDocument.create();
 
-                jpgStatus.textContent =
-                    "Processing image " + (i + 1) + " of " + selectedImages.length + "...";
 
-                await delay(30);
+        for (
+            let i = 0;
+            i < jpgSelectedFiles.length;
+            i++
+        ) {
 
-                const file = selectedImages[i];
-                const bytes = await file.arrayBuffer();
+            const file =
+                jpgSelectedFiles[i];
 
-                const embeddedImage =
-                    file.type === "image/png"
-                        ? await pdf.embedPng(bytes)
-                        : await pdf.embedJpg(bytes);
 
-                const scale = Math.min(
+            status.textContent =
+                "Processing image " +
+                (i + 1) +
+                " of " +
+                jpgSelectedFiles.length +
+                "...";
+
+
+            await delay(30);
+
+
+            const bytes =
+                await file.arrayBuffer();
+
+
+            let image;
+
+
+            if (file.type === "image/png") {
+
+                image =
+                    await pdf.embedPng(bytes);
+
+            } else {
+
+                image =
+                    await pdf.embedJpg(bytes);
+            }
+
+
+            const scale =
+                Math.min(
                     1,
-                    1600 / embeddedImage.width,
-                    2200 / embeddedImage.height
+                    1600 / image.width,
+                    2200 / image.height
                 );
 
-                const width = embeddedImage.width * scale;
-                const height = embeddedImage.height * scale;
 
-                const page = pdf.addPage([width, height]);
+            const width =
+                image.width * scale;
 
-                page.drawImage(embeddedImage, {
+            const height =
+                image.height * scale;
+
+
+            const page =
+                pdf.addPage([
+                    width,
+                    height
+                ]);
+
+
+            page.drawImage(
+                image,
+                {
                     x: 0,
                     y: 0,
                     width: width,
                     height: height
-                });
-            }
+                }
+            );
+        }
 
-            jpgStatus.textContent = "Preparing download...";
 
-            const bytes = await pdf.save();
+        status.textContent =
+            "Preparing PDF...";
 
-            downloadBlob(
-                new Blob([bytes], { type: "application/pdf" }),
-                "PDFNexa-JPG-to-PDF.pdf"
+
+        const finalPdf =
+            await pdf.save();
+
+
+        downloadBlob(
+            new Blob(
+                [finalPdf],
+                {
+                    type: "application/pdf"
+                }
+            ),
+            "PDFNexa-JPG-to-PDF.pdf"
+        );
+
+
+        status.textContent =
+            "✓ PDF created successfully!";
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        status.textContent =
+            "Could not create PDF. Please try another image.";
+
+
+    } finally {
+
+        button.disabled =
+            false;
+
+        button.textContent =
+            "Create & Download PDF";
+    }
+}
+
+
+/* =========================================================
+   PDF TO JPG
+   ========================================================= */
+
+let selectedPdfForJpg = null;
+
+
+function pdfJpgFileSelected(input) {
+
+    const status =
+        document.getElementById("pdfJpgStatus");
+
+    const button =
+        document.getElementById("pdfJpgConvertButton");
+
+    const preview =
+        document.getElementById("pdfJpgPreview");
+
+
+    selectedPdfForJpg =
+        input.files && input.files[0]
+            ? input.files[0]
+            : null;
+
+
+    preview.innerHTML = "";
+
+
+    if (!selectedPdfForJpg) {
+
+        status.textContent = "";
+
+        button.style.display =
+            "none";
+
+        return;
+    }
+
+
+    status.textContent =
+        "Selected: " +
+        selectedPdfForJpg.name;
+
+
+    button.style.display =
+        "block";
+}
+
+
+async function convertPdfToJpg() {
+
+    const status =
+        document.getElementById("pdfJpgStatus");
+
+    const button =
+        document.getElementById("pdfJpgConvertButton");
+
+    const preview =
+        document.getElementById("pdfJpgPreview");
+
+
+    if (!window.pdfjsLib) {
+
+        status.textContent =
+            "Local PDF renderer could not load.";
+
+        return;
+    }
+
+
+    if (!selectedPdfForJpg) {
+
+        status.textContent =
+            "Please select a PDF first.";
+
+        return;
+    }
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "Converting...";
+
+    preview.innerHTML = "";
+
+
+    try {
+
+        const bytes =
+            new Uint8Array(
+                await selectedPdfForJpg.arrayBuffer()
             );
 
-            jpgStatus.textContent = "✓ PDF created successfully!";
 
-        } catch (error) {
-
-            console.error(error);
-            jpgStatus.textContent = "Could not create the PDF.";
-
-        } finally {
-
-            createPdfButton.disabled = false;
-            createPdfButton.textContent = "Create & Download PDF";
-        }
-    });
+        const loadingTask =
+            window.pdfjsLib.getDocument({
+                data: bytes
+            });
 
 
-    /* =========================================================
-       PDF TO JPG
-       ========================================================= */
+        const pdf =
+            await loadingTask.promise;
 
-    let selectedPdf = null;
-    let generatedJpgs = [];
 
-    const pdfJpgWorkspace = document.getElementById("pdfJpgWorkspace");
-    const pdfInput = document.getElementById("pdfInput");
-    const pdfUploadBox = document.getElementById("pdfUploadBox");
-    const pdfJpgStatus = document.getElementById("pdfJpgStatus");
-    const convertJpgButton = document.getElementById("convertJpgButton");
-    const pdfJpgPreview = document.getElementById("pdfJpgPreview");
-    const downloadAllButton = document.getElementById("downloadAllButton");
+        for (
+            let pageNumber = 1;
+            pageNumber <= pdf.numPages;
+            pageNumber++
+        ) {
 
-    document.getElementById("openPdfJpgButton").addEventListener("click", function () {
+            status.textContent =
+                "Converting page " +
+                pageNumber +
+                " of " +
+                pdf.numPages +
+                "...";
 
-        closeAllTools();
 
-        pdfJpgWorkspace.style.display = "block";
+            await delay(30);
 
-        pdfJpgWorkspace.scrollIntoView({
-            behavior: "smooth"
-        });
-    });
 
-    document.getElementById("closePdfJpgButton").addEventListener("click", function () {
-        pdfJpgWorkspace.style.display = "none";
-    });
+            const page =
+                await pdf.getPage(pageNumber);
 
-    pdfUploadBox.addEventListener("click", function () {
-        pdfInput.click();
-    });
 
-    pdfInput.addEventListener("change", function (event) {
-
-        selectedPdf = event.target.files[0] || null;
-
-        generatedJpgs = [];
-        pdfJpgPreview.innerHTML = "";
-        downloadAllButton.style.display = "none";
-
-        if (!selectedPdf) {
-            convertJpgButton.style.display = "none";
-            return;
-        }
-
-        pdfJpgStatus.textContent =
-            "Selected: " + selectedPdf.name;
-
-        convertJpgButton.style.display = "block";
-    });
-
-    convertJpgButton.addEventListener("click", async function () {
-
-        if (!selectedPdf) {
-            return;
-        }
-
-        if (!window.pdfjsLib) {
-            pdfJpgStatus.textContent =
-                "Local PDF renderer could not load.";
-            return;
-        }
-
-        convertJpgButton.disabled = true;
-        convertJpgButton.textContent = "Converting...";
-
-        generatedJpgs = [];
-        pdfJpgPreview.innerHTML = "";
-        downloadAllButton.style.display = "none";
-
-        try {
-
-            const pdfBytes = new Uint8Array(
-                await selectedPdf.arrayBuffer()
-            );
-
-            const loadingTask =
-                window.pdfjsLib.getDocument({
-                    data: pdfBytes
+            const viewport =
+                page.getViewport({
+                    scale: 1.7
                 });
 
-            const pdfDocument =
-                await loadingTask.promise;
 
-            for (
-                let pageNumber = 1;
-                pageNumber <= pdfDocument.numPages;
-                pageNumber++
-            ) {
+            const canvas =
+                document.createElement("canvas");
 
-                pdfJpgStatus.textContent =
-                    "Converting page " +
-                    pageNumber +
-                    " of " +
-                    pdfDocument.numPages +
-                    "...";
 
-                await delay(30);
-
-                const page =
-                    await pdfDocument.getPage(pageNumber);
-
-                const viewport =
-                    page.getViewport({
-                        scale: 1.7
-                    });
-
-                const canvas =
-                    document.createElement("canvas");
-
-                const context =
-                    canvas.getContext("2d", {
+            const context =
+                canvas.getContext(
+                    "2d",
+                    {
                         alpha: false
-                    });
-
-                canvas.width =
-                    Math.floor(viewport.width);
-
-                canvas.height =
-                    Math.floor(viewport.height);
-
-                context.fillStyle = "#ffffff";
-
-                context.fillRect(
-                    0,
-                    0,
-                    canvas.width,
-                    canvas.height
+                    }
                 );
 
-                await page.render({
-                    canvasContext: context,
-                    viewport: viewport
-                }).promise;
 
-                const jpgBlob =
-                    await canvasToJpgBlob(canvas);
+            canvas.width =
+                Math.floor(viewport.width);
 
-                const jpgUrl =
-                    URL.createObjectURL(jpgBlob);
+            canvas.height =
+                Math.floor(viewport.height);
 
-                generatedJpgs.push({
-                    blob: jpgBlob,
-                    url: jpgUrl,
-                    filename:
-                        "PDFNexa-page-" +
-                        pageNumber +
-                        ".jpg"
-                });
 
-                addPdfJpgPreview(
-                    jpgUrl,
-                    pageNumber,
-                    jpgBlob
-                );
+            context.fillStyle =
+                "#ffffff";
 
-                canvas.width = 1;
-                canvas.height = 1;
-            }
 
-            pdfJpgStatus.textContent =
-                "✓ " +
-                generatedJpgs.length +
-                " JPG image(s) created.";
-
-            downloadAllButton.style.display =
-                "block";
-
-        } catch (error) {
-
-            console.error(
-                "PDF to JPG error:",
-                error
+            context.fillRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
             );
 
-            pdfJpgStatus.textContent =
-                "Could not convert this PDF. Please try another PDF.";
 
-        } finally {
+            await page.render({
+                canvasContext: context,
+                viewport: viewport
+            }).promise;
 
-            convertJpgButton.disabled = false;
-            convertJpgButton.textContent = "Convert PDF to JPG";
+
+            const blob =
+                await canvasToJpeg(canvas);
+
+
+            const url =
+                URL.createObjectURL(blob);
+
+
+            addJpgResult(
+                preview,
+                url,
+                blob,
+                pageNumber
+            );
+
+
+            canvas.width = 1;
+            canvas.height = 1;
         }
+
+
+        status.textContent =
+            "✓ PDF converted successfully!";
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        status.textContent =
+            "Could not convert this PDF.";
+
+
+    } finally {
+
+        button.disabled =
+            false;
+
+        button.textContent =
+            "Convert PDF to JPG";
+    }
+}
+
+
+function canvasToJpeg(canvas) {
+
+    return new Promise(function (resolve, reject) {
+
+        canvas.toBlob(
+            function (blob) {
+
+                if (blob) {
+
+                    resolve(blob);
+
+                } else {
+
+                    reject(
+                        new Error(
+                            "Could not create JPG."
+                        )
+                    );
+                }
+            },
+            "image/jpeg",
+            0.92
+        );
     });
+}
 
-    function addPdfJpgPreview(url, pageNumber, blob) {
 
-        const item = document.createElement("div");
-        item.className = "preview-item";
+function addJpgResult(
+    container,
+    url,
+    blob,
+    pageNumber
+) {
 
-        const image = document.createElement("img");
-        image.src = url;
+    const card =
+        document.createElement("div");
 
-        const label = document.createElement("div");
-        label.className = "preview-label";
-        label.textContent = "Page " + pageNumber;
+    card.className =
+        "preview-card";
 
-        const button = document.createElement("button");
-        button.className = "small-download";
-        button.textContent = "Download JPG";
 
-        button.addEventListener("click", function () {
+    const image =
+        document.createElement("img");
+
+    image.src =
+        url;
+
+
+    const label =
+        document.createElement("div");
+
+    label.className =
+        "preview-label";
+
+    label.textContent =
+        "Page " + pageNumber;
+
+
+    const button =
+        document.createElement("button");
+
+    button.className =
+        "small-btn";
+
+    button.textContent =
+        "Download JPG";
+
+
+    button.onclick =
+        function () {
 
             downloadBlob(
                 blob,
@@ -759,13 +1104,189 @@
                 pageNumber +
                 ".jpg"
             );
-        });
+        };
 
-        item.appendChild(image);
-        item.appendChild(label);
-        item.appendChild(button);
 
-        pdfJpgPreview.appendChild(item);
+    card.appendChild(image);
+
+    card.appendChild(label);
+
+    card.appendChild(button);
+
+    container.appendChild(card);
+}
+
+
+/* =========================================================
+   MERGE PDF
+   ========================================================= */
+
+let selectedMergeFiles = [];
+
+
+function mergeFilesSelected(input) {
+
+    const status =
+        document.getElementById("mergeStatus");
+
+    const button =
+        document.getElementById("mergeButton");
+
+
+    selectedMergeFiles =
+        Array.from(input.files || []);
+
+
+    if (selectedMergeFiles.length < 2) {
+
+        status.textContent =
+            "Please select at least 2 PDF files.";
+
+        button.style.display =
+            "none";
+
+        return;
     }
 
-    downloadAllButton.addEventListener("click", async function () {
+
+    status.textContent =
+        selectedMergeFiles.length +
+        " PDF files selected.";
+
+
+    button.style.display =
+        "block";
+}
+
+
+async function mergePdfs() {
+
+    const status =
+        document.getElementById("mergeStatus");
+
+    const button =
+        document.getElementById("mergeButton");
+
+
+    if (
+        !window.PDFLib ||
+        !window.PDFLib.PDFDocument
+    ) {
+
+        status.textContent =
+            "Local PDF engine could not load.";
+
+        return;
+    }
+
+
+    if (selectedMergeFiles.length < 2) {
+
+        status.textContent =
+            "Select at least 2 PDF files.";
+
+        return;
+    }
+
+
+    button.disabled =
+        true;
+
+    button.textContent =
+        "Merging...";
+
+
+    try {
+
+        const merged =
+            await window.PDFLib.PDFDocument.create();
+
+
+        for (
+            let i = 0;
+            i < selectedMergeFiles.length;
+            i++
+        ) {
+
+            status.textContent =
+                "Adding PDF " +
+                (i + 1) +
+                " of " +
+                selectedMergeFiles.length +
+                "...";
+
+
+            const bytes =
+                await selectedMergeFiles[i]
+                    .arrayBuffer();
+
+
+            const source =
+                await window.PDFLib.PDFDocument.load(
+                    bytes
+                );
+
+
+            const pageIndices =
+                source.getPageIndices();
+
+
+            const pages =
+                await merged.copyPages(
+                    source,
+                    pageIndices
+                );
+
+
+            pages.forEach(function (page) {
+
+                merged.addPage(page);
+
+            });
+        }
+
+
+        status.textContent =
+            "Preparing merged PDF...";
+
+
+        const bytes =
+            await merged.save();
+
+
+        downloadBlob(
+            new Blob(
+                [bytes],
+                {
+                    type: "application/pdf"
+                }
+            ),
+            "PDFNexa-Merged.pdf"
+        );
+
+
+        status.textContent =
+            "✓ PDFs merged successfully!";
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        status.textContent =
+            "Could not merge these PDF files.";
+
+
+    } finally {
+
+        button.disabled =
+            false;
+
+        button.textContent =
+            "Merge & Download PDF";
+    }
+}
+</script>
+
+</body>
+</html>
