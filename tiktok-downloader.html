@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TikTok Video Downloader - Free No Watermark | PDFNexa</title>
+    <meta name="description" content="Download TikTok videos without watermark in HD MP4 or MP3 audio. Free, fast, no signup. Works on iPhone, Android, and PC.">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #160c16;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: #542452;
+            border-bottom: 3px solid #FFB39A;
+            padding: 24px 16px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #FFB39A;
+            font-size: 32px;
+            margin-bottom: 6px;
+        }
+
+        header h1 a {
+            color: #FFB39A;
+            text-decoration: none;
+        }
+
+        header p {
+            color: #f5e7f2;
+            font-size: 14px;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 700px;
+            margin: auto;
+            padding: 30px 0;
+            flex: 1;
+        }
+
+        .tool-title {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .tool-title h2 {
+            color: #FFB39A;
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+        .tool-title p {
+            color: #d8c9d6;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .tool-card {
+            background: #542452;
+            border: 2px solid #FFB39A;
+            border-radius: 15px;
+            padding: 22px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+            margin-bottom: 24px;
+        }
+
+        .url-input-box {
+            background: #381736;
+            border: 2px dashed #FFB39A;
+            border-radius: 12px;
+            padding: 18px 15px;
+            margin-bottom: 15px;
+        }
+
+        .url-input-box label {
+            display: block;
+            color: #FFB39A;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .url-input-wrapper {
+            display: flex;
+            gap: 8px;
+        }
+
+        .url-input-wrapper input {
+            flex: 1;
+            padding: 13px 14px;
+            border: 2px solid #743871;
+            border-radius: 9px;
+            background: #160c16;
+            color: #ffffff;
+            font-size: 15px;
+            outline: none;
+            min-width: 0;
+        }
+
+        .url-input-wrapper input::placeholder {
+            color: #9a7d98;
+            font-size: 13px;
+        }
+
+        .url-input-wrapper input:focus {
+            border-color: #FFB39A;
+        }
+
+        .paste-btn {
+            padding: 13px 14px;
+            border: 2px solid #FFB39A;
+            border-radius: 9px;
+            background: transparent;
+            color: #FFB39A;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .paste-btn:active {
+            background: #FFB39A;
+            color: #542452;
+        }
+
+        .download-btn {
+            width: 100%;
+            padding: 15px 16px;
+            border: 0;
+            border-radius: 9px;
+            background: #FFB39A;
+            color: #542452;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 4px;
+        }
+
+        .download-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .status {
+            color: #FFB39A;
+            text-align: center;
+            min-height: 24px;
+            margin: 14px 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .status.error {
+            color: #ff6b6b;
+        }
+
+        /* Result Area */
+        .result-area {
+            display: none;
+            background: #381736;
+            border: 1px solid #743871;
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 18px;
+        }
+
+        .result-header {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .result-thumb {
+            width: 80px;
+            height: 80px;
+            border-radius: 9px;
+            object-fit: cover;
+            background: #542452;
+            flex-shrink: 0;
+        }
+
+        .result-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .result-author {
+            color: #FFB39A;
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .result-caption {
+            color: #d8c9d6;
+            font-size: 13px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .download-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .dl-link {
+            display: block;
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 9px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .dl-link.hd {
+            background: #FFB39A;
+            color: #542452;
+        }
+
+        .dl-link.sd {
+            background: #743871;
+            color: #ffffff;
+            border: 1px solid #FFB39A;
+        }
+
+        .dl-link.audio {
+            background: transparent;
+            color: #FFB39A;
+            border: 2px dashed #FFB39A;
+        }
+
+        .dl-link:active {
+            opacity: 0.8;
+        }
+
+        /* How-To Steps */
+        .how-to {
+            background: #542452;
+            border: 1px solid #743871;
+            border-radius: 14px;
+            padding: 22px;
+            margin-bottom: 24px;
+        }
+
+        .how-to h3 {
+            color: #FFB39A;
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 14px;
+        }
+
+        .step {
+            background: #381736;
+            border-radius: 10px;
+            padding: 16px 12px;
+            text-align: center;
+        }
+
+        .step-num {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            background: #FFB39A;
+            color: #542452;
+            font-weight: bold;
+            border-radius: 50%;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .step h4 {
+            color: #FFB39A;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .step p {
+            color: #d8c9d6;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        /* Copyright Notice */
+        .copyright-notice {
+            background: #381736;
+            border: 1px solid #743871;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .copyright-notice h4 {
+            color: #FFB39A;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .copyright-notice p {
+            color: #cbbac9;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #FFB39A;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: auto;
+            background: #542452;
+            border-top: 1px solid #753971;
+            padding: 18px;
+            text-align: center;
+            color: #dfd1dd;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 28px;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .tool-card,
+            .how-to {
+                padding: 17px;
+            }
+
+            .url-input-wrapper {
+                flex-direction: column;
+            }
+
+            .result-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .result-thumb {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1><a href="index.html">PDFNexa</a></h1>
+    <p>Free & Fast Online Tools</p>
+</header>
+
+<main class="container">
+
+    <a href="index.html" class="back-link">&larr; Back to All Tools</a>
+
+    <div class="tool-title">
+        <h2>🎵 TikTok Video Downloader</h2>
+        <p>Download TikTok videos without watermark in HD quality. Paste the link, click download, and save to your device. Completely free.</p>
+    </div>
+
+    <!-- DOWNLOADER TOOL -->
+    <div class="tool-card">
+
+        <form id="tiktokForm">
+            <div class="url-input-box">
+                <label>📋 Paste TikTok Video Link</label>
+                <div class="url-input-wrapper">
+                    <input
+                        type="url"
+                        id="tiktokUrl"
+                        placeholder="https://www.tiktok.com/@user/video/..."
+                        autocomplete="off"
+                        required
+                    >
+                    <button type="button" class="paste-btn" id="pasteBtn">Paste</button>
+                </div>
+            </div>
+
+            <button type="submit" class="download-btn" id="downloadBtn">
+                Download Video
+            </button>
+        </form>
+
+        <div id="tiktokStatus" class="status"></div>
+
+        <!-- RESULTS -->
+        <div id="tiktokResult" class="result-area">
+            <div class="result-header">
+                <img id="resultCover" class="result-thumb" src="" alt="Video thumbnail">
+                <div class="result-info">
+                    <div id="resultAuthor" class="result-author"></div>
+                    <div id="resultCaption" class="result-caption"></div>
+                </div>
+            </div>
+
+            <div class="download-links">
+                <a id="downloadHD" class="dl-link hd" href="#" target="_blank" rel="noopener noreferrer" style="display:none;">
+                    ⬇ Download HD (No Watermark)
+                </a>
+                <a id="downloadSD" class="dl-link sd" href="#" target="_blank" rel="noopener noreferrer" style="display:none;">
+                    ⬇ Download Standard Quality
+                </a>
+                <a id="downloadAudio" class="dl-link audio" href="#" target="_blank" rel="noopener noreferrer" style="display:none;">
+                    🎵 Download MP3 Audio Only
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOW TO USE -->
+    <div class="how-to">
+        <h3>How to Download</h3>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h4>Copy Link</h4>
+                <p>Open TikTok, tap Share on the video, then Copy Link.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <h4>Paste Here</h4>
+                <p>Paste the link in the box above and tap Download.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <h4>Save File</h4>
+                <p>Choose HD, Standard, or MP3 to save to your device.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- COPYRIGHT NOTICE -->
+    <div class="copyright-notice">
+        <h4>⚠ Copyright Notice</h4>
+        <p>This tool is for personal use only. Only download videos you have permission to use. Respect the rights of content creators. We do not host, store, or distribute any copyrighted content. See our <a href="dmca.html" style="color:#FFB39A;">DMCA Policy</a> for more information.</p>
+    </div>
+
+</main>
+
+<footer>
+    © 2026 PDFNexa. All rights reserved.
+</footer>
+
+<script src="tiktok.js"></script>
+
+</body>
+</html>
