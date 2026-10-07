@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PDFNexa - Free Online PDF Tools</title>
+    <title>PDFNexa - Free Online PDF & Video Tools</title>
+    <meta name="description" content="Free online tools for PDF conversion, merging, and TikTok video downloads. Fast, secure, and works directly in your browser. No signup required.">
 
     <!-- LOCAL LIBRARIES -->
     <script src="./pdf-lib.min.js"></script>
@@ -223,6 +224,10 @@
             margin-top: 15px;
         }
 
+        .section-divider {
+            margin-top: 40px;
+        }
+
         footer {
             margin-top: 30px;
             background: #542452;
@@ -254,7 +259,7 @@
 
 <header>
     <h1>PDFNexa</h1>
-    <p>Free & Fast Online PDF Tools</p>
+    <p>Free & Fast Online Tools</p>
 </header>
 
 <main class="container">
@@ -400,8 +405,10 @@
     </section>
 
 
+    <!-- PDF TOOLS SECTION -->
+
     <section class="intro">
-        <h2>All PDF Tools</h2>
+        <h2>PDF Tools</h2>
         <p>Simple online tools for your PDF files.</p>
     </section>
 
@@ -453,6 +460,48 @@
             <p>Convert your PDF documents into editable Word files.</p>
 
             <button onclick="comingSoon('PDF to Word')">
+                Open Tool
+            </button>
+        </div>
+
+    </section>
+
+
+    <!-- VIDEO & MEDIA TOOLS SECTION -->
+
+    <section class="intro section-divider">
+        <h2>Video & Media Tools</h2>
+        <p>Download and save online videos for free.</p>
+    </section>
+
+
+    <section class="tools-grid">
+
+        <div class="card">
+            <h3>🎵 TikTok Downloader</h3>
+            <p>Download TikTok videos without watermark in HD MP4 or MP3 audio format.</p>
+
+            <button onclick="window.location.href='tiktok-downloader.html'">
+                Open Tool
+            </button>
+        </div>
+
+
+        <div class="card">
+            <h3>📸 Instagram Downloader</h3>
+            <p>Download Instagram videos, reels, and photos directly to your device.</p>
+
+            <button onclick="comingSoon('Instagram Downloader')">
+                Open Tool
+            </button>
+        </div>
+
+
+        <div class="card">
+            <h3>📌 Pinterest Downloader</h3>
+            <p>Save Pinterest videos and images in high quality to your device.</p>
+
+            <button onclick="comingSoon('Pinterest Downloader')">
                 Open Tool
             </button>
         </div>
