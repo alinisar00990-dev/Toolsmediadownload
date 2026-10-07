@@ -133,32 +133,74 @@ document.addEventListener("DOMContentLoaded", function () {
         var wmUrl = buildUrl(data.wmplay, baseUrl);
         var musicUrl = buildUrl(data.music, baseUrl);
 
-        /* HD (No Watermark) */
-        if (hdUrl) {
-            downloadHD.href = hdUrl;
-            downloadHD.style.display = "block";
+        /* 
+           FIX: Determine the best no-watermark VIDEO url
+           Sometimes hdplay returns an audio file.
+           We check if hdplay contains audio indicators.
+           If so, fall back to the standard play url for video.
+        */
+        var bestVideoUrl = "";
+
+        if (hdUrl && !isAudioUrl(hdUrl)) {
+            bestVideoUrl = hdUrl;
+        } else if (playUrl && !isAudioUrl(playUrl)) {
+            bestVideoUrl = playUrl;
+        } else if (hdUrl) {
+            bestVideoUrl = hdUrl;
         } else if (playUrl) {
-            downloadHD.href = playUrl;
+            bestVideoUrl = playUrl;
+        }
+
+        /* Determine standard quality url (different from best) */
+        var standardUrl = "";
+
+        if (wmUrl) {
+            standardUrl = wmUrl;
+        } else if (playUrl && playUrl !== bestVideoUrl) {
+            standardUrl = playUrl;
+        }
+
+        /* HD (No Watermark) - force download as MP4 */
+        if (bestVideoUrl) {
             downloadHD.style.display = "block";
+            downloadHD.onclick = function (e) {
+                e.preventDefault();
+                forceDownload(bestVideoUrl, "tiktok_hd_no_watermark.mp4");
+            };
         }
 
         /* Standard / Watermarked */
-        if (wmUrl) {
-            downloadSD.href = wmUrl;
+        if (standardUrl) {
             downloadSD.style.display = "block";
-        } else if (playUrl && hdUrl && playUrl !== hdUrl) {
-            downloadSD.href = playUrl;
-            downloadSD.style.display = "block";
+            downloadSD.onclick = function (e) {
+                e.preventDefault();
+                forceDownload(standardUrl, "tiktok_standard.mp4");
+            };
         }
 
         /* Audio */
         if (musicUrl) {
-            downloadAudio.href = musicUrl;
             downloadAudio.style.display = "block";
+            downloadAudio.onclick = function (e) {
+                e.preventDefault();
+                forceDownload(musicUrl, "tiktok_audio.mp3");
+            };
         }
 
         resultEl.style.display = "block";
         showStatus("✓ Video found! Choose your download format below.", "");
+    }
+
+    /* ---- Check if URL looks like audio ---- */
+    function isAudioUrl(url) {
+        if (!url) return false;
+        var lower = url.toLowerCase();
+        return (
+            lower.indexOf(".mp3") !== -1 ||
+            lower.indexOf("type=music") !== -1 ||
+            lower.indexOf("/music/") !== -1 ||
+            lower.indexOf("mime_type=audio") !== -1
+        );
     }
 
     /* ---- Helper: build full URL ---- */
@@ -166,5 +208,37 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!path) return "";
         if (path.indexOf("http") === 0) return path;
         return baseUrl + path;
+    }
+
+    /* ---- Force download via fetch + blob ---- */
+    function forceDownload(url, filename) {
+        showStatus("Downloading file... Please wait.", "");
+
+        fetch(url)
+            .then(function (response) {
+                if (!response.ok) {
+                    throw new Error("Download failed: " + response.status);
+                }
+                return response.blob();
+            })
+            .then(function (blob) {
+                var blobUrl = URL.createObjectURL(blob);
+                var a = document.createElement("a");
+                a.href = blobUrl;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                setTimeout(function () {
+                    URL.revokeObjectURL(blobUrl);
+                }, 30000);
+                showStatus("✓ Download started! Check your downloads folder.", "");
+            })
+            .catch(function (err) {
+                console.error("Download error:", err);
+                /* Fallback: open in new tab */
+                showStatus("Direct download failed. Opening in new tab — long-press or right-click to save.", "error");
+                window.open(url, "_blank");
+            });
     }
 });
