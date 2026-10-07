@@ -7,6 +7,9 @@
     <title>ToolsMediaDownloader - Free Online PDF & Video Tools</title>
     <meta name="description" content="Free online tools for PDF conversion, merging, video downloads, and media tools. Fast, secure, works directly in your browser. No signup required.">
 
+    <!-- FAVICON (Browser Tab Logo) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+
     <!-- LOCAL LIBRARIES -->
     <script src="./pdf-lib.min.js"></script>
     <script src="./pdf.min.js"></script>
@@ -23,24 +26,74 @@
             background: #160c16;
             color: #ffffff;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        header {
+        /* --- NEW NAVIGATION BAR --- */
+        .navbar {
             background: #542452;
             border-bottom: 3px solid #FFB39A;
-            padding: 24px 16px;
-            text-align: center;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
-        header h1 {
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             color: #FFB39A;
-            font-size: 28px;
-            margin-bottom: 6px;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: bold;
         }
 
-        header p {
+        .nav-logo svg {
+            width: 28px;
+            height: 28px;
+            fill: #FFB39A;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
             color: #f5e7f2;
-            font-size: 14px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #FFB39A;
+        }
+
+        /* --- NEW HERO SECTION --- */
+        .hero-section {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(180deg, #381736 0%, #160c16 100%);
+            border-bottom: 1px solid #381736;
+        }
+
+        .hero-section h1 {
+            color: #FFB39A;
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .hero-section p {
+            color: #d8c9d6;
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
 
         .container {
@@ -48,6 +101,7 @@
             max-width: 1000px;
             margin: auto;
             padding: 30px 0;
+            flex: 1;
         }
 
         .intro {
@@ -78,12 +132,20 @@
             border-radius: 14px;
             padding: 22px;
             box-shadow: 0 7px 22px rgba(0, 0, 0, 0.25);
+            transition: transform 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-3px);
         }
 
         .card h3 {
             color: #FFB39A;
             font-size: 19px;
             margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .card p {
@@ -225,28 +287,53 @@
         }
 
         .section-divider {
-            margin-top: 40px;
+            margin-top: 50px;
         }
 
+        /* --- NEW PROFESSIONAL FOOTER --- */
         footer {
-            margin-top: 30px;
-            background: #542452;
-            border-top: 1px solid #753971;
-            padding: 18px;
+            margin-top: 40px;
+            background: #381736;
+            border-top: 2px solid #542452;
+            padding: 30px 20px;
             text-align: center;
-            color: #dfd1dd;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #d8c9d6;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            color: #FFB39A;
+            text-decoration: underline;
+        }
+
+        .footer-copy {
+            color: #9a7d98;
             font-size: 13px;
         }
 
         @media (max-width: 600px) {
-            header h1 {
-                font-size: 24px;
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
             }
-
+            .hero-section h1 {
+                font-size: 28px;
+            }
             .container {
                 width: 94%;
             }
-
             .card,
             .workspace {
                 padding: 17px;
@@ -257,274 +344,155 @@
 
 <body>
 
-<header>
-    <h1>ToolsMediaDownloader</h1>
-    <p>Free Online Tools & Media Downloaders</p>
-</header>
+<!-- NAVIGATION BAR -->
+<nav class="navbar">
+    <a href="index.html" class="nav-logo">
+        <!-- Built-in SVG Logo (No external image needed) -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="none"/>
+        </svg>
+        ToolsMediaDownloader
+    </a>
+    <div class="nav-links">
+        <a href="#pdf-tools">PDF Tools</a>
+        <a href="#video-tools">Video Tools</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero-section">
+    <h1>All-in-One Online Utilities</h1>
+    <p>Merge, convert, and compress PDFs securely in your browser. Download TikTok videos in HD without watermarks. 100% Free, Fast, and Secure.</p>
+</section>
 
 <main class="container">
 
     <!-- JPG TO PDF WORKSPACE -->
-
     <section id="jpgTool" class="workspace">
-
         <h2>JPG to PDF Converter</h2>
-
-        <p class="description">
-            Select one or multiple JPG/PNG images and combine them into one PDF.
-        </p>
-
-        <div class="upload-box"
-             onclick="document.getElementById('jpgFiles').click()">
+        <p class="description">Select one or multiple JPG/PNG images and combine them into one PDF.</p>
+        <div class="upload-box" onclick="document.getElementById('jpgFiles').click()">
             <strong>📁 Choose Images</strong>
             <span>JPG, JPEG and PNG supported</span>
         </div>
-
-        <input
-            id="jpgFiles"
-            class="hidden-input"
-            type="file"
-            accept="image/jpeg,image/png"
-            multiple
-            onchange="jpgFilesSelected(this)"
-        >
-
+        <input id="jpgFiles" class="hidden-input" type="file" accept="image/jpeg,image/png" multiple onchange="jpgFilesSelected(this)">
         <div id="jpgPreview" class="preview-grid"></div>
-
         <div id="jpgStatus" class="status"></div>
-
-        <button
-            id="jpgCreateButton"
-            class="action-button"
-            onclick="createJpgPdf()"
-        >
-            Create & Download PDF
-        </button>
-
-        <button class="close-button" onclick="closeTools()">
-            Close Tool
-        </button>
-
-        <p class="privacy">
-            Your files are processed directly in your browser.
-        </p>
-
+        <button id="jpgCreateButton" class="action-button" onclick="createJpgPdf()">Create & Download PDF</button>
+        <button class="close-button" onclick="closeTools()">Close Tool</button>
+        <p class="privacy">Your files are processed directly in your browser.</p>
     </section>
 
-
     <!-- PDF TO JPG WORKSPACE -->
-
     <section id="pdfJpgTool" class="workspace">
-
         <h2>PDF to JPG Converter</h2>
-
-        <p class="description">
-            Select a PDF and convert its pages into JPG images.
-        </p>
-
-        <div class="upload-box"
-             onclick="document.getElementById('pdfJpgFile').click()">
+        <p class="description">Select a PDF and convert its pages into JPG images.</p>
+        <div class="upload-box" onclick="document.getElementById('pdfJpgFile').click()">
             <strong>📄 Choose PDF</strong>
             <span>Select one PDF document</span>
         </div>
-
-        <input
-            id="pdfJpgFile"
-            class="hidden-input"
-            type="file"
-            accept=".pdf,application/pdf"
-            onchange="pdfJpgFileSelected(this)"
-        >
-
+        <input id="pdfJpgFile" class="hidden-input" type="file" accept=".pdf,application/pdf" onchange="pdfJpgFileSelected(this)">
         <div id="pdfJpgStatus" class="status"></div>
-
-        <button
-            id="pdfJpgConvertButton"
-            class="action-button"
-            onclick="convertPdfToJpg()"
-        >
-            Convert PDF to JPG
-        </button>
-
+        <button id="pdfJpgConvertButton" class="action-button" onclick="convertPdfToJpg()">Convert PDF to JPG</button>
         <div id="pdfJpgPreview" class="preview-grid"></div>
-
-        <button class="close-button" onclick="closeTools()">
-            Close Tool
-        </button>
-
-        <p class="privacy">
-            Your PDF is processed directly in your browser.
-        </p>
-
+        <button class="close-button" onclick="closeTools()">Close Tool</button>
+        <p class="privacy">Your PDF is processed directly in your browser.</p>
     </section>
 
-
     <!-- MERGE PDF WORKSPACE -->
-
     <section id="mergeTool" class="workspace">
-
         <h2>Merge PDF</h2>
-
-        <p class="description">
-            Select two or more PDF files and combine them into one PDF.
-        </p>
-
-        <div class="upload-box"
-             onclick="document.getElementById('mergeFiles').click()">
+        <p class="description">Select two or more PDF files and combine them into one PDF.</p>
+        <div class="upload-box" onclick="document.getElementById('mergeFiles').click()">
             <strong>📄 Choose PDF Files</strong>
             <span>Select 2 or more PDF documents</span>
         </div>
-
-        <input
-            id="mergeFiles"
-            class="hidden-input"
-            type="file"
-            accept=".pdf,application/pdf"
-            multiple
-            onchange="mergeFilesSelected(this)"
-        >
-
+        <input id="mergeFiles" class="hidden-input" type="file" accept=".pdf,application/pdf" multiple onchange="mergeFilesSelected(this)">
         <div id="mergeStatus" class="status"></div>
-
-        <button
-            id="mergeButton"
-            class="action-button"
-            onclick="mergePdfs()"
-        >
-            Merge & Download PDF
-        </button>
-
-        <button class="close-button" onclick="closeTools()">
-            Close Tool
-        </button>
-
-        <p class="privacy">
-            Your PDFs are processed directly in your browser.
-        </p>
-
+        <button id="mergeButton" class="action-button" onclick="mergePdfs()">Merge & Download PDF</button>
+        <button class="close-button" onclick="closeTools()">Close Tool</button>
+        <p class="privacy">Your PDFs are processed directly in your browser.</p>
     </section>
 
 
     <!-- PDF TOOLS SECTION -->
-
-    <section class="intro">
-        <h2>📄 PDF Tools</h2>
-        <p>Simple online tools for your PDF files.</p>
+    <section id="pdf-tools" class="intro">
+        <h2>📄 Document & PDF Tools</h2>
+        <p>Simple online tools for your PDF files. Processed locally on your device.</p>
     </section>
 
-
     <section class="tools-grid">
-
         <div class="card">
-            <h3>JPG to PDF</h3>
-            <p>Convert multiple JPG or PNG images into one downloadable PDF.</p>
-
-            <button onclick="openTool('jpgTool')">
-                Open Tool
-            </button>
+            <h3>🖼️ JPG to PDF</h3>
+            <p>Convert multiple JPG or PNG images into one downloadable PDF document.</p>
+            <button onclick="openTool('jpgTool')">Open Tool</button>
         </div>
-
-
         <div class="card">
-            <h3>PDF to JPG</h3>
-            <p>Convert every page of a PDF document into a JPG image.</p>
-
-            <button onclick="openTool('pdfJpgTool')">
-                Open Tool
-            </button>
+            <h3>📸 PDF to JPG</h3>
+            <p>Extract and convert every single page of a PDF document into a high-quality JPG image.</p>
+            <button onclick="openTool('pdfJpgTool')">Open Tool</button>
         </div>
-
-
         <div class="card">
-            <h3>Merge PDF</h3>
-            <p>Combine multiple PDF documents into one PDF file.</p>
-
-            <button onclick="openTool('mergeTool')">
-                Open Tool
-            </button>
+            <h3>📑 Merge PDF</h3>
+            <p>Combine multiple PDF documents into one single, easily readable PDF file.</p>
+            <button onclick="openTool('mergeTool')">Open Tool</button>
         </div>
-
-
         <div class="card">
-            <h3>Compress PDF</h3>
-            <p>Reduce PDF file size for easier sharing and storage.</p>
-
-            <button onclick="comingSoon('Compress PDF')">
-                Open Tool
-            </button>
+            <h3>🗜️ Compress PDF</h3>
+            <p>Reduce PDF file size for easier email sharing and storage.</p>
+            <button onclick="comingSoon('Compress PDF')">Open Tool</button>
         </div>
-
-
         <div class="card">
-            <h3>PDF to Word</h3>
-            <p>Convert your PDF documents into editable Word files.</p>
-
-            <button onclick="comingSoon('PDF to Word')">
-                Open Tool
-            </button>
+            <h3>📝 PDF to Word</h3>
+            <p>Convert your PDF documents into editable Word files instantly.</p>
+            <button onclick="comingSoon('PDF to Word')">Open Tool</button>
         </div>
-
     </section>
 
 
     <!-- VIDEO & MEDIA TOOLS SECTION -->
-
-    <section class="intro section-divider">
-        <h2>🎬 Video & Media Tools</h2>
-        <p>Download and save online videos for free.</p>
+    <section id="video-tools" class="intro section-divider">
+        <h2>🎬 Video & Media Downloaders</h2>
+        <p>Download and save online videos directly to your device for free.</p>
     </section>
 
-
     <section class="tools-grid">
-
         <div class="card">
             <h3>🎵 TikTok Downloader</h3>
-            <p>Download TikTok videos without watermark in HD MP4 or MP3 audio format.</p>
-
-            <button onclick="window.location.href='tiktok-downloader.html'">
-                Open Tool
-            </button>
+            <p>Download TikTok videos without watermark in HD MP4 or extract MP3 audio files.</p>
+            <button onclick="window.location.href='tiktok-downloader.html'">Open Tool</button>
         </div>
-
-
         <div class="card">
             <h3>📸 Instagram Downloader</h3>
-            <p>Download Instagram videos, reels, and photos directly to your device.</p>
-
-            <button onclick="comingSoon('Instagram Downloader')">
-                Open Tool
-            </button>
+            <p>Download Instagram videos, reels, stories, and photos directly to your device.</p>
+            <button onclick="comingSoon('Instagram Downloader')">Open Tool</button>
         </div>
-
-
         <div class="card">
             <h3>📘 Facebook Downloader</h3>
             <p>Save Facebook videos in HD quality directly to your phone or computer.</p>
-
-            <button onclick="comingSoon('Facebook Downloader')">
-                Open Tool
-            </button>
+            <button onclick="comingSoon('Facebook Downloader')">Open Tool</button>
         </div>
-
-
         <div class="card">
             <h3>📌 Pinterest Downloader</h3>
-            <p>Save Pinterest videos and images in high quality to your device.</p>
-
-            <button onclick="comingSoon('Pinterest Downloader')">
-                Open Tool
-            </button>
+            <p>Save Pinterest videos and images in high quality to your gallery.</p>
+            <button onclick="comingSoon('Pinterest Downloader')">Open Tool</button>
         </div>
-
     </section>
 
 </main>
 
-
+<!-- PROFESSIONAL FOOTER -->
 <footer>
-    © 2026 ToolsMediaDownloader. All rights reserved.
+    <div class="footer-links">
+        <a href="about.html">About Us</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="contact.html">Contact</a>
+    </div>
+    <p class="footer-copy">© 2026 ToolsMediaDownloader. All rights reserved. Free online tools.</p>
 </footer>
-
 
 <script>
 "use strict";
@@ -538,73 +506,49 @@ if (window.pdfjsLib) {
         "./pdf.worker.min.js";
 }
 
-
 /* =========================================================
    GENERAL TOOL FUNCTIONS
    ========================================================= */
 
 function closeTools() {
-
     document.querySelectorAll(".workspace").forEach(function (tool) {
         tool.style.display = "none";
     });
 }
 
-
 function openTool(toolId) {
-
     closeTools();
-
     const tool = document.getElementById(toolId);
-
     if (!tool) {
         alert("Tool could not be opened.");
         return;
     }
-
     tool.style.display = "block";
-
-    tool.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
+    tool.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-
 function comingSoon(name) {
-
     alert(name + " tool coming soon!");
 }
 
-
 function delay(ms) {
-
     return new Promise(function (resolve) {
         setTimeout(resolve, ms);
     });
 }
 
-
 function downloadBlob(blob, filename) {
-
     const url = URL.createObjectURL(blob);
-
     const link = document.createElement("a");
-
     link.href = url;
     link.download = filename;
-
     document.body.appendChild(link);
-
     link.click();
-
     link.remove();
-
     setTimeout(function () {
         URL.revokeObjectURL(url);
     }, 15000);
 }
-
 
 /* =========================================================
    JPG TO PDF
@@ -613,264 +557,106 @@ function downloadBlob(blob, filename) {
 let jpgSelectedFiles = [];
 let jpgObjectUrls = [];
 
-
 function clearJpgUrls() {
-
     jpgObjectUrls.forEach(function (url) {
         URL.revokeObjectURL(url);
     });
-
     jpgObjectUrls = [];
 }
 
-
 function jpgFilesSelected(input) {
-
     clearJpgUrls();
+    const status = document.getElementById("jpgStatus");
+    const preview = document.getElementById("jpgPreview");
+    const button = document.getElementById("jpgCreateButton");
 
-    const status =
-        document.getElementById("jpgStatus");
-
-    const preview =
-        document.getElementById("jpgPreview");
-
-    const button =
-        document.getElementById("jpgCreateButton");
-
-
-    jpgSelectedFiles =
-        Array.from(input.files || []).filter(function (file) {
-
-            return (
-                file.type === "image/jpeg" ||
-                file.type === "image/png"
-            );
-        });
-
+    jpgSelectedFiles = Array.from(input.files || []).filter(function (file) {
+        return (file.type === "image/jpeg" || file.type === "image/png");
+    });
 
     preview.innerHTML = "";
 
-
     if (jpgSelectedFiles.length === 0) {
-
-        status.textContent =
-            "Please select JPG or PNG images.";
-
-        button.style.display =
-            "none";
-
+        status.textContent = "Please select JPG or PNG images.";
+        button.style.display = "none";
         return;
     }
 
-
     jpgSelectedFiles.forEach(function (file, index) {
-
-        const url =
-            URL.createObjectURL(file);
-
+        const url = URL.createObjectURL(file);
         jpgObjectUrls.push(url);
 
+        const card = document.createElement("div");
+        card.className = "preview-card";
 
-        const card =
-            document.createElement("div");
+        const image = document.createElement("img");
+        image.src = url;
 
-        card.className =
-            "preview-card";
-
-
-        const image =
-            document.createElement("img");
-
-        image.src =
-            url;
-
-
-        const label =
-            document.createElement("div");
-
-        label.className =
-            "preview-label";
-
-        label.textContent =
-            "Image " + (index + 1);
-
+        const label = document.createElement("div");
+        label.className = "preview-label";
+        label.textContent = "Image " + (index + 1);
 
         card.appendChild(image);
         card.appendChild(label);
-
         preview.appendChild(card);
     });
 
-
-    status.textContent =
-        jpgSelectedFiles.length +
-        (jpgSelectedFiles.length === 1
-            ? " image selected."
-            : " images selected.");
-
-
-    button.style.display =
-        "block";
+    status.textContent = jpgSelectedFiles.length + (jpgSelectedFiles.length === 1 ? " image selected." : " images selected.");
+    button.style.display = "block";
 }
-
 
 async function createJpgPdf() {
+    const status = document.getElementById("jpgStatus");
+    const button = document.getElementById("jpgCreateButton");
 
-    const status =
-        document.getElementById("jpgStatus");
-
-    const button =
-        document.getElementById("jpgCreateButton");
-
-
-    if (
-        !window.PDFLib ||
-        !window.PDFLib.PDFDocument
-    ) {
-
-        status.textContent =
-            "Local PDF engine could not load.";
-
+    if (!window.PDFLib || !window.PDFLib.PDFDocument) {
+        status.textContent = "Local PDF engine could not load.";
         return;
     }
-
 
     if (!jpgSelectedFiles.length) {
-
-        status.textContent =
-            "Please select images first.";
-
+        status.textContent = "Please select images first.";
         return;
     }
 
-
     button.disabled = true;
-
-    button.textContent =
-        "Creating PDF...";
-
+    button.textContent = "Creating PDF...";
 
     try {
+        const pdf = await window.PDFLib.PDFDocument.create();
 
-        const pdf =
-            await window.PDFLib.PDFDocument.create();
-
-
-        for (
-            let i = 0;
-            i < jpgSelectedFiles.length;
-            i++
-        ) {
-
-            const file =
-                jpgSelectedFiles[i];
-
-
-            status.textContent =
-                "Processing image " +
-                (i + 1) +
-                " of " +
-                jpgSelectedFiles.length +
-                "...";
-
-
+        for (let i = 0; i < jpgSelectedFiles.length; i++) {
+            const file = jpgSelectedFiles[i];
+            status.textContent = "Processing image " + (i + 1) + " of " + jpgSelectedFiles.length + "...";
             await delay(30);
-
-
-            const bytes =
-                await file.arrayBuffer();
-
-
+            const bytes = await file.arrayBuffer();
             let image;
 
-
             if (file.type === "image/png") {
-
-                image =
-                    await pdf.embedPng(bytes);
-
+                image = await pdf.embedPng(bytes);
             } else {
-
-                image =
-                    await pdf.embedJpg(bytes);
+                image = await pdf.embedJpg(bytes);
             }
 
-
-            const scale =
-                Math.min(
-                    1,
-                    1600 / image.width,
-                    2200 / image.height
-                );
-
-
-            const width =
-                image.width * scale;
-
-            const height =
-                image.height * scale;
-
-
-            const page =
-                pdf.addPage([
-                    width,
-                    height
-                ]);
-
-
-            page.drawImage(
-                image,
-                {
-                    x: 0,
-                    y: 0,
-                    width: width,
-                    height: height
-                }
-            );
+            const scale = Math.min(1, 1600 / image.width, 2200 / image.height);
+            const width = image.width * scale;
+            const height = image.height * scale;
+            const page = pdf.addPage([width, height]);
+            page.drawImage(image, { x: 0, y: 0, width: width, height: height });
         }
 
-
-        status.textContent =
-            "Preparing PDF...";
-
-
-        const finalPdf =
-            await pdf.save();
-
-
-        downloadBlob(
-            new Blob(
-                [finalPdf],
-                {
-                    type: "application/pdf"
-                }
-            ),
-            "ToolsMediaDownloader-JPG-to-PDF.pdf"
-        );
-
-
-        status.textContent =
-            "✓ PDF created successfully!";
-
-
+        status.textContent = "Preparing PDF...";
+        const finalPdf = await pdf.save();
+        downloadBlob(new Blob([finalPdf], { type: "application/pdf" }), "ToolsMediaDownloader-JPG-to-PDF.pdf");
+        status.textContent = "✓ PDF created successfully!";
     } catch (error) {
-
         console.error(error);
-
-        status.textContent =
-            "Could not create PDF. Please try another image.";
-
-
+        status.textContent = "Could not create PDF. Please try another image.";
     } finally {
-
-        button.disabled =
-            false;
-
-        button.textContent =
-            "Create & Download PDF";
+        button.disabled = false;
+        button.textContent = "Create & Download PDF";
     }
 }
-
 
 /* =========================================================
    PDF TO JPG
@@ -878,303 +664,114 @@ async function createJpgPdf() {
 
 let selectedPdfForJpg = null;
 
-
 function pdfJpgFileSelected(input) {
+    const status = document.getElementById("pdfJpgStatus");
+    const button = document.getElementById("pdfJpgConvertButton");
+    const preview = document.getElementById("pdfJpgPreview");
 
-    const status =
-        document.getElementById("pdfJpgStatus");
-
-    const button =
-        document.getElementById("pdfJpgConvertButton");
-
-    const preview =
-        document.getElementById("pdfJpgPreview");
-
-
-    selectedPdfForJpg =
-        input.files && input.files[0]
-            ? input.files[0]
-            : null;
-
-
+    selectedPdfForJpg = input.files && input.files[0] ? input.files[0] : null;
     preview.innerHTML = "";
 
-
     if (!selectedPdfForJpg) {
-
         status.textContent = "";
-
-        button.style.display =
-            "none";
-
+        button.style.display = "none";
         return;
     }
 
-
-    status.textContent =
-        "Selected: " +
-        selectedPdfForJpg.name;
-
-
-    button.style.display =
-        "block";
+    status.textContent = "Selected: " + selectedPdfForJpg.name;
+    button.style.display = "block";
 }
 
-
 async function convertPdfToJpg() {
-
-    const status =
-        document.getElementById("pdfJpgStatus");
-
-    const button =
-        document.getElementById("pdfJpgConvertButton");
-
-    const preview =
-        document.getElementById("pdfJpgPreview");
-
+    const status = document.getElementById("pdfJpgStatus");
+    const button = document.getElementById("pdfJpgConvertButton");
+    const preview = document.getElementById("pdfJpgPreview");
 
     if (!window.pdfjsLib) {
-
-        status.textContent =
-            "Local PDF renderer could not load.";
-
+        status.textContent = "Local PDF renderer could not load.";
         return;
     }
-
 
     if (!selectedPdfForJpg) {
-
-        status.textContent =
-            "Please select a PDF first.";
-
+        status.textContent = "Please select a PDF first.";
         return;
     }
 
-
     button.disabled = true;
-
-    button.textContent =
-        "Converting...";
-
+    button.textContent = "Converting...";
     preview.innerHTML = "";
 
-
     try {
+        const bytes = new Uint8Array(await selectedPdfForJpg.arrayBuffer());
+        const loadingTask = window.pdfjsLib.getDocument({ data: bytes });
+        const pdf = await loadingTask.promise;
 
-        const bytes =
-            new Uint8Array(
-                await selectedPdfForJpg.arrayBuffer()
-            );
-
-
-        const loadingTask =
-            window.pdfjsLib.getDocument({
-                data: bytes
-            });
-
-
-        const pdf =
-            await loadingTask.promise;
-
-
-        for (
-            let pageNumber = 1;
-            pageNumber <= pdf.numPages;
-            pageNumber++
-        ) {
-
-            status.textContent =
-                "Converting page " +
-                pageNumber +
-                " of " +
-                pdf.numPages +
-                "...";
-
-
+        for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
+            status.textContent = "Converting page " + pageNumber + " of " + pdf.numPages + "...";
             await delay(30);
 
+            const page = await pdf.getPage(pageNumber);
+            const viewport = page.getViewport({ scale: 1.7 });
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d", { alpha: false });
 
-            const page =
-                await pdf.getPage(pageNumber);
+            canvas.width = Math.floor(viewport.width);
+            canvas.height = Math.floor(viewport.height);
+            context.fillStyle = "#ffffff";
+            context.fillRect(0, 0, canvas.width, canvas.height);
 
+            await page.render({ canvasContext: context, viewport: viewport }).promise;
 
-            const viewport =
-                page.getViewport({
-                    scale: 1.7
-                });
-
-
-            const canvas =
-                document.createElement("canvas");
-
-
-            const context =
-                canvas.getContext(
-                    "2d",
-                    {
-                        alpha: false
-                    }
-                );
-
-
-            canvas.width =
-                Math.floor(viewport.width);
-
-            canvas.height =
-                Math.floor(viewport.height);
-
-
-            context.fillStyle =
-                "#ffffff";
-
-
-            context.fillRect(
-                0,
-                0,
-                canvas.width,
-                canvas.height
-            );
-
-
-            await page.render({
-                canvasContext: context,
-                viewport: viewport
-            }).promise;
-
-
-            const blob =
-                await canvasToJpeg(canvas);
-
-
-            const url =
-                URL.createObjectURL(blob);
-
-
-            addJpgResult(
-                preview,
-                url,
-                blob,
-                pageNumber
-            );
-
+            const blob = await canvasToJpeg(canvas);
+            const url = URL.createObjectURL(blob);
+            addJpgResult(preview, url, blob, pageNumber);
 
             canvas.width = 1;
             canvas.height = 1;
         }
 
-
-        status.textContent =
-            "✓ PDF converted successfully!";
-
-
+        status.textContent = "✓ PDF converted successfully!";
     } catch (error) {
-
         console.error(error);
-
-        status.textContent =
-            "Could not convert this PDF.";
-
-
+        status.textContent = "Could not convert this PDF.";
     } finally {
-
-        button.disabled =
-            false;
-
-        button.textContent =
-            "Convert PDF to JPG";
+        button.disabled = false;
+        button.textContent = "Convert PDF to JPG";
     }
 }
 
-
 function canvasToJpeg(canvas) {
-
     return new Promise(function (resolve, reject) {
-
-        canvas.toBlob(
-            function (blob) {
-
-                if (blob) {
-
-                    resolve(blob);
-
-                } else {
-
-                    reject(
-                        new Error(
-                            "Could not create JPG."
-                        )
-                    );
-                }
-            },
-            "image/jpeg",
-            0.92
-        );
+        canvas.toBlob(function (blob) {
+            if (blob) resolve(blob);
+            else reject(new Error("Could not create JPG."));
+        }, "image/jpeg", 0.92);
     });
 }
 
+function addJpgResult(container, url, blob, pageNumber) {
+    const card = document.createElement("div");
+    card.className = "preview-card";
 
-function addJpgResult(
-    container,
-    url,
-    blob,
-    pageNumber
-) {
+    const image = document.createElement("img");
+    image.src = url;
 
-    const card =
-        document.createElement("div");
+    const label = document.createElement("div");
+    label.className = "preview-label";
+    label.textContent = "Page " + pageNumber;
 
-    card.className =
-        "preview-card";
-
-
-    const image =
-        document.createElement("img");
-
-    image.src =
-        url;
-
-
-    const label =
-        document.createElement("div");
-
-    label.className =
-        "preview-label";
-
-    label.textContent =
-        "Page " + pageNumber;
-
-
-    const button =
-        document.createElement("button");
-
-    button.className =
-        "small-btn";
-
-    button.textContent =
-        "Download JPG";
-
-
-    button.onclick =
-        function () {
-
-            downloadBlob(
-                blob,
-                "ToolsMediaDownloader-page-" +
-                pageNumber +
-                ".jpg"
-            );
-        };
-
+    const button = document.createElement("button");
+    button.className = "small-btn";
+    button.textContent = "Download JPG";
+    button.onclick = function () {
+        downloadBlob(blob, "ToolsMediaDownloader-page-" + pageNumber + ".jpg");
+    };
 
     card.appendChild(image);
-
     card.appendChild(label);
-
     card.appendChild(button);
-
     container.appendChild(card);
 }
-
 
 /* =========================================================
    MERGE PDF
@@ -1182,167 +779,63 @@ function addJpgResult(
 
 let selectedMergeFiles = [];
 
-
 function mergeFilesSelected(input) {
+    const status = document.getElementById("mergeStatus");
+    const button = document.getElementById("mergeButton");
 
-    const status =
-        document.getElementById("mergeStatus");
-
-    const button =
-        document.getElementById("mergeButton");
-
-
-    selectedMergeFiles =
-        Array.from(input.files || []);
-
+    selectedMergeFiles = Array.from(input.files || []);
 
     if (selectedMergeFiles.length < 2) {
-
-        status.textContent =
-            "Please select at least 2 PDF files.";
-
-        button.style.display =
-            "none";
-
+        status.textContent = "Please select at least 2 PDF files.";
+        button.style.display = "none";
         return;
     }
 
-
-    status.textContent =
-        selectedMergeFiles.length +
-        " PDF files selected.";
-
-
-    button.style.display =
-        "block";
+    status.textContent = selectedMergeFiles.length + " PDF files selected.";
+    button.style.display = "block";
 }
 
-
 async function mergePdfs() {
+    const status = document.getElementById("mergeStatus");
+    const button = document.getElementById("mergeButton");
 
-    const status =
-        document.getElementById("mergeStatus");
-
-    const button =
-        document.getElementById("mergeButton");
-
-
-    if (
-        !window.PDFLib ||
-        !window.PDFLib.PDFDocument
-    ) {
-
-        status.textContent =
-            "Local PDF engine could not load.";
-
+    if (!window.PDFLib || !window.PDFLib.PDFDocument) {
+        status.textContent = "Local PDF engine could not load.";
         return;
     }
-
 
     if (selectedMergeFiles.length < 2) {
-
-        status.textContent =
-            "Select at least 2 PDF files.";
-
+        status.textContent = "Select at least 2 PDF files.";
         return;
     }
 
-
-    button.disabled =
-        true;
-
-    button.textContent =
-        "Merging...";
-
+    button.disabled = true;
+    button.textContent = "Merging...";
 
     try {
+        const merged = await window.PDFLib.PDFDocument.create();
 
-        const merged =
-            await window.PDFLib.PDFDocument.create();
-
-
-        for (
-            let i = 0;
-            i < selectedMergeFiles.length;
-            i++
-        ) {
-
-            status.textContent =
-                "Adding PDF " +
-                (i + 1) +
-                " of " +
-                selectedMergeFiles.length +
-                "...";
-
-
-            const bytes =
-                await selectedMergeFiles[i]
-                    .arrayBuffer();
-
-
-            const source =
-                await window.PDFLib.PDFDocument.load(
-                    bytes
-                );
-
-
-            const pageIndices =
-                source.getPageIndices();
-
-
-            const pages =
-                await merged.copyPages(
-                    source,
-                    pageIndices
-                );
-
-
+        for (let i = 0; i < selectedMergeFiles.length; i++) {
+            status.textContent = "Adding PDF " + (i + 1) + " of " + selectedMergeFiles.length + "...";
+            const bytes = await selectedMergeFiles[i].arrayBuffer();
+            const source = await window.PDFLib.PDFDocument.load(bytes);
+            const pageIndices = source.getPageIndices();
+            const pages = await merged.copyPages(source, pageIndices);
             pages.forEach(function (page) {
-
                 merged.addPage(page);
-
             });
         }
 
-
-        status.textContent =
-            "Preparing merged PDF...";
-
-
-        const bytes =
-            await merged.save();
-
-
-        downloadBlob(
-            new Blob(
-                [bytes],
-                {
-                    type: "application/pdf"
-                }
-            ),
-            "ToolsMediaDownloader-Merged.pdf"
-        );
-
-
-        status.textContent =
-            "✓ PDFs merged successfully!";
-
-
+        status.textContent = "Preparing merged PDF...";
+        const bytes = await merged.save();
+        downloadBlob(new Blob([bytes], { type: "application/pdf" }), "ToolsMediaDownloader-Merged.pdf");
+        status.textContent = "✓ PDFs merged successfully!";
     } catch (error) {
-
         console.error(error);
-
-        status.textContent =
-            "Could not merge these PDF files.";
-
-
+        status.textContent = "Could not merge these PDF files.";
     } finally {
-
-        button.disabled =
-            false;
-
-        button.textContent =
-            "Merge & Download PDF";
+        button.disabled = false;
+        button.textContent = "Merge & Download PDF";
     }
 }
 </script>
