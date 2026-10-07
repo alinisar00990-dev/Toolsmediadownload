@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PDFNexa - Free Online PDF & Video Tools</title>
-    <meta name="description" content="Free online tools for PDF conversion, merging, and TikTok video downloads. Fast, secure, and works directly in your browser. No signup required.">
+    <title>ToolsMediaDownloader - Free Online PDF & Video Tools</title>
+    <meta name="description" content="Free online tools for PDF conversion, merging, video downloads, and media tools. Fast, secure, works directly in your browser. No signup required.">
 
     <!-- LOCAL LIBRARIES -->
     <script src="./pdf-lib.min.js"></script>
@@ -34,7 +34,7 @@
 
         header h1 {
             color: #FFB39A;
-            font-size: 32px;
+            font-size: 28px;
             margin-bottom: 6px;
         }
 
@@ -240,7 +240,7 @@
 
         @media (max-width: 600px) {
             header h1 {
-                font-size: 28px;
+                font-size: 24px;
             }
 
             .container {
@@ -258,8 +258,8 @@
 <body>
 
 <header>
-    <h1>PDFNexa</h1>
-    <p>Free & Fast Online Tools</p>
+    <h1>ToolsMediaDownloader</h1>
+    <p>Free Online Tools & Media Downloaders</p>
 </header>
 
 <main class="container">
@@ -408,7 +408,7 @@
     <!-- PDF TOOLS SECTION -->
 
     <section class="intro">
-        <h2>PDF Tools</h2>
+        <h2>📄 PDF Tools</h2>
         <p>Simple online tools for your PDF files.</p>
     </section>
 
@@ -470,7 +470,7 @@
     <!-- VIDEO & MEDIA TOOLS SECTION -->
 
     <section class="intro section-divider">
-        <h2>Video & Media Tools</h2>
+        <h2>🎬 Video & Media Tools</h2>
         <p>Download and save online videos for free.</p>
     </section>
 
@@ -498,6 +498,16 @@
 
 
         <div class="card">
+            <h3>📘 Facebook Downloader</h3>
+            <p>Save Facebook videos in HD quality directly to your phone or computer.</p>
+
+            <button onclick="comingSoon('Facebook Downloader')">
+                Open Tool
+            </button>
+        </div>
+
+
+        <div class="card">
             <h3>📌 Pinterest Downloader</h3>
             <p>Save Pinterest videos and images in high quality to your device.</p>
 
@@ -512,7 +522,7 @@
 
 
 <footer>
-    © 2026 PDFNexa. All rights reserved.
+    © 2026 ToolsMediaDownloader. All rights reserved.
 </footer>
 
 
@@ -835,7 +845,7 @@ async function createJpgPdf() {
                     type: "application/pdf"
                 }
             ),
-            "PDFNexa-JPG-to-PDF.pdf"
+            "ToolsMediaDownloader-JPG-to-PDF.pdf"
         );
 
 
@@ -1149,7 +1159,7 @@ function addJpgResult(
 
             downloadBlob(
                 blob,
-                "PDFNexa-page-" +
+                "ToolsMediaDownloader-page-" +
                 pageNumber +
                 ".jpg"
             );
@@ -1310,7 +1320,7 @@ async function mergePdfs() {
                     type: "application/pdf"
                 }
             ),
-            "PDFNexa-Merged.pdf"
+            "ToolsMediaDownloader-Merged.pdf"
         );
 
 
