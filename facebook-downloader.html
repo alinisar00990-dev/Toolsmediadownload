@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Video Downloader | ToolsMediaDownloader</title>
+    <meta name="description" content="Download Facebook videos and Reels in HD quality for free. No watermark, fast and secure.">
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ctext%20y='.9em'%20font-size='90'%3E📘%3C/text%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg-dark: #0a0510;
+            --accent: #FFB39A;
+            --accent-glow: #ff8a66;
+            --fb-blue: #1877F2;
+            --text-light: #f0e6ef;
+            --text-dim: #a08ca0;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .orb-1 {
+            width: 420px; height: 420px;
+            background: #1877F2;
+            top: -120px; left: -100px;
+            animation: float1 16s infinite ease-in-out;
+        }
+        .orb-2 {
+            width: 350px; height: 350px;
+            background: #ff8a66;
+            bottom: -100px; right: -80px;
+            animation: float2 19s infinite ease-in-out;
+        }
+        @keyframes float1 { 50% { transform: translate(90px, 140px); } }
+        @keyframes float2 { 50% { transform: translate(-70px, -110px); } }
+
+        /* Navbar */
+        .navbar {
+            position: sticky; top: 0;
+            background: rgba(10, 5, 16, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 179, 154, 0.15);
+            padding: 16px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: 20px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 14px;
+            margin-left: 20px;
+            transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 40px;
+        }
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(32px, 5vw, 48px);
+            margin-bottom: 15px;
+        }
+        .hero h1 span {
+            color: #1877F2;
+        }
+        .hero p {
+            color: var(--text-dim);
+            max-width: 520px;
+            margin: 0 auto;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Downloader Box */
+        .downloader-box {
+            background: rgba(15, 7, 20, 0.85);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(24, 119, 242, 0.35);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 700px;
+            width: 92%;
+            margin: 0 auto 80px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+        .input-group input {
+            flex: 1;
+            min-width: 240px;
+            padding: 16px 18px;
+            border-radius: 14px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(24, 119, 242, 0.4);
+            color: white;
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+            transition: 0.3s;
+        }
+        .input-group input:focus {
+            border-color: #1877F2;
+            box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.2);
+        }
+        .input-group button {
+            padding: 16px 28px;
+            border-radius: 14px;
+            background: #1877F2;
+            color: white;
+            font-weight: 700;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+        .input-group button:hover {
+            background: #166fe5;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(24, 119, 242, 0.4);
+        }
+        .input-group button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .status-msg {
+            min-height: 24px;
+            margin: 12px 0 5px;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--accent);
+        }
+
+        /* Result Card */
+        .result-card {
+            display: none;
+            margin-top: 25px;
+            background: rgba(0,0,0,0.35);
+            border: 1px solid rgba(24, 119, 242, 0.3);
+            border-radius: 18px;
+            padding: 25px;
+            text-align: left;
+            animation: fadeIn 0.4s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-content {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .thumb {
+            width: 160px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 12px;
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .result-info {
+            flex: 1;
+            min-width: 200px;
+        }
+        .result-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .result-meta {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-bottom: 16px;
+        }
+        .download-btns {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .dl-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: #1877F2;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+        .dl-btn:hover {
+            background: #166fe5;
+            transform: translateY(-2px);
+        }
+        .dl-btn.secondary {
+            background: transparent;
+            border: 1px solid #1877F2;
+            color: #1877F2;
+        }
+        .dl-btn.secondary:hover {
+            background: rgba(24, 119, 242, 0.1);
+        }
+
+        .note {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-top: 20px;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            background: linear-gradient(180deg, transparent, rgba(10,5,16,0.9));
+            border-top: 1px solid rgba(255,179,154,0.1);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .footer-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        .footer-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            margin: 0 14px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .footer-links a:hover { color: var(--accent); }
+        .footer-copy {
+            color: var(--text-dim);
+            font-size: 13px;
+            margin-top: 18px;
+        }
+
+        @media (max-width: 600px) {
+            .input-group button { width: 100%; }
+            .downloader-box { padding: 28px 18px; }
+            .result-content { flex-direction: column; text-align: center; }
+            .thumb { width: 100%; height: 180px; }
+            .download-btns { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo">⚡ ToolsMediaDownloader</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="mailto:m.aliarain070@gmail.com">Support</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Facebook <span>Downloader</span></h1>
+        <p>Download Facebook videos and Reels in HD quality for free. Fast, clean, and no watermark.</p>
+    </section>
+
+    <!-- Downloader Box -->
+    <div class="downloader-box">
+        <div class="input-group">
+            <input type="text" id="fbUrl" placeholder="Paste Facebook video or Reel link here...">
+            <button id="fetchBtn" onclick="fetchFacebook()">Download</button>
+        </div>
+
+        <div class="status-msg" id="statusMsg"></div>
+
+        <!-- Result -->
+        <div class="result-card" id="resultCard">
+            <div class="result-content">
+                <img src="" id="thumb" class="thumb" alt="Video thumbnail">
+                <div class="result-info">
+                    <div class="result-title" id="videoTitle">Facebook Video</div>
+                    <div class="result-meta" id="videoMeta">HD Quality Available</div>
+                    <div class="download-btns">
+                        <a href="#" id="hdBtn" class="dl-btn" target="_blank">Download HD Video</a>
+                        <a href="#" id="sdBtn" class="dl-btn secondary" target="_blank">Download SD</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="note">
+            🔒 Works best with public videos. Private or age-restricted videos may not download.
+        </p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-brand">⚡ ToolsMediaDownloader</div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="mailto:m.aliarain070@gmail.com">Contact Support</a>
+        </div>
+        <p class="footer-copy">© 2026 ToolsMediaDownloader. Free online tools.</p>
+    </footer>
+
+    <script>
+        async function fetchFacebook() {
+            const input = document.getElementById('fbUrl');
+            const status = document.getElementById('statusMsg');
+            const resultCard = document.getElementById('resultCard');
+            const btn = document.getElementById('fetchBtn');
+
+            const url = input.value.trim();
+
+            if (!url || (!url.includes('facebook.com') && !url.includes('fb.watch') && !url.includes('fb.com'))) {
+                status.textContent = "❌ Please paste a valid Facebook video link";
+                resultCard.style.display = "none";
+                return;
+            }
+
+            status.textContent = "⏳ Fetching video from Facebook...";
+            btn.disabled = true;
+            resultCard.style.display = "none";
+
+            try {
+                // Using a free public Facebook downloader endpoint
+                const apiUrl = `https://api.corebotflow.com/fb/download?url=${encodeURIComponent(url)}`;
+                
+                // Alternative free method (more reliable for many users)
+                const response = await fetch(`https://facebook-video-downloader.fly.dev/app/main?url=${encodeURIComponent(url)}`);
+                
+                let data;
+                try {
+                    data = await response.json();
+                } catch (e) {
+                    // If first method fails, try second popular free method
+                    const res2 = await fetch(`https://yt5s.io/api/ajaxSearch`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: `q=${encodeURIComponent(url)}&vt=fb`
+                    });
+                    data = await res2.json();
+                }
+
+                // Process the result
+                if (data && (data.success || data.links || data.data || data.hd || data.sd)) {
+                    // Handle different API response formats
+                    let hdLink = data.hd || data.links?.hd || data.data?.hd || data.url || null;
+                    let sdLink = data.sd || data.links?.sd || data.data?.sd || null;
+                    let thumb = data.thumbnail || data.thumb || data.image || "";
+                    let title = data.title || "Facebook Video";
+
+                    if (!hdLink && data.links && Array.isArray(data.links)) {
+                        hdLink = data.links.find(l => l.quality === "HD" || l.quality === "720p")?.url;
+                        sdLink = data.links.find(l => l.quality === "SD" || l.quality === "360p")?.url;
+                    }
+
+                    if (hdLink || sdLink) {
+                        document.getElementById('thumb').src = thumb || "https://via.placeholder.com/160x100?text=FB+Video";
+                        document.getElementById('videoTitle').textContent = title.substring(0, 80);
+                        document.getElementById('videoMeta').textContent = hdLink ? "HD Quality Available" : "SD Quality Available";
+
+                        const hdBtn = document.getElementById('hdBtn');
+                        const sdBtn = document.getElementById('sdBtn');
+
+                        if (hdLink) {
+                            hdBtn.href = hdLink;
+                            hdBtn.style.display = "inline-flex";
+                        } else {
+                            hdBtn.style.display = "none";
+                        }
+
+                        if (sdLink) {
+                            sdBtn.href = sdLink;
+                            sdBtn.style.display = "inline-flex";
+                        } else {
+                            sdBtn.style.display = "none";
+                        }
+
+                        resultCard.style.display = "block";
+                        status.textContent = "✓ Video ready for download!";
+                    } else {
+                        throw new Error("No download links found");
+                    }
+                } else {
+                    // Final fallback - open a reliable external tool with the link
+                    status.innerHTML = `⚠️ Direct fetch limited. <a href="https://fdown.net/?url=${encodeURIComponent(url)}" target="_blank" style="color:#1877F2">Click here for alternative downloader</a>`;
+                }
+
+            } catch (error) {
+                console.error(error);
+                // Friendly fallback
+                status.innerHTML = `⚠️ Could not fetch directly. <a href="https://fdown.net/?url=${encodeURIComponent(url)}" target="_blank" style="color:#1877F2; text-decoration:underline">Open Free Facebook Downloader →</a>`;
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        // Enter key support
+        document.getElementById('fbUrl').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') fetchFacebook();
+        });
+    </script>
+</body>
+</html>
