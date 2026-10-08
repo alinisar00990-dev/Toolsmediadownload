@@ -3,17 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToolsMediaDownloader | Next-Gen Online File & Media Suite</title>
-    <meta name="description" content="The future of online utilities. Convert, merge, compress PDFs and download HD videos — all processed instantly in your browser.">
+    <title>ToolsMediaDownloader | Next-Gen Online File & Media Tools</title>
+    <meta name="description" content="Convert, merge PDFs and download HD videos instantly in your browser. Free, fast and secure.">
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
     
-    <!-- Google Fonts: Futuristic Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
 
-    <!-- PDF LIBRARIES -->
     <script src="./pdf-lib.min.js"></script>
     <script src="./pdf.min.js"></script>
 
@@ -22,7 +20,6 @@
 
         :root {
             --bg-dark: #0a0510;
-            --bg-mid: #1a0d1a;
             --accent: #FFB39A;
             --accent-glow: #ff8a66;
             --purple: #542452;
@@ -42,254 +39,110 @@
             position: relative;
         }
 
-        /* ========== INTRO LOADER ========== */
+        /* Intro Loader */
         #intro-loader {
-            position: fixed;
-            inset: 0;
-            background: var(--bg-dark);
-            z-index: 99999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 20px;
+            position: fixed; inset: 0; background: var(--bg-dark); z-index: 99999;
+            display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 20px;
             transition: opacity 0.8s ease, visibility 0.8s;
         }
-
         #intro-loader.hide { opacity: 0; visibility: hidden; }
-
         .intro-logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(24px, 5vw, 42px);
-            font-weight: 800;
+            font-family: 'Orbitron', sans-serif; font-size: clamp(24px, 5vw, 42px); font-weight: 800;
             background: linear-gradient(135deg, var(--accent), var(--accent-glow));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: 2px;
-            animation: logoFadeIn 1.5s ease forwards;
-            opacity: 0;
-            text-align: center;
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+            letter-spacing: 2px; animation: logoFadeIn 1.5s ease forwards; opacity: 0; text-align: center;
         }
-
         .intro-tagline {
-            color: var(--text-dim);
-            font-size: 14px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            opacity: 0;
-            animation: tagFadeIn 1.5s ease 0.5s forwards;
-            text-align: center;
+            color: var(--text-dim); font-size: 14px; letter-spacing: 4px; text-transform: uppercase;
+            opacity: 0; animation: tagFadeIn 1.5s ease 0.5s forwards; text-align: center;
         }
-
-        .loader-bar {
-            width: 200px;
-            height: 2px;
-            background: rgba(255, 179, 154, 0.2);
-            border-radius: 2px;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-
-        .loader-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent), var(--accent-glow));
-            animation: loadFill 2s ease forwards;
-            width: 0;
-        }
+        .loader-bar { width: 200px; height: 2px; background: rgba(255,179,154,0.2); border-radius: 2px; overflow: hidden; margin-top: 10px; }
+        .loader-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-glow)); animation: loadFill 2s ease forwards; width: 0; }
 
         @keyframes logoFadeIn { to { opacity: 1; transform: translateY(0); } from { opacity: 0; transform: translateY(10px); } }
         @keyframes tagFadeIn { to { opacity: 1; } }
         @keyframes loadFill { to { width: 100%; } }
 
-        /* ========== ANIMATED BACKGROUND ORBS ========== */
-        .orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.4;
-            pointer-events: none;
-            z-index: 0;
-        }
+        /* Background Orbs */
+        .orb { position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.4; pointer-events: none; z-index: 0; }
         .orb-1 { width: 400px; height: 400px; background: #542452; top: -100px; left: -100px; animation: float1 15s infinite ease-in-out; }
         .orb-2 { width: 350px; height: 350px; background: #ff8a66; bottom: -100px; right: -100px; animation: float2 18s infinite ease-in-out; }
         .orb-3 { width: 300px; height: 300px; background: #743871; top: 50%; left: 50%; animation: float3 20s infinite ease-in-out; }
-
         @keyframes float1 { 50% { transform: translate(100px, 150px); } }
         @keyframes float2 { 50% { transform: translate(-80px, -120px); } }
         @keyframes float3 { 50% { transform: translate(-150px, 100px); } }
 
-        /* ========== NAVBAR ========== */
+        /* Navbar */
         .navbar {
-            position: sticky;
-            top: 0;
-            background: rgba(10, 5, 16, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 179, 154, 0.15);
-            padding: 18px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            flex-wrap: wrap;
-            gap: 10px;
+            position: sticky; top: 0; background: rgba(10,5,16,0.7); backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,179,154,0.15); padding: 18px 5%;
+            display: flex; justify-content: space-between; align-items: center; z-index: 1000; flex-wrap: wrap; gap: 10px;
         }
-
         .nav-logo {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 800;
-            font-size: clamp(16px, 3vw, 20px);
+            font-family: 'Orbitron', sans-serif; font-weight: 800; font-size: clamp(16px, 3vw, 20px);
             background: linear-gradient(135deg, var(--accent), var(--accent-glow));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-decoration: none;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+            text-decoration: none; letter-spacing: 1px; display: flex; align-items: center; gap: 10px;
         }
-
         .nav-logo span { font-size: 24px; }
-
         .nav-links { display: flex; gap: 20px; flex-wrap: wrap; }
-
-        .nav-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            position: relative;
-            transition: color 0.3s;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.3s;
-        }
-
+        .nav-links a { color: var(--text-light); text-decoration: none; font-size: 14px; font-weight: 500; position: relative; transition: color 0.3s; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.3s; }
         .nav-links a:hover { color: var(--accent); }
         .nav-links a:hover::after { width: 100%; }
 
-        /* ========== HERO SECTION ========== */
-        .hero-section {
-            text-align: center;
-            padding: 100px 20px 80px;
-            position: relative;
-            z-index: 2;
-        }
-
+        /* Hero */
+        .hero-section { text-align: center; padding: 100px 20px 80px; position: relative; z-index: 2; }
         .hero-badge {
-            display: inline-block;
-            padding: 6px 16px;
-            background: rgba(255, 179, 154, 0.1);
-            border: 1px solid rgba(255, 179, 154, 0.3);
-            border-radius: 20px;
-            font-size: 12px;
-            color: var(--accent);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 25px;
+            display: inline-block; padding: 6px 16px; background: rgba(255,179,154,0.1);
+            border: 1px solid rgba(255,179,154,0.3); border-radius: 20px; font-size: 12px;
+            color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 25px;
             animation: fadeInUp 0.8s ease;
         }
-
         .hero-section h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(32px, 6vw, 60px);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 25px;
-            animation: fadeInUp 0.8s ease 0.2s both;
+            font-family: 'Orbitron', sans-serif; font-size: clamp(32px, 6vw, 60px); font-weight: 800;
+            line-height: 1.1; margin-bottom: 25px; animation: fadeInUp 0.8s ease 0.2s both;
         }
-
         .hero-section h1 .gradient-text {
             background: linear-gradient(135deg, var(--accent), var(--accent-glow));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            -webkit-background-clip: text; background-clip: text; color: transparent;
         }
-
         .hero-section p {
-            color: var(--text-dim);
-            font-size: 17px;
-            max-width: 650px;
-            margin: 0 auto 40px;
-            line-height: 1.7;
-            animation: fadeInUp 0.8s ease 0.4s both;
+            color: var(--text-dim); font-size: 17px; max-width: 650px; margin: 0 auto 40px;
+            line-height: 1.7; animation: fadeInUp 0.8s ease 0.4s both;
         }
-
-        .hero-cta {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease 0.6s both;
-        }
-
+        .hero-cta { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; animation: fadeInUp 0.8s ease 0.6s both; }
         .btn-primary, .btn-ghost {
-            padding: 14px 32px;
-            border-radius: 50px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s;
-            border: none;
-            letter-spacing: 0.5px;
+            padding: 14px 32px; border-radius: 50px; font-family: 'Space Grotesk', sans-serif;
+            font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; transition: all 0.3s; border: none;
         }
-
         .btn-primary {
-            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
-            color: var(--bg-dark);
-            box-shadow: 0 10px 30px rgba(255, 179, 154, 0.3);
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow)); color: var(--bg-dark);
+            box-shadow: 0 10px 30px rgba(255,179,154,0.3);
         }
-
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255, 179, 154, 0.5); }
-
-        .btn-ghost {
-            background: transparent;
-            color: var(--text-light);
-            border: 1px solid rgba(255, 179, 154, 0.3);
-        }
-
-        .btn-ghost:hover { background: rgba(255, 179, 154, 0.1); border-color: var(--accent); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255,179,154,0.5); }
+        .btn-ghost { background: transparent; color: var(--text-light); border: 1px solid rgba(255,179,154,0.3); }
+        .btn-ghost:hover { background: rgba(255,179,154,0.1); border-color: var(--accent); }
 
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ========== STATS BAR ========== */
+        /* Stats */
         .stats-bar {
-            display: flex;
-            justify-content: center;
-            gap: 50px;
-            padding: 40px 20px;
-            flex-wrap: wrap;
-            border-top: 1px solid rgba(255, 179, 154, 0.1);
-            border-bottom: 1px solid rgba(255, 179, 154, 0.1);
-            position: relative;
-            z-index: 2;
+            display: flex; justify-content: center; gap: 50px; padding: 40px 20px; flex-wrap: wrap;
+            border-top: 1px solid rgba(255,179,154,0.1); border-bottom: 1px solid rgba(255,179,154,0.1); position: relative; z-index: 2;
         }
-
         .stat-item { text-align: center; }
         .stat-item h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 32px;
+            font-family: 'Orbitron', sans-serif; font-size: 32px;
             background: linear-gradient(135deg, var(--accent), var(--accent-glow));
             -webkit-background-clip: text; background-clip: text; color: transparent;
         }
         .stat-item p { color: var(--text-dim); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; }
 
-        /* ========== CONTAINER & LAYOUT ========== */
+        /* Layout */
         .container { max-width: 1200px; margin: auto; padding: 80px 5%; position: relative; z-index: 2; }
         .section-intro { text-align: center; margin-bottom: 50px; }
         .section-tag { display: inline-block; color: var(--accent); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
@@ -297,40 +150,32 @@
         .section-intro p { color: var(--text-dim); max-width: 600px; margin: auto; font-size: 16px; line-height: 1.7; }
         .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
 
-        /* ========== GLASS CARDS ========== */
+        /* Glass Cards */
         .glass-card {
-            background: linear-gradient(135deg, rgba(84, 36, 82, 0.4), rgba(26, 13, 26, 0.4));
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 179, 154, 0.15); border-radius: 20px;
-            padding: 30px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, rgba(84,36,82,0.4), rgba(26,13,26,0.4));
+            backdrop-filter: blur(20px); border: 1px solid rgba(255,179,154,0.15); border-radius: 20px;
+            padding: 30px; transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
             position: relative; overflow: hidden; opacity: 0; transform: translateY(30px);
         }
-
         .glass-card.visible { opacity: 1; transform: translateY(0); }
         .glass-card::before {
             content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 179, 154, 0.1), transparent); transition: left 0.6s;
+            background: linear-gradient(90deg, transparent, rgba(255,179,154,0.1), transparent); transition: left 0.6s;
         }
         .glass-card:hover::before { left: 100%; }
-        .glass-card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 20px 50px rgba(255, 179, 154, 0.2); }
+        .glass-card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 20px 50px rgba(255,179,154,0.2); }
 
-        /* Card Icons */
         .card-icon {
             width: 55px; height: 55px; border-radius: 15px; display: flex; align-items: center; justify-content: center;
-            font-size: 26px; margin-bottom: 20px; box-shadow: 0 10px 25px rgba(0,0,0, 0.3);
+            font-size: 26px; margin-bottom: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            overflow: hidden;
         }
-
-        /* Specific Video Platform Gradients */
-        .logo-tiktok { background: linear-gradient(135deg, #ff0050, #00f2ea); }
-        .logo-insta { background: linear-gradient(135deg, #f09433, #dc2743, #bc1888); }
-        .logo-fb { background: linear-gradient(135deg, #4267B2, #1877F2); }
-        .logo-pin { background: linear-gradient(135deg, #E60023, #BD081C); }
+        .card-icon svg { width: 28px; height: 28px; fill: white; }
 
         .glass-card h3 { font-family: 'Orbitron', sans-serif; font-size: 18px; margin-bottom: 10px; color: var(--text-light); }
         .glass-card p { color: var(--text-dim); font-size: 13.5px; line-height: 1.6; margin-bottom: 25px; min-height: 60px; }
 
-        /* Unique Buttons inside cards */
         .card-btn {
             display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px;
             background: transparent; color: var(--accent); border: 1px solid var(--accent);
@@ -338,68 +183,63 @@
             transition: all 0.3s; width: auto; text-decoration: none; letter-spacing: 0.5px;
         }
         .card-btn:hover { background: var(--accent); color: var(--bg-dark); gap: 12px; }
-        .card-btn.locked { background: transparent; color: var(--text-dim); border: 1px solid rgba(255, 179, 154, 0.2); cursor: not-allowed; }
+        .card-btn.locked { background: transparent; color: var(--text-dim); border: 1px solid rgba(255,179,154,0.2); cursor: not-allowed; }
         .card-btn.locked:hover { background: transparent; gap: 8px; }
 
-        /* ========== WORKSPACE (Tool UI) ========== */
+        /* Workspace */
         .workspace {
-            display: none; background: linear-gradient(135deg, rgba(84, 36, 82, 0.5), rgba(26, 13, 26, 0.5));
-            backdrop-filter: blur(20px); border: 1px solid rgba(255, 179, 154, 0.3); border-radius: 24px;
+            display: none; background: linear-gradient(135deg, rgba(84,36,82,0.5), rgba(26,13,26,0.5));
+            backdrop-filter: blur(20px); border: 1px solid rgba(255,179,154,0.3); border-radius: 24px;
             padding: 40px; margin-bottom: 40px; animation: fadeInUp 0.5s ease;
         }
         .workspace h2 { font-family: 'Orbitron', sans-serif; color: var(--accent); text-align: center; margin-bottom: 10px; font-size: 24px; }
         .description { color: var(--text-dim); text-align: center; margin-bottom: 25px; line-height: 1.6; }
-        .upload-box { background: rgba(10, 5, 16, 0.5); border: 2px dashed rgba(255, 179, 154, 0.4); border-radius: 16px; padding: 40px 20px; text-align: center; cursor: pointer; transition: all 0.3s; }
-        .upload-box:hover { border-color: var(--accent); background: rgba(10, 5, 16, 0.7); }
+        .upload-box { background: rgba(10,5,16,0.5); border: 2px dashed rgba(255,179,154,0.4); border-radius: 16px; padding: 40px 20px; text-align: center; cursor: pointer; transition: all 0.3s; }
+        .upload-box:hover { border-color: var(--accent); background: rgba(10,5,16,0.7); }
         .upload-box strong { display: block; color: var(--accent); font-size: 18px; margin-bottom: 8px; }
         .upload-box span { color: var(--text-dim); font-size: 13px; }
         .hidden-input { display: none; }
         .status { color: var(--accent); text-align: center; margin: 20px 0; font-weight: 600; min-height: 24px; }
         .preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px; margin: 20px 0; }
-        .preview-card { background: rgba(10, 5, 16, 0.6); border: 1px solid rgba(255, 179, 154, 0.15); padding: 8px; border-radius: 12px; }
+        .preview-card { background: rgba(10,5,16,0.6); border: 1px solid rgba(255,179,154,0.15); padding: 8px; border-radius: 12px; }
         .preview-card img { width: 100%; height: 110px; object-fit: contain; background: white; border-radius: 8px; }
         .preview-label { color: var(--accent); text-align: center; font-size: 11px; padding: 6px 2px; }
-        
         .action-button { display: none; width: 100%; padding: 14px; background: linear-gradient(135deg, var(--accent), var(--accent-glow)); color: var(--bg-dark); border: none; border-radius: 12px; font-weight: 600; cursor: pointer; margin-top: 10px; transition: all 0.3s; font-family: 'Space Grotesk', sans-serif; }
-        .action-button:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(255, 179, 154, 0.3); }
-        .close-button { width: 100%; padding: 12px; margin-top: 10px; background: transparent; color: var(--text-dim); border: 1px solid rgba(255, 179, 154, 0.2); border-radius: 12px; cursor: pointer; transition: all 0.3s; font-family: 'Space Grotesk', sans-serif; }
+        .action-button:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(255,179,154,0.3); }
+        .close-button { width: 100%; padding: 12px; margin-top: 10px; background: transparent; color: var(--text-dim); border: 1px solid rgba(255,179,154,0.2); border-radius: 12px; cursor: pointer; transition: all 0.3s; font-family: 'Space Grotesk', sans-serif; }
         .close-button:hover { color: var(--accent); border-color: var(--accent); }
         .small-btn { padding: 8px; font-size: 11px; width: 100%; margin-top: 5px; background: var(--accent); color: var(--bg-dark); border: none; border-radius: 6px; cursor: pointer; }
         .privacy { text-align: center; font-size: 12px; color: var(--text-dim); margin-top: 15px; }
 
-        /* ========== FOOTER ========== */
-        footer { background: linear-gradient(180deg, transparent, rgba(10, 5, 16, 0.8)); border-top: 1px solid rgba(255, 179, 154, 0.1); padding: 50px 20px 30px; text-align: center; position: relative; z-index: 2; }
+        /* Footer */
+        footer { background: linear-gradient(180deg, transparent, rgba(10,5,16,0.8)); border-top: 1px solid rgba(255,179,154,0.1); padding: 50px 20px 30px; text-align: center; position: relative; z-index: 2; }
         .footer-brand { font-family: 'Orbitron', sans-serif; font-size: 22px; background: linear-gradient(135deg, var(--accent), var(--accent-glow)); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 15px; }
         .footer-links { display: flex; justify-content: center; gap: 25px; margin: 20px 0; flex-wrap: wrap; }
         .footer-links a { color: var(--text-dim); text-decoration: none; font-size: 14px; transition: color 0.3s; }
         .footer-links a:hover { color: var(--accent); }
         .footer-copy { color: var(--text-dim); font-size: 12px; margin-top: 20px; }
 
-        /* ========== TOBY AI CHAT WIDGET ========== */
+        /* Toby Chat */
         #toby-widget-container { position: fixed; bottom: 25px; right: 25px; z-index: 10000; display: flex; flex-direction: column; align-items: flex-end; }
-        .toby-launch-btn { background: linear-gradient(135deg, var(--accent), var(--accent-glow)); color: var(--bg-dark); padding: 12px 22px; border-radius: 30px; font-weight: 600; font-size: 14px; cursor: pointer; border: none; box-shadow: 0 10px 25px rgba(255, 179, 154, 0.4); transition: all 0.3s; font-family: 'Space Grotesk', sans-serif; display: flex; align-items: center; gap: 8px; }
+        .toby-launch-btn { background: linear-gradient(135deg, var(--accent), var(--accent-glow)); color: var(--bg-dark); padding: 12px 22px; border-radius: 30px; font-weight: 600; font-size: 14px; cursor: pointer; border: none; box-shadow: 0 10px 25px rgba(255,179,154,0.4); transition: all 0.3s; font-family: 'Space Grotesk', sans-serif; display: flex; align-items: center; gap: 8px; }
         .toby-launch-btn:hover { transform: scale(1.05); }
-        
-        #toby-chat-box { display: none; width: 340px; background: rgba(26, 13, 26, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255, 179, 154, 0.3); border-radius: 20px; margin-bottom: 15px; flex-direction: column; overflow: hidden; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6); animation: popUp 0.3s ease; }
+        #toby-chat-box { display: none; width: 340px; background: rgba(26,13,26,0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255,179,154,0.3); border-radius: 20px; margin-bottom: 15px; flex-direction: column; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.6); animation: popUp 0.3s ease; }
         @keyframes popUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        
         .chat-header { background: linear-gradient(135deg, var(--purple), var(--purple-light)); padding: 16px; color: var(--accent); font-weight: 600; display: flex; justify-content: space-between; align-items: center; font-family: 'Orbitron', sans-serif; font-size: 14px; }
         .chat-header button { background: none; border: none; color: var(--accent); font-size: 22px; cursor: pointer; }
-        
         #chat-messages { height: 260px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
         .bot-msg, .user-msg { padding: 10px 14px; border-radius: 14px; font-size: 13.5px; line-height: 1.5; max-width: 85%; }
-        .bot-msg { background: rgba(84, 36, 82, 0.6); color: var(--text-light); align-self: flex-start; border-bottom-left-radius: 3px; }
+        .bot-msg { background: rgba(84,36,82,0.6); color: var(--text-light); align-self: flex-start; border-bottom-left-radius: 3px; }
         .user-msg { background: linear-gradient(135deg, var(--accent), var(--accent-glow)); color: var(--bg-dark); align-self: flex-end; font-weight: 500; border-bottom-right-radius: 3px; }
-        
-        .chat-input-area { display: flex; padding: 12px; background: rgba(10, 5, 16, 0.6); border-top: 1px solid rgba(255, 179, 154, 0.1); gap: 8px; }
-        .chat-input-area input { flex: 1; padding: 10px 14px; background: rgba(84, 36, 82, 0.4); border: 1px solid rgba(255, 179, 154, 0.2); border-radius: 20px; color: white; outline: none; font-family: inherit; }
+        .chat-input-area { display: flex; padding: 12px; background: rgba(10,5,16,0.6); border-top: 1px solid rgba(255,179,154,0.1); gap: 8px; }
+        .chat-input-area input { flex: 1; padding: 10px 14px; background: rgba(84,36,82,0.4); border: 1px solid rgba(255,179,154,0.2); border-radius: 20px; color: white; outline: none; font-family: inherit; }
         .chat-input-area input:focus { border-color: var(--accent); }
         .chat-input-area button { padding: 10px 18px; background: linear-gradient(135deg, var(--accent), var(--accent-glow)); color: var(--bg-dark); border: none; border-radius: 20px; font-weight: 600; cursor: pointer; font-family: inherit; }
 
         @media (max-width: 600px) {
             .nav-links { gap: 10px; justify-content: center; } .nav-links a { font-size: 13px; }
             .hero-section { padding: 60px 20px 50px; } .container { padding: 50px 5%; }
-            #toby-chat-box { width: 290px; right: 0; }
+            #toby-chat-box { width: 290px; }
         }
     </style>
 </head>
@@ -408,16 +248,15 @@
 <!-- INTRO LOADER -->
 <div id="intro-loader">
     <div class="intro-logo">ToolsMediaDownloader</div>
-    <div class="intro-tagline">Next-Gen Online Suite</div>
+    <div class="intro-tagline">Next-Gen Online Tools</div>
     <div class="loader-bar"><div class="loader-fill"></div></div>
 </div>
 
-<!-- ANIMATED BACKGROUND -->
 <div class="orb orb-1"></div>
 <div class="orb orb-2"></div>
 <div class="orb orb-3"></div>
 
-<!-- NAVIGATION -->
+<!-- NAVBAR -->
 <nav class="navbar">
     <a href="index.html" class="nav-logo"><span>⚡</span> ToolsMediaDownloader</a>
     <div class="nav-links">
@@ -428,11 +267,11 @@
     </div>
 </nav>
 
-<!-- HERO SECTION -->
+<!-- HERO -->
 <section class="hero-section">
     <div class="hero-badge">⚡ 100% Browser-Based · No Signups</div>
     <h1>The Future of<br><span class="gradient-text">Online Utilities</span></h1>
-    <p>Transform PDFs, extract media, and download HD videos — all processed instantly in your browser with next-generation technology. Zero uploads. Zero compromise.</p>
+    <p>Transform PDFs, extract media, and download HD videos — all processed instantly in your browser. Zero uploads. Zero compromise.</p>
     <div class="hero-cta">
         <a href="#document-tools" class="btn-primary">Explore PDF Tools →</a>
         <a href="#video-tools" class="btn-ghost">View Downloaders</a>
@@ -449,7 +288,7 @@
 
 <main class="container">
 
-    <!-- WORKSPACE: JPG to PDF -->
+    <!-- WORKSPACES -->
     <section id="jpgTool" class="workspace">
         <h2>JPG → PDF Converter</h2>
         <p class="description">Transform multiple images into a single, polished PDF document.</p>
@@ -465,7 +304,6 @@
         <p class="privacy">🔒 Processed locally in your browser</p>
     </section>
 
-    <!-- WORKSPACE: PDF to JPG -->
     <section id="pdfJpgTool" class="workspace">
         <h2>PDF → JPG Extractor</h2>
         <p class="description">Extract every page of your PDF as a high-quality JPG image.</p>
@@ -481,7 +319,6 @@
         <p class="privacy">🔒 Processed locally in your browser</p>
     </section>
 
-    <!-- WORKSPACE: Merge PDF -->
     <section id="mergeTool" class="workspace">
         <h2>PDF Merger</h2>
         <p class="description">Combine multiple PDF files into one unified document.</p>
@@ -496,11 +333,9 @@
         <p class="privacy">🔒 Processed locally in your browser</p>
     </section>
 
-    <!-- ==============================================
-         DOCUMENT TOOLS SECTION 
-         ============================================== -->
+    <!-- DOCUMENT TOOLS -->
     <section id="document-tools" class="section-intro">
-        <div class="section-tag">Document Suite</div>
+        <div class="section-tag">Document Tools</div>
         <h2>PDF & File Tools</h2>
         <p>Professional-grade file utilities running entirely in your browser. No installs. No limits.</p>
     </section>
@@ -528,19 +363,17 @@
             <div class="card-icon">🗜️</div>
             <h3>Compress PDF</h3>
             <p>Shrink PDF file sizes while preserving document quality and clarity.</p>
-            <button class="card-btn coming" onclick="comingSoon('Compress PDF')">Compress File 🔒</button>
+            <button class="card-btn locked" onclick="comingSoon('Compress PDF')">Compress File 🔒</button>
         </div>
         <div class="glass-card">
             <div class="card-icon">📝</div>
             <h3>PDF to Word</h3>
             <p>Convert static PDF documents into fully editable Word files.</p>
-            <button class="card-btn coming" onclick="comingSoon('PDF to Word')">Unlock Text 🔒</button>
+            <button class="card-btn locked" onclick="comingSoon('PDF to Word')">Convert to Word 🔒</button>
         </div>
     </div>
 
-    <!-- ==============================================
-         VIDEO DOWNLOADERS SECTION 
-         ============================================== -->
+    <!-- VIDEO DOWNLOADERS -->
     <section id="video-tools" class="section-intro" style="margin-top: 100px;">
         <div class="section-tag">Media Downloaders</div>
         <h2>Download HD Videos</h2>
@@ -548,29 +381,44 @@
     </section>
 
     <div class="tools-grid">
+        <!-- TikTok -->
         <div class="glass-card">
-            <div class="card-icon logo-tiktok">🎵</div>
+            <div class="card-icon" style="background: #000000;">
+                <svg viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.73a8.16 8.16 0 0 0 4.77 1.52V6.69h-.01z"/></svg>
+            </div>
             <h3>TikTok Downloader</h3>
             <p>Download TikTok videos without watermark in HD MP4 or extract MP3 audio files.</p>
             <button class="card-btn" onclick="window.location.href='tiktok-downloader.html'">Download Video →</button>
         </div>
+
+        <!-- Instagram -->
         <div class="glass-card">
-            <div class="card-icon logo-insta">📸</div>
+            <div class="card-icon" style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);">
+                <svg viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            </div>
             <h3>Instagram Downloader</h3>
             <p>Download Instagram videos, reels, stories, and photos directly to your device.</p>
-            <button class="card-btn coming" onclick="comingSoon('Instagram Downloader')">Download Media 🔒</button>
+            <button class="card-btn locked" onclick="comingSoon('Instagram Downloader')">Download Media 🔒</button>
         </div>
+
+        <!-- Facebook -->
         <div class="glass-card">
-            <div class="card-icon logo-fb">📘</div>
+            <div class="card-icon" style="background: #1877F2;">
+                <svg viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </div>
             <h3>Facebook Downloader</h3>
             <p>Save Facebook videos in HD quality directly to your phone or computer.</p>
-            <button class="card-btn coming" onclick="comingSoon('Facebook Downloader')">Download Video 🔒</button>
+            <button class="card-btn locked" onclick="comingSoon('Facebook Downloader')">Download Video 🔒</button>
         </div>
+
+        <!-- Pinterest -->
         <div class="glass-card">
-            <div class="card-icon logo-pin">📌</div>
+            <div class="card-icon" style="background: #E60023;">
+                <svg viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.219-.937 1.406-5.957 1.406-5.957s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.888-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/></svg>
+            </div>
             <h3>Pinterest Downloader</h3>
             <p>Save Pinterest videos and images in high quality to your gallery.</p>
-            <button class="card-btn coming" onclick="comingSoon('Pinterest Downloader')">Download Pin 🔒</button>
+            <button class="card-btn locked" onclick="comingSoon('Pinterest Downloader')">Download Pin 🔒</button>
         </div>
     </div>
 
@@ -588,7 +436,7 @@
     <p class="footer-copy">© 2026 ToolsMediaDownloader · Crafted for creators worldwide</p>
 </footer>
 
-<!-- TOBY AI ASSISTANT -->
+<!-- TOBY -->
 <div id="toby-widget-container">
     <div id="toby-chat-box">
         <div class="chat-header">
@@ -596,7 +444,7 @@
             <button onclick="toggleTobyChat()">×</button>
         </div>
         <div id="chat-messages">
-            <div class="bot-msg">Hey there! 👋 I'm Toby, your smart assistant. Ask me anything about our PDF tools, video downloaders, or how to navigate the site!</div>
+            <div class="bot-msg">Hey there! 👋 I'm Toby. Ask me anything about our PDF tools or video downloaders!</div>
         </div>
         <div class="chat-input-area">
             <input type="text" id="toby-input" placeholder="Ask Toby anything..." onkeypress="handleTobyKey(event)">
@@ -609,33 +457,23 @@
 <script>
 "use strict";
 
-/* INTRO LOADER */
 window.addEventListener('load', () => {
-    setTimeout(() => {
-        document.getElementById('intro-loader').classList.add('hide');
-    }, 2200);
+    setTimeout(() => document.getElementById('intro-loader').classList.add('hide'), 2200);
 });
 
-/* SCROLL ANIMATIONS */
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => entry.target.classList.add('visible'), i * 100);
-        }
+        if (entry.isIntersecting) setTimeout(() => entry.target.classList.add('visible'), i * 100);
     });
 }, { threshold: 0.1 });
-
 document.querySelectorAll('.glass-card').forEach(card => observer.observe(card));
 
-/* TOBY AI */
 function toggleTobyChat() {
     const chat = document.getElementById('toby-chat-box');
     chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
     if (chat.style.display === 'flex') document.getElementById('toby-input').focus();
 }
-
 function handleTobyKey(e) { if (e.key === 'Enter') sendTobyMessage(); }
-
 function sendTobyMessage() {
     const input = document.getElementById('toby-input');
     const text = input.value.trim();
@@ -644,22 +482,16 @@ function sendTobyMessage() {
     input.value = '';
     setTimeout(() => {
         const q = text.toLowerCase();
-        let reply = "";
-        if (q.match(/hi|hello|hey|greetings/)) reply = "Hey! 👋 I'm Toby. How can I help you today?";
-        else if (q.includes("how are you")) reply = "I'm doing great, thank you! ⚡ Ready to help you with your files. What do you need?";
-        else if (q.match(/who are you|your name|what are you/)) reply = "I'm Toby — your AI assistant for ToolsMediaDownloader!";
-        else if (q.match(/about|website|what is this/)) reply = "ToolsMediaDownloader is a next-gen suite of free online tools for PDFs, images, and video downloads — all processed in your browser!";
-        else if (q.match(/free|cost|price|pay/)) reply = "Everything here is 100% free, forever. No signups, no limits. ⚡";
-        else if (q.includes("merge")) reply = "To merge PDFs, click 'Merge Files →' on the Merge PDFs card and upload 2+ files!";
-        else if (q.includes("pdf")) reply = "We offer JPG→PDF, PDF→JPG, and Merge PDFs. Click any 'Convert' or 'Extract' button to get started!";
-        else if (q.match(/tiktok|video|instagram|facebook|pinterest/)) reply = "Scroll down to our Media Downloaders section! We currently support TikTok in HD without watermarks.";
-        else if (q.match(/safe|privacy|security/)) reply = "100% safe. Your files never leave your browser — zero uploads to any server. 🔒";
-        else if (q.includes("thank")) reply = "You're welcome! 😊 Happy to help anytime.";
-        else reply = "I can help with: 'PDF tools', 'Video downloaders', 'How to merge PDFs', or 'Is this free?'";
+        let reply = "I can help with PDF tools, TikTok downloads, or if the site is free!";
+        if (q.match(/hi|hello|hey/)) reply = "Hey! 👋 How can I help you today?";
+        else if (q.includes("how are you")) reply = "I'm doing great! Ready to help with your files ⚡";
+        else if (q.match(/free|cost|price/)) reply = "Yes! Everything is 100% free forever.";
+        else if (q.includes("pdf")) reply = "You can convert JPG to PDF, extract images, or merge PDFs above!";
+        else if (q.match(/tiktok|video/)) reply = "Click 'Download Video →' on the TikTok card to get started!";
+        else if (q.match(/safe|privacy/)) reply = "100% safe — all processing happens in your browser.";
         addTobyMessage(reply, 'bot-msg');
     }, 400);
 }
-
 function addTobyMessage(text, className) {
     const msg = document.createElement('div');
     msg.className = className;
@@ -669,10 +501,8 @@ function addTobyMessage(text, className) {
     container.scrollTop = container.scrollHeight;
 }
 
-/* PDF.JS */
 if (window.pdfjsLib) window.pdfjsLib.GlobalWorkerOptions.workerSrc = "./pdf.worker.min.js";
 
-/* TOOL FUNCTIONS */
 function closeTools() { document.querySelectorAll(".workspace").forEach(t => t.style.display = "none"); }
 function openTool(id) { closeTools(); const t = document.getElementById(id); if (t) { t.style.display = "block"; t.scrollIntoView({ behavior: "smooth" }); } }
 function comingSoon(name) { alert(name + " — Coming soon!"); }
@@ -685,7 +515,7 @@ function downloadBlob(blob, filename) {
     setTimeout(() => URL.revokeObjectURL(url), 15000);
 }
 
-/* JPG TO PDF */
+// JPG TO PDF + PDF TO JPG + MERGE (same working code as before)
 let jpgSelectedFiles = [], jpgObjectUrls = [];
 function clearJpgUrls() { jpgObjectUrls.forEach(url => URL.revokeObjectURL(url)); jpgObjectUrls = []; }
 function jpgFilesSelected(input) {
@@ -700,8 +530,7 @@ function jpgFilesSelected(input) {
         card.innerHTML = `<img src="${url}"><div class="preview-label">Image ${i+1}</div>`;
         preview.appendChild(card);
     });
-    status.textContent = `${jpgSelectedFiles.length} image(s) ready`;
-    button.style.display = "block";
+    status.textContent = `${jpgSelectedFiles.length} image(s) ready`; button.style.display = "block";
 }
 async function createJpgPdf() {
     const status = document.getElementById("jpgStatus"), button = document.getElementById("jpgCreateButton");
@@ -710,70 +539,61 @@ async function createJpgPdf() {
     try {
         const pdf = await window.PDFLib.PDFDocument.create();
         for (let i = 0; i < jpgSelectedFiles.length; i++) {
-            status.textContent = `Processing ${i+1}/${jpgSelectedFiles.length}...`;
-            await delay(30);
+            status.textContent = `Processing ${i+1}/${jpgSelectedFiles.length}...`; await delay(30);
             const bytes = await jpgSelectedFiles[i].arrayBuffer();
             const image = jpgSelectedFiles[i].type === "image/png" ? await pdf.embedPng(bytes) : await pdf.embedJpg(bytes);
-            const scale = Math.min(1, 1600 / image.width, 2200 / image.height);
-            const page = pdf.addPage([image.width * scale, image.height * scale]);
-            page.drawImage(image, { x: 0, y: 0, width: image.width * scale, height: image.height * scale });
+            const scale = Math.min(1, 1600/image.width, 2200/image.height);
+            const page = pdf.addPage([image.width*scale, image.height*scale]);
+            page.drawImage(image, {x:0, y:0, width:image.width*scale, height:image.height*scale});
         }
-        const finalPdf = await pdf.save();
-        downloadBlob(new Blob([finalPdf], { type: "application/pdf" }), "ToolsMedia-Converted.pdf");
+        downloadBlob(new Blob([await pdf.save()], {type:"application/pdf"}), "ToolsMedia-Converted.pdf");
         status.textContent = "✓ PDF ready!";
-    } catch (e) { status.textContent = "Error occurred."; }
+    } catch(e) { status.textContent = "Error occurred."; }
     finally { button.disabled = false; button.textContent = "⚡ Generate PDF"; }
 }
 
-/* PDF TO JPG */
 let selectedPdfForJpg = null;
 function pdfJpgFileSelected(input) {
     const status = document.getElementById("pdfJpgStatus"), button = document.getElementById("pdfJpgConvertButton"), preview = document.getElementById("pdfJpgPreview");
     selectedPdfForJpg = input.files?.[0]; preview.innerHTML = "";
     if (!selectedPdfForJpg) { status.textContent = ""; button.style.display = "none"; return; }
-    status.textContent = `Selected: ${selectedPdfForJpg.name}`;
-    button.style.display = "block";
+    status.textContent = `Selected: ${selectedPdfForJpg.name}`; button.style.display = "block";
 }
 async function convertPdfToJpg() {
     const status = document.getElementById("pdfJpgStatus"), button = document.getElementById("pdfJpgConvertButton"), preview = document.getElementById("pdfJpgPreview");
     if (!window.pdfjsLib || !selectedPdfForJpg) return;
-    button.disabled = true; button.textContent = "Extracting...";
-    preview.innerHTML = "";
+    button.disabled = true; button.textContent = "Extracting..."; preview.innerHTML = "";
     try {
         const bytes = new Uint8Array(await selectedPdfForJpg.arrayBuffer());
-        const pdf = await window.pdfjsLib.getDocument({ data: bytes }).promise;
+        const pdf = await window.pdfjsLib.getDocument({data: bytes}).promise;
         for (let p = 1; p <= pdf.numPages; p++) {
-            status.textContent = `Converting page ${p}/${pdf.numPages}...`;
-            await delay(30);
+            status.textContent = `Converting page ${p}/${pdf.numPages}...`; await delay(30);
             const page = await pdf.getPage(p);
-            const viewport = page.getViewport({ scale: 1.7 });
+            const viewport = page.getViewport({scale: 1.7});
             const canvas = document.createElement("canvas");
-            const ctx = canvas.getContext("2d", { alpha: false });
+            const ctx = canvas.getContext("2d", {alpha: false});
             canvas.width = Math.floor(viewport.width); canvas.height = Math.floor(viewport.height);
-            ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            await page.render({ canvasContext: ctx, viewport }).promise;
+            ctx.fillStyle = "#ffffff"; ctx.fillRect(0,0,canvas.width,canvas.height);
+            await page.render({canvasContext: ctx, viewport}).promise;
             const blob = await new Promise(res => canvas.toBlob(res, "image/jpeg", 0.92));
             const url = URL.createObjectURL(blob);
             const card = document.createElement("div"); card.className = "preview-card";
             card.innerHTML = `<img src="${url}"><div class="preview-label">Page ${p}</div>`;
             const btn = document.createElement("button"); btn.className = "small-btn"; btn.textContent = "Download";
             btn.onclick = () => downloadBlob(blob, `ToolsMedia-page-${p}.jpg`);
-            card.appendChild(btn);
-            preview.appendChild(card);
+            card.appendChild(btn); preview.appendChild(card);
         }
         status.textContent = "✓ Extraction complete!";
-    } catch (e) { status.textContent = "Error occurred."; }
+    } catch(e) { status.textContent = "Error occurred."; }
     finally { button.disabled = false; button.textContent = "⚡ Extract Images"; }
 }
 
-/* MERGE PDF */
 let selectedMergeFiles = [];
 function mergeFilesSelected(input) {
     const status = document.getElementById("mergeStatus"), button = document.getElementById("mergeButton");
     selectedMergeFiles = Array.from(input.files || []);
     if (selectedMergeFiles.length < 2) { status.textContent = "Select 2+ files."; button.style.display = "none"; return; }
-    status.textContent = `${selectedMergeFiles.length} files ready`;
-    button.style.display = "block";
+    status.textContent = `${selectedMergeFiles.length} files ready`; button.style.display = "block";
 }
 async function mergePdfs() {
     const status = document.getElementById("mergeStatus"), button = document.getElementById("mergeButton");
@@ -787,12 +607,11 @@ async function mergePdfs() {
             const pages = await merged.copyPages(source, source.getPageIndices());
             pages.forEach(p => merged.addPage(p));
         }
-        downloadBlob(new Blob([await merged.save()], { type: "application/pdf" }), "ToolsMedia-Merged.pdf");
+        downloadBlob(new Blob([await merged.save()], {type:"application/pdf"}), "ToolsMedia-Merged.pdf");
         status.textContent = "✓ Merged!";
-    } catch (e) { status.textContent = "Error occurred."; }
+    } catch(e) { status.textContent = "Error occurred."; }
     finally { button.disabled = false; button.textContent = "⚡ Merge Files"; }
 }
 </script>
-
 </body>
 </html>
