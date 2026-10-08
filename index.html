@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToolsMediaDownloader | Next-Gen Online File & Media Suite</title>
-    <meta name="description" content="The future of online utilities. Convert, merge, compress PDFs and download HD videos — all processed instantly in your browser.">
+    <title>ToolsMediaDownloader | Pro File & Media Utilities</title>
+    <meta name="description" content="Professional online tools for PDF conversion, merging, and HD video downloading. Secure, browser-based, and 100% free.">
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
     
-    <!-- Google Fonts: Futuristic Typography -->
+    <!-- Premium UI Fonts: Inter & Space Grotesk -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
     <!-- PDF LIBRARIES -->
     <script src="./pdf-lib.min.js"></script>
@@ -21,381 +21,199 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
-            --bg-dark: #0a0510;
-            --bg-mid: #1a0d1a;
+            --bg-dark: #050505;
+            --bg-card: #0e0e11;
+            --border-color: #222225;
             --accent: #FFB39A;
-            --accent-glow: #ff8a66;
-            --purple: #542452;
-            --purple-light: #743871;
-            --text-light: #f0e6ef;
-            --text-dim: #a08ca0;
+            --accent-hover: #ff9a7a;
+            --text-main: #ededed;
+            --text-muted: #888888;
         }
 
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-light);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             min-height: 100vh;
             overflow-x: hidden;
-            position: relative;
+            /* Developer Grid Background */
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-attachment: fixed;
         }
+
+        h1, h2, h3, .nav-logo { font-family: 'Space Grotesk', sans-serif; }
 
         /* ========== INTRO LOADER ========== */
         #intro-loader {
-            position: fixed;
-            inset: 0;
-            background: var(--bg-dark);
-            z-index: 99999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 20px;
-            transition: opacity 0.8s ease, visibility 0.8s;
+            position: fixed; inset: 0; background: var(--bg-dark); z-index: 99999;
+            display: flex; align-items: center; justify-content: center; flex-direction: column;
+            transition: opacity 0.6s ease, visibility 0.6s;
         }
-
         #intro-loader.hide { opacity: 0; visibility: hidden; }
-
         .intro-logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(24px, 5vw, 42px);
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: 2px;
-            animation: logoFadeIn 1.5s ease forwards;
-            opacity: 0;
-            text-align: center;
+            font-size: 32px; font-weight: 700; color: var(--text-main); letter-spacing: 1px;
+            animation: pulse 1.5s infinite;
         }
-
-        .intro-tagline {
-            color: var(--text-dim);
-            font-size: 14px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            opacity: 0;
-            animation: tagFadeIn 1.5s ease 0.5s forwards;
-            text-align: center;
-        }
-
-        .loader-bar {
-            width: 200px;
-            height: 2px;
-            background: rgba(255, 179, 154, 0.2);
-            border-radius: 2px;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-
-        .loader-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent), var(--accent-glow));
-            animation: loadFill 2s ease forwards;
-            width: 0;
-        }
-
-        @keyframes logoFadeIn { to { opacity: 1; transform: translateY(0); } from { opacity: 0; transform: translateY(10px); } }
-        @keyframes tagFadeIn { to { opacity: 1; } }
-        @keyframes loadFill { to { width: 100%; } }
-
-        /* ========== ANIMATED BACKGROUND ORBS ========== */
-        .orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.4;
-            pointer-events: none;
-            z-index: 0;
-        }
-        .orb-1 { width: 400px; height: 400px; background: #542452; top: -100px; left: -100px; animation: float1 15s infinite ease-in-out; }
-        .orb-2 { width: 350px; height: 350px; background: #ff8a66; bottom: -100px; right: -100px; animation: float2 18s infinite ease-in-out; }
-        .orb-3 { width: 300px; height: 300px; background: #743871; top: 50%; left: 50%; animation: float3 20s infinite ease-in-out; }
-
-        @keyframes float1 { 50% { transform: translate(100px, 150px); } }
-        @keyframes float2 { 50% { transform: translate(-80px, -120px); } }
-        @keyframes float3 { 50% { transform: translate(-150px, 100px); } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
         /* ========== NAVBAR ========== */
         .navbar {
-            position: sticky;
-            top: 0;
-            background: rgba(10, 5, 16, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 179, 154, 0.15);
-            padding: 18px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            flex-wrap: wrap;
-            gap: 10px;
+            position: sticky; top: 0;
+            background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000;
         }
-
-        .nav-logo {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 800;
-            font-size: clamp(16px, 3vw, 20px);
-            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-decoration: none;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .nav-logo span { font-size: 24px; }
-
-        .nav-links { display: flex; gap: 20px; flex-wrap: wrap; }
-
-        .nav-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            position: relative;
-            transition: color 0.3s;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover { color: var(--accent); }
-        .nav-links a:hover::after { width: 100%; }
+        .nav-logo { color: var(--text-main); text-decoration: none; font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .nav-logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 24px; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: 0.2s; }
+        .nav-links a:hover { color: var(--text-main); }
 
         /* ========== HERO SECTION ========== */
-        .hero-section {
-            text-align: center;
-            padding: 100px 20px 80px;
-            position: relative;
-            z-index: 2;
-        }
-
+        .hero-section { text-align: center; padding: 120px 20px 80px; position: relative; }
         .hero-badge {
-            display: inline-block;
-            padding: 6px 16px;
-            background: rgba(255, 179, 154, 0.1);
-            border: 1px solid rgba(255, 179, 154, 0.3);
-            border-radius: 20px;
-            font-size: 12px;
-            color: var(--accent);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 25px;
-            animation: fadeInUp 0.8s ease;
+            display: inline-block; padding: 6px 14px; background: rgba(255, 179, 154, 0.1);
+            border: 1px solid rgba(255, 179, 154, 0.2); border-radius: 20px;
+            font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 24px;
         }
-
-        .hero-section h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(32px, 6vw, 60px);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 25px;
-            animation: fadeInUp 0.8s ease 0.2s both;
+        .hero-section h1 { font-size: clamp(36px, 6vw, 64px); font-weight: 700; line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; }
+        .hero-section h1 span { color: var(--accent); }
+        .hero-section p { color: var(--text-muted); font-size: 18px; max-width: 600px; margin: 0 auto 40px; line-height: 1.6; }
+        .hero-cta { display: flex; gap: 16px; justify-content: center; }
+        
+        .btn-primary, .btn-secondary {
+            padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 600;
+            text-decoration: none; transition: 0.2s; cursor: pointer; border: none;
         }
-
-        .hero-section h1 .gradient-text {
-            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .hero-section p {
-            color: var(--text-dim);
-            font-size: 17px;
-            max-width: 650px;
-            margin: 0 auto 40px;
-            line-height: 1.7;
-            animation: fadeInUp 0.8s ease 0.4s both;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease 0.6s both;
-        }
-
-        .btn-primary, .btn-ghost {
-            padding: 14px 32px;
-            border-radius: 50px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s;
-            border: none;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
-            color: var(--bg-dark);
-            box-shadow: 0 10px 30px rgba(255, 179, 154, 0.3);
-        }
-
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255, 179, 154, 0.5); }
-
-        .btn-ghost {
-            background: transparent;
-            color: var(--text-light);
-            border: 1px solid rgba(255, 179, 154, 0.3);
-        }
-
-        .btn-ghost:hover { background: rgba(255, 179, 154, 0.1); border-color: var(--accent); }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .btn-primary { background: var(--text-main); color: var(--bg-dark); }
+        .btn-primary:hover { background: var(--accent); }
+        .btn-secondary { background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color); }
+        .btn-secondary:hover { border-color: var(--text-muted); }
 
         /* ========== STATS BAR ========== */
         .stats-bar {
-            display: flex;
-            justify-content: center;
-            gap: 50px;
-            padding: 40px 20px;
-            flex-wrap: wrap;
-            border-top: 1px solid rgba(255, 179, 154, 0.1);
-            border-bottom: 1px solid rgba(255, 179, 154, 0.1);
-            position: relative;
-            z-index: 2;
+            display: flex; justify-content: center; gap: 60px; padding: 40px 20px; flex-wrap: wrap;
+            border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);
+            background: rgba(14, 14, 17, 0.5);
         }
-
         .stat-item { text-align: center; }
-        .stat-item h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 32px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
-            -webkit-background-clip: text; background-clip: text; color: transparent;
+        .stat-item h3 { font-size: 28px; color: var(--text-main); margin-bottom: 4px; }
+        .stat-item p { color: var(--text-muted); font-size: 13px; font-weight: 500; }
+
+        /* ========== MAIN LAYOUT ========== */
+        .container { max-width: 1200px; margin: auto; padding: 80px 5%; }
+        .section-intro { margin-bottom: 40px; }
+        .section-intro h2 { font-size: 32px; margin-bottom: 10px; letter-spacing: -0.5px; }
+        .section-intro p { color: var(--text-muted); font-size: 16px; }
+
+        /* ========== EXPERT CARDS ========== */
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        
+        .expert-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 32px 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
-        .stat-item p { color: var(--text-dim); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; }
-
-        /* ========== CONTAINER & LAYOUT ========== */
-        .container { max-width: 1200px; margin: auto; padding: 80px 5%; position: relative; z-index: 2; }
-        .section-intro { text-align: center; margin-bottom: 50px; }
-        .section-tag { display: inline-block; color: var(--accent); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
-        .section-intro h2 { font-family: 'Orbitron', sans-serif; font-size: clamp(28px, 4vw, 42px); margin-bottom: 15px; }
-        .section-intro p { color: var(--text-dim); max-width: 600px; margin: auto; font-size: 16px; line-height: 1.7; }
-        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
-
-        /* ========== GLASS CARDS ========== */
-        .glass-card {
-            background: linear-gradient(135deg, rgba(84, 36, 82, 0.4), rgba(26, 13, 26, 0.4));
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 179, 154, 0.15); border-radius: 20px;
-            padding: 30px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative; overflow: hidden; opacity: 0; transform: translateY(30px);
+        .expert-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-
-        .glass-card.visible { opacity: 1; transform: translateY(0); }
-        .glass-card::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 179, 154, 0.1), transparent); transition: left 0.6s;
-        }
-        .glass-card:hover::before { left: 100%; }
-        .glass-card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 20px 50px rgba(255, 179, 154, 0.2); }
-
-        /* Card Icons */
         .card-icon {
-            width: 55px; height: 55px; border-radius: 15px; display: flex; align-items: center; justify-content: center;
-            font-size: 26px; margin-bottom: 20px; box-shadow: 0 10px 25px rgba(0,0,0, 0.3);
-            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            width: 48px; height: 48px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            font-size: 20px; margin-bottom: 20px;
         }
-
-        /* Specific Video Platform Gradients */
-        .logo-tiktok { background: linear-gradient(135deg, #ff0050, #00f2ea); }
-        .logo-insta { background: linear-gradient(135deg, #f09433, #dc2743, #bc1888); }
-        .logo-fb { background: linear-gradient(135deg, #4267B2, #1877F2); }
-        .logo-pin { background: linear-gradient(135deg, #E60023, #BD081C); }
-
-        .glass-card h3 { font-family: 'Orbitron', sans-serif; font-size: 18px; margin-bottom: 10px; color: var(--text-light); }
-        .glass-card p { color: var(--text-dim); font-size: 13.5px; line-height: 1.6; margin-bottom: 25px; min-height: 60px; }
-
-        /* Unique Buttons inside cards */
+        .expert-card h3 { font-size: 18px; margin-bottom: 8px; color: var(--text-main); }
+        .expert-card p { color: var(--text-muted); font-size: 14px; line-height: 1.6; margin-bottom: 24px; flex-grow: 1; }
+        
+        /* New sleek buttons */
         .card-btn {
-            display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px;
-            background: transparent; color: var(--accent); border: 1px solid var(--accent);
-            border-radius: 50px; font-size: 13px; font-weight: 600; cursor: pointer;
-            transition: all 0.3s; width: auto; text-decoration: none; letter-spacing: 0.5px;
+            background: transparent; color: var(--text-main); border: 1px solid var(--border-color);
+            padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 500;
+            cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 6px;
         }
-        .card-btn:hover { background: var(--accent); color: var(--bg-dark); gap: 12px; }
-        .card-btn.coming { background: transparent; color: var(--text-dim); border: 1px solid rgba(255, 179, 154, 0.2); cursor: not-allowed; }
-        .card-btn.coming:hover { background: transparent; gap: 8px; }
+        .expert-card:hover .card-btn { background: var(--text-main); color: var(--bg-dark); border-color: var(--text-main); }
+        
+        .card-btn.locked { background: transparent; color: var(--text-muted); cursor: not-allowed; }
+        .expert-card:hover .card-btn.locked { background: transparent; color: var(--text-muted); border-color: var(--border-color); }
 
         /* ========== WORKSPACE (Tool UI) ========== */
         .workspace {
-            display: none; background: linear-gradient(135deg, rgba(84, 36, 82, 0.5), rgba(26, 13, 26, 0.5));
-            backdrop-filter: blur(20px); border: 1px solid rgba(255, 179, 154, 0.3); border-radius: 24px;
-            padding: 40px; margin-bottom: 40px; animation: fadeInUp 0.5s ease;
+            display: none; background: var(--bg-card); border: 1px solid var(--accent); border-radius: 16px;
+            padding: 40px; margin-bottom: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
-        .workspace h2 { font-family: 'Orbitron', sans-serif; color: var(--accent); text-align: center; margin-bottom: 10px; font-size: 24px; }
-        .description { color: var(--text-dim); text-align: center; margin-bottom: 25px; line-height: 1.6; }
-        .upload-box { background: rgba(10, 5, 16, 0.5); border: 2px dashed rgba(255, 179, 154, 0.4); border-radius: 16px; padding: 40px 20px; text-align: center; cursor: pointer; transition: all 0.3s; }
-        .upload-box:hover { border-color: var(--accent); background: rgba(10, 5, 16, 0.7); }
-        .upload-box strong { display: block; color: var(--accent); font-size: 18px; margin-bottom: 8px; }
-        .upload-box span { color: var(--text-dim); font-size: 13px; }
+        .workspace h2 { color: var(--text-main); text-align: center; margin-bottom: 8px; font-size: 24px; }
+        .description { color: var(--text-muted); text-align: center; margin-bottom: 30px; font-size: 14px; }
+        .upload-box {
+            background: rgba(255, 255, 255, 0.02); border: 1px dashed var(--border-color); border-radius: 12px;
+            padding: 40px 20px; text-align: center; cursor: pointer; transition: 0.2s;
+        }
+        .upload-box:hover { border-color: var(--accent); background: rgba(255, 179, 154, 0.05); }
+        .upload-box strong { display: block; color: var(--text-main); font-size: 16px; margin-bottom: 8px; font-weight: 600; }
+        .upload-box span { color: var(--text-muted); font-size: 13px; }
         .hidden-input { display: none; }
-        .status { color: var(--accent); text-align: center; margin: 20px 0; font-weight: 600; min-height: 24px; }
-        .preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px; margin: 20px 0; }
-        .preview-card { background: rgba(10, 5, 16, 0.6); border: 1px solid rgba(255, 179, 154, 0.15); padding: 8px; border-radius: 12px; }
-        .preview-card img { width: 100%; height: 110px; object-fit: contain; background: white; border-radius: 8px; }
-        .preview-label { color: var(--accent); text-align: center; font-size: 11px; padding: 6px 2px; }
+        .status { color: var(--accent); text-align: center; margin: 20px 0; font-size: 14px; font-weight: 500; min-height: 20px; }
+        .preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin: 20px 0; }
+        .preview-card { background: var(--bg-dark); border: 1px solid var(--border-color); padding: 6px; border-radius: 8px; }
+        .preview-card img { width: 100%; height: 90px; object-fit: contain; background: #fff; border-radius: 4px; }
+        .preview-label { color: var(--text-muted); text-align: center; font-size: 11px; margin-top: 6px; }
         
-        .action-button { display: none; width: 100%; padding: 14px; background: linear-gradient(135deg, var(--accent), var(--accent-glow)); color: var(--bg-dark); border: none; border-radius: 12px; font-weight: 600; cursor: pointer; margin-top: 10px; transition: all 0.3s; font-family: 'Space Grotesk', sans-serif; }
-        .action-button:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(255, 179, 154, 0.3); }
-        .close-button { width: 100%; padding: 12px; margin-top: 10px; background: transparent; color: var(--text-dim); border: 1px solid rgba(255, 179, 154, 0.2); border-radius: 12px; cursor: pointer; transition: all 0.3s; font-family: 'Space Grotesk', sans-serif; }
-        .close-button:hover { color: var(--accent); border-color: var(--accent); }
-        .small-btn { padding: 8px; font-size: 11px; width: 100%; margin-top: 5px; background: var(--accent); color: var(--bg-dark); border: none; border-radius: 6px; cursor: pointer; }
-        .privacy { text-align: center; font-size: 12px; color: var(--text-dim); margin-top: 15px; }
-
-        /* ========== FOOTER ========== */
-        footer { background: linear-gradient(180deg, transparent, rgba(10, 5, 16, 0.8)); border-top: 1px solid rgba(255, 179, 154, 0.1); padding: 50px 20px 30px; text-align: center; position: relative; z-index: 2; }
-        .footer-brand { font-family: 'Orbitron', sans-serif; font-size: 22px; background: linear-gradient(135deg, var(--accent), var(--accent-glow)); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 15px; }
-        .footer-links { display: flex; justify-content: center; gap: 25px; margin: 20px 0; flex-wrap: wrap; }
-        .footer-links a { color: var(--text-dim); text-decoration: none; font-size: 14px; transition: color 0.3s; }
-        .footer-links a:hover { color: var(--accent); }
-        .footer-copy { color: var(--text-dim); font-size: 12px; margin-top: 20px; }
+        .action-button { display: none; width: 100%; padding: 12px; background: var(--text-main); color: var(--bg-dark); border: none; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 10px; transition: 0.2s; }
+        .action-button:hover { background: var(--accent); }
+        .close-button { width: 100%; padding: 12px; margin-top: 10px; background: transparent; color: var(--text-muted); border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer; transition: 0.2s; }
+        .close-button:hover { color: var(--text-main); border-color: var(--text-main); }
+        .small-btn { padding: 6px; font-size: 11px; width: 100%; margin-top: 5px; background: var(--border-color); color: var(--text-main); border: none; border-radius: 4px; cursor: pointer; }
 
         /* ========== TOBY AI CHAT ========== */
-        #toby-widget-container { position: fixed; bottom: 25px; right: 25px; z-index: 10000; display: flex; flex-direction: column; align-items: flex-end; }
-        .toby-launch-btn { background: linear-gradient(135deg, var(--accent), var(--accent-glow)); color: var(--bg-dark); padding: 12px 22px; border-radius: 30px; font-weight: 600; cursor: pointer; border: none; box-shadow: 0 10px 25px rgba(255, 179, 154, 0.4); transition: all 0.3s; font-family: 'Space Grotesk', sans-serif; display: flex; align-items: center; gap: 8px; }
-        .toby-launch-btn:hover { transform: scale(1.05); }
-        #toby-chat-box { display: none; width: 340px; background: rgba(26, 13, 26, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255, 179, 154, 0.3); border-radius: 20px; margin-bottom: 15px; flex-direction: column; overflow: hidden; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6); animation: popUp 0.3s ease; }
-        @keyframes popUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .chat-header { background: linear-gradient(135deg, var(--purple), var(--purple-light)); padding: 16px; color: var(--accent); font-weight: 600; display: flex; justify-content: space-between; align-items: center; font-family: 'Orbitron', sans-serif; font-size: 14px; }
-        .chat-header button { background: none; border: none; color: var(--accent); font-size: 22px; cursor: pointer; }
-        #chat-messages { height: 260px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-        .bot-msg, .user-msg { padding: 10px 14px; border-radius: 14px; font-size: 13.5px; line-height: 1.5; max-width: 85%; }
-        .bot-msg { background: rgba(84, 36, 82, 0.6); color: var(--text-light); align-self: flex-start; border-bottom-left-radius: 3px; }
-        .user-msg { background: linear-gradient(135deg, var(--accent), var(--accent-glow)); color: var(--bg-dark); align-self: flex-end; font-weight: 500; border-bottom-right-radius: 3px; }
-        .chat-input-area { display: flex; padding: 12px; background: rgba(10, 5, 16, 0.6); border-top: 1px solid rgba(255, 179, 154, 0.1); gap: 8px; }
-        .chat-input-area input { flex: 1; padding: 10px 14px; background: rgba(84, 36, 82, 0.4); border: 1px solid rgba(255, 179, 154, 0.2); border-radius: 20px; color: white; outline: none; font-family: inherit; }
-        .chat-input-area input:focus { border-color: var(--accent); }
-        .chat-input-area button { padding: 10px 18px; background: linear-gradient(135deg, var(--accent), var(--accent-glow)); color: var(--bg-dark); border: none; border-radius: 20px; font-weight: 600; cursor: pointer; font-family: inherit; }
+        #toby-widget-container { position: fixed; bottom: 24px; right: 24px; z-index: 10000; display: flex; flex-direction: column; align-items: flex-end; }
+        .toby-launch-btn {
+            background: var(--bg-card); color: var(--text-main); padding: 12px 20px; border-radius: 30px;
+            font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid var(--border-color);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5); transition: 0.2s; display: flex; align-items: center; gap: 8px;
+        }
+        .toby-launch-btn:hover { border-color: var(--accent); color: var(--accent); }
+        #toby-chat-box {
+            display: none; width: 320px; background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 12px; margin-bottom: 12px; flex-direction: column; overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+        }
+        .chat-header { background: rgba(255,255,255,0.03); padding: 14px 16px; color: var(--text-main); font-weight: 600; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); font-size: 14px; }
+        .chat-header button { background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; transition: 0.2s; }
+        .chat-header button:hover { color: var(--accent); }
+        #chat-messages { height: 280px; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+        .bot-msg, .user-msg { padding: 10px 14px; border-radius: 8px; font-size: 13px; line-height: 1.5; max-width: 85%; }
+        .bot-msg { background: rgba(255,255,255,0.05); color: var(--text-main); align-self: flex-start; }
+        .user-msg { background: var(--text-main); color: var(--bg-dark); align-self: flex-end; font-weight: 500; }
+        .chat-input-area { display: flex; padding: 12px; border-top: 1px solid var(--border-color); gap: 8px; }
+        .chat-input-area input { flex: 1; padding: 10px; background: var(--bg-dark); border: 1px solid var(--border-color); border-radius: 6px; color: white; outline: none; font-size: 13px; }
+        .chat-input-area input:focus { border-color: var(--text-muted); }
+        .chat-input-area button { background: var(--text-main); color: var(--bg-dark); border: none; padding: 0 16px; border-radius: 6px; font-weight: 600; cursor: pointer; }
 
-        @media (max-width: 600px) {
-            .nav-links { gap: 10px; justify-content: center; } .nav-links a { font-size: 13px; }
-            .hero-section { padding: 60px 20px 50px; } .container { padding: 50px 5%; }
-            #toby-chat-box { width: 290px; }
+        /* ========== FOOTER ========== */
+        footer { padding: 40px 20px; text-align: center; border-top: 1px solid var(--border-color); margin-top: 40px; }
+        .footer-brand { font-family: 'Space Grotesk', sans-serif; font-size: 18px; color: var(--text-main); margin-bottom: 16px; font-weight: 700; }
+        .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 20px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; transition: 0.2s; }
+        .footer-links a:hover { color: var(--text-main); }
+        .footer-copy { color: var(--text-muted); font-size: 13px; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Kept simple for mobile */
+            .hero-section { padding: 80px 20px 40px; }
+            .stats-bar { gap: 30px; }
+            #toby-chat-box { width: 280px; }
         }
     </style>
 </head>
@@ -404,169 +222,145 @@
 <!-- INTRO LOADER -->
 <div id="intro-loader">
     <div class="intro-logo">ToolsMediaDownloader</div>
-    <div class="intro-tagline">Next-Gen Online Suite</div>
-    <div class="loader-bar"><div class="loader-fill"></div></div>
 </div>
-
-<!-- ANIMATED BACKGROUND -->
-<div class="orb orb-1"></div>
-<div class="orb orb-2"></div>
-<div class="orb orb-3"></div>
 
 <!-- NAVIGATION -->
 <nav class="navbar">
-    <a href="index.html" class="nav-logo"><span>⚡</span> ToolsMediaDownloader</a>
+    <a href="index.html" class="nav-logo"><span>⚡</span> TMD</a>
     <div class="nav-links">
-        <a href="#document-tools">PDF Tools</a>
-        <a href="#video-tools">Video Downloaders</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
+        <a href="#documents">PDF Tools</a>
+        <a href="#video">Video Tools</a>
+        <a href="#">API</a>
+        <a href="#">Github</a>
     </div>
 </nav>
 
 <!-- HERO SECTION -->
 <section class="hero-section">
-    <div class="hero-badge">⚡ 100% Browser-Based · No Signups</div>
-    <h1>The Future of<br><span class="gradient-text">Online Utilities</span></h1>
-    <p>Transform PDFs, extract media, and download HD videos — all processed instantly in your browser with next-generation technology. Zero uploads. Zero compromise.</p>
+    <div class="hero-badge">v2.0 Beta · Open Source Core</div>
+    <h1>Professional file utilities,<br><span>built for the browser.</span></h1>
+    <p>Convert PDFs, merge documents, and extract HD video media entirely client-side. Zero server uploads. Maximum privacy and speed.</p>
     <div class="hero-cta">
-        <a href="#document-tools" class="btn-primary">Explore PDF Tools →</a>
-        <a href="#video-tools" class="btn-ghost">View Downloaders</a>
+        <a href="#documents" class="btn-primary">Start Building</a>
+        <a href="#video" class="btn-secondary">View Video Tools</a>
     </div>
 </section>
 
-<!-- STATS -->
+<!-- STATS (Updated) -->
 <div class="stats-bar">
-    <div class="stat-item"><h3>100%</h3><p>Free Forever</p></div>
-    <div class="stat-item"><h3>0ms</h3><p>Upload Time</p></div>
-    <div class="stat-item"><h3>HD</h3><p>Quality Output</p></div>
-    <div class="stat-item"><h3>∞</h3><p>No Limits</p></div>
+    <div class="stat-item"><h3>100%</h3><p>Secure (Local)</p></div>
+    <div class="stat-item"><h3>HD</h3><p>Media Quality</p></div>
+    <div class="stat-item"><h3>0$</h3><p>Always Free</p></div>
+    <div class="stat-item"><h3>∞</h3><p>No File Limits</p></div>
 </div>
 
 <main class="container">
 
-    <!-- WORKSPACE: JPG to PDF -->
+    <!-- WORKSPACE UI (Hidden until tool is opened) -->
     <section id="jpgTool" class="workspace">
-        <h2>JPG → PDF Converter</h2>
-        <p class="description">Transform multiple images into a single, polished PDF document.</p>
+        <h2>Convert JPG to PDF</h2>
+        <p class="description">Upload images to generate a compiled PDF document.</p>
         <div class="upload-box" onclick="document.getElementById('jpgFiles').click()">
-            <strong>📁 Drop Images Here</strong>
-            <span>JPG, JPEG and PNG supported</span>
+            <strong>Select Images</strong>
+            <span>Supports .jpg, .jpeg, .png</span>
         </div>
         <input id="jpgFiles" class="hidden-input" type="file" accept="image/jpeg,image/png" multiple onchange="jpgFilesSelected(this)">
         <div id="jpgPreview" class="preview-grid"></div>
         <div id="jpgStatus" class="status"></div>
-        <button id="jpgCreateButton" class="action-button" onclick="createJpgPdf()">⚡ Generate PDF</button>
-        <button class="close-button" onclick="closeTools()">Close Workspace</button>
-        <p class="privacy">🔒 Processed locally in your browser</p>
+        <button id="jpgCreateButton" class="action-button" onclick="createJpgPdf()">Generate PDF Document</button>
+        <button class="close-button" onclick="closeTools()">Cancel</button>
     </section>
 
-    <!-- WORKSPACE: PDF to JPG -->
     <section id="pdfJpgTool" class="workspace">
-        <h2>PDF → JPG Extractor</h2>
-        <p class="description">Extract every page of your PDF as a high-quality JPG image.</p>
+        <h2>Extract PDF to JPG</h2>
+        <p class="description">Select a PDF to extract every page as an image.</p>
         <div class="upload-box" onclick="document.getElementById('pdfJpgFile').click()">
-            <strong>📄 Select Your PDF</strong>
-            <span>One document at a time</span>
+            <strong>Select PDF Document</strong>
+            <span>One file at a time</span>
         </div>
         <input id="pdfJpgFile" class="hidden-input" type="file" accept=".pdf,application/pdf" onchange="pdfJpgFileSelected(this)">
         <div id="pdfJpgStatus" class="status"></div>
-        <button id="pdfJpgConvertButton" class="action-button" onclick="convertPdfToJpg()">⚡ Extract Images</button>
+        <button id="pdfJpgConvertButton" class="action-button" onclick="convertPdfToJpg()">Extract Images</button>
         <div id="pdfJpgPreview" class="preview-grid"></div>
-        <button class="close-button" onclick="closeTools()">Close Workspace</button>
-        <p class="privacy">🔒 Processed locally in your browser</p>
+        <button class="close-button" onclick="closeTools()">Cancel</button>
     </section>
 
-    <!-- WORKSPACE: Merge PDF -->
     <section id="mergeTool" class="workspace">
-        <h2>PDF Merger</h2>
-        <p class="description">Combine multiple PDF files into one unified document.</p>
+        <h2>Merge PDF Files</h2>
+        <p class="description">Combine multiple PDFs into a single file.</p>
         <div class="upload-box" onclick="document.getElementById('mergeFiles').click()">
-            <strong>📄 Select PDF Files</strong>
-            <span>Choose 2 or more documents</span>
+            <strong>Select PDF Files</strong>
+            <span>Requires 2 or more files</span>
         </div>
         <input id="mergeFiles" class="hidden-input" type="file" accept=".pdf,application/pdf" multiple onchange="mergeFilesSelected(this)">
         <div id="mergeStatus" class="status"></div>
-        <button id="mergeButton" class="action-button" onclick="mergePdfs()">⚡ Merge Files</button>
-        <button class="close-button" onclick="closeTools()">Close Workspace</button>
-        <p class="privacy">🔒 Processed locally in your browser</p>
+        <button id="mergeButton" class="action-button" onclick="mergePdfs()">Merge Documents</button>
+        <button class="close-button" onclick="closeTools()">Cancel</button>
     </section>
 
-    <!-- ==============================================
-         DOCUMENT TOOLS SECTION 
-         ============================================== -->
-    <section id="document-tools" class="section-intro">
-        <div class="section-tag">Document Suite</div>
-        <h2>PDF & File Tools</h2>
-        <p>Professional-grade file utilities running entirely in your browser. No installs. No limits.</p>
+    <!-- DOCUMENT TOOLS -->
+    <section id="documents" class="section-intro">
+        <h2>Document Suite</h2>
+        <p>Client-side PDF processing. Your files never leave your device.</p>
     </section>
 
     <div class="tools-grid">
-        <div class="glass-card">
+        <div class="expert-card">
             <div class="card-icon">🖼️</div>
-            <h3>JPG to PDF</h3>
-            <p>Combine multiple images into a single, high-quality PDF document in seconds.</p>
-            <button class="card-btn" onclick="openTool('jpgTool')">Forge PDF →</button>
+            <h3>Image to PDF</h3>
+            <p>Compile multiple JPG or PNG images into a single, structured PDF file instantly.</p>
+            <button class="card-btn" onclick="openTool('jpgTool')">Convert to PDF →</button>
         </div>
-        <div class="glass-card">
-            <div class="card-icon">📸</div>
-            <h3>PDF to JPG</h3>
-            <p>Extract every page from your PDF as crisp, downloadable JPG images.</p>
-            <button class="card-btn" onclick="openTool('pdfJpgTool')">Shatter PDF →</button>
+        <div class="expert-card">
+            <div class="card-icon">📄</div>
+            <h3>PDF to Image</h3>
+            <p>Deconstruct a PDF document and extract every single page as a high-res JPG.</p>
+            <button class="card-btn" onclick="openTool('pdfJpgTool')">Extract Images →</button>
         </div>
-        <div class="glass-card">
+        <div class="expert-card">
             <div class="card-icon">📑</div>
-            <h3>Merge PDFs</h3>
-            <p>Blend multiple PDF documents into one streamlined, organized file.</p>
-            <button class="card-btn" onclick="openTool('mergeTool')">Bind Scrolls →</button>
+            <h3>Merge Documents</h3>
+            <p>Combine multiple separate PDF files into one clean, unified document.</p>
+            <button class="card-btn" onclick="openTool('mergeTool')">Merge Files →</button>
         </div>
-        <div class="glass-card">
+        <div class="expert-card">
             <div class="card-icon">🗜️</div>
             <h3>Compress PDF</h3>
-            <p>Shrink PDF file sizes while preserving document quality and clarity.</p>
-            <button class="card-btn coming" onclick="comingSoon('Compress PDF')">Shrink Size 🔒</button>
-        </div>
-        <div class="glass-card">
-            <div class="card-icon">📝</div>
-            <h3>PDF to Word</h3>
-            <p>Convert static PDF documents into fully editable Word files.</p>
-            <button class="card-btn coming" onclick="comingSoon('PDF to Word')">Unlock Text 🔒</button>
+            <p>Optimize PDF file sizes for web and email while retaining visual quality.</p>
+            <button class="card-btn locked" onclick="comingSoon('Compress PDF')">Compress File 🔒</button>
         </div>
     </div>
 
-    <!-- ==============================================
-         VIDEO DOWNLOADERS SECTION (BACK ON MAIN PAGE)
-         ============================================== -->
-    <section id="video-tools" class="section-intro" style="margin-top: 100px;">
-        <div class="section-tag">Media Downloaders</div>
-        <h2>Download HD Videos</h2>
-        <p>Grab videos from TikTok, Instagram, Facebook, Pinterest and more — in stunning HD quality, watermark-free.</p>
+    <!-- VIDEO DOWNLOADERS -->
+    <section id="video" class="section-intro" style="margin-top: 80px;">
+        <h2>Media Extractors</h2>
+        <p>Fetch video streams directly from major social platforms without watermarks.</p>
     </section>
 
     <div class="tools-grid">
-        <div class="glass-card">
-            <div class="card-icon logo-tiktok">🎵</div>
+        <div class="expert-card">
+            <div class="card-icon">🎵</div>
             <h3>TikTok Downloader</h3>
-            <p>Download TikTok videos without watermark in HD MP4 or extract MP3 audio files.</p>
-            <button class="card-btn" onclick="window.location.href='tiktok-downloader.html'">Snag Video →</button>
+            <p>Extract HD TikTok videos without the platform watermark. MP3 extraction supported.</p>
+            <button class="card-btn" onclick="window.location.href='tiktok-downloader.html'">Download Video →</button>
         </div>
-        <div class="glass-card">
-            <div class="card-icon logo-insta">📸</div>
+        <div class="expert-card">
+            <div class="card-icon">📸</div>
             <h3>Instagram Downloader</h3>
-            <p>Download Instagram videos, reels, stories, and photos directly to your device.</p>
-            <button class="card-btn coming" onclick="comingSoon('Instagram Downloader')">Capture Reel 🔒</button>
+            <p>Pull Reels, Stories, and carousel posts directly from Instagram links.</p>
+            <button class="card-btn locked" onclick="comingSoon('Instagram Downloader')">Download Media 🔒</button>
         </div>
-        <div class="glass-card">
-            <div class="card-icon logo-fb">📘</div>
+        <div class="expert-card">
+            <div class="card-icon">📘</div>
             <h3>Facebook Downloader</h3>
-            <p>Save Facebook videos in HD quality directly to your phone or computer.</p>
-            <button class="card-btn coming" onclick="comingSoon('Facebook Downloader')">Rip Video 🔒</button>
+            <p>Save high-definition public videos and watch feeds directly to local storage.</p>
+            <button class="card-btn locked" onclick="comingSoon('Facebook Downloader')">Download Video 🔒</button>
         </div>
-        <div class="glass-card">
-            <div class="card-icon logo-pin">📌</div>
+        <div class="expert-card">
+            <div class="card-icon">📌</div>
             <h3>Pinterest Downloader</h3>
-            <p>Save Pinterest videos and images in high quality to your gallery.</p>
-            <button class="card-btn coming" onclick="comingSoon('Pinterest Downloader')">Save Pin 🔒</button>
+            <p>Fetch animated pins and high-resolution image boards natively.</p>
+            <button class="card-btn locked" onclick="comingSoon('Pinterest Downloader')">Download Pin 🔒</button>
         </div>
     </div>
 
@@ -576,30 +370,31 @@
 <footer>
     <div class="footer-brand">⚡ ToolsMediaDownloader</div>
     <div class="footer-links">
-        <a href="about.html">About</a>
-        <a href="privacy.html">Privacy</a>
-        <a href="terms.html">Terms</a>
-        <a href="contact.html">Contact</a>
+        <a href="#">Documentation</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
     </div>
-    <p class="footer-copy">© 2026 ToolsMediaDownloader · Crafted for creators worldwide</p>
+    <p class="footer-copy">© 2026 TMD Labs. All rights reserved.</p>
 </footer>
 
 <!-- TOBY AI ASSISTANT -->
 <div id="toby-widget-container">
     <div id="toby-chat-box">
         <div class="chat-header">
-            <span>🤖 TOBY · AI Assistant</span>
+            <span>Ask Toby AI</span>
             <button onclick="toggleTobyChat()">×</button>
         </div>
         <div id="chat-messages">
-            <div class="bot-msg">Hey there! 👋 I'm Toby, your smart assistant. Ask me anything about our PDF tools, video downloaders, or how to navigate the site!</div>
+            <div class="bot-msg">System initialized. I am Toby, your technical assistant. How can I help you navigate these tools?</div>
         </div>
         <div class="chat-input-area">
-            <input type="text" id="toby-input" placeholder="Ask Toby anything..." onkeypress="handleTobyKey(event)">
-            <button onclick="sendTobyMessage()">↑</button>
+            <input type="text" id="toby-input" placeholder="Type command..." onkeypress="handleTobyKey(event)">
+            <button onclick="sendTobyMessage()">→</button>
         </div>
     </div>
-    <button class="toby-launch-btn" onclick="toggleTobyChat()">🤖 Ask Toby</button>
+    <button class="toby-launch-btn" onclick="toggleTobyChat()">
+        💬 Chat with Toby
+    </button>
 </div>
 
 <script>
@@ -609,19 +404,8 @@
 window.addEventListener('load', () => {
     setTimeout(() => {
         document.getElementById('intro-loader').classList.add('hide');
-    }, 2200);
+    }, 1200);
 });
-
-/* SCROLL ANIMATIONS */
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => entry.target.classList.add('visible'), i * 100);
-        }
-    });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.glass-card').forEach(card => observer.observe(card));
 
 /* TOBY AI */
 function toggleTobyChat() {
@@ -638,22 +422,21 @@ function sendTobyMessage() {
     if (!text) return;
     addTobyMessage(text, 'user-msg');
     input.value = '';
+    
     setTimeout(() => {
         const q = text.toLowerCase();
         let reply = "";
-        if (q.match(/hi|hello|hey|greetings/)) reply = "Hey! 👋 Great to see you here. How can I help?";
-        else if (q.includes("how are you")) reply = "I'm running at full speed! ⚡ Ready to help you with your files. What do you need?";
-        else if (q.match(/who are you|your name|what are you/)) reply = "I'm Toby — your AI assistant for ToolsMediaDownloader!";
-        else if (q.match(/about|website|what is this/)) reply = "ToolsMediaDownloader is a next-gen suite of free online tools for PDFs, images, and video downloads — all processed in your browser!";
-        else if (q.match(/free|cost|price|pay/)) reply = "Everything here is 100% free, forever. No signups, no limits. ⚡";
-        else if (q.includes("merge")) reply = "To merge PDFs, click 'Bind Scrolls →' on the Merge PDFs card and upload 2+ files!";
-        else if (q.includes("pdf")) reply = "We offer JPG→PDF, PDF→JPG, and Merge PDFs. Click any button to get started!";
-        else if (q.match(/tiktok|video|instagram|facebook|pinterest/)) reply = "Scroll down to the Media Downloaders section! We support TikTok right now, with more platforms coming soon.";
-        else if (q.match(/safe|privacy|security/)) reply = "100% safe. Your files never leave your browser — zero uploads to any server. 🔒";
-        else if (q.includes("thank")) reply = "You're welcome! 😊 Happy to help anytime.";
-        else reply = "I can help with: 'PDF tools', 'Video downloaders', 'How to merge PDFs', or 'Is this free?'";
+        if (q.match(/hi|hello|hey/)) reply = "Hello. I'm Toby. What utility do you need assistance with today?";
+        else if (q.match(/who are you|name/)) reply = "I am Toby, the AI support module for ToolsMediaDownloader.";
+        else if (q.match(/about|website|what/)) reply = "This platform provides client-side document processing (PDFs) and serverless media extraction (Video downloads).";
+        else if (q.match(/free|cost|price|pay/)) reply = "All endpoints and utilities on this platform are completely free and open for public use.";
+        else if (q.includes("merge")) reply = "To combine PDFs, locate the 'Merge Documents' card, click 'Merge Files ->', and select your inputs.";
+        else if (q.includes("pdf")) reply = "Our Document Suite handles JPG to PDF, PDF to JPG, and PDF Merging. Processing is done securely in your local browser.";
+        else if (q.match(/tiktok|video/)) reply = "Navigate to the Media Extractors section below. Click 'Download Video ->' on the TikTok card to fetch watermark-free HD files.";
+        else if (q.match(/safe|privacy|security/)) reply = "Extremely secure. PDF tools run entirely via JavaScript on your local machine. No data is sent to our servers.";
+        else reply = "Unrecognized query. Try asking about 'PDF conversion', 'TikTok downloads', or 'Security'.";
         addTobyMessage(reply, 'bot-msg');
-    }, 400);
+    }, 500);
 }
 
 function addTobyMessage(text, className) {
@@ -671,7 +454,7 @@ if (window.pdfjsLib) window.pdfjsLib.GlobalWorkerOptions.workerSrc = "./pdf.work
 /* TOOL FUNCTIONS */
 function closeTools() { document.querySelectorAll(".workspace").forEach(t => t.style.display = "none"); }
 function openTool(id) { closeTools(); const t = document.getElementById(id); if (t) { t.style.display = "block"; t.scrollIntoView({ behavior: "smooth" }); } }
-function comingSoon(name) { alert(name + " — Coming soon!"); }
+function comingSoon(name) { alert(name + " feature is currently in development. Check back soon."); }
 function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
 function downloadBlob(blob, filename) {
     const url = URL.createObjectURL(blob);
@@ -689,14 +472,14 @@ function jpgFilesSelected(input) {
     const status = document.getElementById("jpgStatus"), preview = document.getElementById("jpgPreview"), button = document.getElementById("jpgCreateButton");
     jpgSelectedFiles = Array.from(input.files || []).filter(f => f.type === "image/jpeg" || f.type === "image/png");
     preview.innerHTML = "";
-    if (!jpgSelectedFiles.length) { status.textContent = "Select JPG or PNG images."; button.style.display = "none"; return; }
+    if (!jpgSelectedFiles.length) { status.textContent = "Error: Select valid JPG/PNG images."; button.style.display = "none"; return; }
     jpgSelectedFiles.forEach((file, i) => {
         const url = URL.createObjectURL(file); jpgObjectUrls.push(url);
         const card = document.createElement("div"); card.className = "preview-card";
-        card.innerHTML = `<img src="${url}"><div class="preview-label">Image ${i+1}</div>`;
+        card.innerHTML = `<img src="${url}"><div class="preview-label">IMG_${i+1}</div>`;
         preview.appendChild(card);
     });
-    status.textContent = `${jpgSelectedFiles.length} image(s) ready`;
+    status.textContent = `Status: ${jpgSelectedFiles.length} files queued.`;
     button.style.display = "block";
 }
 async function createJpgPdf() {
@@ -706,7 +489,7 @@ async function createJpgPdf() {
     try {
         const pdf = await window.PDFLib.PDFDocument.create();
         for (let i = 0; i < jpgSelectedFiles.length; i++) {
-            status.textContent = `Processing ${i+1}/${jpgSelectedFiles.length}...`;
+            status.textContent = `Rendering page ${i+1}/${jpgSelectedFiles.length}...`;
             await delay(30);
             const bytes = await jpgSelectedFiles[i].arrayBuffer();
             const image = jpgSelectedFiles[i].type === "image/png" ? await pdf.embedPng(bytes) : await pdf.embedJpg(bytes);
@@ -715,10 +498,10 @@ async function createJpgPdf() {
             page.drawImage(image, { x: 0, y: 0, width: image.width * scale, height: image.height * scale });
         }
         const finalPdf = await pdf.save();
-        downloadBlob(new Blob([finalPdf], { type: "application/pdf" }), "ToolsMedia-Converted.pdf");
-        status.textContent = "✓ PDF ready!";
-    } catch (e) { status.textContent = "Error occurred."; }
-    finally { button.disabled = false; button.textContent = "⚡ Generate PDF"; }
+        downloadBlob(new Blob([finalPdf], { type: "application/pdf" }), "TMD_Converted.pdf");
+        status.textContent = "Success: Download initiated.";
+    } catch (e) { status.textContent = "Error: Rendering failed."; }
+    finally { button.disabled = false; button.textContent = "Generate PDF Document"; }
 }
 
 /* PDF TO JPG */
@@ -727,7 +510,7 @@ function pdfJpgFileSelected(input) {
     const status = document.getElementById("pdfJpgStatus"), button = document.getElementById("pdfJpgConvertButton"), preview = document.getElementById("pdfJpgPreview");
     selectedPdfForJpg = input.files?.[0]; preview.innerHTML = "";
     if (!selectedPdfForJpg) { status.textContent = ""; button.style.display = "none"; return; }
-    status.textContent = `Selected: ${selectedPdfForJpg.name}`;
+    status.textContent = `Queued: ${selectedPdfForJpg.name}`;
     button.style.display = "block";
 }
 async function convertPdfToJpg() {
@@ -739,7 +522,7 @@ async function convertPdfToJpg() {
         const bytes = new Uint8Array(await selectedPdfForJpg.arrayBuffer());
         const pdf = await window.pdfjsLib.getDocument({ data: bytes }).promise;
         for (let p = 1; p <= pdf.numPages; p++) {
-            status.textContent = `Converting page ${p}/${pdf.numPages}...`;
+            status.textContent = `Parsing page ${p}/${pdf.numPages}...`;
             await delay(30);
             const page = await pdf.getPage(p);
             const viewport = page.getViewport({ scale: 1.7 });
@@ -751,15 +534,15 @@ async function convertPdfToJpg() {
             const blob = await new Promise(res => canvas.toBlob(res, "image/jpeg", 0.92));
             const url = URL.createObjectURL(blob);
             const card = document.createElement("div"); card.className = "preview-card";
-            card.innerHTML = `<img src="${url}"><div class="preview-label">Page ${p}</div>`;
+            card.innerHTML = `<img src="${url}"><div class="preview-label">PAGE_${p}</div>`;
             const btn = document.createElement("button"); btn.className = "small-btn"; btn.textContent = "Download";
-            btn.onclick = () => downloadBlob(blob, `ToolsMedia-page-${p}.jpg`);
+            btn.onclick = () => downloadBlob(blob, `TMD_Page_${p}.jpg`);
             card.appendChild(btn);
             preview.appendChild(card);
         }
-        status.textContent = "✓ Extraction complete!";
-    } catch (e) { status.textContent = "Error occurred."; }
-    finally { button.disabled = false; button.textContent = "⚡ Extract Images"; }
+        status.textContent = "Success: Extraction complete.";
+    } catch (e) { status.textContent = "Error: File parsing failed."; }
+    finally { button.disabled = false; button.textContent = "Extract Images"; }
 }
 
 /* MERGE PDF */
@@ -767,8 +550,8 @@ let selectedMergeFiles = [];
 function mergeFilesSelected(input) {
     const status = document.getElementById("mergeStatus"), button = document.getElementById("mergeButton");
     selectedMergeFiles = Array.from(input.files || []);
-    if (selectedMergeFiles.length < 2) { status.textContent = "Select 2+ files."; button.style.display = "none"; return; }
-    status.textContent = `${selectedMergeFiles.length} files ready`;
+    if (selectedMergeFiles.length < 2) { status.textContent = "Error: Requires 2+ documents."; button.style.display = "none"; return; }
+    status.textContent = `Status: ${selectedMergeFiles.length} documents queued.`;
     button.style.display = "block";
 }
 async function mergePdfs() {
@@ -778,15 +561,15 @@ async function mergePdfs() {
     try {
         const merged = await window.PDFLib.PDFDocument.create();
         for (let i = 0; i < selectedMergeFiles.length; i++) {
-            status.textContent = `Adding ${i+1}/${selectedMergeFiles.length}...`;
+            status.textContent = `Appending doc ${i+1}/${selectedMergeFiles.length}...`;
             const source = await window.PDFLib.PDFDocument.load(await selectedMergeFiles[i].arrayBuffer());
             const pages = await merged.copyPages(source, source.getPageIndices());
             pages.forEach(p => merged.addPage(p));
         }
-        downloadBlob(new Blob([await merged.save()], { type: "application/pdf" }), "ToolsMedia-Merged.pdf");
-        status.textContent = "✓ Merged!";
-    } catch (e) { status.textContent = "Error occurred."; }
-    finally { button.disabled = false; button.textContent = "⚡ Merge Files"; }
+        downloadBlob(new Blob([await merged.save()], { type: "application/pdf" }), "TMD_Merged.pdf");
+        status.textContent = "Success: Merge complete.";
+    } catch (e) { status.textContent = "Error: Merge failed."; }
+    finally { button.disabled = false; button.textContent = "Merge Documents"; }
 }
 </script>
 
