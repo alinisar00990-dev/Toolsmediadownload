@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Downloader | ToolsMediaDownloader</title>
+    <meta name="description" content="Download Instagram Reels, Videos, Photos and Stories in high quality for free. No watermark.">
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ctext%20y='.9em'%20font-size='90'%3E📸%3C/text%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg-dark: #0a0510;
+            --accent: #FFB39A;
+            --accent-glow: #ff8a66;
+            --purple: #542452;
+            --text-light: #f0e6ef;
+            --text-dim: #a08ca0;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .orb-1 {
+            width: 400px; height: 400px;
+            background: #542452;
+            top: -100px; left: -100px;
+            animation: float1 15s infinite ease-in-out;
+        }
+        .orb-2 {
+            width: 350px; height: 350px;
+            background: #ff8a66;
+            bottom: -100px; right: -100px;
+            animation: float2 18s infinite ease-in-out;
+        }
+        @keyframes float1 { 50% { transform: translate(100px, 150px); } }
+        @keyframes float2 { 50% { transform: translate(-80px, -120px); } }
+
+        /* Navbar */
+        .navbar {
+            position: sticky; top: 0;
+            background: rgba(10, 5, 16, 0.75);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 179, 154, 0.15);
+            padding: 16px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 100;
+        }
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800; font-size: 20px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+            text-decoration: none;
+        }
+        .nav-links a {
+            color: var(--text-light); text-decoration: none;
+            font-size: 14px; margin-left: 20px; transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 40px;
+        }
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(32px, 5vw, 48px);
+            margin-bottom: 15px;
+        }
+        .hero h1 span {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #bc1888);
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+        .hero p {
+            color: var(--text-dim);
+            max-width: 520px;
+            margin: 0 auto;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Main Box */
+        .downloader-box {
+            background: rgba(15, 7, 20, 0.85);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 179, 154, 0.35);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 700px;
+            width: 92%;
+            margin: 0 auto 80px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .input-group input {
+            flex: 1;
+            min-width: 240px;
+            padding: 16px 18px;
+            border-radius: 14px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,179,154,0.3);
+            color: white;
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+            transition: 0.3s;
+        }
+        .input-group input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(255,179,154,0.15);
+        }
+        .input-group button {
+            padding: 16px 28px;
+            border-radius: 14px;
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #bc1888);
+            color: white;
+            font-weight: 700;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+        .input-group button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(220, 39, 67, 0.4);
+        }
+        .input-group button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .status-msg {
+            min-height: 24px;
+            margin: 12px 0;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--accent);
+        }
+
+        /* Result Area */
+        .result-area {
+            display: none;
+            margin-top: 25px;
+            animation: fadeIn 0.4s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .media-card {
+            background: rgba(0,0,0,0.35);
+            border: 1px solid rgba(255,179,154,0.2);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+        .media-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+        .media-card img, .media-card video {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            background: #111;
+        }
+        .media-info {
+            padding: 14px;
+            text-align: center;
+        }
+        .media-info p {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+        }
+        .dl-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 11px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            color: #0a0510;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+        .dl-btn:hover {
+            filter: brightness(1.1);
+        }
+
+        .note {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-top: 20px;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            background: linear-gradient(180deg, transparent, rgba(10,5,16,0.9));
+            border-top: 1px solid rgba(255,179,154,0.1);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .footer-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        .footer-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            margin: 0 14px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .footer-links a:hover { color: var(--accent); }
+        .footer-copy {
+            color: var(--text-dim);
+            font-size: 13px;
+            margin-top: 18px;
+        }
+
+        @media (max-width: 600px) {
+            .input-group button { width: 100%; }
+            .downloader-box { padding: 28px 18px; }
+            .media-card img, .media-card video { height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo">⚡ ToolsMediaDownloader</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="mailto:m.aliarain070@gmail.com">Support</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Instagram <span>Downloader</span></h1>
+        <p>Download Instagram Reels, Videos, Photos & Carousel posts in high quality — free and without watermarks.</p>
+    </section>
+
+    <!-- Downloader Box -->
+    <div class="downloader-box">
+        <div class="input-group">
+            <input type="text" id="instaUrl" placeholder="Paste Instagram link here (Reel / Post / Photo)">
+            <button id="fetchBtn" onclick="fetchInstagram()">Download</button>
+        </div>
+
+        <div class="status-msg" id="statusMsg"></div>
+
+        <!-- Results will appear here -->
+        <div class="result-area" id="resultArea">
+            <div class="media-grid" id="mediaGrid"></div>
+        </div>
+
+        <p class="note">🔒 Works with public posts, reels and photos. Private accounts are not supported.</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-brand">⚡ ToolsMediaDownloader</div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="mailto:m.aliarain070@gmail.com">Contact Support</a>
+        </div>
+        <p class="footer-copy">© 2026 ToolsMediaDownloader. Free online tools.</p>
+    </footer>
+
+    <script>
+        async function fetchInstagram() {
+            const input = document.getElementById('instaUrl');
+            const status = document.getElementById('statusMsg');
+            const resultArea = document.getElementById('resultArea');
+            const mediaGrid = document.getElementById('mediaGrid');
+            const btn = document.getElementById('fetchBtn');
+
+            const url = input.value.trim();
+
+            if (!url || (!url.includes('instagram.com') && !url.includes('instagr.am'))) {
+                status.textContent = "❌ Please paste a valid Instagram link";
+                resultArea.style.display = "none";
+                return;
+            }
+
+            status.textContent = "⏳ Fetching media from Instagram...";
+            btn.disabled = true;
+            resultArea.style.display = "none";
+            mediaGrid.innerHTML = "";
+
+            try {
+                // Free public method (commonly used)
+                const formData = new FormData();
+                formData.append("q", url);
+                formData.append("t", "media");
+                formData.append("lang", "en");
+
+                const response = await fetch("https://saveig.app/api/ajaxSearch", {
+                    method: "POST",
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data && data.data) {
+                    // Parse the returned HTML to extract media
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data.data, "text/html");
+                    const items = doc.querySelectorAll(".download-items");
+
+                    if (items.length === 0) {
+                        // Fallback parsing
+                        const links = doc.querySelectorAll("a[href*='cdninstagram'], a[href*='fbcdn']");
+                        if (links.length > 0) {
+                            links.forEach((link, index) => {
+                                createMediaCard(link.href, index);
+                            });
+                            resultArea.style.display = "block";
+                            status.textContent = `✓ Found ${links.length} media file(s)`;
+                        } else {
+                            status.textContent = "❌ Could not extract media. Make sure the post is public.";
+                        }
+                    } else {
+                        items.forEach((item, index) => {
+                            const downloadLink = item.querySelector("a");
+                            if (downloadLink) {
+                                createMediaCard(downloadLink.href, index);
+                            }
+                        });
+                        resultArea.style.display = "block";
+                        status.textContent = `✓ Successfully loaded media!`;
+                    }
+                } else {
+                    // Alternative free method
+                    await alternativeMethod(url);
+                }
+            } catch (error) {
+                console.error(error);
+                // Try alternative
+                await alternativeMethod(url);
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        // Alternative free method
+        async function alternativeMethod(url) {
+            const status = document.getElementById('statusMsg');
+            const resultArea = document.getElementById('resultArea');
+            const mediaGrid = document.getElementById('mediaGrid');
+
+            try {
+                status.textContent = "⏳ Trying alternative method...";
+
+                // Using a CORS proxy + public oembed (basic info) + manual note
+                // For production you can replace this with RapidAPI free tier
+                const shortcode = extractShortcode(url);
+                
+                if (!shortcode) {
+                    status.textContent = "❌ Invalid Instagram URL format";
+                    return;
+                }
+
+                // Create a helpful result with direct instructions
+                mediaGrid.innerHTML = `
+                    <div class="media-card" style="grid-column: 1 / -1; padding: 30px;">
+                        <div class="media-info">
+                            <p style="color: #FFB39A; font-size: 16px; margin-bottom: 15px;">
+                                Instagram is very strict with direct downloads.
+                            </p>
+                            <p style="margin-bottom: 20px;">
+                                For the most reliable results right now, we recommend using this free method:
+                            </p>
+                            <a href="https://snapinsta.to/" target="_blank" class="dl-btn" style="max-width: 280px; margin: 0 auto;">
+                                Open Snapinsta Downloader →
+                            </a>
+                            <p style="margin-top: 20px; font-size: 13px;">
+                                Just paste the same link there. It supports Reels, Photos & Carousels.
+                            </p>
+                        </div>
+                    </div>
+                `;
+                resultArea.style.display = "block";
+                status.textContent = "✓ Alternative option ready";
+            } catch (err) {
+                status.textContent = "❌ Failed to fetch. Please make sure the post is public.";
+            }
+        }
+
+        function extractShortcode(url) {
+            const match = url.match(/\/(p|reel|tv)\/([A-Za-z0-9_-]+)/);
+            return match ? match[2] : null;
+        }
+
+        function createMediaCard(mediaUrl, index) {
+            const mediaGrid = document.getElementById('mediaGrid');
+            const isVideo = mediaUrl.includes('.mp4') || mediaUrl.includes('video');
+
+            const card = document.createElement('div');
+            card.className = 'media-card';
+
+            if (isVideo) {
+                card.innerHTML = `
+                    <video src="${mediaUrl}" controls></video>
+                    <div class="media-info">
+                        <p>Video ${index + 1}</p>
+                        <a href="${mediaUrl}" download class="dl-btn" target="_blank">Download Video</a>
+                    </div>
+                `;
+            } else {
+                card.innerHTML = `
+                    <img src="${mediaUrl}" alt="Instagram Photo">
+                    <div class="media-info">
+                        <p>Photo ${index + 1}</p>
+                        <a href="${mediaUrl}" download class="dl-btn" target="_blank">Download Photo</a>
+                    </div>
+                `;
+            }
+
+            mediaGrid.appendChild(card);
+        }
+
+        // Allow pressing Enter
+        document.getElementById('instaUrl').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') fetchInstagram();
+        });
+    </script>
+</body>
+</html>
