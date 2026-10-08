@@ -3,113 +3,543 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolsMediaDownloader | Next-Gen Online File & Media Suite</title>
+    <meta name="description" content="The future of online utilities. Convert, merge, compress PDFs and download HD videos — all processed instantly in your browser.">
 
-    <title>ToolsMediaDownloader - Free Online PDF & Video Tools</title>
-    <meta name="description" content="Free online tools for PDF conversion, merging, video downloads, and media tools. Fast, secure, works directly in your browser. No signup required.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    
+    <!-- Google Fonts: Futuristic Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
 
-    <!-- FAVICON -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
-
-    <!-- LOCAL LIBRARIES -->
+    <!-- PDF LIBRARIES -->
     <script src="./pdf-lib.min.js"></script>
     <script src="./pdf.min.js"></script>
 
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #160c16;
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
+        :root {
+            --bg-dark: #0a0510;
+            --bg-mid: #1a0d1a;
+            --accent: #FFB39A;
+            --accent-glow: #ff8a66;
+            --purple: #542452;
+            --purple-light: #743871;
+            --text-light: #f0e6ef;
+            --text-dim: #a08ca0;
         }
 
-        /* --- NAVIGATION BAR --- */
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ========== INTRO LOADER ========== */
+        #intro-loader {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-dark);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
+
+        #intro-loader.hide { opacity: 0; visibility: hidden; }
+
+        .intro-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 42px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+            animation: logoFadeIn 1.5s ease forwards;
+            opacity: 0;
+        }
+
+        .intro-tagline {
+            color: var(--text-dim);
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: tagFadeIn 1.5s ease 0.5s forwards;
+        }
+
+        .loader-bar {
+            width: 200px;
+            height: 2px;
+            background: rgba(255, 179, 154, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .loader-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-glow));
+            animation: loadFill 2s ease forwards;
+            width: 0;
+        }
+
+        @keyframes logoFadeIn { to { opacity: 1; transform: translateY(0); } from { opacity: 0; transform: translateY(10px); } }
+        @keyframes tagFadeIn { to { opacity: 1; } }
+        @keyframes loadFill { to { width: 100%; } }
+
+        /* ========== ANIMATED BACKGROUND ORBS ========== */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .orb-1 { width: 400px; height: 400px; background: #542452; top: -100px; left: -100px; animation: float1 15s infinite ease-in-out; }
+        .orb-2 { width: 350px; height: 350px; background: #ff8a66; bottom: -100px; right: -100px; animation: float2 18s infinite ease-in-out; }
+        .orb-3 { width: 300px; height: 300px; background: #743871; top: 50%; left: 50%; animation: float3 20s infinite ease-in-out; }
+
+        @keyframes float1 { 50% { transform: translate(100px, 150px); } }
+        @keyframes float2 { 50% { transform: translate(-80px, -120px); } }
+        @keyframes float3 { 50% { transform: translate(-150px, 100px); } }
+
+        /* ========== NAVBAR ========== */
         .navbar {
-            background: #542452;
-            border-bottom: 3px solid #FFB39A;
-            padding: 15px 5%;
+            position: sticky;
+            top: 0;
+            background: rgba(10, 5, 16, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 179, 154, 0.15);
+            padding: 18px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            z-index: 1000;
             flex-wrap: wrap;
+            gap: 10px;
         }
 
         .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: 20px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            letter-spacing: 1px;
             display: flex;
             align-items: center;
             gap: 10px;
-            color: #FFB39A;
-            text-decoration: none;
-            font-size: 24px;
-            font-weight: bold;
         }
 
-        .nav-logo svg { width: 28px; height: 28px; fill: #FFB39A; }
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { color: #f5e7f2; text-decoration: none; font-size: 15px; font-weight: bold; transition: color 0.3s; }
-        .nav-links a:hover { color: #FFB39A; }
+        .nav-logo span { font-size: 24px; }
 
-        /* --- HERO SECTION --- */
+        .nav-links { display: flex; gap: 30px; }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* ========== HERO SECTION ========== */
         .hero-section {
             text-align: center;
-            padding: 50px 20px;
-            background: linear-gradient(180deg, #381736 0%, #160c16 100%);
-            border-bottom: 1px solid #381736;
+            padding: 100px 20px 80px;
+            position: relative;
+            z-index: 2;
         }
 
-        .hero-section h1 { color: #FFB39A; font-size: 38px; margin-bottom: 15px; }
-        .hero-section p { color: #d8c9d6; font-size: 16px; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(255, 179, 154, 0.1);
+            border: 1px solid rgba(255, 179, 154, 0.3);
+            border-radius: 20px;
+            font-size: 12px;
+            color: var(--accent);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            animation: fadeInUp 0.8s ease;
+        }
 
-        .container { width: 92%; max-width: 1000px; margin: auto; padding: 30px 0; flex: 1; }
+        .hero-section h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(32px, 6vw, 60px);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
 
-        .intro { text-align: center; margin-bottom: 28px; }
-        .intro h2 { color: #FFB39A; font-size: 25px; margin-bottom: 8px; }
-        .intro p { color: #d8c9d6; font-size: 14px; }
+        .hero-section h1 .gradient-text {
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
 
-        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+        .hero-section p {
+            color: var(--text-dim);
+            font-size: 17px;
+            max-width: 650px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
 
-        .card { background: #542452; border: 1px solid #743871; border-radius: 14px; padding: 22px; box-shadow: 0 7px 22px rgba(0, 0, 0, 0.25); transition: transform 0.2s; }
-        .card:hover { transform: translateY(-3px); border-color: #FFB39A; }
-        .card h3 { color: #FFB39A; font-size: 19px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-        .card p { color: #eaddea; font-size: 13px; line-height: 1.5; min-height: 58px; margin-bottom: 18px; }
+        .hero-cta {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
 
-        button { width: 100%; padding: 13px 16px; border: 0; border-radius: 9px; background: #FFB39A; color: #542452; font-size: 15px; font-weight: bold; cursor: pointer; }
-        button:disabled { opacity: 0.6; cursor: not-allowed; }
+        .btn-primary, .btn-ghost {
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            letter-spacing: 0.5px;
+        }
 
-        .workspace { display: none; background: #542452; border: 2px solid #FFB39A; border-radius: 15px; padding: 22px; margin-bottom: 30px; box-shadow: 0 8px 24px rgba(0,0,0,.25); }
-        .workspace h2 { color: #FFB39A; text-align: center; margin-bottom: 8px; }
-        .description { color: #eaddea; text-align: center; font-size: 14px; margin-bottom: 20px; }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            color: var(--bg-dark);
+            box-shadow: 0 10px 30px rgba(255, 179, 154, 0.3);
+        }
 
-        .upload-box { background: #381736; border: 2px dashed #FFB39A; border-radius: 12px; padding: 30px 15px; text-align: center; cursor: pointer; margin-bottom: 15px; }
-        .upload-box strong { display: block; color: #FFB39A; font-size: 17px; margin-bottom: 7px; }
-        .upload-box span { color: #d5c4d3; font-size: 12px; }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 179, 154, 0.5);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-light);
+            border: 1px solid rgba(255, 179, 154, 0.3);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 179, 154, 0.1);
+            border-color: var(--accent);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ========== STATS BAR ========== */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            padding: 40px 20px;
+            flex-wrap: wrap;
+            border-top: 1px solid rgba(255, 179, 154, 0.1);
+            border-bottom: 1px solid rgba(255, 179, 154, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-item { text-align: center; }
+        .stat-item h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 32px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .stat-item p { color: var(--text-dim); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; }
+
+        /* ========== CONTAINER ========== */
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 80px 5%;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ========== SECTION INTRO ========== */
+        .section-intro {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            color: var(--accent);
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .section-intro h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(28px, 4vw, 42px);
+            margin-bottom: 15px;
+        }
+
+        .section-intro p {
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: auto;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        /* ========== GLASS CARDS ========== */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(84, 36, 82, 0.4), rgba(26, 13, 26, 0.4));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 179, 154, 0.15);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .glass-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 179, 154, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .glass-card:hover::before { left: 100%; }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 50px rgba(255, 179, 154, 0.2);
+        }
+
+        .card-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(255, 179, 154, 0.3);
+        }
+
+        .glass-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        .glass-card p {
+            color: var(--text-dim);
+            font-size: 13.5px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            min-height: 60px;
+        }
+
+        .card-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: auto;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+
+        .card-btn:hover {
+            background: var(--accent);
+            color: var(--bg-dark);
+            gap: 12px;
+        }
+
+        /* ========== WORKSPACE ========== */
+        .workspace {
+            display: none;
+            background: linear-gradient(135deg, rgba(84, 36, 82, 0.5), rgba(26, 13, 26, 0.5));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 179, 154, 0.3);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .workspace h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent);
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .description {
+            color: var(--text-dim);
+            text-align: center;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .upload-box {
+            background: rgba(10, 5, 16, 0.5);
+            border: 2px dashed rgba(255, 179, 154, 0.4);
+            border-radius: 16px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .upload-box:hover { border-color: var(--accent); background: rgba(10, 5, 16, 0.7); }
+        .upload-box strong { display: block; color: var(--accent); font-size: 18px; margin-bottom: 8px; }
+        .upload-box span { color: var(--text-dim); font-size: 13px; }
         .hidden-input { display: none; }
 
-        .status { color: #FFB39A; text-align: center; min-height: 24px; margin: 14px 0; font-size: 14px; font-weight: bold; }
-        .preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; margin: 15px 0; }
-        .preview-card { background: #341532; border: 1px solid #764173; padding: 6px; border-radius: 9px; }
-        .preview-card img { width: 100%; height: 110px; object-fit: contain; display: block; background: #ffffff; border-radius: 6px; }
-        .preview-label { color: #FFB39A; text-align: center; font-size: 11px; padding: 6px 2px; }
-        .small-btn { padding: 8px 4px; font-size: 11px; }
-        .action-button { display: none; margin-top: 8px; }
-        .close-button { margin-top: 10px; background: transparent; color: #FFB39A; border: 1px solid #FFB39A; }
-        .privacy { text-align: center; font-size: 12px; color: #cbbac9; margin-top: 15px; }
-        .section-divider { margin-top: 50px; }
+        .status { color: var(--accent); text-align: center; margin: 20px 0; font-weight: 600; min-height: 24px; }
+        .preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px; margin: 20px 0; }
+        .preview-card { background: rgba(10, 5, 16, 0.6); border: 1px solid rgba(255, 179, 154, 0.15); padding: 8px; border-radius: 12px; }
+        .preview-card img { width: 100%; height: 110px; object-fit: contain; background: white; border-radius: 8px; }
+        .preview-label { color: var(--accent); text-align: center; font-size: 11px; padding: 6px 2px; }
 
-        /* --- FOOTER --- */
-        footer { margin-top: 40px; background: #381736; border-top: 2px solid #542452; padding: 30px 20px; text-align: center; }
-        .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; }
-        .footer-links a { color: #d8c9d6; text-decoration: none; font-size: 14px; }
-        .footer-links a:hover { color: #FFB39A; text-decoration: underline; }
-        .footer-copy { color: #9a7d98; font-size: 13px; }
+        .action-button {
+            display: none;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s;
+            font-family: 'Space Grotesk', sans-serif;
+        }
 
-        /* =========================================================
-           CLEAN & SIMPLE AI CHAT ASSISTANT (TOBY)
-           ========================================================= */
+        .action-button:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(255, 179, 154, 0.3); }
+
+        .close-button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            background: transparent;
+            color: var(--text-dim);
+            border: 1px solid rgba(255, 179, 154, 0.2);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .close-button:hover { color: var(--accent); border-color: var(--accent); }
+
+        .small-btn { padding: 8px; font-size: 11px; width: 100%; margin-top: 5px; background: var(--accent); color: var(--bg-dark); border: none; border-radius: 6px; cursor: pointer; }
+        .privacy { text-align: center; font-size: 12px; color: var(--text-dim); margin-top: 15px; }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: linear-gradient(180deg, transparent, rgba(10, 5, 16, 0.8));
+            border-top: 1px solid rgba(255, 179, 154, 0.1);
+            padding: 50px 20px 30px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 22px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .footer-links { display: flex; justify-content: center; gap: 25px; margin: 20px 0; flex-wrap: wrap; }
+        .footer-links a { color: var(--text-dim); text-decoration: none; font-size: 14px; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--accent); }
+        .footer-copy { color: var(--text-dim); font-size: 12px; margin-top: 20px; }
+
+        /* ========== TOBY AI CHAT ========== */
         #toby-widget-container {
             position: fixed;
             bottom: 25px;
@@ -120,154 +550,97 @@
             align-items: flex-end;
         }
 
-        /* Floating Trigger Button */
         .toby-launch-btn {
-            background: #FFB39A;
-            color: #542452;
-            padding: 12px 20px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            color: var(--bg-dark);
+            padding: 12px 22px;
             border-radius: 30px;
-            font-size: 14px;
-            font-weight: bold;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            font-weight: 600;
             cursor: pointer;
-            border: 2px solid #542452;
-            transition: transform 0.2s, background 0.2s;
+            border: none;
+            box-shadow: 0 10px 25px rgba(255, 179, 154, 0.4);
+            transition: all 0.3s;
+            font-family: 'Space Grotesk', sans-serif;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .toby-launch-btn:hover {
-            transform: scale(1.06);
-            background: #ffffff;
-        }
+        .toby-launch-btn:hover { transform: scale(1.05); }
 
-        /* Chat Window */
         #toby-chat-box {
             display: none;
-            width: 320px;
-            background: #381736;
-            border: 2px solid #FFB39A;
-            border-radius: 16px;
-            margin-bottom: 12px;
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+            width: 340px;
+            background: rgba(26, 13, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 179, 154, 0.3);
+            border-radius: 20px;
+            margin-bottom: 15px;
             flex-direction: column;
             overflow: hidden;
-            animation: popUp 0.25s ease;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            animation: popUp 0.3s ease;
         }
 
         @keyframes popUp {
-            from { opacity: 0; transform: translateY(15px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .chat-header {
-            background: #542452;
-            color: #FFB39A;
-            padding: 14px;
-            font-weight: bold;
+            background: linear-gradient(135deg, var(--purple), var(--purple-light));
+            padding: 16px;
+            color: var(--accent);
+            font-weight: 600;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #743871;
-            font-size: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
         }
 
-        .chat-header button {
-            background: none;
-            border: none;
-            color: #FFB39A;
-            font-size: 22px;
-            cursor: pointer;
-            width: auto;
-            padding: 0;
-            line-height: 1;
-        }
+        .chat-header button { background: none; border: none; color: var(--accent); font-size: 22px; cursor: pointer; }
+        #chat-messages { height: 260px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        .bot-msg, .user-msg { padding: 10px 14px; border-radius: 14px; font-size: 13.5px; line-height: 1.5; max-width: 85%; }
+        .bot-msg { background: rgba(84, 36, 82, 0.6); color: var(--text-light); align-self: flex-start; border-bottom-left-radius: 3px; }
+        .user-msg { background: linear-gradient(135deg, var(--accent), var(--accent-glow)); color: var(--bg-dark); align-self: flex-end; font-weight: 500; border-bottom-right-radius: 3px; }
 
-        #chat-messages {
-            height: 240px;
-            padding: 15px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            font-size: 13.5px;
-        }
+        .chat-input-area { display: flex; padding: 12px; background: rgba(10, 5, 16, 0.6); border-top: 1px solid rgba(255, 179, 154, 0.1); gap: 8px; }
+        .chat-input-area input { flex: 1; padding: 10px 14px; background: rgba(84, 36, 82, 0.4); border: 1px solid rgba(255, 179, 154, 0.2); border-radius: 20px; color: white; outline: none; font-family: inherit; }
+        .chat-input-area input:focus { border-color: var(--accent); }
+        .chat-input-area button { padding: 10px 18px; background: linear-gradient(135deg, var(--accent), var(--accent-glow)); color: var(--bg-dark); border: none; border-radius: 20px; font-weight: 600; cursor: pointer; font-family: inherit; }
 
-        .bot-msg {
-            background: #542452;
-            padding: 10px 14px;
-            border-radius: 12px;
-            align-self: flex-start;
-            color: #eaddea;
-            line-height: 1.45;
-            max-width: 88%;
-            border-bottom-left-radius: 3px;
-        }
-
-        .user-msg {
-            background: #FFB39A;
-            color: #381736;
-            padding: 10px 14px;
-            border-radius: 12px;
-            align-self: flex-end;
-            font-weight: bold;
-            max-width: 88%;
-            border-bottom-right-radius: 3px;
-        }
-
-        .chat-input-area {
-            display: flex;
-            padding: 10px;
-            background: #160c16;
-            border-top: 1px solid #542452;
-        }
-
-        .chat-input-area input {
-            flex: 1;
-            border: none;
-            background: #381736;
-            color: #ffffff;
-            padding: 10px;
-            border-radius: 8px;
-            outline: none;
-            font-size: 13.5px;
-        }
-
-        .chat-input-area button {
-            background: #FFB39A;
-            color: #381736;
-            border: none;
-            margin-left: 8px;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            width: auto;
-        }
-
-        /* Mobile Adjustments */
         @media (max-width: 600px) {
-            .navbar { flex-direction: column; gap: 15px; }
-            .hero-section h1 { font-size: 28px; }
-            .container { width: 94%; }
-            #toby-widget-container { bottom: 15px; right: 15px; }
-            #toby-chat-box { width: 280px; }
+            .nav-links { gap: 15px; }
+            .nav-links a { font-size: 12px; }
+            .hero-section { padding: 60px 20px 50px; }
+            .stats-bar { gap: 30px; padding: 30px 20px; }
+            .stat-item h3 { font-size: 24px; }
+            .container { padding: 50px 5%; }
+            #toby-chat-box { width: 290px; }
         }
     </style>
 </head>
-
 <body>
 
-<!-- NAVIGATION BAR -->
+<!-- INTRO LOADER -->
+<div id="intro-loader">
+    <div class="intro-logo">TOOLS MEDIA</div>
+    <div class="intro-tagline">Next-Gen Online Suite</div>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<!-- ANIMATED BACKGROUND -->
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- NAVIGATION -->
 <nav class="navbar">
-    <a href="index.html" class="nav-logo">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="none"/></svg>
-        ToolsMediaDownloader
-    </a>
+    <a href="index.html" class="nav-logo"><span>⚡</span> TOOLS MEDIA</a>
     <div class="nav-links">
-        <a href="#pdf-tools">PDF Tools</a>
-        <a href="#video-tools">Video Tools</a>
+        <a href="#document-tools">Documents</a>
+        <a href="video-downloader.html">Downloaders</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
     </div>
@@ -275,566 +648,338 @@
 
 <!-- HERO SECTION -->
 <section class="hero-section">
-    <h1>All-in-One Online Utilities</h1>
-    <p>Merge, convert, and compress PDFs securely in your browser. Download TikTok videos in HD without watermarks. 100% Free, Fast, and Secure.</p>
+    <div class="hero-badge">⚡ 100% Browser-Based · No Signups</div>
+    <h1>The Future of<br><span class="gradient-text">Online Utilities</span></h1>
+    <p>Transform PDFs, extract media, and download HD videos — all processed instantly in your browser with next-generation technology. Zero uploads. Zero compromise.</p>
+    <div class="hero-cta">
+        <a href="#document-tools" class="btn-primary">Explore Tools →</a>
+        <a href="video-downloader.html" class="btn-ghost">Video Downloaders</a>
+    </div>
 </section>
+
+<!-- STATS -->
+<div class="stats-bar">
+    <div class="stat-item"><h3>100%</h3><p>Free Forever</p></div>
+    <div class="stat-item"><h3>0ms</h3><p>Upload Time</p></div>
+    <div class="stat-item"><h3>HD</h3><p>Quality Output</p></div>
+    <div class="stat-item"><h3>∞</h3><p>No Limits</p></div>
+</div>
 
 <main class="container">
 
-    <!-- JPG TO PDF WORKSPACE -->
+    <!-- WORKSPACE: JPG to PDF -->
     <section id="jpgTool" class="workspace">
-        <h2>JPG to PDF Converter</h2>
-        <p class="description">Select one or multiple JPG/PNG images and combine them into one PDF.</p>
+        <h2>JPG → PDF Converter</h2>
+        <p class="description">Transform multiple images into a single, polished PDF document.</p>
         <div class="upload-box" onclick="document.getElementById('jpgFiles').click()">
-            <strong>📁 Choose Images</strong>
+            <strong>📁 Drop Images Here</strong>
             <span>JPG, JPEG and PNG supported</span>
         </div>
         <input id="jpgFiles" class="hidden-input" type="file" accept="image/jpeg,image/png" multiple onchange="jpgFilesSelected(this)">
         <div id="jpgPreview" class="preview-grid"></div>
         <div id="jpgStatus" class="status"></div>
-        <button id="jpgCreateButton" class="action-button" onclick="createJpgPdf()">Create & Download PDF</button>
-        <button class="close-button" onclick="closeTools()">Close Tool</button>
-        <p class="privacy">Your files are processed directly in your browser.</p>
+        <button id="jpgCreateButton" class="action-button" onclick="createJpgPdf()">⚡ Generate PDF</button>
+        <button class="close-button" onclick="closeTools()">Close Workspace</button>
+        <p class="privacy">🔒 Processed locally in your browser</p>
     </section>
 
-    <!-- PDF TO JPG WORKSPACE -->
+    <!-- WORKSPACE: PDF to JPG -->
     <section id="pdfJpgTool" class="workspace">
-        <h2>PDF to JPG Converter</h2>
-        <p class="description">Select a PDF and convert its pages into JPG images.</p>
+        <h2>PDF → JPG Extractor</h2>
+        <p class="description">Extract every page of your PDF as a high-quality JPG image.</p>
         <div class="upload-box" onclick="document.getElementById('pdfJpgFile').click()">
-            <strong>📄 Choose PDF</strong>
-            <span>Select one PDF document</span>
+            <strong>📄 Select Your PDF</strong>
+            <span>One document at a time</span>
         </div>
         <input id="pdfJpgFile" class="hidden-input" type="file" accept=".pdf,application/pdf" onchange="pdfJpgFileSelected(this)">
         <div id="pdfJpgStatus" class="status"></div>
-        <button id="pdfJpgConvertButton" class="action-button" onclick="convertPdfToJpg()">Convert PDF to JPG</button>
+        <button id="pdfJpgConvertButton" class="action-button" onclick="convertPdfToJpg()">⚡ Extract Images</button>
         <div id="pdfJpgPreview" class="preview-grid"></div>
-        <button class="close-button" onclick="closeTools()">Close Tool</button>
-        <p class="privacy">Your PDF is processed directly in your browser.</p>
+        <button class="close-button" onclick="closeTools()">Close Workspace</button>
+        <p class="privacy">🔒 Processed locally in your browser</p>
     </section>
 
-    <!-- MERGE PDF WORKSPACE -->
+    <!-- WORKSPACE: Merge PDF -->
     <section id="mergeTool" class="workspace">
-        <h2>Merge PDF</h2>
-        <p class="description">Select two or more PDF files and combine them into one PDF.</p>
+        <h2>PDF Merger</h2>
+        <p class="description">Combine multiple PDF files into one unified document.</p>
         <div class="upload-box" onclick="document.getElementById('mergeFiles').click()">
-            <strong>📄 Choose PDF Files</strong>
-            <span>Select 2 or more PDF documents</span>
+            <strong>📄 Select PDF Files</strong>
+            <span>Choose 2 or more documents</span>
         </div>
         <input id="mergeFiles" class="hidden-input" type="file" accept=".pdf,application/pdf" multiple onchange="mergeFilesSelected(this)">
         <div id="mergeStatus" class="status"></div>
-        <button id="mergeButton" class="action-button" onclick="mergePdfs()">Merge & Download PDF</button>
-        <button class="close-button" onclick="closeTools()">Close Tool</button>
-        <p class="privacy">Your PDFs are processed directly in your browser.</p>
+        <button id="mergeButton" class="action-button" onclick="mergePdfs()">⚡ Merge Files</button>
+        <button class="close-button" onclick="closeTools()">Close Workspace</button>
+        <p class="privacy">🔒 Processed locally in your browser</p>
     </section>
 
-    <!-- PDF TOOLS SECTION -->
-    <section id="pdf-tools" class="intro">
-        <h2>📄 Document & PDF Tools</h2>
-        <p>Simple online tools for your PDF files. Processed locally on your device.</p>
+    <!-- DOCUMENT TOOLS -->
+    <section id="document-tools" class="section-intro">
+        <div class="section-tag">Document Suite</div>
+        <h2>PDF & File Tools</h2>
+        <p>Professional-grade file utilities running entirely in your browser. No installs. No limits.</p>
     </section>
 
-    <section class="tools-grid">
-        <div class="card">
-            <h3>🖼️ JPG to PDF</h3>
-            <p>Convert multiple JPG or PNG images into one downloadable PDF document.</p>
-            <button onclick="openTool('jpgTool')">Open Tool</button>
+    <div class="tools-grid">
+        <div class="glass-card">
+            <div class="card-icon">🖼️</div>
+            <h3>JPG to PDF</h3>
+            <p>Combine multiple images into a single, high-quality PDF document in seconds.</p>
+            <button class="card-btn" onclick="openTool('jpgTool')">Launch →</button>
         </div>
-        <div class="card">
-            <h3>📸 PDF to JPG</h3>
-            <p>Extract and convert every single page of a PDF document into a high-quality JPG image.</p>
-            <button onclick="openTool('pdfJpgTool')">Open Tool</button>
+        <div class="glass-card">
+            <div class="card-icon">📸</div>
+            <h3>PDF to JPG</h3>
+            <p>Extract every page from your PDF as crisp, downloadable JPG images.</p>
+            <button class="card-btn" onclick="openTool('pdfJpgTool')">Launch →</button>
         </div>
-        <div class="card">
-            <h3>📑 Merge PDF</h3>
-            <p>Combine multiple PDF documents into one single, easily readable PDF file.</p>
-            <button onclick="openTool('mergeTool')">Open Tool</button>
+        <div class="glass-card">
+            <div class="card-icon">📑</div>
+            <h3>Merge PDFs</h3>
+            <p>Blend multiple PDF documents into one streamlined, organized file.</p>
+            <button class="card-btn" onclick="openTool('mergeTool')">Launch →</button>
         </div>
-        <div class="card">
-            <h3>🗜️ Compress PDF</h3>
-            <p>Reduce PDF file size for easier email sharing and storage.</p>
-            <button onclick="comingSoon('Compress PDF')">Open Tool</button>
+        <div class="glass-card">
+            <div class="card-icon">🗜️</div>
+            <h3>Compress PDF</h3>
+            <p>Shrink PDF file sizes while preserving document quality and clarity.</p>
+            <button class="card-btn" onclick="comingSoon('Compress PDF')">Coming Soon</button>
         </div>
-        <div class="card">
-            <h3>📝 PDF to Word</h3>
-            <p>Convert your PDF documents into editable Word files instantly.</p>
-            <button onclick="comingSoon('PDF to Word')">Open Tool</button>
+        <div class="glass-card">
+            <div class="card-icon">📝</div>
+            <h3>PDF to Word</h3>
+            <p>Convert static PDF documents into fully editable Word files.</p>
+            <button class="card-btn" onclick="comingSoon('PDF to Word')">Coming Soon</button>
         </div>
-    </section>
+    </div>
 
-    <!-- VIDEO & MEDIA TOOLS SECTION -->
-    <section id="video-tools" class="intro section-divider">
-        <h2>🎬 Video & Media Downloaders</h2>
-        <p>Download and save online videos directly to your device for free.</p>
-    </section>
-
-    <section class="tools-grid">
-        <div class="card">
-            <h3>🎵 TikTok Downloader</h3>
-            <p>Download TikTok videos without watermark in HD MP4 or extract MP3 audio files.</p>
-            <button onclick="window.location.href='tiktok-downloader.html'">Open Tool</button>
-        </div>
-        <div class="card">
-            <h3>📸 Instagram Downloader</h3>
-            <p>Download Instagram videos, reels, stories, and photos directly to your device.</p>
-            <button onclick="comingSoon('Instagram Downloader')">Open Tool</button>
-        </div>
-        <div class="card">
-            <h3>📘 Facebook Downloader</h3>
-            <p>Save Facebook videos in HD quality directly to your phone or computer.</p>
-            <button onclick="comingSoon('Facebook Downloader')">Open Tool</button>
-        </div>
-        <div class="card">
-            <h3>📌 Pinterest Downloader</h3>
-            <p>Save Pinterest videos and images in high quality to your gallery.</p>
-            <button onclick="comingSoon('Pinterest Downloader')">Open Tool</button>
-        </div>
+    <!-- VIDEO DOWNLOADERS CTA -->
+    <section class="section-intro" style="margin-top: 100px;">
+        <div class="section-tag">Media Downloaders</div>
+        <h2>Download HD Videos</h2>
+        <p>Grab videos from TikTok, Instagram, Facebook, Pinterest and more — in stunning HD quality, watermark-free.</p>
+        <br>
+        <a href="video-downloader.html" class="btn-primary">Open Downloader Suite →</a>
     </section>
 
 </main>
 
-<!-- =========================================================
-     TOBY AI CHAT ASSISTANT WIDGET
-     ========================================================= -->
+<!-- FOOTER -->
+<footer>
+    <div class="footer-brand">⚡ TOOLS MEDIA</div>
+    <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="contact.html">Contact</a>
+    </div>
+    <p class="footer-copy">© 2026 ToolsMediaDownloader · Crafted for creators worldwide</p>
+</footer>
+
+<!-- TOBY AI -->
 <div id="toby-widget-container">
-    
-    <!-- Chat Window -->
     <div id="toby-chat-box">
         <div class="chat-header">
-            <span>🤖 Toby - AI Assistant</span>
+            <span>🤖 TOBY · AI Assistant</span>
             <button onclick="toggleTobyChat()">×</button>
         </div>
         <div id="chat-messages">
-            <div class="bot-msg">Hi there! 👋 I'm Toby, your website assistant. Ask me anything about our PDF tools, video downloaders, or how to use this site!</div>
+            <div class="bot-msg">Hey there! 👋 I'm Toby, your smart assistant. Ask me anything about our PDF tools, video downloaders, or how to navigate the site!</div>
         </div>
         <div class="chat-input-area">
-            <input type="text" id="toby-input" placeholder="Type a message..." onkeypress="handleTobyKey(event)">
-            <button onclick="sendTobyMessage()">Send</button>
+            <input type="text" id="toby-input" placeholder="Ask Toby anything..." onkeypress="handleTobyKey(event)">
+            <button onclick="sendTobyMessage()">↑</button>
         </div>
     </div>
-
-    <!-- Floating Launch Button -->
-    <button class="toby-launch-btn" onclick="toggleTobyChat()">
-        🤖 Ask Toby
-    </button>
-
+    <button class="toby-launch-btn" onclick="toggleTobyChat()">🤖 Ask Toby</button>
 </div>
 
-<!-- PROFESSIONAL FOOTER -->
-<footer>
-    <div class="footer-links">
-        <a href="about.html">About Us</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Service</a>
-        <a href="contact.html">Contact</a>
-    </div>
-    <p class="footer-copy">© 2026 ToolsMediaDownloader. All rights reserved. Free online tools.</p>
-</footer>
-
-<!-- =========================================================
-     JAVASCRIPT LOGIC
-     ========================================================= -->
 <script>
 "use strict";
 
-/* --- 1. TOBY AI CHATBOT INTELLIGENCE --- */
+/* INTRO LOADER */
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        document.getElementById('intro-loader').classList.add('hide');
+    }, 2200);
+});
+
+/* SCROLL ANIMATIONS */
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => entry.target.classList.add('visible'), i * 100);
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.glass-card').forEach(card => observer.observe(card));
+
+/* TOBY AI */
 function toggleTobyChat() {
     const chat = document.getElementById('toby-chat-box');
-    if (chat.style.display === 'flex') {
-        chat.style.display = 'none';
-    } else {
-        chat.style.display = 'flex';
-        document.getElementById('toby-input').focus();
-    }
+    chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
+    if (chat.style.display === 'flex') document.getElementById('toby-input').focus();
 }
 
-function handleTobyKey(e) {
-    if (e.key === 'Enter') sendTobyMessage();
-}
+function handleTobyKey(e) { if (e.key === 'Enter') sendTobyMessage(); }
 
 function sendTobyMessage() {
     const input = document.getElementById('toby-input');
     const text = input.value.trim();
     if (!text) return;
-
-    // Show User Message
     addTobyMessage(text, 'user-msg');
     input.value = '';
-
-    // Toby's Intelligent Brain
     setTimeout(() => {
         const q = text.toLowerCase();
         let reply = "";
-
-        // Greetings
-        if (q.includes("hi") || q.includes("hello") || q.includes("hey") || q.includes("greetings")) {
-            reply = "Hello! 👋 I'm Toby. How can I help you today?";
-        }
-        else if (q.includes("how are you") || q.includes("how r u") || q.includes("how do you do")) {
-            reply = "I'm doing great, thank you for asking! 😊 Ready to help you with your files and videos. What do you need help with?";
-        }
-        else if (q.includes("who are you") || q.includes("your name") || q.includes("what are you")) {
-            reply = "I'm Toby, the AI Assistant for ToolsMediaDownloader! I help visitors understand how to convert PDFs, merge files, and download videos.";
-        }
-        // Website Knowledge
-        else if (q.includes("about") || q.includes("website") || q.includes("what is this") || q.includes("what do you do")) {
-            reply = "ToolsMediaDownloader is a 100% free online utility site! You can merge PDFs, convert JPGs to PDF, convert PDF to JPG, and download TikTok videos without watermarks—all inside your browser.";
-        }
-        else if (q.includes("free") || q.includes("cost") || q.includes("price") || q.includes("pay")) {
-            reply = "Yes, absolutely! Everything on ToolsMediaDownloader is 100% free with no signups or hidden charges.";
-        }
-        else if (q.includes("pdf") && (q.includes("merge") || q.includes("combine"))) {
-            reply = "To merge PDFs, click the 'Merge PDF' tool above, upload 2 or more PDF documents, and click 'Merge & Download PDF'!";
-        }
-        else if (q.includes("jpg") || q.includes("image") || q.includes("pdf")) {
-            reply = "We offer both 'JPG to PDF' (combining images into a single PDF) and 'PDF to JPG' (extracting pages as JPG images). Select a tool above to get started!";
-        }
-        else if (q.includes("tiktok") || q.includes("video") || q.includes("watermark")) {
-            reply = "To download TikTok videos in HD without watermarks, click 'TikTok Downloader' in the Video section below, paste your video link, and click Download!";
-        }
-        else if (q.includes("safe") || q.includes("privacy") || q.includes("security")) {
-            reply = "Your privacy is guaranteed! All PDF files are processed directly on your computer/device inside your web browser. We never upload or store your files.";
-        }
-        else if (q.includes("thank") || q.includes("thanks")) {
-            reply = "You're very welcome! Let me know if you need anything else. 😊";
-        }
-        else {
-            reply = "I'm here to help! You can ask me about 'PDF tools', 'TikTok downloader', 'How to merge PDFs', or 'Is this site free?'.";
-        }
-
+        if (q.match(/hi|hello|hey|greetings/)) reply = "Hey! 👋 Great to see you here. How can I help?";
+        else if (q.includes("how are you")) reply = "I'm running at full speed! ⚡ Ready to help you with your files. What do you need?";
+        else if (q.match(/who are you|your name|what are you/)) reply = "I'm Toby — your AI assistant for ToolsMediaDownloader!";
+        else if (q.match(/about|website|what is this/)) reply = "ToolsMediaDownloader is a next-gen suite of free online tools for PDFs, images, and video downloads — all processed in your browser!";
+        else if (q.match(/free|cost|price|pay/)) reply = "Everything here is 100% free, forever. No signups, no limits. ⚡";
+        else if (q.includes("merge")) reply = "To merge PDFs, click 'Launch' on the Merge PDFs card and upload 2+ files!";
+        else if (q.includes("pdf")) reply = "We offer JPG→PDF, PDF→JPG, and Merge PDFs. Click any 'Launch →' button to get started!";
+        else if (q.match(/tiktok|video|instagram|facebook|pinterest/)) reply = "Head to our Video Downloader page! It supports TikTok, Instagram, Facebook, and Pinterest in HD without watermarks.";
+        else if (q.match(/safe|privacy|security/)) reply = "100% safe. Your files never leave your browser — zero uploads to any server. 🔒";
+        else if (q.includes("thank")) reply = "You're welcome! 😊 Happy to help anytime.";
+        else reply = "I can help with: 'PDF tools', 'Video downloaders', 'How to merge PDFs', or 'Is this free?'";
         addTobyMessage(reply, 'bot-msg');
-    }, 450);
+    }, 400);
 }
 
 function addTobyMessage(text, className) {
-    const msgDiv = document.createElement('div');
-    msgDiv.className = className;
-    msgDiv.textContent = text;
+    const msg = document.createElement('div');
+    msg.className = className;
+    msg.textContent = text;
     const container = document.getElementById('chat-messages');
-    container.appendChild(msgDiv);
+    container.appendChild(msg);
     container.scrollTop = container.scrollHeight;
 }
 
+/* PDF.JS */
+if (window.pdfjsLib) window.pdfjsLib.GlobalWorkerOptions.workerSrc = "./pdf.worker.min.js";
 
-/* --- 2. PDF.JS CONFIG --- */
-if (window.pdfjsLib) {
-    window.pdfjsLib.GlobalWorkerOptions.workerSrc = "./pdf.worker.min.js";
-}
-
-/* --- 3. GENERAL TOOL FUNCTIONS --- */
-function closeTools() {
-    document.querySelectorAll(".workspace").forEach(function (tool) {
-        tool.style.display = "none";
-    });
-}
-
-function openTool(toolId) {
-    closeTools();
-    const tool = document.getElementById(toolId);
-    if (!tool) {
-        alert("Tool could not be opened.");
-        return;
-    }
-    tool.style.display = "block";
-    tool.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
-function comingSoon(name) {
-    alert(name + " tool coming soon!");
-}
-
-function delay(ms) {
-    return new Promise(function (resolve) {
-        setTimeout(resolve, ms);
-    });
-}
-
+/* TOOL FUNCTIONS */
+function closeTools() { document.querySelectorAll(".workspace").forEach(t => t.style.display = "none"); }
+function openTool(id) { closeTools(); const t = document.getElementById(id); if (t) { t.style.display = "block"; t.scrollIntoView({ behavior: "smooth" }); } }
+function comingSoon(name) { alert(name + " — Coming soon!"); }
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
 function downloadBlob(blob, filename) {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
-    link.href = url;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    setTimeout(function () {
-        URL.revokeObjectURL(url);
-    }, 15000);
+    link.href = url; link.download = filename;
+    document.body.appendChild(link); link.click(); link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 15000);
 }
 
-/* --- 4. JPG TO PDF --- */
-let jpgSelectedFiles = [];
-let jpgObjectUrls = [];
-
-function clearJpgUrls() {
-    jpgObjectUrls.forEach(function (url) {
-        URL.revokeObjectURL(url);
-    });
-    jpgObjectUrls = [];
-}
-
+/* JPG TO PDF */
+let jpgSelectedFiles = [], jpgObjectUrls = [];
+function clearJpgUrls() { jpgObjectUrls.forEach(url => URL.revokeObjectURL(url)); jpgObjectUrls = []; }
 function jpgFilesSelected(input) {
     clearJpgUrls();
-    const status = document.getElementById("jpgStatus");
-    const preview = document.getElementById("jpgPreview");
-    const button = document.getElementById("jpgCreateButton");
-
-    jpgSelectedFiles = Array.from(input.files || []).filter(function (file) {
-        return (file.type === "image/jpeg" || file.type === "image/png");
-    });
-
+    const status = document.getElementById("jpgStatus"), preview = document.getElementById("jpgPreview"), button = document.getElementById("jpgCreateButton");
+    jpgSelectedFiles = Array.from(input.files || []).filter(f => f.type === "image/jpeg" || f.type === "image/png");
     preview.innerHTML = "";
-
-    if (jpgSelectedFiles.length === 0) {
-        status.textContent = "Please select JPG or PNG images.";
-        button.style.display = "none";
-        return;
-    }
-
-    jpgSelectedFiles.forEach(function (file, index) {
-        const url = URL.createObjectURL(file);
-        jpgObjectUrls.push(url);
-
-        const card = document.createElement("div");
-        card.className = "preview-card";
-        const image = document.createElement("img");
-        image.src = url;
-        const label = document.createElement("div");
-        label.className = "preview-label";
-        label.textContent = "Image " + (index + 1);
-
-        card.appendChild(image);
-        card.appendChild(label);
+    if (!jpgSelectedFiles.length) { status.textContent = "Select JPG or PNG images."; button.style.display = "none"; return; }
+    jpgSelectedFiles.forEach((file, i) => {
+        const url = URL.createObjectURL(file); jpgObjectUrls.push(url);
+        const card = document.createElement("div"); card.className = "preview-card";
+        card.innerHTML = `<img src="${url}"><div class="preview-label">Image ${i+1}</div>`;
         preview.appendChild(card);
     });
-
-    status.textContent = jpgSelectedFiles.length + (jpgSelectedFiles.length === 1 ? " image selected." : " images selected.");
+    status.textContent = `${jpgSelectedFiles.length} image(s) ready`;
     button.style.display = "block";
 }
-
 async function createJpgPdf() {
-    const status = document.getElementById("jpgStatus");
-    const button = document.getElementById("jpgCreateButton");
-
-    if (!window.PDFLib || !window.PDFLib.PDFDocument) {
-        status.textContent = "Local PDF engine could not load.";
-        return;
-    }
-
-    if (!jpgSelectedFiles.length) {
-        status.textContent = "Please select images first.";
-        return;
-    }
-
-    button.disabled = true;
-    button.textContent = "Creating PDF...";
-
+    const status = document.getElementById("jpgStatus"), button = document.getElementById("jpgCreateButton");
+    if (!window.PDFLib) return;
+    button.disabled = true; button.textContent = "Processing...";
     try {
         const pdf = await window.PDFLib.PDFDocument.create();
-
         for (let i = 0; i < jpgSelectedFiles.length; i++) {
-            const file = jpgSelectedFiles[i];
-            status.textContent = "Processing image " + (i + 1) + " of " + jpgSelectedFiles.length + "...";
+            status.textContent = `Processing ${i+1}/${jpgSelectedFiles.length}...`;
             await delay(30);
-            const bytes = await file.arrayBuffer();
-            let image;
-
-            if (file.type === "image/png") {
-                image = await pdf.embedPng(bytes);
-            } else {
-                image = await pdf.embedJpg(bytes);
-            }
-
+            const bytes = await jpgSelectedFiles[i].arrayBuffer();
+            const image = jpgSelectedFiles[i].type === "image/png" ? await pdf.embedPng(bytes) : await pdf.embedJpg(bytes);
             const scale = Math.min(1, 1600 / image.width, 2200 / image.height);
-            const width = image.width * scale;
-            const height = image.height * scale;
-            const page = pdf.addPage([width, height]);
-            page.drawImage(image, { x: 0, y: 0, width: width, height: height });
+            const page = pdf.addPage([image.width * scale, image.height * scale]);
+            page.drawImage(image, { x: 0, y: 0, width: image.width * scale, height: image.height * scale });
         }
-
-        status.textContent = "Preparing PDF...";
         const finalPdf = await pdf.save();
-        downloadBlob(new Blob([finalPdf], { type: "application/pdf" }), "ToolsMediaDownloader-JPG-to-PDF.pdf");
-        status.textContent = "✓ PDF created successfully!";
-    } catch (error) {
-        console.error(error);
-        status.textContent = "Could not create PDF. Please try another image.";
-    } finally {
-        button.disabled = false;
-        button.textContent = "Create & Download PDF";
-    }
+        downloadBlob(new Blob([finalPdf], { type: "application/pdf" }), "ToolsMedia-Converted.pdf");
+        status.textContent = "✓ PDF ready!";
+    } catch (e) { status.textContent = "Error occurred."; }
+    finally { button.disabled = false; button.textContent = "⚡ Generate PDF"; }
 }
 
-/* --- 5. PDF TO JPG --- */
+/* PDF TO JPG */
 let selectedPdfForJpg = null;
-
 function pdfJpgFileSelected(input) {
-    const status = document.getElementById("pdfJpgStatus");
-    const button = document.getElementById("pdfJpgConvertButton");
-    const preview = document.getElementById("pdfJpgPreview");
-
-    selectedPdfForJpg = input.files && input.files[0] ? input.files[0] : null;
-    preview.innerHTML = "";
-
-    if (!selectedPdfForJpg) {
-        status.textContent = "";
-        button.style.display = "none";
-        return;
-    }
-
-    status.textContent = "Selected: " + selectedPdfForJpg.name;
+    const status = document.getElementById("pdfJpgStatus"), button = document.getElementById("pdfJpgConvertButton"), preview = document.getElementById("pdfJpgPreview");
+    selectedPdfForJpg = input.files?.[0]; preview.innerHTML = "";
+    if (!selectedPdfForJpg) { status.textContent = ""; button.style.display = "none"; return; }
+    status.textContent = `Selected: ${selectedPdfForJpg.name}`;
     button.style.display = "block";
 }
-
 async function convertPdfToJpg() {
-    const status = document.getElementById("pdfJpgStatus");
-    const button = document.getElementById("pdfJpgConvertButton");
-    const preview = document.getElementById("pdfJpgPreview");
-
-    if (!window.pdfjsLib) {
-        status.textContent = "Local PDF renderer could not load.";
-        return;
-    }
-
-    if (!selectedPdfForJpg) {
-        status.textContent = "Please select a PDF first.";
-        return;
-    }
-
-    button.disabled = true;
-    button.textContent = "Converting...";
+    const status = document.getElementById("pdfJpgStatus"), button = document.getElementById("pdfJpgConvertButton"), preview = document.getElementById("pdfJpgPreview");
+    if (!window.pdfjsLib || !selectedPdfForJpg) return;
+    button.disabled = true; button.textContent = "Extracting...";
     preview.innerHTML = "";
-
     try {
         const bytes = new Uint8Array(await selectedPdfForJpg.arrayBuffer());
-        const loadingTask = window.pdfjsLib.getDocument({ data: bytes });
-        const pdf = await loadingTask.promise;
-
-        for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
-            status.textContent = "Converting page " + pageNumber + " of " + pdf.numPages + "...";
+        const pdf = await window.pdfjsLib.getDocument({ data: bytes }).promise;
+        for (let p = 1; p <= pdf.numPages; p++) {
+            status.textContent = `Converting page ${p}/${pdf.numPages}...`;
             await delay(30);
-
-            const page = await pdf.getPage(pageNumber);
+            const page = await pdf.getPage(p);
             const viewport = page.getViewport({ scale: 1.7 });
             const canvas = document.createElement("canvas");
-            const context = canvas.getContext("2d", { alpha: false });
-
-            canvas.width = Math.floor(viewport.width);
-            canvas.height = Math.floor(viewport.height);
-            context.fillStyle = "#ffffff";
-            context.fillRect(0, 0, canvas.width, canvas.height);
-
-            await page.render({ canvasContext: context, viewport: viewport }).promise;
-
-            const blob = await canvasToJpeg(canvas);
+            const ctx = canvas.getContext("2d", { alpha: false });
+            canvas.width = Math.floor(viewport.width); canvas.height = Math.floor(viewport.height);
+            ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            await page.render({ canvasContext: ctx, viewport }).promise;
+            const blob = await new Promise(res => canvas.toBlob(res, "image/jpeg", 0.92));
             const url = URL.createObjectURL(blob);
-            addJpgResult(preview, url, blob, pageNumber);
-
-            canvas.width = 1;
-            canvas.height = 1;
+            const card = document.createElement("div"); card.className = "preview-card";
+            card.innerHTML = `<img src="${url}"><div class="preview-label">Page ${p}</div>`;
+            const btn = document.createElement("button"); btn.className = "small-btn"; btn.textContent = "Download";
+            btn.onclick = () => downloadBlob(blob, `ToolsMedia-page-${p}.jpg`);
+            card.appendChild(btn);
+            preview.appendChild(card);
         }
-
-        status.textContent = "✓ PDF converted successfully!";
-    } catch (error) {
-        console.error(error);
-        status.textContent = "Could not convert this PDF.";
-    } finally {
-        button.disabled = false;
-        button.textContent = "Convert PDF to JPG";
-    }
+        status.textContent = "✓ Extraction complete!";
+    } catch (e) { status.textContent = "Error occurred."; }
+    finally { button.disabled = false; button.textContent = "⚡ Extract Images"; }
 }
 
-function canvasToJpeg(canvas) {
-    return new Promise(function (resolve, reject) {
-        canvas.toBlob(function (blob) {
-            if (blob) resolve(blob);
-            else reject(new Error("Could not create JPG."));
-        }, "image/jpeg", 0.92);
-    });
-}
-
-function addJpgResult(container, url, blob, pageNumber) {
-    const card = document.createElement("div");
-    card.className = "preview-card";
-    const image = document.createElement("img");
-    image.src = url;
-    const label = document.createElement("div");
-    label.className = "preview-label";
-    label.textContent = "Page " + pageNumber;
-    const button = document.createElement("button");
-    button.className = "small-btn";
-    button.textContent = "Download JPG";
-    button.onclick = function () {
-        downloadBlob(blob, "ToolsMediaDownloader-page-" + pageNumber + ".jpg");
-    };
-
-    card.appendChild(image);
-    card.appendChild(label);
-    card.appendChild(button);
-    container.appendChild(card);
-}
-
-/* --- 6. MERGE PDF --- */
+/* MERGE PDF */
 let selectedMergeFiles = [];
-
 function mergeFilesSelected(input) {
-    const status = document.getElementById("mergeStatus");
-    const button = document.getElementById("mergeButton");
-
+    const status = document.getElementById("mergeStatus"), button = document.getElementById("mergeButton");
     selectedMergeFiles = Array.from(input.files || []);
-
-    if (selectedMergeFiles.length < 2) {
-        status.textContent = "Please select at least 2 PDF files.";
-        button.style.display = "none";
-        return;
-    }
-
-    status.textContent = selectedMergeFiles.length + " PDF files selected.";
+    if (selectedMergeFiles.length < 2) { status.textContent = "Select 2+ files."; button.style.display = "none"; return; }
+    status.textContent = `${selectedMergeFiles.length} files ready`;
     button.style.display = "block";
 }
-
 async function mergePdfs() {
-    const status = document.getElementById("mergeStatus");
-    const button = document.getElementById("mergeButton");
-
-    if (!window.PDFLib || !window.PDFLib.PDFDocument) {
-        status.textContent = "Local PDF engine could not load.";
-        return;
-    }
-
-    if (selectedMergeFiles.length < 2) {
-        status.textContent = "Select at least 2 PDF files.";
-        return;
-    }
-
-    button.disabled = true;
-    button.textContent = "Merging...";
-
+    const status = document.getElementById("mergeStatus"), button = document.getElementById("mergeButton");
+    if (!window.PDFLib || selectedMergeFiles.length < 2) return;
+    button.disabled = true; button.textContent = "Merging...";
     try {
         const merged = await window.PDFLib.PDFDocument.create();
-
         for (let i = 0; i < selectedMergeFiles.length; i++) {
-            status.textContent = "Adding PDF " + (i + 1) + " of " + selectedMergeFiles.length + "...";
-            const bytes = await selectedMergeFiles[i].arrayBuffer();
-            const source = await window.PDFLib.PDFDocument.load(bytes);
-            const pageIndices = source.getPageIndices();
-            const pages = await merged.copyPages(source, pageIndices);
-            pages.forEach(function (page) {
-                merged.addPage(page);
-            });
+            status.textContent = `Adding ${i+1}/${selectedMergeFiles.length}...`;
+            const source = await window.PDFLib.PDFDocument.load(await selectedMergeFiles[i].arrayBuffer());
+            const pages = await merged.copyPages(source, source.getPageIndices());
+            pages.forEach(p => merged.addPage(p));
         }
-
-        status.textContent = "Preparing merged PDF...";
-        const bytes = await merged.save();
-        downloadBlob(new Blob([bytes], { type: "application/pdf" }), "ToolsMediaDownloader-Merged.pdf");
-        status.textContent = "✓ PDFs merged successfully!";
-    } catch (error) {
-        console.error(error);
-        status.textContent = "Could not merge these PDF files.";
-    } finally {
-        button.disabled = false;
-        button.textContent = "Merge & Download PDF";
-    }
+        downloadBlob(new Blob([await merged.save()], { type: "application/pdf" }), "ToolsMedia-Merged.pdf");
+        status.textContent = "✓ Merged!";
+    } catch (e) { status.textContent = "Error occurred."; }
+    finally { button.disabled = false; button.textContent = "⚡ Merge Files"; }
 }
 </script>
 
