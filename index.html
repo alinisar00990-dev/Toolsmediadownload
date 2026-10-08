@@ -14,12 +14,11 @@
     <script src="./pdf-lib.min.js"></script>
     <script src="./pdf.min.js"></script>
 
+    <!-- 3D SPLINE ENGINE -->
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@latest/build/spline-viewer.js"></script>
+
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -28,6 +27,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
 
         /* --- NAVIGATION BAR --- */
@@ -51,28 +51,10 @@
             font-weight: bold;
         }
 
-        .nav-logo svg {
-            width: 28px;
-            height: 28px;
-            fill: #FFB39A;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .nav-links a {
-            color: #f5e7f2;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #FFB39A;
-        }
+        .nav-logo svg { width: 28px; height: 28px; fill: #FFB39A; }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { color: #f5e7f2; text-decoration: none; font-size: 15px; font-weight: bold; transition: color 0.3s; }
+        .nav-links a:hover { color: #FFB39A; }
 
         /* --- HERO SECTION --- */
         .hero-section {
@@ -82,263 +64,128 @@
             border-bottom: 1px solid #381736;
         }
 
-        .hero-section h1 {
-            color: #FFB39A;
-            font-size: 38px;
-            margin-bottom: 15px;
-        }
+        .hero-section h1 { color: #FFB39A; font-size: 38px; margin-bottom: 15px; }
+        .hero-section p { color: #d8c9d6; font-size: 16px; max-width: 600px; margin: 0 auto; line-height: 1.6; }
 
-        .hero-section p {
-            color: #d8c9d6;
-            font-size: 16px;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
+        .container { width: 92%; max-width: 1000px; margin: auto; padding: 30px 0; flex: 1; }
 
-        .container {
-            width: 92%;
-            max-width: 1000px;
-            margin: auto;
-            padding: 30px 0;
-            flex: 1;
-        }
+        .intro { text-align: center; margin-bottom: 28px; }
+        .intro h2 { color: #FFB39A; font-size: 25px; margin-bottom: 8px; }
+        .intro p { color: #d8c9d6; font-size: 14px; }
 
-        .intro {
-            text-align: center;
-            margin-bottom: 28px;
-        }
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
 
-        .intro h2 {
-            color: #FFB39A;
-            font-size: 25px;
-            margin-bottom: 8px;
-        }
+        .card { background: #542452; border: 1px solid #743871; border-radius: 14px; padding: 22px; box-shadow: 0 7px 22px rgba(0, 0, 0, 0.25); transition: transform 0.2s; }
+        .card:hover { transform: translateY(-3px); border-color: #FFB39A; }
+        .card h3 { color: #FFB39A; font-size: 19px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .card p { color: #eaddea; font-size: 13px; line-height: 1.5; min-height: 58px; margin-bottom: 18px; }
 
-        .intro p {
-            color: #d8c9d6;
-            font-size: 14px;
-        }
+        button { width: 100%; padding: 13px 16px; border: 0; border-radius: 9px; background: #FFB39A; color: #542452; font-size: 15px; font-weight: bold; cursor: pointer; }
+        button:disabled { opacity: 0.6; cursor: not-allowed; }
 
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 18px;
-        }
+        .workspace { display: none; background: #542452; border: 2px solid #FFB39A; border-radius: 15px; padding: 22px; margin-bottom: 30px; box-shadow: 0 8px 24px rgba(0,0,0,.25); }
+        .workspace h2 { color: #FFB39A; text-align: center; margin-bottom: 8px; }
+        .description { color: #eaddea; text-align: center; font-size: 14px; margin-bottom: 20px; }
 
-        .card {
-            background: #542452;
-            border: 1px solid #743871;
-            border-radius: 14px;
-            padding: 22px;
-            box-shadow: 0 7px 22px rgba(0, 0, 0, 0.25);
-            transition: transform 0.2s;
-        }
-        
-        .card:hover {
-            transform: translateY(-3px);
-            border-color: #FFB39A;
-        }
+        .upload-box { background: #381736; border: 2px dashed #FFB39A; border-radius: 12px; padding: 30px 15px; text-align: center; cursor: pointer; margin-bottom: 15px; }
+        .upload-box strong { display: block; color: #FFB39A; font-size: 17px; margin-bottom: 7px; }
+        .upload-box span { color: #d5c4d3; font-size: 12px; }
+        .hidden-input { display: none; }
 
-        .card h3 {
-            color: #FFB39A;
-            font-size: 19px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .card p {
-            color: #eaddea;
-            font-size: 13px;
-            line-height: 1.5;
-            min-height: 58px;
-            margin-bottom: 18px;
-        }
-
-        button {
-            width: 100%;
-            padding: 13px 16px;
-            border: 0;
-            border-radius: 9px;
-            background: #FFB39A;
-            color: #542452;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .workspace {
-            display: none;
-            background: #542452;
-            border: 2px solid #FFB39A;
-            border-radius: 15px;
-            padding: 22px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 24px rgba(0,0,0,.25);
-        }
-
-        .workspace h2 {
-            color: #FFB39A;
-            text-align: center;
-            margin-bottom: 8px;
-        }
-
-        .description {
-            color: #eaddea;
-            text-align: center;
-            font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
-        .upload-box {
-            background: #381736;
-            border: 2px dashed #FFB39A;
-            border-radius: 12px;
-            padding: 30px 15px;
-            text-align: center;
-            cursor: pointer;
-            margin-bottom: 15px;
-        }
-
-        .upload-box strong {
-            display: block;
-            color: #FFB39A;
-            font-size: 17px;
-            margin-bottom: 7px;
-        }
-
-        .upload-box span {
-            color: #d5c4d3;
-            font-size: 12px;
-        }
-
-        .hidden-input {
-            display: none;
-        }
-
-        .status {
-            color: #FFB39A;
-            text-align: center;
-            min-height: 24px;
-            margin: 14px 0;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .preview-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-            gap: 12px;
-            margin: 15px 0;
-        }
-
-        .preview-card {
-            background: #341532;
-            border: 1px solid #764173;
-            padding: 6px;
-            border-radius: 9px;
-        }
-
-        .preview-card img {
-            width: 100%;
-            height: 110px;
-            object-fit: contain;
-            display: block;
-            background: #ffffff;
-            border-radius: 6px;
-        }
-
-        .preview-label {
-            color: #FFB39A;
-            text-align: center;
-            font-size: 11px;
-            padding: 6px 2px;
-        }
-
-        .small-btn {
-            padding: 8px 4px;
-            font-size: 11px;
-        }
-
-        .action-button {
-            display: none;
-            margin-top: 8px;
-        }
-
-        .close-button {
-            margin-top: 10px;
-            background: transparent;
-            color: #FFB39A;
-            border: 1px solid #FFB39A;
-        }
-
-        .privacy {
-            text-align: center;
-            font-size: 12px;
-            color: #cbbac9;
-            margin-top: 15px;
-        }
-
-        .section-divider {
-            margin-top: 50px;
-        }
+        .status { color: #FFB39A; text-align: center; min-height: 24px; margin: 14px 0; font-size: 14px; font-weight: bold; }
+        .preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; margin: 15px 0; }
+        .preview-card { background: #341532; border: 1px solid #764173; padding: 6px; border-radius: 9px; }
+        .preview-card img { width: 100%; height: 110px; object-fit: contain; display: block; background: #ffffff; border-radius: 6px; }
+        .preview-label { color: #FFB39A; text-align: center; font-size: 11px; padding: 6px 2px; }
+        .small-btn { padding: 8px 4px; font-size: 11px; }
+        .action-button { display: none; margin-top: 8px; }
+        .close-button { margin-top: 10px; background: transparent; color: #FFB39A; border: 1px solid #FFB39A; }
+        .privacy { text-align: center; font-size: 12px; color: #cbbac9; margin-top: 15px; }
+        .section-divider { margin-top: 50px; }
 
         /* --- FOOTER --- */
-        footer {
-            margin-top: 40px;
-            background: #381736;
-            border-top: 2px solid #542452;
-            padding: 30px 20px;
-            text-align: center;
-        }
+        footer { margin-top: 40px; background: #381736; border-top: 2px solid #542452; padding: 30px 20px; text-align: center; }
+        .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; }
+        .footer-links a { color: #d8c9d6; text-decoration: none; font-size: 14px; }
+        .footer-links a:hover { color: #FFB39A; text-decoration: underline; }
+        .footer-copy { color: #9a7d98; font-size: 13px; }
 
-        .footer-links {
+        /* =========================================================
+           3D ROBOT WIDGET & CHAT UI
+           ========================================================= */
+        #robot-helper-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10000;
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        #robot-avatar {
+            width: 170px;
+            height: 170px;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        #robot-avatar:hover { transform: scale(1.05); }
+
+        spline-viewer { width: 100%; height: 100%; pointer-events: auto; }
+
+        .helper-label {
+            background: #FFB39A;
+            color: #542452;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            position: absolute;
+            top: 0;
+            left: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        #robot-chat-window {
+            display: none;
+            width: 300px;
+            background: #381736;
+            border: 2px solid #FFB39A;
+            border-radius: 15px;
             margin-bottom: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            flex-direction: column;
+            overflow: hidden;
+            animation: slideUp 0.3s ease;
         }
 
-        .footer-links a {
-            color: #d8c9d6;
-            text-decoration: none;
-            font-size: 14px;
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .footer-links a:hover {
-            color: #FFB39A;
-            text-decoration: underline;
-        }
+        .chat-header { background: #542452; color: #FFB39A; padding: 12px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+        .chat-header button { background: none; border: none; color: #FFB39A; font-size: 20px; cursor: pointer; }
 
-        .footer-copy {
-            color: #9a7d98;
-            font-size: 13px;
-        }
+        #chat-messages { height: 220px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 13px; }
+        .bot-msg { background: #542452; padding: 10px 12px; border-radius: 12px; align-self: flex-start; color: #eaddea; line-height: 1.4; max-width: 85%; }
+        .user-msg { background: #FFB39A; color: #381736; padding: 10px 12px; border-radius: 12px; align-self: flex-end; font-weight: bold; max-width: 85%; }
 
+        .chat-input-area { display: flex; padding: 10px; background: #160c16; border-top: 1px solid #542452; }
+        .chat-input-area input { flex: 1; border: none; background: #381736; color: white; padding: 10px; border-radius: 5px; outline: none; }
+        .chat-input-area button { background: #FFB39A; color: #381736; border: none; margin-left: 8px; padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+
+        /* Mobile Adjustments */
         @media (max-width: 600px) {
-            .navbar {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .hero-section h1 {
-                font-size: 28px;
-            }
-            .container {
-                width: 94%;
-            }
-            .card,
-            .workspace {
-                padding: 17px;
-            }
+            .navbar { flex-direction: column; gap: 15px; }
+            .hero-section h1 { font-size: 28px; }
+            .container { width: 94%; }
+            #robot-avatar { width: 120px; height: 120px; }
+            #robot-chat-window { width: 270px; right: 0; }
         }
     </style>
 </head>
@@ -348,9 +195,7 @@
 <!-- NAVIGATION BAR -->
 <nav class="navbar">
     <a href="index.html" class="nav-logo">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="none"/>
-        </svg>
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="none"/></svg>
         ToolsMediaDownloader
     </a>
     <div class="nav-links">
@@ -481,6 +326,34 @@
 
 </main>
 
+<!-- =========================================================
+     3D ROBOT WIDGET & CHAT TOOL
+     ========================================================= -->
+<div id="robot-helper-container">
+    
+    <!-- Chat Window -->
+    <div id="robot-chat-window">
+        <div class="chat-header">
+            <span>3D Helper</span>
+            <button onclick="toggleRobotChat()">×</button>
+        </div>
+        <div id="chat-messages">
+            <div class="bot-msg">Hi! 👋 I am your 3D assistant. Ask me anything about downloading videos or using PDF tools!</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="robot-input" placeholder="Type a question..." onkeypress="handleRobotKey(event)">
+            <button onclick="sendRobotMessage()">Send</button>
+        </div>
+    </div>
+
+    <!-- 3D Mascot -->
+    <div id="robot-avatar" onclick="toggleRobotChat()">
+        <div class="helper-label" id="robot-badge">Need help? ⚡</div>
+        <spline-viewer url="https://prod.spline.design/kZ3iO5pA3UtS94Bq/scene.splinecode"></spline-viewer>
+    </div>
+
+</div>
+
 <!-- PROFESSIONAL FOOTER -->
 <footer>
     <div class="footer-links">
@@ -492,14 +365,70 @@
     <p class="footer-copy">© 2026 ToolsMediaDownloader. All rights reserved. Free online tools.</p>
 </footer>
 
-<!-- PDF & WEBSITE SCRIPTS -->
+<!-- =========================================================
+     JAVASCRIPT: CHATBOT & PDF TOOLS
+     ========================================================= -->
 <script>
 "use strict";
 
+/* --- 1. CHATBOT LOGIC --- */
+function toggleRobotChat() {
+    const chat = document.getElementById('robot-chat-window');
+    const badge = document.getElementById('robot-badge');
+    if (chat.style.display === 'flex') {
+        chat.style.display = 'none';
+        badge.style.display = 'block';
+    } else {
+        chat.style.display = 'flex';
+        badge.style.display = 'none';
+        document.getElementById('robot-input').focus();
+    }
+}
+
+function handleRobotKey(e) {
+    if (e.key === 'Enter') sendRobotMessage();
+}
+
+function sendRobotMessage() {
+    const input = document.getElementById('robot-input');
+    const text = input.value.trim();
+    if (!text) return;
+
+    // Add user msg
+    addRobotMessage(text, 'user-msg');
+    input.value = '';
+
+    // Simulate Bot typing
+    setTimeout(() => {
+        let response = "⚡ I am still learning! Try asking about 'PDFs', 'TikTok', or if this site is 'Free'.";
+        const lowText = text.toLowerCase();
+
+        if (lowText.includes("pdf")) response = "⚡ We have great PDF tools! You can merge PDFs, or convert JPGs to PDF in the Document section above.";
+        if (lowText.includes("tiktok") || lowText.includes("video")) response = "⚡ Want to download a TikTok? Click the TikTok Downloader card below. It removes watermarks perfectly in HD!";
+        if (lowText.includes("free") || lowText.includes("pay")) response = "⚡ Yes! Every tool on ToolsMediaDownloader is 100% free with no signups.";
+        if (lowText.includes("safe") || lowText.includes("privacy")) response = "⚡ Completely safe! Your PDF files are processed directly in your browser. I do not upload them to my servers.";
+        if (lowText.includes("hello") || lowText.includes("hi")) response = "⚡ Greetings! How can I assist your media needs today?";
+
+        addRobotMessage(response, 'bot-msg');
+    }, 600);
+}
+
+function addRobotMessage(text, className) {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = className;
+    msgDiv.textContent = text;
+    const container = document.getElementById('chat-messages');
+    container.appendChild(msgDiv);
+    container.scrollTop = container.scrollHeight;
+}
+
+
+/* --- 2. PDF.JS CONFIG --- */
 if (window.pdfjsLib) {
     window.pdfjsLib.GlobalWorkerOptions.workerSrc = "./pdf.worker.min.js";
 }
 
+/* --- 3. GENERAL TOOL FUNCTIONS --- */
 function closeTools() {
     document.querySelectorAll(".workspace").forEach(function (tool) {
         tool.style.display = "none";
@@ -540,7 +469,7 @@ function downloadBlob(blob, filename) {
     }, 15000);
 }
 
-// JPG TO PDF
+/* --- 4. JPG TO PDF --- */
 let jpgSelectedFiles = [];
 let jpgObjectUrls = [];
 
@@ -575,10 +504,8 @@ function jpgFilesSelected(input) {
 
         const card = document.createElement("div");
         card.className = "preview-card";
-
         const image = document.createElement("img");
         image.src = url;
-
         const label = document.createElement("div");
         label.className = "preview-label";
         label.textContent = "Image " + (index + 1);
@@ -645,7 +572,7 @@ async function createJpgPdf() {
     }
 }
 
-// PDF TO JPG
+/* --- 5. PDF TO JPG --- */
 let selectedPdfForJpg = null;
 
 function pdfJpgFileSelected(input) {
@@ -736,14 +663,11 @@ function canvasToJpeg(canvas) {
 function addJpgResult(container, url, blob, pageNumber) {
     const card = document.createElement("div");
     card.className = "preview-card";
-
     const image = document.createElement("img");
     image.src = url;
-
     const label = document.createElement("div");
     label.className = "preview-label";
     label.textContent = "Page " + pageNumber;
-
     const button = document.createElement("button");
     button.className = "small-btn";
     button.textContent = "Download JPG";
@@ -757,7 +681,7 @@ function addJpgResult(container, url, blob, pageNumber) {
     container.appendChild(card);
 }
 
-// MERGE PDF
+/* --- 6. MERGE PDF --- */
 let selectedMergeFiles = [];
 
 function mergeFilesSelected(input) {
@@ -820,14 +744,6 @@ async function mergePdfs() {
     }
 }
 </script>
-
-<!-- 3D ROBOT ASSISTANT "TOBY" SCRIPT -->
-<script src="https://three.ws/assistant/v1.js" async
-  data-avatar="https://my.spline.design/robotfollowcursorforlandingpage-vwM65bSaL7gx6GIO1FDPNvnK/"
-  data-mode="chat"
-  data-name="Toby"
-  data-greeting="Hi! 👋 I'm Toby, your AI assistant. How can I help you use our tools today?"
-  data-context="Tools Media Downloader is an online tools website that provides simple and easy-to-use web utilities for working with PDFs, images, videos, and other digital files. The website includes tools such as PDF to JPG conversion, PDF-related tools, image tools, and video downloading tools such as TikTok video downloader tools. The goal is to make common file and media tasks quick and easy without requiring complicated software. Help visitors understand which tool they should use and explain how to use them."></script>
 
 </body>
 </html>
