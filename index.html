@@ -30,7 +30,7 @@
             flex-direction: column;
         }
 
-        /* --- NEW NAVIGATION BAR --- */
+        /* --- NAVIGATION BAR --- */
         .navbar {
             background: #542452;
             border-bottom: 3px solid #FFB39A;
@@ -74,10 +74,10 @@
             color: #FFB39A;
         }
 
-        /* --- NEW HERO SECTION --- */
+        /* --- HERO SECTION --- */
         .hero-section {
             text-align: center;
-            padding: 50px 20px;
+            padding: 50px 20px 20px 20px;
             background: linear-gradient(180deg, #381736 0%, #160c16 100%);
             border-bottom: 1px solid #381736;
         }
@@ -96,6 +96,100 @@
             line-height: 1.6;
         }
 
+        /* =========================================================
+           ZEUS MASCOT STYLES (NEW)
+           ========================================================= */
+        .toola-zeus-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px; /* Space between description and Zeus */
+            position: relative;
+        }
+
+        .zeus-character-box {
+            position: relative;
+            width: 150px;
+            animation: zeusFloat 3.5s ease-in-out infinite;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .zeus-character-box:hover {
+            transform: scale(1.08) rotate(2deg);
+        }
+
+        .zeus-img {
+            width: 100%;
+            height: auto;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 15px 25px rgba(255, 179, 154, 0.2)); /* Peach glow */
+        }
+
+        .zeus-aura {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 130px;
+            height: 130px;
+            background: radial-gradient(circle, rgba(255, 179, 154, 0.25) 0%, rgba(84, 36, 82, 0.4) 60%, transparent 75%);
+            border-radius: 50%;
+            z-index: 1;
+            animation: auraPulse 2.5s infinite alternate;
+        }
+
+        .zeus-speech-bubble {
+            background: #542452; /* Matches your cards */
+            color: #eaddea;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 10px 18px;
+            border-radius: 18px;
+            border: 2px solid #FFB39A; /* Matches your theme highlight */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            margin-bottom: 15px;
+            text-align: center;
+            max-width: 280px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .zeus-speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -9px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 9px 8px 0;
+            border-style: solid;
+            border-color: #542452 transparent transparent transparent;
+            z-index: 2;
+        }
+
+        .zeus-speech-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 10px 9px 0;
+            border-style: solid;
+            border-color: #FFB39A transparent transparent transparent;
+        }
+
+        @keyframes zeusFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes auraPulse {
+            0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.6; }
+            100% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+        }
+
+        /* --- LAYOUT CONTINUED --- */
         .container {
             width: 92%;
             max-width: 1000px;
@@ -137,6 +231,7 @@
         
         .card:hover {
             transform: translateY(-3px);
+            border-color: #FFB39A;
         }
 
         .card h3 {
@@ -181,6 +276,12 @@
             padding: 22px;
             margin-bottom: 30px;
             box-shadow: 0 8px 24px rgba(0,0,0,.25);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .workspace h2 {
@@ -290,7 +391,7 @@
             margin-top: 50px;
         }
 
-        /* --- NEW PROFESSIONAL FOOTER --- */
+        /* --- PROFESSIONAL FOOTER --- */
         footer {
             margin-top: 40px;
             background: #381736;
@@ -338,6 +439,9 @@
             .workspace {
                 padding: 17px;
             }
+            .zeus-character-box {
+                width: 120px;
+            }
         }
     </style>
 </head>
@@ -347,7 +451,6 @@
 <!-- NAVIGATION BAR -->
 <nav class="navbar">
     <a href="index.html" class="nav-logo">
-        <!-- Built-in SVG Logo (No external image needed) -->
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="none"/>
         </svg>
@@ -361,10 +464,21 @@
     </div>
 </nav>
 
-<!-- HERO SECTION -->
+<!-- HERO SECTION WITH ZEUS MASCOT -->
 <section class="hero-section">
     <h1>All-in-One Online Utilities</h1>
     <p>Merge, convert, and compress PDFs securely in your browser. Download TikTok videos in HD without watermarks. 100% Free, Fast, and Secure.</p>
+    
+    <!-- ZEUS MASCOT ADDED HERE -->
+    <div class="toola-zeus-wrapper">
+        <div class="zeus-speech-bubble" id="zeusSpeech">
+            ⚡ Greetings, mortal! Choose a divine tool below to begin your quest!
+        </div>
+        <div class="zeus-character-box" id="zeusMascot">
+            <div class="zeus-aura"></div>
+            <img src="zeus-mascot.png" alt="Toola Zeus" class="zeus-img">
+        </div>
+    </div>
 </section>
 
 <main class="container">
@@ -424,27 +538,27 @@
     </section>
 
     <section class="tools-grid">
-        <div class="card">
+        <div class="card" data-tool="jpg">
             <h3>🖼️ JPG to PDF</h3>
             <p>Convert multiple JPG or PNG images into one downloadable PDF document.</p>
             <button onclick="openTool('jpgTool')">Open Tool</button>
         </div>
-        <div class="card">
+        <div class="card" data-tool="pdfjpg">
             <h3>📸 PDF to JPG</h3>
             <p>Extract and convert every single page of a PDF document into a high-quality JPG image.</p>
             <button onclick="openTool('pdfJpgTool')">Open Tool</button>
         </div>
-        <div class="card">
+        <div class="card" data-tool="merge">
             <h3>📑 Merge PDF</h3>
             <p>Combine multiple PDF documents into one single, easily readable PDF file.</p>
             <button onclick="openTool('mergeTool')">Open Tool</button>
         </div>
-        <div class="card">
+        <div class="card" data-tool="compress">
             <h3>🗜️ Compress PDF</h3>
             <p>Reduce PDF file size for easier email sharing and storage.</p>
             <button onclick="comingSoon('Compress PDF')">Open Tool</button>
         </div>
-        <div class="card">
+        <div class="card" data-tool="word">
             <h3>📝 PDF to Word</h3>
             <p>Convert your PDF documents into editable Word files instantly.</p>
             <button onclick="comingSoon('PDF to Word')">Open Tool</button>
@@ -459,22 +573,22 @@
     </section>
 
     <section class="tools-grid">
-        <div class="card">
+        <div class="card" data-tool="tiktok">
             <h3>🎵 TikTok Downloader</h3>
             <p>Download TikTok videos without watermark in HD MP4 or extract MP3 audio files.</p>
             <button onclick="window.location.href='tiktok-downloader.html'">Open Tool</button>
         </div>
-        <div class="card">
+        <div class="card" data-tool="instagram">
             <h3>📸 Instagram Downloader</h3>
             <p>Download Instagram videos, reels, stories, and photos directly to your device.</p>
             <button onclick="comingSoon('Instagram Downloader')">Open Tool</button>
         </div>
-        <div class="card">
+        <div class="card" data-tool="facebook">
             <h3>📘 Facebook Downloader</h3>
             <p>Save Facebook videos in HD quality directly to your phone or computer.</p>
             <button onclick="comingSoon('Facebook Downloader')">Open Tool</button>
         </div>
-        <div class="card">
+        <div class="card" data-tool="pinterest">
             <h3>📌 Pinterest Downloader</h3>
             <p>Save Pinterest videos and images in high quality to your gallery.</p>
             <button onclick="comingSoon('Pinterest Downloader')">Open Tool</button>
@@ -498,6 +612,45 @@
 "use strict";
 
 /* =========================================================
+   ZEUS MASCOT INTERACTIONS (NEW)
+   ========================================================= */
+const zeusSpeech = document.getElementById('zeusSpeech');
+const zeusMascot = document.getElementById('zeusMascot');
+const allToolCards = document.querySelectorAll('.card');
+
+// Zeus reacts when you hover over different tools!
+allToolCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+        const toolName = card.querySelector('h3').innerText;
+        zeusSpeech.textContent = `⚡ Ah! ${toolName}! An excellent choice. Click to begin!`;
+    });
+    
+    card.addEventListener('mouseleave', () => {
+        zeusSpeech.textContent = "⚡ What else do you seek, mortal?";
+    });
+});
+
+// Click Zeus for random quotes
+if(zeusMascot) {
+    const zeusQuotes = [
+        "⚡ My lightning fast servers await your command!",
+        "👑 100% Free. The gods are generous today!",
+        "✨ No watermarks... only divine media!",
+        "⚡ Choose a tool below, and I shall do the heavy lifting!"
+    ];
+    let quoteIndex = 0;
+    
+    zeusMascot.addEventListener('click', () => {
+        zeusSpeech.textContent = zeusQuotes[quoteIndex];
+        quoteIndex = (quoteIndex + 1) % zeusQuotes.length;
+        
+        // Add a tiny bounce effect when clicked
+        zeusMascot.style.transform = "scale(1.2)";
+        setTimeout(() => { zeusMascot.style.transform = ""; }, 200);
+    });
+}
+
+/* =========================================================
    PDF.JS LOCAL WORKER
    ========================================================= */
 
@@ -514,6 +667,9 @@ function closeTools() {
     document.querySelectorAll(".workspace").forEach(function (tool) {
         tool.style.display = "none";
     });
+    // Zeus speaks when closing a tool
+    zeusSpeech.textContent = "⚡ Tool closed! Which divine magic shall we use next?";
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function openTool(toolId) {
@@ -525,9 +681,13 @@ function openTool(toolId) {
     }
     tool.style.display = "block";
     tool.scrollIntoView({ behavior: "smooth", block: "start" });
+    
+    // Zeus speaks when opening a tool
+    zeusSpeech.textContent = "⚡ The workspace is open! Upload your mortal files!";
 }
 
 function comingSoon(name) {
+    zeusSpeech.textContent = "⏳ Patience, mortal! I am still building that tool!";
     alert(name + " tool coming soon!");
 }
 
@@ -603,6 +763,7 @@ function jpgFilesSelected(input) {
 
     status.textContent = jpgSelectedFiles.length + (jpgSelectedFiles.length === 1 ? " image selected." : " images selected.");
     button.style.display = "block";
+    zeusSpeech.textContent = "⚡ Excellent images! Click the button to merge them!";
 }
 
 async function createJpgPdf() {
@@ -621,6 +782,7 @@ async function createJpgPdf() {
 
     button.disabled = true;
     button.textContent = "Creating PDF...";
+    zeusSpeech.textContent = "⚡ Forging your images into a sacred PDF scroll...";
 
     try {
         const pdf = await window.PDFLib.PDFDocument.create();
@@ -649,6 +811,7 @@ async function createJpgPdf() {
         const finalPdf = await pdf.save();
         downloadBlob(new Blob([finalPdf], { type: "application/pdf" }), "ToolsMediaDownloader-JPG-to-PDF.pdf");
         status.textContent = "✓ PDF created successfully!";
+        zeusSpeech.textContent = "⚡ It is done! Check your downloads folder!";
     } catch (error) {
         console.error(error);
         status.textContent = "Could not create PDF. Please try another image.";
@@ -680,6 +843,7 @@ function pdfJpgFileSelected(input) {
 
     status.textContent = "Selected: " + selectedPdfForJpg.name;
     button.style.display = "block";
+    zeusSpeech.textContent = "⚡ A fine document! Shall we slice it into images?";
 }
 
 async function convertPdfToJpg() {
@@ -700,6 +864,7 @@ async function convertPdfToJpg() {
     button.disabled = true;
     button.textContent = "Converting...";
     preview.innerHTML = "";
+    zeusSpeech.textContent = "⚡ Extracting images with the power of lightning...";
 
     try {
         const bytes = new Uint8Array(await selectedPdfForJpg.arrayBuffer());
@@ -731,6 +896,7 @@ async function convertPdfToJpg() {
         }
 
         status.textContent = "✓ PDF converted successfully!";
+        zeusSpeech.textContent = "⚡ Success! Download your images below!";
     } catch (error) {
         console.error(error);
         status.textContent = "Could not convert this PDF.";
@@ -793,6 +959,7 @@ function mergeFilesSelected(input) {
 
     status.textContent = selectedMergeFiles.length + " PDF files selected.";
     button.style.display = "block";
+    zeusSpeech.textContent = "⚡ Ah, multiple scrolls! I am ready to bind them together!";
 }
 
 async function mergePdfs() {
@@ -811,6 +978,7 @@ async function mergePdfs() {
 
     button.disabled = true;
     button.textContent = "Merging...";
+    zeusSpeech.textContent = "⚡ Binding your documents into one mighty PDF...";
 
     try {
         const merged = await window.PDFLib.PDFDocument.create();
@@ -830,6 +998,7 @@ async function mergePdfs() {
         const bytes = await merged.save();
         downloadBlob(new Blob([bytes], { type: "application/pdf" }), "ToolsMediaDownloader-Merged.pdf");
         status.textContent = "✓ PDFs merged successfully!";
+        zeusSpeech.textContent = "⚡ Behold! Your merged document is ready!";
     } catch (error) {
         console.error(error);
         status.textContent = "Could not merge these PDF files.";
