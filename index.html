@@ -121,7 +121,7 @@
             box-shadow: 0 10px 30px rgba(255,179,154,0.3);
         }
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255,179,154,0.5); }
-        .btn-ghost { background: transparent; color: var(--text-light); border: 1px solid rgba(255,179,154,0.3); }
+        .btn-ghost { padding: 14px 32px; border-radius: 50px; background: transparent; color: var(--text-light); border: 1px solid rgba(255,179,154,0.3); text-decoration: none; transition: 0.3s; }
         .btn-ghost:hover { background: rgba(255,179,154,0.1); border-color: var(--accent); }
 
         @keyframes fadeInUp {
@@ -277,18 +277,17 @@
     </div>
 </nav>
 
-<!-- HERO SECTION -->
+<!-- FADING HERO SECTION -->
 <section class="hero-section" id="hero">
     <div class="hero-badge">⚡ 100% Free · No Signups</div>
     <h1>Free <span class="gradient-text">PDF & Video</span> Tools</h1>
     <p>Convert and merge PDFs, download HD videos without watermarks. Everything runs securely in your browser — fast, private, and free.</p>
     <div class="hero-cta">
         <a href="#document-tools" class="btn-primary">Explore PDF Tools →</a>
-        <a href="tiktok-downloader.html" class="btn-ghost">Video Downloaders</a>
+        <a href="#video-tools" class="btn-ghost">Video Downloaders</a>
     </div>
 </section>
 
-<!-- STATS -->
 <div class="stats-bar fade-element">
     <div class="stat-item"><h3>100%</h3><p>Free Forever</p></div>
     <div class="stat-item"><h3>Local</h3><p>Secure Processing</p></div>
@@ -298,7 +297,7 @@
 
 <main class="container">
 
-    <!-- WORKSPACES -->
+    <!-- PREMIUM WORKSPACES -->
     <section id="jpgTool" class="workspace">
         <h2>JPG → PDF Converter</h2>
         <p class="description">Transform multiple images into a single PDF document securely.</p>
@@ -395,6 +394,7 @@
         <p>Save videos from popular platforms in HD quality without watermarks.</p>
     </section>
 
+    <!-- HERE IS WHERE THE BUTTONS ARE ALL FIXED & UNLOCKED! -->
     <div class="tools-grid">
         <div class="glass-card fade-element">
             <div class="card-icon logo-tiktok">
@@ -411,7 +411,7 @@
             </div>
             <h3>Instagram Downloader</h3>
             <p>Download Instagram Reels, stories, posts and photos.</p>
-            <button class="card-btn locked" onclick="comingSoon('Instagram Downloader')">Download 🔒</button>
+            <button class="card-btn" onclick="window.location.href='instagram-downloader.html'">Download →</button>
         </div>
         
         <div class="glass-card fade-element">
@@ -420,7 +420,7 @@
             </div>
             <h3>Facebook Downloader</h3>
             <p>Save Facebook videos in HD quality to your device.</p>
-            <button class="card-btn locked" onclick="comingSoon('Facebook Downloader')">Download 🔒</button>
+            <button class="card-btn" onclick="window.location.href='facebook-downloader.html'">Download →</button>
         </div>
         
         <div class="glass-card fade-element">
@@ -429,7 +429,7 @@
             </div>
             <h3>Pinterest Downloader</h3>
             <p>Save Pinterest videos and high-quality images.</p>
-            <button class="card-btn locked" onclick="comingSoon('Pinterest Downloader')">Download 🔒</button>
+            <button class="card-btn" onclick="window.location.href='pinterest-downloader.html'">Download →</button>
         </div>
     </div>
 
@@ -485,11 +485,9 @@ function checkScroll() {
         const rect = el.getBoundingClientRect();
         const windowHeight = window.innerHeight;
         
-        // Element is visible in viewport
         if(rect.top <= windowHeight * 0.85 && rect.bottom >= 0) {
             el.classList.add('visible');
         } else {
-            // Remove class to trigger fade out when scrolled past (up or down)
             el.classList.remove('visible');
         }
     });
