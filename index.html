@@ -108,125 +108,112 @@
         .footer-copy { color: #9a7d98; font-size: 13px; }
 
         /* =========================================================
-           3D TOBY WIDGET & CHAT UI
+           CLEAN & SIMPLE AI CHAT ASSISTANT (TOBY)
            ========================================================= */
-        #toby-helper-container {
+        #toby-widget-container {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 25px;
+            right: 25px;
             z-index: 10000;
             display: flex;
             flex-direction: column;
             align-items: flex-end;
         }
 
-        .toby-toggle-btn {
+        /* Floating Trigger Button */
+        .toby-launch-btn {
             background: #FFB39A;
             color: #542452;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 13px;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 14px;
             font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
             cursor: pointer;
-            margin-bottom: 8px;
-            border: none;
+            border: 2px solid #542452;
             transition: transform 0.2s, background 0.2s;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
 
-        .toby-toggle-btn:hover {
-            transform: scale(1.08);
+        .toby-launch-btn:hover {
+            transform: scale(1.06);
             background: #ffffff;
         }
 
-        /* 3D Model Box */
-        .toby-3d-box {
-            width: 180px;
-            height: 180px;
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            background: rgba(56, 23, 54, 0.6);
-            backdrop-filter: blur(5px);
-            border: 1px solid #FFB39A;
-        }
-
-        .toby-3d-box iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
         /* Chat Window */
-        #toby-chat-window {
+        #toby-chat-box {
             display: none;
-            width: 300px;
+            width: 320px;
             background: #381736;
             border: 2px solid #FFB39A;
-            border-radius: 15px;
+            border-radius: 16px;
             margin-bottom: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
             flex-direction: column;
             overflow: hidden;
-            animation: slideUp 0.3s ease;
+            animation: popUp 0.25s ease;
         }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
+        @keyframes popUp {
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .chat-header {
             background: #542452;
             color: #FFB39A;
-            padding: 12px;
+            padding: 14px;
             font-weight: bold;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid #743871;
+            font-size: 15px;
         }
 
         .chat-header button {
             background: none;
             border: none;
             color: #FFB39A;
-            font-size: 20px;
+            font-size: 22px;
             cursor: pointer;
+            width: auto;
+            padding: 0;
+            line-height: 1;
         }
 
         #chat-messages {
-            height: 220px;
+            height: 240px;
             padding: 15px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
             gap: 10px;
-            font-size: 13px;
+            font-size: 13.5px;
         }
 
         .bot-msg {
             background: #542452;
-            padding: 10px 12px;
+            padding: 10px 14px;
             border-radius: 12px;
             align-self: flex-start;
             color: #eaddea;
-            line-height: 1.4;
-            max-width: 85%;
+            line-height: 1.45;
+            max-width: 88%;
+            border-bottom-left-radius: 3px;
         }
 
         .user-msg {
             background: #FFB39A;
             color: #381736;
-            padding: 10px 12px;
+            padding: 10px 14px;
             border-radius: 12px;
             align-self: flex-end;
             font-weight: bold;
-            max-width: 85%;
+            max-width: 88%;
+            border-bottom-right-radius: 3px;
         }
 
         .chat-input-area {
@@ -240,10 +227,11 @@
             flex: 1;
             border: none;
             background: #381736;
-            color: white;
+            color: #ffffff;
             padding: 10px;
-            border-radius: 5px;
+            border-radius: 8px;
             outline: none;
+            font-size: 13.5px;
         }
 
         .chat-input-area button {
@@ -251,10 +239,11 @@
             color: #381736;
             border: none;
             margin-left: 8px;
-            padding: 8px 15px;
-            border-radius: 5px;
+            padding: 8px 16px;
+            border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
+            width: auto;
         }
 
         /* Mobile Adjustments */
@@ -262,8 +251,8 @@
             .navbar { flex-direction: column; gap: 15px; }
             .hero-section h1 { font-size: 28px; }
             .container { width: 94%; }
-            .toby-3d-box { width: 130px; height: 130px; }
-            #toby-chat-window { width: 270px; }
+            #toby-widget-container { bottom: 15px; right: 15px; }
+            #toby-chat-box { width: 280px; }
         }
     </style>
 </head>
@@ -405,34 +394,29 @@
 </main>
 
 <!-- =========================================================
-     3D ROBOT TOBY WIDGET & CHAT TOOL
+     TOBY AI CHAT ASSISTANT WIDGET
      ========================================================= -->
-<div id="toby-helper-container">
+<div id="toby-widget-container">
     
     <!-- Chat Window -->
-    <div id="toby-chat-window">
+    <div id="toby-chat-box">
         <div class="chat-header">
-            <span>🤖 Toby (AI Helper)</span>
+            <span>🤖 Toby - AI Assistant</span>
             <button onclick="toggleTobyChat()">×</button>
         </div>
         <div id="chat-messages">
-            <div class="bot-msg">Hi! 👋 I'm Toby, your 3D assistant! Ask me anything about downloading videos or using our PDF tools.</div>
+            <div class="bot-msg">Hi there! 👋 I'm Toby, your website assistant. Ask me anything about our PDF tools, video downloaders, or how to use this site!</div>
         </div>
         <div class="chat-input-area">
-            <input type="text" id="toby-input" placeholder="Ask Toby a question..." onkeypress="handleTobyKey(event)">
+            <input type="text" id="toby-input" placeholder="Type a message..." onkeypress="handleTobyKey(event)">
             <button onclick="sendTobyMessage()">Send</button>
         </div>
     </div>
 
-    <!-- Toggle Button -->
-    <button class="toby-toggle-btn" onclick="toggleTobyChat()">
-        💬 Ask Toby!
+    <!-- Floating Launch Button -->
+    <button class="toby-launch-btn" onclick="toggleTobyChat()">
+        🤖 Ask Toby
     </button>
-
-    <!-- 3D Mascot Frame (Guaranteed 3D Render) -->
-    <div class="toby-3d-box">
-        <iframe src="https://my.spline.design/robotfollowcursorforlandingpage-vwM65bSaL7gx6GIO1FDPNvnK/"></iframe>
-    </div>
 
 </div>
 
@@ -447,13 +431,15 @@
     <p class="footer-copy">© 2026 ToolsMediaDownloader. All rights reserved. Free online tools.</p>
 </footer>
 
-<!-- JAVASCRIPT LOGIC -->
+<!-- =========================================================
+     JAVASCRIPT LOGIC
+     ========================================================= -->
 <script>
 "use strict";
 
-/* --- 1. TOBY AI CHATBOT LOGIC --- */
+/* --- 1. TOBY AI CHATBOT INTELLIGENCE --- */
 function toggleTobyChat() {
-    const chat = document.getElementById('toby-chat-window');
+    const chat = document.getElementById('toby-chat-box');
     if (chat.style.display === 'flex') {
         chat.style.display = 'none';
     } else {
@@ -471,22 +457,53 @@ function sendTobyMessage() {
     const text = input.value.trim();
     if (!text) return;
 
+    // Show User Message
     addTobyMessage(text, 'user-msg');
     input.value = '';
 
-    // Toby Brain
+    // Toby's Intelligent Brain
     setTimeout(() => {
-        let response = "🤖 I'm still learning! Try asking me about 'PDFs', 'TikTok', or if this site is 'Free'.";
-        const lowText = text.toLowerCase();
+        const q = text.toLowerCase();
+        let reply = "";
 
-        if (lowText.includes("pdf")) response = "🤖 I can help with PDFs! You can merge PDFs or convert JPGs to PDF using the tools above.";
-        if (lowText.includes("tiktok") || lowText.includes("video")) response = "🤖 Want to download TikTok videos? Click the TikTok Downloader card! It removes watermarks in HD.";
-        if (lowText.includes("free") || lowText.includes("pay")) response = "🤖 Yes! Every single tool on ToolsMediaDownloader is 100% free.";
-        if (lowText.includes("safe") || lowText.includes("privacy")) response = "🤖 100% safe! All your PDF files are processed locally inside your own browser.";
-        if (lowText.includes("hello") || lowText.includes("hi") || lowText.includes("hey")) response = "🤖 Hello! I'm Toby. How can I help you today?";
+        // Greetings
+        if (q.includes("hi") || q.includes("hello") || q.includes("hey") || q.includes("greetings")) {
+            reply = "Hello! 👋 I'm Toby. How can I help you today?";
+        }
+        else if (q.includes("how are you") || q.includes("how r u") || q.includes("how do you do")) {
+            reply = "I'm doing great, thank you for asking! 😊 Ready to help you with your files and videos. What do you need help with?";
+        }
+        else if (q.includes("who are you") || q.includes("your name") || q.includes("what are you")) {
+            reply = "I'm Toby, the AI Assistant for ToolsMediaDownloader! I help visitors understand how to convert PDFs, merge files, and download videos.";
+        }
+        // Website Knowledge
+        else if (q.includes("about") || q.includes("website") || q.includes("what is this") || q.includes("what do you do")) {
+            reply = "ToolsMediaDownloader is a 100% free online utility site! You can merge PDFs, convert JPGs to PDF, convert PDF to JPG, and download TikTok videos without watermarks—all inside your browser.";
+        }
+        else if (q.includes("free") || q.includes("cost") || q.includes("price") || q.includes("pay")) {
+            reply = "Yes, absolutely! Everything on ToolsMediaDownloader is 100% free with no signups or hidden charges.";
+        }
+        else if (q.includes("pdf") && (q.includes("merge") || q.includes("combine"))) {
+            reply = "To merge PDFs, click the 'Merge PDF' tool above, upload 2 or more PDF documents, and click 'Merge & Download PDF'!";
+        }
+        else if (q.includes("jpg") || q.includes("image") || q.includes("pdf")) {
+            reply = "We offer both 'JPG to PDF' (combining images into a single PDF) and 'PDF to JPG' (extracting pages as JPG images). Select a tool above to get started!";
+        }
+        else if (q.includes("tiktok") || q.includes("video") || q.includes("watermark")) {
+            reply = "To download TikTok videos in HD without watermarks, click 'TikTok Downloader' in the Video section below, paste your video link, and click Download!";
+        }
+        else if (q.includes("safe") || q.includes("privacy") || q.includes("security")) {
+            reply = "Your privacy is guaranteed! All PDF files are processed directly on your computer/device inside your web browser. We never upload or store your files.";
+        }
+        else if (q.includes("thank") || q.includes("thanks")) {
+            reply = "You're very welcome! Let me know if you need anything else. 😊";
+        }
+        else {
+            reply = "I'm here to help! You can ask me about 'PDF tools', 'TikTok downloader', 'How to merge PDFs', or 'Is this site free?'.";
+        }
 
-        addTobyMessage(response, 'bot-msg');
-    }, 600);
+        addTobyMessage(reply, 'bot-msg');
+    }, 450);
 }
 
 function addTobyMessage(text, className) {
