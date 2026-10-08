@@ -14,9 +14,6 @@
     <script src="./pdf-lib.min.js"></script>
     <script src="./pdf.min.js"></script>
 
-    <!-- 3D SPLINE ENGINE -->
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@latest/build/spline-viewer.js"></script>
-
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -111,9 +108,9 @@
         .footer-copy { color: #9a7d98; font-size: 13px; }
 
         /* =========================================================
-           3D ROBOT WIDGET & CHAT UI
+           3D TOBY WIDGET & CHAT UI
            ========================================================= */
-        #robot-helper-container {
+        #toby-helper-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -123,41 +120,56 @@
             align-items: flex-end;
         }
 
-        #robot-avatar {
-            width: 170px;
-            height: 170px;
-            cursor: pointer;
-            position: relative;
-            transition: transform 0.3s ease;
-        }
-
-        #robot-avatar:hover { transform: scale(1.05); }
-
-        spline-viewer { width: 100%; height: 100%; pointer-events: auto; }
-
-        .helper-label {
+        .toby-toggle-btn {
             background: #FFB39A;
             color: #542452;
-            padding: 5px 12px;
+            padding: 8px 16px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: bold;
-            position: absolute;
-            top: 0;
-            left: 0;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            pointer-events: none;
-            z-index: 10;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            margin-bottom: 8px;
+            border: none;
+            transition: transform 0.2s, background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        #robot-chat-window {
+        .toby-toggle-btn:hover {
+            transform: scale(1.08);
+            background: #ffffff;
+        }
+
+        /* 3D Model Box */
+        .toby-3d-box {
+            width: 180px;
+            height: 180px;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            background: rgba(56, 23, 54, 0.6);
+            backdrop-filter: blur(5px);
+            border: 1px solid #FFB39A;
+        }
+
+        .toby-3d-box iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Chat Window */
+        #toby-chat-window {
             display: none;
             width: 300px;
             background: #381736;
             border: 2px solid #FFB39A;
             border-radius: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
             flex-direction: column;
             overflow: hidden;
             animation: slideUp 0.3s ease;
@@ -168,24 +180,90 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .chat-header { background: #542452; color: #FFB39A; padding: 12px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
-        .chat-header button { background: none; border: none; color: #FFB39A; font-size: 20px; cursor: pointer; }
+        .chat-header {
+            background: #542452;
+            color: #FFB39A;
+            padding: 12px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #743871;
+        }
 
-        #chat-messages { height: 220px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 13px; }
-        .bot-msg { background: #542452; padding: 10px 12px; border-radius: 12px; align-self: flex-start; color: #eaddea; line-height: 1.4; max-width: 85%; }
-        .user-msg { background: #FFB39A; color: #381736; padding: 10px 12px; border-radius: 12px; align-self: flex-end; font-weight: bold; max-width: 85%; }
+        .chat-header button {
+            background: none;
+            border: none;
+            color: #FFB39A;
+            font-size: 20px;
+            cursor: pointer;
+        }
 
-        .chat-input-area { display: flex; padding: 10px; background: #160c16; border-top: 1px solid #542452; }
-        .chat-input-area input { flex: 1; border: none; background: #381736; color: white; padding: 10px; border-radius: 5px; outline: none; }
-        .chat-input-area button { background: #FFB39A; color: #381736; border: none; margin-left: 8px; padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        #chat-messages {
+            height: 220px;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 13px;
+        }
+
+        .bot-msg {
+            background: #542452;
+            padding: 10px 12px;
+            border-radius: 12px;
+            align-self: flex-start;
+            color: #eaddea;
+            line-height: 1.4;
+            max-width: 85%;
+        }
+
+        .user-msg {
+            background: #FFB39A;
+            color: #381736;
+            padding: 10px 12px;
+            border-radius: 12px;
+            align-self: flex-end;
+            font-weight: bold;
+            max-width: 85%;
+        }
+
+        .chat-input-area {
+            display: flex;
+            padding: 10px;
+            background: #160c16;
+            border-top: 1px solid #542452;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            border: none;
+            background: #381736;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .chat-input-area button {
+            background: #FFB39A;
+            color: #381736;
+            border: none;
+            margin-left: 8px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
         /* Mobile Adjustments */
         @media (max-width: 600px) {
             .navbar { flex-direction: column; gap: 15px; }
             .hero-section h1 { font-size: 28px; }
             .container { width: 94%; }
-            #robot-avatar { width: 120px; height: 120px; }
-            #robot-chat-window { width: 270px; right: 0; }
+            .toby-3d-box { width: 130px; height: 130px; }
+            #toby-chat-window { width: 270px; }
         }
     </style>
 </head>
@@ -327,29 +405,33 @@
 </main>
 
 <!-- =========================================================
-     3D ROBOT WIDGET & CHAT TOOL
+     3D ROBOT TOBY WIDGET & CHAT TOOL
      ========================================================= -->
-<div id="robot-helper-container">
+<div id="toby-helper-container">
     
     <!-- Chat Window -->
-    <div id="robot-chat-window">
+    <div id="toby-chat-window">
         <div class="chat-header">
-            <span>3D Helper</span>
-            <button onclick="toggleRobotChat()">×</button>
+            <span>🤖 Toby (AI Helper)</span>
+            <button onclick="toggleTobyChat()">×</button>
         </div>
         <div id="chat-messages">
-            <div class="bot-msg">Hi! 👋 I am your 3D assistant. Ask me anything about downloading videos or using PDF tools!</div>
+            <div class="bot-msg">Hi! 👋 I'm Toby, your 3D assistant! Ask me anything about downloading videos or using our PDF tools.</div>
         </div>
         <div class="chat-input-area">
-            <input type="text" id="robot-input" placeholder="Type a question..." onkeypress="handleRobotKey(event)">
-            <button onclick="sendRobotMessage()">Send</button>
+            <input type="text" id="toby-input" placeholder="Ask Toby a question..." onkeypress="handleTobyKey(event)">
+            <button onclick="sendTobyMessage()">Send</button>
         </div>
     </div>
 
-    <!-- 3D Mascot -->
-    <div id="robot-avatar" onclick="toggleRobotChat()">
-        <div class="helper-label" id="robot-badge">Need help? ⚡</div>
-        <spline-viewer url="https://prod.spline.design/kZ3iO5pA3UtS94Bq/scene.splinecode"></spline-viewer>
+    <!-- Toggle Button -->
+    <button class="toby-toggle-btn" onclick="toggleTobyChat()">
+        💬 Ask Toby!
+    </button>
+
+    <!-- 3D Mascot Frame (Guaranteed 3D Render) -->
+    <div class="toby-3d-box">
+        <iframe src="https://my.spline.design/robotfollowcursorforlandingpage-vwM65bSaL7gx6GIO1FDPNvnK/"></iframe>
     </div>
 
 </div>
@@ -365,55 +447,49 @@
     <p class="footer-copy">© 2026 ToolsMediaDownloader. All rights reserved. Free online tools.</p>
 </footer>
 
-<!-- =========================================================
-     JAVASCRIPT: CHATBOT & PDF TOOLS
-     ========================================================= -->
+<!-- JAVASCRIPT LOGIC -->
 <script>
 "use strict";
 
-/* --- 1. CHATBOT LOGIC --- */
-function toggleRobotChat() {
-    const chat = document.getElementById('robot-chat-window');
-    const badge = document.getElementById('robot-badge');
+/* --- 1. TOBY AI CHATBOT LOGIC --- */
+function toggleTobyChat() {
+    const chat = document.getElementById('toby-chat-window');
     if (chat.style.display === 'flex') {
         chat.style.display = 'none';
-        badge.style.display = 'block';
     } else {
         chat.style.display = 'flex';
-        badge.style.display = 'none';
-        document.getElementById('robot-input').focus();
+        document.getElementById('toby-input').focus();
     }
 }
 
-function handleRobotKey(e) {
-    if (e.key === 'Enter') sendRobotMessage();
+function handleTobyKey(e) {
+    if (e.key === 'Enter') sendTobyMessage();
 }
 
-function sendRobotMessage() {
-    const input = document.getElementById('robot-input');
+function sendTobyMessage() {
+    const input = document.getElementById('toby-input');
     const text = input.value.trim();
     if (!text) return;
 
-    // Add user msg
-    addRobotMessage(text, 'user-msg');
+    addTobyMessage(text, 'user-msg');
     input.value = '';
 
-    // Simulate Bot typing
+    // Toby Brain
     setTimeout(() => {
-        let response = "⚡ I am still learning! Try asking about 'PDFs', 'TikTok', or if this site is 'Free'.";
+        let response = "🤖 I'm still learning! Try asking me about 'PDFs', 'TikTok', or if this site is 'Free'.";
         const lowText = text.toLowerCase();
 
-        if (lowText.includes("pdf")) response = "⚡ We have great PDF tools! You can merge PDFs, or convert JPGs to PDF in the Document section above.";
-        if (lowText.includes("tiktok") || lowText.includes("video")) response = "⚡ Want to download a TikTok? Click the TikTok Downloader card below. It removes watermarks perfectly in HD!";
-        if (lowText.includes("free") || lowText.includes("pay")) response = "⚡ Yes! Every tool on ToolsMediaDownloader is 100% free with no signups.";
-        if (lowText.includes("safe") || lowText.includes("privacy")) response = "⚡ Completely safe! Your PDF files are processed directly in your browser. I do not upload them to my servers.";
-        if (lowText.includes("hello") || lowText.includes("hi")) response = "⚡ Greetings! How can I assist your media needs today?";
+        if (lowText.includes("pdf")) response = "🤖 I can help with PDFs! You can merge PDFs or convert JPGs to PDF using the tools above.";
+        if (lowText.includes("tiktok") || lowText.includes("video")) response = "🤖 Want to download TikTok videos? Click the TikTok Downloader card! It removes watermarks in HD.";
+        if (lowText.includes("free") || lowText.includes("pay")) response = "🤖 Yes! Every single tool on ToolsMediaDownloader is 100% free.";
+        if (lowText.includes("safe") || lowText.includes("privacy")) response = "🤖 100% safe! All your PDF files are processed locally inside your own browser.";
+        if (lowText.includes("hello") || lowText.includes("hi") || lowText.includes("hey")) response = "🤖 Hello! I'm Toby. How can I help you today?";
 
-        addRobotMessage(response, 'bot-msg');
+        addTobyMessage(response, 'bot-msg');
     }, 600);
 }
 
-function addRobotMessage(text, className) {
+function addTobyMessage(text, className) {
     const msgDiv = document.createElement('div');
     msgDiv.className = className;
     msgDiv.textContent = text;
