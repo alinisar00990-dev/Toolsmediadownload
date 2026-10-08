@@ -7,13 +7,19 @@
     <title>ToolsMediaDownloader - Free Online PDF & Video Tools</title>
     <meta name="description" content="Free online tools for PDF conversion, merging, video downloads, and media tools. Fast, secure, works directly in your browser. No signup required.">
 
+    <!-- FAVICON -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
 
+    <!-- LOCAL LIBRARIES -->
     <script src="./pdf-lib.min.js"></script>
     <script src="./pdf.min.js"></script>
 
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -45,10 +51,28 @@
             font-weight: bold;
         }
 
-        .nav-logo svg { width: 28px; height: 28px; fill: #FFB39A; }
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { color: #f5e7f2; text-decoration: none; font-size: 15px; font-weight: bold; transition: color 0.3s; }
-        .nav-links a:hover { color: #FFB39A; }
+        .nav-logo svg {
+            width: 28px;
+            height: 28px;
+            fill: #FFB39A;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #f5e7f2;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #FFB39A;
+        }
 
         /* --- HERO SECTION --- */
         .hero-section {
@@ -58,212 +82,263 @@
             border-bottom: 1px solid #381736;
         }
 
-        .hero-section h1 { color: #FFB39A; font-size: 38px; margin-bottom: 15px; }
-        .hero-section p { color: #d8c9d6; font-size: 16px; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+        .hero-section h1 {
+            color: #FFB39A;
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
 
-        /* --- MAIN LAYOUT --- */
-        .container { width: 92%; max-width: 1000px; margin: auto; padding: 30px 0; flex: 1; }
-        .intro { text-align: center; margin-bottom: 28px; }
-        .intro h2 { color: #FFB39A; font-size: 25px; margin-bottom: 8px; }
-        .intro p { color: #d8c9d6; font-size: 14px; }
-        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+        .hero-section p {
+            color: #d8c9d6;
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
 
-        .card { background: #542452; border: 1px solid #743871; border-radius: 14px; padding: 22px; box-shadow: 0 7px 22px rgba(0, 0, 0, 0.25); transition: transform 0.2s; }
-        .card:hover { transform: translateY(-3px); border-color: #FFB39A; }
-        .card h3 { color: #FFB39A; font-size: 19px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-        .card p { color: #eaddea; font-size: 13px; line-height: 1.5; min-height: 58px; margin-bottom: 18px; }
+        .container {
+            width: 92%;
+            max-width: 1000px;
+            margin: auto;
+            padding: 30px 0;
+            flex: 1;
+        }
 
-        button { width: 100%; padding: 13px 16px; border: 0; border-radius: 9px; background: #FFB39A; color: #542452; font-size: 15px; font-weight: bold; cursor: pointer; }
-        button:disabled { opacity: 0.6; cursor: not-allowed; }
+        .intro {
+            text-align: center;
+            margin-bottom: 28px;
+        }
 
-        .workspace { display: none; background: #542452; border: 2px solid #FFB39A; border-radius: 15px; padding: 22px; margin-bottom: 30px; animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        .workspace h2 { color: #FFB39A; text-align: center; margin-bottom: 8px; }
-        .description { color: #eaddea; text-align: center; font-size: 14px; margin-bottom: 20px; }
+        .intro h2 {
+            color: #FFB39A;
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
 
-        .upload-box { background: #381736; border: 2px dashed #FFB39A; border-radius: 12px; padding: 30px 15px; text-align: center; cursor: pointer; margin-bottom: 15px; }
-        .upload-box strong { display: block; color: #FFB39A; font-size: 17px; margin-bottom: 7px; }
-        .upload-box span { color: #d5c4d3; font-size: 12px; }
-        .hidden-input { display: none; }
-        .status { color: #FFB39A; text-align: center; min-height: 24px; margin: 14px 0; font-weight: bold; }
-        .preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; margin: 15px 0; }
-        .preview-card { background: #341532; border: 1px solid #764173; padding: 6px; border-radius: 9px; }
-        .preview-card img { width: 100%; height: 110px; object-fit: contain; background: #ffffff; border-radius: 6px; }
-        .preview-label { color: #FFB39A; text-align: center; font-size: 11px; padding: 6px 2px; }
-        .small-btn { padding: 8px 4px; font-size: 11px; }
-        .action-button { display: none; margin-top: 8px; }
-        .close-button { margin-top: 10px; background: transparent; color: #FFB39A; border: 1px solid #FFB39A; }
-        .privacy { text-align: center; font-size: 12px; color: #cbbac9; margin-top: 15px; }
-        .section-divider { margin-top: 50px; }
+        .intro p {
+            color: #d8c9d6;
+            font-size: 14px;
+        }
 
-        /* =========================================================
-           ZEUS FLOATING HELPER & CHATBOT WIDGET
-           ========================================================= */
-        #zeus-widget {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 9999;
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .card {
+            background: #542452;
+            border: 1px solid #743871;
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 7px 22px rgba(0, 0, 0, 0.25);
+            transition: transform 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: #FFB39A;
+        }
+
+        .card h3 {
+            color: #FFB39A;
+            font-size: 19px;
+            margin-bottom: 10px;
             display: flex;
-            flex-direction: column;
-            align-items: flex-end;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* The Avatar Container */
-        .zeus-avatar-container {
-            position: relative;
-            cursor: pointer;
-            width: 110px;
-            height: auto;
-            transition: transform 0.1s ease-out; /* For mouse movement tilt */
+        .card p {
+            color: #eaddea;
+            font-size: 13px;
+            line-height: 1.5;
+            min-height: 58px;
+            margin-bottom: 18px;
         }
 
-        .zeus-avatar-container:hover {
-            transform: scale(1.05);
-        }
-
-        .zeus-img {
+        button {
             width: 100%;
-            filter: drop-shadow(0 10px 15px rgba(255, 179, 154, 0.4));
-            animation: floatBob 3s infinite ease-in-out;
-        }
-
-        /* Floating Animation */
-        @keyframes floatBob {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        /* Notification Badge */
-        .zeus-badge {
-            position: absolute;
-            top: 0;
-            left: 0;
+            padding: 13px 16px;
+            border: 0;
+            border-radius: 9px;
             background: #FFB39A;
             color: #542452;
+            font-size: 15px;
             font-weight: bold;
-            font-size: 12px;
-            padding: 4px 8px;
-            border-radius: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-            animation: pop 0.5s ease;
+            cursor: pointer;
         }
 
-        @keyframes pop {
-            0% { transform: scale(0); }
-            100% { transform: scale(1); }
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
-        /* Chat Window */
-        .zeus-chat-window {
-            display: none; /* Hidden by default */
-            width: 320px;
-            background: #381736;
+        .workspace {
+            display: none;
+            background: #542452;
             border: 2px solid #FFB39A;
             border-radius: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            flex-direction: column;
-            overflow: hidden;
-            animation: slideUp 0.3s ease;
+            padding: 22px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 24px rgba(0,0,0,.25);
         }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .chat-header {
-            background: #542452;
+        .workspace h2 {
             color: #FFB39A;
-            padding: 15px;
-            font-weight: bold;
             text-align: center;
-            border-bottom: 1px solid #743871;
-            position: relative;
+            margin-bottom: 8px;
         }
 
-        .close-chat {
-            position: absolute;
-            right: 15px;
-            top: 15px;
-            cursor: pointer;
-            color: #FFB39A;
-            font-weight: bold;
-        }
-
-        .chat-body {
-            padding: 15px;
-            height: 250px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .chat-bubble {
-            max-width: 80%;
-            padding: 10px 14px;
-            border-radius: 15px;
-            font-size: 13px;
-            line-height: 1.4;
-        }
-
-        .zeus-msg {
-            background: #542452;
+        .description {
             color: #eaddea;
-            align-self: flex-start;
-            border-bottom-left-radius: 3px;
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
         }
 
-        .user-msg {
-            background: #FFB39A;
-            color: #381736;
-            align-self: flex-end;
-            border-bottom-right-radius: 3px;
+        .upload-box {
+            background: #381736;
+            border: 2px dashed #FFB39A;
+            border-radius: 12px;
+            padding: 30px 15px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+
+        .upload-box strong {
+            display: block;
+            color: #FFB39A;
+            font-size: 17px;
+            margin-bottom: 7px;
+        }
+
+        .upload-box span {
+            color: #d5c4d3;
+            font-size: 12px;
+        }
+
+        .hidden-input {
+            display: none;
+        }
+
+        .status {
+            color: #FFB39A;
+            text-align: center;
+            min-height: 24px;
+            margin: 14px 0;
+            font-size: 14px;
             font-weight: bold;
         }
 
-        .chat-input-area {
-            display: flex;
-            padding: 10px;
-            background: #160c16;
-            border-top: 1px solid #542452;
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 12px;
+            margin: 15px 0;
         }
 
-        .chat-input-area input {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            border-radius: 8px;
+        .preview-card {
+            background: #341532;
+            border: 1px solid #764173;
+            padding: 6px;
+            border-radius: 9px;
+        }
+
+        .preview-card img {
+            width: 100%;
+            height: 110px;
+            object-fit: contain;
+            display: block;
+            background: #ffffff;
+            border-radius: 6px;
+        }
+
+        .preview-label {
+            color: #FFB39A;
+            text-align: center;
+            font-size: 11px;
+            padding: 6px 2px;
+        }
+
+        .small-btn {
+            padding: 8px 4px;
+            font-size: 11px;
+        }
+
+        .action-button {
+            display: none;
+            margin-top: 8px;
+        }
+
+        .close-button {
+            margin-top: 10px;
+            background: transparent;
+            color: #FFB39A;
+            border: 1px solid #FFB39A;
+        }
+
+        .privacy {
+            text-align: center;
+            font-size: 12px;
+            color: #cbbac9;
+            margin-top: 15px;
+        }
+
+        .section-divider {
+            margin-top: 50px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            margin-top: 40px;
             background: #381736;
-            color: white;
-            outline: none;
+            border-top: 2px solid #542452;
+            padding: 30px 20px;
+            text-align: center;
         }
 
-        .chat-input-area button {
-            width: auto;
-            margin-left: 8px;
-            padding: 10px 15px;
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
         }
 
-        /* Scrollbar for chat */
-        .chat-body::-webkit-scrollbar { width: 5px; }
-        .chat-body::-webkit-scrollbar-thumb { background: #FFB39A; border-radius: 5px; }
+        .footer-links a {
+            color: #d8c9d6;
+            text-decoration: none;
+            font-size: 14px;
+        }
 
-        footer { margin-top: 40px; background: #381736; border-top: 2px solid #542452; padding: 30px 20px; text-align: center; }
-        .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; }
-        .footer-links a { color: #d8c9d6; text-decoration: none; font-size: 14px; }
-        .footer-links a:hover { color: #FFB39A; text-decoration: underline; }
-        .footer-copy { color: #9a7d98; font-size: 13px; }
+        .footer-links a:hover {
+            color: #FFB39A;
+            text-decoration: underline;
+        }
+
+        .footer-copy {
+            color: #9a7d98;
+            font-size: 13px;
+        }
 
         @media (max-width: 600px) {
-            .navbar { flex-direction: column; gap: 15px; }
-            .hero-section h1 { font-size: 28px; }
-            /* Mobile Zeus Placement */
-            #zeus-widget { bottom: 15px; right: 15px; }
-            .zeus-avatar-container { width: 80px; }
-            .zeus-chat-window { width: 280px; right: 0; }
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .hero-section h1 {
+                font-size: 28px;
+            }
+            .container {
+                width: 94%;
+            }
+            .card,
+            .workspace {
+                padding: 17px;
+            }
         }
     </style>
 </head>
@@ -273,12 +348,16 @@
 <!-- NAVIGATION BAR -->
 <nav class="navbar">
     <a href="index.html" class="nav-logo">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="none"/></svg>
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="none"/>
+        </svg>
         ToolsMediaDownloader
     </a>
     <div class="nav-links">
         <a href="#pdf-tools">PDF Tools</a>
         <a href="#video-tools">Video Tools</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
     </div>
 </nav>
 
@@ -288,7 +367,6 @@
     <p>Merge, convert, and compress PDFs securely in your browser. Download TikTok videos in HD without watermarks. 100% Free, Fast, and Secure.</p>
 </section>
 
-<!-- MAIN CONTENT -->
 <main class="container">
 
     <!-- JPG TO PDF WORKSPACE -->
@@ -304,6 +382,7 @@
         <div id="jpgStatus" class="status"></div>
         <button id="jpgCreateButton" class="action-button" onclick="createJpgPdf()">Create & Download PDF</button>
         <button class="close-button" onclick="closeTools()">Close Tool</button>
+        <p class="privacy">Your files are processed directly in your browser.</p>
     </section>
 
     <!-- PDF TO JPG WORKSPACE -->
@@ -319,6 +398,7 @@
         <button id="pdfJpgConvertButton" class="action-button" onclick="convertPdfToJpg()">Convert PDF to JPG</button>
         <div id="pdfJpgPreview" class="preview-grid"></div>
         <button class="close-button" onclick="closeTools()">Close Tool</button>
+        <p class="privacy">Your PDF is processed directly in your browser.</p>
     </section>
 
     <!-- MERGE PDF WORKSPACE -->
@@ -333,6 +413,7 @@
         <div id="mergeStatus" class="status"></div>
         <button id="mergeButton" class="action-button" onclick="mergePdfs()">Merge & Download PDF</button>
         <button class="close-button" onclick="closeTools()">Close Tool</button>
+        <p class="privacy">Your PDFs are processed directly in your browser.</p>
     </section>
 
     <!-- PDF TOOLS SECTION -->
@@ -344,18 +425,28 @@
     <section class="tools-grid">
         <div class="card">
             <h3>🖼️ JPG to PDF</h3>
-            <p>Convert multiple JPG images into one downloadable PDF.</p>
+            <p>Convert multiple JPG or PNG images into one downloadable PDF document.</p>
             <button onclick="openTool('jpgTool')">Open Tool</button>
         </div>
         <div class="card">
             <h3>📸 PDF to JPG</h3>
-            <p>Extract and convert pages of a PDF into JPG images.</p>
+            <p>Extract and convert every single page of a PDF document into a high-quality JPG image.</p>
             <button onclick="openTool('pdfJpgTool')">Open Tool</button>
         </div>
         <div class="card">
             <h3>📑 Merge PDF</h3>
-            <p>Combine multiple PDF documents into one single file.</p>
+            <p>Combine multiple PDF documents into one single, easily readable PDF file.</p>
             <button onclick="openTool('mergeTool')">Open Tool</button>
+        </div>
+        <div class="card">
+            <h3>🗜️ Compress PDF</h3>
+            <p>Reduce PDF file size for easier email sharing and storage.</p>
+            <button onclick="comingSoon('Compress PDF')">Open Tool</button>
+        </div>
+        <div class="card">
+            <h3>📝 PDF to Word</h3>
+            <p>Convert your PDF documents into editable Word files instantly.</p>
+            <button onclick="comingSoon('PDF to Word')">Open Tool</button>
         </div>
     </section>
 
@@ -368,249 +459,375 @@
     <section class="tools-grid">
         <div class="card">
             <h3>🎵 TikTok Downloader</h3>
-            <p>Download TikTok videos without watermark in HD MP4.</p>
+            <p>Download TikTok videos without watermark in HD MP4 or extract MP3 audio files.</p>
             <button onclick="window.location.href='tiktok-downloader.html'">Open Tool</button>
+        </div>
+        <div class="card">
+            <h3>📸 Instagram Downloader</h3>
+            <p>Download Instagram videos, reels, stories, and photos directly to your device.</p>
+            <button onclick="comingSoon('Instagram Downloader')">Open Tool</button>
+        </div>
+        <div class="card">
+            <h3>📘 Facebook Downloader</h3>
+            <p>Save Facebook videos in HD quality directly to your phone or computer.</p>
+            <button onclick="comingSoon('Facebook Downloader')">Open Tool</button>
+        </div>
+        <div class="card">
+            <h3>📌 Pinterest Downloader</h3>
+            <p>Save Pinterest videos and images in high quality to your gallery.</p>
+            <button onclick="comingSoon('Pinterest Downloader')">Open Tool</button>
         </div>
     </section>
 
 </main>
 
-<!-- =========================================================
-     ZEUS FLOATING WIDGET (Follows Scroll, Moves with Mouse)
-     ========================================================= -->
-<div id="zeus-widget">
-    
-    <!-- Chat Window (Hidden until clicked) -->
-    <div class="zeus-chat-window" id="zeusChat">
-        <div class="chat-header">
-            ⚡ Ask Zeus a Question
-            <span class="close-chat" onclick="toggleZeusChat()">✖</span>
-        </div>
-        <div class="chat-body" id="chatBody">
-            <div class="chat-bubble zeus-msg">
-                Greetings, mortal! I am Zeus, the God of Media Tools. Ask me a question about downloading videos, merging PDFs, or if the website is free!
-            </div>
-        </div>
-        <div class="chat-input-area">
-            <input type="text" id="userInput" placeholder="Type your question..." onkeypress="handleKeyPress(event)">
-            <button onclick="sendMessage()">Send</button>
-        </div>
-    </div>
-
-    <!-- Zeus Avatar -->
-    <div class="zeus-avatar-container" id="zeusAvatar" onclick="toggleZeusChat()">
-        <div class="zeus-badge" id="zeusBadge">Need Help?</div>
-        <img src="zeus-mascot.png" alt="Zeus Helper" class="zeus-img">
-    </div>
-
-</div>
-
-<!-- FOOTER -->
+<!-- PROFESSIONAL FOOTER -->
 <footer>
     <div class="footer-links">
         <a href="about.html">About Us</a>
         <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="contact.html">Contact</a>
     </div>
-    <p class="footer-copy">© 2026 ToolsMediaDownloader. All rights reserved.</p>
+    <p class="footer-copy">© 2026 ToolsMediaDownloader. All rights reserved. Free online tools.</p>
 </footer>
 
+<!-- PDF & WEBSITE SCRIPTS -->
 <script>
 "use strict";
 
-/* =========================================================
-   ZEUS AI CHATBOT & MOUSE MOVEMENT LOGIC
-   ========================================================= */
-
-// 1. Make Zeus Look at Your Mouse (3D Tilt Effect)
-const zeusContainer = document.getElementById('zeusAvatar');
-document.addEventListener('mousemove', (e) => {
-    // Calculate mouse position relative to the screen
-    let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-    let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-    
-    // Apply a slight tilt so Zeus "follows" the mouse
-    zeusContainer.style.transform = `perspective(1000px) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-});
-
-// Reset tilt when mouse leaves window
-document.addEventListener('mouseleave', () => {
-    zeusContainer.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg)`;
-});
-
-// 2. Open/Close Chat Window
-const chatWindow = document.getElementById('zeusChat');
-const badge = document.getElementById('zeusBadge');
-let isChatOpen = false;
-
-function toggleZeusChat() {
-    isChatOpen = !isChatOpen;
-    if (isChatOpen) {
-        chatWindow.style.display = "flex";
-        badge.style.display = "none"; // Hide "Need Help?" badge when open
-        document.getElementById('userInput').focus(); // Auto-focus input
-    } else {
-        chatWindow.style.display = "none";
-    }
+if (window.pdfjsLib) {
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc = "./pdf.worker.min.js";
 }
 
-// 3. Handle Chat Messages & AI Logic
-const chatBody = document.getElementById('chatBody');
-const userInput = document.getElementById('userInput');
-
-function handleKeyPress(e) {
-    if (e.key === 'Enter') {
-        sendMessage();
-    }
-}
-
-function sendMessage() {
-    let text = userInput.value.trim();
-    if (text === "") return;
-
-    // Add User Message to Chat
-    appendMessage(text, 'user-msg');
-    userInput.value = ""; // Clear input
-
-    // Simulate Zeus Thinking...
-    setTimeout(() => {
-        let response = generateZeusResponse(text.toLowerCase());
-        appendMessage(response, 'zeus-msg');
-    }, 600); // 0.6 seconds delay
-}
-
-function appendMessage(text, className) {
-    let msgDiv = document.createElement('div');
-    msgDiv.className = `chat-bubble ${className}`;
-    msgDiv.textContent = text;
-    chatBody.appendChild(msgDiv);
-    
-    // Auto-scroll to bottom
-    chatBody.scrollTop = chatBody.scrollHeight;
-}
-
-// 4. Zeus "AI" Knowledge Base
-function generateZeusResponse(question) {
-    // Keyword Matching Logic
-    if (question.includes("free") || question.includes("pay") || question.includes("cost")) {
-        return "⚡ By my divine power, every single tool on this website is 100% FREE! No credit cards required, mortal.";
-    }
-    if (question.includes("pdf") && (question.includes("merge") || question.includes("combine"))) {
-        return "⚡ Ah, you wish to bind scrolls! Scroll up and click 'Merge PDF' under the Document Tools section.";
-    }
-    if (question.includes("pdf") || question.includes("jpg") || question.includes("image")) {
-        return "⚡ I have forged powerful PDF tools! You can convert JPG to PDF, or PDF to JPG above.";
-    }
-    if (question.includes("tiktok") || question.includes("video") || question.includes("watermark")) {
-        return "⚡ Seek the 'TikTok Downloader' below! It will fetch your videos in HD without those annoying watermarks.";
-    }
-    if (question.includes("safe") || question.includes("privacy") || question.includes("virus")) {
-        return "⚡ Fear not! Your PDF files are processed directly in your web browser. I do not upload or store them on my servers!";
-    }
-    if (question.includes("hello") || question.includes("hi") || question.includes("hey")) {
-        return "⚡ Greetings, Earthling! How may I assist your media needs today?";
-    }
-    
-    // Default Fallback
-    return "⚡ I am a God of Media, not an all-knowing oracle! Try asking me about 'PDFs', 'TikTok', 'Safety', or if the site is 'Free'.";
-}
-
-/* =========================================================
-   PDF.JS LOCAL WORKER
-   ========================================================= */
-if (window.pdfjsLib) { window.pdfjsLib.GlobalWorkerOptions.workerSrc = "./pdf.worker.min.js"; }
-
-/* =========================================================
-   GENERAL TOOL FUNCTIONS
-   ========================================================= */
 function closeTools() {
-    document.querySelectorAll(".workspace").forEach(function (tool) { tool.style.display = "none"; });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.querySelectorAll(".workspace").forEach(function (tool) {
+        tool.style.display = "none";
+    });
 }
 
 function openTool(toolId) {
     closeTools();
     const tool = document.getElementById(toolId);
-    if (tool) { tool.style.display = "block"; tool.scrollIntoView({ behavior: "smooth", block: "start" }); }
+    if (!tool) {
+        alert("Tool could not be opened.");
+        return;
+    }
+    tool.style.display = "block";
+    tool.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-function delay(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+function comingSoon(name) {
+    alert(name + " tool coming soon!");
+}
+
+function delay(ms) {
+    return new Promise(function (resolve) {
+        setTimeout(resolve, ms);
+    });
+}
 
 function downloadBlob(blob, filename) {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
-    link.href = url; link.download = filename;
-    document.body.appendChild(link); link.click(); link.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 15000);
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(function () {
+        URL.revokeObjectURL(url);
+    }, 15000);
 }
-
-/* =========================================================
-   TOOL LOGIC (JPG, PDF, MERGE) INCLUDED AS BEFORE
-   ========================================================= */
-// (I kept all your actual functional code for tools here exactly the same so they don't break!)
 
 // JPG TO PDF
-let jpgSelectedFiles = [], jpgObjectUrls = [];
-function clearJpgUrls() { jpgObjectUrls.forEach(url => URL.revokeObjectURL(url)); jpgObjectUrls = []; }
+let jpgSelectedFiles = [];
+let jpgObjectUrls = [];
+
+function clearJpgUrls() {
+    jpgObjectUrls.forEach(function (url) {
+        URL.revokeObjectURL(url);
+    });
+    jpgObjectUrls = [];
+}
+
 function jpgFilesSelected(input) {
     clearJpgUrls();
-    const status = document.getElementById("jpgStatus"), preview = document.getElementById("jpgPreview"), button = document.getElementById("jpgCreateButton");
-    jpgSelectedFiles = Array.from(input.files || []).filter(f => f.type === "image/jpeg" || f.type === "image/png");
-    preview.innerHTML = "";
-    if (!jpgSelectedFiles.length) { status.textContent = "Please select images."; button.style.display = "none"; return; }
-    jpgSelectedFiles.forEach((file, index) => {
-        const url = URL.createObjectURL(file); jpgObjectUrls.push(url);
-        const card = document.createElement("div"); card.className = "preview-card";
-        const img = document.createElement("img"); img.src = url;
-        const lbl = document.createElement("div"); lbl.className = "preview-label"; lbl.textContent = "Image " + (index + 1);
-        card.append(img, lbl); preview.appendChild(card);
+    const status = document.getElementById("jpgStatus");
+    const preview = document.getElementById("jpgPreview");
+    const button = document.getElementById("jpgCreateButton");
+
+    jpgSelectedFiles = Array.from(input.files || []).filter(function (file) {
+        return (file.type === "image/jpeg" || file.type === "image/png");
     });
-    status.textContent = jpgSelectedFiles.length + " images selected."; button.style.display = "block";
+
+    preview.innerHTML = "";
+
+    if (jpgSelectedFiles.length === 0) {
+        status.textContent = "Please select JPG or PNG images.";
+        button.style.display = "none";
+        return;
+    }
+
+    jpgSelectedFiles.forEach(function (file, index) {
+        const url = URL.createObjectURL(file);
+        jpgObjectUrls.push(url);
+
+        const card = document.createElement("div");
+        card.className = "preview-card";
+
+        const image = document.createElement("img");
+        image.src = url;
+
+        const label = document.createElement("div");
+        label.className = "preview-label";
+        label.textContent = "Image " + (index + 1);
+
+        card.appendChild(image);
+        card.appendChild(label);
+        preview.appendChild(card);
+    });
+
+    status.textContent = jpgSelectedFiles.length + (jpgSelectedFiles.length === 1 ? " image selected." : " images selected.");
+    button.style.display = "block";
 }
+
 async function createJpgPdf() {
-    const status = document.getElementById("jpgStatus"), button = document.getElementById("jpgCreateButton");
-    if (!window.PDFLib) { status.textContent = "Engine failed."; return; }
-    button.disabled = true; button.textContent = "Creating...";
+    const status = document.getElementById("jpgStatus");
+    const button = document.getElementById("jpgCreateButton");
+
+    if (!window.PDFLib || !window.PDFLib.PDFDocument) {
+        status.textContent = "Local PDF engine could not load.";
+        return;
+    }
+
+    if (!jpgSelectedFiles.length) {
+        status.textContent = "Please select images first.";
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Creating PDF...";
+
     try {
         const pdf = await window.PDFLib.PDFDocument.create();
+
         for (let i = 0; i < jpgSelectedFiles.length; i++) {
-            status.textContent = `Processing ${i+1}/${jpgSelectedFiles.length}...`; await delay(30);
-            const bytes = await jpgSelectedFiles[i].arrayBuffer();
-            const image = jpgSelectedFiles[i].type === "image/png" ? await pdf.embedPng(bytes) : await pdf.embedJpg(bytes);
+            const file = jpgSelectedFiles[i];
+            status.textContent = "Processing image " + (i + 1) + " of " + jpgSelectedFiles.length + "...";
+            await delay(30);
+            const bytes = await file.arrayBuffer();
+            let image;
+
+            if (file.type === "image/png") {
+                image = await pdf.embedPng(bytes);
+            } else {
+                image = await pdf.embedJpg(bytes);
+            }
+
             const scale = Math.min(1, 1600 / image.width, 2200 / image.height);
-            const page = pdf.addPage([image.width * scale, image.height * scale]);
-            page.drawImage(image, { x: 0, y: 0, width: image.width * scale, height: image.height * scale });
+            const width = image.width * scale;
+            const height = image.height * scale;
+            const page = pdf.addPage([width, height]);
+            page.drawImage(image, { x: 0, y: 0, width: width, height: height });
         }
+
         status.textContent = "Preparing PDF...";
         const finalPdf = await pdf.save();
         downloadBlob(new Blob([finalPdf], { type: "application/pdf" }), "ToolsMediaDownloader-JPG-to-PDF.pdf");
-        status.textContent = "✓ Success!";
-    } catch (e) { status.textContent = "Error."; } finally { button.disabled = false; button.textContent = "Download PDF"; }
+        status.textContent = "✓ PDF created successfully!";
+    } catch (error) {
+        console.error(error);
+        status.textContent = "Could not create PDF. Please try another image.";
+    } finally {
+        button.disabled = false;
+        button.textContent = "Create & Download PDF";
+    }
 }
 
-// MERGE PDF (Simplified code block for space)
-let selectedMergeFiles = [];
-function mergeFilesSelected(input) {
-    const status = document.getElementById("mergeStatus"), button = document.getElementById("mergeButton");
-    selectedMergeFiles = Array.from(input.files || []);
-    if (selectedMergeFiles.length < 2) { status.textContent = "Select at least 2 files."; button.style.display = "none"; return; }
-    status.textContent = selectedMergeFiles.length + " files selected."; button.style.display = "block";
+// PDF TO JPG
+let selectedPdfForJpg = null;
+
+function pdfJpgFileSelected(input) {
+    const status = document.getElementById("pdfJpgStatus");
+    const button = document.getElementById("pdfJpgConvertButton");
+    const preview = document.getElementById("pdfJpgPreview");
+
+    selectedPdfForJpg = input.files && input.files[0] ? input.files[0] : null;
+    preview.innerHTML = "";
+
+    if (!selectedPdfForJpg) {
+        status.textContent = "";
+        button.style.display = "none";
+        return;
+    }
+
+    status.textContent = "Selected: " + selectedPdfForJpg.name;
+    button.style.display = "block";
 }
+
+async function convertPdfToJpg() {
+    const status = document.getElementById("pdfJpgStatus");
+    const button = document.getElementById("pdfJpgConvertButton");
+    const preview = document.getElementById("pdfJpgPreview");
+
+    if (!window.pdfjsLib) {
+        status.textContent = "Local PDF renderer could not load.";
+        return;
+    }
+
+    if (!selectedPdfForJpg) {
+        status.textContent = "Please select a PDF first.";
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Converting...";
+    preview.innerHTML = "";
+
+    try {
+        const bytes = new Uint8Array(await selectedPdfForJpg.arrayBuffer());
+        const loadingTask = window.pdfjsLib.getDocument({ data: bytes });
+        const pdf = await loadingTask.promise;
+
+        for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
+            status.textContent = "Converting page " + pageNumber + " of " + pdf.numPages + "...";
+            await delay(30);
+
+            const page = await pdf.getPage(pageNumber);
+            const viewport = page.getViewport({ scale: 1.7 });
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d", { alpha: false });
+
+            canvas.width = Math.floor(viewport.width);
+            canvas.height = Math.floor(viewport.height);
+            context.fillStyle = "#ffffff";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+
+            await page.render({ canvasContext: context, viewport: viewport }).promise;
+
+            const blob = await canvasToJpeg(canvas);
+            const url = URL.createObjectURL(blob);
+            addJpgResult(preview, url, blob, pageNumber);
+
+            canvas.width = 1;
+            canvas.height = 1;
+        }
+
+        status.textContent = "✓ PDF converted successfully!";
+    } catch (error) {
+        console.error(error);
+        status.textContent = "Could not convert this PDF.";
+    } finally {
+        button.disabled = false;
+        button.textContent = "Convert PDF to JPG";
+    }
+}
+
+function canvasToJpeg(canvas) {
+    return new Promise(function (resolve, reject) {
+        canvas.toBlob(function (blob) {
+            if (blob) resolve(blob);
+            else reject(new Error("Could not create JPG."));
+        }, "image/jpeg", 0.92);
+    });
+}
+
+function addJpgResult(container, url, blob, pageNumber) {
+    const card = document.createElement("div");
+    card.className = "preview-card";
+
+    const image = document.createElement("img");
+    image.src = url;
+
+    const label = document.createElement("div");
+    label.className = "preview-label";
+    label.textContent = "Page " + pageNumber;
+
+    const button = document.createElement("button");
+    button.className = "small-btn";
+    button.textContent = "Download JPG";
+    button.onclick = function () {
+        downloadBlob(blob, "ToolsMediaDownloader-page-" + pageNumber + ".jpg");
+    };
+
+    card.appendChild(image);
+    card.appendChild(label);
+    card.appendChild(button);
+    container.appendChild(card);
+}
+
+// MERGE PDF
+let selectedMergeFiles = [];
+
+function mergeFilesSelected(input) {
+    const status = document.getElementById("mergeStatus");
+    const button = document.getElementById("mergeButton");
+
+    selectedMergeFiles = Array.from(input.files || []);
+
+    if (selectedMergeFiles.length < 2) {
+        status.textContent = "Please select at least 2 PDF files.";
+        button.style.display = "none";
+        return;
+    }
+
+    status.textContent = selectedMergeFiles.length + " PDF files selected.";
+    button.style.display = "block";
+}
+
 async function mergePdfs() {
-    const status = document.getElementById("mergeStatus"), button = document.getElementById("mergeButton");
-    button.disabled = true; button.textContent = "Merging...";
+    const status = document.getElementById("mergeStatus");
+    const button = document.getElementById("mergeButton");
+
+    if (!window.PDFLib || !window.PDFLib.PDFDocument) {
+        status.textContent = "Local PDF engine could not load.";
+        return;
+    }
+
+    if (selectedMergeFiles.length < 2) {
+        status.textContent = "Select at least 2 PDF files.";
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Merging...";
+
     try {
         const merged = await window.PDFLib.PDFDocument.create();
+
         for (let i = 0; i < selectedMergeFiles.length; i++) {
-            status.textContent = `Adding ${i+1}/${selectedMergeFiles.length}...`;
-            const source = await window.PDFLib.PDFDocument.load(await selectedMergeFiles[i].arrayBuffer());
-            const pages = await merged.copyPages(source, source.getPageIndices());
-            pages.forEach(p => merged.addPage(p));
+            status.textContent = "Adding PDF " + (i + 1) + " of " + selectedMergeFiles.length + "...";
+            const bytes = await selectedMergeFiles[i].arrayBuffer();
+            const source = await window.PDFLib.PDFDocument.load(bytes);
+            const pageIndices = source.getPageIndices();
+            const pages = await merged.copyPages(source, pageIndices);
+            pages.forEach(function (page) {
+                merged.addPage(page);
+            });
         }
-        status.textContent = "Preparing...";
-        downloadBlob(new Blob([await merged.save()], { type: "application/pdf" }), "Merged.pdf");
-        status.textContent = "✓ Merged!";
-    } catch (e) { status.textContent = "Error."; } finally { button.disabled = false; button.textContent = "Merge PDF"; }
+
+        status.textContent = "Preparing merged PDF...";
+        const bytes = await merged.save();
+        downloadBlob(new Blob([bytes], { type: "application/pdf" }), "ToolsMediaDownloader-Merged.pdf");
+        status.textContent = "✓ PDFs merged successfully!";
+    } catch (error) {
+        console.error(error);
+        status.textContent = "Could not merge these PDF files.";
+    } finally {
+        button.disabled = false;
+        button.textContent = "Merge & Download PDF";
+    }
 }
 </script>
+
+<!-- 3D ROBOT ASSISTANT "TOBY" SCRIPT -->
+<script src="https://three.ws/assistant/v1.js" async
+  data-avatar="https://my.spline.design/robotfollowcursorforlandingpage-vwM65bSaL7gx6GIO1FDPNvnK/"
+  data-mode="chat"
+  data-name="Toby"
+  data-greeting="Hi! 👋 I'm Toby, your AI assistant. How can I help you use our tools today?"
+  data-context="Tools Media Downloader is an online tools website that provides simple and easy-to-use web utilities for working with PDFs, images, videos, and other digital files. The website includes tools such as PDF to JPG conversion, PDF-related tools, image tools, and video downloading tools such as TikTok video downloader tools. The goal is to make common file and media tasks quick and easy without requiring complicated software. Help visitors understand which tool they should use and explain how to use them."></script>
+
 </body>
 </html>
