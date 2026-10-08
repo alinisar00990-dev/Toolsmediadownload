@@ -3,71 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - ToolsMediaDownloader</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+    <title>About Us | ToolsMediaDownloader</title>
+    <meta name="description" content="Learn more about ToolsMediaDownloader, your free, secure, and fast online utility suite.">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: Arial, sans-serif; background: #160c16; color: #ffffff; min-height: 100vh; display: flex; flex-direction: column; }
-        .navbar { background: #542452; border-bottom: 3px solid #FFB39A; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-        .nav-logo { display: flex; align-items: center; gap: 10px; color: #FFB39A; text-decoration: none; font-size: 24px; font-weight: bold; }
-        .nav-logo svg { width: 28px; height: 28px; fill: #FFB39A; }
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { color: #f5e7f2; text-decoration: none; font-size: 15px; font-weight: bold; transition: color 0.3s; }
-        .nav-links a:hover { color: #FFB39A; }
-        
-        .container { width: 90%; max-width: 800px; margin: 50px auto; flex: 1; background: #381736; padding: 40px; border-radius: 12px; border: 1px solid #743871; }
-        .container h1 { color: #FFB39A; margin-bottom: 20px; font-size: 32px; }
-        .container p { color: #d8c9d6; line-height: 1.8; margin-bottom: 20px; font-size: 16px; }
-        .container ul { margin-left: 20px; margin-bottom: 20px; color: #d8c9d6; }
-        .container li { margin-bottom: 10px; line-height: 1.6; }
+        :root { --bg-dark: #0a0510; --accent: #FFB39A; --accent-glow: #ff8a66; --purple: #542452; --text-light: #f0e6ef; --text-dim: #a08ca0; }
+        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg-dark); color: var(--text-light); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
 
-        footer { margin-top: 40px; background: #381736; border-top: 2px solid #542452; padding: 30px 20px; text-align: center; }
-        .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; }
-        .footer-links a { color: #d8c9d6; text-decoration: none; font-size: 14px; }
-        .footer-links a:hover { color: #FFB39A; text-decoration: underline; }
-        .footer-copy { color: #9a7d98; font-size: 13px; }
-        @media (max-width: 600px) { .navbar { flex-direction: column; gap: 15px; } .container { padding: 20px; } }
+        /* Orbs Background */
+        .orb { position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.3; z-index: -1; pointer-events: none; }
+        .orb-1 { width: 400px; height: 400px; background: #542452; top: -100px; left: -100px; animation: float1 15s infinite ease-in-out; }
+        .orb-2 { width: 350px; height: 350px; background: #ff8a66; bottom: -100px; right: -100px; animation: float2 18s infinite ease-in-out; }
+        @keyframes float1 { 50% { transform: translate(100px, 150px); } } @keyframes float2 { 50% { transform: translate(-80px, -120px); } }
+
+        /* Navbar */
+        .navbar { position: sticky; top: 0; background: rgba(10,5,16,0.7); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,179,154,0.15); padding: 18px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
+        .nav-logo { font-family: 'Orbitron', sans-serif; font-weight: 800; font-size: 20px; background: linear-gradient(135deg, var(--accent), var(--accent-glow)); -webkit-background-clip: text; color: transparent; text-decoration: none; }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { color: var(--text-light); text-decoration: none; font-size: 14px; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* Hero */
+        .hero { text-align: center; padding: 100px 20px 60px; animation: fadeInUp 0.8s ease; }
+        .hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(32px, 5vw, 54px); margin-bottom: 20px; }
+        .hero h1 span { background: linear-gradient(135deg, var(--accent), var(--accent-glow)); -webkit-background-clip: text; color: transparent; }
+        .hero p { color: var(--text-dim); max-width: 650px; margin: auto; font-size: 17px; line-height: 1.7; }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Content Container */
+        .container { max-width: 1000px; margin: auto; padding: 20px 5% 100px; flex: 1; }
+
+        .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 40px; }
+        
+        .glass-card {
+            background: linear-gradient(135deg, rgba(84,36,82,0.4), rgba(26,13,26,0.4));
+            backdrop-filter: blur(20px); border: 1px solid rgba(255,179,154,0.15);
+            border-radius: 20px; padding: 35px; transition: 0.3s;
+        }
+        .glass-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 15px 40px rgba(255,179,154,0.15); }
+        .card-icon { font-size: 40px; margin-bottom: 15px; }
+        .glass-card h3 { font-family: 'Orbitron', sans-serif; font-size: 20px; margin-bottom: 10px; color: var(--accent); }
+        .glass-card p { color: var(--text-dim); font-size: 14.5px; line-height: 1.6; }
+
+        /* Footer */
+        footer { background: linear-gradient(180deg, transparent, rgba(10,5,16,0.9)); border-top: 1px solid rgba(255,179,154,0.1); padding: 50px 20px 30px; text-align: center; }
+        .footer-brand { font-family: 'Orbitron', sans-serif; font-size: 22px; color: var(--accent); margin-bottom: 15px; }
+        .footer-links { display: flex; justify-content: center; gap: 25px; margin: 20px 0; }
+        .footer-links a { color: var(--text-dim); text-decoration: none; font-size: 14px; transition: 0.3s; }
+        .footer-links a:hover { color: var(--accent); }
+        .footer-copy { color: var(--text-dim); font-size: 12px; margin-top: 20px; }
     </style>
 </head>
 <body>
 
+<div class="orb orb-1"></div><div class="orb orb-2"></div>
+
 <nav class="navbar">
-    <a href="index.html" class="nav-logo">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" fill="none"/>
-        </svg>
-        ToolsMediaDownloader
-    </a>
+    <a href="index.html" class="nav-logo"><span>⚡</span> ToolsMediaDownloader</a>
     <div class="nav-links">
         <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
+        <a href="contact.html">Support</a>
     </div>
 </nav>
 
-<main class="container">
-    <h1>About ToolsMediaDownloader</h1>
-    <p>Welcome to <strong>ToolsMediaDownloader</strong>. Our goal is to provide simple, fast, and completely free online utilities that make your digital life easier. You don't need to install heavy software on your computer to perform basic tasks.</p>
-    
-    <p>We started this project because we believe that everyday file processing should be accessible to everyone without paywalls, hidden subscriptions, or limits.</p>
-
-    <h2 style="color: #FFB39A; margin-bottom: 15px; margin-top: 30px;">What We Offer</h2>
-    <ul>
-        <li><strong>PDF Processing:</strong> Merge, convert, and edit PDFs directly inside your browser. Your files never leave your device, ensuring total privacy.</li>
-        <li><strong>Media Downloading:</strong> Fast and reliable tools to download videos from platforms like TikTok in high definition and without watermarks.</li>
-    </ul>
-
-    <p>Our platform works beautifully on both desktop computers and mobile phones, meaning you can access these tools wherever you go.</p>
-</main>
-
-<footer>
-    <div class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About Us</a>
-        <a href="privacy.html">Privacy Policy</a>
-    </div>
-    <p class="footer-copy">© 2026 ToolsMediaDownloader. All rights reserved.</p>
-</footer>
-
-</body>
-</html>
+<section class="hero">
+    <h1>About <span>Us</span></h1>
+    <p>We 
