@@ -10,8 +10,8 @@
 
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        :root { --bg-dark: #0a0510; --accent: #FFB39A; --accent-glow: #ff8a66; --purple: #542452; --text-light: #f0e6ef; --text-dim: #a08ca0; }
-        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg-dark); color: var(--text-light); min-height: 100vh; overflow-x: hidden; }
+        :root { --bg-dark: #0a0510; --accent: #FFB39A; --accent-glow: #ff8a66; --text-light: #f0e6ef; --text-dim: #a08ca0; }
+        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg-dark); color: var(--text-light); min-height: 100vh; overflow-x: hidden; display: flex; flex-direction: column; }
         
         .orb { position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.3; z-index: -1; pointer-events: none; }
         .orb-1 { width: 400px; height: 400px; background: #542452; top: -100px; left: -100px; animation: float1 15s infinite ease-in-out; }
@@ -24,44 +24,46 @@
         .nav-links a { color: var(--text-light); text-decoration: none; font-size: 14px; transition: 0.3s; }
         .nav-links a:hover { color: var(--accent); }
 
-        .hero { text-align: center; padding: 80px 20px 40px; }
-        .hero h1 { font-family: 'Orbitron', sans-serif; font-size: 42px; margin-bottom: 15px; }
+        .hero { text-align: center; padding: 100px 20px 40px; }
+        .hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(32px, 5vw, 48px); margin-bottom: 15px; }
         .hero p { color: var(--text-dim); max-width: 500px; margin: auto; font-size: 16px; line-height: 1.6; }
 
         .downloader-box {
             background: rgba(15, 7, 20, 0.8); backdrop-filter: blur(25px);
             border: 1px solid rgba(255,179,154,0.4); border-radius: 24px; padding: 50px; 
             max-width: 700px; margin: 0 auto 100px; box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-            text-align: center;
+            text-align: center; width: 92%;
         }
 
         .input-group { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
         .input-group input {
             flex: 1; min-width: 250px; padding: 16px; border-radius: 12px;
             background: rgba(0,0,0,0.3); border: 1px solid rgba(255,179,154,0.3);
-            color: white; font-family: inherit; font-size: 15px; outline: none;
+            color: white; font-family: inherit; font-size: 15px; outline: none; transition: 0.3s;
         }
-        .input-group input:focus { border-color: var(--accent); }
+        .input-group input:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(255,179,154,0.2); }
         .input-group button {
             padding: 16px 30px; border-radius: 12px; background: linear-gradient(135deg, var(--accent), var(--accent-glow));
-            color: var(--bg-dark); font-weight: 700; border: none; cursor: pointer; transition: 0.3s; font-family: inherit; font-size: 15px;
+            color: #0a0510; font-weight: 700; border: none; cursor: pointer; transition: 0.3s; font-family: inherit; font-size: 15px;
         }
         .input-group button:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(255,179,154,0.3); }
         
         .note { font-size: 13px; color: var(--text-dim); }
 
-        footer { background: linear-gradient(180deg, transparent, rgba(10,5,16,0.9)); border-top: 1px solid rgba(255,179,154,0.1); padding: 50px 20px 30px; text-align: center; }
+        footer { margin-top: auto; background: linear-gradient(180deg, transparent, rgba(10,5,16,0.9)); border-top: 1px solid rgba(255,179,154,0.1); padding: 50px 20px 30px; text-align: center; }
         .footer-brand { font-family: 'Orbitron', sans-serif; font-size: 22px; color: var(--accent); margin-bottom: 15px; }
         .footer-links { display: flex; justify-content: center; gap: 25px; margin: 20px 0; }
-        .footer-links a { color: var(--text-dim); text-decoration: none; font-size: 14px; }
+        .footer-links a { color: var(--text-dim); text-decoration: none; font-size: 14px; transition: 0.3s; }
+        .footer-links a:hover { color: var(--accent); }
         .footer-copy { color: var(--text-dim); font-size: 12px; margin-top: 20px; }
         
-        @media (max-width: 600px) { .downloader-box { padding: 30px 20px; } }
+        @media (max-width: 600px) { .downloader-box { padding: 30px 20px; } .input-group button { width: 100%; } }
     </style>
 </head>
 <body>
 
-<div class="orb orb-1"></div><div class="orb orb-2"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
 
 <nav class="navbar">
     <a href="index.html" class="nav-logo"><span>⚡</span> ToolsMediaDownloader</a>
@@ -78,7 +80,7 @@
 
 <div class="downloader-box">
     <div class="input-group">
-        <input type="text" id="videoUrl" placeholder="Paste TikTok URL here (https://www.tiktok.com/...)">
+        <input type="text" id="videoUrl" placeholder="Paste TikTok URL (https://www.tiktok.com/...)">
         <button onclick="downloadTikTok()">Download Video</button>
     </div>
     <p class="note">🔒 100% Secure. Downloads process directly to your device.</p>
@@ -96,12 +98,11 @@
 <script>
     function downloadTikTok() {
         const url = document.getElementById('videoUrl').value;
-        if(!url.includes('tiktok.com')) {
-            alert('Please enter a valid TikTok URL!');
+        if(url === "" || !url.includes('tiktok.com')) {
+            alert('Error: Please enter a valid TikTok URL!');
             return;
         }
-        alert('API integration required to fetch video: ' + url);
-        // Add your TikTok API fetch logic here
+        alert('Ready to download! (API Integration needed to fetch: ' + url + ')');
     }
 </script>
 
