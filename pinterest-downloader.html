@@ -1,144 +1,568 @@
-import os
-import shutil
-import tempfile
-from urllib.parse import urlparse
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-from flask import Flask, request, send_file, jsonify
-from flask_cors import CORS
-import yt_dlp
+    <title>Pinterest Video Downloader | ToolsMediaDownloader</title>
+    <meta name="description" content="Download accessible public Pinterest video Pins with ToolsMediaDownloader.">
 
-app = Flask(__name__)
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📌%3C/text%3E%3C/svg%3E">
 
-ALLOWED_ORIGINS = [
-    "https://toolsmediadownload.online",
-    "https://www.toolsmediadownload.online",
-]
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
 
-CORS(app, resources={r"/download": {"origins": ALLOWED_ORIGINS}})
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
-INSTAGRAM_HOSTS = {
-    "instagram.com",
-    "www.instagram.com",
-}
-
-FACEBOOK_HOSTS = {
-    "facebook.com",
-    "www.facebook.com",
-    "m.facebook.com",
-    "web.facebook.com",
-    "fb.watch",
-    "fb.com",
-    "www.fb.com",
-}
-
-PINTEREST_HOSTS = {
-    "pinterest.com",
-    "www.pinterest.com",
-    "m.pinterest.com",
-    "in.pinterest.com",
-    "pin.it",
-}
-
-
-def get_platform(url):
-    try:
-        parsed = urlparse(url)
-        host = (parsed.hostname or "").lower()
-
-        if parsed.scheme != "https":
-            return None
-
-        if host in INSTAGRAM_HOSTS:
-            if parsed.path.startswith(("/p/", "/reel/", "/reels/", "/tv/")):
-                return "instagram"
-
-        if host in FACEBOOK_HOSTS:
-            if parsed.path != "/":
-                return "facebook"
-
-        if host in PINTEREST_HOSTS:
-            if host == "pin.it" or parsed.path.startswith("/pin/"):
-                return "pinterest"
-
-        return None
-
-    except Exception:
-        return None
-
-
-@app.route("/", methods=["GET"])
-def home():
-    return "Instagram, Facebook and Pinterest downloader backend is running!"
-
-
-@app.route("/download", methods=["POST"])
-def download_video():
-    data = request.get_json(silent=True) or {}
-    url = (data.get("url") or "").strip()
-    platform = get_platform(url)
-
-    if not platform:
-        return jsonify({
-            "error": "Valid public Instagram, Facebook ya Pinterest video link dein."
-        }), 400
-
-    temp_dir = tempfile.mkdtemp(prefix="media_download_")
-
-    try:
-        options = {
-            "outtmpl": os.path.join(temp_dir, "video.%(ext)s"),
-            "format": "best[ext=mp4]/best",
-            "noplaylist": True,
-            "quiet": True,
-            "no_warnings": True,
-            "socket_timeout": 30,
-            "max_filesize": 100 * 1024 * 1024,
+        :root {
+            --bg-dark: #0a0510;
+            --accent: #FFB39A;
+            --accent-glow: #ff8a66;
+            --pin-red: #E60023;
+            --text-light: #f0e6ef;
+            --text-dim: #a08ca0;
         }
 
-        with yt_dlp.YoutubeDL(options) as ydl:
-            ydl.download([url])
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
 
-        files = [
-            os.path.join(temp_dir, name)
-            for name in os.listdir(temp_dir)
-            if os.path.isfile(os.path.join(temp_dir, name))
-        ]
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: .3;
+            z-index: -1;
+            pointer-events: none;
+        }
 
-        if not files:
-            raise RuntimeError("Video file nahi mili.")
+        .orb-1 {
+            width: 420px;
+            height: 420px;
+            background: #E60023;
+            top: -120px;
+            left: -100px;
+            animation: float1 16s infinite ease-in-out;
+        }
 
-        video_path = files[0]
-        extension = os.path.splitext(video_path)[1] or ".mp4"
-        filename = f"{platform}_video{extension}"
+        .orb-2 {
+            width: 350px;
+            height: 350px;
+            background: #ff8a66;
+            bottom: -100px;
+            right: -80px;
+            animation: float2 19s infinite ease-in-out;
+        }
 
-        response = send_file(
-            video_path,
-            as_attachment=True,
-            download_name=filename,
-        )
+        @keyframes float1 {
+            50% { transform: translate(90px, 140px); }
+        }
 
-        response.call_on_close(
-            lambda: shutil.rmtree(temp_dir, ignore_errors=True)
-        )
+        @keyframes float2 {
+            50% { transform: translate(-70px, -110px); }
+        }
 
-        return response
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 5, 16, .8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 179, 154, .15);
+            padding: 16px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            z-index: 100;
+        }
 
-    except Exception:
-        shutil.rmtree(temp_dir, ignore_errors=True)
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: 20px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
 
-        app.logger.exception("Media download failed for platform: %s", platform)
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 14px;
+            margin-left: 20px;
+            transition: .3s;
+        }
 
-        return jsonify({
-            "error": (
-                "Video download nahi ho saki. Public link check karein. "
-                "Kuch videos login, privacy ya platform restrictions ki "
-                "wajah se available nahi hoti."
-            )
-        }), 400
+        .nav-links a:hover { color: var(--accent); }
 
+        .hero {
+            text-align: center;
+            padding: 80px 20px 40px;
+        }
 
-if __name__ == "__main__":
-    app.run(
-        host="0.0.0.0",
-        port=int(os.environ.get("PORT", 10000))
-    )
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(30px, 5vw, 48px);
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span { color: var(--pin-red); }
+
+        .hero p {
+            color: var(--text-dim);
+            max-width: 540px;
+            margin: 0 auto;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .downloader-box {
+            background: rgba(15, 7, 20, .85);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(230, 0, 35, .35);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 700px;
+            width: 92%;
+            margin: 0 auto 80px;
+            box-shadow: 0 30px 60px rgba(0,0,0,.5);
+            text-align: center;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+
+        .input-group input {
+            flex: 1;
+            min-width: 220px;
+            padding: 16px 18px;
+            border-radius: 14px;
+            background: rgba(0,0,0,.4);
+            border: 1px solid rgba(230,0,35,.4);
+            color: white;
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: var(--pin-red);
+            box-shadow: 0 0 0 3px rgba(230,0,35,.2);
+        }
+
+        .input-group button {
+            padding: 16px 28px;
+            border-radius: 14px;
+            background: var(--pin-red);
+            color: white;
+            font-weight: 700;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            transition: .3s;
+            font-family: inherit;
+        }
+
+        .input-group button:hover {
+            background: #c90020;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(230,0,35,.3);
+        }
+
+        .input-group button:disabled {
+            opacity: .6;
+            cursor: wait;
+            transform: none;
+        }
+
+        .status-msg {
+            min-height: 24px;
+            margin: 12px 0 5px;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--accent);
+            overflow-wrap: anywhere;
+        }
+
+        .result-card {
+            display: none;
+            margin-top: 25px;
+            background: rgba(0,0,0,.35);
+            border: 1px solid rgba(230,0,35,.3);
+            border-radius: 18px;
+            padding: 25px;
+            text-align: left;
+            animation: fadeIn .4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-content {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .result-info {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .result-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .result-meta {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-bottom: 16px;
+            overflow-wrap: anywhere;
+        }
+
+        .download-btns {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .dl-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            background: var(--pin-red);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 13px;
+            transition: .3s;
+        }
+
+        .dl-btn:hover {
+            background: #c90020;
+            transform: translateY(-2px);
+        }
+
+        .note {
+            font-size: 13px;
+            color: var(--text-dim);
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+
+        footer {
+            margin-top: auto;
+            background: linear-gradient(180deg, transparent, rgba(10,5,16,.9));
+            border-top: 1px solid rgba(255,179,154,.1);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            margin: 0 14px;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
+
+        .footer-copy {
+            color: var(--text-dim);
+            font-size: 13px;
+            margin-top: 18px;
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-links {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links a { margin: 0 8px; }
+            .hero { padding-top: 55px; }
+            .input-group button { width: 100%; }
+            .downloader-box { padding: 28px 18px; }
+
+            .result-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .download-btns { justify-content: center; }
+        }
+
+        [hidden] { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo">⚡ ToolsMediaDownloader</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="mailto:m.aliarain070@gmail.com">Support</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Pinterest <span>Downloader</span></h1>
+        <p>Download accessible public Pinterest video Pins directly through ToolsMediaDownloader without redirecting to another downloader website.</p>
+    </section>
+
+    <main class="downloader-box">
+        <form id="downloadForm" class="input-group">
+            <input
+                type="url"
+                id="pinUrl"
+                placeholder="Paste Pinterest video Pin link here..."
+                aria-label="Pinterest video URL"
+                autocomplete="url"
+                required
+            >
+            <button type="submit" id="fetchBtn">Download</button>
+        </form>
+
+        <div class="status-msg" id="statusMsg" role="status" aria-live="polite"></div>
+
+        <div class="result-card" id="resultCard">
+            <div class="result-content">
+                <div class="result-info">
+                    <div class="result-title" id="videoTitle">Pinterest Video Ready</div>
+                    <div class="result-meta" id="videoMeta">Your video is ready to save.</div>
+                    <div class="download-btns">
+                        <a
+                            href="#"
+                            id="downloadBtn"
+                            class="dl-btn"
+                            download="pinterest_video.mp4"
+                            hidden
+                        >Download Video</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="note">
+            🔒 Works with accessible public video Pins. Some Pins may not be available.
+            Only download content you have permission to save.
+        </p>
+    </main>
+
+    <footer>
+        <div class="footer-brand">⚡ ToolsMediaDownloader</div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="mailto:m.aliarain070@gmail.com">Contact Support</a>
+        </div>
+        <p class="footer-copy">© 2026 ToolsMediaDownloader. Free online tools.</p>
+    </footer>
+
+    <script>
+        const BACKEND_URL =
+            "https://instagram-downloader-backend-nd5n.onrender.com";
+
+        const form = document.getElementById("downloadForm");
+        const input = document.getElementById("pinUrl");
+        const status = document.getElementById("statusMsg");
+        const resultCard = document.getElementById("resultCard");
+        const button = document.getElementById("fetchBtn");
+        const downloadBtn = document.getElementById("downloadBtn");
+
+        let currentObjectUrl = null;
+
+        function validPinterestUrl(value) {
+            try {
+                const parsed = new URL(value);
+                const host = parsed.hostname.toLowerCase();
+
+                const allowedHosts = [
+                    "pinterest.com",
+                    "www.pinterest.com",
+                    "m.pinterest.com",
+                    "in.pinterest.com",
+                    "pin.it"
+                ];
+
+                if (
+                    parsed.protocol !== "https:" ||
+                    !allowedHosts.includes(host)
+                ) {
+                    return false;
+                }
+
+                return host === "pin.it" ||
+                    parsed.pathname.startsWith("/pin/");
+            } catch {
+                return false;
+            }
+        }
+
+        function clearResult() {
+            resultCard.style.display = "none";
+            downloadBtn.hidden = true;
+            downloadBtn.removeAttribute("href");
+
+            if (currentObjectUrl) {
+                URL.revokeObjectURL(currentObjectUrl);
+                currentObjectUrl = null;
+            }
+        }
+
+        form.addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            const url = input.value.trim();
+
+            if (!validPinterestUrl(url)) {
+                clearResult();
+                status.textContent =
+                    "Please paste a valid Pinterest video Pin link.";
+                return;
+            }
+
+            clearResult();
+            button.disabled = true;
+            button.textContent = "Processing...";
+            status.textContent =
+                "Connecting to our server. This may take a little while.";
+
+            const controller = new AbortController();
+            const timeoutId = setTimeout(
+                () => controller.abort(),
+                180000
+            );
+
+            try {
+                const response = await fetch(BACKEND_URL + "/download", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ url: url }),
+                    signal: controller.signal
+                });
+
+                const contentType =
+                    response.headers.get("content-type") || "";
+
+                if (!response.ok) {
+                    let message =
+                        "Pinterest video could not be downloaded.";
+
+                    if (contentType.includes("application/json")) {
+                        const data = await response.json();
+                        message = data.error || message;
+                    }
+
+                    throw new Error(message);
+                }
+
+                if (contentType.includes("application/json")) {
+                    const data = await response.json();
+                    throw new Error(
+                        data.error || "Pinterest video could not be downloaded."
+                    );
+                }
+
+                const blob = await response.blob();
+
+                if (!blob.size) {
+                    throw new Error("The server returned an empty file.");
+                }
+
+                currentObjectUrl = URL.createObjectURL(blob);
+
+                const disposition =
+                    response.headers.get("content-disposition") || "";
+
+                const match = disposition.match(/filename="?([^";]+)"?/i);
+                const filename = match
+                    ? match[1]
+                    : "pinterest_video.mp4";
+
+                downloadBtn.href = currentObjectUrl;
+                downloadBtn.download = filename;
+                downloadBtn.hidden = false;
+
+                document.getElementById("videoTitle").textContent =
+                    "Pinterest Video Ready";
+
+                document.getElementById("videoMeta").textContent =
+                    "File size: " +
+                    (blob.size / (1024 * 1024)).toFixed(2) +
+                    " MB";
+
+                resultCard.style.display = "block";
+                status.textContent =
+                    "✓ Video is ready. Click Download Video to save it.";
+
+            } catch (error) {
+                console.error("Pinterest download error:", error);
+
+                if (error.name === "AbortError") {
+                    status.textContent =
+                        "The request took too long. Please try again.";
+                } else if (error instanceof TypeError) {
+                    status.textContent =
+                        "Could not connect to our server. Check the backend and try again.";
+                } else {
+                    status.textContent =
+                        error.message ||
+                        "Download failed. Try another public video Pin.";
+                }
+
+            } finally {
+                clearTimeout(timeoutId);
+                button.disabled = false;
+                button.textContent = "Download";
+            }
+        });
+
+        window.addEventListener("pagehide", function() {
+            if (currentObjectUrl) {
+                URL.revokeObjectURL(currentObjectUrl);
+            }
+        });
+    </script>
+</body>
+</html>
