@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pinterest Video Downloader | ToolsMediaDownloader</title>
+    <meta name="description" content="Download accessible public Pinterest video Pins directly with ToolsMediaDownloader.">
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📌%3C/text%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg-dark: #0a0510;
+            --accent: #FFB39A;
+            --accent-glow: #ff8a66;
+            --pin-red: #E60023;
+            --text-light: #f0e6ef;
+            --text-dim: #a08ca0;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: .3;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .orb-1 {
+            width: 420px;
+            height: 420px;
+            background: #E60023;
+            top: -120px;
+            left: -100px;
+            animation: float1 16s infinite ease-in-out;
+        }
+
+        .orb-2 {
+            width: 350px;
+            height: 350px;
+            background: #ff8a66;
+            bottom: -100px;
+            right: -80px;
+            animation: float2 19s infinite ease-in-out;
+        }
+
+        @keyframes float1 { 50% { transform: translate(90px, 140px); } }
+        @keyframes float2 { 50% { transform: translate(-70px, -110px); } }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 5, 16, .8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 179, 154, .15);
+            padding: 16px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: 20px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 14px;
+            margin-left: 20px;
+            transition: .3s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px 40px;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(30px, 5vw, 48px);
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span { color: var(--pin-red); }
+
+        .hero p {
+            color: var(--text-dim);
+            max-width: 540px;
+            margin: 0 auto;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .downloader-box {
+            background: rgba(15, 7, 20, .85);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(230, 0, 35, .35);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 700px;
+            width: 92%;
+            margin: 0 auto 80px;
+            box-shadow: 0 30px 60px rgba(0,0,0,.5);
+            text-align: center;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .input-group input {
+            flex: 1;
+            min-width: 220px;
+            padding: 16px 18px;
+            border-radius: 14px;
+            background: rgba(0,0,0,.4);
+            border: 1px solid rgba(230,0,35,.4);
+            color: white;
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color .3s, box-shadow .3s;
+        }
+
+        .input-group input:focus {
+            border-color: var(--pin-red);
+            box-shadow: 0 0 0 3px rgba(230,0,35,.2);
+        }
+
+        .input-group button {
+            padding: 16px 32px;
+            border-radius: 14px;
+            background: var(--pin-red);
+            color: white;
+            font-weight: 700;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            transition: .3s;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .input-group button:hover {
+            background: #c90020;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(230,0,35,.4);
+        }
+
+        .input-group button:disabled {
+            opacity: .6;
+            cursor: wait;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .status-msg {
+            min-height: 24px;
+            margin: 15px 0 10px;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--accent);
+            overflow-wrap: anywhere;
+        }
+
+        .note {
+            font-size: 13px;
+            color: var(--text-dim);
+            line-height: 1.6;
+            margin-top: 25px;
+            border-top: 1px solid rgba(255, 179, 154, .1);
+            padding-top: 20px;
+        }
+
+        footer {
+            margin-top: auto;
+            background: linear-gradient(180deg, transparent, rgba(10,5,16,.9));
+            border-top: 1px solid rgba(255,179,154,.1);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            margin: 0 14px;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
+
+        .footer-copy {
+            color: var(--text-dim);
+            font-size: 13px;
+            margin-top: 18px;
+        }
+
+        @media (max-width: 600px) {
+            .navbar { flex-wrap: wrap; justify-content: center; }
+            .nav-links { width: 100%; text-align: center; }
+            .nav-links a { margin: 0 8px; }
+            .hero { padding-top: 55px; }
+            .input-group button { width: 100%; }
+            .downloader-box { padding: 28px 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo">⚡ ToolsMediaDownloader</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="mailto:m.aliarain070@gmail.com">Support</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Pinterest <span>Downloader</span></h1>
+        <p>Download accessible public Pinterest videos directly to your device with ToolsMediaDownloader.</p>
+    </section>
+
+    <main class="downloader-box">
+        <form id="downloadForm" class="input-group">
+            <input
+                type="url"
+                id="pinUrl"
+                placeholder="Paste Pinterest video Pin link here..."
+                aria-label="Pinterest video URL"
+                autocomplete="url"
+                required
+            >
+            <button type="submit" id="fetchBtn">Download</button>
+        </form>
+
+        <div class="status-msg" id="statusMsg" role="status" aria-live="polite"></div>
+
+        <p class="note">
+            🔒 Works with accessible public video Pins. Downloads start automatically once processed.
+        </p>
+    </main>
+
+    <footer>
+        <div class="footer-brand">⚡ ToolsMediaDownloader</div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="mailto:m.aliarain070@gmail.com">Contact Support</a>
+        </div>
+        <p class="footer-copy">© 2026 ToolsMediaDownloader. Free online tools.</p>
+    </footer>
+
+    <script>
+        const BACKEND_URL = "https://instagram-downloader-backend-nd5n.onrender.com";
+
+        const form = document.getElementById("downloadForm");
+        const input = document.getElementById("pinUrl");
+        const status = document.getElementById("statusMsg");
+        const button = document.getElementById("fetchBtn");
+
+        function validPinterestUrl(value) {
+            try {
+                const parsed = new URL(value);
+                const host = parsed.hostname.toLowerCase();
+                const allowedHosts = [
+                    "pinterest.com",
+                    "www.pinterest.com",
+                    "m.pinterest.com",
+                    "in.pinterest.com",
+                    "pin.it"
+                ];
+
+                if (parsed.protocol !== "https:" || !allowedHosts.includes(host)) {
+                    return false;
+                }
+
+                return host === "pin.it" || parsed.pathname.startsWith("/pin/");
+            } catch {
+                return false;
+            }
+        }
+
+        // Triggers direct automatic file save in the user's browser
+        function triggerDirectDownload(blob, filename) {
+            const downloadUrl = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.style.display = "none";
+            a.href = downloadUrl;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            
+            // Clean up memory after trigger
+            setTimeout(() => {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(downloadUrl);
+            }, 100);
+        }
+
+        form.addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            const url = input.value.trim();
+
+            if (!validPinterestUrl(url)) {
+                status.textContent = "Please paste a valid Pinterest video Pin link.";
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent = "Processing...";
+            status.textContent = "Connecting to server & preparing your download...";
+
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 180000);
+
+            try {
+                const response = await fetch(BACKEND_URL + "/download", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ url: url }),
+                    signal: controller.signal
+                });
+
+                const contentType = response.headers.get("content-type") || "";
+
+                if (!response.ok) {
+                    let message = "Pinterest video could not be downloaded.";
+                    if (contentType.includes("application/json")) {
+                        const data = await response.json();
+                        message = data.error || message;
+                    }
+                    throw new Error(message);
+                }
+
+                if (contentType.includes("application/json")) {
+                    const data = await response.json();
+                    throw new Error(data.error || "Pinterest video could not be downloaded.");
+                }
+
+                const blob = await response.blob();
+                if (!blob.size) {
+                    throw new Error("The server returned an empty file.");
+                }
+
+                const disposition = response.headers.get("content-disposition") || "";
+                const match = disposition.match(/filename="?([^";]+)"?/i);
+                const filename = match ? match[1] : "pinterest_video.mp4";
+
+                // Direct download without any card
+                triggerDirectDownload(blob, filename);
+
+                status.textContent = "✓ Download started! Check your device downloads folder.";
+                input.value = ""; // Clear input on success
+
+            } catch (error) {
+                console.error("Pinterest download error:", error);
+
+                if (error.name === "AbortError") {
+                    status.textContent = "The request took too long. Please try again.";
+                } else if (error instanceof TypeError) {
+                    status.textContent = "Could not connect to backend server. Please check the backend and try again.";
+                } else {
+                    status.textContent = error.message || "Download failed. Try another public video Pin.";
+                }
+
+            } finally {
+                clearTimeout(timeoutId);
+                button.disabled = false;
+                button.textContent = "Download";
+            }
+        });
+    </script>
+</body>
+</html>
