@@ -3,74 +3,299 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog & Tech Guides - ToolsMediaDownloader</title>
-    <meta name="description" content="Read helpful guides on PDF management, video downloading tips, and online privacy.">
-    
-    <!-- Favicon (Tab Icon) -->
+    <title>Blog & Guides - ToolsMediaDownloader</title>
+    <meta name="description" content="Helpful guides on PDF tools, video downloading and online privacy.">
+
+    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
-    
+
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        :root { --bg-dark: #0a0510; --accent: #FFB39A; --accent-glow: #ff8a66; --text-light: #f0e6ef; --text-dim: #a08ca0; }
-        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
-        
-        /* Navbar & Mobile Menu */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg-dark: #0a0510;
+            --accent: #FFB39A;
+            --accent-glow: #ff8a66;
+            --text-light: #f0e6ef;
+            --text-dim: #a08ca0;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* ========== NAVBAR ========== */
         .navbar {
-            position: sticky; top: 0; background: rgba(10,5,16,0.85); backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,179,154,0.15); padding: 18px 5%;
-            display: flex; justify-content: space-between; align-items: center; z-index: 1000;
+            position: sticky;
+            top: 0;
+            background: rgba(10, 5, 16, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 179, 154, 0.15);
+            padding: 16px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
         }
+
         .nav-logo {
-            font-family: 'Orbitron', sans-serif; font-weight: 800; font-size: clamp(16px, 3vw, 20px);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: 18px;
             background: linear-gradient(135deg, var(--accent), var(--accent-glow));
-            -webkit-background-clip: text; background-clip: text; color: transparent;
-            text-decoration: none; letter-spacing: 1px; display: flex; align-items: center; gap: 10px;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .nav-logo span { font-size: 24px; }
-        
-        .nav-links { display: flex; gap: 25px; align-items: center; }
-        .nav-links a { color: var(--text-light); text-decoration: none; font-size: 14.5px; font-weight: 500; position: relative; transition: color 0.3s; }
-        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.3s; }
-        .nav-links a:hover { color: var(--accent); }
-        .nav-links a:hover::after { width: 100%; }
 
-        /* Hamburger Button */
-        .menu-toggle { display: none; cursor: pointer; color: var(--text-light); }
-        .menu-toggle svg { width: 28px; height: 28px; stroke: currentColor; stroke-width: 2; fill: none; }
+        .nav-logo span {
+            font-size: 22px;
+        }
 
-        .container { max-width: 1100px; margin: 60px auto; padding: 0 20px; }
-        .header { text-align: center; margin-bottom: 50px; }
-        .header h1 { font-family: 'Orbitron', sans-serif; font-size: 38px; color: var(--accent); margin-bottom: 10px; }
-        .header p { color: var(--text-dim); font-size: 16px; }
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
 
-        .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .blog-card { background: linear-gradient(135deg, rgba(84,36,82,0.4), rgba(26,13,26,0.4)); border: 1px solid rgba(255,179,154,0.15); border-radius: 20px; padding: 25px; transition: 0.3s; }
-        .blog-card:hover { transform: translateY(-5px); border-color: var(--accent); }
-        .blog-tag { color: var(--accent); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 10px; display: block; }
-        .blog-card h2 { font-size: 20px; color: white; margin-bottom: 12px; font-family: 'Orbitron', sans-serif; }
-        .blog-card p { color: var(--text-dim); font-size: 14px; margin-bottom: 20px; line-height: 1.6; }
-        .read-btn { display: inline-block; color: var(--accent); text-decoration: none; font-weight: 600; font-size: 14px; }
-        .read-btn:hover { text-decoration: underline; }
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
 
-        footer { border-top: 1px solid rgba(255,179,154,0.1); padding: 30px 20px; text-align: center; color: var(--text-dim); font-size: 13px; margin-top: 80px; }
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
 
-        /* Mobile Responsive */
+        /* Hamburger */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .menu-toggle svg {
+            width: 28px;
+            height: 28px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* ========== MAIN CONTENT ========== */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px 80px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(28px, 5vw, 42px);
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .page-header p {
+            color: var(--text-dim);
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ========== BLOG GRID ========== */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .blog-card {
+            background: linear-gradient(135deg, rgba(84, 36, 82, 0.45), rgba(26, 13, 26, 0.45));
+            border: 1px solid rgba(255, 179, 154, 0.15);
+            border-radius: 18px;
+            padding: 28px;
+            transition: all 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent);
+            box-shadow: 0 15px 40px rgba(255, 179, 154, 0.15);
+        }
+
+        .blog-tag {
+            display: inline-block;
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .blog-card h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            color: white;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .blog-card p {
+            color: var(--text-dim);
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .read-btn {
+            display: inline-block;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: gap 0.3s;
+        }
+
+        .read-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            border-top: 1px solid rgba(255, 179, 154, 0.1);
+            padding: 30px 20px;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 13px;
+        }
+
+        /* ========== MOBILE ========== */
         @media (max-width: 768px) {
-            .menu-toggle { display: block; }
+            .menu-toggle {
+                display: block;
+            }
+
             .nav-links {
                 display: none;
-                flex-direction: column;
                 position: absolute;
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background: rgba(10,5,16,0.95);
-                backdrop-filter: blur(20px);
-                border-bottom: 1px solid rgba(255,179,154,0.2);
-                padding: 20px 0;
+                background: rgba(10, 5, 16, 0.97);
+                flex-direction: column;
+                padding: 25px 0;
                 gap: 20px;
                 text-align: center;
+                border-bottom: 1px solid rgba(255, 179, 154, 0.15);
             }
-            .nav-links.active 
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .page-header h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo">
+            <span>⚡</span> ToolsMediaDownloader
+        </a>
+
+        <button class="menu-toggle" onclick="toggleMenu()">
+            <svg viewBox="0 0 24 24">
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="blog.html" class="active">Blog</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <div class="page-header">
+            <h1>Latest Articles & Guides</h1>
+            <p>Explore tutorials, tech insights, and step-by-step guides on document optimization and media downloading.</p>
+        </div>
+
+        <div class="blog-grid">
+
+            <!-- Card 1 -->
+            <div class="blog-card">
+                <span class="blog-tag">PDF Guide</span>
+                <h2>How to Compress PDF Files Without Losing Quality</h2>
+                <p>Learn the best techniques to reduce large PDF document sizes for email attachments while keeping images sharp and text clear.</p>
+                <a href="how-to-compress-pdf-guide.html" class="read-btn">Read Full Article →</a>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="blog-card">
+                <span class="blog-tag">Tutorial</span>
+                <h2>How to Convert Multiple JPG Images into One PDF</h2>
+                <p>Step-by-step guide on compiling your scanned images and receipts into a single professional PDF document in your browser.</p>
+                <a href="convert-jpg-to-pdf-guide.html" class="read-btn">Read Full Article →</a>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="blog-card">
+                <span class="blog-tag">Privacy</span>
+                <h2>Why Client-Side File Processing is Safest for Privacy</h2>
+                <p>Discover why offline browser processing protects your sensitive personal documents better than traditional cloud servers.</p>
+                <a href="browser-file-privacy-guide.html" class="read-btn">Read Full Article →</a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        © 2026 ToolsMediaDownloader · All rights reserved.
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+    </script>
+
+</body>
+</html>
