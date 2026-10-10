@@ -6,6 +6,7 @@
     <title>ToolsMediaDownloader | Free PDF & Video Tools</title>
     <meta name="description" content="Free online tools to convert, merge PDFs and download HD videos. Fast, secure, works in your browser.">
     
+    <!-- Google Search Console Verification Tag -->
     <meta name="google-site-verification" content="R4_xT1JhDfFTocdkhduMOq6FO7SIGjEv68zE8MJph04" />
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
@@ -71,11 +72,11 @@
         @keyframes float2 { 50% { transform: translate(-80px, -120px); } }
         @keyframes float3 { 50% { transform: translate(-150px, 100px); } }
 
-        /* Navbar */
+        /* Navbar & Mobile Menu */
         .navbar {
-            position: sticky; top: 0; background: rgba(10,5,16,0.7); backdrop-filter: blur(20px);
+            position: sticky; top: 0; background: rgba(10,5,16,0.85); backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255,179,154,0.15); padding: 18px 5%;
-            display: flex; justify-content: space-between; align-items: center; z-index: 1000; flex-wrap: wrap; gap: 10px;
+            display: flex; justify-content: space-between; align-items: center; z-index: 1000;
         }
         .nav-logo {
             font-family: 'Orbitron', sans-serif; font-weight: 800; font-size: clamp(16px, 3vw, 20px);
@@ -84,11 +85,16 @@
             text-decoration: none; letter-spacing: 1px; display: flex; align-items: center; gap: 10px;
         }
         .nav-logo span { font-size: 24px; }
-        .nav-links { display: flex; gap: 20px; flex-wrap: wrap; }
-        .nav-links a { color: var(--text-light); text-decoration: none; font-size: 14px; font-weight: 500; position: relative; transition: color 0.3s; }
+        
+        .nav-links { display: flex; gap: 25px; align-items: center; }
+        .nav-links a { color: var(--text-light); text-decoration: none; font-size: 14.5px; font-weight: 500; position: relative; transition: color 0.3s; }
         .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.3s; }
         .nav-links a:hover { color: var(--accent); }
         .nav-links a:hover::after { width: 100%; }
+
+        /* Hamburger Button (Hidden on Desktop) */
+        .menu-toggle { display: none; cursor: pointer; color: var(--text-light); }
+        .menu-toggle svg { width: 28px; height: 28px; stroke: currentColor; stroke-width: 2; fill: none; }
 
         /* Hero */
         .hero-section { text-align: center; padding: 100px 20px 80px; position: relative; z-index: 2; transition: opacity 0.5s ease, transform 0.5s ease; }
@@ -171,10 +177,8 @@
 
         .logo-tiktok { background: #000000; }
         .logo-tiktok svg { fill: white; stroke: none; }
-        
         .logo-insta { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
         .logo-insta svg { fill: white; stroke: none; }
-        
         .logo-fb { background: #1877F2; }
         .logo-fb svg { fill: white; stroke: none; }
 
@@ -243,17 +247,34 @@
         .chat-input-area button { padding: 10px 16px; background: var(--accent); color: var(--bg-dark); border: none; border-radius: 12px; font-weight: 700; cursor: pointer; }
 
         /* =========================================
-           MOBILE RESPONSIVE FIXES (Modern App Style)
+           MOBILE RESPONSIVE MENU & CLEAN LAYOUT FIX
            ========================================= */
-        @media (max-width: 600px) {
-            .nav-links { gap: 12px; justify-content: center; margin-top: 10px; } 
+        @media (max-width: 768px) {
+            /* Mobile Navbar Hamburger */
+            .menu-toggle { display: block; }
+            .nav-links {
+                display: none; /* Hidden by default on mobile */
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10,5,16,0.95);
+                backdrop-filter: blur(20px);
+                border-bottom: 1px solid rgba(255,179,154,0.2);
+                padding: 20px 0;
+                gap: 20px;
+                text-align: center;
+            }
+            .nav-links.active { display: flex; } /* Shows menu when clicked */
             
+            /* Clean Hero Layout */
             .hero-section { padding: 50px 15px 40px; }
-            .hero-section h1 { font-size: 32px; }
+            .hero-section h1 { font-size: 36px; }
             .hero-section p { font-size: 15px; }
             
-            /* Button Fixes for Mobile */
-            .hero-cta { flex-direction: column; gap: 12px; width: 100%; padding: 0 10px; align-items: stretch; }
+            /* Equal Width Stacked Buttons */
+            .hero-cta { flex-direction: column; gap: 12px; width: 100%; max-width: 300px; margin: 0 auto; align-items: stretch; }
             .btn-primary, .btn-ghost { width: 100%; text-align: center; padding: 16px; font-size: 15px; }
             
             .workspace { padding: 30px 15px; }
@@ -271,12 +292,19 @@
 
 <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
 
-<!-- NAVBAR -->
+<!-- NAVBAR WITH HAMBURGER -->
 <nav class="navbar">
     <a href="index.html" class="nav-logo"><span>⚡</span> ToolsMediaDownloader</a>
-    <div class="nav-links">
-        <a href="#document-tools">PDF Tools</a>
-        <a href="#video-tools">Video Tools</a>
+    
+    <!-- Mobile Hamburger Icon -->
+    <div class="menu-toggle" onclick="toggleMobileMenu()">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </div>
+
+    <!-- Nav Links -->
+    <div class="nav-links" id="navMenu">
+        <a href="#document-tools" onclick="toggleMobileMenu()">PDF Tools</a>
+        <a href="#video-tools" onclick="toggleMobileMenu()">Video Tools</a>
         <a href="blog.html">Blog</a>
         <a href="about.html">About</a>
     </div>
@@ -544,6 +572,12 @@
 
 <script>
 "use strict";
+
+/* Mobile Hamburger Menu Toggle */
+function toggleMobileMenu() {
+    const menu = document.getElementById("navMenu");
+    menu.classList.toggle("active");
+}
 
 /* FAIL-SAFE LOADER SCRIPT */
 function removeLoader() {
