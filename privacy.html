@@ -4,71 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - ToolsMediaDownloader</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: Arial, sans-serif; background: #160c16; color: #ffffff; min-height: 100vh; display: flex; flex-direction: column; }
-        .navbar { background: #542452; border-bottom: 3px solid #FFB39A; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-        .nav-logo { display: flex; align-items: center; gap: 10px; color: #FFB39A; text-decoration: none; font-size: 24px; font-weight: bold; }
-        .nav-logo svg { width: 28px; height: 28px; fill: #FFB39A; }
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { color: #f5e7f2; text-decoration: none; font-size: 15px; font-weight: bold; transition: color 0.3s; }
-        .nav-links a:hover { color: #FFB39A; }
+        :root { --bg-dark: #0a0510; --accent: #FFB39A; --accent-glow: #ff8a66; --text-light: #f0e6ef; --text-dim: #a08ca0; }
+        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.8; }
         
-        .container { width: 90%; max-width: 800px; margin: 50px auto; flex: 1; background: #381736; padding: 40px; border-radius: 12px; border: 1px solid #743871; }
-        .container h1 { color: #FFB39A; margin-bottom: 20px; font-size: 32px; }
-        .container h2 { color: #FFB39A; margin-top: 25px; margin-bottom: 10px; font-size: 20px; }
-        .container p { color: #d8c9d6; line-height: 1.8; margin-bottom: 15px; font-size: 15px; }
+        .navbar { position: sticky; top: 0; background: rgba(10,5,16,0.7); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,179,154,0.15); padding: 18px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
+        .nav-logo { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent-glow)); -webkit-background-clip: text; color: transparent; text-decoration: none; }
+        .nav-links a { color: var(--text-light); text-decoration: none; font-size: 14px; margin-left: 20px; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
 
-        footer { margin-top: 40px; background: #381736; border-top: 2px solid #542452; padding: 30px 20px; text-align: center; }
-        .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; }
-        .footer-links a { color: #d8c9d6; text-decoration: none; font-size: 14px; }
-        .footer-links a:hover { color: #FFB39A; text-decoration: underline; }
-        .footer-copy { color: #9a7d98; font-size: 13px; }
-        @media (max-width: 600px) { .navbar { flex-direction: column; gap: 15px; } .container { padding: 20px; } }
+        .content-container { max-width: 800px; margin: 60px auto; padding: 40px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,179,154,0.1); border-radius: 20px; }
+        h1 { font-family: 'Orbitron', sans-serif; color: var(--accent); margin-bottom: 20px; font-size: 32px; }
+        h2 { color: white; margin: 30px 0 15px; font-size: 22px; }
+        p { color: var(--text-dim); margin-bottom: 15px; font-size: 15.5px; }
+        ul { margin-left: 20px; color: var(--text-dim); margin-bottom: 15px; }
+        ul li { margin-bottom: 8px; }
+
+        footer { border-top: 1px solid rgba(255,179,154,0.1); padding: 30px 20px; text-align: center; color: var(--text-dim); font-size: 13px; }
     </style>
 </head>
 <body>
 
 <nav class="navbar">
-    <a href="index.html" class="nav-logo">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" fill="none"/>
-        </svg>
-        ToolsMediaDownloader
-    </a>
+    <a href="index.html" class="nav-logo">⚡ ToolsMediaDownloader</a>
     <div class="nav-links">
         <a href="index.html">Home</a>
-        <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
+        <a href="terms.html">Terms</a>
     </div>
 </nav>
 
-<main class="container">
+<div class="content-container">
     <h1>Privacy Policy</h1>
-    <p>At <strong>ToolsMediaDownloader</strong>, accessible from <em>toolsmediadownload.online</em>, your privacy is extremely important to us. This Privacy Policy outlines the types of information processed when you use our website.</p>
+    <p>Last updated: October 2023</p>
+    <p>At ToolsMediaDownloader (toolsmediadownload.online), the privacy of our visitors is of extreme importance to us. This Privacy Policy document outlines the types of personal information that is received and collected by our website and how it is used.</p>
 
     <h2>1. Local File Processing (PDF Tools)</h2>
-    <p>All PDF and document tools (including JPG to PDF, PDF to JPG, and Merge PDF) process your files locally inside your web browser using client-side JavaScript. Your files are never uploaded to or stored on our servers.</p>
+    <p>We highly respect your privacy. All of our PDF tools (Convert, Merge, Compress) run entirely inside your web browser using JavaScript. <strong>Your files are NEVER uploaded to our servers.</strong> We do not store, view, or share your documents.</p>
 
-    <h2>2. Video Downloader Services</h2>
-    <p>When using our media download tools (such as the TikTok Downloader), the video URL you submit is processed securely via remote APIs to generate download links. We do not host, archive, or keep logs of downloadable media files on our infrastructure.</p>
+    <h2>2. Log Files</h2>
+    <p>Like many other Web sites, ToolsMediaDownloader makes use of log files. The information inside the log files includes internet protocol (IP) addresses, type of browser, Internet Service Provider (ISP), date/time stamp, referring/exit pages, and number of clicks to analyze trends, administer the site, track user's movement around the site, and gather demographic information.</p>
 
-    <h2>3. Cookies and Analytics</h2>
-    <p>Our website may use standard technical cookies or basic browser local storage to maintain session states. We do not track personal identifying information across external websites.</p>
+    <h2>3. Cookies and Web Beacons</h2>
+    <p>We do use cookies to store information about visitors' preferences, record user-specific information on which pages the user access or visit, and customize Web page content based on visitors' browser type.</p>
 
-    <h2>4. Third-Party Services</h2>
-    <p>We may link to third-party endpoints or APIs to provide functionality. We encourage users to consult the privacy policies of these third-party platforms for detailed information.</p>
-</main>
+    <h2>4. Google DoubleClick DART Cookie</h2>
+    <ul>
+        <li>Google, as a third-party vendor, uses cookies to serve ads on ToolsMediaDownloader.</li>
+        <li>Google's use of the DART cookie enables it to serve ads to users based on their visit to our site and other sites on the Internet.</li>
+        <li>Users may opt out of the use of the DART cookie by visiting the Google ad and content network privacy policy at the following URL - https://policies.google.com/technologies/ads</li>
+    </ul>
 
-<footer>
-    <div class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About Us</a>
-        <a href="privacy.html">Privacy Policy</a>
-    </div>
-    <p class="footer-copy">© 2026 ToolsMediaDownloader. All rights reserved.</p>
-</footer>
+    <h2>5. Consent</h2>
+    <p>By using our website, you hereby consent to our privacy policy and agree to its terms. If you require any more information or have any questions about our privacy policy, please feel free to contact us at <a href="mailto:m.aliarain070@gmail.com" style="color:var(--accent)">m.aliarain070@gmail.com</a>.</p>
+</div>
+
+<footer>© 2026 ToolsMediaDownloader · All rights reserved.</footer>
 
 </body>
 </html>
