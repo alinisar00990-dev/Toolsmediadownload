@@ -12,8 +12,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
 
-    <script src="./pdf-lib.min.js"></script>
-    <script src="./pdf.min.js"></script>
+    <!-- CDN Fallbacks for PDF Libraries -->
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -39,28 +40,24 @@
             position: relative;
         }
 
-        /* Intro Loader */
+        /* Intro Loader Fix */
         #intro-loader {
             position: fixed; inset: 0; background: var(--bg-dark); z-index: 99999;
             display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 20px;
-            transition: opacity 0.8s ease, visibility 0.8s;
+            transition: opacity 0.6s ease, visibility 0.6s;
+            pointer-events: auto;
         }
-        #intro-loader.hide { opacity: 0; visibility: hidden; }
+        #intro-loader.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+        
         .intro-logo {
             font-family: 'Orbitron', sans-serif; font-size: clamp(24px, 5vw, 42px); font-weight: 800;
             background: linear-gradient(135deg, var(--accent), var(--accent-glow));
             -webkit-background-clip: text; background-clip: text; color: transparent;
-            letter-spacing: 2px; animation: logoFadeIn 1.5s ease forwards; opacity: 0; text-align: center;
-        }
-        .intro-tagline {
-            color: var(--text-dim); font-size: 14px; letter-spacing: 4px; text-transform: uppercase;
-            opacity: 0; animation: tagFadeIn 1.5s ease 0.5s forwards; text-align: center;
+            letter-spacing: 2px; text-align: center;
         }
         .loader-bar { width: 200px; height: 2px; background: rgba(255,179,154,0.2); border-radius: 2px; overflow: hidden; margin-top: 10px; }
-        .loader-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-glow)); animation: loadFill 2s ease forwards; width: 0; }
+        .loader-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-glow)); animation: loadFill 1.5s ease forwards; width: 0; }
 
-        @keyframes logoFadeIn { to { opacity: 1; transform: translateY(0); } from { opacity: 0; transform: translateY(10px); } }
-        @keyframes tagFadeIn { to { opacity: 1; } }
         @keyframes loadFill { to { width: 100%; } }
 
         /* Background Orbs */
@@ -97,11 +94,10 @@
             display: inline-block; padding: 6px 16px; background: rgba(255,179,154,0.1);
             border: 1px solid rgba(255,179,154,0.3); border-radius: 20px; font-size: 12px;
             color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 25px;
-            animation: fadeInUp 0.8s ease;
         }
         .hero-section h1 {
             font-family: 'Orbitron', sans-serif; font-size: clamp(36px, 6vw, 56px); font-weight: 800;
-            line-height: 1.15; margin-bottom: 20px; animation: fadeInUp 0.8s ease 0.2s both;
+            line-height: 1.15; margin-bottom: 20px;
         }
         .hero-section h1 .gradient-text {
             background: linear-gradient(135deg, var(--accent), var(--accent-glow));
@@ -109,9 +105,9 @@
         }
         .hero-section p {
             color: var(--text-dim); font-size: 17px; max-width: 580px; margin: 0 auto 40px;
-            line-height: 1.7; animation: fadeInUp 0.8s ease 0.4s both;
+            line-height: 1.7;
         }
-        .hero-cta { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; animation: fadeInUp 0.8s ease 0.6s both; }
+        .hero-cta { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
         .btn-primary, .btn-ghost {
             padding: 14px 32px; border-radius: 50px; font-family: 'Space Grotesk', sans-serif;
             font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; transition: all 0.3s; border: none;
@@ -123,11 +119,6 @@
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255,179,154,0.5); }
         .btn-ghost { padding: 14px 32px; border-radius: 50px; background: transparent; color: var(--text-light); border: 1px solid rgba(255,179,154,0.3); text-decoration: none; transition: 0.3s; }
         .btn-ghost:hover { background: rgba(255,179,154,0.1); border-color: var(--accent); }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
 
         /* Stats */
         .stats-bar {
@@ -175,7 +166,6 @@
         }
         .card-icon svg { width: 26px; height: 26px; stroke: white; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 
-        /* Beautiful Gradients restored for Video Tools */
         .logo-tiktok { background: #000000; }
         .logo-tiktok svg { fill: white; stroke: none; }
         
@@ -200,7 +190,7 @@
         .workspace {
             display: none; background: rgba(15, 7, 20, 0.8); backdrop-filter: blur(25px);
             border: 1px solid rgba(255,179,154,0.4); border-radius: 24px; padding: 50px; margin-bottom: 40px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6); animation: fadeInUp 0.4s ease;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
         }
         .workspace h2 { font-family: 'Orbitron', sans-serif; color: var(--accent); text-align: center; font-size: 26px; margin-bottom: 10px; }
         .workspace .description { color: var(--text-dim); text-align: center; margin-bottom: 30px; font-size: 15px; }
@@ -238,7 +228,7 @@
         #toby-widget-container { position: fixed; bottom: 25px; right: 25px; z-index: 10000; display: flex; flex-direction: column; align-items: flex-end; }
         .toby-launch-btn { background: linear-gradient(135deg, var(--accent), var(--accent-glow)); color: var(--bg-dark); padding: 12px 22px; border-radius: 30px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; box-shadow: 0 10px 25px rgba(255,179,154,0.4); transition: 0.3s; }
         .toby-launch-btn:hover { transform: scale(1.05); }
-        #toby-chat-box { display: none; width: 320px; background: rgba(20,10,25,0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255,179,154,0.3); border-radius: 20px; margin-bottom: 15px; flex-direction: column; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.6); animation: fadeInUp 0.2s ease; }
+        #toby-chat-box { display: none; width: 320px; background: rgba(20,10,25,0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255,179,154,0.3); border-radius: 20px; margin-bottom: 15px; flex-direction: column; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
         .chat-header { background: rgba(84,36,82,0.8); padding: 16px; color: var(--accent); font-weight: 600; display: flex; justify-content: space-between; align-items: center; font-family: 'Orbitron', sans-serif; font-size: 14px; }
         .chat-header button { background: none; border: none; color: var(--accent); font-size: 22px; cursor: pointer; }
         #chat-messages { height: 260px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
@@ -257,7 +247,11 @@
 </head>
 <body>
 
-<div id="intro-loader"><div class="intro-logo">ToolsMediaDownloader</div><div class="loader-bar"><div class="loader-fill"></div></div></div>
+<!-- LOADER -->
+<div id="intro-loader">
+    <div class="intro-logo">ToolsMediaDownloader</div>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
 
 <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
 
@@ -268,11 +262,11 @@
         <a href="#document-tools">PDF Tools</a>
         <a href="#video-tools">Video Tools</a>
         <a href="about.html">About</a>
-        <a href="mailto:m.aliarain070@gmail.com">Support</a>
+        <a href="contact.html">Support</a>
     </div>
 </nav>
 
-<!-- FADING HERO SECTION -->
+<!-- HERO SECTION -->
 <section class="hero-section" id="hero">
     <div class="hero-badge">⚡ 100% Free · No Signups</div>
     <h1>Free <span class="gradient-text">PDF & Video</span> Tools</h1>
@@ -415,4 +409,364 @@
         
         <div class="glass-card fade-element">
             <div class="card-icon logo-insta">
-                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            </div>
+            <h3>Instagram Downloader</h3>
+            <p>Download Instagram Reels, stories, posts and photos.</p>
+            <button class="card-btn" onclick="window.location.href='instagram-downloader.html'">Download →</button>
+        </div>
+        
+        <div class="glass-card fade-element">
+            <div class="card-icon logo-fb">
+                <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </div>
+            <h3>Facebook Downloader</h3>
+            <p>Save Facebook videos in HD quality to your device.</p>
+            <button class="card-btn" onclick="window.location.href='facebook-downloader.html'">Download →</button>
+        </div>
+    </div>
+
+    <!-- SEO ARTICLES -->
+    <section class="section-intro fade-element" style="margin-top: 100px;">
+        <div class="section-tag">Complete User Guide</div>
+        <h2>Free Online PDF & Video Downloader Tools</h2>
+        <p>Learn how to process documents safely and download HD media with ease.</p>
+    </section>
+
+    <div class="glass-card fade-element" style="margin-bottom: 40px; padding: 40px; line-height: 1.8;">
+        <h3 style="font-size: 24px; color: var(--accent); margin-bottom: 15px;">Fast, Secure & Browser-Based Utility Suite</h3>
+        <p style="color: var(--text-dim); margin-bottom: 20px;">
+            ToolsMediaDownloader is a comprehensive platform designed to streamline your daily digital tasks. Whether you need to convert document formats, compress large PDF files for email attachments, or save online media for offline viewing, our suite provides instant solutions directly inside your browser. No registration, software installation, or subscriptions are required.
+        </p>
+
+        <h4 style="font-size: 18px; color: #fff; margin: 25px 0 10px;">1. Convert Images to PDF (JPG/PNG to PDF)</h4>
+        <p style="color: var(--text-dim); margin-bottom: 15px;">
+            Converting image files like JPG, JPEG, or PNG into a unified PDF document makes sharing and printing effortless. Our browser-based converter processes your image assets locally. Your images are formatted cleanly without compromising image resolution, making it ideal for creating digital portfolios, submitting official receipts, or compiling assignment pages.
+        </p>
+
+        <h4 style="font-size: 18px; color: #fff; margin: 25px 0 10px;">2. PDF File Size Compression</h4>
+        <p style="color: var(--text-dim); margin-bottom: 15px;">
+            Large PDF documents often exceed attachment file limits on job portals and email services. Our PDF Compression utility optimizes the internal stream structures and renders pages effectively to decrease total file size while preserving legibility. Because all operations are executed client-side, your document data remains completely private.
+        </p>
+
+        <h4 style="font-size: 18px; color: #fff; margin: 25px 0 10px;">3. Merge Multiple PDF Files</h4>
+        <p style="color: var(--text-dim); margin-bottom: 15px;">
+            Organize fragmented documents by merging separate PDF files into a single, cohesive file. Simply select two or more PDF files from your local storage, and our merge tool combines them sequentially within seconds.
+        </p>
+
+        <h4 style="font-size: 18px; color: #fff; margin: 25px 0 10px;">4. HD Media Downloaders (TikTok, Instagram, Facebook)</h4>
+        <p style="color: var(--text-dim); margin-bottom: 15px;">
+            Our video downloader tools allow creators and viewers to save public videos for offline entertainment, educational reference, or archiving. Enjoy seamless MP4 video downloads without unnecessary steps or intrusive redirect loops.
+        </p>
+    </div>
+
+    <!-- FAQS -->
+    <section class="section-intro fade-element" style="margin-top: 60px;">
+        <div class="section-tag">Help & Support</div>
+        <h2>Frequently Asked Questions</h2>
+        <p>Find answers to common questions regarding security, file limits, and compatibility.</p>
+    </section>
+
+    <div class="tools-grid fade-element" style="margin-bottom: 60px;">
+        <div class="glass-card">
+            <h3 style="color: var(--accent); font-size: 16px;">Are my uploaded files stored on your server?</h3>
+            <p style="color: var(--text-dim); font-size: 14px; min-height: auto; margin-bottom: 0;">
+                No. Privacy is our top priority. All PDF tools run entirely within your web browser using client-side JavaScript execution. Your documents never touch our servers.
+            </p>
+        </div>
+
+        <div class="glass-card">
+            <h3 style="color: var(--accent); font-size: 16px;">Is ToolsMediaDownloader 100% free to use?</h3>
+            <p style="color: var(--text-dim); font-size: 14px; min-height: auto; margin-bottom: 0;">
+                Yes, every tool on our platform is completely free forever. There are no hidden fees, premium tiers, or hidden daily limits.
+            </p>
+        </div>
+
+        <div class="glass-card">
+            <h3 style="color: var(--accent); font-size: 16px;">Do I need to create an account?</h3>
+            <p style="color: var(--text-dim); font-size: 14px; min-height: auto; margin-bottom: 0;">
+                No account creation or login process is needed. You can access all tools immediately upon visiting the website.
+            </p>
+        </div>
+
+        <div class="glass-card">
+            <h3 style="color: var(--accent); font-size: 16px;">Does it work on mobile devices?</h3>
+            <p style="color: var(--text-dim); font-size: 14px; min-height: auto; margin-bottom: 0;">
+                Yes! Our web application is fully responsive and optimized for all devices, including Android smartphones, iPhones, iPads, laptops, and desktop computers.
+            </p>
+        </div>
+    </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-brand">⚡ ToolsMediaDownloader</div>
+    <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="contact.html">Contact Support</a>
+    </div>
+    <p class="footer-copy">© 2026 ToolsMediaDownloader · Free online tools.</p>
+</footer>
+
+<!-- TOBY WIDGET -->
+<div id="toby-widget-container">
+    <div id="toby-chat-box">
+        <div class="chat-header"><span>🤖 TOBY · AI</span><button onclick="toggleTobyChat()">×</button></div>
+        <div id="chat-messages"><div class="bot-msg">Hey! 👋 I'm Toby. Ask me anything about PDF tools or video downloaders!</div></div>
+        <div class="chat-input-area">
+            <input type="text" id="toby-input" placeholder="Ask Toby anything..." onkeypress="handleTobyKey(event)">
+            <button onclick="sendTobyMessage()">↑</button>
+        </div>
+    </div>
+    <button class="toby-launch-btn" onclick="toggleTobyChat()">🤖 Ask Toby</button>
+</div>
+
+<script>
+"use strict";
+
+/* FAIL-SAFE LOADER SCRIPT (Fixes Loading Stuck Issue) */
+function removeLoader() {
+    const loader = document.getElementById('intro-loader');
+    if (loader) loader.classList.add('hide');
+}
+
+// Automatically hide loader after 1 second
+document.addEventListener('DOMContentLoaded', () => setTimeout(removeLoader, 1000));
+// Hard fallback: force remove after 2 seconds no matter what
+setTimeout(removeLoader, 2000);
+
+/* SCROLL FADE ANIMATIONS */
+const fadeElements = document.querySelectorAll('.fade-element');
+const hero = document.getElementById('hero');
+
+function checkScroll() {
+    let scrollPos = window.scrollY;
+    
+    if(hero && scrollPos < 600) {
+        hero.style.opacity = 1 - (scrollPos / 400);
+        hero.style.transform = `translateY(${scrollPos * 0.2}px)`;
+        hero.style.pointerEvents = scrollPos > 300 ? 'none' : 'auto';
+    }
+
+    fadeElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        if(rect.top <= windowHeight * 0.85 && rect.bottom >= 0) {
+            el.classList.add('visible');
+        } else {
+            el.classList.remove('visible');
+        }
+    });
+}
+
+window.addEventListener('scroll', checkScroll);
+checkScroll();
+
+/* TOBY AI */
+function toggleTobyChat() {
+    const chat = document.getElementById('toby-chat-box');
+    chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
+    if (chat.style.display === 'flex') document.getElementById('toby-input').focus();
+}
+function handleTobyKey(e) { if (e.key === 'Enter') sendTobyMessage(); }
+function sendTobyMessage() {
+    const input = document.getElementById('toby-input'); const text = input.value.trim(); if (!text) return;
+    addTobyMessage(text, 'user-msg'); input.value = '';
+    setTimeout(() => {
+        const q = text.toLowerCase(); let reply = "I can help with PDF tools, TikTok downloads, or if the site is free!";
+        if (q.match(/hi|hello|hey/)) reply = "Hey! 👋 How can I help you today?";
+        else if (q.includes("how are you")) reply = "I'm doing great! Ready to help ⚡";
+        else if (q.match(/email|contact|support/)) reply = "You can reach support directly at m.aliarain070@gmail.com";
+        else if (q.match(/free|cost/)) reply = "Yes! Everything is 100% free forever.";
+        else if (q.includes("pdf")) reply = "You can convert JPG to PDF, extract images, compress, or merge PDFs above!";
+        else if (q.match(/tiktok|video/)) reply = "Click 'Download →' on the video tools section!";
+        addTobyMessage(reply, 'bot-msg');
+    }, 400);
+}
+function addTobyMessage(text, className) {
+    const msg = document.createElement('div'); msg.className = className; msg.textContent = text;
+    const container = document.getElementById('chat-messages'); container.appendChild(msg); container.scrollTop = container.scrollHeight;
+}
+
+if (window.pdfjsLib) window.pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+function closeTools() { document.querySelectorAll(".workspace").forEach(t => t.style.display = "none"); }
+function openTool(id) { closeTools(); const t = document.getElementById(id); if (t) { t.style.display = "block"; t.scrollIntoView({ behavior: "smooth", block: "center" }); } }
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+function downloadBlob(blob, filename) {
+    const url = URL.createObjectURL(blob); const link = document.createElement("a"); link.href = url; link.download = filename;
+    document.body.appendChild(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 15000);
+}
+
+// JPG TO PDF
+let jpgSelectedFiles = [], jpgObjectUrls = [];
+function clearJpgUrls() { jpgObjectUrls.forEach(url => URL.revokeObjectURL(url)); jpgObjectUrls = []; }
+function jpgFilesSelected(input) {
+    clearJpgUrls();
+    const status = document.getElementById("jpgStatus"), preview = document.getElementById("jpgPreview"), button = document.getElementById("jpgCreateButton");
+    jpgSelectedFiles = Array.from(input.files || []).filter(f => f.type === "image/jpeg" || f.type === "image/png");
+    preview.innerHTML = "";
+    if (!jpgSelectedFiles.length) { status.textContent = "Please select JPG or PNG images."; button.style.display = "none"; return; }
+    jpgSelectedFiles.forEach((file, i) => {
+        const url = URL.createObjectURL(file); jpgObjectUrls.push(url);
+        const card = document.createElement("div"); card.className = "preview-card";
+        card.innerHTML = `<img src="${url}"><div class="preview-label">Image ${i+1}</div>`; preview.appendChild(card);
+    });
+    status.textContent = `${jpgSelectedFiles.length} file(s) ready for conversion`; button.style.display = "block";
+}
+async function createJpgPdf() {
+    const status = document.getElementById("jpgStatus"), button = document.getElementById("jpgCreateButton");
+    if (!window.PDFLib) return; button.disabled = true; button.textContent = "Processing...";
+    try {
+        const pdf = await window.PDFLib.PDFDocument.create();
+        for (let i = 0; i < jpgSelectedFiles.length; i++) {
+            status.textContent = `Processing image ${i+1} of ${jpgSelectedFiles.length}...`; await delay(30);
+            const bytes = await jpgSelectedFiles[i].arrayBuffer();
+            const image = jpgSelectedFiles[i].type === "image/png" ? await pdf.embedPng(bytes) : await pdf.embedJpg(bytes);
+            const scale = Math.min(1, 1600/image.width, 2200/image.height);
+            const page = pdf.addPage([image.width*scale, image.height*scale]);
+            page.drawImage(image, {x:0, y:0, width:image.width*scale, height:image.height*scale});
+        }
+        downloadBlob(new Blob([await pdf.save()], {type:"application/pdf"}), "TMD-Converted.pdf");
+        status.textContent = "✓ PDF generated successfully!";
+    } catch(e) { status.textContent = "An error occurred during processing."; } finally { button.disabled = false; button.textContent = "⚡ Generate PDF"; }
+}
+
+// PDF TO JPG
+let selectedPdfForJpg = null;
+function pdfJpgFileSelected(input) {
+    const status = document.getElementById("pdfJpgStatus"), button = document.getElementById("pdfJpgConvertButton"), preview = document.getElementById("pdfJpgPreview");
+    selectedPdfForJpg = input.files?.[0]; preview.innerHTML = "";
+    if (!selectedPdfForJpg) { status.textContent = ""; button.style.display = "none"; return; }
+    status.textContent = `Selected File: ${selectedPdfForJpg.name}`; button.style.display = "block";
+}
+async function convertPdfToJpg() {
+    const status = document.getElementById("pdfJpgStatus"), button = document.getElementById("pdfJpgConvertButton"), preview = document.getElementById("pdfJpgPreview");
+    if (!window.pdfjsLib || !selectedPdfForJpg) return; button.disabled = true; button.textContent = "Extracting images..."; preview.innerHTML = "";
+    try {
+        const bytes = new Uint8Array(await selectedPdfForJpg.arrayBuffer());
+        const pdf = await window.pdfjsLib.getDocument({data: bytes}).promise;
+        for (let p = 1; p <= pdf.numPages; p++) {
+            status.textContent = `Converting page ${p} of ${pdf.numPages}...`; await delay(30);
+            const page = await pdf.getPage(p); const viewport = page.getViewport({scale: 1.7});
+            const canvas = document.createElement("canvas"); const ctx = canvas.getContext("2d", {alpha: false});
+            canvas.width = Math.floor(viewport.width); canvas.height = Math.floor(viewport.height);
+            ctx.fillStyle = "#ffffff"; ctx.fillRect(0,0,canvas.width,canvas.height);
+            await page.render({canvasContext: ctx, viewport}).promise;
+            const blob = await new Promise(res => canvas.toBlob(res, "image/jpeg", 0.92));
+            const url = URL.createObjectURL(blob);
+            const card = document.createElement("div"); card.className = "preview-card";
+            card.innerHTML = `<img src="${url}"><div class="preview-label">Page ${p}</div>`;
+            const btn = document.createElement("button"); btn.className = "small-btn"; btn.textContent = "Download";
+            btn.style.marginTop = "5px"; btn.style.padding = "4px"; btn.style.cursor = "pointer";
+            btn.onclick = () => downloadBlob(blob, `TMD-page-${p}.jpg`);
+            card.appendChild(btn); preview.appendChild(card);
+        }
+        status.textContent = "✓ Extraction completed successfully!";
+    } catch(e) { status.textContent = "An error occurred during extraction."; } finally { button.disabled = false; button.textContent = "⚡ Extract Images"; }
+}
+
+// MERGE PDF
+let selectedMergeFiles = [];
+function mergeFilesSelected(input) {
+    const status = document.getElementById("mergeStatus"), button = document.getElementById("mergeButton");
+    selectedMergeFiles = Array.from(input.files || []);
+    if (selectedMergeFiles.length < 2) { status.textContent = "Please select at least 2 PDF files to merge."; button.style.display = "none"; return; }
+    status.textContent = `${selectedMergeFiles.length} files selected for merging.`; button.style.display = "block";
+}
+async function mergePdfs() {
+    const status = document.getElementById("mergeStatus"), button = document.getElementById("mergeButton");
+    if (!window.PDFLib || selectedMergeFiles.length < 2) return; button.disabled = true; button.textContent = "Merging files...";
+    try {
+        const merged = await window.PDFLib.PDFDocument.create();
+        for (let i = 0; i < selectedMergeFiles.length; i++) {
+            status.textContent = `Adding document ${i+1} of ${selectedMergeFiles.length}...`;
+            const source = await window.PDFLib.PDFDocument.load(await selectedMergeFiles[i].arrayBuffer());
+            const pages = await merged.copyPages(source, source.getPageIndices()); pages.forEach(p => merged.addPage(p));
+        }
+        downloadBlob(new Blob([await merged.save()], {type:"application/pdf"}), "TMD-Merged.pdf");
+        status.textContent = "✓ Files merged successfully!";
+    } catch(e) { status.textContent = "An error occurred while merging."; } finally { button.disabled = false; button.textContent = "⚡ Merge Files"; }
+}
+
+// COMPRESS PDF
+let selectedCompressFile = null;
+function compressFileSelected(input) {
+    const status = document.getElementById("compressStatus"), button = document.getElementById("compressButton");
+    selectedCompressFile = input.files?.[0];
+    if (!selectedCompressFile) { status.textContent = ""; button.style.display = "none"; return; }
+    
+    const sizeMB = (selectedCompressFile.size / (1024 * 1024)).toFixed(2);
+    status.textContent = `Selected File: ${selectedCompressFile.name} (${sizeMB} MB)`; 
+    button.style.display = "block";
+}
+
+async function compressPdf() {
+    const status = document.getElementById("compressStatus");
+    const button = document.getElementById("compressButton");
+    
+    if (!window.pdfjsLib || !window.PDFLib || !selectedCompressFile) {
+        status.textContent = "Error: System libraries not loaded properly.";
+        return;
+    }
+    
+    button.disabled = true;
+    button.textContent = "Compressing PDF, please wait...";
+    
+    try {
+        const originalSizeMB = (selectedCompressFile.size / (1024 * 1024)).toFixed(2);
+        status.textContent = `Original Size: ${originalSizeMB} MB. Processing pages...`;
+        
+        const arrayBuffer = await selectedCompressFile.arrayBuffer();
+        const pdfDoc = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        const totalPages = pdfDoc.numPages;
+        const newPdfDoc = await window.PDFLib.PDFDocument.create();
+        
+        for (let i = 1; i <= totalPages; i++) {
+            status.textContent = `Compressing page ${i} of ${totalPages}...`;
+            await delay(10);
+            
+            const page = await pdfDoc.getPage(i);
+            const viewport = page.getViewport({ scale: 1.0 });
+            
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d", { alpha: false });
+            canvas.width = Math.floor(viewport.width);
+            canvas.height = Math.floor(viewport.height);
+            
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            await page.render({ canvasContext: ctx, viewport }).promise;
+            
+            const compressedImageBlob = await new Promise(resolve => canvas.toBlob(resolve, "image/jpeg", 0.65));
+            const imageArrayBuffer = await compressedImageBlob.arrayBuffer();
+            
+            const embeddedImage = await newPdfDoc.embedJpg(imageArrayBuffer);
+            const newPage = newPdfDoc.addPage([viewport.width, viewport.height]);
+            newPage.drawImage(embeddedImage, {
+                x: 0, y: 0, width: viewport.width, height: viewport.height,
+            });
+        }
+        
+        const compressedBytes = await newPdfDoc.save();
+        const finalBlob = new Blob([compressedBytes], { type: "application/pdf" });
+        const compressedSizeMB = (finalBlob.size / (1024 * 1024)).toFixed(2);
+        
+        downloadBlob(finalBlob, "TMD-Compressed.pdf");
+        status.textContent = `✓ Success! File reduced from ${originalSizeMB} MB to ${compressedSizeMB} MB`;
+        
+    } catch (e) {
+        status.textContent = "An error occurred during compression. File might be encrypted.";
+        console.error(e);
+    } finally {
+        button.disabled = false;
+        button.textContent = "⚡ Compress File";
+    }
+}
+</script>
+</body>
+</html>
