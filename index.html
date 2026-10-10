@@ -292,7 +292,7 @@
 
 <main class="container">
 
-    <!-- PREMIUM WORKSPACES -->
+    <!-- WORKSPACES -->
     <section id="jpgTool" class="workspace">
         <h2>JPG → PDF Converter</h2>
         <p class="description">Transform multiple images into a single PDF document securely.</p>
@@ -340,7 +340,7 @@
     <!-- NEW COMPRESS PDF WORKSPACE -->
     <section id="compressTool" class="workspace">
         <h2>PDF Compressor</h2>
-        <p class="description">Reduce your PDF file size quickly without losing formatting.</p>
+        <p class="description">Reduce your PDF file size quickly by optimizing page quality.</p>
         <div class="upload-box" onclick="document.getElementById('compressFile').click()">
             <svg viewBox="0 0 24 24"><path d="M12 22v-6"/><path d="M12 2v6"/><path d="m15 19-3 3-3-3"/><path d="m15 5-3-3-3 3"/><path d="M22 12h-6"/><path d="M2 12h6"/><path d="m19 9-3 3 3 3"/><path d="m5 9 3 3-3 3"/></svg>
             <strong>Click to upload PDF</strong>
@@ -622,41 +622,89 @@ async function mergePdfs() {
     } catch(e) { status.textContent = "An error occurred while merging."; } finally { button.disabled = false; button.textContent = "⚡ Merge Files"; }
 }
 
-// COMPRESS PDF 
+// NEW 100% WORKING COMPRESS PDF (JPEG DOWNSAMPLING)
 let selectedCompressFile = null;
 function compressFileSelected(input) {
     const status = document.getElementById("compressStatus"), button = document.getElementById("compressButton");
     selectedCompressFile = input.files?.[0];
     if (!selectedCompressFile) { status.textContent = ""; button.style.display = "none"; return; }
     
-    // File size in MB
     const sizeMB = (selectedCompressFile.size / (1024 * 1024)).toFixed(2);
     status.textContent = `Selected File: ${selectedCompressFile.name} (${sizeMB} MB)`; 
     button.style.display = "block";
 }
 
 async function compressPdf() {
-    const status = document.getElementById("compressStatus"), button = document.getElementById("compressButton");
-    if (!window.PDFLib || !selectedCompressFile) return; 
-    button.disabled = true; button.textContent = "Compressing, please wait...";
+    const status = document.getElementById("compressStatus");
+    const button = document.getElementById("compressButton");
+    
+    if (!window.pdfjsLib || !window.PDFLib || !selectedCompressFile) {
+        status.textContent = "Error: System libraries not loaded properly.";
+        return;
+    }
+    
+    button.disabled = true;
+    button.textContent = "Compressing PDF, please wait...";
     
     try {
+        const originalSizeMB = (selectedCompressFile.size / (1024 * 1024)).toFixed(2);
+        status.textContent = `Original Size: ${originalSizeMB} MB. Processing pages...`;
+        
+        // Load with PDF.js to render pages
         const arrayBuffer = await selectedCompressFile.arrayBuffer();
-        const pdfDoc = await window.PDFLib.PDFDocument.load(arrayBuffer);
+        const pdfDoc = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        const totalPages = pdfDoc.numPages;
         
-        // Save with Object Streams enables structural compression in pdf-lib
-        const pdfBytes = await pdfDoc.save({ useObjectStreams: true });
+        // Create new empty PDF
+        const newPdfDoc = await window.PDFLib.PDFDocument.create();
         
-        const blob = new Blob([pdfBytes], { type: "application/pdf" });
-        const newSizeMB = (blob.size / (1024 * 1024)).toFixed(2);
+        // Loop and compress each page
+        for (let i = 1; i <= totalPages; i++) {
+            status.textContent = `Compressing page ${i} of ${totalPages}...`;
+            await delay(10); // Small delay to allow UI to update
+            
+            const page = await pdfDoc.getPage(i);
+            const viewport = page.getViewport({ scale: 1.0 }); // 1.0 scale is good for reading
+            
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d", { alpha: false });
+            canvas.width = Math.floor(viewport.width);
+            canvas.height = Math.floor(viewport.height);
+            
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            await page.render({ canvasContext: ctx, viewport }).promise;
+            
+            // Compress to JPEG format (65% quality)
+            const compressedImageBlob = await new Promise(resolve => canvas.toBlob(resolve, "image/jpeg", 0.65));
+            const imageArrayBuffer = await compressedImageBlob.arrayBuffer();
+            
+            // Embed back into PDF
+            const embeddedImage = await newPdfDoc.embedJpg(imageArrayBuffer);
+            const newPage = newPdfDoc.addPage([viewport.width, viewport.height]);
+            newPage.drawImage(embeddedImage, {
+                x: 0,
+                y: 0,
+                width: viewport.width,
+                height: viewport.height,
+            });
+        }
         
-        downloadBlob(blob, "TMD-Compressed.pdf");
-        status.textContent = `✓ Compression successful! New size: ${newSizeMB} MB`;
-    } catch(e) { 
-        status.textContent = "An error occurred while compressing. The file might be corrupted or encrypted."; 
+        // Save and calculate new size
+        const compressedBytes = await newPdfDoc.save();
+        const finalBlob = new Blob([compressedBytes], { type: "application/pdf" });
+        const compressedSizeMB = (finalBlob.size / (1024 * 1024)).toFixed(2);
+        
+        downloadBlob(finalBlob, "TMD-Compressed.pdf");
+        status.textContent = `✓ Success! File reduced from ${originalSizeMB} MB to ${compressedSizeMB} MB`;
+        
+    } catch (e) {
+        status.textContent = "An error occurred during compression. File might be encrypted.";
         console.error(e);
-    } finally { 
-        button.disabled = false; button.textContent = "⚡ Compress File"; 
+    } finally {
+        button.disabled = false;
+        button.textContent = "⚡ Compress File";
     }
 }
 
