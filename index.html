@@ -6,7 +6,6 @@
     <title>ToolsMediaDownloader | Free PDF & Video Tools</title>
     <meta name="description" content="Free online tools to convert, merge PDFs and download HD videos. Fast, secure, works in your browser.">
     
-    <!-- Google Search Console Verification Tag -->
     <meta name="google-site-verification" content="R4_xT1JhDfFTocdkhduMOq6FO7SIGjEv68zE8MJph04" />
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
@@ -114,6 +113,7 @@
         .btn-primary, .btn-ghost {
             padding: 14px 32px; border-radius: 50px; font-family: 'Space Grotesk', sans-serif;
             font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; transition: all 0.3s; border: none;
+            display: inline-block;
         }
         .btn-primary {
             background: linear-gradient(135deg, var(--accent), var(--accent-glow)); color: var(--bg-dark);
@@ -242,8 +242,21 @@
         .chat-input-area input { flex: 1; padding: 10px 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,179,154,0.2); border-radius: 12px; color: white; outline: none; }
         .chat-input-area button { padding: 10px 16px; background: var(--accent); color: var(--bg-dark); border: none; border-radius: 12px; font-weight: 700; cursor: pointer; }
 
+        /* =========================================
+           MOBILE RESPONSIVE FIXES (Modern App Style)
+           ========================================= */
         @media (max-width: 600px) {
-            .nav-links { gap: 10px; justify-content: center; } .hero-section { padding: 60px 20px 50px; }
+            .nav-links { gap: 12px; justify-content: center; margin-top: 10px; } 
+            
+            .hero-section { padding: 50px 15px 40px; }
+            .hero-section h1 { font-size: 32px; }
+            .hero-section p { font-size: 15px; }
+            
+            /* Button Fixes for Mobile */
+            .hero-cta { flex-direction: column; gap: 12px; width: 100%; padding: 0 10px; align-items: stretch; }
+            .btn-primary, .btn-ghost { width: 100%; text-align: center; padding: 16px; font-size: 15px; }
+            
+            .workspace { padding: 30px 15px; }
             #toby-chat-box { width: 290px; right: 0; }
         }
     </style>
@@ -264,8 +277,8 @@
     <div class="nav-links">
         <a href="#document-tools">PDF Tools</a>
         <a href="#video-tools">Video Tools</a>
+        <a href="blog.html">Blog</a>
         <a href="about.html">About</a>
-        <a href="contact.html">Support</a>
     </div>
 </nav>
 
@@ -507,6 +520,7 @@
     <div class="footer-brand">⚡ ToolsMediaDownloader</div>
     <div class="footer-links">
         <a href="about.html">About</a>
+        <a href="blog.html">Blog & Guides</a>
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>
         <a href="disclaimer.html">Disclaimer</a>
@@ -536,10 +550,7 @@ function removeLoader() {
     const loader = document.getElementById('intro-loader');
     if (loader) loader.classList.add('hide');
 }
-
-// Automatically hide loader after 1 second
 document.addEventListener('DOMContentLoaded', () => setTimeout(removeLoader, 1000));
-// Hard fallback: force remove after 2 seconds no matter what
 setTimeout(removeLoader, 2000);
 
 /* SCROLL FADE ANIMATIONS */
@@ -566,7 +577,6 @@ function checkScroll() {
         }
     });
 }
-
 window.addEventListener('scroll', checkScroll);
 checkScroll();
 
