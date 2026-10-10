@@ -20,4 +20,8 @@
     <loc>https://toolsmediadownload.online/contact.html</loc>
     <priority>0.80</priority>
   </url>
+  <url>
+    <loc>https://toolsmediadownload.online/disclaimer.html</loc>
+    <priority>0.80</priority>
+  </url>
 </urlset>
