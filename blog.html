@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog & Tech Guides - ToolsMediaDownloader</title>
+    <meta name="description" content="Read helpful guides on PDF management, video downloading tips, and online privacy.">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root { --bg-dark: #0a0510; --accent: #FFB39A; --accent-glow: #ff8a66; --text-light: #f0e6ef; --text-dim: #a08ca0; }
+        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
+        
+        .navbar { position: sticky; top: 0; background: rgba(10,5,16,0.7); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,179,154,0.15); padding: 18px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
+        .nav-logo { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent-glow)); -webkit-background-clip: text; color: transparent; text-decoration: none; }
+        .nav-links a { color: var(--text-light); text-decoration: none; font-size: 14px; margin-left: 20px; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
+
+        .container { max-width: 1100px; margin: 60px auto; padding: 0 20px; }
+        .header { text-align: center; margin-bottom: 50px; }
+        .header h1 { font-family: 'Orbitron', sans-serif; font-size: 38px; color: var(--accent); margin-bottom: 10px; }
+        .header p { color: var(--text-dim); font-size: 16px; }
+
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .blog-card { background: linear-gradient(135deg, rgba(84,36,82,0.4), rgba(26,13,26,0.4)); border: 1px solid rgba(255,179,154,0.15); border-radius: 20px; padding: 25px; transition: 0.3s; }
+        .blog-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .blog-tag { color: var(--accent); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 10px; display: block; }
+        .blog-card h2 { font-size: 20px; color: white; margin-bottom: 12px; font-family: 'Orbitron', sans-serif; }
+        .blog-card p { color: var(--text-dim); font-size: 14px; margin-bottom: 20px; line-height: 1.6; }
+        .read-btn { display: inline-block; color: var(--accent); text-decoration: none; font-weight: 600; font-size: 14px; }
+        .read-btn:hover { text-decoration: underline; }
+
+        footer { border-top: 1px solid rgba(255,179,154,0.1); padding: 30px 20px; text-align: center; color: var(--text-dim); font-size: 13px; margin-top: 80px; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="index.html" class="nav-logo">⚡ ToolsMediaDownloader</a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="blog.html" style="color:var(--accent)">Blog</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="header">
+        <h1>Latest Articles & Guides</h1>
+        <p>Explore tutorials, tech insights, and step-by-step guides on document optimization and media downloading.</p>
+    </div>
+
+    <div class="blog-grid">
+        <!-- Article 1 Card -->
+        <div class="blog-card">
+            <span class="blog-tag">PDF Guide</span>
+            <h2>How to Compress PDF Files Without Losing Quality</h2>
+            <p>Learn the best techniques to reduce large PDF document sizes for email attachments while keeping images sharp and text clear.</p>
+            <a href="how-to-compress-pdf-guide.html" class="read-btn">Read Full Article →</a>
+        </div>
+
+        <!-- Article 2 Card -->
+        <div class="blog-card">
+            <span class="blog-tag">Tutorial</span>
+            <h2>How to Convert Multiple JPG Images into One PDF</h2>
+            <p>Step-by-step guide on compiling your scanned images and receipts into a single professional PDF document in your browser.</p>
+            <a href="convert-jpg-to-pdf-guide.html" class="read-btn">Read Full Article →</a>
+        </div>
+
+        <!-- Article 3 Card -->
+        <div class="blog-card">
+            <span class="blog-tag">Media Tips</span>
+            <h2>Why Client-Side File Processing is Safest for Privacy</h2>
+            <p>Discover why offline browser processing protects your sensitive personal documents better than traditional cloud servers.</p>
+            <a href="browser-file-privacy-guide.html" class="read-btn">Read Full Article →</a>
+        </div>
+    </div>
+</div>
+
+<footer>© 2026 ToolsMediaDownloader · All rights reserved.</footer>
+
+</body>
+</html>
