@@ -3,350 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | ToolsMediaDownloader</title>
-    <meta name="description" content="Learn more about ToolsMediaDownloader - free, secure and fast online PDF and video tools.">
+    <title>About Us - ToolsMediaDownloader</title>
 
+    <!-- Favicon (Tab Icon) -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
-
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root { --bg-dark: #0a0510; --accent: #FFB39A; --accent-glow: #ff8a66; --text-light: #f0e6ef; --text-dim: #a08ca0; }
+        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.8; }
+        
+        .navbar { position: sticky; top: 0; background: rgba(10,5,16,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,179,154,0.15); padding: 18px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
+        .nav-logo { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent-glow)); -webkit-background-clip: text; color: transparent; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .nav-links a { color: var(--text-light); text-decoration: none; font-size: 14px; margin-left: 20px; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
 
-        :root {
-            --bg-dark: #0a0510;
-            --accent: #FFB39A;
-            --accent-glow: #ff8a66;
-            --purple: #542452;
-            --text-light: #f0e6ef;
-            --text-dim: #a08ca0;
-        }
+        .content-container { max-width: 800px; margin: 60px auto; padding: 40px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,179,154,0.1); border-radius: 20px; }
+        h1 { font-family: 'Orbitron', sans-serif; color: var(--accent); margin-bottom: 20px; font-size: 32px; }
+        h2 { color: white; margin: 30px 0 15px; font-size: 22px; }
+        p { color: var(--text-dim); margin-bottom: 15px; font-size: 15.5px; }
 
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-light);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-        }
-
-        /* Background Orbs */
-        .orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.35;
-            z-index: -1;
-            pointer-events: none;
-        }
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: #542452;
-            top: -100px;
-            left: -100px;
-            animation: float1 18s infinite ease-in-out;
-        }
-        .orb-2 {
-            width: 350px;
-            height: 350px;
-            background: #ff8a66;
-            bottom: -100px;
-            right: -100px;
-            animation: float2 20s infinite ease-in-out;
-        }
-        @keyframes float1 {
-            50% { transform: translate(80px, 120px); }
-        }
-        @keyframes float2 {
-            50% { transform: translate(-80px, -100px); }
-        }
-
-        /* Navbar */
-        .navbar {
-            position: sticky;
-            top: 0;
-            background: rgba(10, 5, 16, 0.75);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 179, 154, 0.15);
-            padding: 16px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-        }
-
-        .nav-logo {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 800;
-            font-size: 20px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-decoration: none;
-        }
-
-        .nav-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-size: 14px;
-            margin-left: 22px;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 90px 20px 50px;
-        }
-
-        .hero h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(36px, 6vw, 52px);
-            margin-bottom: 18px;
-            color: white;
-        }
-
-        .hero h1 span {
-            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .hero p {
-            color: var(--text-dim);
-            font-size: 17px;
-            max-width: 620px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
-
-        /* Main Content */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 20px 20px 80px;
-            flex: 1;
-        }
-
-        .section-title {
-            text-align: center;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 28px;
-            margin-bottom: 40px;
-            color: var(--accent);
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px;
-        }
-
-        .card {
-            background: linear-gradient(135deg, rgba(84, 36, 82, 0.45), rgba(20, 10, 25, 0.6));
-            border: 1px solid rgba(255, 179, 154, 0.18);
-            border-radius: 20px;
-            padding: 35px 28px;
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent);
-            box-shadow: 0 20px 40px rgba(255, 179, 154, 0.15);
-        }
-
-        .card-icon {
-            font-size: 36px;
-            margin-bottom: 18px;
-        }
-
-        .card h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 20px;
-            margin-bottom: 12px;
-            color: white;
-        }
-
-        .card p {
-            color: var(--text-dim);
-            font-size: 15px;
-            line-height: 1.65;
-        }
-
-        /* Mission Box */
-        .mission-box {
-            margin-top: 60px;
-            background: rgba(255, 179, 154, 0.05);
-            border: 1px solid rgba(255, 179, 154, 0.25);
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-        }
-
-        .mission-box h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 24px;
-            color: var(--accent);
-            margin-bottom: 15px;
-        }
-
-        .mission-box p {
-            color: var(--text-dim);
-            font-size: 16px;
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
-
-        /* Footer */
-        footer {
-            background: rgba(10, 5, 16, 0.9);
-            border-top: 1px solid rgba(255, 179, 154, 0.1);
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .footer-brand {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 20px;
-            color: var(--accent);
-            margin-bottom: 15px;
-        }
-
-        .footer-links a {
-            color: var(--text-dim);
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 14px;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent);
-        }
-
-        .footer-copy {
-            color: var(--text-dim);
-            font-size: 13px;
-            margin-top: 20px;
-        }
-
-        @media (max-width: 600px) {
-            .nav-links a {
-                margin-left: 12px;
-                font-size: 13px;
-            }
-            .hero {
-                padding: 60px 20px 40px;
-            }
-        }
+        footer { border-top: 1px solid rgba(255,179,154,0.1); padding: 30px 20px; text-align: center; color: var(--text-dim); font-size: 13px; }
     </style>
 </head>
 <body>
 
-    <!-- Background Orbs -->
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
+<nav class="navbar">
+    <a href="index.html" class="nav-logo"><span>⚡</span> ToolsMediaDownloader</a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy</a>
+    </div>
+</nav>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <a href="index.html" class="nav-logo">⚡ ToolsMediaDownloader</a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="contact.html">Support</a>
-        </div>
-    </nav>
+<div class="content-container">
+    <h1>About ToolsMediaDownloader</h1>
+    <p>ToolsMediaDownloader (toolsmediadownload.online) is a free, web-based utility platform created to help users simplify everyday digital file tasks and download public social media videos easily.</p>
 
-    <!-- Hero -->
-    <section class="hero">
-        <h1>About <span>Us</span></h1>
-        <p>
-            ToolsMediaDownloader was created to give everyone free, fast, and private online tools 
-            for PDF files and video downloading — without any complicated software or sign-ups.
-        </p>
-    </section>
+    <h2>Our Mission</h2>
+    <p>Our goal is to offer fast, secure, and privacy-focused online tools that run directly inside your web browser without requiring user registration, subscriptions, or software downloads.</p>
 
-    <!-- Main Content -->
-    <main class="container">
-        
-        <h2 class="section-title">Why We Built This</h2>
+    <h2>Privacy-First Approach</h2>
+    <p>Unlike traditional online converters that upload your personal documents to remote cloud servers, all of our PDF tools process your files locally within your browser session. Your confidential files never touch our servers, providing 100% data security.</p>
+</div>
 
-        <div class="about-grid">
-            <div class="card">
-                <div class="card-icon">🔒</div>
-                <h3>Privacy First</h3>
-                <p>
-                    All PDF tools run directly in your browser. Your files never leave your device 
-                    and are never uploaded to any server. Your privacy is fully protected.
-                </p>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">💸</div>
-                <h3>100% Free</h3>
-                <p>
-                    We believe useful tools should be free for everyone. There are no hidden fees, 
-                    no premium plans, and no forced account creation.
-                </p>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">⚡</div>
-                <h3>Lightning Fast</h3>
-                <p>
-                    Because everything happens inside your browser, you get instant results 
-                    without waiting for slow server uploads or downloads.
-                </p>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">🎬</div>
-                <h3>HD Video Downloads</h3>
-                <p>
-                    Download TikTok and other videos in high quality without watermarks. 
-                    Simple, clean, and completely free.
-                </p>
-            </div>
-        </div>
-
-        <!-- Mission -->
-        <div class="mission-box">
-            <h2>Our Mission</h2>
-            <p>
-                We want to make everyday digital tasks simple. Whether you need to convert images to PDF, 
-                merge documents, or save a video — ToolsMediaDownloader is here to help you do it quickly, 
-                safely, and for free.
-            </p>
-        </div>
-
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-brand">⚡ ToolsMediaDownloader</div>
-        <div class="footer-links">
-            <a href="index.html">Home</a>
-            <a href="contact.html">Contact Support</a>
-            <a href="privacy.html">Privacy Policy</a>
-        </div>
-        <p class="footer-copy">© 2026 ToolsMediaDownloader. All rights reserved.</p>
-    </footer>
+<footer>© 2026 ToolsMediaDownloader · All rights reserved.</footer>
 
 </body>
 </html>
