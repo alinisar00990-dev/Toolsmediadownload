@@ -3,69 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service - ToolsMediaDownloader</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+    <title>Terms and Conditions - ToolsMediaDownloader</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: Arial, sans-serif; background: #160c16; color: #ffffff; min-height: 100vh; display: flex; flex-direction: column; }
-        .navbar { background: #542452; border-bottom: 3px solid #FFB39A; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-        .nav-logo { display: flex; align-items: center; gap: 10px; color: #FFB39A; text-decoration: none; font-size: 24px; font-weight: bold; }
-        .nav-logo svg { width: 28px; height: 28px; fill: #FFB39A; }
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { color: #f5e7f2; text-decoration: none; font-size: 15px; font-weight: bold; transition: color 0.3s; }
-        .nav-links a:hover { color: #FFB39A; }
+        :root { --bg-dark: #0a0510; --accent: #FFB39A; --accent-glow: #ff8a66; --text-light: #f0e6ef; --text-dim: #a08ca0; }
+        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.8; }
         
-        .container { width: 90%; max-width: 800px; margin: 50px auto; flex: 1; background: #381736; padding: 40px; border-radius: 12px; border: 1px solid #743871; }
-        .container h1 { color: #FFB39A; margin-bottom: 20px; font-size: 32px; }
-        .container h2 { color: #FFB39A; margin-top: 25px; margin-bottom: 10px; font-size: 20px; }
-        .container p { color: #d8c9d6; line-height: 1.8; margin-bottom: 15px; font-size: 15px; }
+        .navbar { position: sticky; top: 0; background: rgba(10,5,16,0.7); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,179,154,0.15); padding: 18px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
+        .nav-logo { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent-glow)); -webkit-background-clip: text; color: transparent; text-decoration: none; }
+        .nav-links a { color: var(--text-light); text-decoration: none; font-size: 14px; margin-left: 20px; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
 
-        footer { margin-top: 40px; background: #381736; border-top: 2px solid #542452; padding: 30px 20px; text-align: center; }
-        .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; }
-        .footer-links a { color: #d8c9d6; text-decoration: none; font-size: 14px; }
-        .footer-links a:hover { color: #FFB39A; text-decoration: underline; }
-        .footer-copy { color: #9a7d98; font-size: 13px; }
-        @media (max-width: 600px) { .navbar { flex-direction: column; gap: 15px; } .container { padding: 20px; } }
+        .content-container { max-width: 800px; margin: 60px auto; padding: 40px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,179,154,0.1); border-radius: 20px; }
+        h1 { font-family: 'Orbitron', sans-serif; color: var(--accent); margin-bottom: 20px; font-size: 32px; }
+        h2 { color: white; margin: 30px 0 15px; font-size: 22px; }
+        p { color: var(--text-dim); margin-bottom: 15px; font-size: 15.5px; }
+
+        footer { border-top: 1px solid rgba(255,179,154,0.1); padding: 30px 20px; text-align: center; color: var(--text-dim); font-size: 13px; }
     </style>
 </head>
 <body>
 
 <nav class="navbar">
-    <a href="index.html" class="nav-logo">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" fill="none"/>
-        </svg>
-        ToolsMediaDownloader
-    </a>
+    <a href="index.html" class="nav-logo">⚡ ToolsMediaDownloader</a>
     <div class="nav-links">
         <a href="index.html">Home</a>
-        <a href="about.html">About</a>
+        <a href="privacy.html">Privacy</a>
         <a href="contact.html">Contact</a>
     </div>
 </nav>
 
-<main class="container">
-    <h1>Terms of Service</h1>
-    <p>By accessing and using <strong>ToolsMediaDownloader</strong>, you accept and agree to be bound by the following terms and conditions.</p>
+<div class="content-container">
+    <h1>Terms and Conditions</h1>
+    <p>Welcome to ToolsMediaDownloader. By accessing this website (toolsmediadownload.online), we assume you accept these terms and conditions in full. Do not continue to use ToolsMediaDownloader if you do not accept all of the terms and conditions stated on this page.</p>
 
-    <h2>1. Use of Tools</h2>
-    <p>All tools provided on this website are free for personal and commercial use. You agree not to use our tools for any illegal, unauthorized, or infringing activities.</p>
+    <h2>1. Website Usage</h2>
+    <p>Our website provides free online tools for PDF editing and social media video downloading. These tools are provided "as is" without any warranties. You agree to use these tools only for lawful purposes.</p>
 
-    <h2>2. Intellectual Property & Fair Use</h2>
-    <p>Users are solely responsible for verifying that they have the legal right or permission to process, convert, or download any media files using our services. We do not support copyright infringement.</p>
+    <h2>2. Copyright and Media Downloads</h2>
+    <p>Our video download tools are designed to help users download publicly available videos for personal, offline viewing. We strictly prohibit the downloading of copyrighted material without the creator's permission. Users are solely responsible for any copyright violations or misuse of downloaded media.</p>
 
-    <h2>3. Disclaimer of Warranties</h2>
-    <p>All services are provided "as-is" and "as available" without warranties of any kind. We do not guarantee uninterrupted availability or error-free operation.</p>
-</main>
+    <h2>3. Disclaimer</h2>
+    <p>To the maximum extent permitted by applicable law, we exclude all representations, warranties, and conditions relating to our website and the use of this website. ToolsMediaDownloader will not be liable for any data loss, file corruption, or any damages arising from the use of our free tools.</p>
 
-<footer>
-    <div class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About Us</a>
-        <a href="terms.html">Terms of Service</a>
-    </div>
-    <p class="footer-copy">© 2026 ToolsMediaDownloader. All rights reserved.</p>
-</footer>
+    <h2>4. Modifications</h2>
+    <p>ToolsMediaDownloader reserves the right to revise these terms of service for its website at any time without notice. By using this website, you are agreeing to be bound by the current version of these Terms and Conditions.</p>
+
+    <h2>5. Contact Us</h2>
+    <p>If you have any questions regarding these terms, you may contact us at <a href="mailto:m.aliarain070@gmail.com" style="color:var(--accent)">m.aliarain070@gmail.com</a>.</p>
+</div>
+
+<footer>© 2026 ToolsMediaDownloader · All rights reserved.</footer>
 
 </body>
 </html>
