@@ -184,9 +184,6 @@
         
         .logo-fb { background: #1877F2; }
         .logo-fb svg { fill: white; stroke: none; }
-        
-        .logo-pin { background: #E60023; }
-        .logo-pin svg { fill: white; stroke: none; }
 
         .glass-card h3 { font-family: 'Orbitron', sans-serif; font-size: 18px; margin-bottom: 10px; color: var(--text-light); }
         .glass-card p { color: var(--text-dim); font-size: 13.5px; line-height: 1.6; margin-bottom: 25px; min-height: 60px; }
@@ -198,8 +195,6 @@
             transition: all 0.3s; width: auto; text-decoration: none; letter-spacing: 0.5px;
         }
         .card-btn:hover { background: var(--accent); color: var(--bg-dark); gap: 12px; }
-        .card-btn.locked { background: transparent; color: var(--text-dim); border: 1px solid rgba(255,179,154,0.2); cursor: not-allowed; }
-        .card-btn.locked:hover { background: transparent; gap: 8px; }
 
         /* Workspace */
         .workspace {
@@ -342,6 +337,21 @@
         <button class="close-button" onclick="closeTools()">Close Window</button>
     </section>
 
+    <!-- NEW COMPRESS PDF WORKSPACE -->
+    <section id="compressTool" class="workspace">
+        <h2>PDF Compressor</h2>
+        <p class="description">Reduce your PDF file size quickly without losing formatting.</p>
+        <div class="upload-box" onclick="document.getElementById('compressFile').click()">
+            <svg viewBox="0 0 24 24"><path d="M12 22v-6"/><path d="M12 2v6"/><path d="m15 19-3 3-3-3"/><path d="m15 5-3-3-3 3"/><path d="M22 12h-6"/><path d="M2 12h6"/><path d="m19 9-3 3 3 3"/><path d="m5 9 3 3-3 3"/></svg>
+            <strong>Click to upload PDF</strong>
+            <span>One document at a time</span>
+        </div>
+        <input id="compressFile" class="hidden-input" type="file" accept=".pdf,application/pdf" onchange="compressFileSelected(this)">
+        <div id="compressStatus" class="status"></div>
+        <button id="compressButton" class="action-button" onclick="compressPdf()">⚡ Compress File</button>
+        <button class="close-button" onclick="closeTools()">Close Window</button>
+    </section>
+
     <!-- DOCUMENT TOOLS SECTION -->
     <section id="document-tools" class="section-intro fade-element">
         <div class="section-tag">Document Tools</div>
@@ -383,7 +393,8 @@
             </div>
             <h3>Compress PDF</h3>
             <p>Shrink PDF file sizes while keeping good quality for sharing.</p>
-            <button class="card-btn locked" onclick="comingSoon('Compress PDF')">Compress 🔒</button>
+            <!-- COMPRESS TOOL ACTIVATED -->
+            <button class="card-btn" onclick="openTool('compressTool')">Compress →</button>
         </div>
     </div>
 
@@ -394,7 +405,7 @@
         <p>Save videos from popular platforms in HD quality without watermarks.</p>
     </section>
 
-    <!-- HERE IS WHERE THE BUTTONS ARE ALL FIXED & UNLOCKED! -->
+    <!-- HERE IS WHERE THE BUTTONS ARE ALL FIXED & UNLOCKED! (Pinterest Removed) -->
     <div class="tools-grid">
         <div class="glass-card fade-element">
             <div class="card-icon logo-tiktok">
@@ -421,15 +432,6 @@
             <h3>Facebook Downloader</h3>
             <p>Save Facebook videos in HD quality to your device.</p>
             <button class="card-btn" onclick="window.location.href='facebook-downloader.html'">Download →</button>
-        </div>
-        
-        <div class="glass-card fade-element">
-            <div class="card-icon logo-pin">
-                <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.219-.937 1.406-5.957 1.406-5.957s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.888-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/></svg>
-            </div>
-            <h3>Pinterest Downloader</h3>
-            <p>Save Pinterest videos and high-quality images.</p>
-            <button class="card-btn" onclick="window.location.href='pinterest-downloader.html'">Download →</button>
         </div>
     </div>
 
@@ -466,21 +468,19 @@
 /* INITIAL LOADER */
 window.addEventListener('load', () => setTimeout(() => document.getElementById('intro-loader').classList.add('hide'), 1500));
 
-/* SCROLL FADE ANIMATIONS (Up & Down) */
+/* SCROLL FADE ANIMATIONS */
 const fadeElements = document.querySelectorAll('.fade-element');
 const hero = document.getElementById('hero');
 
 function checkScroll() {
     let scrollPos = window.scrollY;
     
-    // Hero fading out as you scroll down, fading in as you scroll up
     if(scrollPos < 600) {
         hero.style.opacity = 1 - (scrollPos / 400);
         hero.style.transform = `translateY(${scrollPos * 0.2}px)`;
         hero.style.pointerEvents = scrollPos > 300 ? 'none' : 'auto';
     }
 
-    // Grid elements fading in and out based on viewport
     fadeElements.forEach(el => {
         const rect = el.getBoundingClientRect();
         const windowHeight = window.innerHeight;
@@ -494,7 +494,7 @@ function checkScroll() {
 }
 
 window.addEventListener('scroll', checkScroll);
-checkScroll(); // Run once on load
+checkScroll();
 
 /* TOBY AI */
 function toggleTobyChat() {
@@ -512,8 +512,8 @@ function sendTobyMessage() {
         else if (q.includes("how are you")) reply = "I'm doing great! Ready to help ⚡";
         else if (q.match(/email|contact|support/)) reply = "You can reach support directly at m.aliarain070@gmail.com";
         else if (q.match(/free|cost/)) reply = "Yes! Everything is 100% free forever.";
-        else if (q.includes("pdf")) reply = "You can convert JPG to PDF, extract images, or merge PDFs above!";
-        else if (q.match(/tiktok|video/)) reply = "Click 'Download →' on the TikTok card!";
+        else if (q.includes("pdf")) reply = "You can convert JPG to PDF, extract images, compress, or merge PDFs above!";
+        else if (q.match(/tiktok|video/)) reply = "Click 'Download →' on the video tools section!";
         addTobyMessage(reply, 'bot-msg');
     }, 400);
 }
@@ -525,7 +525,6 @@ function addTobyMessage(text, className) {
 if (window.pdfjsLib) window.pdfjsLib.GlobalWorkerOptions.workerSrc = "./pdf.worker.min.js";
 function closeTools() { document.querySelectorAll(".workspace").forEach(t => t.style.display = "none"); }
 function openTool(id) { closeTools(); const t = document.getElementById(id); if (t) { t.style.display = "block"; t.scrollIntoView({ behavior: "smooth", block: "center" }); } }
-function comingSoon(name) { alert(name + " — Coming soon!"); }
 function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
 function downloadBlob(blob, filename) {
     const url = URL.createObjectURL(blob); const link = document.createElement("a"); link.href = url; link.download = filename;
@@ -540,13 +539,13 @@ function jpgFilesSelected(input) {
     const status = document.getElementById("jpgStatus"), preview = document.getElementById("jpgPreview"), button = document.getElementById("jpgCreateButton");
     jpgSelectedFiles = Array.from(input.files || []).filter(f => f.type === "image/jpeg" || f.type === "image/png");
     preview.innerHTML = "";
-    if (!jpgSelectedFiles.length) { status.textContent = "Select JPG/PNG images."; button.style.display = "none"; return; }
+    if (!jpgSelectedFiles.length) { status.textContent = "Please select JPG or PNG images."; button.style.display = "none"; return; }
     jpgSelectedFiles.forEach((file, i) => {
         const url = URL.createObjectURL(file); jpgObjectUrls.push(url);
         const card = document.createElement("div"); card.className = "preview-card";
-        card.innerHTML = `<img src="${url}"><div class="preview-label">Img ${i+1}</div>`; preview.appendChild(card);
+        card.innerHTML = `<img src="${url}"><div class="preview-label">Image ${i+1}</div>`; preview.appendChild(card);
     });
-    status.textContent = `${jpgSelectedFiles.length} file(s) ready`; button.style.display = "block";
+    status.textContent = `${jpgSelectedFiles.length} file(s) ready for conversion`; button.style.display = "block";
 }
 async function createJpgPdf() {
     const status = document.getElementById("jpgStatus"), button = document.getElementById("jpgCreateButton");
@@ -554,7 +553,7 @@ async function createJpgPdf() {
     try {
         const pdf = await window.PDFLib.PDFDocument.create();
         for (let i = 0; i < jpgSelectedFiles.length; i++) {
-            status.textContent = `Processing ${i+1}/${jpgSelectedFiles.length}...`; await delay(30);
+            status.textContent = `Processing image ${i+1} of ${jpgSelectedFiles.length}...`; await delay(30);
             const bytes = await jpgSelectedFiles[i].arrayBuffer();
             const image = jpgSelectedFiles[i].type === "image/png" ? await pdf.embedPng(bytes) : await pdf.embedJpg(bytes);
             const scale = Math.min(1, 1600/image.width, 2200/image.height);
@@ -562,8 +561,8 @@ async function createJpgPdf() {
             page.drawImage(image, {x:0, y:0, width:image.width*scale, height:image.height*scale});
         }
         downloadBlob(new Blob([await pdf.save()], {type:"application/pdf"}), "TMD-Converted.pdf");
-        status.textContent = "✓ PDF ready!";
-    } catch(e) { status.textContent = "Error occurred."; } finally { button.disabled = false; button.textContent = "⚡ Generate PDF"; }
+        status.textContent = "✓ PDF generated successfully!";
+    } catch(e) { status.textContent = "An error occurred during processing."; } finally { button.disabled = false; button.textContent = "⚡ Generate PDF"; }
 }
 
 // PDF TO JPG
@@ -572,16 +571,16 @@ function pdfJpgFileSelected(input) {
     const status = document.getElementById("pdfJpgStatus"), button = document.getElementById("pdfJpgConvertButton"), preview = document.getElementById("pdfJpgPreview");
     selectedPdfForJpg = input.files?.[0]; preview.innerHTML = "";
     if (!selectedPdfForJpg) { status.textContent = ""; button.style.display = "none"; return; }
-    status.textContent = `Selected: ${selectedPdfForJpg.name}`; button.style.display = "block";
+    status.textContent = `Selected File: ${selectedPdfForJpg.name}`; button.style.display = "block";
 }
 async function convertPdfToJpg() {
     const status = document.getElementById("pdfJpgStatus"), button = document.getElementById("pdfJpgConvertButton"), preview = document.getElementById("pdfJpgPreview");
-    if (!window.pdfjsLib || !selectedPdfForJpg) return; button.disabled = true; button.textContent = "Extracting..."; preview.innerHTML = "";
+    if (!window.pdfjsLib || !selectedPdfForJpg) return; button.disabled = true; button.textContent = "Extracting images..."; preview.innerHTML = "";
     try {
         const bytes = new Uint8Array(await selectedPdfForJpg.arrayBuffer());
         const pdf = await window.pdfjsLib.getDocument({data: bytes}).promise;
         for (let p = 1; p <= pdf.numPages; p++) {
-            status.textContent = `Converting page ${p}/${pdf.numPages}...`; await delay(30);
+            status.textContent = `Converting page ${p} of ${pdf.numPages}...`; await delay(30);
             const page = await pdf.getPage(p); const viewport = page.getViewport({scale: 1.7});
             const canvas = document.createElement("canvas"); const ctx = canvas.getContext("2d", {alpha: false});
             canvas.width = Math.floor(viewport.width); canvas.height = Math.floor(viewport.height);
@@ -592,11 +591,12 @@ async function convertPdfToJpg() {
             const card = document.createElement("div"); card.className = "preview-card";
             card.innerHTML = `<img src="${url}"><div class="preview-label">Page ${p}</div>`;
             const btn = document.createElement("button"); btn.className = "small-btn"; btn.textContent = "Download";
+            btn.style.marginTop = "5px"; btn.style.padding = "4px"; btn.style.cursor = "pointer";
             btn.onclick = () => downloadBlob(blob, `TMD-page-${p}.jpg`);
             card.appendChild(btn); preview.appendChild(card);
         }
-        status.textContent = "✓ Extraction complete!";
-    } catch(e) { status.textContent = "Error occurred."; } finally { button.disabled = false; button.textContent = "⚡ Extract Images"; }
+        status.textContent = "✓ Extraction completed successfully!";
+    } catch(e) { status.textContent = "An error occurred during extraction."; } finally { button.disabled = false; button.textContent = "⚡ Extract Images"; }
 }
 
 // MERGE PDF
@@ -604,23 +604,62 @@ let selectedMergeFiles = [];
 function mergeFilesSelected(input) {
     const status = document.getElementById("mergeStatus"), button = document.getElementById("mergeButton");
     selectedMergeFiles = Array.from(input.files || []);
-    if (selectedMergeFiles.length < 2) { status.textContent = "Select 2+ files."; button.style.display = "none"; return; }
-    status.textContent = `${selectedMergeFiles.length} files ready`; button.style.display = "block";
+    if (selectedMergeFiles.length < 2) { status.textContent = "Please select at least 2 PDF files to merge."; button.style.display = "none"; return; }
+    status.textContent = `${selectedMergeFiles.length} files selected for merging.`; button.style.display = "block";
 }
 async function mergePdfs() {
     const status = document.getElementById("mergeStatus"), button = document.getElementById("mergeButton");
-    if (!window.PDFLib || selectedMergeFiles.length < 2) return; button.disabled = true; button.textContent = "Merging...";
+    if (!window.PDFLib || selectedMergeFiles.length < 2) return; button.disabled = true; button.textContent = "Merging files...";
     try {
         const merged = await window.PDFLib.PDFDocument.create();
         for (let i = 0; i < selectedMergeFiles.length; i++) {
-            status.textContent = `Adding ${i+1}/${selectedMergeFiles.length}...`;
+            status.textContent = `Adding document ${i+1} of ${selectedMergeFiles.length}...`;
             const source = await window.PDFLib.PDFDocument.load(await selectedMergeFiles[i].arrayBuffer());
             const pages = await merged.copyPages(source, source.getPageIndices()); pages.forEach(p => merged.addPage(p));
         }
         downloadBlob(new Blob([await merged.save()], {type:"application/pdf"}), "TMD-Merged.pdf");
-        status.textContent = "✓ Merged!";
-    } catch(e) { status.textContent = "Error occurred."; } finally { button.disabled = false; button.textContent = "⚡ Merge Files"; }
+        status.textContent = "✓ Files merged successfully!";
+    } catch(e) { status.textContent = "An error occurred while merging."; } finally { button.disabled = false; button.textContent = "⚡ Merge Files"; }
 }
+
+// COMPRESS PDF 
+let selectedCompressFile = null;
+function compressFileSelected(input) {
+    const status = document.getElementById("compressStatus"), button = document.getElementById("compressButton");
+    selectedCompressFile = input.files?.[0];
+    if (!selectedCompressFile) { status.textContent = ""; button.style.display = "none"; return; }
+    
+    // File size in MB
+    const sizeMB = (selectedCompressFile.size / (1024 * 1024)).toFixed(2);
+    status.textContent = `Selected File: ${selectedCompressFile.name} (${sizeMB} MB)`; 
+    button.style.display = "block";
+}
+
+async function compressPdf() {
+    const status = document.getElementById("compressStatus"), button = document.getElementById("compressButton");
+    if (!window.PDFLib || !selectedCompressFile) return; 
+    button.disabled = true; button.textContent = "Compressing, please wait...";
+    
+    try {
+        const arrayBuffer = await selectedCompressFile.arrayBuffer();
+        const pdfDoc = await window.PDFLib.PDFDocument.load(arrayBuffer);
+        
+        // Save with Object Streams enables structural compression in pdf-lib
+        const pdfBytes = await pdfDoc.save({ useObjectStreams: true });
+        
+        const blob = new Blob([pdfBytes], { type: "application/pdf" });
+        const newSizeMB = (blob.size / (1024 * 1024)).toFixed(2);
+        
+        downloadBlob(blob, "TMD-Compressed.pdf");
+        status.textContent = `✓ Compression successful! New size: ${newSizeMB} MB`;
+    } catch(e) { 
+        status.textContent = "An error occurred while compressing. The file might be corrupted or encrypted."; 
+        console.error(e);
+    } finally { 
+        button.disabled = false; button.textContent = "⚡ Compress File"; 
+    }
+}
+
 </script>
 </body>
 </html>
