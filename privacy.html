@@ -8,17 +8,25 @@
     <style>
         body { margin: 0; background-color: #0b0711; color: #b3b0b8; font-family: 'Inter', sans-serif; line-height: 1.6; }
         
-        /* NEW FIXED HEADER */
-        header { display: flex; flex-direction: column; align-items: center; padding: 20px; gap: 12px; background: transparent; }
-        @media (min-width: 768px) { header { flex-direction: row; justify-content: space-between; max-width: 1000px; margin: 0 auto; width: 100%; padding: 20px 0; } }
-        .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 700; background: linear-gradient(90deg, #ff7e5f, #ff6a88); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .logo .icon { -webkit-text-fill-color: #ff7e5f; }
-        .nav-links { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin: 0; padding: 0; }
-        .nav-links a { color: #ffffff; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
-        .nav-links a:hover { color: #ff7e5f; }
+        /* UNIVERSAL HEADER STYLES */
+        .tmd-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; background-color: #0b0711; border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: relative; z-index: 9999; }
+        .tmd-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; font-family: 'Orbitron', sans-serif; font-size: 1.25rem; font-weight: 700; color: #ff7e5f !important; letter-spacing: 0.5px; }
+        .tmd-nav { display: flex; gap: 25px; }
+        .tmd-nav a { color: #d1d5db; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.3s ease; }
+        .tmd-nav a:hover { color: #ff7e5f; }
+        .tmd-menu-btn { display: none; flex-direction: column; justify-content: space-between; width: 26px; height: 18px; background: transparent; border: none; cursor: pointer; padding: 0; }
+        .tmd-menu-btn span { width: 100%; height: 2px; background-color: #ff7e5f; border-radius: 2px; transition: all 0.3s ease; }
         
-        /* OLD STYLE BODY (Unchanged) */
-        .page-wrapper { padding: 20px; max-width: 800px; margin: 0 auto 40px auto; }
+        @media (max-width: 768px) {
+            .tmd-menu-btn { display: flex; }
+            .tmd-nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: #120918; padding: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+            .tmd-nav.active { display: flex; }
+            .tmd-nav a { padding: 15px 20px; font-size: 1.1rem; display: block; border-bottom: 1px solid rgba(255,255,255,0.02); }
+            .tmd-nav a:last-child { border-bottom: none; }
+        }
+
+        /* PAGE CONTENT STYLES */
+        .page-wrapper { padding: 20px; max-width: 800px; margin: 40px auto; }
         .content-card { background: #160d1e; border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 20px; padding: 30px; }
         h1.page-title { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; margin-top: 0; background: linear-gradient(90deg, #ff7e5f, #ff6a88); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         h2 { color: #ffffff; font-size: 1.2rem; margin-top: 30px; }
@@ -26,12 +34,16 @@
     </style>
 </head>
 <body>
-    <header>
-        <a href="/" class="logo"><span class="icon">⚡</span> ToolsMediaDownloader</a>
-        <nav class="nav-links">
+    <header class="tmd-header">
+        <a href="/" class="tmd-logo"><span>⚡</span> ToolsMediaDownloader</a>
+        <button class="tmd-menu-btn" id="mobileMenuBtn">
+            <span></span><span></span><span></span>
+        </button>
+        <nav class="tmd-nav" id="navLinks">
             <a href="/">Home</a>
             <a href="/about.html">About</a>
             <a href="/contact.html">Support</a>
+            <a href="/privacy.html">Privacy</a>
         </nav>
     </header>
 
@@ -45,5 +57,11 @@
             <p>We highly respect your privacy. All of our media tools process links securely. We do not store downloaded files on our servers longer than necessary to facilitate your download, and we do not track individual user downloads.</p>
         </div>
     </div>
+
+    <script>
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
