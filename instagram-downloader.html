@@ -8,9 +8,10 @@
 
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📸%3C/text%3E%3C/svg%3E">
 
+    <!-- Fonts (Updated to include Inter for the universal header) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,6 +33,7 @@
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         .orb {
@@ -61,49 +63,35 @@
             animation: float2 18s infinite ease-in-out;
         }
 
-        @keyframes float1 {
-            50% { transform: translate(100px, 150px); }
+        @keyframes float1 { 50% { transform: translate(100px, 150px); } }
+        @keyframes float2 { 50% { transform: translate(-80px, -120px); } }
+
+        /* ========================================= */
+        /* UNIVERSAL HEADER CSS */
+        /* ========================================= */
+        .tmd-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 5%; background-color: rgba(11, 7, 17, 0.98); border-bottom: 1px solid rgba(255, 179, 154, 0.15); position: sticky; top: 0; z-index: 1000; font-family: 'Inter', sans-serif; }
+        .tmd-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; font-family: 'Orbitron', sans-serif; font-size: 1.25rem; font-weight: 700; color: #FFB39A !important; white-space: nowrap; }
+        .tmd-logo svg { width: 20px; height: 20px; flex-shrink: 0; fill: #FFB39A; }
+        .tmd-nav { display: flex; gap: 22px; align-items: center; }
+        .tmd-nav a { color: #d1d5db; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+        .tmd-nav a:hover { color: #FFB39A; }
+        .tmd-menu-btn { display: none; background: none; border: none; cursor: pointer; flex-direction: column; justify-content: space-between; width: 22px; height: 16px; padding: 0; flex-shrink: 0; margin-left: auto; }
+        .tmd-menu-btn span { display: block; width: 100%; height: 2px; background-color: #FFB39A; border-radius: 2px; }
+        
+        @media (max-width: 768px) {
+            .tmd-logo { font-size: 1.1rem; }
+            .tmd-logo svg { width: 18px; height: 18px; }
+            .tmd-menu-btn { display: flex; }
+            .tmd-nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: #120918; border-bottom: 1px solid rgba(255, 179, 154, 0.12); box-shadow: 0 12px 30px rgba(0,0,0,0.45); gap: 0; }
+            .tmd-nav.active { display: flex; }
+            .tmd-nav a { padding: 10px 20px; font-size: 0.9rem; width: 100%; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.04); color: #d1d5db; }
+            .tmd-nav a:last-child { border-bottom: none; }
+            .tmd-nav a:active { background: rgba(255, 179, 154, 0.08); color: #FFB39A; }
         }
 
-        @keyframes float2 {
-            50% { transform: translate(-80px, -120px); }
-        }
-
-        .navbar {
-            position: sticky;
-            top: 0;
-            background: rgba(10, 5, 16, 0.75);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 179, 154, 0.15);
-            padding: 16px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-            z-index: 100;
-        }
-
-        .nav-logo {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 800;
-            font-size: 20px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-decoration: none;
-        }
-
-        .nav-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-size: 14px;
-            margin-left: 20px;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover { color: var(--accent); }
-
+        /* ========================================= */
+        /* HERO & DOWNLOADER CSS */
+        /* ========================================= */
         .hero {
             text-align: center;
             padding: 80px 20px 40px;
@@ -276,54 +264,21 @@
             line-height: 1.6;
         }
 
-        footer {
-            margin-top: auto;
-            background: linear-gradient(180deg, transparent, rgba(10, 5, 16, 0.9));
-            border-top: 1px solid rgba(255, 179, 154, 0.1);
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .footer-brand {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 20px;
-            color: var(--accent);
-            margin-bottom: 15px;
-        }
-
-        .footer-links a {
-            color: var(--text-dim);
-            text-decoration: none;
-            margin: 0 14px;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-
-        .footer-links a:hover { color: var(--accent); }
-
-        .footer-copy {
-            color: var(--text-dim);
-            font-size: 13px;
-            margin-top: 18px;
-        }
-
         @media (max-width: 600px) {
-            .navbar {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .nav-links {
-                text-align: center;
-            }
-
-            .nav-links a {
-                margin: 0 8px;
-            }
-
             .input-group button { width: 100%; }
             .downloader-box { padding: 28px 18px; }
         }
+
+        /* ========================================= */
+        /* UNIVERSAL FOOTER CSS */
+        /* ========================================= */
+        .tmd-footer { background: linear-gradient(180deg, transparent, rgba(10,5,16,0.9)); border-top: 1px solid rgba(255,179,154,0.1); padding: 50px 20px 30px; text-align: center; font-family: 'Inter', sans-serif; margin-top: auto; }
+        .tmd-footer-brand { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 700; color: #FFB39A; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .tmd-footer-brand svg { width: 22px; height: 22px; fill: #FFB39A; }
+        .tmd-footer-links { display: flex; justify-content: center; gap: 20px; margin: 20px 0; flex-wrap: wrap; }
+        .tmd-footer-links a { color: #a08ca0; text-decoration: none; font-size: 14px; transition: 0.3s; }
+        .tmd-footer-links a:hover { color: #FFB39A; }
+        .tmd-footer-copy { color: rgba(255, 255, 255, 0.3); font-size: 13px; margin-top: 20px; }
     </style>
 </head>
 
@@ -331,14 +286,25 @@
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
 
-    <nav class="navbar">
-        <a href="index.html" class="nav-logo">⚡ ToolsMediaDownloader</a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="mailto:m.aliarain070@gmail.com">Support</a>
-        </div>
-    </nav>
+    <!-- UNIVERSAL HEADER -->
+    <header class="tmd-header">
+        <a href="/" class="tmd-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/></svg>
+            ToolsMediaDownloader
+        </a>
+        <button class="tmd-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <nav class="tmd-nav" id="navLinks">
+            <a href="/#document-tools">PDF Tools</a>
+            <a href="/#video-tools">Video Tools</a>
+            <a href="/about.html">About</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
+            <a href="/disclaimer.html">Disclaimer</a>
+            <a href="/contact.html">Contact</a>
+        </nav>
+    </header>
 
     <section class="hero">
         <h1>Instagram <span>Downloader</span></h1>
@@ -370,19 +336,31 @@
         </p>
     </main>
 
-    <footer>
-        <div class="footer-brand">⚡ ToolsMediaDownloader</div>
-        <div class="footer-links">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="mailto:m.aliarain070@gmail.com">Contact Support</a>
+    <!-- UNIVERSAL FOOTER -->
+    <footer class="tmd-footer">
+        <div class="tmd-footer-brand">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/></svg>
+            ToolsMediaDownloader
         </div>
-        <p class="footer-copy">© 2026 ToolsMediaDownloader. Free online tools.</p>
+        <div class="tmd-footer-links">
+            <a href="/about.html">About</a>
+            <a href="/blog.html">Blog & Guides</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
+            <a href="/disclaimer.html">Disclaimer</a>
+            <a href="/contact.html">Contact Support</a>
+        </div>
+        <p class="tmd-footer-copy">© 2026 ToolsMediaDownloader · Free online tools.</p>
     </footer>
 
     <script>
-        const BACKEND_URL =
-            "https://instagram-downloader-backend-nd5n.onrender.com";
+        // Universal Mobile Menu script
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+
+        // Backend Instagram Core Logic
+        const BACKEND_URL = "https://instagram-downloader-backend-nd5n.onrender.com";
 
         const form = document.getElementById("downloadForm");
         const input = document.getElementById("instaUrl");
@@ -463,18 +441,14 @@
             mediaGrid.replaceChildren();
 
             if (!isValidInstagramUrl(url)) {
-                showStatus(
-                    "Please enter a valid Instagram Reel or video URL."
-                );
+                showStatus("Please enter a valid Instagram Reel or video URL.");
                 input.focus();
                 return;
             }
 
             btn.disabled = true;
             btn.textContent = "Please wait...";
-            showStatus(
-                "Connecting to downloader. The free server may take a little time to wake up..."
-            );
+            showStatus("Connecting to downloader. The free server may take a little time to wake up...");
 
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 180000);
@@ -489,12 +463,10 @@
                     signal: controller.signal
                 });
 
-                const contentType =
-                    response.headers.get("content-type") || "";
+                const contentType = response.headers.get("content-type") || "";
 
                 if (!response.ok) {
-                    let message =
-                        "Download failed. Please try a different public Reel.";
+                    let message = "Download failed. Please try a different public Reel.";
 
                     if (contentType.includes("application/json")) {
                         const errorData = await response.json();
@@ -508,9 +480,7 @@
 
                 if (contentType.includes("application/json")) {
                     const errorData = await response.json();
-                    throw new Error(
-                        errorData.error || "The server did not return a video."
-                    );
+                    throw new Error(errorData.error || "The server did not return a video.");
                 }
 
                 const blob = await response.blob();
@@ -526,18 +496,11 @@
                 console.error("Instagram downloader error:", error);
 
                 if (error.name === "AbortError") {
-                    showStatus(
-                        "The request took too long. Please try again."
-                    );
+                    showStatus("The request took too long. Please try again.");
                 } else if (error instanceof TypeError) {
-                    showStatus(
-                        "Could not connect to the backend. Please retry in a moment."
-                    );
+                    showStatus("Could not connect to the backend. Please retry in a moment.");
                 } else {
-                    showStatus(
-                        error.message ||
-                        "Something went wrong. Please try again."
-                    );
+                    showStatus(error.message || "Something went wrong. Please try again.");
                 }
             } finally {
                 clearTimeout(timeoutId);
