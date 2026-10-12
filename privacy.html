@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - ToolsMediaDownloader</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <meta name="description" content="Read the Privacy Policy of ToolsMediaDownloader. Learn how we handle your data, cookies, and personal information while using our free online media downloader tools.">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; }
-        body { margin: 0; background-color: #0b0711; color: #b3b0b8; font-family: 'Inter', sans-serif; line-height: 1.6; }
+        body { margin: 0; background-color: #0b0711; color: #b3b0b8; font-family: 'Inter', sans-serif; line-height: 1.7; }
         
-        /* HEADER STYLES */
+        /* HEADER */
         .tmd-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; background-color: #0b0711; border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: relative; z-index: 9999; }
         .tmd-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; font-family: 'Orbitron', sans-serif; font-size: 1.35rem; font-weight: 700; color: #FFB39A !important; letter-spacing: 0.5px; white-space: nowrap; }
         .tmd-logo svg { flex-shrink: 0; width: 20px; height: 20px; }
-        .tmd-nav { display: flex; gap: 20px; align-items: center; }
+        .tmd-nav { display: flex; gap: 22px; align-items: center; }
         .tmd-nav a { color: #d1d5db; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s ease; }
         .tmd-nav a:hover { color: #FFB39A; }
         .tmd-menu-btn { display: none; flex-direction: column; justify-content: space-between; width: 24px; height: 16px; background: transparent; border: none; cursor: pointer; padding: 0; flex-shrink: 0; }
@@ -24,18 +25,28 @@
             .tmd-logo { font-size: 1.15rem; }
             .tmd-logo svg { width: 18px; height: 18px; }
             .tmd-menu-btn { display: flex; }
-            .tmd-nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: #120918; padding: 6px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+            .tmd-nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: #120918; padding: 4px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.5); gap: 0; }
             .tmd-nav.active { display: flex; }
-            .tmd-nav a { padding: 12px 16px; font-size: 0.95rem; display: block; border-bottom: 1px solid rgba(255,255,255,0.02); }
+            .tmd-nav a { padding: 10px 16px; font-size: 0.85rem; display: block; border-bottom: 1px solid rgba(255,255,255,0.03); }
             .tmd-nav a:last-child { border-bottom: none; }
         }
 
-        /* PAGE CONTENT STYLES */
-        .page-wrapper { padding: 20px; max-width: 800px; margin: 40px auto; }
-        .content-card { background: #160d1e; border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 20px; padding: 30px; }
-        h1.page-title { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; margin-top: 0; background: linear-gradient(90deg, #FFB39A, #ff6a88); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        h2 { color: #ffffff; font-size: 1.2rem; margin-top: 30px; }
-        p { margin-bottom: 20px; font-size: 1rem; }
+        /* HERO SECTION */
+        .page-hero { text-align: center; padding: 50px 20px 30px; max-width: 800px; margin: 0 auto; }
+        .page-hero h1 { font-family: 'Orbitron', sans-serif; font-size: 2.6rem; margin: 0 0 15px; background: linear-gradient(90deg, #FFB39A, #ff6a88); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .page-hero p { color: #8a8591; font-size: 1rem; margin: 0; }
+        .divider { width: 60px; height: 3px; background: linear-gradient(90deg, #FFB39A, #ff6a88); margin: 20px auto; border-radius: 3px; }
+
+        /* CONTENT */
+        .page-wrapper { padding: 20px; max-width: 850px; margin: 0 auto 60px; }
+        .content-card { background: linear-gradient(145deg, #160d1e, #110818); border: 1px solid rgba(255, 179, 154, 0.08); border-radius: 20px; padding: 35px; margin-bottom: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+        .section-title { display: flex; align-items: center; gap: 12px; color: #ffffff; font-size: 1.3rem; margin: 0 0 15px; font-weight: 600; }
+        .section-icon { width: 36px; height: 36px; background: rgba(255, 179, 154, 0.1); border: 1px solid rgba(255, 179, 154, 0.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .section-icon svg { width: 18px; height: 18px; fill: #FFB39A; }
+        p { margin: 0 0 15px; font-size: 0.98rem; }
+        .last-updated { background: rgba(255, 179, 154, 0.05); border-left: 3px solid #FFB39A; padding: 12px 16px; border-radius: 8px; color: #FFB39A; font-size: 0.9rem; margin-bottom: 25px; }
+        a.inline-link { color: #FFB39A; text-decoration: none; }
+        a.inline-link:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -44,9 +55,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="#FFB39A"><path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/></svg>
             ToolsMediaDownloader
         </a>
-        <button class="tmd-menu-btn" id="mobileMenuBtn">
-            <span></span><span></span><span></span>
-        </button>
+        <button class="tmd-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></button>
         <nav class="tmd-nav" id="navLinks">
             <a href="/">Home</a>
             <a href="/about.html">About</a>
@@ -55,21 +64,27 @@
         </nav>
     </header>
 
+    <section class="page-hero">
+        <h1>Privacy Policy</h1>
+        <div class="divider"></div>
+        <p>Your privacy is important to us. Learn how we handle your data responsibly.</p>
+    </section>
+
     <div class="page-wrapper">
         <div class="content-card">
-            <h1 class="page-title">Privacy Policy</h1>
-            <p>Last updated: 2026</p>
-            <p>At ToolsMediaDownloader (toolsmediadownload.online), the privacy of our visitors is of extreme importance to us. This Privacy Policy document outlines the types of personal information that is received and collected by our website and how it is used.</p>
-            
-            <h2>1. Local File Processing</h2>
-            <p>We highly respect your privacy. All of our media tools process links securely. We do not store downloaded files on our servers longer than necessary to facilitate your download, and we do not track individual user downloads.</p>
+            <div class="last-updated">📅 Last Updated: January 2026</div>
+            <p>At <strong>ToolsMediaDownloader</strong> (toolsmediadownload.online), accessible from the internet, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains the types of information that is collected and recorded by ToolsMediaDownloader and how we use it. If you have additional questions or require more information about our Privacy Policy, do not hesitate to <a href="/contact.html" class="inline-link">contact us</a>.</p>
+            <p>This Privacy Policy applies only to our online activities and is valid for visitors to our website with regards to the information that they shared and/or collect in ToolsMediaDownloader. This policy is not applicable to any information collected offline or via channels other than this website.</p>
         </div>
-    </div>
 
-    <script>
-        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-            document.getElementById('navLinks').classList.toggle('active');
-        });
-    </script>
-</body>
-</html>
+        <div class="content-card">
+            <h2 class="section-title">
+                <span class="section-icon"><svg viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg></span>
+                1. Consent
+            </h2>
+            <p>By using our website, you hereby consent to our Privacy Policy and agree to its terms. If you do not agree with the practices described in this policy, you should not use our services. Your continued use of the site following any changes to this policy constitutes your acceptance of such changes.</p>
+        </div>
+
+        <div class="content-card">
+            <h2 class="section-title">
+                <span class="section-icon"><svg viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 
