@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - ToolsMediaDownloader</title>
+    <meta name="description" content="Get in touch with ToolsMediaDownloader. Send us feedback, report issues, or ask questions.">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background-color: #0b0711; color: #b3b0b8; font-family: 'Inter', sans-serif; line-height: 1.8; -webkit-font-smoothing: antialiased; }
+        
+        /* HEADER */
         .tmd-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 5%; background-color: rgba(11, 7, 17, 0.98); border-bottom: 1px solid rgba(255, 179, 154, 0.15); position: sticky; top: 0; z-index: 1000; }
         .tmd-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; font-family: 'Orbitron', sans-serif; font-size: 1.25rem; font-weight: 700; color: #FFB39A !important; white-space: nowrap; }
         .tmd-logo svg { width: 20px; height: 20px; flex-shrink: 0; }
@@ -16,6 +19,7 @@
         .tmd-nav a:hover { color: #FFB39A; }
         .tmd-menu-btn { display: none; background: none; border: none; cursor: pointer; flex-direction: column; justify-content: space-between; width: 22px; height: 16px; padding: 0; flex-shrink: 0; }
         .tmd-menu-btn span { display: block; width: 100%; height: 2px; background-color: #FFB39A; border-radius: 2px; }
+        
         @media (max-width: 768px) {
             .tmd-logo { font-size: 1.1rem; }
             .tmd-logo svg { width: 18px; height: 18px; }
@@ -26,18 +30,29 @@
             .tmd-nav a:last-child { border-bottom: none; }
             .tmd-nav a:active { background: rgba(255, 179, 154, 0.08); color: #FFB39A; }
         }
+
+        /* CONTACT FORM CONTAINER */
         .page-container { max-width: 560px; margin: 40px auto; padding: 0 20px 60px; }
         .legal-box { background: #120b18; border: 1px solid rgba(255, 179, 154, 0.1); border-radius: 14px; padding: 40px; box-shadow: 0 4px 24px rgba(0,0,0,0.25); }
         .legal-box h1 { font-family: 'Orbitron', sans-serif; color: #FFB39A; font-size: 1.9rem; margin-bottom: 8px; font-weight: 700; text-align: center; }
         .legal-box > p { text-align: center; margin-bottom: 28px; font-size: 0.95rem; color: #8a8591; }
+        
         .form-group { margin-bottom: 18px; }
         .form-group label { display: block; color: #d1d5db; margin-bottom: 7px; font-size: 0.9rem; font-weight: 500; }
         .form-control { width: 100%; padding: 13px 15px; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: #fff; font-size: 0.95rem; font-family: 'Inter', sans-serif; transition: border-color 0.2s; }
         .form-control:focus { border-color: #FFB39A; outline: none; }
         .form-control::placeholder { color: #5a5560; }
         textarea.form-control { min-height: 130px; resize: vertical; }
+        
         .btn-submit { background: linear-gradient(90deg, #FFB39A, #ff8f7a); color: #0b0711; font-weight: 700; border: none; padding: 14px 20px; border-radius: 10px; cursor: pointer; width: 100%; font-size: 1rem; font-family: 'Inter', sans-serif; transition: opacity 0.2s, transform 0.2s; margin-top: 8px; }
         .btn-submit:hover { opacity: 0.92; transform: translateY(-1px); }
+        .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        /* ALERT STATUS MESSAGE */
+        .form-status { display: none; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9rem; text-align: center; font-weight: 500; }
+        .form-status.success { display: block; background: rgba(74, 222, 128, 0.1); border: 1px solid rgba(74, 222, 128, 0.3); color: #4ade80; }
+        .form-status.error { display: block; background: rgba(248, 113, 113, 0.1); border: 1px solid rgba(248, 113, 113, 0.3); color: #f87171; }
+
         @media (max-width: 600px) {
             .page-container { margin: 20px auto; }
             .legal-box { padding: 28px 18px; }
@@ -68,28 +83,72 @@
         <div class="legal-box">
             <h1>Contact Us</h1>
             <p>Have a question, suggestion, or facing an issue? Fill out the form below and we'll get back to you soon.</p>
+
+            <div id="formStatus" class="form-status"></div>
             
-            <form action="#" method="POST">
+            <form id="contactForm" action="https://formsubmit.co/ajax/m.aliarain070@gmail.com" method="POST">
+                <input type="hidden" name="_subject" value="New Contact Form Submission - ToolsMediaDownloader">
+                <input type="hidden" name="_captcha" value="false">
+                
                 <div class="form-group">
-                    <label>Your Name</label>
-                    <input type="text" class="form-control" placeholder="John Doe" required>
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="John Doe" required>
                 </div>
                 <div class="form-group">
-                    <label>Email Address</label>
-                    <input type="email" class="form-control" placeholder="john@example.com" required>
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="john@example.com" required>
                 </div>
                 <div class="form-group">
-                    <label>Message</label>
-                    <textarea class="form-control" placeholder="How can we help you?" required></textarea>
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" class="form-control" placeholder="How can we help you?" required></textarea>
                 </div>
-                <button type="submit" class="btn-submit">Send Message</button>
+                <button type="submit" id="submitBtn" class="btn-submit">Send Message</button>
             </form>
         </div>
     </div>
 
     <script>
+        // Hamburger Menu Toggle
         document.getElementById('mobileMenuBtn').addEventListener('click', function() {
             document.getElementById('navLinks').classList.toggle('active');
+        });
+
+        // AJAX Form Handler (Prevents 404 and page refresh)
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const btn = document.getElementById('submitBtn');
+            const status = document.getElementById('formStatus');
+            
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+            status.className = 'form-status';
+
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    status.className = 'form-status success';
+                    status.textContent = 'Thank you! Your message has been sent successfully.';
+                    form.reset();
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            })
+            .catch(error => {
+                status.className = 'form-status error';
+                status.textContent = 'Oops! There was an issue sending your message. Please try again.';
+            })
+            .finally(() => {
+                btn.textContent = 'Send Message';
+                btn.disabled = false;
+            });
         });
     </script>
 </body>
