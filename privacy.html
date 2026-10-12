@@ -8,34 +8,40 @@
     <style>
         body { margin: 0; background-color: #0b0711; color: #b3b0b8; font-family: 'Inter', sans-serif; line-height: 1.6; }
         
-        /* UNIVERSAL HEADER STYLES */
-        .tmd-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; background-color: #0b0711; border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: relative; z-index: 9999; }
-        .tmd-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; font-family: 'Orbitron', sans-serif; font-size: 1.25rem; font-weight: 700; color: #ff7e5f !important; letter-spacing: 0.5px; }
+        /* HEADER STYLES */
+        .tmd-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background-color: #0b0711; border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: relative; z-index: 9999; }
+        .tmd-logo { display: flex; align-items: center; gap: 6px; text-decoration: none; font-family: 'Orbitron', sans-serif; font-size: 1.15rem; font-weight: 700; color: #FFB39A !important; letter-spacing: 0.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .tmd-logo svg { flex-shrink: 0; }
         .tmd-nav { display: flex; gap: 25px; }
         .tmd-nav a { color: #d1d5db; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.3s ease; }
-        .tmd-nav a:hover { color: #ff7e5f; }
-        .tmd-menu-btn { display: none; flex-direction: column; justify-content: space-between; width: 26px; height: 18px; background: transparent; border: none; cursor: pointer; padding: 0; }
-        .tmd-menu-btn span { width: 100%; height: 2px; background-color: #ff7e5f; border-radius: 2px; transition: all 0.3s ease; }
+        .tmd-nav a:hover { color: #FFB39A; }
+        .tmd-menu-btn { display: none; flex-direction: column; justify-content: space-between; width: 26px; height: 18px; background: transparent; border: none; cursor: pointer; padding: 0; flex-shrink: 0; }
+        .tmd-menu-btn span { width: 100%; height: 2px; background-color: #FFB39A; border-radius: 2px; transition: all 0.3s ease; }
         
         @media (max-width: 768px) {
+            .tmd-header { padding: 12px 15px; }
+            .tmd-logo { font-size: 0.95rem; } /* Made smaller to prevent overlap */
             .tmd-menu-btn { display: flex; }
             .tmd-nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: #120918; padding: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
             .tmd-nav.active { display: flex; }
-            .tmd-nav a { padding: 15px 20px; font-size: 1.1rem; display: block; border-bottom: 1px solid rgba(255,255,255,0.02); }
+            .tmd-nav a { padding: 15px 20px; font-size: 1.05rem; display: block; border-bottom: 1px solid rgba(255,255,255,0.02); }
             .tmd-nav a:last-child { border-bottom: none; }
         }
 
         /* PAGE CONTENT STYLES */
         .page-wrapper { padding: 20px; max-width: 800px; margin: 40px auto; }
         .content-card { background: #160d1e; border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 20px; padding: 30px; }
-        h1.page-title { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; margin-top: 0; background: linear-gradient(90deg, #ff7e5f, #ff6a88); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        h1.page-title { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; margin-top: 0; background: linear-gradient(90deg, #FFB39A, #ff6a88); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         h2 { color: #ffffff; font-size: 1.2rem; margin-top: 30px; }
         p { margin-bottom: 20px; font-size: 1rem; }
     </style>
 </head>
 <body>
     <header class="tmd-header">
-        <a href="/" class="tmd-logo"><span>⚡</span> ToolsMediaDownloader</a>
+        <a href="/" class="tmd-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFB39A" viewBox="0 0 16 16"><path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/></svg>
+            ToolsMediaDownloader
+        </a>
         <button class="tmd-menu-btn" id="mobileMenuBtn">
             <span></span><span></span><span></span>
         </button>
