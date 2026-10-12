@@ -4,53 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - ToolsMediaDownloader</title>
-
-    <!-- Favicon (Tab Icon) -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        :root { --bg-dark: #0a0510; --accent: #FFB39A; --accent-glow: #ff8a66; --text-light: #f0e6ef; --text-dim: #a08ca0; }
-        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.8; }
-        
-        .navbar { position: sticky; top: 0; background: rgba(10,5,16,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,179,154,0.15); padding: 18px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
-        .nav-logo { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent-glow)); -webkit-background-clip: text; color: transparent; text-decoration: none; display: flex; align-items: center; gap: 8px; }
-        .nav-links a { color: var(--text-light); text-decoration: none; font-size: 14px; margin-left: 20px; transition: 0.3s; }
-        .nav-links a:hover { color: var(--accent); }
-
-        .content-container { max-width: 800px; margin: 60px auto; padding: 40px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,179,154,0.1); border-radius: 20px; }
-        h1 { font-family: 'Orbitron', sans-serif; color: var(--accent); margin-bottom: 20px; font-size: 32px; }
-        h2 { color: white; margin: 30px 0 15px; font-size: 22px; }
-        p { color: var(--text-dim); margin-bottom: 15px; font-size: 15.5px; }
-
-        footer { border-top: 1px solid rgba(255,179,154,0.1); padding: 30px 20px; text-align: center; color: var(--text-dim); font-size: 13px; }
+        body { background-color: #0b0711; color: #b3b0b8; font-family: 'Inter', sans-serif; line-height: 1.8; -webkit-font-smoothing: antialiased; }
+        .tmd-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 5%; background-color: rgba(11, 7, 17, 0.98); border-bottom: 1px solid rgba(255, 179, 154, 0.15); position: sticky; top: 0; z-index: 1000; }
+        .tmd-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; font-family: 'Orbitron', sans-serif; font-size: 1.25rem; font-weight: 700; color: #FFB39A !important; white-space: nowrap; }
+        .tmd-logo svg { width: 20px; height: 20px; flex-shrink: 0; }
+        .tmd-nav { display: flex; gap: 22px; align-items: center; }
+        .tmd-nav a { color: #d1d5db; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+        .tmd-nav a:hover { color: #FFB39A; }
+        .tmd-menu-btn { display: none; background: none; border: none; cursor: pointer; flex-direction: column; justify-content: space-between; width: 22px; height: 16px; padding: 0; flex-shrink: 0; }
+        .tmd-menu-btn span { display: block; width: 100%; height: 2px; background-color: #FFB39A; border-radius: 2px; }
+        @media (max-width: 768px) {
+            .tmd-logo { font-size: 1.1rem; }
+            .tmd-logo svg { width: 18px; height: 18px; }
+            .tmd-menu-btn { display: flex; }
+            .tmd-nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: #120918; border-bottom: 1px solid rgba(255, 179, 154, 0.12); box-shadow: 0 12px 30px rgba(0,0,0,0.45); gap: 0; }
+            .tmd-nav.active { display: flex; }
+            .tmd-nav a { padding: 10px 20px; font-size: 0.9rem; width: 100%; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.04); color: #d1d5db; }
+            .tmd-nav a:last-child { border-bottom: none; }
+            .tmd-nav a:active { background: rgba(255, 179, 154, 0.08); color: #FFB39A; }
+        }
+        .page-container { max-width: 800px; margin: 40px auto; padding: 0 20px 60px; }
+        .legal-box { background: #120b18; border: 1px solid rgba(255, 179, 154, 0.1); border-radius: 14px; padding: 40px; box-shadow: 0 4px 24px rgba(0,0,0,0.25); }
+        .legal-box h1 { font-family: 'Orbitron', sans-serif; color: #FFB39A; font-size: 1.9rem; margin-bottom: 28px; font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 14px; }
+        .legal-box h2 { color: #e5e7eb; font-size: 1.2rem; margin-top: 32px; margin-bottom: 12px; font-weight: 600; }
+        .legal-box p { margin-bottom: 14px; font-size: 0.98rem; color: #b3b0b8; }
+        .legal-box a { color: #FFB39A; text-decoration: none; }
+        .legal-box a:hover { text-decoration: underline; }
+        @media (max-width: 600px) {
+            .page-container { margin: 20px auto; }
+            .legal-box { padding: 28px 18px; }
+            .legal-box h1 { font-size: 1.6rem; margin-bottom: 20px; }
+            .legal-box h2 { font-size: 1.1rem; margin-top: 26px; }
+            .legal-box p { font-size: 0.94rem; }
+        }
     </style>
 </head>
 <body>
+    <header class="tmd-header">
+        <a href="/" class="tmd-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="#FFB39A"><path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/></svg>
+            ToolsMediaDownloader
+        </a>
+        <button class="tmd-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <nav class="tmd-nav" id="navLinks">
+            <a href="/">Home</a>
+            <a href="/about.html">About</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
+            <a href="/disclaimer.html">Disclaimer</a>
+            <a href="/contact.html">Contact</a>
+        </nav>
+    </header>
 
-<nav class="navbar">
-    <a href="index.html" class="nav-logo"><span>⚡</span> ToolsMediaDownloader</a>
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="blog.html">Blog</a>
-        <a href="contact.html">Contact</a>
-        <a href="privacy.html">Privacy</a>
+    <div class="page-container">
+        <div class="legal-box">
+            <h1>About Us</h1>
+            
+            <p>Welcome to <strong>ToolsMediaDownloader</strong>, your trusted destination for downloading media content from the world's most popular social platforms. Launched with a vision to simplify online content access, we provide a seamless experience for users who want to save videos, reels, and other public media quickly and safely.</p>
+
+            <h2>Our Mission</h2>
+            <p>Our mission is simple: to provide the fastest, cleanest, and most reliable media downloading service on the web. We empower users to effortlessly save public content from platforms like TikTok, Instagram, Facebook, and more — so they can enjoy their favorite videos offline, create personal collections, or share them later.</p>
+            <p>We believe technology should serve people, not the other way around. That's why every tool on our website is engineered to be user-friendly, blazing fast, and secure. We don't compromise on quality, speed, or your privacy.</p>
+
+            <h2>Why Choose Us?</h2>
+            <p>Unlike many other platforms, we focus strictly on user experience. We require no sign-ups, no software installations, and we never add watermarks to your downloads. We maintain high uptime so that whenever you need to save a memory, an educational clip, or a funny video, our tools are ready and working perfectly.</p>
+            <p>Our platform works on any device — mobile, tablet, or desktop — without needing to install any extra software. Just open your browser, paste the link, and download.</p>
+
+            <h2>Privacy & Transparency</h2>
+            <p>We do not track your downloads, store your personal data unnecessarily, or sell any user information to third parties. Your privacy is a core principle we never compromise on. What you see is what you get — a clean, transparent tool that performs exactly as advertised.</p>
+
+            <h2>Get in Touch</h2>
+            <p>We'd love to hear from you! Whether you have feedback, suggestions, or need support, our team is always ready to help. Visit our <a href="/contact.html">Contact Page</a> and send us a message. Thank you for being part of the ToolsMediaDownloader community!</p>
+        </div>
     </div>
-</nav>
 
-<div class="content-container">
-    <h1>About ToolsMediaDownloader</h1>
-    <p>ToolsMediaDownloader (toolsmediadownload.online) is a free, web-based utility platform created to help users simplify everyday digital file tasks and download public social media videos easily.</p>
-
-    <h2>Our Mission</h2>
-    <p>Our goal is to offer fast, secure, and privacy-focused online tools that run directly inside your web browser without requiring user registration, subscriptions, or software downloads.</p>
-
-    <h2>Privacy-First Approach</h2>
-    <p>Unlike traditional online converters that upload your personal documents to remote cloud servers, all of our PDF tools process your files locally within your browser session. Your confidential files never touch our servers, providing 100% data security.</p>
-</div>
-
-<footer>© 2026 ToolsMediaDownloader · All rights reserved.</footer>
-
+    <script>
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
