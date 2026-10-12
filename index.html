@@ -65,16 +65,10 @@
 
         /* ==================== UNIVERSAL HEADER ==================== */
         .tmd-header { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 14px 5%; 
-            background-color: var(--bg-dark); 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 14px 5%; background-color: var(--bg-dark); 
             border-bottom: 1px solid rgba(255, 179, 154, 0.15); 
-            position: sticky; 
-            top: 0; 
-            z-index: 1000; 
-            font-family: 'Inter', sans-serif; 
+            position: sticky; top: 0; z-index: 1000; font-family: 'Inter', sans-serif; 
         }
         .tmd-logo { 
             display: flex; align-items: center; gap: 8px; text-decoration: none; 
@@ -140,7 +134,7 @@
         .stat-item h3 { font-family: 'Orbitron', sans-serif; font-size: 32px; background: linear-gradient(135deg, var(--accent), var(--accent-glow)); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .stat-item p { color: var(--text-dim); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; }
 
-        /* ==================== REUSABLE CONTAINER & SECTIONS ==================== */
+        /* ==================== CONTAINERS ==================== */
         .container { max-width: 1200px; margin: auto; padding: 80px 5%; position: relative; z-index: 2; }
         .fade-element { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .fade-element.visible { opacity: 1; transform: translateY(0); }
@@ -149,43 +143,7 @@
         .section-intro h2 { font-family: 'Orbitron', sans-serif; font-size: clamp(28px, 4vw, 42px); margin-bottom: 15px; }
         .section-intro p { color: var(--text-dim); max-width: 600px; margin: auto; font-size: 16px; line-height: 1.7; }
 
-        /* ==================== ABOUT / INTRO SECTION ==================== */
-        .intro-block { max-width: 900px; margin: 0 auto 80px; text-align: center; }
-        .intro-block h2 { font-family: 'Orbitron', sans-serif; font-size: clamp(24px, 4vw, 36px); margin-bottom: 20px; color: var(--text-light); }
-        .intro-block h2 span { color: var(--accent); }
-        .intro-block p { color: var(--text-dim); font-size: 16px; line-height: 1.8; margin-bottom: 15px; }
-
-        /* ==================== HOW IT WORKS ==================== */
-        .how-it-works-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
-        .step-card { text-align: center; padding: 35px 25px; background: rgba(84,36,82,0.15); border: 1px solid rgba(255,179,154,0.12); border-radius: 20px; transition: all 0.3s; position: relative; }
-        .step-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 15px 40px rgba(255,179,154,0.1); }
-        .step-number { font-family: 'Orbitron', sans-serif; font-size: 48px; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent-glow)); -webkit-background-clip: text; background-clip: text; color: transparent; opacity: 0.3; margin-bottom: 10px; }
-        .step-icon { width: 60px; height: 60px; margin: 0 auto 20px; background: rgba(255,179,154,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        .step-icon svg { width: 28px; height: 28px; stroke: var(--accent); fill: none; stroke-width: 1.5; }
-        .step-card h3 { font-family: 'Orbitron', sans-serif; font-size: 16px; margin-bottom: 10px; color: var(--text-light); }
-        .step-card p { color: var(--text-dim); font-size: 14px; line-height: 1.6; }
-
-        /* ==================== POPULAR TOOLS ==================== */
-        .popular-tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 40px; }
-        .popular-card { background: linear-gradient(135deg, rgba(255,179,154,0.08), rgba(84,36,82,0.3)); border: 1px solid rgba(255,179,154,0.2); border-radius: 20px; padding: 30px; display: flex; align-items: flex-start; gap: 20px; transition: all 0.3s; }
-        .popular-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 15px 40px rgba(255,179,154,0.15); }
-        .popular-card .p-icon { width: 50px; height: 50px; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .popular-card .p-icon svg { width: 24px; height: 24px; stroke: white; fill: none; stroke-width: 1.5; }
-        .popular-card h3 { font-family: 'Orbitron', sans-serif; font-size: 15px; margin-bottom: 8px; color: var(--text-light); }
-        .popular-card p { color: var(--text-dim); font-size: 13px; line-height: 1.5; margin-bottom: 12px; }
-        .popular-card .p-link { color: var(--accent); font-size: 13px; font-weight: 600; text-decoration: none; transition: 0.2s; }
-        .popular-card .p-link:hover { text-decoration: underline; }
-        .popular-badge { position: absolute; top: -8px; right: 15px; background: var(--accent); color: var(--bg-dark); font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 10px; letter-spacing: 1px; text-transform: uppercase; }
-
-        /* ==================== WHY CHOOSE US ==================== */
-        .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 40px; }
-        .why-card { text-align: center; padding: 35px 25px; background: rgba(84,36,82,0.12); border: 1px solid rgba(255,179,154,0.1); border-radius: 18px; transition: all 0.3s; }
-        .why-card:hover { border-color: var(--accent); transform: translateY(-4px); }
-        .why-card .why-icon { font-size: 36px; margin-bottom: 15px; }
-        .why-card h3 { font-family: 'Orbitron', sans-serif; font-size: 15px; margin-bottom: 10px; color: var(--text-light); }
-        .why-card p { color: var(--text-dim); font-size: 13.5px; line-height: 1.6; }
-
-        /* ==================== TOOLS GRID (ALL TOOLS + PDF + VIDEO) ==================== */
+        /* ==================== TOOLS GRID ==================== */
         .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
         .glass-card { background: linear-gradient(135deg, rgba(84,36,82,0.4), rgba(26,13,26,0.4)); backdrop-filter: blur(20px); border: 1px solid rgba(255,179,154,0.15); border-radius: 20px; padding: 30px; transition: all 0.4s cubic-bezier(0.4,0,0.2,1); position: relative; overflow: hidden; }
         .glass-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,179,154,0.1), transparent); transition: left 0.6s; }
@@ -204,7 +162,7 @@
         .card-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 50px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s; text-decoration: none; }
         .card-btn:hover { background: var(--accent); color: var(--bg-dark); gap: 12px; }
 
-        /* ==================== WORKSPACE (PDF TOOL MODALS) ==================== */
+        /* ==================== WORKSPACE ==================== */
         .workspace { display: none; background: rgba(15, 7, 20, 0.8); backdrop-filter: blur(25px); border: 1px solid rgba(255,179,154,0.4); border-radius: 24px; padding: 50px; margin-bottom: 40px; box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
         .workspace h2 { font-family: 'Orbitron', sans-serif; color: var(--accent); text-align: center; font-size: 26px; margin-bottom: 10px; }
         .workspace .description { color: var(--text-dim); text-align: center; margin-bottom: 30px; font-size: 15px; }
@@ -225,19 +183,85 @@
         .close-button:hover { color: white; border-color: white; }
         .small-btn { display: inline-block; width: 100%; font-family: 'Space Grotesk', sans-serif; background: var(--accent); color: var(--bg-dark); border: none; border-radius: 6px; font-size: 11px; font-weight: 600; }
 
-        /* ==================== FAQ SECTION ==================== */
+        /* ==================== INTRO BLOCK ==================== */
+        .intro-block { max-width: 900px; margin: 0 auto 80px; text-align: center; }
+        .intro-block h2 { font-family: 'Orbitron', sans-serif; font-size: clamp(24px, 4vw, 36px); margin-bottom: 20px; color: var(--text-light); }
+        .intro-block h2 span { color: var(--accent); }
+        .intro-block p { color: var(--text-dim); font-size: 16px; line-height: 1.8; margin-bottom: 15px; }
+
+        /* ==================== HOW IT WORKS ==================== */
+        .how-it-works-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
+        .step-card { text-align: center; padding: 35px 25px; background: rgba(84,36,82,0.15); border: 1px solid rgba(255,179,154,0.12); border-radius: 20px; transition: all 0.3s; }
+        .step-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 15px 40px rgba(255,179,154,0.1); }
+        .step-number { font-family: 'Orbitron', sans-serif; font-size: 48px; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent-glow)); -webkit-background-clip: text; background-clip: text; color: transparent; opacity: 0.3; margin-bottom: 10px; }
+        .step-icon { width: 60px; height: 60px; margin: 0 auto 20px; background: rgba(255,179,154,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .step-icon svg { width: 28px; height: 28px; stroke: var(--accent); fill: none; stroke-width: 1.5; }
+        .step-card h3 { font-family: 'Orbitron', sans-serif; font-size: 16px; margin-bottom: 10px; color: var(--text-light); }
+        .step-card p { color: var(--text-dim); font-size: 14px; line-height: 1.6; }
+
+        /* ==================== POPULAR TOOLS ==================== */
+        .popular-tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 40px; }
+        .popular-card { background: linear-gradient(135deg, rgba(255,179,154,0.08), rgba(84,36,82,0.3)); border: 1px solid rgba(255,179,154,0.2); border-radius: 20px; padding: 30px; display: flex; align-items: flex-start; gap: 20px; transition: all 0.3s; position: relative; }
+        .popular-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 15px 40px rgba(255,179,154,0.15); }
+        .popular-card .p-icon { width: 50px; height: 50px; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .popular-card .p-icon svg { width: 24px; height: 24px; stroke: white; fill: none; stroke-width: 1.5; }
+        .popular-card h3 { font-family: 'Orbitron', sans-serif; font-size: 15px; margin-bottom: 8px; color: var(--text-light); }
+        .popular-card p { color: var(--text-dim); font-size: 13px; line-height: 1.5; margin-bottom: 12px; }
+        .popular-card .p-link { color: var(--accent); font-size: 13px; font-weight: 600; text-decoration: none; transition: 0.2s; }
+        .popular-card .p-link:hover { text-decoration: underline; }
+        .popular-badge { position: absolute; top: -8px; right: 15px; background: var(--accent); color: var(--bg-dark); font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 10px; letter-spacing: 1px; text-transform: uppercase; }
+
+        /* ==================== WHY CHOOSE US ==================== */
+        .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 40px; }
+        .why-card { text-align: center; padding: 35px 25px; background: rgba(84,36,82,0.12); border: 1px solid rgba(255,179,154,0.1); border-radius: 18px; transition: all 0.3s; }
+        .why-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+        .why-card .why-icon { font-size: 36px; margin-bottom: 15px; }
+        .why-card h3 { font-family: 'Orbitron', sans-serif; font-size: 15px; margin-bottom: 10px; color: var(--text-light); }
+        .why-card p { color: var(--text-dim); font-size: 13.5px; line-height: 1.6; }
+
+        /* ==================== FAQ ==================== */
         .faq-section { margin-top: 100px; }
         .faq-grid { max-width: 800px; margin: 40px auto 0; display: flex; flex-direction: column; gap: 15px; }
         .faq-item { background: rgba(84,36,82,0.2); border: 1px solid rgba(255,179,154,0.15); border-radius: 12px; overflow: hidden; transition: 0.3s; }
         .faq-item:hover { border-color: var(--accent); }
         .faq-question { padding: 20px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-light); display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
         .faq-question svg { width: 18px; height: 18px; fill: none; stroke: var(--accent); stroke-width: 2; transition: transform 0.3s; flex-shrink: 0; margin-left: 15px; }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: rgba(0,0,0,0.2); }
-        .faq-answer-content { padding: 20px; color: var(--text-dim); font-size: 14.5px; line-height: 1.6; }
-        .faq-item.active .faq-answer { max-height: 500px; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: rgba(0,0,0,0.2); }
+        .faq-answer-content { padding: 20px; color: var(--text-dim); font-size: 14.5px; line-height: 1.7; }
+        .faq-item.active .faq-answer { max-height: 600px; }
         .faq-item.active .faq-question svg { transform: rotate(180deg); }
 
-        /* ==================== UNIVERSAL FOOTER ==================== */
+        /* ==================== ASK A QUESTION FORM ==================== */
+        .ask-section { margin-top: 80px; }
+        .ask-form-container { max-width: 650px; margin: 40px auto 0; background: rgba(84,36,82,0.15); border: 1px solid rgba(255,179,154,0.15); border-radius: 20px; padding: 40px 35px; }
+        .ask-form-container .form-group { margin-bottom: 20px; }
+        .ask-form-container label { display: block; color: var(--text-light); font-weight: 600; font-size: 14px; margin-bottom: 8px; }
+        .ask-form-container input,
+        .ask-form-container textarea { 
+            width: 100%; padding: 14px 18px; 
+            background: rgba(255,255,255,0.05); 
+            border: 1px solid rgba(255,179,154,0.2); 
+            border-radius: 12px; color: white; 
+            font-family: 'Space Grotesk', sans-serif; 
+            font-size: 15px; outline: none; 
+            transition: border-color 0.3s; 
+        }
+        .ask-form-container input:focus,
+        .ask-form-container textarea:focus { border-color: var(--accent); }
+        .ask-form-container textarea { resize: vertical; min-height: 120px; }
+        .ask-form-container input::placeholder,
+        .ask-form-container textarea::placeholder { color: var(--text-dim); }
+        .ask-submit-btn { 
+            width: 100%; padding: 16px; 
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow)); 
+            color: var(--bg-dark); border: none; border-radius: 12px; 
+            font-weight: 700; font-size: 16px; cursor: pointer; 
+            transition: 0.3s; font-family: 'Space Grotesk', sans-serif; 
+        }
+        .ask-submit-btn:hover { box-shadow: 0 10px 30px rgba(255,179,154,0.4); transform: translateY(-2px); }
+        .form-note { text-align: center; color: var(--text-dim); font-size: 12px; margin-top: 15px; line-height: 1.5; }
+
+        /* ==================== FOOTER ==================== */
         .tmd-footer { background: linear-gradient(180deg, transparent, rgba(10,5,16,0.9)); border-top: 1px solid rgba(255,179,154,0.1); padding: 50px 20px 30px; text-align: center; font-family: 'Inter', sans-serif; }
         .tmd-footer-brand { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 700; color: var(--accent); margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .tmd-footer-brand svg { width: 22px; height: 22px; fill: var(--accent); }
@@ -246,7 +270,7 @@
         .tmd-footer-links a:hover { color: var(--accent); }
         .tmd-footer-copy { color: rgba(255, 255, 255, 0.3); font-size: 13px; margin-top: 20px; }
 
-        /* ==================== TOBY AI CHAT ==================== */
+        /* ==================== TOBY AI ==================== */
         #toby-widget-container { position: fixed; bottom: 25px; right: 25px; z-index: 10000; display: flex; flex-direction: column; align-items: flex-end; }
         .toby-launch-btn { background: linear-gradient(135deg, var(--accent), var(--accent-glow)); color: var(--bg-dark); padding: 12px 22px; border-radius: 30px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; box-shadow: 0 10px 25px rgba(255,179,154,0.4); transition: 0.3s; }
         .toby-launch-btn:hover { transform: scale(1.05); }
@@ -270,6 +294,7 @@
             .workspace { padding: 30px 15px; }
             #toby-chat-box { width: 290px; right: 0; }
             .popular-card { flex-direction: column; text-align: center; align-items: center; }
+            .ask-form-container { padding: 30px 20px; }
         }
     </style>
 </head>
@@ -306,7 +331,7 @@
     </div>
 </header>
 
-<!-- ==================== HERO SECTION ==================== -->
+<!-- ==================== HERO ==================== -->
 <section class="hero-section" id="hero">
     <div class="hero-badge">⚡ 100% Free · No Signups · No Watermarks</div>
     <h1>Free <span class="gradient-text">PDF & Video</span> Tools</h1>
@@ -327,15 +352,132 @@
 
 <main class="container">
 
-    <!-- ==================== WEBSITE INTRODUCTION ==================== -->
-    <section class="intro-block fade-element">
+    <!-- ==================== PDF TOOL WORKSPACES ==================== -->
+    <section id="jpgTool" class="workspace">
+        <h2>JPG → PDF Converter</h2>
+        <p class="description">Transform multiple images into a single PDF document securely.</p>
+        <div class="upload-box" onclick="document.getElementById('jpgFiles').click()">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <strong>Click to upload Images</strong><span>Supports .jpg, .jpeg, .png</span>
+        </div>
+        <input id="jpgFiles" class="hidden-input" type="file" accept="image/jpeg,image/png" multiple onchange="jpgFilesSelected(this)">
+        <div id="jpgPreview" class="preview-grid"></div>
+        <div id="jpgStatus" class="status"></div>
+        <button id="jpgCreateButton" class="action-button" onclick="createJpgPdf()">⚡ Generate PDF</button>
+        <button class="close-button" onclick="closeTools()">Close Window</button>
+    </section>
+
+    <section id="pdfJpgTool" class="workspace">
+        <h2>PDF → JPG Extractor</h2>
+        <p class="description">Extract every page of your PDF as a high-quality JPG image.</p>
+        <div class="upload-box" onclick="document.getElementById('pdfJpgFile').click()">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 12 15 15"/></svg>
+            <strong>Click to upload PDF</strong><span>One document at a time</span>
+        </div>
+        <input id="pdfJpgFile" class="hidden-input" type="file" accept=".pdf,application/pdf" onchange="pdfJpgFileSelected(this)">
+        <div id="pdfJpgStatus" class="status"></div>
+        <button id="pdfJpgConvertButton" class="action-button" onclick="convertPdfToJpg()">⚡ Extract Images</button>
+        <div id="pdfJpgPreview" class="preview-grid"></div>
+        <button class="close-button" onclick="closeTools()">Close Window</button>
+    </section>
+
+    <section id="mergeTool" class="workspace">
+        <h2>PDF Merger</h2>
+        <p class="description">Combine multiple PDF files into one clean document.</p>
+        <div class="upload-box" onclick="document.getElementById('mergeFiles').click()">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+            <strong>Click to upload PDFs</strong><span>Requires 2 or more files</span>
+        </div>
+        <input id="mergeFiles" class="hidden-input" type="file" accept=".pdf,application/pdf" multiple onchange="mergeFilesSelected(this)">
+        <div id="mergeStatus" class="status"></div>
+        <button id="mergeButton" class="action-button" onclick="mergePdfs()">⚡ Merge Files</button>
+        <button class="close-button" onclick="closeTools()">Close Window</button>
+    </section>
+
+    <section id="compressTool" class="workspace">
+        <h2>PDF Compressor</h2>
+        <p class="description">Reduce your PDF file size quickly by optimizing page quality.</p>
+        <div class="upload-box" onclick="document.getElementById('compressFile').click()">
+            <svg viewBox="0 0 24 24"><path d="M12 22v-6"/><path d="M12 2v6"/><path d="m15 19-3 3-3-3"/><path d="m15 5-3-3-3 3"/><path d="M22 12h-6"/><path d="M2 12h6"/><path d="m19 9-3 3 3 3"/><path d="m5 9 3 3-3 3"/></svg>
+            <strong>Click to upload PDF</strong><span>One document at a time</span>
+        </div>
+        <input id="compressFile" class="hidden-input" type="file" accept=".pdf,application/pdf" onchange="compressFileSelected(this)">
+        <div id="compressStatus" class="status"></div>
+        <button id="compressButton" class="action-button" onclick="compressPdf()">⚡ Compress File</button>
+        <button class="close-button" onclick="closeTools()">Close Window</button>
+    </section>
+
+    <!-- ==================== PDF TOOLS GRID ==================== -->
+    <section id="document-tools" class="section-intro fade-element">
+        <div class="section-tag">Document Tools</div>
+        <h2>PDF Utilities</h2>
+        <p>Professional file tools that run safely in your browser. No uploads to any server.</p>
+    </section>
+
+    <div class="tools-grid">
+        <div class="glass-card fade-element">
+            <div class="card-icon" style="background: linear-gradient(135deg, #FFB39A, #ff8a66);"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+            <h3>JPG to PDF</h3>
+            <p>Combine multiple images into a single high-quality PDF document.</p>
+            <button class="card-btn" onclick="openTool('jpgTool')">Convert →</button>
+        </div>
+        <div class="glass-card fade-element">
+            <div class="card-icon" style="background: linear-gradient(135deg, #a855f7, #7c3aed);"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+            <h3>PDF to JPG</h3>
+            <p>Extract every page from your PDF as crisp, downloadable images.</p>
+            <button class="card-btn" onclick="openTool('pdfJpgTool')">Extract →</button>
+        </div>
+        <div class="glass-card fade-element">
+            <div class="card-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M15 2H9a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/></svg></div>
+            <h3>Merge PDFs</h3>
+            <p>Blend multiple PDF documents into one organized file.</p>
+            <button class="card-btn" onclick="openTool('mergeTool')">Merge →</button>
+        </div>
+        <div class="glass-card fade-element">
+            <div class="card-icon" style="background: linear-gradient(135deg, #10b981, #059669);"><svg viewBox="0 0 24 24"><path d="M12 22v-6"/><path d="M12 2v6"/><path d="m15 19-3 3-3-3"/><path d="m15 5-3-3-3 3"/><path d="M22 12h-6"/><path d="M2 12h6"/><path d="m19 9-3 3 3 3"/><path d="m5 9 3 3-3 3"/></svg></div>
+            <h3>Compress PDF</h3>
+            <p>Shrink PDF file sizes while keeping good quality for sharing.</p>
+            <button class="card-btn" onclick="openTool('compressTool')">Compress →</button>
+        </div>
+    </div>
+
+    <!-- ==================== VIDEO TOOLS GRID ==================== -->
+    <section id="video-tools" class="section-intro fade-element" style="margin-top: 100px;">
+        <div class="section-tag">Media Downloaders</div>
+        <h2>Download HD Videos</h2>
+        <p>Save videos from popular platforms in HD quality without watermarks.</p>
+    </section>
+
+    <div class="tools-grid">
+        <div class="glass-card fade-element">
+            <div class="card-icon logo-tiktok"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.73a8.16 8.16 0 0 0 4.77 1.52V6.69h-.01z"/></svg></div>
+            <h3>TikTok Downloader</h3>
+            <p>Download TikTok videos without watermark in HD MP4.</p>
+            <a href="tiktok-downloader.html" class="card-btn">Download →</a>
+        </div>
+        <div class="glass-card fade-element">
+            <div class="card-icon logo-insta"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></div>
+            <h3>Instagram Downloader</h3>
+            <p>Download Instagram Reels, stories, posts and photos.</p>
+            <a href="instagram-downloader.html" class="card-btn">Download →</a>
+        </div>
+        <div class="glass-card fade-element">
+            <div class="card-icon logo-fb"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
+            <h3>Facebook Downloader</h3>
+            <p>Save Facebook videos in HD quality to your device.</p>
+            <a href="facebook-downloader.html" class="card-btn">Download →</a>
+        </div>
+    </div>
+
+    <!-- ==================== WEBSITE INTRODUCTION (BOTTOM) ==================== -->
+    <section class="intro-block fade-element" style="margin-top: 100px;">
         <h2>Welcome to <span>ToolsMediaDownloader</span></h2>
         <p>ToolsMediaDownloader is a free, browser-based platform designed to simplify your digital life. Whether you need to convert images into PDF documents, extract pages from a PDF as high-quality JPG files, merge multiple PDFs into one, or compress large PDF files for easy sharing — we've got you covered.</p>
         <p>We also provide fast and reliable video downloaders for TikTok, Instagram, and Facebook — allowing you to save your favorite videos in HD quality without watermarks, directly to your device. No account needed, no software installation, and no hidden fees. Just open, use, and go.</p>
-        <p>All file processing happens locally in your browser. Your documents and data never leave your device, ensuring complete privacy and security at all times.</p>
+        <p>All file processing happens locally in your browser. Your documents and data never leave your device, ensuring complete privacy and security at all times. ToolsMediaDownloader is built for everyone — students, professionals, content creators, and everyday users who want reliable tools without the hassle.</p>
     </section>
 
-    <!-- ==================== HOW IT WORKS ==================== -->
+    <!-- ==================== HOW IT WORKS (BOTTOM) ==================== -->
     <section class="fade-element">
         <div class="section-intro">
             <div class="section-tag">Simple & Fast</div>
@@ -345,32 +487,26 @@
         <div class="how-it-works-grid">
             <div class="step-card">
                 <div class="step-number">01</div>
-                <div class="step-icon">
-                    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                </div>
+                <div class="step-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
                 <h3>Choose Your Tool</h3>
-                <p>Pick from our collection of PDF converters, mergers, compressors, or video downloaders below.</p>
+                <p>Browse our collection of PDF converters, mergers, compressors, or video downloaders and select the one you need.</p>
             </div>
             <div class="step-card">
                 <div class="step-number">02</div>
-                <div class="step-icon">
-                    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                </div>
-                <h3>Upload or Paste</h3>
-                <p>Upload your files for PDF tools or paste a video URL for downloaders. Everything is processed in your browser.</p>
+                <div class="step-icon"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+                <h3>Upload or Paste URL</h3>
+                <p>Upload your files directly for PDF tools, or paste a video URL for our media downloaders. Everything processes in your browser.</p>
             </div>
             <div class="step-card">
                 <div class="step-number">03</div>
-                <div class="step-icon">
-                    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                </div>
+                <div class="step-icon"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
                 <h3>Download Result</h3>
-                <p>Your converted PDF or HD video is ready instantly. Click download and save it to your device.</p>
+                <p>Your converted PDF or HD video is ready instantly. Click download and save it directly to your device for free.</p>
             </div>
         </div>
     </section>
 
-    <!-- ==================== POPULAR TOOLS ==================== -->
+    <!-- ==================== POPULAR TOOLS (BOTTOM) ==================== -->
     <section class="fade-element" style="margin-top: 80px;">
         <div class="section-intro">
             <div class="section-tag">Most Used</div>
@@ -378,7 +514,7 @@
             <p>Our most frequently used tools by thousands of users every day.</p>
         </div>
         <div class="popular-tools-grid">
-            <div class="popular-card" style="position:relative;">
+            <div class="popular-card">
                 <div class="popular-badge">🔥 Popular</div>
                 <div class="p-icon" style="background: linear-gradient(135deg, #FFB39A, #ff8a66);">
                     <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -389,7 +525,7 @@
                     <a href="javascript:void(0)" onclick="openTool('jpgTool')" class="p-link">Use Tool →</a>
                 </div>
             </div>
-            <div class="popular-card" style="position:relative;">
+            <div class="popular-card">
                 <div class="popular-badge">🔥 Popular</div>
                 <div class="p-icon" style="background: #000;">
                     <svg viewBox="0 0 24 24" style="fill:white;stroke:none;"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.73a8.16 8.16 0 0 0 4.77 1.52V6.69h-.01z"/></svg>
@@ -400,7 +536,7 @@
                     <a href="tiktok-downloader.html" class="p-link">Use Tool →</a>
                 </div>
             </div>
-            <div class="popular-card" style="position:relative;">
+            <div class="popular-card">
                 <div class="popular-badge">🔥 Popular</div>
                 <div class="p-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
                     <svg viewBox="0 0 24 24"><path d="M12 22v-6"/><path d="M12 2v6"/><path d="m15 19-3 3-3-3"/><path d="m15 5-3-3-3 3"/><path d="M22 12h-6"/><path d="M2 12h6"/><path d="m19 9-3 3 3 3"/><path d="m5 9 3 3-3 3"/></svg>
@@ -414,7 +550,7 @@
         </div>
     </section>
 
-    <!-- ==================== WHY CHOOSE US ==================== -->
+    <!-- ==================== WHY CHOOSE US (BOTTOM) ==================== -->
     <section class="fade-element" style="margin-top: 80px;">
         <div class="section-intro">
             <div class="section-tag">Trust & Quality</div>
@@ -455,244 +591,91 @@
         </div>
     </section>
 
-    <!-- ==================== PDF TOOL WORKSPACES ==================== -->
-    <section id="jpgTool" class="workspace">
-        <h2>JPG → PDF Converter</h2>
-        <p class="description">Transform multiple images into a single PDF document securely.</p>
-        <div class="upload-box" onclick="document.getElementById('jpgFiles').click()">
-            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-            <strong>Click to upload Images</strong>
-            <span>Supports .jpg, .jpeg, .png</span>
-        </div>
-        <input id="jpgFiles" class="hidden-input" type="file" accept="image/jpeg,image/png" multiple onchange="jpgFilesSelected(this)">
-        <div id="jpgPreview" class="preview-grid"></div>
-        <div id="jpgStatus" class="status"></div>
-        <button id="jpgCreateButton" class="action-button" onclick="createJpgPdf()">⚡ Generate PDF</button>
-        <button class="close-button" onclick="closeTools()">Close Window</button>
-    </section>
-
-    <section id="pdfJpgTool" class="workspace">
-        <h2>PDF → JPG Extractor</h2>
-        <p class="description">Extract every page of your PDF as a high-quality JPG image.</p>
-        <div class="upload-box" onclick="document.getElementById('pdfJpgFile').click()">
-            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 12 15 15"/></svg>
-            <strong>Click to upload PDF</strong>
-            <span>One document at a time</span>
-        </div>
-        <input id="pdfJpgFile" class="hidden-input" type="file" accept=".pdf,application/pdf" onchange="pdfJpgFileSelected(this)">
-        <div id="pdfJpgStatus" class="status"></div>
-        <button id="pdfJpgConvertButton" class="action-button" onclick="convertPdfToJpg()">⚡ Extract Images</button>
-        <div id="pdfJpgPreview" class="preview-grid"></div>
-        <button class="close-button" onclick="closeTools()">Close Window</button>
-    </section>
-
-    <section id="mergeTool" class="workspace">
-        <h2>PDF Merger</h2>
-        <p class="description">Combine multiple PDF files into one clean document.</p>
-        <div class="upload-box" onclick="document.getElementById('mergeFiles').click()">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-            <strong>Click to upload PDFs</strong>
-            <span>Requires 2 or more files</span>
-        </div>
-        <input id="mergeFiles" class="hidden-input" type="file" accept=".pdf,application/pdf" multiple onchange="mergeFilesSelected(this)">
-        <div id="mergeStatus" class="status"></div>
-        <button id="mergeButton" class="action-button" onclick="mergePdfs()">⚡ Merge Files</button>
-        <button class="close-button" onclick="closeTools()">Close Window</button>
-    </section>
-
-    <section id="compressTool" class="workspace">
-        <h2>PDF Compressor</h2>
-        <p class="description">Reduce your PDF file size quickly by optimizing page quality.</p>
-        <div class="upload-box" onclick="document.getElementById('compressFile').click()">
-            <svg viewBox="0 0 24 24"><path d="M12 22v-6"/><path d="M12 2v6"/><path d="m15 19-3 3-3-3"/><path d="m15 5-3-3-3 3"/><path d="M22 12h-6"/><path d="M2 12h6"/><path d="m19 9-3 3 3 3"/><path d="m5 9 3 3-3 3"/></svg>
-            <strong>Click to upload PDF</strong>
-            <span>One document at a time</span>
-        </div>
-        <input id="compressFile" class="hidden-input" type="file" accept=".pdf,application/pdf" onchange="compressFileSelected(this)">
-        <div id="compressStatus" class="status"></div>
-        <button id="compressButton" class="action-button" onclick="compressPdf()">⚡ Compress File</button>
-        <button class="close-button" onclick="closeTools()">Close Window</button>
-    </section>
-
-    <!-- ==================== ALL TOOLS: PDF SECTION ==================== -->
-    <section id="document-tools" class="section-intro fade-element" style="margin-top: 80px;">
-        <div class="section-tag">Document Tools</div>
-        <h2>PDF Utilities</h2>
-        <p>Professional file tools that run safely in your browser. No uploads to any server.</p>
-    </section>
-
-    <div class="tools-grid">
-        <div class="glass-card fade-element">
-            <div class="card-icon" style="background: linear-gradient(135deg, #FFB39A, #ff8a66);"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-            <h3>JPG to PDF</h3>
-            <p>Combine multiple images into a single high-quality PDF document.</p>
-            <button class="card-btn" onclick="openTool('jpgTool')">Convert →</button>
-        </div>
-        <div class="glass-card fade-element">
-            <div class="card-icon" style="background: linear-gradient(135deg, #a855f7, #7c3aed);"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
-            <h3>PDF to JPG</h3>
-            <p>Extract every page from your PDF as crisp, downloadable images.</p>
-            <button class="card-btn" onclick="openTool('pdfJpgTool')">Extract →</button>
-        </div>
-        <div class="glass-card fade-element">
-            <div class="card-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M15 2H9a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/></svg></div>
-            <h3>Merge PDFs</h3>
-            <p>Blend multiple PDF documents into one organized file.</p>
-            <button class="card-btn" onclick="openTool('mergeTool')">Merge →</button>
-        </div>
-        <div class="glass-card fade-element">
-            <div class="card-icon" style="background: linear-gradient(135deg, #10b981, #059669);"><svg viewBox="0 0 24 24"><path d="M12 22v-6"/><path d="M12 2v6"/><path d="m15 19-3 3-3-3"/><path d="m15 5-3-3-3 3"/><path d="M22 12h-6"/><path d="M2 12h6"/><path d="m19 9-3 3 3 3"/><path d="m5 9 3 3-3 3"/></svg></div>
-            <h3>Compress PDF</h3>
-            <p>Shrink PDF file sizes while keeping good quality for sharing.</p>
-            <button class="card-btn" onclick="openTool('compressTool')">Compress →</button>
-        </div>
-    </div>
-
-    <!-- ==================== ALL TOOLS: VIDEO SECTION ==================== -->
-    <section id="video-tools" class="section-intro fade-element" style="margin-top: 100px;">
-        <div class="section-tag">Media Downloaders</div>
-        <h2>Download HD Videos</h2>
-        <p>Save videos from popular platforms in HD quality without watermarks.</p>
-    </section>
-
-    <div class="tools-grid" style="margin-bottom: 60px;">
-        <div class="glass-card fade-element">
-            <div class="card-icon logo-tiktok"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.73a8.16 8.16 0 0 0 4.77 1.52V6.69h-.01z"/></svg></div>
-            <h3>TikTok Downloader</h3>
-            <p>Download TikTok videos without watermark in HD MP4.</p>
-            <a href="tiktok-downloader.html" class="card-btn">Download →</a>
-        </div>
-        <div class="glass-card fade-element">
-            <div class="card-icon logo-insta"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></div>
-            <h3>Instagram Downloader</h3>
-            <p>Download Instagram Reels, stories, posts and photos.</p>
-            <a href="instagram-downloader.html" class="card-btn">Download →</a>
-        </div>
-        <div class="glass-card fade-element">
-            <div class="card-icon logo-fb"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
-            <h3>Facebook Downloader</h3>
-            <p>Save Facebook videos in HD quality to your device.</p>
-            <a href="facebook-downloader.html" class="card-btn">Download →</a>
-        </div>
-    </div>
-
-    <!-- ==================== ALL TOOLS OVERVIEW ==================== -->
-    <section class="fade-element" style="margin-top: 40px;">
-        <div class="section-intro">
-            <div class="section-tag">Complete Toolkit</div>
-            <h2>All Tools at a Glance</h2>
-            <p>Browse our complete collection of free online tools — everything you need in one place.</p>
-        </div>
-        <div class="tools-grid" style="margin-top: 40px;">
-            <div class="glass-card fade-element">
-                <div class="card-icon" style="background: linear-gradient(135deg, #FFB39A, #ff8a66);"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-                <h3>JPG to PDF</h3>
-                <p>Convert your JPG and PNG images into a single, professional PDF file.</p>
-                <button class="card-btn" onclick="openTool('jpgTool')">Use Tool →</button>
-            </div>
-            <div class="glass-card fade-element">
-                <div class="card-icon" style="background: linear-gradient(135deg, #a855f7, #7c3aed);"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-                <h3>PDF to JPG</h3>
-                <p>Extract each page of your PDF as a separate high-quality JPG image file.</p>
-                <button class="card-btn" onclick="openTool('pdfJpgTool')">Use Tool →</button>
-            </div>
-            <div class="glass-card fade-element">
-                <div class="card-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M15 2H9a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/></svg></div>
-                <h3>Merge PDFs</h3>
-                <p>Combine two or more PDF documents into a single organized file.</p>
-                <button class="card-btn" onclick="openTool('mergeTool')">Use Tool →</button>
-            </div>
-            <div class="glass-card fade-element">
-                <div class="card-icon" style="background: linear-gradient(135deg, #10b981, #059669);"><svg viewBox="0 0 24 24"><path d="M12 22v-6"/><path d="M12 2v6"/><path d="m15 19-3 3-3-3"/><path d="m15 5-3-3-3 3"/><path d="M22 12h-6"/><path d="M2 12h6"/><path d="m19 9-3 3 3 3"/><path d="m5 9 3 3-3 3"/></svg></div>
-                <h3>Compress PDF</h3>
-                <p>Reduce the file size of any PDF while preserving readable quality.</p>
-                <button class="card-btn" onclick="openTool('compressTool')">Use Tool →</button>
-            </div>
-            <div class="glass-card fade-element">
-                <div class="card-icon logo-tiktok"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.73a8.16 8.16 0 0 0 4.77 1.52V6.69h-.01z"/></svg></div>
-                <h3>TikTok Downloader</h3>
-                <p>Save TikTok videos without watermark in HD quality MP4 format.</p>
-                <a href="tiktok-downloader.html" class="card-btn">Use Tool →</a>
-            </div>
-            <div class="glass-card fade-element">
-                <div class="card-icon logo-insta"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></div>
-                <h3>Instagram Downloader</h3>
-                <p>Download Instagram Reels, stories, posts and photos instantly.</p>
-                <a href="instagram-downloader.html" class="card-btn">Use Tool →</a>
-            </div>
-            <div class="glass-card fade-element">
-                <div class="card-icon logo-fb"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
-                <h3>Facebook Downloader</h3>
-                <p>Save Facebook videos in HD quality directly to your device.</p>
-                <a href="facebook-downloader.html" class="card-btn">Use Tool →</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== FAQ SECTION ==================== -->
+    <!-- ==================== DETAILED FAQ SECTION ==================== -->
     <section class="faq-section fade-element" id="faq">
         <div class="section-intro">
-            <div class="section-tag">Help Desk</div>
-            <h2>Questions & Answers</h2>
-            <p>Have questions about how our free tools work? Find quick answers below.</p>
+            <div class="section-tag">Help Center</div>
+            <h2>Frequently Asked Questions</h2>
+            <p>Detailed answers to the most common questions about our tools and services.</p>
         </div>
         <div class="faq-grid">
             <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    Is ToolsMediaDownloader really free?
-                    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-                </div>
-                <div class="faq-answer"><div class="faq-answer-content">Yes, 100%! All our PDF file conversion systems, compression logic, merger engines, and video downloader components are free to use without restrictions, subscriptions, or hidden charges.</div></div>
+                <div class="faq-question" onclick="toggleFaq(this)">Is ToolsMediaDownloader really free to use?<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+                <div class="faq-answer"><div class="faq-answer-content">Yes, absolutely! ToolsMediaDownloader is 100% free with no hidden fees, no premium plans, and no subscription charges. All our PDF conversion tools (JPG to PDF, PDF to JPG, Merge PDF, and Compress PDF) along with our video downloaders for TikTok, Instagram, and Facebook are completely free to use, forever. We believe everyone deserves access to quality digital tools without paying a penny.</div></div>
             </div>
             <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    Are my uploaded PDF files secure?
-                    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-                </div>
-                <div class="faq-answer"><div class="faq-answer-content">Absolutely. Unlike other platforms, all file conversions (JPG to PDF, PDF to JPG, Merge, and Compress) are computed locally inside your browser context. Your document bytes never touch our servers, protecting your private files completely.</div></div>
+                <div class="faq-question" onclick="toggleFaq(this)">Are my files safe and private when I use these tools?<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+                <div class="faq-answer"><div class="faq-answer-content">Your privacy is our top priority. All PDF file processing — including conversion, merging, compressing, and image extraction — happens entirely within your browser using client-side JavaScript. This means your files are never uploaded to any external server. Your documents stay on your device at all times. We don't store, read, or have access to any of your files. This is the most secure way to process sensitive documents online.</div></div>
             </div>
             <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    How can I download videos without watermarks?
-                    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-                </div>
-                <div class="faq-answer"><div class="faq-answer-content">Simply copy the video URL from TikTok, Instagram, or Facebook, click on our matching Downloader card, paste your clean link, and hit Download. The engine will retrieve the raw high-definition video stream directly.</div></div>
+                <div class="faq-question" onclick="toggleFaq(this)">How do I download TikTok videos without watermark?<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+                <div class="faq-answer"><div class="faq-answer-content">To download a TikTok video without watermark: 1) Open the TikTok app or website and find the video you want to save. 2) Copy the video's share link/URL. 3) Go to our TikTok Downloader page. 4) Paste the copied URL into the input field. 5) Click the Download button. 6) Your video will be processed and available to download in HD MP4 format without any watermark. The process takes just a few seconds!</div></div>
             </div>
             <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    Why does the PDF compressor fail on some files?
-                    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-                </div>
-                <div class="faq-answer"><div class="faq-answer-content">Our compressor parses document parameters down page-by-page. If your original PDF is password encrypted or contains advanced DRM protection constraints, system libraries block direct processing access.</div></div>
+                <div class="faq-question" onclick="toggleFaq(this)">What file formats are supported by the PDF tools?<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+                <div class="faq-answer"><div class="faq-answer-content">Our PDF tools support the following formats: <strong>JPG to PDF</strong> accepts .jpg, .jpeg, and .png image files. <strong>PDF to JPG</strong> accepts standard .pdf documents and extracts each page as a .jpg image. <strong>Merge PDF</strong> accepts multiple .pdf files and combines them into one. <strong>Compress PDF</strong> accepts .pdf files and reduces their size by optimizing page quality. All outputs are standard formats compatible with every device and operating system.</div></div>
             </div>
             <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    Do I need to create an account to use the tools?
-                    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-                </div>
-                <div class="faq-answer"><div class="faq-answer-content">No, you never need to sign up, log in, or provide any personal information. All tools are instantly accessible from any browser on any device. Just open the page and start using.</div></div>
+                <div class="faq-question" onclick="toggleFaq(this)">Do I need to create an account or sign up?<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+                <div class="faq-answer"><div class="faq-answer-content">No, you never need to create an account, sign up, log in, or provide any personal information to use our tools. Simply visit the website, choose your tool, and start using it immediately. We don't collect your email, phone number, or any personal data. Our goal is to provide instant access to useful tools without any barriers.</div></div>
             </div>
             <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    What file formats are supported?
-                    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-                </div>
-                <div class="faq-answer"><div class="faq-answer-content">Our PDF tools support JPG, JPEG, PNG images for conversion, and standard PDF files for merging, compressing, and extracting. Video downloaders support direct URLs from TikTok, Instagram, and Facebook.</div></div>
+                <div class="faq-question" onclick="toggleFaq(this)">Why does the PDF compressor not work on some files?<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+                <div class="faq-answer"><div class="faq-answer-content">Our PDF compressor works by rendering each page of your PDF as an optimized image and rebuilding the document. However, if your PDF is password-protected, encrypted, or contains advanced DRM (Digital Rights Management) restrictions, the browser's security policies prevent our tool from accessing the file content. In such cases, you'll need to remove the password protection first using your PDF reader software, then try compressing again.</div></div>
             </div>
             <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    Can I use these tools on my phone?
-                    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-                </div>
-                <div class="faq-answer"><div class="faq-answer-content">Yes! ToolsMediaDownloader is fully responsive and optimized for all devices including smartphones, tablets, laptops, and desktop computers. All tools work seamlessly across all screen sizes.</div></div>
+                <div class="faq-question" onclick="toggleFaq(this)">Can I download Instagram Reels and Stories?<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+                <div class="faq-answer"><div class="faq-answer-content">Yes! Our Instagram Downloader supports downloading Reels, Stories, regular posts, and photos. Simply copy the Instagram post or Reel URL, paste it into our downloader, and click Download. The tool will fetch the media in the highest available quality. Please note that only publicly available content can be downloaded — private accounts require the content to be shared via a direct link.</div></div>
             </div>
             <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    Is there a file size limit?
-                    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-                </div>
-                <div class="faq-answer"><div class="faq-answer-content">Since all processing happens in your browser, the limit depends on your device's memory and browser capabilities. Most modern devices can handle files up to 50-100MB without issues. For very large files, we recommend using a desktop browser.</div></div>
+                <div class="faq-question" onclick="toggleFaq(this)">Can I use these tools on my mobile phone?<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+                <div class="faq-answer"><div class="faq-answer-content">Absolutely! ToolsMediaDownloader is fully responsive and works perfectly on all devices including smartphones (iPhone, Android), tablets (iPad), laptops, and desktop computers. The entire website and all tools are optimized for touch screens and smaller displays. You can convert PDFs, download videos, and use every feature seamlessly from your mobile browser without installing any app.</div></div>
             </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Is there a file size limit for PDF tools?<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+                <div class="faq-answer"><div class="faq-answer-content">Since all processing happens locally in your browser, there's no server-side file size limit. However, the practical limit depends on your device's available RAM and browser capabilities. Most modern smartphones can handle files up to 30-50MB comfortably, while desktop computers can typically process files up to 100MB or more. For very large files, we recommend using a desktop browser like Chrome or Firefox for the best performance.</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">How can I contact support if I have an issue?<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+                <div class="faq-answer"><div class="faq-answer-content">You can reach our support team through multiple channels: 1) Use the <a href="contact.html" style="color: var(--accent);">Contact Page</a> on our website to send us a message directly. 2) Email us at <strong style="color: var(--accent);">m.aliarain070@gmail.com</strong> for any questions, bug reports, or feature requests. 3) Use the "Ask Your Question" form below on this page. 4) Chat with Toby, our AI assistant, using the chat button in the bottom-right corner for instant help. We typically respond within 24 hours.</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ASK YOUR QUESTION SECTION ==================== -->
+    <section class="ask-section fade-element" id="ask-question">
+        <div class="section-intro">
+            <div class="section-tag">Got a Question?</div>
+            <h2>Ask Us Anything</h2>
+            <p>Can't find your answer above? Send us your question and we'll get back to you as soon as possible.</p>
+        </div>
+        <div class="ask-form-container">
+            <form action="https://formsubmit.co/m.aliarain070@gmail.com" method="POST">
+                <!-- FormSubmit Configuration -->
+                <input type="hidden" name="_subject" value="New Question from ToolsMediaDownloader Homepage">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="box">
+                <input type="hidden" name="_next" value="https://toolsmediadownload.online/">
+                
+                <div class="form-group">
+                    <label for="ask-name">Your Name</label>
+                    <input type="text" id="ask-name" name="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="ask-email">Your Email</label>
+                    <input type="email" id="ask-email" name="email" placeholder="Enter your email address" required>
+                </div>
+                <div class="form-group">
+                    <label for="ask-subject">Subject</label>
+                    <input type="text" id="ask-subject" name="subject" placeholder="e.g. PDF tool not working, Video download issue">
+                </div>
+                <div class="form-group">
+                    <label for="ask-message">Your Question</label>
+                    <textarea id="ask-message" name="message" placeholder="Describe your question in detail. The more info you provide, the faster we can help you..." required></textarea>
+                </div>
+                <button type="submit" class="ask-submit-btn">⚡ Submit Your Question</button>
+            </form>
+            <p class="form-note">We usually respond within 24 hours. Your email will only be used to reply to your question. We never share your information with anyone.</p>
         </div>
     </section>
 
@@ -715,7 +698,7 @@
     <p class="tmd-footer-copy">© 2026 ToolsMediaDownloader. All rights reserved.</p>
 </footer>
 
-<!-- ==================== TOBY AI CHAT ==================== -->
+<!-- ==================== TOBY AI ==================== -->
 <div id="toby-widget-container">
     <div id="toby-chat-box">
         <div class="chat-header"><span>🤖 TOBY · AI</span><button onclick="toggleTobyChat()">×</button></div>
@@ -729,7 +712,7 @@
 </div>
 
 <script>
-// ==================== UNIVERSAL HEADER LOGIC ====================
+// ==================== HEADER LOGIC ====================
 document.getElementById('mobileMenuBtn').addEventListener('click', function(e) {
     e.stopPropagation();
     this.classList.toggle('active');
@@ -790,13 +773,17 @@ function sendTobyMessage() {
         const q = text.toLowerCase(); let reply = "I can help with PDF tools, TikTok downloads, or tell you about our features!";
         if (q.match(/hi|hello|hey/)) reply = "Hey! 👋 How can I help you today?";
         else if (q.includes("how are you")) reply = "I'm doing great! Ready to help ⚡";
-        else if (q.match(/email|contact|support/)) reply = "You can reach support directly at m.aliarain070@gmail.com";
+        else if (q.match(/email|contact|support/)) reply = "You can reach support directly at m.aliarain070@gmail.com or use the Ask Question form at the bottom!";
         else if (q.match(/free|cost|price/)) reply = "Yes! Everything is 100% free forever. No hidden charges.";
         else if (q.includes("pdf")) reply = "You can convert JPG to PDF, extract images, compress, or merge PDFs — all from the homepage!";
         else if (q.match(/tiktok|video|download/)) reply = "Click 'Download →' on the video tools section to save videos in HD!";
         else if (q.match(/blog/)) reply = "Check out our blog for tips, guides, and updates! Click 'Blog' in the menu.";
         else if (q.match(/safe|secure|privacy/)) reply = "All files are processed locally in your browser. Nothing is uploaded to any server. 100% private!";
         else if (q.match(/mobile|phone/)) reply = "Yes! All tools work perfectly on phones, tablets, and desktops.";
+        else if (q.match(/instagram|insta|reel/)) reply = "Our Instagram downloader supports Reels, Stories, and posts. Just paste the URL!";
+        else if (q.match(/facebook|fb/)) reply = "Yes! You can download Facebook videos in HD quality. Go to the Facebook Downloader tool!";
+        else if (q.match(/merge|combine/)) reply = "Select 2 or more PDFs and merge them into one file instantly!";
+        else if (q.match(/compress|reduce|size/)) reply = "Our compressor can reduce your PDF file size significantly while keeping readable quality.";
         addTobyMessage(reply, 'bot-msg');
     }, 400);
 }
@@ -828,7 +815,7 @@ async function mergePdfs() { const status = document.getElementById("mergeStatus
 // PDF Compressor
 let selectedCompressFile = null;
 function compressFileSelected(input) { const status = document.getElementById("compressStatus"), button = document.getElementById("compressButton"); selectedCompressFile = input.files?.[0]; if (!selectedCompressFile) { status.textContent = ""; button.style.display = "none"; return; } const sizeMB = (selectedCompressFile.size / (1024 * 1024)).toFixed(2); status.textContent = `Selected File: ${selectedCompressFile.name} (${sizeMB} MB)`; button.style.display = "block"; }
-async function compressPdf() { const status = document.getElementById("compressStatus"); const button = document.getElementById("compressButton"); if (!window.pdfjsLib || !window.PDFLib || !selectedCompressFile) { status.textContent = "Error: System libraries not loaded properly."; return; } button.disabled = true; button.textContent = "Compressing PDF, please wait..."; try { const originalSizeMB = (selectedCompressFile.size / (1024 * 1024)).toFixed(2); status.textContent = `Original Size: ${originalSizeMB} MB. Processing pages...`; const arrayBuffer = await selectedCompressFile.arrayBuffer(); const pdfDoc = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise; const totalPages = pdfDoc.numPages; const newPdfDoc = await window.PDFLib.PDFDocument.create(); for (let i = 1; i <= totalPages; i++) { status.textContent = `Compressing page ${i} of ${totalPages}...`; await delay(10); const page = await pdfDoc.getPage(i); const viewport = page.getViewport({ scale: 1.0 }); const canvas = document.createElement("canvas"); const ctx = canvas.getContext("2d", { alpha: false }); canvas.width = Math.floor(viewport.width); canvas.height = Math.floor(viewport.height); ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, canvas.width, canvas.height); await page.render({ canvasContext: ctx, viewport }).promise; const compressedImageBlob = await new Promise(resolve => canvas.toBlob(resolve, "image/jpeg", 0.65)); const imageArrayBuffer = await compressedImageBlob.arrayBuffer(); const embeddedImage = await newPdfDoc.embedJpg(imageArrayBuffer); const newPage = newPdfDoc.addPage([viewport.width, viewport.height]); newPage.drawImage(embeddedImage, { x: 0, y: 0, width: viewport.width, height: viewport.height, }); } const compressedBytes = await newPdfDoc.save(); const finalBlob = new Blob([compressedBytes], { type: "application/pdf" }); const compressedSizeMB = (finalBlob.size / (1024 * 1024)).toFixed(2); downloadBlob(finalBlob, "TMD-Compressed.pdf"); status.textContent = `✓ Success! File reduced from ${originalSizeMB} MB to ${compressedSizeMB} MB`; } catch (e) { status.textContent = "An error occurred during compression. File might be encrypted."; console.error(e); } finally { button.disabled = false; button.textContent = "⚡ Compress File"; } }
+async function compressPdf() { const status = document.getElementById("compressStatus"); const button = document.getElementById("compressButton"); if (!window.pdfjsLib || !window.PDFLib || !selectedCompressFile) { status.textContent = "Error: System libraries not loaded properly."; return; } button.disabled = true; button.textContent = "Compressing PDF, please wait..."; try { const originalSizeMB = (selectedCompressFile.size / (1024 * 1024)).toFixed(2); status.textContent = `Original Size: ${originalSizeMB} MB. Processing pages...`; const arrayBuffer = await selectedCompressFile.arrayBuffer(); const pdfDoc = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise; const totalPages = pdfDoc.numPages; const newPdfDoc = await window.PDFLib.PDFDocument.create(); for (let i = 1; i <= totalPages; i++) { status.textContent = `Compressing page ${i} of ${totalPages}...`; await delay(10); const page = await pdfDoc.getPage(i); const viewport = page.getViewport({ scale: 1.0 }); const canvas = document.createElement("canvas"); const ctx = canvas.getContext("2d", { alpha: false }); canvas.width = Math.floor(viewport.width); canvas.height = Math.floor(viewport.height); ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, canvas.width, canvas.height); await page.render({ canvasContext: ctx, viewport }).promise; const compressedImageBlob = await new Promise(resolve => canvas.toBlob(resolve, "image/jpeg", 0.65)); const imageArrayBuffer = await compressedImageBlob.arrayBuffer(); const embeddedImage = await newPdfDoc.embedJpg(imageArrayBuffer); const newPage = newPdfDoc.addPage([viewport.width, viewport.height]); newPage.drawImage(embeddedImage, { x: 0, y: 0, width: viewport.width, height: viewport.height }); } const compressedBytes = await newPdfDoc.save(); const finalBlob = new Blob([compressedBytes], { type: "application/pdf" }); const compressedSizeMB = (finalBlob.size / (1024 * 1024)).toFixed(2); downloadBlob(finalBlob, "TMD-Compressed.pdf"); status.textContent = `✓ Success! File reduced from ${originalSizeMB} MB to ${compressedSizeMB} MB`; } catch (e) { status.textContent = "An error occurred during compression. File might be encrypted."; console.error(e); } finally { button.disabled = false; button.textContent = "⚡ Compress File"; } }
 </script>
 </body>
 </html>
