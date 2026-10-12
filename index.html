@@ -18,11 +18,27 @@
 
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        :root { --bg-dark: #0a0510; --accent: #FFB39A; --accent-glow: #ff8a66; --purple: #542452; --text-light: #f0e6ef; --text-dim: #a08ca0; }
+        :root { 
+            --bg-dark: #0b0711; 
+            --bg-dark-alt: #0a0510;
+            --accent: #FFB39A; 
+            --accent-glow: #ff8a66; 
+            --purple: #542452; 
+            --text-light: #f0e6ef; 
+            --text-dim: #a08ca0; 
+        }
         html { scroll-behavior: smooth; }
-        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg-dark); color: var(--text-light); min-height: 100vh; overflow-x: hidden; position: relative; -webkit-font-smoothing: antialiased; }
+        body { 
+            font-family: 'Space Grotesk', sans-serif; 
+            background: var(--bg-dark); 
+            color: var(--text-light); 
+            min-height: 100vh; 
+            overflow-x: hidden; 
+            position: relative; 
+            -webkit-font-smoothing: antialiased; 
+        }
         
-        #intro-loader { position: fixed; inset: 0; background: var(--bg-dark); z-index: 99999; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 20px; transition: opacity 0.6s ease, visibility 0.6s; pointer-events: auto; }
+        #intro-loader { position: fixed; inset: 0; background: var(--bg-dark-alt); z-index: 99999; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 20px; transition: opacity 0.6s ease, visibility 0.6s; pointer-events: auto; }
         #intro-loader.hide { opacity: 0; visibility: hidden; pointer-events: none; }
         .intro-logo { font-family: 'Orbitron', sans-serif; font-size: clamp(24px, 5vw, 42px); font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent-glow)); -webkit-background-clip: text; background-clip: text; color: transparent; letter-spacing: 2px; text-align: center; }
         .loader-bar { width: 200px; height: 2px; background: rgba(255,179,154,0.2); border-radius: 2px; overflow: hidden; margin-top: 10px; }
@@ -38,25 +54,147 @@
         @keyframes float3 { 50% { transform: translate(-150px, 100px); } }
 
         /* UNIVERSAL HEADER */
-        .tmd-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 5%; background-color: rgba(11, 7, 17, 0.98); border-bottom: 1px solid rgba(255, 179, 154, 0.15); position: sticky; top: 0; z-index: 1000; font-family: 'Inter', sans-serif; }
-        .tmd-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; font-family: 'Orbitron', sans-serif; font-size: 1.25rem; font-weight: 700; color: #FFB39A !important; white-space: nowrap; }
-        .tmd-logo svg { width: 20px; height: 20px; flex-shrink: 0; fill: #FFB39A; }
-        .tmd-nav { display: flex; gap: 22px; align-items: center; }
-        .tmd-nav a { color: #d1d5db; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
-        .tmd-nav a:hover { color: #FFB39A; }
-        .tmd-menu-btn { display: none; background: none; border: none; cursor: pointer; flex-direction: column; justify-content: space-between; width: 22px; height: 16px; padding: 0; flex-shrink: 0; margin-left: auto; }
-        .tmd-menu-btn span { display: block; width: 100%; height: 2px; background-color: #FFB39A; border-radius: 2px; }
-        @media (max-width: 768px) {
-            .tmd-logo { font-size: 1.1rem; }
-            .tmd-logo svg { width: 18px; height: 18px; }
-            .tmd-menu-btn { display: flex; }
-            .tmd-nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: #120918; border-bottom: 1px solid rgba(255, 179, 154, 0.12); box-shadow: 0 12px 30px rgba(0,0,0,0.45); gap: 0; }
-            .tmd-nav.active { display: flex; }
-            .tmd-nav a { padding: 10px 20px; font-size: 0.9rem; width: 100%; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.04); color: #d1d5db; }
-            .tmd-nav a:last-child { border-bottom: none; }
-            .tmd-nav a:active { background: rgba(255, 179, 154, 0.08); color: #FFB39A; }
+        .tmd-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 14px 5%; 
+            background-color: var(--bg-dark); 
+            border-bottom: 1px solid rgba(255, 179, 154, 0.15); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            font-family: 'Inter', sans-serif; 
+        }
+        .tmd-logo { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            text-decoration: none; 
+            font-family: 'Orbitron', sans-serif; 
+            font-size: 1.25rem; 
+            font-weight: 700; 
+            color: var(--accent) !important; 
+            white-space: nowrap; 
+        }
+        .tmd-logo svg { 
+            width: 20px; 
+            height: 20px; 
+            flex-shrink: 0; 
+            fill: var(--accent); 
+        }
+        .tmd-nav-container {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            position: relative;
+        }
+        .tmd-nav-desktop-links {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+        }
+        .tmd-nav-desktop-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .tmd-nav-desktop-links a:hover {
+            color: var(--accent);
+        }
+        
+        /* 3-LINE HAMBURGER MENU (ALWAYS VISIBLE) */
+        .tmd-menu-btn { 
+            display: flex; 
+            background: none; 
+            border: none; 
+            cursor: pointer; 
+            flex-direction: column; 
+            justify-content: space-between; 
+            width: 22px; 
+            height: 16px; 
+            padding: 0; 
+            flex-shrink: 0; 
+        }
+        .tmd-menu-btn span { 
+            display: block; 
+            width: 100%; 
+            height: 2px; 
+            background-color: var(--accent); 
+            border-radius: 2px; 
+            transition: transform 0.3s, opacity 0.3s;
+        }
+        .tmd-menu-btn.active span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .tmd-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .tmd-menu-btn.active span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
         }
 
+        /* HEADER DROPDOWN */
+        .tmd-dropdown {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: calc(100% + 15px);
+            right: 0;
+            width: 220px;
+            background-color: #120918;
+            border: 1px solid rgba(255, 179, 154, 0.15);
+            border-radius: 12px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+            overflow: hidden;
+            z-index: 1001;
+        }
+        .tmd-dropdown.active {
+            display: flex;
+        }
+        .tmd-dropdown a {
+            padding: 12px 20px;
+            font-size: 0.9rem;
+            color: #d1d5db;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 179, 154, 0.08);
+            transition: background 0.2s, color 0.2s;
+            text-align: left;
+        }
+        .tmd-dropdown a:last-child {
+            border-bottom: none;
+        }
+        .tmd-dropdown a:hover {
+            background: rgba(255, 179, 154, 0.08);
+            color: var(--accent);
+        }
+        .tmd-mobile-link {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .tmd-nav-desktop-links {
+                display: none;
+            }
+            .tmd-mobile-link {
+                display: block;
+            }
+            .tmd-dropdown {
+                position: fixed;
+                top: 57px;
+                left: 0;
+                right: 0;
+                width: 100%;
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 179, 154, 0.15);
+            }
+        }
+
+        /* HERO & CONTENT */
         .hero-section { text-align: center; padding: 100px 20px 80px; position: relative; z-index: 2; transition: opacity 0.5s ease, transform 0.5s ease; }
         .hero-badge { display: inline-block; padding: 6px 16px; background: rgba(255,179,154,0.1); border: 1px solid rgba(255,179,154,0.3); border-radius: 20px; font-size: 12px; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 25px; }
         .hero-section h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(36px, 6vw, 56px); font-weight: 800; line-height: 1.15; margin-bottom: 20px; }
@@ -118,16 +256,18 @@
         .action-button:hover { box-shadow: 0 10px 25px rgba(255,179,154,0.3); transform: translateY(-2px); }
         .close-button { width: 100%; padding: 14px; margin-top: 12px; background: transparent; color: var(--text-dim); border: 1px solid rgba(255,179,154,0.2); border-radius: 12px; cursor: pointer; transition: 0.3s; font-size: 15px; }
         .close-button:hover { color: white; border-color: white; }
+        .small-btn { display: inline-block; width: 100%; font-family: 'Space Grotesk', sans-serif; background: var(--accent); color: var(--bg-dark); border: none; border-radius: 6px; font-size: 11px; font-weight: 600; }
 
         /* UNIVERSAL FOOTER */
         .tmd-footer { background: linear-gradient(180deg, transparent, rgba(10,5,16,0.9)); border-top: 1px solid rgba(255,179,154,0.1); padding: 50px 20px 30px; text-align: center; font-family: 'Inter', sans-serif; }
-        .tmd-footer-brand { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 700; color: #FFB39A; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .tmd-footer-brand svg { width: 22px; height: 22px; fill: #FFB39A; }
+        .tmd-footer-brand { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 700; color: var(--accent); margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .tmd-footer-brand svg { width: 22px; height: 22px; fill: var(--accent); }
         .tmd-footer-links { display: flex; justify-content: center; gap: 20px; margin: 20px 0; flex-wrap: wrap; }
         .tmd-footer-links a { color: #a08ca0; text-decoration: none; font-size: 14px; transition: 0.3s; }
-        .tmd-footer-links a:hover { color: #FFB39A; }
+        .tmd-footer-links a:hover { color: var(--accent); }
         .tmd-footer-copy { color: rgba(255, 255, 255, 0.3); font-size: 13px; margin-top: 20px; }
 
+        /* TOBY AI CHAT WIDGET */
         #toby-widget-container { position: fixed; bottom: 25px; right: 25px; z-index: 10000; display: flex; flex-direction: column; align-items: flex-end; }
         .toby-launch-btn { background: linear-gradient(135deg, var(--accent), var(--accent-glow)); color: var(--bg-dark); padding: 12px 22px; border-radius: 30px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; box-shadow: 0 10px 25px rgba(255,179,154,0.4); transition: 0.3s; }
         .toby-launch-btn:hover { transform: scale(1.05); }
@@ -164,17 +304,32 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/></svg>
         ToolsMediaDownloader
     </a>
-    <button class="tmd-menu-btn" id="mobileMenuBtn" aria-label="Menu">
-        <span></span><span></span><span></span>
-    </button>
-    <nav class="tmd-nav" id="navLinks">
-        <a href="/">Home</a>
-        <a href="/about.html">About</a>
-        <a href="/privacy.html">Privacy</a>
-        <a href="/terms.html">Terms</a>
-        <a href="/disclaimer.html">Disclaimer</a>
-        <a href="/contact.html">Contact</a>
-    </nav>
+    
+    <div class="tmd-nav-container">
+        <!-- Desktop Direct Links -->
+        <div class="tmd-nav-desktop-links">
+            <a href="#document-tools">PDF Tools</a>
+            <a href="#video-tools">Video Tools</a>
+        </div>
+        
+        <!-- Hamburger Menu Button (Always visible) -->
+        <button class="tmd-menu-btn" id="mobileMenuBtn" aria-label="Menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        
+        <!-- Universal Dropdown -->
+        <nav class="tmd-dropdown" id="navLinks">
+            <!-- Mobile Navigation Injection Links -->
+            <a href="#document-tools" class="tmd-mobile-link">PDF Tools</a>
+            <a href="#video-tools" class="tmd-mobile-link">Video Tools</a>
+            <!-- General Links -->
+            <a href="about.html">About</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+            <a href="disclaimer.html">Disclaimer</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </div>
 </header>
 
 <section class="hero-section" id="hero">
@@ -297,19 +452,19 @@
             <div class="card-icon logo-tiktok"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.73a8.16 8.16 0 0 0 4.77 1.52V6.69h-.01z"/></svg></div>
             <h3>TikTok Downloader</h3>
             <p>Download TikTok videos without watermark in HD MP4.</p>
-            <button class="card-btn" onclick="window.location.href='tiktok-downloader.html'">Download →</button>
+            <a href="tiktok-downloader.html" class="card-btn">Download →</a>
         </div>
         <div class="glass-card fade-element">
             <div class="card-icon logo-insta"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></div>
             <h3>Instagram Downloader</h3>
             <p>Download Instagram Reels, stories, posts and photos.</p>
-            <button class="card-btn" onclick="window.location.href='instagram-downloader.html'">Download →</button>
+            <a href="instagram-downloader.html" class="card-btn">Download →</a>
         </div>
         <div class="glass-card fade-element">
             <div class="card-icon logo-fb"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
             <h3>Facebook Downloader</h3>
             <p>Save Facebook videos in HD quality to your device.</p>
-            <button class="card-btn" onclick="window.location.href='facebook-downloader.html'">Download →</button>
+            <a href="facebook-downloader.html" class="card-btn">Download →</a>
         </div>
     </div>
 </main>
@@ -330,6 +485,7 @@
     <p class="tmd-footer-copy">© 2026 ToolsMediaDownloader · Free online tools.</p>
 </footer>
 
+<!-- TOBY AI -->
 <div id="toby-widget-container">
     <div id="toby-chat-box">
         <div class="chat-header"><span>🤖 TOBY · AI</span><button onclick="toggleTobyChat()">×</button></div>
@@ -343,14 +499,36 @@
 </div>
 
 <script>
-document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+// UNIVERSAL HEADER ACTIONS
+document.getElementById('mobileMenuBtn').addEventListener('click', function(e) {
+    e.stopPropagation();
+    this.classList.toggle('active');
     document.getElementById('navLinks').classList.toggle('active');
 });
 
+document.addEventListener('click', function(e) {
+    const nav = document.getElementById('navLinks');
+    const btn = document.getElementById('mobileMenuBtn');
+    if (nav.classList.contains('active') && !nav.contains(e.target) && !btn.contains(e.target)) {
+        nav.classList.remove('active');
+        btn.classList.remove('active');
+    }
+});
+
+// Smooth closing of dropdown when anchors are clicked (for mobile scrolling context)
+document.querySelectorAll('.tmd-dropdown a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.getElementById('navLinks').classList.remove('active');
+        document.getElementById('mobileMenuBtn').classList.remove('active');
+    });
+});
+
+// loader scripts
 function removeLoader() { const loader = document.getElementById('intro-loader'); if (loader) loader.classList.add('hide'); }
 document.addEventListener('DOMContentLoaded', () => setTimeout(removeLoader, 1000));
 setTimeout(removeLoader, 2000);
 
+// dynamic fade in animations
 const fadeElements = document.querySelectorAll('.fade-element');
 const hero = document.getElementById('hero');
 function checkScroll() {
@@ -360,6 +538,7 @@ function checkScroll() {
 }
 window.addEventListener('scroll', checkScroll); checkScroll();
 
+// Toby AI responses
 function toggleTobyChat() { const chat = document.getElementById('toby-chat-box'); chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex'; if (chat.style.display === 'flex') document.getElementById('toby-input').focus(); }
 function handleTobyKey(e) { if (e.key === 'Enter') sendTobyMessage(); }
 function sendTobyMessage() {
@@ -378,25 +557,30 @@ function sendTobyMessage() {
 }
 function addTobyMessage(text, className) { const msg = document.createElement('div'); msg.className = className; msg.textContent = text; const container = document.getElementById('chat-messages'); container.appendChild(msg); container.scrollTop = container.scrollHeight; }
 
+// Engine workers and browser PDF functionality APIs
 if (window.pdfjsLib) window.pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 function closeTools() { document.querySelectorAll(".workspace").forEach(t => t.style.display = "none"); }
 function openTool(id) { closeTools(); const t = document.getElementById(id); if (t) { t.style.display = "block"; t.scrollIntoView({ behavior: "smooth", block: "center" }); } }
 function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
 function downloadBlob(blob, filename) { const url = URL.createObjectURL(blob); const link = document.createElement("a"); link.href = url; link.download = filename; document.body.appendChild(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 15000); }
 
+// JPG to PDF logic 
 let jpgSelectedFiles = [], jpgObjectUrls = [];
 function clearJpgUrls() { jpgObjectUrls.forEach(url => URL.revokeObjectURL(url)); jpgObjectUrls = []; }
 function jpgFilesSelected(input) { clearJpgUrls(); const status = document.getElementById("jpgStatus"), preview = document.getElementById("jpgPreview"), button = document.getElementById("jpgCreateButton"); jpgSelectedFiles = Array.from(input.files || []).filter(f => f.type === "image/jpeg" || f.type === "image/png"); preview.innerHTML = ""; if (!jpgSelectedFiles.length) { status.textContent = "Please select JPG or PNG images."; button.style.display = "none"; return; } jpgSelectedFiles.forEach((file, i) => { const url = URL.createObjectURL(file); jpgObjectUrls.push(url); const card = document.createElement("div"); card.className = "preview-card"; card.innerHTML = `<img src="${url}"><div class="preview-label">Image ${i+1}</div>`; preview.appendChild(card); }); status.textContent = `${jpgSelectedFiles.length} file(s) ready for conversion`; button.style.display = "block"; }
 async function createJpgPdf() { const status = document.getElementById("jpgStatus"), button = document.getElementById("jpgCreateButton"); if (!window.PDFLib) return; button.disabled = true; button.textContent = "Processing..."; try { const pdf = await window.PDFLib.PDFDocument.create(); for (let i = 0; i < jpgSelectedFiles.length; i++) { status.textContent = `Processing image ${i+1} of ${jpgSelectedFiles.length}...`; await delay(30); const bytes = await jpgSelectedFiles[i].arrayBuffer(); const image = jpgSelectedFiles[i].type === "image/png" ? await pdf.embedPng(bytes) : await pdf.embedJpg(bytes); const scale = Math.min(1, 1600/image.width, 2200/image.height); const page = pdf.addPage([image.width*scale, image.height*scale]); page.drawImage(image, {x:0, y:0, width:image.width*scale, height:image.height*scale}); } downloadBlob(new Blob([await pdf.save()], {type:"application/pdf"}), "TMD-Converted.pdf"); status.textContent = "✓ PDF generated successfully!"; } catch(e) { status.textContent = "An error occurred during processing."; } finally { button.disabled = false; button.textContent = "⚡ Generate PDF"; } }
 
+// PDF to JPG Extractor logic
 let selectedPdfForJpg = null;
 function pdfJpgFileSelected(input) { const status = document.getElementById("pdfJpgStatus"), button = document.getElementById("pdfJpgConvertButton"), preview = document.getElementById("pdfJpgPreview"); selectedPdfForJpg = input.files?.[0]; preview.innerHTML = ""; if (!selectedPdfForJpg) { status.textContent = ""; button.style.display = "none"; return; } status.textContent = `Selected File: ${selectedPdfForJpg.name}`; button.style.display = "block"; }
 async function convertPdfToJpg() { const status = document.getElementById("pdfJpgStatus"), button = document.getElementById("pdfJpgConvertButton"), preview = document.getElementById("pdfJpgPreview"); if (!window.pdfjsLib || !selectedPdfForJpg) return; button.disabled = true; button.textContent = "Extracting images..."; preview.innerHTML = ""; try { const bytes = new Uint8Array(await selectedPdfForJpg.arrayBuffer()); const pdf = await window.pdfjsLib.getDocument({data: bytes}).promise; for (let p = 1; p <= pdf.numPages; p++) { status.textContent = `Converting page ${p} of ${pdf.numPages}...`; await delay(30); const page = await pdf.getPage(p); const viewport = page.getViewport({scale: 1.7}); const canvas = document.createElement("canvas"); const ctx = canvas.getContext("2d", {alpha: false}); canvas.width = Math.floor(viewport.width); canvas.height = Math.floor(viewport.height); ctx.fillStyle = "#ffffff"; ctx.fillRect(0,0,canvas.width,canvas.height); await page.render({canvasContext: ctx, viewport}).promise; const blob = await new Promise(res => canvas.toBlob(res, "image/jpeg", 0.92)); const url = URL.createObjectURL(blob); const card = document.createElement("div"); card.className = "preview-card"; card.innerHTML = `<img src="${url}"><div class="preview-label">Page ${p}</div>`; const btn = document.createElement("button"); btn.className = "small-btn"; btn.textContent = "Download"; btn.style.marginTop = "5px"; btn.style.padding = "4px"; btn.style.cursor = "pointer"; btn.onclick = () => downloadBlob(blob, `TMD-page-${p}.jpg`); card.appendChild(btn); preview.appendChild(card); } status.textContent = "✓ Extraction completed successfully!"; } catch(e) { status.textContent = "An error occurred during extraction."; } finally { button.disabled = false; button.textContent = "⚡ Extract Images"; } }
 
+// PDF Merger logic
 let selectedMergeFiles = [];
 function mergeFilesSelected(input) { const status = document.getElementById("mergeStatus"), button = document.getElementById("mergeButton"); selectedMergeFiles = Array.from(input.files || []); if (selectedMergeFiles.length < 2) { status.textContent = "Please select at least 2 PDF files to merge."; button.style.display = "none"; return; } status.textContent = `${selectedMergeFiles.length} files selected for merging.`; button.style.display = "block"; }
 async function mergePdfs() { const status = document.getElementById("mergeStatus"), button = document.getElementById("mergeButton"); if (!window.PDFLib || selectedMergeFiles.length < 2) return; button.disabled = true; button.textContent = "Merging files..."; try { const merged = await window.PDFLib.PDFDocument.create(); for (let i = 0; i < selectedMergeFiles.length; i++) { status.textContent = `Adding document ${i+1} of ${selectedMergeFiles.length}...`; const source = await window.PDFLib.PDFDocument.load(await selectedMergeFiles[i].arrayBuffer()); const pages = await merged.copyPages(source, source.getPageIndices()); pages.forEach(p => merged.addPage(p)); } downloadBlob(new Blob([await merged.save()], {type:"application/pdf"}), "TMD-Merged.pdf"); status.textContent = "✓ Files merged successfully!"; } catch(e) { status.textContent = "An error occurred while merging."; } finally { button.disabled = false; button.textContent = "⚡ Merge Files"; } }
 
+// PDF Compressor logic
 let selectedCompressFile = null;
 function compressFileSelected(input) { const status = document.getElementById("compressStatus"), button = document.getElementById("compressButton"); selectedCompressFile = input.files?.[0]; if (!selectedCompressFile) { status.textContent = ""; button.style.display = "none"; return; } const sizeMB = (selectedCompressFile.size / (1024 * 1024)).toFixed(2); status.textContent = `Selected File: ${selectedCompressFile.name} (${sizeMB} MB)`; button.style.display = "block"; }
 async function compressPdf() { const status = document.getElementById("compressStatus"); const button = document.getElementById("compressButton"); if (!window.pdfjsLib || !window.PDFLib || !selectedCompressFile) { status.textContent = "Error: System libraries not loaded properly."; return; } button.disabled = true; button.textContent = "Compressing PDF, please wait..."; try { const originalSizeMB = (selectedCompressFile.size / (1024 * 1024)).toFixed(2); status.textContent = `Original Size: ${originalSizeMB} MB. Processing pages...`; const arrayBuffer = await selectedCompressFile.arrayBuffer(); const pdfDoc = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise; const totalPages = pdfDoc.numPages; const newPdfDoc = await window.PDFLib.PDFDocument.create(); for (let i = 1; i <= totalPages; i++) { status.textContent = `Compressing page ${i} of ${totalPages}...`; await delay(10); const page = await pdfDoc.getPage(i); const viewport = page.getViewport({ scale: 1.0 }); const canvas = document.createElement("canvas"); const ctx = canvas.getContext("2d", { alpha: false }); canvas.width = Math.floor(viewport.width); canvas.height = Math.floor(viewport.height); ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, canvas.width, canvas.height); await page.render({ canvasContext: ctx, viewport }).promise; const compressedImageBlob = await new Promise(resolve => canvas.toBlob(resolve, "image/jpeg", 0.65)); const imageArrayBuffer = await compressedImageBlob.arrayBuffer(); const embeddedImage = await newPdfDoc.embedJpg(imageArrayBuffer); const newPage = newPdfDoc.addPage([viewport.width, viewport.height]); newPage.drawImage(embeddedImage, { x: 0, y: 0, width: viewport.width, height: viewport.height, }); } const compressedBytes = await newPdfDoc.save(); const finalBlob = new Blob([compressedBytes], { type: "application/pdf" }); const compressedSizeMB = (finalBlob.size / (1024 * 1024)).toFixed(2); downloadBlob(finalBlob, "TMD-Compressed.pdf"); status.textContent = `✓ Success! File reduced from ${originalSizeMB} MB to ${compressedSizeMB} MB`; } catch (e) { status.textContent = "An error occurred during compression. File might be encrypted."; console.error(e); } finally { button.disabled = false; button.textContent = "⚡ Compress File"; } }
