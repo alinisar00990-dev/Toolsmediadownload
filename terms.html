@@ -4,62 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms and Conditions - ToolsMediaDownloader</title>
-
-    <!-- Favicon (Tab Icon) -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        :root { --bg-dark: #0a0510; --accent: #FFB39A; --accent-glow: #ff8a66; --text-light: #f0e6ef; --text-dim: #a08ca0; }
-        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.8; }
+        body { margin: 0; background-color: #0b0711; color: #b3b0b8; font-family: 'Inter', sans-serif; line-height: 1.6; }
+        .tmd-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; background-color: #0b0711; border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: relative; z-index: 9999; }
+        .tmd-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; font-family: 'Orbitron', sans-serif; font-size: 1.25rem; font-weight: 700; color: #ff7e5f !important; letter-spacing: 0.5px; }
+        .tmd-nav { display: flex; gap: 25px; }
+        .tmd-nav a { color: #d1d5db; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.3s ease; }
+        .tmd-nav a:hover { color: #ff7e5f; }
+        .tmd-menu-btn { display: none; flex-direction: column; justify-content: space-between; width: 26px; height: 18px; background: transparent; border: none; cursor: pointer; padding: 0; }
+        .tmd-menu-btn span { width: 100%; height: 2px; background-color: #ff7e5f; border-radius: 2px; transition: all 0.3s ease; }
         
-        .navbar { position: sticky; top: 0; background: rgba(10,5,16,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,179,154,0.15); padding: 18px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
-        .nav-logo { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent-glow)); -webkit-background-clip: text; color: transparent; text-decoration: none; display: flex; align-items: center; gap: 8px; }
-        .nav-links a { color: var(--text-light); text-decoration: none; font-size: 14px; margin-left: 20px; transition: 0.3s; }
-        .nav-links a:hover { color: var(--accent); }
+        @media (max-width: 768px) {
+            .tmd-menu-btn { display: flex; }
+            .tmd-nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: #120918; padding: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+            .tmd-nav.active { display: flex; }
+            .tmd-nav a { padding: 15px 20px; font-size: 1.1rem; display: block; border-bottom: 1px solid rgba(255,255,255,0.02); }
+            .tmd-nav a:last-child { border-bottom: none; }
+        }
 
-        .content-container { max-width: 800px; margin: 60px auto; padding: 40px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,179,154,0.1); border-radius: 20px; }
-        h1 { font-family: 'Orbitron', sans-serif; color: var(--accent); margin-bottom: 20px; font-size: 32px; }
-        h2 { color: white; margin: 30px 0 15px; font-size: 22px; }
-        p { color: var(--text-dim); margin-bottom: 15px; font-size: 15.5px; }
-
-        footer { border-top: 1px solid rgba(255,179,154,0.1); padding: 30px 20px; text-align: center; color: var(--text-dim); font-size: 13px; }
+        .page-wrapper { padding: 20px; max-width: 800px; margin: 40px auto; }
+        .content-card { background: #160d1e; border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 20px; padding: 30px; }
+        h1.page-title { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; margin-top: 0; background: linear-gradient(90deg, #ff7e5f, #ff6a88); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        p { margin-bottom: 20px; font-size: 1rem; }
     </style>
 </head>
 <body>
+    <header class="tmd-header">
+        <a href="/" class="tmd-logo"><span>⚡</span> ToolsMediaDownloader</a>
+        <button class="tmd-menu-btn" id="mobileMenuBtn">
+            <span></span><span></span><span></span>
+        </button>
+        <nav class="tmd-nav" id="navLinks">
+            <a href="/">Home</a>
+            <a href="/about.html">About</a>
+            <a href="/contact.html">Support</a>
+            <a href="/privacy.html">Privacy</a>
+        </nav>
+    </header>
 
-<nav class="navbar">
-    <a href="index.html" class="nav-logo"><span>⚡</span> ToolsMediaDownloader</a>
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="blog.html">Blog</a>
-        <a href="privacy.html">Privacy</a>
-        <a href="contact.html">Contact</a>
+    <div class="page-wrapper">
+        <div class="content-card">
+            <h1 class="page-title">Terms and Conditions</h1>
+            <p>Welcome to ToolsMediaDownloader.</p>
+            <p>By accessing this website (toolsmediadownload.online), we assume you accept these terms and conditions in full. Do not continue to use ToolsMediaDownloader if you do not accept all of the terms and conditions stated on this page.</p>
+            <p>The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice: "Client", "You" and "Your" refers to you, the person accessing this website. "The Company", "Ourselves", "We", "Our" and "Us", refers to our Company.</p>
+        </div>
     </div>
-</nav>
 
-<div class="content-container">
-    <h1>Terms and Conditions</h1>
-    <p>Welcome to ToolsMediaDownloader. By accessing this website (toolsmediadownload.online), we assume you accept these terms and conditions in full. Do not continue to use ToolsMediaDownloader if you do not accept all of the terms and conditions stated on this page.</p>
-
-    <h2>1. Website Usage</h2>
-    <p>Our website provides free online tools for PDF editing and social media video downloading. These tools are provided "as is" without any warranties. You agree to use these tools only for lawful purposes.</p>
-
-    <h2>2. Copyright and Media Downloads</h2>
-    <p>Our video download tools are designed to help users download publicly available videos for personal, offline viewing. We strictly prohibit the downloading of copyrighted material without the creator's permission. Users are solely responsible for any copyright violations or misuse of downloaded media.</p>
-
-    <h2>3. Disclaimer</h2>
-    <p>To the maximum extent permitted by applicable law, we exclude all representations, warranties, and conditions relating to our website and the use of this website. ToolsMediaDownloader will not be liable for any data loss, file corruption, or any damages arising from the use of our free tools.</p>
-
-    <h2>4. Modifications</h2>
-    <p>ToolsMediaDownloader reserves the right to revise these terms of service for its website at any time without notice. By using this website, you are agreeing to be bound by the current version of these Terms and Conditions.</p>
-
-    <h2>5. Contact Us</h2>
-    <p>If you have any questions regarding these terms, you may contact us at <a href="mailto:m.aliarain070@gmail.com" style="color:var(--accent)">m.aliarain070@gmail.com</a>.</p>
-</div>
-
-<footer>© 2026 ToolsMediaDownloader · All rights reserved.</footer>
-
+    <script>
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
