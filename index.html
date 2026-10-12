@@ -258,6 +258,18 @@
         .close-button:hover { color: white; border-color: white; }
         .small-btn { display: inline-block; width: 100%; font-family: 'Space Grotesk', sans-serif; background: var(--accent); color: var(--bg-dark); border: none; border-radius: 6px; font-size: 11px; font-weight: 600; }
 
+        /* Q&A Accordion Styling */
+        .faq-section { margin-top: 100px; }
+        .faq-grid { max-width: 800px; margin: 40px auto 0; display: flex; flex-direction: column; gap: 15px; }
+        .faq-item { background: rgba(84,36,82,0.2); border: 1px solid rgba(255,179,154,0.15); border-radius: 12px; overflow: hidden; transition: 0.3s; }
+        .faq-item:hover { border-color: var(--accent); }
+        .faq-question { padding: 20px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-light); display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
+        .faq-question svg { width: 18px; height: 18px; fill: none; stroke: var(--accent); stroke-width: 2; transition: transform 0.3s; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: rgba(0,0,0,0.2); }
+        .faq-answer-content { padding: 20px; color: var(--text-dim); font-size: 14.5px; line-height: 1.6; }
+        .faq-item.active .faq-answer { max-height: 500px; }
+        .faq-item.active .faq-question svg { transform: rotate(180deg); }
+
         /* UNIVERSAL FOOTER */
         .tmd-footer { background: linear-gradient(180deg, transparent, rgba(10,5,16,0.9)); border-top: 1px solid rgba(255,179,154,0.1); padding: 50px 20px 30px; text-align: center; font-family: 'Inter', sans-serif; }
         .tmd-footer-brand { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 700; color: var(--accent); margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; }
@@ -310,6 +322,7 @@
         <div class="tmd-nav-desktop-links">
             <a href="#document-tools">PDF Tools</a>
             <a href="#video-tools">Video Tools</a>
+            <a href="blog.html">Blog</a>
         </div>
         
         <!-- Hamburger Menu Button (Always visible) -->
@@ -322,6 +335,7 @@
             <!-- Mobile Navigation Injection Links -->
             <a href="#document-tools" class="tmd-mobile-link">PDF Tools</a>
             <a href="#video-tools" class="tmd-mobile-link">Video Tools</a>
+            <a href="blog.html" class="tmd-mobile-link">Blog</a>
             <!-- General Links -->
             <a href="about.html">About</a>
             <a href="privacy.html">Privacy</a>
@@ -447,7 +461,7 @@
         <p>Save videos from popular platforms in HD quality without watermarks.</p>
     </section>
 
-    <div class="tools-grid">
+    <div class="tools-grid" style="margin-bottom: 100px;">
         <div class="glass-card fade-element">
             <div class="card-icon logo-tiktok"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.73a8.16 8.16 0 0 0 4.77 1.52V6.69h-.01z"/></svg></div>
             <h3>TikTok Downloader</h3>
@@ -467,6 +481,61 @@
             <a href="facebook-downloader.html" class="card-btn">Download →</a>
         </div>
     </div>
+
+    <!-- QUESTIONS & ANSWERS (FAQ) SECTION -->
+    <section class="faq-section fade-element" id="faq">
+        <div class="section-intro">
+            <div class="section-tag">Help Desk</div>
+            <h2>Questions & Answers</h2>
+            <p>Have questions about how our free tools process files and downloads? Check out our quick guides below.</p>
+        </div>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Is ToolsMediaDownloader really free?
+                    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Yes, 100%! All our PDF file conversion systems, compression logic, merger engines, and video downloader components are free to use without restrictions, subscriptions, or hidden charges.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Are my uploaded PDF files secure?
+                    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Absolutely. Unlike other platforms, all file conversions (JPG to PDF, PDF to JPG, Merge, and Compress) are computed locally inside your browser context. Your document bytes never touch our servers, protecting your private files completely.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    How can I download videos without watermarks?
+                    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Simply copy the video URL from TikTok, Instagram, or Facebook, click on our matching Downloader card, paste your clean link, and hit Download. The engine will retrieve the raw high-definition video stream directly.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Why does the PDF compressor fail on some files?
+                    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Our compressor parses document parameters down page-by-page. If your original PDF is password encrypted or contains advanced DRM protection constraints, system libraries block direct processing access.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 
 <!-- UNIVERSAL FOOTER -->
@@ -481,8 +550,9 @@
         <a href="terms.html">Terms</a>
         <a href="disclaimer.html">Disclaimer</a>
         <a href="contact.html">Contact</a>
+        <a href="blog.html">Blog</a>
     </div>
-    <p class="tmd-footer-copy">© 2026 ToolsMediaDownloader · Free online tools.</p>
+    <p class="tmd-footer-copy">© 2026 ToolsMediaDownloader · All rights reserved.</p>
 </footer>
 
 <!-- TOBY AI -->
@@ -515,13 +585,31 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Smooth closing of dropdown when anchors are clicked (for mobile scrolling context)
+// Smooth closing of dropdown when anchors are clicked
 document.querySelectorAll('.tmd-dropdown a').forEach(link => {
     link.addEventListener('click', () => {
         document.getElementById('navLinks').classList.remove('active');
         document.getElementById('mobileMenuBtn').classList.remove('active');
     });
 });
+
+// Q&A / FAQ Accordion Handler
+function toggleFaq(el) {
+    const item = el.parentElement;
+    const isActive = item.classList.contains('active');
+    
+    // Close other FAQ items
+    document.querySelectorAll('.faq-item').forEach(faq => {
+        faq.classList.remove('active');
+        faq.querySelector('.faq-answer').style.maxHeight = "0px";
+    });
+
+    if (!isActive) {
+        item.classList.add('active');
+        const answer = item.querySelector('.faq-answer');
+        answer.style.maxHeight = answer.scrollHeight + "px";
+    }
+}
 
 // loader scripts
 function removeLoader() { const loader = document.getElementById('intro-loader'); if (loader) loader.classList.add('hide'); }
