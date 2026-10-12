@@ -4,49 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - ToolsMediaDownloader</title>
-    <meta name="description" content="Read the Privacy Policy of ToolsMediaDownloader. Learn how we handle your data, cookies, and personal information while using our free online media downloader tools.">
+    <meta name="description" content="Privacy Policy for ToolsMediaDownloader.">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; }
-        body { margin: 0; background-color: #0b0711; color: #b3b0b8; font-family: 'Inter', sans-serif; line-height: 1.7; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: #0b0711; color: #b3b0b8; font-family: 'Inter', sans-serif; line-height: 1.8; -webkit-font-smoothing: antialiased; }
         
-        /* HEADER */
-        .tmd-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; background-color: #0b0711; border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: relative; z-index: 9999; }
-        .tmd-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; font-family: 'Orbitron', sans-serif; font-size: 1.35rem; font-weight: 700; color: #FFB39A !important; letter-spacing: 0.5px; white-space: nowrap; }
-        .tmd-logo svg { flex-shrink: 0; width: 20px; height: 20px; }
-        .tmd-nav { display: flex; gap: 22px; align-items: center; }
-        .tmd-nav a { color: #d1d5db; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s ease; }
+        /* ELEGANT HEADER */
+        .tmd-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background-color: rgba(11, 7, 17, 0.98); border-bottom: 1px solid rgba(255, 179, 154, 0.15); position: sticky; top: 0; z-index: 1000; }
+        .tmd-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 700; color: #FFB39A !important; }
+        .tmd-logo svg { width: 22px; height: 22px; flex-shrink: 0; }
+        
+        .tmd-nav { display: flex; gap: 25px; align-items: center; }
+        .tmd-nav a { color: #e5e7eb; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
         .tmd-nav a:hover { color: #FFB39A; }
-        .tmd-menu-btn { display: none; flex-direction: column; justify-content: space-between; width: 24px; height: 16px; background: transparent; border: none; cursor: pointer; padding: 0; flex-shrink: 0; }
-        .tmd-menu-btn span { width: 100%; height: 2px; background-color: #FFB39A; border-radius: 2px; transition: all 0.3s ease; }
+        
+        .tmd-menu-btn { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 5px; margin-left: auto; }
+        .tmd-menu-btn span { display: block; width: 24px; height: 2px; background-color: #FFB39A; border-radius: 2px; transition: 0.3s; }
         
         @media (max-width: 768px) {
-            .tmd-header { padding: 12px 16px; }
             .tmd-logo { font-size: 1.15rem; }
-            .tmd-logo svg { width: 18px; height: 18px; }
             .tmd-menu-btn { display: flex; }
-            .tmd-nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: #120918; padding: 4px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.5); gap: 0; }
+            .tmd-nav { display: none; flex-direction: column; position: absolute; top: 100%; right: 0; width: 100%; background-color: #120918; border-bottom: 1px solid rgba(255, 179, 154, 0.15); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
             .tmd-nav.active { display: flex; }
-            .tmd-nav a { padding: 10px 16px; font-size: 0.85rem; display: block; border-bottom: 1px solid rgba(255,255,255,0.03); }
+            .tmd-nav a { padding: 15px 5%; border-bottom: 1px solid rgba(255,255,255,0.03); width: 100%; text-align: left; font-size: 1rem; }
             .tmd-nav a:last-child { border-bottom: none; }
         }
 
-        /* HERO SECTION */
-        .page-hero { text-align: center; padding: 50px 20px 30px; max-width: 800px; margin: 0 auto; }
-        .page-hero h1 { font-family: 'Orbitron', sans-serif; font-size: 2.6rem; margin: 0 0 15px; background: linear-gradient(90deg, #FFB39A, #ff6a88); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .page-hero p { color: #8a8591; font-size: 1rem; margin: 0; }
-        .divider { width: 60px; height: 3px; background: linear-gradient(90deg, #FFB39A, #ff6a88); margin: 20px auto; border-radius: 3px; }
+        /* PROFESSIONAL CONTENT LAYOUT */
+        .page-container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        .legal-box { background: #120b18; border: 1px solid rgba(255, 179, 154, 0.1); border-radius: 12px; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+        .legal-box h1 { font-family: 'Orbitron', sans-serif; color: #FFB39A; font-size: 2rem; margin-bottom: 5px; font-weight: 700; }
+        .legal-box .updated { color: #8a8591; font-size: 0.9rem; margin-bottom: 30px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 15px; }
+        .legal-box h2 { color: #e5e7eb; font-size: 1.25rem; margin-top: 35px; margin-bottom: 15px; font-weight: 600; font-family: 'Inter', sans-serif; }
+        .legal-box p { margin-bottom: 16px; font-size: 1rem; color: #b3b0b8; }
+        .legal-box ul { margin-bottom: 16px; padding-left: 20px; color: #b3b0b8; }
+        .legal-box li { margin-bottom: 8px; }
+        .legal-box a { color: #FFB39A; text-decoration: none; transition: 0.2s; }
+        .legal-box a:hover { text-decoration: underline; }
 
-        /* CONTENT */
-        .page-wrapper { padding: 20px; max-width: 850px; margin: 0 auto 60px; }
-        .content-card { background: linear-gradient(145deg, #160d1e, #110818); border: 1px solid rgba(255, 179, 154, 0.08); border-radius: 20px; padding: 35px; margin-bottom: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
-        .section-title { display: flex; align-items: center; gap: 12px; color: #ffffff; font-size: 1.3rem; margin: 0 0 15px; font-weight: 600; }
-        .section-icon { width: 36px; height: 36px; background: rgba(255, 179, 154, 0.1); border: 1px solid rgba(255, 179, 154, 0.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .section-icon svg { width: 18px; height: 18px; fill: #FFB39A; }
-        p { margin: 0 0 15px; font-size: 0.98rem; }
-        .last-updated { background: rgba(255, 179, 154, 0.05); border-left: 3px solid #FFB39A; padding: 12px 16px; border-radius: 8px; color: #FFB39A; font-size: 0.9rem; margin-bottom: 25px; }
-        a.inline-link { color: #FFB39A; text-decoration: none; }
-        a.inline-link:hover { text-decoration: underline; }
+        @media (max-width: 600px) {
+            .page-container { margin: 20px auto; }
+            .legal-box { padding: 25px 20px; }
+            .legal-box h1 { font-size: 1.7rem; }
+            .legal-box h2 { font-size: 1.15rem; margin-top: 25px; }
+            .legal-box p, .legal-box ul { font-size: 0.95rem; }
+        }
     </style>
 </head>
 <body>
@@ -55,101 +58,51 @@
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="#FFB39A"><path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/></svg>
             ToolsMediaDownloader
         </a>
-        <button class="tmd-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></button>
+        <button class="tmd-menu-btn" id="mobileMenuBtn">
+            <span></span><span></span><span></span>
+        </button>
         <nav class="tmd-nav" id="navLinks">
             <a href="/">Home</a>
             <a href="/about.html">About</a>
-            <a href="/contact.html">Support</a>
             <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
+            <a href="/disclaimer.html">Disclaimer</a>
+            <a href="/contact.html">Contact</a>
         </nav>
     </header>
 
-    <section class="page-hero">
-        <h1>Privacy Policy</h1>
-        <div class="divider"></div>
-        <p>Your privacy is important to us. Learn how we handle your data responsibly.</p>
-    </section>
+    <div class="page-container">
+        <div class="legal-box">
+            <h1>Privacy Policy</h1>
+            <div class="updated">Last Updated: January 2026</div>
+            
+            <p>At ToolsMediaDownloader (toolsmediadownload.online), accessible from the internet, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains the types of information that is collected and recorded by ToolsMediaDownloader and how we use it.</p>
+            <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to <a href="/contact.html">contact us</a>.</p>
 
-    <div class="page-wrapper">
-        <div class="content-card">
-            <div class="last-updated">📅 Last Updated: January 2026</div>
-            <p>At <strong>ToolsMediaDownloader</strong> (toolsmediadownload.online), accessible from the internet, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains the types of information that is collected and recorded by ToolsMediaDownloader and how we use it. If you have additional questions or require more information about our Privacy Policy, do not hesitate to <a href="/contact.html" class="inline-link">contact us</a>.</p>
-            <p>This Privacy Policy applies only to our online activities and is valid for visitors to our website with regards to the information that they shared and/or collect in ToolsMediaDownloader. This policy is not applicable to any information collected offline or via channels other than this website.</p>
-        </div>
+            <h2>1. Information We Collect</h2>
+            <p>The personal information that you are asked to provide, and the reasons why you are asked to provide it, will be made clear to you at the point we ask you to provide your personal information. If you contact us directly, we may receive additional information about you such as your name, email address, the contents of the message, and any other information you choose to provide.</p>
 
-        <div class="content-card">
-            <h2 class="section-title">
-                <span class="section-icon"><svg viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg></span>
-                1. Consent
-            </h2>
-            <p>By using our website, you hereby consent to our Privacy Policy and agree to its terms. If you do not agree with the practices described in this policy, you should not use our services. Your continued use of the site following any changes to this policy constitutes your acceptance of such changes.</p>
-        </div>
-
-        <div class="content-card">
-            <h2 class="section-title">
-                <span class="section-icon"><svg viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></span>
-                2. Information We Collect
-            </h2>
-            <p>The personal information that you are asked to provide, and the reasons why you are asked to provide it, will be made clear to you at the point we ask you to provide your personal information.</p>
-            <p>If you contact us directly, we may receive additional information about you such as your name, email address, phone number, the contents of the message and/or attachments you may send us, and any other information you may choose to provide. We do not require registration to use our media downloading tools.</p>
-        </div>
-
-        <div class="content-card">
-            <h2 class="section-title">
-                <span class="section-icon"><svg viewBox="0 0 16 16"><path d="M11 2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3h6zm0-1H5a4 4 0 0 0-4 4v6a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4V5a4 4 0 0 0-4-4z"/></svg></span>
-                3. How We Use Your Information
-            </h2>
+            <h2>2. How We Use Your Information</h2>
             <p>We use the information we collect in various ways, including to:</p>
-            <p>• Provide, operate, and maintain our website and downloader services<br>
-            • Improve, personalize, and expand our website functionality<br>
-            • Understand and analyze how you use our website<br>
-            • Develop new products, services, features, and functionality<br>
-            • Communicate with you for customer service, updates, and support<br>
-            • Send you emails related to your requests<br>
-            • Find and prevent fraud or abuse of our services</p>
-        </div>
+            <ul>
+                <li>Provide, operate, and maintain our website</li>
+                <li>Improve, personalize, and expand our services</li>
+                <li>Understand and analyze how you use our website</li>
+                <li>Develop new products, services, and features</li>
+                <li>Find and prevent fraud or abuse</li>
+            </ul>
 
-        <div class="content-card">
-            <h2 class="section-title">
-                <span class="section-icon"><svg viewBox="0 0 16 16"><path d="M9.828 4a3 3 0 0 1-2.12-.879l-.83-.828A1 1 0 0 0 6.173 2H2.5a1 1 0 0 0-1 .981L1.546 4h-1L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181L15.546 8H14.54l.265-2.91A1 1 0 0 0 13.81 4H9.828zm-2.95 8.5l.5-5A.5.5 0 0 1 7.874 7H16a.5.5 0 0 1 .498.55l-.78 7.8A2.5 2.5 0 0 1 13.23 17h-10.46a2.5 2.5 0 0 1-2.488-2.65L.004 2.5A.5.5 0 0 1 .5 2h4.052a.5.5 0 0 1 .433.25l1.173 2.25z"/></svg></span>
-                4. Local File Processing (PDF & Media Tools)
-            </h2>
-            <p>We highly respect your privacy. All of our media downloader tools (TikTok, Facebook, Instagram) process links through secure third-party APIs, and the downloaded videos go directly from the source server to your device. We do not store copies of any videos you download on our servers.</p>
-            <p>For any PDF or local file tools provided on this website, all processing is done directly in your browser (client-side). Your files never leave your device, ensuring 100% confidentiality.</p>
-        </div>
+            <h2>3. Local File Processing & Media Downloads</h2>
+            <p>We highly respect your privacy. All of our media downloader tools process links through secure APIs, and the downloaded videos are fetched directly from the source server to your device. We do not store copies of any videos you download on our servers.</p>
 
-        <div class="content-card">
-            <h2 class="section-title">
-                <span class="section-icon"><svg viewBox="0 0 16 16"><path d="M9.828 4a3 3 0 0 1-2.12-.879l-.83-.828A1 1 0 0 0 6.173 2H2.5a1 1 0 0 0-1 .981L1.546 4h-1L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181L15.546 8H14.54l.265-2.91A1 1 0 0 0 13.81 4H9.828z"/></svg></span>
-                5. Log Files & Cookies
-            </h2>
-            <p>ToolsMediaDownloader follows a standard procedure of using log files. These files log visitors when they visit websites. All hosting companies do this as part of hosting services' analytics. The information collected by log files include internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks.</p>
-            <p>Like any other website, we use "cookies" to store information including visitors' preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users' experience by customizing our web page content based on visitors' browser type and/or other information.</p>
-        </div>
+            <h2>4. Log Files</h2>
+            <p>ToolsMediaDownloader follows a standard procedure of using log files. These files log visitors when they visit websites. The information collected by log files includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable.</p>
 
-        <div class="content-card">
-            <h2 class="section-title">
-                <span class="section-icon"><svg viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg></span>
-                6. Google DoubleClick DART Cookie
-            </h2>
-            <p>Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to www.website.com and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL – <a href="https://policies.google.com/technologies/ads" class="inline-link" target="_blank" rel="noopener">https://policies.google.com/technologies/ads</a>.</p>
-        </div>
+            <h2>5. Google DoubleClick DART Cookie</h2>
+            <p>Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to our site and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL: <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">policies.google.com/technologies/ads</a>.</p>
 
-        <div class="content-card">
-            <h2 class="section-title">
-                <span class="section-icon"><svg viewBox="0 0 16 16"><path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/></svg></span>
-                7. Children's Information
-            </h2>
-            <p>Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity.</p>
-            <p>ToolsMediaDownloader does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.</p>
-        </div>
-
-        <div class="content-card">
-            <h2 class="section-title">
-                <span class="section-icon"><svg viewBox="0 0 16 16"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 15A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/><path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/></svg></span>
-                8. Contact Us
-            </h2>
-            <p>If you have any questions or concerns regarding our Privacy Policy or how your personal information is handled, please do not hesitate to <a href="/contact.html" class="inline-link">reach out to our support team</a>. We're here to help ensure your experience is safe and transparent.</p>
+            <h2>6. Children's Information</h2>
+            <p>Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity. ToolsMediaDownloader does not knowingly collect any Personal Identifiable Information from children under the age of 13.</p>
         </div>
     </div>
 
