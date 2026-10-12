@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Facebook Video Downloader | ToolsMediaDownloader</title>
-    <meta name="description" content="Download accessible public Facebook videos and Reels with ToolsMediaDownloader.">
+    <meta name="description" content="Download accessible public Facebook videos and Reels in HD quality using ToolsMediaDownloader. Fast, secure, and completely free.">
+    <meta name="keywords" content="facebook downloader, download facebook video, facebook reel downloader, fb video download, save fb video hd">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://toolsmediadownload.online/facebook-downloader.html">
 
-    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ctext%20y='.9em'%20font-size='90'%3E📘%3C/text%3E%3C/svg%3E">
+    <!-- Peach Lightning Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23FFB39A'><path d='M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z'/></svg>">
 
-    <!-- Fonts (Updated to include Inter for the universal header) -->
+    <!-- Typography Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -17,13 +21,18 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
-            --bg-dark: #0a0510;
+            --bg-dark: #0b0711;
+            --bg-dark-alt: #0a0510;
             --accent: #FFB39A;
             --accent-glow: #ff8a66;
             --fb-blue: #1877F2;
+            --fb-blue-hover: #166fe5;
+            --purple: #542452;
             --text-light: #f0e6ef;
             --text-dim: #a08ca0;
         }
+
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Space Grotesk', sans-serif;
@@ -33,15 +42,17 @@
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
+            position: relative;
             -webkit-font-smoothing: antialiased;
         }
 
+        /* Floating Background Orbs */
         .orb {
             position: fixed;
             border-radius: 50%;
             filter: blur(80px);
             opacity: 0.3;
-            z-index: -1;
+            z-index: 0;
             pointer-events: none;
         }
 
@@ -66,95 +77,233 @@
         @keyframes float1 { 50% { transform: translate(90px, 140px); } }
         @keyframes float2 { 50% { transform: translate(-70px, -110px); } }
 
-        /* ========================================= */
-        /* UNIVERSAL HEADER CSS */
-        /* ========================================= */
-        .tmd-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 5%; background-color: rgba(11, 7, 17, 0.98); border-bottom: 1px solid rgba(255, 179, 154, 0.15); position: sticky; top: 0; z-index: 1000; font-family: 'Inter', sans-serif; }
-        .tmd-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; font-family: 'Orbitron', sans-serif; font-size: 1.25rem; font-weight: 700; color: #FFB39A !important; white-space: nowrap; }
-        .tmd-logo svg { width: 20px; height: 20px; flex-shrink: 0; fill: #FFB39A; }
-        .tmd-nav { display: flex; gap: 22px; align-items: center; }
-        .tmd-nav a { color: #d1d5db; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
-        .tmd-nav a:hover { color: #FFB39A; }
-        .tmd-menu-btn { display: none; background: none; border: none; cursor: pointer; flex-direction: column; justify-content: space-between; width: 22px; height: 16px; padding: 0; flex-shrink: 0; margin-left: auto; }
-        .tmd-menu-btn span { display: block; width: 100%; height: 2px; background-color: #FFB39A; border-radius: 2px; }
+        /* ==================== UNIVERSAL HEADER ==================== */
+        .tmd-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 14px 5%; 
+            background-color: var(--bg-dark); 
+            border-bottom: 1px solid rgba(255, 179, 154, 0.15); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            font-family: 'Inter', sans-serif; 
+        }
+        .tmd-logo { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            text-decoration: none; 
+            font-family: 'Orbitron', sans-serif; 
+            font-size: 1.25rem; 
+            font-weight: 700; 
+            color: var(--accent) !important; 
+            white-space: nowrap; 
+        }
+        .tmd-logo svg { 
+            width: 20px; 
+            height: 20px; 
+            flex-shrink: 0; 
+            fill: var(--accent); 
+        }
+        .tmd-nav-container {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            position: relative;
+        }
+        .tmd-nav-desktop-links {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+        }
+        .tmd-nav-desktop-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .tmd-nav-desktop-links a:hover {
+            color: var(--accent);
+        }
         
-        @media (max-width: 768px) {
-            .tmd-logo { font-size: 1.1rem; }
-            .tmd-logo svg { width: 18px; height: 18px; }
-            .tmd-menu-btn { display: flex; }
-            .tmd-nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: #120918; border-bottom: 1px solid rgba(255, 179, 154, 0.12); box-shadow: 0 12px 30px rgba(0,0,0,0.45); gap: 0; }
-            .tmd-nav.active { display: flex; }
-            .tmd-nav a { padding: 10px 20px; font-size: 0.9rem; width: 100%; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.04); color: #d1d5db; }
-            .tmd-nav a:last-child { border-bottom: none; }
-            .tmd-nav a:active { background: rgba(255, 179, 154, 0.08); color: #FFB39A; }
+        /* 3-LINE HAMBURGER MENU (ALWAYS VISIBLE) */
+        .tmd-menu-btn { 
+            display: flex; 
+            background: none; 
+            border: none; 
+            cursor: pointer; 
+            flex-direction: column; 
+            justify-content: space-between; 
+            width: 22px; 
+            height: 16px; 
+            padding: 0; 
+            flex-shrink: 0; 
+        }
+        .tmd-menu-btn span { 
+            display: block; 
+            width: 100%; 
+            height: 2px; 
+            background-color: var(--accent); 
+            border-radius: 2px; 
+            transition: transform 0.3s, opacity 0.3s;
+        }
+        .tmd-menu-btn.active span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .tmd-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .tmd-menu-btn.active span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
         }
 
-        /* ========================================= */
-        /* HERO & DOWNLOADER CSS */
-        /* ========================================= */
+        /* HEADER DROPDOWN */
+        .tmd-dropdown {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: calc(100% + 15px);
+            right: 0;
+            width: 220px;
+            background-color: #120918;
+            border: 1px solid rgba(255, 179, 154, 0.15);
+            border-radius: 12px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+            overflow: hidden;
+            z-index: 1001;
+        }
+        .tmd-dropdown.active {
+            display: flex;
+        }
+        .tmd-dropdown a {
+            padding: 12px 20px;
+            font-size: 0.9rem;
+            color: #d1d5db;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 179, 154, 0.08);
+            transition: background 0.2s, color 0.2s;
+            text-align: left;
+        }
+        .tmd-dropdown a:last-child {
+            border-bottom: none;
+        }
+        .tmd-dropdown a:hover {
+            background: rgba(255, 179, 154, 0.08);
+            color: var(--accent);
+        }
+        .tmd-mobile-link {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .tmd-logo { font-size: 1rem; }
+            .tmd-nav-desktop-links {
+                display: none;
+            }
+            .tmd-mobile-link {
+                display: block;
+            }
+            .tmd-dropdown {
+                position: fixed;
+                top: 57px;
+                left: 0;
+                right: 0;
+                width: 100%;
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 179, 154, 0.15);
+            }
+        }
+
+        /* ==================== HERO & DOWNLOADER ==================== */
         .hero {
             text-align: center;
             padding: 80px 20px 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge { 
+            display: inline-block; 
+            padding: 6px 16px; 
+            background: rgba(24, 119, 242, 0.12); 
+            border: 1px solid rgba(24, 119, 242, 0.35); 
+            border-radius: 20px; 
+            font-size: 12px; 
+            color: #1877F2; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            margin-bottom: 20px; 
+            font-weight: 600;
         }
 
         .hero h1 {
             font-family: 'Orbitron', sans-serif;
             font-size: clamp(32px, 5vw, 48px);
             margin-bottom: 15px;
+            font-weight: 800;
         }
 
         .hero h1 span { color: #1877F2; }
 
         .hero p {
             color: var(--text-dim);
-            max-width: 520px;
+            max-width: 540px;
             margin: 0 auto;
             font-size: 16px;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         .downloader-box {
-            background: rgba(15, 7, 20, 0.85);
+            background: linear-gradient(135deg, rgba(84,36,82,0.25), rgba(26,13,26,0.55));
             backdrop-filter: blur(25px);
             border: 1px solid rgba(24, 119, 242, 0.35);
             border-radius: 24px;
-            padding: 40px;
-            max-width: 700px;
+            padding: 45px 40px;
+            max-width: 720px;
             width: 92%;
             margin: 0 auto 80px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
             text-align: center;
+            position: relative;
+            z-index: 2;
         }
 
         .input-group {
             display: flex;
             gap: 12px;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
 
         .input-group input {
             flex: 1;
             min-width: 240px;
-            padding: 16px 18px;
-            border-radius: 14px;
-            background: rgba(0,0,0,0.4);
-            border: 1px solid rgba(24, 119, 242, 0.4);
+            padding: 16px 20px;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(24, 119, 242, 0.35);
             color: white;
             font-size: 15px;
-            font-family: inherit;
+            font-family: 'Space Grotesk', sans-serif;
             outline: none;
-            transition: 0.3s;
+            transition: all 0.3s;
         }
 
         .input-group input:focus {
             border-color: #1877F2;
-            box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.2);
+            box-shadow: 0 0 15px rgba(24, 119, 242, 0.25);
         }
 
+        .input-group input::placeholder { color: var(--text-dim); }
+
         .input-group button {
-            padding: 16px 28px;
-            border-radius: 14px;
+            padding: 16px 32px;
+            border-radius: 12px;
             background: #1877F2;
             color: white;
             font-weight: 700;
@@ -162,11 +311,12 @@
             border: none;
             cursor: pointer;
             transition: 0.3s;
-            font-family: inherit;
+            font-family: 'Space Grotesk', sans-serif;
+            white-space: nowrap;
         }
 
         .input-group button:hover {
-            background: #166fe5;
+            background: var(--fb-blue-hover);
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(24, 119, 242, 0.4);
         }
@@ -179,9 +329,9 @@
 
         .status-msg {
             min-height: 24px;
-            margin: 12px 0 5px;
+            margin: 15px 0 5px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 14.5px;
             line-height: 1.6;
             color: var(--accent);
             overflow-wrap: anywhere;
@@ -190,10 +340,10 @@
         .result-card {
             display: none;
             margin-top: 25px;
-            background: rgba(0,0,0,0.35);
+            background: rgba(0,0,0,0.45);
             border: 1px solid rgba(24, 119, 242, 0.3);
             border-radius: 18px;
-            padding: 25px;
+            padding: 24px;
             text-align: left;
             animation: fadeIn 0.4s ease;
         }
@@ -205,41 +355,42 @@
 
         .result-content {
             display: flex;
-            gap: 20px;
+            gap: 22px;
             align-items: center;
             flex-wrap: wrap;
         }
 
         .thumb {
             width: 160px;
-            height: 100px;
+            height: 110px;
             object-fit: cover;
             border-radius: 12px;
-            background: #111;
+            background: #000;
             border: 1px solid rgba(255,255,255,0.1);
         }
 
         .result-info {
             flex: 1;
-            min-width: 200px;
+            min-width: 220px;
         }
 
         .result-title {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             margin-bottom: 8px;
             line-height: 1.4;
+            color: var(--text-light);
         }
 
         .result-meta {
-            font-size: 13px;
+            font-size: 13.5px;
             color: var(--text-dim);
             margin-bottom: 16px;
         }
 
         .download-btns {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
@@ -248,22 +399,23 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            padding: 12px 20px;
+            padding: 13px 22px;
             background: #1877F2;
             color: white;
             text-decoration: none;
             border: none;
             border-radius: 10px;
-            font-family: inherit;
+            font-family: 'Space Grotesk', sans-serif;
             font-weight: 700;
-            font-size: 13px;
+            font-size: 13.5px;
             cursor: pointer;
             transition: 0.3s;
         }
 
         .dl-btn:hover {
-            background: #166fe5;
+            background: var(--fb-blue-hover);
             transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(24, 119, 242, 0.35);
         }
 
         .dl-btn.secondary {
@@ -280,30 +432,69 @@
             font-size: 13px;
             color: var(--text-dim);
             line-height: 1.6;
-            margin-top: 20px;
+            margin-top: 25px;
         }
 
         @media (max-width: 600px) {
             .input-group button { width: 100%; }
-            .downloader-box { padding: 28px 18px; }
+            .downloader-box { padding: 30px 18px; }
             .result-content {
                 flex-direction: column;
                 text-align: center;
             }
             .thumb { width: 100%; height: 180px; }
             .download-btns { justify-content: center; }
+            .dl-btn { width: 100%; }
         }
 
-        /* ========================================= */
-        /* UNIVERSAL FOOTER CSS */
-        /* ========================================= */
-        .tmd-footer { background: linear-gradient(180deg, transparent, rgba(10,5,16,0.9)); border-top: 1px solid rgba(255,179,154,0.1); padding: 50px 20px 30px; text-align: center; font-family: 'Inter', sans-serif; margin-top: auto; }
-        .tmd-footer-brand { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 700; color: #FFB39A; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .tmd-footer-brand svg { width: 22px; height: 22px; fill: #FFB39A; }
-        .tmd-footer-links { display: flex; justify-content: center; gap: 20px; margin: 20px 0; flex-wrap: wrap; }
-        .tmd-footer-links a { color: #a08ca0; text-decoration: none; font-size: 14px; transition: 0.3s; }
-        .tmd-footer-links a:hover { color: #FFB39A; }
-        .tmd-footer-copy { color: rgba(255, 255, 255, 0.3); font-size: 13px; margin-top: 20px; }
+        /* ==================== UNIVERSAL FOOTER ==================== */
+        .tmd-footer { 
+            background: linear-gradient(180deg, transparent, rgba(10,5,16,0.9)); 
+            border-top: 1px solid rgba(255,179,154,0.1); 
+            padding: 50px 20px 30px; 
+            text-align: center; 
+            font-family: 'Inter', sans-serif; 
+            margin-top: auto;
+            position: relative;
+            z-index: 2;
+        }
+        .tmd-footer-brand { 
+            font-family: 'Orbitron', sans-serif; 
+            font-size: 20px; 
+            font-weight: 700; 
+            color: var(--accent); 
+            margin-bottom: 15px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 8px; 
+        }
+        .tmd-footer-brand svg { 
+            width: 22px; 
+            height: 22px; 
+            fill: var(--accent); 
+        }
+        .tmd-footer-links { 
+            display: flex; 
+            justify-content: center; 
+            gap: 20px; 
+            margin: 20px 0; 
+            flex-wrap: wrap; 
+        }
+        .tmd-footer-links a { 
+            color: #a08ca0; 
+            text-decoration: none; 
+            font-size: 14px; 
+            transition: 0.3s; 
+        }
+        .tmd-footer-links a:hover { 
+            color: var(--accent); 
+        }
+        .tmd-footer-copy { 
+            color: rgba(255, 255, 255, 0.3); 
+            font-size: 13px; 
+            margin-top: 20px; 
+        }
     </style>
 </head>
 <body>
@@ -311,31 +502,49 @@
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
 
-    <!-- UNIVERSAL HEADER -->
+    <!-- ==================== UNIVERSAL HEADER ==================== -->
     <header class="tmd-header">
         <a href="/" class="tmd-logo">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/></svg>
             ToolsMediaDownloader
         </a>
-        <button class="tmd-menu-btn" id="mobileMenuBtn" aria-label="Menu">
-            <span></span><span></span><span></span>
-        </button>
-        <nav class="tmd-nav" id="navLinks">
-            <a href="/#document-tools">PDF Tools</a>
-            <a href="/#video-tools">Video Tools</a>
-            <a href="/about.html">About</a>
-            <a href="/privacy.html">Privacy</a>
-            <a href="/terms.html">Terms</a>
-            <a href="/disclaimer.html">Disclaimer</a>
-            <a href="/contact.html">Contact</a>
-        </nav>
+        <div class="tmd-nav-container">
+            <!-- Desktop Direct Links -->
+            <div class="tmd-nav-desktop-links">
+                <a href="/#document-tools">PDF Tools</a>
+                <a href="/#video-tools">Video Tools</a>
+                <a href="blog.html">Blog</a>
+            </div>
+            
+            <!-- Hamburger Menu Button (Always visible) -->
+            <button class="tmd-menu-btn" id="mobileMenuBtn" aria-label="Menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            
+            <!-- Universal Dropdown -->
+            <nav class="tmd-dropdown" id="navLinks">
+                <!-- Mobile Navigation Injection Links -->
+                <a href="/#document-tools" class="tmd-mobile-link">PDF Tools</a>
+                <a href="/#video-tools" class="tmd-mobile-link">Video Tools</a>
+                <a href="blog.html" class="tmd-mobile-link">Blog</a>
+                <!-- General Links -->
+                <a href="about.html">About</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="disclaimer.html">Disclaimer</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
     </header>
 
+    <!-- ==================== HERO SECTION ==================== -->
     <section class="hero">
+        <div class="hero-badge">⚡ Free Facebook Video Downloader</div>
         <h1>Facebook <span>Downloader</span></h1>
-        <p>Download accessible public Facebook videos and Reels. Fast, simple, and without redirecting to another downloader website.</p>
+        <p>Download accessible public Facebook videos and Reels. Fast, simple, and directly in your browser.</p>
     </section>
 
+    <!-- ==================== DOWNLOADER BOX ==================== -->
     <div class="downloader-box">
         <form id="downloadForm" class="input-group">
             <input
@@ -364,7 +573,7 @@
                             class="dl-btn"
                             download="facebook_video.mp4"
                             hidden
-                        >Download Video</a>
+                        >⚡ Download Video</a>
                         <a
                             href="#"
                             id="sdBtn"
@@ -382,32 +591,50 @@
         </p>
     </div>
 
-    <!-- UNIVERSAL FOOTER -->
+    <!-- ==================== UNIVERSAL FOOTER ==================== -->
     <footer class="tmd-footer">
         <div class="tmd-footer-brand">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/></svg>
             ToolsMediaDownloader
         </div>
         <div class="tmd-footer-links">
-            <a href="/about.html">About</a>
-            <a href="/blog.html">Blog & Guides</a>
-            <a href="/privacy.html">Privacy</a>
-            <a href="/terms.html">Terms</a>
-            <a href="/disclaimer.html">Disclaimer</a>
-            <a href="/contact.html">Contact Support</a>
+            <a href="about.html">About</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+            <a href="disclaimer.html">Disclaimer</a>
+            <a href="contact.html">Contact</a>
+            <a href="blog.html">Blog</a>
         </div>
-        <p class="tmd-footer-copy">© 2026 ToolsMediaDownloader · Free online tools.</p>
+        <p class="tmd-footer-copy">© 2026 ToolsMediaDownloader. All rights reserved.</p>
     </footer>
 
+    <!-- ==================== SCRIPTS ==================== -->
     <script>
-        // Universal Mobile Menu script
-        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+        // Universal Header Mobile & Desktop Menu Dropdown Handler
+        document.getElementById('mobileMenuBtn').addEventListener('click', function(e) {
+            e.stopPropagation();
+            this.classList.toggle('active');
             document.getElementById('navLinks').classList.toggle('active');
         });
 
+        document.addEventListener('click', function(e) {
+            const nav = document.getElementById('navLinks');
+            const btn = document.getElementById('mobileMenuBtn');
+            if (nav.classList.contains('active') && !nav.contains(e.target) && !btn.contains(e.target)) {
+                nav.classList.remove('active');
+                btn.classList.remove('active');
+            }
+        });
+
+        document.querySelectorAll('.tmd-dropdown a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+                document.getElementById('mobileMenuBtn').classList.remove('active');
+            });
+        });
+
         // Backend Facebook Core Logic
-        const BACKEND_URL =
-            "https://instagram-downloader-backend-nd5n.onrender.com";
+        const BACKEND_URL = "https://instagram-downloader-backend-nd5n.onrender.com";
 
         const downloadForm = document.getElementById("downloadForm");
         const input = document.getElementById("fbUrl");
@@ -465,16 +692,14 @@
 
             if (!isValidFacebookUrl(url)) {
                 clearPreviousResult();
-                status.textContent =
-                    "Please paste a valid HTTPS Facebook video or Reel link.";
+                status.textContent = "❌ Please paste a valid HTTPS Facebook video or Reel link.";
                 return;
             }
 
             clearPreviousResult();
             btn.disabled = true;
             btn.textContent = "Processing...";
-            status.textContent =
-                "Connecting to our server. The first request may take a little longer.";
+            status.textContent = "⏳ Connecting to server. The first request may take a moment to wake up...";
 
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 180000);
@@ -489,8 +714,7 @@
                     signal: controller.signal
                 });
 
-                const contentType =
-                    response.headers.get("content-type") || "";
+                const contentType = response.headers.get("content-type") || "";
 
                 if (!response.ok) {
                     let message = "Video could not be downloaded.";
@@ -499,8 +723,7 @@
                         const errorData = await response.json();
                         message = errorData.error || message;
                     } else {
-                        message =
-                            "Server error. Please try again with another public video link.";
+                        message = "Server error. Please try again with another public video link.";
                     }
 
                     throw new Error(message);
@@ -508,9 +731,7 @@
 
                 if (contentType.includes("application/json")) {
                     const errorData = await response.json();
-                    throw new Error(
-                        errorData.error || "Video could not be downloaded."
-                    );
+                    throw new Error(errorData.error || "Video could not be downloaded.");
                 }
 
                 const blob = await response.blob();
@@ -521,42 +742,30 @@
 
                 currentObjectUrl = URL.createObjectURL(blob);
 
-                const disposition =
-                    response.headers.get("content-disposition") || "";
-
+                const disposition = response.headers.get("content-disposition") || "";
                 const match = disposition.match(/filename="?([^";]+)"?/i);
-                const filename = match
-                    ? match[1]
-                    : "facebook_video.mp4";
+                const filename = match ? match[1] : "facebook_video.mp4";
 
                 hdBtn.href = currentObjectUrl;
                 hdBtn.download = filename;
-                hdBtn.textContent = "Download Video";
+                hdBtn.textContent = "⚡ Download Video";
                 hdBtn.hidden = false;
 
-                document.getElementById("videoTitle").textContent =
-                    "Facebook Video Ready";
-                document.getElementById("videoMeta").textContent =
-                    "File size: " + (blob.size / (1024 * 1024)).toFixed(2) + " MB";
+                document.getElementById("videoTitle").textContent = "Facebook Video Ready";
+                document.getElementById("videoMeta").textContent = "File size: " + (blob.size / (1024 * 1024)).toFixed(2) + " MB";
 
                 resultCard.style.display = "block";
-                status.textContent =
-                    "✓ Video is ready. Click Download Video to save it.";
+                status.textContent = "✓ Video is ready. Click Download Video to save it.";
 
             } catch (error) {
                 console.error("Facebook downloader error:", error);
 
                 if (error.name === "AbortError") {
-                    status.textContent =
-                        "The request took too long. Please try again.";
-                } else if (
-                    error instanceof TypeError
-                ) {
-                    status.textContent =
-                        "Could not connect to our server. Check the backend status and try again.";
+                    status.textContent = "❌ The request took too long. Please try again.";
+                } else if (error instanceof TypeError) {
+                    status.textContent = "❌ Could not connect to the backend server. Please retry in a moment.";
                 } else {
-                    status.textContent =
-                        error.message || "Download failed. Please try another public video.";
+                    status.textContent = "❌ " + (error.message || "Download failed. Please try another public video.");
                 }
 
             } finally {
