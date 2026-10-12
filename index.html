@@ -3,8 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToolsMediaDownloader | Free PDF & Video Tools</title>
-    <meta name="description" content="Free online tools to convert, merge PDFs and download HD videos. Fast, secure, works in your browser.">
+    <title>ToolsMediaDownloader | Free PDF & Video Tools Online</title>
+    <meta name="description" content="ToolsMediaDownloader offers free online PDF tools (JPG to PDF, PDF to JPG, Merge, Compress) and HD video downloaders for TikTok, Instagram & Facebook. No signup required.">
+    <meta name="keywords" content="free pdf tools, jpg to pdf, pdf to jpg, merge pdf, compress pdf, tiktok downloader, instagram downloader, facebook video downloader, online tools, free tools">
+    <meta name="author" content="ToolsMediaDownloader">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="ToolsMediaDownloader | Free PDF & Video Tools">
+    <meta property="og:description" content="Convert PDFs, download HD videos without watermarks. 100% free, no signup, works in your browser.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolsmediadownload.online">
+    <link rel="canonical" href="https://toolsmediadownload.online">
     <meta name="google-site-verification" content="R4_xT1JhDfFTocdkhduMOq6FO7SIGjEv68zE8MJph04" />
     
     <!-- Peach Lightning Favicon -->
@@ -38,6 +46,7 @@
             -webkit-font-smoothing: antialiased; 
         }
         
+        /* INTRO LOADER */
         #intro-loader { position: fixed; inset: 0; background: var(--bg-dark-alt); z-index: 99999; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 20px; transition: opacity 0.6s ease, visibility 0.6s; pointer-events: auto; }
         #intro-loader.hide { opacity: 0; visibility: hidden; pointer-events: none; }
         .intro-logo { font-family: 'Orbitron', sans-serif; font-size: clamp(24px, 5vw, 42px); font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent-glow)); -webkit-background-clip: text; background-clip: text; color: transparent; letter-spacing: 2px; text-align: center; }
@@ -45,6 +54,7 @@
         .loader-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-glow)); animation: loadFill 1.5s ease forwards; width: 0; }
         @keyframes loadFill { to { width: 100%; } }
         
+        /* FLOATING ORBS */
         .orb { position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.4; pointer-events: none; z-index: 0; }
         .orb-1 { width: 400px; height: 400px; background: #542452; top: -100px; left: -100px; animation: float1 15s infinite ease-in-out; }
         .orb-2 { width: 350px; height: 350px; background: #ff8a66; bottom: -100px; right: -100px; animation: float2 18s infinite ease-in-out; }
@@ -53,7 +63,7 @@
         @keyframes float2 { 50% { transform: translate(-80px, -120px); } }
         @keyframes float3 { 50% { transform: translate(-150px, 100px); } }
 
-        /* UNIVERSAL HEADER */
+        /* ==================== UNIVERSAL HEADER ==================== */
         .tmd-header { 
             display: flex; 
             justify-content: space-between; 
@@ -67,134 +77,51 @@
             font-family: 'Inter', sans-serif; 
         }
         .tmd-logo { 
-            display: flex; 
-            align-items: center; 
-            gap: 8px; 
-            text-decoration: none; 
-            font-family: 'Orbitron', sans-serif; 
-            font-size: 1.25rem; 
-            font-weight: 700; 
-            color: var(--accent) !important; 
-            white-space: nowrap; 
+            display: flex; align-items: center; gap: 8px; text-decoration: none; 
+            font-family: 'Orbitron', sans-serif; font-size: 1.25rem; font-weight: 700; 
+            color: var(--accent) !important; white-space: nowrap; 
         }
-        .tmd-logo svg { 
-            width: 20px; 
-            height: 20px; 
-            flex-shrink: 0; 
-            fill: var(--accent); 
-        }
-        .tmd-nav-container {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            position: relative;
-        }
-        .tmd-nav-desktop-links {
-            display: flex;
-            gap: 22px;
-            align-items: center;
-        }
-        .tmd-nav-desktop-links a {
-            color: #d1d5db;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        .tmd-nav-desktop-links a:hover {
-            color: var(--accent);
-        }
+        .tmd-logo svg { width: 20px; height: 20px; flex-shrink: 0; fill: var(--accent); }
+        .tmd-nav-container { display: flex; align-items: center; gap: 25px; position: relative; }
+        .tmd-nav-desktop-links { display: flex; gap: 22px; align-items: center; }
+        .tmd-nav-desktop-links a { color: #d1d5db; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+        .tmd-nav-desktop-links a:hover { color: var(--accent); }
         
-        /* 3-LINE HAMBURGER MENU (ALWAYS VISIBLE) */
         .tmd-menu-btn { 
-            display: flex; 
-            background: none; 
-            border: none; 
-            cursor: pointer; 
-            flex-direction: column; 
-            justify-content: space-between; 
-            width: 22px; 
-            height: 16px; 
-            padding: 0; 
-            flex-shrink: 0; 
+            display: flex; background: none; border: none; cursor: pointer; 
+            flex-direction: column; justify-content: space-between; 
+            width: 22px; height: 16px; padding: 0; flex-shrink: 0; 
         }
-        .tmd-menu-btn span { 
-            display: block; 
-            width: 100%; 
-            height: 2px; 
-            background-color: var(--accent); 
-            border-radius: 2px; 
-            transition: transform 0.3s, opacity 0.3s;
-        }
-        .tmd-menu-btn.active span:nth-child(1) {
-            transform: translateY(7px) rotate(45deg);
-        }
-        .tmd-menu-btn.active span:nth-child(2) {
-            opacity: 0;
-        }
-        .tmd-menu-btn.active span:nth-child(3) {
-            transform: translateY(-7px) rotate(-45deg);
-        }
+        .tmd-menu-btn span { display: block; width: 100%; height: 2px; background-color: var(--accent); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+        .tmd-menu-btn.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .tmd-menu-btn.active span:nth-child(2) { opacity: 0; }
+        .tmd-menu-btn.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-        /* HEADER DROPDOWN */
         .tmd-dropdown {
-            display: none;
-            flex-direction: column;
-            position: absolute;
-            top: calc(100% + 15px);
-            right: 0;
-            width: 220px;
-            background-color: #120918;
-            border: 1px solid rgba(255, 179, 154, 0.15);
-            border-radius: 12px;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
-            overflow: hidden;
-            z-index: 1001;
+            display: none; flex-direction: column; position: absolute;
+            top: calc(100% + 15px); right: 0; width: 220px;
+            background-color: #120918; border: 1px solid rgba(255, 179, 154, 0.15);
+            border-radius: 12px; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+            overflow: hidden; z-index: 1001;
         }
-        .tmd-dropdown.active {
-            display: flex;
-        }
-        .tmd-dropdown a {
-            padding: 12px 20px;
-            font-size: 0.9rem;
-            color: #d1d5db;
-            text-decoration: none;
-            border-bottom: 1px solid rgba(255, 179, 154, 0.08);
-            transition: background 0.2s, color 0.2s;
-            text-align: left;
-        }
-        .tmd-dropdown a:last-child {
-            border-bottom: none;
-        }
-        .tmd-dropdown a:hover {
-            background: rgba(255, 179, 154, 0.08);
-            color: var(--accent);
-        }
-        .tmd-mobile-link {
-            display: none;
-        }
+        .tmd-dropdown.active { display: flex; }
+        .tmd-dropdown a { padding: 12px 20px; font-size: 0.9rem; color: #d1d5db; text-decoration: none; border-bottom: 1px solid rgba(255, 179, 154, 0.08); transition: background 0.2s, color 0.2s; text-align: left; }
+        .tmd-dropdown a:last-child { border-bottom: none; }
+        .tmd-dropdown a:hover { background: rgba(255, 179, 154, 0.08); color: var(--accent); }
+        .tmd-mobile-link { display: none; }
 
         @media (max-width: 768px) {
-            .tmd-nav-desktop-links {
-                display: none;
-            }
-            .tmd-mobile-link {
-                display: block;
-            }
+            .tmd-logo { font-size: 1rem; }
+            .tmd-nav-desktop-links { display: none; }
+            .tmd-mobile-link { display: block; }
             .tmd-dropdown {
-                position: fixed;
-                top: 57px;
-                left: 0;
-                right: 0;
-                width: 100%;
-                border-radius: 0;
-                border-left: none;
-                border-right: none;
+                position: fixed; top: 57px; left: 0; right: 0; width: 100%;
+                border-radius: 0; border-left: none; border-right: none;
                 border-bottom: 1px solid rgba(255, 179, 154, 0.15);
             }
         }
 
-        /* HERO & CONTENT */
+        /* ==================== HERO ==================== */
         .hero-section { text-align: center; padding: 100px 20px 80px; position: relative; z-index: 2; transition: opacity 0.5s ease, transform 0.5s ease; }
         .hero-badge { display: inline-block; padding: 6px 16px; background: rgba(255,179,154,0.1); border: 1px solid rgba(255,179,154,0.3); border-radius: 20px; font-size: 12px; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 25px; }
         .hero-section h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(36px, 6vw, 56px); font-weight: 800; line-height: 1.15; margin-bottom: 20px; }
@@ -207,11 +134,13 @@
         .btn-ghost { background: transparent; color: var(--text-light); border: 1px solid rgba(255,179,154,0.3); }
         .btn-ghost:hover { background: rgba(255,179,154,0.1); border-color: var(--accent); }
 
+        /* ==================== STATS BAR ==================== */
         .stats-bar { display: flex; justify-content: center; gap: 50px; padding: 40px 20px; flex-wrap: wrap; border-top: 1px solid rgba(255,179,154,0.1); border-bottom: 1px solid rgba(255,179,154,0.1); position: relative; z-index: 2; }
         .stat-item { text-align: center; }
         .stat-item h3 { font-family: 'Orbitron', sans-serif; font-size: 32px; background: linear-gradient(135deg, var(--accent), var(--accent-glow)); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .stat-item p { color: var(--text-dim); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; }
 
+        /* ==================== REUSABLE CONTAINER & SECTIONS ==================== */
         .container { max-width: 1200px; margin: auto; padding: 80px 5%; position: relative; z-index: 2; }
         .fade-element { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .fade-element.visible { opacity: 1; transform: translateY(0); }
@@ -219,7 +148,44 @@
         .section-tag { display: inline-block; color: var(--accent); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
         .section-intro h2 { font-family: 'Orbitron', sans-serif; font-size: clamp(28px, 4vw, 42px); margin-bottom: 15px; }
         .section-intro p { color: var(--text-dim); max-width: 600px; margin: auto; font-size: 16px; line-height: 1.7; }
-        
+
+        /* ==================== ABOUT / INTRO SECTION ==================== */
+        .intro-block { max-width: 900px; margin: 0 auto 80px; text-align: center; }
+        .intro-block h2 { font-family: 'Orbitron', sans-serif; font-size: clamp(24px, 4vw, 36px); margin-bottom: 20px; color: var(--text-light); }
+        .intro-block h2 span { color: var(--accent); }
+        .intro-block p { color: var(--text-dim); font-size: 16px; line-height: 1.8; margin-bottom: 15px; }
+
+        /* ==================== HOW IT WORKS ==================== */
+        .how-it-works-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
+        .step-card { text-align: center; padding: 35px 25px; background: rgba(84,36,82,0.15); border: 1px solid rgba(255,179,154,0.12); border-radius: 20px; transition: all 0.3s; position: relative; }
+        .step-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 15px 40px rgba(255,179,154,0.1); }
+        .step-number { font-family: 'Orbitron', sans-serif; font-size: 48px; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent-glow)); -webkit-background-clip: text; background-clip: text; color: transparent; opacity: 0.3; margin-bottom: 10px; }
+        .step-icon { width: 60px; height: 60px; margin: 0 auto 20px; background: rgba(255,179,154,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .step-icon svg { width: 28px; height: 28px; stroke: var(--accent); fill: none; stroke-width: 1.5; }
+        .step-card h3 { font-family: 'Orbitron', sans-serif; font-size: 16px; margin-bottom: 10px; color: var(--text-light); }
+        .step-card p { color: var(--text-dim); font-size: 14px; line-height: 1.6; }
+
+        /* ==================== POPULAR TOOLS ==================== */
+        .popular-tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 40px; }
+        .popular-card { background: linear-gradient(135deg, rgba(255,179,154,0.08), rgba(84,36,82,0.3)); border: 1px solid rgba(255,179,154,0.2); border-radius: 20px; padding: 30px; display: flex; align-items: flex-start; gap: 20px; transition: all 0.3s; }
+        .popular-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 15px 40px rgba(255,179,154,0.15); }
+        .popular-card .p-icon { width: 50px; height: 50px; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .popular-card .p-icon svg { width: 24px; height: 24px; stroke: white; fill: none; stroke-width: 1.5; }
+        .popular-card h3 { font-family: 'Orbitron', sans-serif; font-size: 15px; margin-bottom: 8px; color: var(--text-light); }
+        .popular-card p { color: var(--text-dim); font-size: 13px; line-height: 1.5; margin-bottom: 12px; }
+        .popular-card .p-link { color: var(--accent); font-size: 13px; font-weight: 600; text-decoration: none; transition: 0.2s; }
+        .popular-card .p-link:hover { text-decoration: underline; }
+        .popular-badge { position: absolute; top: -8px; right: 15px; background: var(--accent); color: var(--bg-dark); font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 10px; letter-spacing: 1px; text-transform: uppercase; }
+
+        /* ==================== WHY CHOOSE US ==================== */
+        .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 40px; }
+        .why-card { text-align: center; padding: 35px 25px; background: rgba(84,36,82,0.12); border: 1px solid rgba(255,179,154,0.1); border-radius: 18px; transition: all 0.3s; }
+        .why-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+        .why-card .why-icon { font-size: 36px; margin-bottom: 15px; }
+        .why-card h3 { font-family: 'Orbitron', sans-serif; font-size: 15px; margin-bottom: 10px; color: var(--text-light); }
+        .why-card p { color: var(--text-dim); font-size: 13.5px; line-height: 1.6; }
+
+        /* ==================== TOOLS GRID (ALL TOOLS + PDF + VIDEO) ==================== */
         .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
         .glass-card { background: linear-gradient(135deg, rgba(84,36,82,0.4), rgba(26,13,26,0.4)); backdrop-filter: blur(20px); border: 1px solid rgba(255,179,154,0.15); border-radius: 20px; padding: 30px; transition: all 0.4s cubic-bezier(0.4,0,0.2,1); position: relative; overflow: hidden; }
         .glass-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,179,154,0.1), transparent); transition: left 0.6s; }
@@ -238,6 +204,7 @@
         .card-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 50px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s; text-decoration: none; }
         .card-btn:hover { background: var(--accent); color: var(--bg-dark); gap: 12px; }
 
+        /* ==================== WORKSPACE (PDF TOOL MODALS) ==================== */
         .workspace { display: none; background: rgba(15, 7, 20, 0.8); backdrop-filter: blur(25px); border: 1px solid rgba(255,179,154,0.4); border-radius: 24px; padding: 50px; margin-bottom: 40px; box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
         .workspace h2 { font-family: 'Orbitron', sans-serif; color: var(--accent); text-align: center; font-size: 26px; margin-bottom: 10px; }
         .workspace .description { color: var(--text-dim); text-align: center; margin-bottom: 30px; font-size: 15px; }
@@ -258,19 +225,19 @@
         .close-button:hover { color: white; border-color: white; }
         .small-btn { display: inline-block; width: 100%; font-family: 'Space Grotesk', sans-serif; background: var(--accent); color: var(--bg-dark); border: none; border-radius: 6px; font-size: 11px; font-weight: 600; }
 
-        /* Q&A Accordion Styling */
+        /* ==================== FAQ SECTION ==================== */
         .faq-section { margin-top: 100px; }
         .faq-grid { max-width: 800px; margin: 40px auto 0; display: flex; flex-direction: column; gap: 15px; }
         .faq-item { background: rgba(84,36,82,0.2); border: 1px solid rgba(255,179,154,0.15); border-radius: 12px; overflow: hidden; transition: 0.3s; }
         .faq-item:hover { border-color: var(--accent); }
         .faq-question { padding: 20px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 16px; color: var(--text-light); display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
-        .faq-question svg { width: 18px; height: 18px; fill: none; stroke: var(--accent); stroke-width: 2; transition: transform 0.3s; }
+        .faq-question svg { width: 18px; height: 18px; fill: none; stroke: var(--accent); stroke-width: 2; transition: transform 0.3s; flex-shrink: 0; margin-left: 15px; }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: rgba(0,0,0,0.2); }
         .faq-answer-content { padding: 20px; color: var(--text-dim); font-size: 14.5px; line-height: 1.6; }
         .faq-item.active .faq-answer { max-height: 500px; }
         .faq-item.active .faq-question svg { transform: rotate(180deg); }
 
-        /* UNIVERSAL FOOTER */
+        /* ==================== UNIVERSAL FOOTER ==================== */
         .tmd-footer { background: linear-gradient(180deg, transparent, rgba(10,5,16,0.9)); border-top: 1px solid rgba(255,179,154,0.1); padding: 50px 20px 30px; text-align: center; font-family: 'Inter', sans-serif; }
         .tmd-footer-brand { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 700; color: var(--accent); margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .tmd-footer-brand svg { width: 22px; height: 22px; fill: var(--accent); }
@@ -279,7 +246,7 @@
         .tmd-footer-links a:hover { color: var(--accent); }
         .tmd-footer-copy { color: rgba(255, 255, 255, 0.3); font-size: 13px; margin-top: 20px; }
 
-        /* TOBY AI CHAT WIDGET */
+        /* ==================== TOBY AI CHAT ==================== */
         #toby-widget-container { position: fixed; bottom: 25px; right: 25px; z-index: 10000; display: flex; flex-direction: column; align-items: flex-end; }
         .toby-launch-btn { background: linear-gradient(135deg, var(--accent), var(--accent-glow)); color: var(--bg-dark); padding: 12px 22px; border-radius: 30px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; box-shadow: 0 10px 25px rgba(255,179,154,0.4); transition: 0.3s; }
         .toby-launch-btn:hover { transform: scale(1.05); }
@@ -302,6 +269,7 @@
             .btn-primary, .btn-ghost { width: 100%; text-align: center; padding: 16px; font-size: 15px; }
             .workspace { padding: 30px 15px; }
             #toby-chat-box { width: 290px; right: 0; }
+            .popular-card { flex-direction: column; text-align: center; align-items: center; }
         }
     </style>
 </head>
@@ -310,33 +278,25 @@
 <div id="intro-loader"><div class="intro-logo">ToolsMediaDownloader</div><div class="loader-bar"><div class="loader-fill"></div></div></div>
 <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
 
-<!-- UNIVERSAL HEADER -->
+<!-- ==================== UNIVERSAL HEADER ==================== -->
 <header class="tmd-header">
     <a href="/" class="tmd-logo">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/></svg>
         ToolsMediaDownloader
     </a>
-    
     <div class="tmd-nav-container">
-        <!-- Desktop Direct Links -->
         <div class="tmd-nav-desktop-links">
             <a href="#document-tools">PDF Tools</a>
             <a href="#video-tools">Video Tools</a>
             <a href="blog.html">Blog</a>
         </div>
-        
-        <!-- Hamburger Menu Button (Always visible) -->
         <button class="tmd-menu-btn" id="mobileMenuBtn" aria-label="Menu" aria-expanded="false">
             <span></span><span></span><span></span>
         </button>
-        
-        <!-- Universal Dropdown -->
         <nav class="tmd-dropdown" id="navLinks">
-            <!-- Mobile Navigation Injection Links -->
             <a href="#document-tools" class="tmd-mobile-link">PDF Tools</a>
             <a href="#video-tools" class="tmd-mobile-link">Video Tools</a>
             <a href="blog.html" class="tmd-mobile-link">Blog</a>
-            <!-- General Links -->
             <a href="about.html">About</a>
             <a href="privacy.html">Privacy</a>
             <a href="terms.html">Terms</a>
@@ -346,8 +306,9 @@
     </div>
 </header>
 
+<!-- ==================== HERO SECTION ==================== -->
 <section class="hero-section" id="hero">
-    <div class="hero-badge">⚡ 100% Free · No Signups</div>
+    <div class="hero-badge">⚡ 100% Free · No Signups · No Watermarks</div>
     <h1>Free <span class="gradient-text">PDF & Video</span> Tools</h1>
     <p>Convert and merge PDFs, download HD videos without watermarks. Everything runs securely in your browser — fast, private, and free.</p>
     <div class="hero-cta">
@@ -356,6 +317,7 @@
     </div>
 </section>
 
+<!-- ==================== STATS BAR ==================== -->
 <div class="stats-bar fade-element">
     <div class="stat-item"><h3>100%</h3><p>Free Forever</p></div>
     <div class="stat-item"><h3>Local</h3><p>Secure Processing</p></div>
@@ -364,6 +326,136 @@
 </div>
 
 <main class="container">
+
+    <!-- ==================== WEBSITE INTRODUCTION ==================== -->
+    <section class="intro-block fade-element">
+        <h2>Welcome to <span>ToolsMediaDownloader</span></h2>
+        <p>ToolsMediaDownloader is a free, browser-based platform designed to simplify your digital life. Whether you need to convert images into PDF documents, extract pages from a PDF as high-quality JPG files, merge multiple PDFs into one, or compress large PDF files for easy sharing — we've got you covered.</p>
+        <p>We also provide fast and reliable video downloaders for TikTok, Instagram, and Facebook — allowing you to save your favorite videos in HD quality without watermarks, directly to your device. No account needed, no software installation, and no hidden fees. Just open, use, and go.</p>
+        <p>All file processing happens locally in your browser. Your documents and data never leave your device, ensuring complete privacy and security at all times.</p>
+    </section>
+
+    <!-- ==================== HOW IT WORKS ==================== -->
+    <section class="fade-element">
+        <div class="section-intro">
+            <div class="section-tag">Simple & Fast</div>
+            <h2>How It Works</h2>
+            <p>Get results in just three easy steps. No signups, no installations, no waiting.</p>
+        </div>
+        <div class="how-it-works-grid">
+            <div class="step-card">
+                <div class="step-number">01</div>
+                <div class="step-icon">
+                    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                </div>
+                <h3>Choose Your Tool</h3>
+                <p>Pick from our collection of PDF converters, mergers, compressors, or video downloaders below.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">02</div>
+                <div class="step-icon">
+                    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </div>
+                <h3>Upload or Paste</h3>
+                <p>Upload your files for PDF tools or paste a video URL for downloaders. Everything is processed in your browser.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">03</div>
+                <div class="step-icon">
+                    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </div>
+                <h3>Download Result</h3>
+                <p>Your converted PDF or HD video is ready instantly. Click download and save it to your device.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== POPULAR TOOLS ==================== -->
+    <section class="fade-element" style="margin-top: 80px;">
+        <div class="section-intro">
+            <div class="section-tag">Most Used</div>
+            <h2>Popular Tools</h2>
+            <p>Our most frequently used tools by thousands of users every day.</p>
+        </div>
+        <div class="popular-tools-grid">
+            <div class="popular-card" style="position:relative;">
+                <div class="popular-badge">🔥 Popular</div>
+                <div class="p-icon" style="background: linear-gradient(135deg, #FFB39A, #ff8a66);">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
+                <div>
+                    <h3>JPG to PDF</h3>
+                    <p>Convert multiple images into a single professional PDF document in seconds.</p>
+                    <a href="javascript:void(0)" onclick="openTool('jpgTool')" class="p-link">Use Tool →</a>
+                </div>
+            </div>
+            <div class="popular-card" style="position:relative;">
+                <div class="popular-badge">🔥 Popular</div>
+                <div class="p-icon" style="background: #000;">
+                    <svg viewBox="0 0 24 24" style="fill:white;stroke:none;"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.73a8.16 8.16 0 0 0 4.77 1.52V6.69h-.01z"/></svg>
+                </div>
+                <div>
+                    <h3>TikTok Downloader</h3>
+                    <p>Download TikTok videos without watermark in full HD MP4 quality.</p>
+                    <a href="tiktok-downloader.html" class="p-link">Use Tool →</a>
+                </div>
+            </div>
+            <div class="popular-card" style="position:relative;">
+                <div class="popular-badge">🔥 Popular</div>
+                <div class="p-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
+                    <svg viewBox="0 0 24 24"><path d="M12 22v-6"/><path d="M12 2v6"/><path d="m15 19-3 3-3-3"/><path d="m15 5-3-3-3 3"/><path d="M22 12h-6"/><path d="M2 12h6"/><path d="m19 9-3 3 3 3"/><path d="m5 9 3 3-3 3"/></svg>
+                </div>
+                <div>
+                    <h3>Compress PDF</h3>
+                    <p>Reduce PDF file size while maintaining good quality for easy sharing.</p>
+                    <a href="javascript:void(0)" onclick="openTool('compressTool')" class="p-link">Use Tool →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== WHY CHOOSE US ==================== -->
+    <section class="fade-element" style="margin-top: 80px;">
+        <div class="section-intro">
+            <div class="section-tag">Trust & Quality</div>
+            <h2>Why Choose Us</h2>
+            <p>Here's what makes ToolsMediaDownloader different from the rest.</p>
+        </div>
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="why-icon">🔒</div>
+                <h3>100% Private</h3>
+                <p>All files are processed locally in your browser. Nothing is uploaded to any server. Your data stays yours.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">⚡</div>
+                <h3>Lightning Fast</h3>
+                <p>No waiting in queues. Our tools process your files instantly using modern browser technology.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">💰</div>
+                <h3>Always Free</h3>
+                <p>No subscriptions, no premium tiers, no hidden charges. Every single tool is free forever.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">📱</div>
+                <h3>Works Everywhere</h3>
+                <p>Fully responsive and optimized for phones, tablets, laptops, and desktops. Use it from any device.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">🚫</div>
+                <h3>No Signup Needed</h3>
+                <p>Jump straight into using any tool. We never ask for your email, phone number, or personal information.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">🎯</div>
+                <h3>HD Quality Output</h3>
+                <p>Get high-definition results every time — crisp PDFs and full HD video downloads without watermarks.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PDF TOOL WORKSPACES ==================== -->
     <section id="jpgTool" class="workspace">
         <h2>JPG → PDF Converter</h2>
         <p class="description">Transform multiple images into a single PDF document securely.</p>
@@ -422,10 +514,11 @@
         <button class="close-button" onclick="closeTools()">Close Window</button>
     </section>
 
-    <section id="document-tools" class="section-intro fade-element">
+    <!-- ==================== ALL TOOLS: PDF SECTION ==================== -->
+    <section id="document-tools" class="section-intro fade-element" style="margin-top: 80px;">
         <div class="section-tag">Document Tools</div>
         <h2>PDF Utilities</h2>
-        <p>Professional file tools that run safely in your browser.</p>
+        <p>Professional file tools that run safely in your browser. No uploads to any server.</p>
     </section>
 
     <div class="tools-grid">
@@ -455,13 +548,14 @@
         </div>
     </div>
 
+    <!-- ==================== ALL TOOLS: VIDEO SECTION ==================== -->
     <section id="video-tools" class="section-intro fade-element" style="margin-top: 100px;">
         <div class="section-tag">Media Downloaders</div>
         <h2>Download HD Videos</h2>
         <p>Save videos from popular platforms in HD quality without watermarks.</p>
     </section>
 
-    <div class="tools-grid" style="margin-bottom: 100px;">
+    <div class="tools-grid" style="margin-bottom: 60px;">
         <div class="glass-card fade-element">
             <div class="card-icon logo-tiktok"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.73a8.16 8.16 0 0 0 4.77 1.52V6.69h-.01z"/></svg></div>
             <h3>TikTok Downloader</h3>
@@ -482,12 +576,65 @@
         </div>
     </div>
 
-    <!-- QUESTIONS & ANSWERS (FAQ) SECTION -->
+    <!-- ==================== ALL TOOLS OVERVIEW ==================== -->
+    <section class="fade-element" style="margin-top: 40px;">
+        <div class="section-intro">
+            <div class="section-tag">Complete Toolkit</div>
+            <h2>All Tools at a Glance</h2>
+            <p>Browse our complete collection of free online tools — everything you need in one place.</p>
+        </div>
+        <div class="tools-grid" style="margin-top: 40px;">
+            <div class="glass-card fade-element">
+                <div class="card-icon" style="background: linear-gradient(135deg, #FFB39A, #ff8a66);"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                <h3>JPG to PDF</h3>
+                <p>Convert your JPG and PNG images into a single, professional PDF file.</p>
+                <button class="card-btn" onclick="openTool('jpgTool')">Use Tool →</button>
+            </div>
+            <div class="glass-card fade-element">
+                <div class="card-icon" style="background: linear-gradient(135deg, #a855f7, #7c3aed);"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                <h3>PDF to JPG</h3>
+                <p>Extract each page of your PDF as a separate high-quality JPG image file.</p>
+                <button class="card-btn" onclick="openTool('pdfJpgTool')">Use Tool →</button>
+            </div>
+            <div class="glass-card fade-element">
+                <div class="card-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M15 2H9a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/></svg></div>
+                <h3>Merge PDFs</h3>
+                <p>Combine two or more PDF documents into a single organized file.</p>
+                <button class="card-btn" onclick="openTool('mergeTool')">Use Tool →</button>
+            </div>
+            <div class="glass-card fade-element">
+                <div class="card-icon" style="background: linear-gradient(135deg, #10b981, #059669);"><svg viewBox="0 0 24 24"><path d="M12 22v-6"/><path d="M12 2v6"/><path d="m15 19-3 3-3-3"/><path d="m15 5-3-3-3 3"/><path d="M22 12h-6"/><path d="M2 12h6"/><path d="m19 9-3 3 3 3"/><path d="m5 9 3 3-3 3"/></svg></div>
+                <h3>Compress PDF</h3>
+                <p>Reduce the file size of any PDF while preserving readable quality.</p>
+                <button class="card-btn" onclick="openTool('compressTool')">Use Tool →</button>
+            </div>
+            <div class="glass-card fade-element">
+                <div class="card-icon logo-tiktok"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.73a8.16 8.16 0 0 0 4.77 1.52V6.69h-.01z"/></svg></div>
+                <h3>TikTok Downloader</h3>
+                <p>Save TikTok videos without watermark in HD quality MP4 format.</p>
+                <a href="tiktok-downloader.html" class="card-btn">Use Tool →</a>
+            </div>
+            <div class="glass-card fade-element">
+                <div class="card-icon logo-insta"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></div>
+                <h3>Instagram Downloader</h3>
+                <p>Download Instagram Reels, stories, posts and photos instantly.</p>
+                <a href="instagram-downloader.html" class="card-btn">Use Tool →</a>
+            </div>
+            <div class="glass-card fade-element">
+                <div class="card-icon logo-fb"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
+                <h3>Facebook Downloader</h3>
+                <p>Save Facebook videos in HD quality directly to your device.</p>
+                <a href="facebook-downloader.html" class="card-btn">Use Tool →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FAQ SECTION ==================== -->
     <section class="faq-section fade-element" id="faq">
         <div class="section-intro">
             <div class="section-tag">Help Desk</div>
             <h2>Questions & Answers</h2>
-            <p>Have questions about how our free tools process files and downloads? Check out our quick guides below.</p>
+            <p>Have questions about how our free tools work? Find quick answers below.</p>
         </div>
         <div class="faq-grid">
             <div class="faq-item">
@@ -495,50 +642,63 @@
                     Is ToolsMediaDownloader really free?
                     <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
                 </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">
-                        Yes, 100%! All our PDF file conversion systems, compression logic, merger engines, and video downloader components are free to use without restrictions, subscriptions, or hidden charges.
-                    </div>
-                </div>
+                <div class="faq-answer"><div class="faq-answer-content">Yes, 100%! All our PDF file conversion systems, compression logic, merger engines, and video downloader components are free to use without restrictions, subscriptions, or hidden charges.</div></div>
             </div>
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
                     Are my uploaded PDF files secure?
                     <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
                 </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">
-                        Absolutely. Unlike other platforms, all file conversions (JPG to PDF, PDF to JPG, Merge, and Compress) are computed locally inside your browser context. Your document bytes never touch our servers, protecting your private files completely.
-                    </div>
-                </div>
+                <div class="faq-answer"><div class="faq-answer-content">Absolutely. Unlike other platforms, all file conversions (JPG to PDF, PDF to JPG, Merge, and Compress) are computed locally inside your browser context. Your document bytes never touch our servers, protecting your private files completely.</div></div>
             </div>
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
                     How can I download videos without watermarks?
                     <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
                 </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">
-                        Simply copy the video URL from TikTok, Instagram, or Facebook, click on our matching Downloader card, paste your clean link, and hit Download. The engine will retrieve the raw high-definition video stream directly.
-                    </div>
-                </div>
+                <div class="faq-answer"><div class="faq-answer-content">Simply copy the video URL from TikTok, Instagram, or Facebook, click on our matching Downloader card, paste your clean link, and hit Download. The engine will retrieve the raw high-definition video stream directly.</div></div>
             </div>
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
                     Why does the PDF compressor fail on some files?
                     <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
                 </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">
-                        Our compressor parses document parameters down page-by-page. If your original PDF is password encrypted or contains advanced DRM protection constraints, system libraries block direct processing access.
-                    </div>
+                <div class="faq-answer"><div class="faq-answer-content">Our compressor parses document parameters down page-by-page. If your original PDF is password encrypted or contains advanced DRM protection constraints, system libraries block direct processing access.</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Do I need to create an account to use the tools?
+                    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
                 </div>
+                <div class="faq-answer"><div class="faq-answer-content">No, you never need to sign up, log in, or provide any personal information. All tools are instantly accessible from any browser on any device. Just open the page and start using.</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    What file formats are supported?
+                    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+                <div class="faq-answer"><div class="faq-answer-content">Our PDF tools support JPG, JPEG, PNG images for conversion, and standard PDF files for merging, compressing, and extracting. Video downloaders support direct URLs from TikTok, Instagram, and Facebook.</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Can I use these tools on my phone?
+                    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+                <div class="faq-answer"><div class="faq-answer-content">Yes! ToolsMediaDownloader is fully responsive and optimized for all devices including smartphones, tablets, laptops, and desktop computers. All tools work seamlessly across all screen sizes.</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Is there a file size limit?
+                    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+                <div class="faq-answer"><div class="faq-answer-content">Since all processing happens in your browser, the limit depends on your device's memory and browser capabilities. Most modern devices can handle files up to 50-100MB without issues. For very large files, we recommend using a desktop browser.</div></div>
             </div>
         </div>
     </section>
+
 </main>
 
-<!-- UNIVERSAL FOOTER -->
+<!-- ==================== UNIVERSAL FOOTER ==================== -->
 <footer class="tmd-footer">
     <div class="tmd-footer-brand">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/></svg>
@@ -552,10 +712,10 @@
         <a href="contact.html">Contact</a>
         <a href="blog.html">Blog</a>
     </div>
-    <p class="tmd-footer-copy">© 2026 ToolsMediaDownloader · All rights reserved.</p>
+    <p class="tmd-footer-copy">© 2026 ToolsMediaDownloader. All rights reserved.</p>
 </footer>
 
-<!-- TOBY AI -->
+<!-- ==================== TOBY AI CHAT ==================== -->
 <div id="toby-widget-container">
     <div id="toby-chat-box">
         <div class="chat-header"><span>🤖 TOBY · AI</span><button onclick="toggleTobyChat()">×</button></div>
@@ -569,13 +729,12 @@
 </div>
 
 <script>
-// UNIVERSAL HEADER ACTIONS
+// ==================== UNIVERSAL HEADER LOGIC ====================
 document.getElementById('mobileMenuBtn').addEventListener('click', function(e) {
     e.stopPropagation();
     this.classList.toggle('active');
     document.getElementById('navLinks').classList.toggle('active');
 });
-
 document.addEventListener('click', function(e) {
     const nav = document.getElementById('navLinks');
     const btn = document.getElementById('mobileMenuBtn');
@@ -584,8 +743,6 @@ document.addEventListener('click', function(e) {
         btn.classList.remove('active');
     }
 });
-
-// Smooth closing of dropdown when anchors are clicked
 document.querySelectorAll('.tmd-dropdown a').forEach(link => {
     link.addEventListener('click', () => {
         document.getElementById('navLinks').classList.remove('active');
@@ -593,17 +750,14 @@ document.querySelectorAll('.tmd-dropdown a').forEach(link => {
     });
 });
 
-// Q&A / FAQ Accordion Handler
+// ==================== FAQ ACCORDION ====================
 function toggleFaq(el) {
     const item = el.parentElement;
     const isActive = item.classList.contains('active');
-    
-    // Close other FAQ items
     document.querySelectorAll('.faq-item').forEach(faq => {
         faq.classList.remove('active');
         faq.querySelector('.faq-answer').style.maxHeight = "0px";
     });
-
     if (!isActive) {
         item.classList.add('active');
         const answer = item.querySelector('.faq-answer');
@@ -611,12 +765,12 @@ function toggleFaq(el) {
     }
 }
 
-// loader scripts
+// ==================== LOADER ====================
 function removeLoader() { const loader = document.getElementById('intro-loader'); if (loader) loader.classList.add('hide'); }
 document.addEventListener('DOMContentLoaded', () => setTimeout(removeLoader, 1000));
 setTimeout(removeLoader, 2000);
 
-// dynamic fade in animations
+// ==================== SCROLL ANIMATIONS ====================
 const fadeElements = document.querySelectorAll('.fade-element');
 const hero = document.getElementById('hero');
 function checkScroll() {
@@ -626,49 +780,52 @@ function checkScroll() {
 }
 window.addEventListener('scroll', checkScroll); checkScroll();
 
-// Toby AI responses
+// ==================== TOBY AI ====================
 function toggleTobyChat() { const chat = document.getElementById('toby-chat-box'); chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex'; if (chat.style.display === 'flex') document.getElementById('toby-input').focus(); }
 function handleTobyKey(e) { if (e.key === 'Enter') sendTobyMessage(); }
 function sendTobyMessage() {
     const input = document.getElementById('toby-input'); const text = input.value.trim(); if (!text) return;
     addTobyMessage(text, 'user-msg'); input.value = '';
     setTimeout(() => {
-        const q = text.toLowerCase(); let reply = "I can help with PDF tools, TikTok downloads, or if the site is free!";
+        const q = text.toLowerCase(); let reply = "I can help with PDF tools, TikTok downloads, or tell you about our features!";
         if (q.match(/hi|hello|hey/)) reply = "Hey! 👋 How can I help you today?";
         else if (q.includes("how are you")) reply = "I'm doing great! Ready to help ⚡";
         else if (q.match(/email|contact|support/)) reply = "You can reach support directly at m.aliarain070@gmail.com";
-        else if (q.match(/free|cost/)) reply = "Yes! Everything is 100% free forever.";
-        else if (q.includes("pdf")) reply = "You can convert JPG to PDF, extract images, compress, or merge PDFs above!";
-        else if (q.match(/tiktok|video/)) reply = "Click 'Download →' on the video tools section!";
+        else if (q.match(/free|cost|price/)) reply = "Yes! Everything is 100% free forever. No hidden charges.";
+        else if (q.includes("pdf")) reply = "You can convert JPG to PDF, extract images, compress, or merge PDFs — all from the homepage!";
+        else if (q.match(/tiktok|video|download/)) reply = "Click 'Download →' on the video tools section to save videos in HD!";
+        else if (q.match(/blog/)) reply = "Check out our blog for tips, guides, and updates! Click 'Blog' in the menu.";
+        else if (q.match(/safe|secure|privacy/)) reply = "All files are processed locally in your browser. Nothing is uploaded to any server. 100% private!";
+        else if (q.match(/mobile|phone/)) reply = "Yes! All tools work perfectly on phones, tablets, and desktops.";
         addTobyMessage(reply, 'bot-msg');
     }, 400);
 }
 function addTobyMessage(text, className) { const msg = document.createElement('div'); msg.className = className; msg.textContent = text; const container = document.getElementById('chat-messages'); container.appendChild(msg); container.scrollTop = container.scrollHeight; }
 
-// Engine workers and browser PDF functionality APIs
+// ==================== PDF TOOLS ENGINE ====================
 if (window.pdfjsLib) window.pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 function closeTools() { document.querySelectorAll(".workspace").forEach(t => t.style.display = "none"); }
 function openTool(id) { closeTools(); const t = document.getElementById(id); if (t) { t.style.display = "block"; t.scrollIntoView({ behavior: "smooth", block: "center" }); } }
 function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
 function downloadBlob(blob, filename) { const url = URL.createObjectURL(blob); const link = document.createElement("a"); link.href = url; link.download = filename; document.body.appendChild(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 15000); }
 
-// JPG to PDF logic 
+// JPG to PDF
 let jpgSelectedFiles = [], jpgObjectUrls = [];
 function clearJpgUrls() { jpgObjectUrls.forEach(url => URL.revokeObjectURL(url)); jpgObjectUrls = []; }
 function jpgFilesSelected(input) { clearJpgUrls(); const status = document.getElementById("jpgStatus"), preview = document.getElementById("jpgPreview"), button = document.getElementById("jpgCreateButton"); jpgSelectedFiles = Array.from(input.files || []).filter(f => f.type === "image/jpeg" || f.type === "image/png"); preview.innerHTML = ""; if (!jpgSelectedFiles.length) { status.textContent = "Please select JPG or PNG images."; button.style.display = "none"; return; } jpgSelectedFiles.forEach((file, i) => { const url = URL.createObjectURL(file); jpgObjectUrls.push(url); const card = document.createElement("div"); card.className = "preview-card"; card.innerHTML = `<img src="${url}"><div class="preview-label">Image ${i+1}</div>`; preview.appendChild(card); }); status.textContent = `${jpgSelectedFiles.length} file(s) ready for conversion`; button.style.display = "block"; }
 async function createJpgPdf() { const status = document.getElementById("jpgStatus"), button = document.getElementById("jpgCreateButton"); if (!window.PDFLib) return; button.disabled = true; button.textContent = "Processing..."; try { const pdf = await window.PDFLib.PDFDocument.create(); for (let i = 0; i < jpgSelectedFiles.length; i++) { status.textContent = `Processing image ${i+1} of ${jpgSelectedFiles.length}...`; await delay(30); const bytes = await jpgSelectedFiles[i].arrayBuffer(); const image = jpgSelectedFiles[i].type === "image/png" ? await pdf.embedPng(bytes) : await pdf.embedJpg(bytes); const scale = Math.min(1, 1600/image.width, 2200/image.height); const page = pdf.addPage([image.width*scale, image.height*scale]); page.drawImage(image, {x:0, y:0, width:image.width*scale, height:image.height*scale}); } downloadBlob(new Blob([await pdf.save()], {type:"application/pdf"}), "TMD-Converted.pdf"); status.textContent = "✓ PDF generated successfully!"; } catch(e) { status.textContent = "An error occurred during processing."; } finally { button.disabled = false; button.textContent = "⚡ Generate PDF"; } }
 
-// PDF to JPG Extractor logic
+// PDF to JPG
 let selectedPdfForJpg = null;
 function pdfJpgFileSelected(input) { const status = document.getElementById("pdfJpgStatus"), button = document.getElementById("pdfJpgConvertButton"), preview = document.getElementById("pdfJpgPreview"); selectedPdfForJpg = input.files?.[0]; preview.innerHTML = ""; if (!selectedPdfForJpg) { status.textContent = ""; button.style.display = "none"; return; } status.textContent = `Selected File: ${selectedPdfForJpg.name}`; button.style.display = "block"; }
 async function convertPdfToJpg() { const status = document.getElementById("pdfJpgStatus"), button = document.getElementById("pdfJpgConvertButton"), preview = document.getElementById("pdfJpgPreview"); if (!window.pdfjsLib || !selectedPdfForJpg) return; button.disabled = true; button.textContent = "Extracting images..."; preview.innerHTML = ""; try { const bytes = new Uint8Array(await selectedPdfForJpg.arrayBuffer()); const pdf = await window.pdfjsLib.getDocument({data: bytes}).promise; for (let p = 1; p <= pdf.numPages; p++) { status.textContent = `Converting page ${p} of ${pdf.numPages}...`; await delay(30); const page = await pdf.getPage(p); const viewport = page.getViewport({scale: 1.7}); const canvas = document.createElement("canvas"); const ctx = canvas.getContext("2d", {alpha: false}); canvas.width = Math.floor(viewport.width); canvas.height = Math.floor(viewport.height); ctx.fillStyle = "#ffffff"; ctx.fillRect(0,0,canvas.width,canvas.height); await page.render({canvasContext: ctx, viewport}).promise; const blob = await new Promise(res => canvas.toBlob(res, "image/jpeg", 0.92)); const url = URL.createObjectURL(blob); const card = document.createElement("div"); card.className = "preview-card"; card.innerHTML = `<img src="${url}"><div class="preview-label">Page ${p}</div>`; const btn = document.createElement("button"); btn.className = "small-btn"; btn.textContent = "Download"; btn.style.marginTop = "5px"; btn.style.padding = "4px"; btn.style.cursor = "pointer"; btn.onclick = () => downloadBlob(blob, `TMD-page-${p}.jpg`); card.appendChild(btn); preview.appendChild(card); } status.textContent = "✓ Extraction completed successfully!"; } catch(e) { status.textContent = "An error occurred during extraction."; } finally { button.disabled = false; button.textContent = "⚡ Extract Images"; } }
 
-// PDF Merger logic
+// PDF Merger
 let selectedMergeFiles = [];
 function mergeFilesSelected(input) { const status = document.getElementById("mergeStatus"), button = document.getElementById("mergeButton"); selectedMergeFiles = Array.from(input.files || []); if (selectedMergeFiles.length < 2) { status.textContent = "Please select at least 2 PDF files to merge."; button.style.display = "none"; return; } status.textContent = `${selectedMergeFiles.length} files selected for merging.`; button.style.display = "block"; }
 async function mergePdfs() { const status = document.getElementById("mergeStatus"), button = document.getElementById("mergeButton"); if (!window.PDFLib || selectedMergeFiles.length < 2) return; button.disabled = true; button.textContent = "Merging files..."; try { const merged = await window.PDFLib.PDFDocument.create(); for (let i = 0; i < selectedMergeFiles.length; i++) { status.textContent = `Adding document ${i+1} of ${selectedMergeFiles.length}...`; const source = await window.PDFLib.PDFDocument.load(await selectedMergeFiles[i].arrayBuffer()); const pages = await merged.copyPages(source, source.getPageIndices()); pages.forEach(p => merged.addPage(p)); } downloadBlob(new Blob([await merged.save()], {type:"application/pdf"}), "TMD-Merged.pdf"); status.textContent = "✓ Files merged successfully!"; } catch(e) { status.textContent = "An error occurred while merging."; } finally { button.disabled = false; button.textContent = "⚡ Merge Files"; } }
 
-// PDF Compressor logic
+// PDF Compressor
 let selectedCompressFile = null;
 function compressFileSelected(input) { const status = document.getElementById("compressStatus"), button = document.getElementById("compressButton"); selectedCompressFile = input.files?.[0]; if (!selectedCompressFile) { status.textContent = ""; button.style.display = "none"; return; } const sizeMB = (selectedCompressFile.size / (1024 * 1024)).toFixed(2); status.textContent = `Selected File: ${selectedCompressFile.name} (${sizeMB} MB)`; button.style.display = "block"; }
 async function compressPdf() { const status = document.getElementById("compressStatus"); const button = document.getElementById("compressButton"); if (!window.pdfjsLib || !window.PDFLib || !selectedCompressFile) { status.textContent = "Error: System libraries not loaded properly."; return; } button.disabled = true; button.textContent = "Compressing PDF, please wait..."; try { const originalSizeMB = (selectedCompressFile.size / (1024 * 1024)).toFixed(2); status.textContent = `Original Size: ${originalSizeMB} MB. Processing pages...`; const arrayBuffer = await selectedCompressFile.arrayBuffer(); const pdfDoc = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise; const totalPages = pdfDoc.numPages; const newPdfDoc = await window.PDFLib.PDFDocument.create(); for (let i = 1; i <= totalPages; i++) { status.textContent = `Compressing page ${i} of ${totalPages}...`; await delay(10); const page = await pdfDoc.getPage(i); const viewport = page.getViewport({ scale: 1.0 }); const canvas = document.createElement("canvas"); const ctx = canvas.getContext("2d", { alpha: false }); canvas.width = Math.floor(viewport.width); canvas.height = Math.floor(viewport.height); ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, canvas.width, canvas.height); await page.render({ canvasContext: ctx, viewport }).promise; const compressedImageBlob = await new Promise(resolve => canvas.toBlob(resolve, "image/jpeg", 0.65)); const imageArrayBuffer = await compressedImageBlob.arrayBuffer(); const embeddedImage = await newPdfDoc.embedJpg(imageArrayBuffer); const newPage = newPdfDoc.addPage([viewport.width, viewport.height]); newPage.drawImage(embeddedImage, { x: 0, y: 0, width: viewport.width, height: viewport.height, }); } const compressedBytes = await newPdfDoc.save(); const finalBlob = new Blob([compressedBytes], { type: "application/pdf" }); const compressedSizeMB = (finalBlob.size / (1024 * 1024)).toFixed(2); downloadBlob(finalBlob, "TMD-Compressed.pdf"); status.textContent = `✓ Success! File reduced from ${originalSizeMB} MB to ${compressedSizeMB} MB`; } catch (e) { status.textContent = "An error occurred during compression. File might be encrypted."; console.error(e); } finally { button.disabled = false; button.textContent = "⚡ Compress File"; } }
