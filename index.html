@@ -183,12 +183,6 @@
         .close-button:hover { color: white; border-color: white; }
         .small-btn { display: inline-block; width: 100%; font-family: 'Space Grotesk', sans-serif; background: var(--accent); color: var(--bg-dark); border: none; border-radius: 6px; font-size: 11px; font-weight: 600; }
 
-        /* ==================== INTRO BLOCK ==================== */
-        .intro-block { max-width: 900px; margin: 0 auto 80px; text-align: center; }
-        .intro-block h2 { font-family: 'Orbitron', sans-serif; font-size: clamp(24px, 4vw, 36px); margin-bottom: 20px; color: var(--text-light); }
-        .intro-block h2 span { color: var(--accent); }
-        .intro-block p { color: var(--text-dim); font-size: 16px; line-height: 1.8; margin-bottom: 15px; }
-
         /* ==================== HOW IT WORKS ==================== */
         .how-it-works-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
         .step-card { text-align: center; padding: 35px 25px; background: rgba(84,36,82,0.15); border: 1px solid rgba(255,179,154,0.12); border-radius: 20px; transition: all 0.3s; }
@@ -210,14 +204,6 @@
         .popular-card .p-link { color: var(--accent); font-size: 13px; font-weight: 600; text-decoration: none; transition: 0.2s; }
         .popular-card .p-link:hover { text-decoration: underline; }
         .popular-badge { position: absolute; top: -8px; right: 15px; background: var(--accent); color: var(--bg-dark); font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 10px; letter-spacing: 1px; text-transform: uppercase; }
-
-        /* ==================== WHY CHOOSE US ==================== */
-        .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 40px; }
-        .why-card { text-align: center; padding: 35px 25px; background: rgba(84,36,82,0.12); border: 1px solid rgba(255,179,154,0.1); border-radius: 18px; transition: all 0.3s; }
-        .why-card:hover { border-color: var(--accent); transform: translateY(-4px); }
-        .why-card .why-icon { font-size: 36px; margin-bottom: 15px; }
-        .why-card h3 { font-family: 'Orbitron', sans-serif; font-size: 15px; margin-bottom: 10px; color: var(--text-light); }
-        .why-card p { color: var(--text-dim); font-size: 13.5px; line-height: 1.6; }
 
         /* ==================== FAQ ==================== */
         .faq-section { margin-top: 100px; }
@@ -270,7 +256,7 @@
         .tmd-footer-links a:hover { color: var(--accent); }
         .tmd-footer-copy { color: rgba(255, 255, 255, 0.3); font-size: 13px; margin-top: 20px; }
 
-        /* ==================== TOBY AI ==================== */
+        /* ==================== TOBY AI CHAT ==================== */
         #toby-widget-container { position: fixed; bottom: 25px; right: 25px; z-index: 10000; display: flex; flex-direction: column; align-items: flex-end; }
         .toby-launch-btn { background: linear-gradient(135deg, var(--accent), var(--accent-glow)); color: var(--bg-dark); padding: 12px 22px; border-radius: 30px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; box-shadow: 0 10px 25px rgba(255,179,154,0.4); transition: 0.3s; }
         .toby-launch-btn:hover { transform: scale(1.05); }
@@ -469,16 +455,8 @@
         </div>
     </div>
 
-    <!-- ==================== WEBSITE INTRODUCTION (BOTTOM) ==================== -->
-    <section class="intro-block fade-element" style="margin-top: 100px;">
-        <h2>Welcome to <span>ToolsMediaDownloader</span></h2>
-        <p>ToolsMediaDownloader is a free, browser-based platform designed to simplify your digital life. Whether you need to convert images into PDF documents, extract pages from a PDF as high-quality JPG files, merge multiple PDFs into one, or compress large PDF files for easy sharing — we've got you covered.</p>
-        <p>We also provide fast and reliable video downloaders for TikTok, Instagram, and Facebook — allowing you to save your favorite videos in HD quality without watermarks, directly to your device. No account needed, no software installation, and no hidden fees. Just open, use, and go.</p>
-        <p>All file processing happens locally in your browser. Your documents and data never leave your device, ensuring complete privacy and security at all times. ToolsMediaDownloader is built for everyone — students, professionals, content creators, and everyday users who want reliable tools without the hassle.</p>
-    </section>
-
     <!-- ==================== HOW IT WORKS (BOTTOM) ==================== -->
-    <section class="fade-element">
+    <section class="fade-element" style="margin-top: 100px;">
         <div class="section-intro">
             <div class="section-tag">Simple & Fast</div>
             <h2>How It Works</h2>
@@ -546,47 +524,6 @@
                     <p>Reduce PDF file size while maintaining good quality for easy sharing.</p>
                     <a href="javascript:void(0)" onclick="openTool('compressTool')" class="p-link">Use Tool →</a>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== WHY CHOOSE US (BOTTOM) ==================== -->
-    <section class="fade-element" style="margin-top: 80px;">
-        <div class="section-intro">
-            <div class="section-tag">Trust & Quality</div>
-            <h2>Why Choose Us</h2>
-            <p>Here's what makes ToolsMediaDownloader different from the rest.</p>
-        </div>
-        <div class="why-grid">
-            <div class="why-card">
-                <div class="why-icon">🔒</div>
-                <h3>100% Private</h3>
-                <p>All files are processed locally in your browser. Nothing is uploaded to any server. Your data stays yours.</p>
-            </div>
-            <div class="why-card">
-                <div class="why-icon">⚡</div>
-                <h3>Lightning Fast</h3>
-                <p>No waiting in queues. Our tools process your files instantly using modern browser technology.</p>
-            </div>
-            <div class="why-card">
-                <div class="why-icon">💰</div>
-                <h3>Always Free</h3>
-                <p>No subscriptions, no premium tiers, no hidden charges. Every single tool is free forever.</p>
-            </div>
-            <div class="why-card">
-                <div class="why-icon">📱</div>
-                <h3>Works Everywhere</h3>
-                <p>Fully responsive and optimized for phones, tablets, laptops, and desktops. Use it from any device.</p>
-            </div>
-            <div class="why-card">
-                <div class="why-icon">🚫</div>
-                <h3>No Signup Needed</h3>
-                <p>Jump straight into using any tool. We never ask for your email, phone number, or personal information.</p>
-            </div>
-            <div class="why-card">
-                <div class="why-icon">🎯</div>
-                <h3>HD Quality Output</h3>
-                <p>Get high-definition results every time — crisp PDFs and full HD video downloads without watermarks.</p>
             </div>
         </div>
     </section>
