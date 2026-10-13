@@ -27,6 +27,20 @@
     <priority>0.80</priority>
   </url>
 
+  <!-- Video Downloader Tools -->
+  <url>
+    <loc>https://toolsmediadownload.online/tiktok-downloader.html</loc>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://toolsmediadownload.online/instagram-downloader.html</loc>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://toolsmediadownload.online/facebook-downloader.html</loc>
+    <priority>0.90</priority>
+  </url>
+
   <!-- Blog & Articles -->
   <url>
     <loc>https://toolsmediadownload.online/blog.html</loc>
@@ -43,6 +57,32 @@
   <url>
     <loc>https://toolsmediadownload.online/browser-file-privacy-guide.html</loc>
     <priority>0.70</priority>
+  </url>
+
+  <!-- New SEO Keyword Blog Posts -->
+  <url>
+    <loc>https://toolsmediadownload.online/tiktok-watermark-guide.html</loc>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://toolsmediadownload.online/compress-pdf-guide.html</loc>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://toolsmediadownload.online/instagram-reels-downloader-guide.html</loc>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://toolsmediadownload.online/download-facebook-videos-guide.html</loc>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://toolsmediadownload.online/merge-pdf-files-online-guide.html</loc>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://toolsmediadownload.online/extract-pdf-to-jpg-guide.html</loc>
+    <priority>0.80</priority>
   </url>
 
 </urlset>
