@@ -1,191 +1,493 @@
-    <script>
-        // Header menu
-        document.getElementById('mobileMenuBtn').addEventListener('click', function (e) {
-            e.stopPropagation(); this.classList.toggle('active'); document.getElementById('navLinks').classList.toggle('active');
-        });
-        document.addEventListener('click', function (e) {
-            const nav = document.getElementById('navLinks');
-            const btn = document.getElementById('mobileMenuBtn');
-            if (nav.classList.contains('active') && !nav.contains(e.target) && !btn.contains(e.target)) {
-                nav.classList.remove('active'); btn.classList.remove('active');
-            }
-        });
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Downloader | ToolsMediaDownloader</title>
+    <meta name="description" content="Download Instagram Reels, videos, photos and stories in HD quality using ToolsMediaDownloader. Fast, secure, and free.">
+    <meta name="keywords" content="instagram downloader, download instagram reels, instagram video download, save instagram video, ig photo downloader">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://toolsmediadownload.online/instagram-downloader.html">
 
-        // ============ RAPIDAPI CONFIG ============
-        const RAPID_API_KEY  = "b4ae13065cmsh2871fc755a3c59dp1346eejsn2d5a9c6dd1ce";
-        const RAPID_API_HOST = "instagram-downloader-download-instagram-videos-stories1.p.rapidapi.com";
-        const RAPID_API_BASE = "https://instagram-downloader-download-instagram-videos-stories1.p.rapidapi.com/fetch";
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23FFB39A'><path d='M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z'/></svg>">
 
-        const form       = document.getElementById("downloadForm");
-        const input      = document.getElementById("instaUrl");
-        const statusEl   = document.getElementById("statusMsg");
-        const resultArea = document.getElementById("resultArea");
-        const mediaGrid  = document.getElementById("mediaGrid");
-        const btn        = document.getElementById("fetchBtn");
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-        function isValidInstagramUrl(value) {
-            try {
-                const url = new URL(value);
-                const allowed = ["instagram.com", "www.instagram.com"];
-                return url.protocol === "https:" && allowed.includes(url.hostname.toLowerCase());
-            } catch {
-                return false;
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg-dark: #0b0711;
+            --accent: #FFB39A;
+            --accent-glow: #ff8a66;
+            --text-light: #f0e6ef;
+            --text-dim: #a08ca0;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+        }
+        .orb {
+            position: fixed; border-radius: 50%; filter: blur(80px);
+            opacity: 0.3; z-index: 0; pointer-events: none;
+        }
+        .orb-1 { width: 400px; height: 400px; background: #542452; top: -100px; left: -100px; animation: float1 15s infinite ease-in-out; }
+        .orb-2 { width: 350px; height: 350px; background: #ff8a66; bottom: -100px; right: -100px; animation: float2 18s infinite ease-in-out; }
+        @keyframes float1 { 50% { transform: translate(60px, 80px); } }
+        @keyframes float2 { 50% { transform: translate(-60px, -80px); } }
+
+        .tmd-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 14px 5%; background-color: var(--bg-dark);
+            border-bottom: 1px solid rgba(255, 179, 154, 0.15);
+            position: sticky; top: 0; z-index: 1000; font-family: 'Inter', sans-serif;
+        }
+        .tmd-logo {
+            display: flex; align-items: center; gap: 8px; text-decoration: none;
+            font-family: 'Orbitron', sans-serif; font-size: 1.25rem; font-weight: 700;
+            color: var(--accent) !important; white-space: nowrap;
+        }
+        .tmd-logo svg { width: 20px; height: 20px; flex-shrink: 0; fill: var(--accent); }
+        .tmd-nav-container { display: flex; align-items: center; gap: 25px; position: relative; }
+        .tmd-nav-desktop-links { display: flex; gap: 22px; align-items: center; }
+        .tmd-nav-desktop-links a { color: #d1d5db; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+        .tmd-nav-desktop-links a:hover { color: var(--accent); }
+        .tmd-menu-btn {
+            display: flex; background: none; border: none; cursor: pointer;
+            flex-direction: column; justify-content: space-between;
+            width: 22px; height: 16px; padding: 0; flex-shrink: 0;
+        }
+        .tmd-menu-btn span { display: block; width: 100%; height: 2px; background-color: var(--accent); border-radius: 2px; transition: 0.3s; }
+        .tmd-menu-btn.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .tmd-menu-btn.active span:nth-child(2) { opacity: 0; }
+        .tmd-menu-btn.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        .tmd-dropdown {
+            display: none; flex-direction: column; position: absolute;
+            top: calc(100% + 15px); right: 0; width: 220px;
+            background-color: #120918; border: 1px solid rgba(255, 179, 154, 0.15);
+            border-radius: 12px; box-shadow: 0 12px 30px rgba(0,0,0,0.45); overflow: hidden; z-index: 1001;
+        }
+        .tmd-dropdown.active { display: flex; }
+        .tmd-dropdown a {
+            padding: 12px 20px; font-size: 0.9rem; color: #d1d5db; text-decoration: none;
+            border-bottom: 1px solid rgba(255, 179, 154, 0.08); transition: 0.2s; text-align: left;
+        }
+        .tmd-dropdown a:last-child { border-bottom: none; }
+        .tmd-dropdown a:hover { background: rgba(255, 179, 154, 0.08); color: var(--accent); }
+        .tmd-mobile-link { display: none; }
+        @media (max-width: 768px) {
+            .tmd-logo { font-size: 1rem; }
+            .tmd-nav-desktop-links { display: none; }
+            .tmd-mobile-link { display: block; }
+            .tmd-dropdown {
+                position: fixed; top: 57px; left: 0; right: 0; width: 100%;
+                border-radius: 0; border-left: none; border-right: none;
+                border-bottom: 1px solid rgba(255, 179, 154, 0.15);
             }
         }
+
+        .hero { text-align: center; padding: 80px 20px 40px; position: relative; z-index: 2; }
+        .hero-badge {
+            display: inline-block; padding: 6px 16px; background: rgba(255,179,154,0.1);
+            border: 1px solid rgba(255,179,154,0.3); border-radius: 20px; font-size: 12px;
+            color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px;
+        }
+        .hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(32px, 5vw, 48px); margin-bottom: 15px; font-weight: 800; }
+        .hero h1 span {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #bc1888);
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+        .hero p { color: var(--text-dim); max-width: 580px; margin: 0 auto; font-size: 16px; line-height: 1.7; }
+
+        .downloader-box {
+            background: linear-gradient(135deg, rgba(84,36,82,0.25), rgba(26,13,26,0.55));
+            backdrop-filter: blur(25px); border: 1px solid rgba(255, 179, 154, 0.35);
+            border-radius: 24px; padding: 45px 40px; max-width: 720px; width: 92%;
+            margin: 0 auto 80px; box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            text-align: center; position: relative; z-index: 2;
+        }
+        .input-group { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+        .input-group input {
+            flex: 1; min-width: 240px; padding: 16px 20px; border-radius: 12px;
+            background: rgba(0,0,0,0.4); border: 1px solid rgba(255,179,154,0.25);
+            color: white; font-size: 15px; font-family: 'Space Grotesk', sans-serif; outline: none;
+        }
+        .input-group input:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(255,179,154,0.2); }
+        .input-group input::placeholder { color: var(--text-dim); font-size: 14px; }
+        .input-group button {
+            padding: 16px 32px; border-radius: 12px;
+            background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+            color: white; font-weight: 700; font-size: 15px; border: none; cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif; white-space: nowrap; transition: 0.3s;
+        }
+        .input-group button:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(220,39,67,0.4); }
+        .input-group button:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        .status-msg {
+            min-height: 24px; margin: 15px 0; font-weight: 600; font-size: 14.5px;
+            color: var(--accent); overflow-wrap: anywhere;
+        }
+
+        .result-area { display: none; margin-top: 25px; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        .media-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px; margin-top: 20px; justify-content: center;
+        }
+        .media-card {
+            background: rgba(0,0,0,0.45); border: 1px solid rgba(255,179,154,0.25);
+            border-radius: 18px; overflow: hidden; transition: 0.3s;
+        }
+        .media-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+        .media-card video, .media-card img {
+            width: 100%; max-height: 380px; display: block; background: #000; object-fit: contain;
+        }
+        .media-info { padding: 16px; text-align: center; }
+        .media-info p { font-size: 13.5px; color: var(--text-dim); margin-bottom: 14px; }
+        .dl-btn {
+            display: inline-block; width: 100%; padding: 13px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            color: var(--bg-dark); text-decoration: none; border: none; border-radius: 10px;
+            font-weight: 700; font-size: 13.5px; cursor: pointer; transition: 0.3s;
+            font-family: 'Space Grotesk', sans-serif; text-align: center;
+        }
+        .dl-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,179,154,0.35); }
+        .note { font-size: 13px; color: var(--text-dim); margin-top: 25px; line-height: 1.6; }
+
+        @media (max-width: 600px) {
+            .input-group button { width: 100%; }
+            .downloader-box { padding: 30px 18px; }
+        }
+
+        .tmd-footer {
+            background: linear-gradient(180deg, transparent, rgba(10,5,16,0.9));
+            border-top: 1px solid rgba(255,179,154,0.1); padding: 50px 20px 30px;
+            text-align: center; font-family: 'Inter', sans-serif; margin-top: auto; position: relative; z-index: 2;
+        }
+        .tmd-footer-brand {
+            font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 700;
+            color: var(--accent); margin-bottom: 15px; display: flex; align-items: center;
+            justify-content: center; gap: 8px;
+        }
+        .tmd-footer-brand svg { width: 22px; height: 22px; fill: var(--accent); }
+        .tmd-footer-links { display: flex; justify-content: center; gap: 20px; margin: 20px 0; flex-wrap: wrap; }
+        .tmd-footer-links a { color: #a08ca0; text-decoration: none; font-size: 14px; transition: 0.3s; }
+        .tmd-footer-links a:hover { color: var(--accent); }
+        .tmd-footer-copy { color: rgba(255,255,255,0.3); font-size: 13px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <header class="tmd-header">
+        <a href="/" class="tmd-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/></svg>
+            ToolsMediaDownloader
+        </a>
+        <div class="tmd-nav-container">
+            <div class="tmd-nav-desktop-links">
+                <a href="/#document-tools">PDF Tools</a>
+                <a href="/#video-tools">Video Tools</a>
+                <a href="blog.html">Blog</a>
+            </div>
+            <button class="tmd-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="tmd-dropdown" id="navLinks">
+                <a href="/#document-tools" class="tmd-mobile-link">PDF Tools</a>
+                <a href="/#video-tools" class="tmd-mobile-link">Video Tools</a>
+                <a href="blog.html" class="tmd-mobile-link">Blog</a>
+                <a href="about.html">About</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="disclaimer.html">Disclaimer</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-badge">⚡ Free Instagram Media Downloader</div>
+        <h1>Instagram <span>Downloader</span></h1>
+        <p>Download Instagram Reels, videos, photos and stories in high quality directly to your device.</p>
+    </section>
+
+    <main class="downloader-box">
+        <form class="input-group" id="downloadForm">
+            <input
+                type="url"
+                id="instaUrl"
+                placeholder="Paste Reel, Photo, Post or Story link here..."
+                autocomplete="url"
+                required
+            >
+            <button id="fetchBtn" type="submit">Download</button>
+        </form>
+
+        <div class="status-msg" id="statusMsg" role="status" aria-live="polite"></div>
+
+        <div class="result-area" id="resultArea">
+            <div class="media-grid" id="mediaGrid"></div>
+        </div>
+
+        <p class="note">
+            🔒 Paste a public Instagram Reel, post, photo or story link.
+            Only download media you own or have permission to save.
+        </p>
+    </main>
+
+    <footer class="tmd-footer">
+        <div class="tmd-footer-brand">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/></svg>
+            ToolsMediaDownloader
+        </div>
+        <div class="tmd-footer-links">
+            <a href="about.html">About</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+            <a href="disclaimer.html">Disclaimer</a>
+            <a href="contact.html">Contact</a>
+            <a href="blog.html">Blog</a>
+        </div>
+        <p class="tmd-footer-copy">© 2026 ToolsMediaDownloader. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // ===== Header Menu =====
+        (function () {
+            var btn = document.getElementById('mobileMenuBtn');
+            var nav = document.getElementById('navLinks');
+            if (!btn || !nav) return;
+
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                btn.classList.toggle('active');
+                nav.classList.toggle('active');
+            });
+
+            document.addEventListener('click', function (e) {
+                if (nav.classList.contains('active') && !nav.contains(e.target) && !btn.contains(e.target)) {
+                    nav.classList.remove('active');
+                    btn.classList.remove('active');
+                }
+            });
+
+            var links = nav.querySelectorAll('a');
+            for (var i = 0; i < links.length; i++) {
+                links[i].addEventListener('click', function () {
+                    nav.classList.remove('active');
+                    btn.classList.remove('active');
+                });
+            }
+        })();
+
+        // ===== RapidAPI Config =====
+        var RAPID_API_KEY  = "b4ae13065cmsh2871fc755a3c59dp1346eejsn2d5a9c6dd1ce";
+        var RAPID_API_HOST = "instagram-downloader-download-instagram-videos-stories1.p.rapidapi.com";
+        var RAPID_API_BASE = "https://instagram-downloader-download-instagram-videos-stories1.p.rapidapi.com/fetch";
+
+        var form       = document.getElementById("downloadForm");
+        var input      = document.getElementById("instaUrl");
+        var statusEl   = document.getElementById("statusMsg");
+        var resultArea = document.getElementById("resultArea");
+        var mediaGrid  = document.getElementById("mediaGrid");
+        var btn        = document.getElementById("fetchBtn");
 
         function showStatus(msg) {
             statusEl.textContent = msg;
         }
 
         function clearResults() {
-            mediaGrid.replaceChildren();
+            mediaGrid.innerHTML = "";
             resultArea.style.display = "none";
         }
 
+        function isValidInstagramUrl(value) {
+            try {
+                var url = new URL(value);
+                var host = url.hostname.toLowerCase();
+                return (host === "instagram.com" || host === "www.instagram.com") && url.protocol === "https:";
+            } catch (e) {
+                return false;
+            }
+        }
+
         function addMediaCard(mediaUrl, type, labelText) {
-            const card = document.createElement("div");
+            var card = document.createElement("div");
             card.className = "media-card";
 
-            let mediaEl;
+            var mediaEl;
             if (type === "video") {
                 mediaEl = document.createElement("video");
                 mediaEl.controls = true;
                 mediaEl.preload = "metadata";
                 mediaEl.src = mediaUrl;
+                mediaEl.style.background = "#000";
             } else {
                 mediaEl = document.createElement("img");
                 mediaEl.src = mediaUrl;
+                mediaEl.alt = "Instagram media";
             }
 
-            const info = document.createElement("div");
+            var info = document.createElement("div");
             info.className = "media-info";
 
-            const label = document.createElement("p");
-            label.textContent = labelText || (type === "video" ? "Video ready" : "Photo ready");
+            var label = document.createElement("p");
+            label.textContent = labelText || (type === "video" ? "Your video is ready." : "Your photo is ready.");
 
-            const dl = document.createElement("a");
+            var dl = document.createElement("a");
             dl.className = "dl-btn";
             dl.href = mediaUrl;
             dl.target = "_blank";
             dl.rel = "noopener noreferrer";
-            dl.download = type === "video" ? "instagram_video.mp4" : "instagram_photo.jpg";
             dl.textContent = type === "video" ? "⚡ Download Video" : "⚡ Download Photo";
 
-            info.append(label, dl);
-            card.append(mediaEl, info);
+            info.appendChild(label);
+            info.appendChild(dl);
+            card.appendChild(mediaEl);
+            card.appendChild(info);
             mediaGrid.appendChild(card);
             resultArea.style.display = "block";
         }
 
-        // Smart Universal Parser for RapidAPI
-        function extractUrlsFromResponse(data) {
-            let extracted = [];
+        // Exact parser for your RapidAPI response
+        function extractMedia(data) {
+            var list = [];
+            if (!data) return list;
 
-            if (!data) return extracted;
-
-            // 1. Check direct string
-            if (typeof data === "string" && data.startsWith("http")) {
-                return [{ url: data, type: data.includes(".mp4") ? "video" : "image" }];
-            }
-
-            // 2. Check standard object properties
-            if (data.media) {
-                if (typeof data.media === "string") {
-                    extracted.push({ url: data.media, type: (data.Type || "").toLowerCase().includes("video") || data.media.includes(".mp4") ? "video" : "image" });
-                } else if (Array.isArray(data.media)) {
-                    data.media.forEach(m => {
-                        if (typeof m === "string") extracted.push({ url: m, type: m.includes(".mp4") ? "video" : "image" });
-                        else if (m.url) extracted.push({ url: m.url, type: m.type || "video" });
-                    });
-                }
-            }
-
-            if (data.url && typeof data.url === "string") {
-                extracted.push({ url: data.url, type: data.url.includes(".mp4") ? "video" : "image" });
-            }
-
-            if (data.download_url && typeof data.download_url === "string") {
-                extracted.push({ url: data.download_url, type: "video" });
-            }
-
-            // 3. Fallback: Deep search using Regex inside JSON string
-            if (extracted.length === 0) {
-                const jsonStr = JSON.stringify(data);
-                const urlMatches = jsonStr.match(/https?:\/\/[^"]+/g) || [];
-                urlMatches.forEach(u => {
-                    if (u.includes("cdninstagram.com") || u.includes("fbcdn.net") || u.includes(".mp4") || u.includes(".jpg")) {
-                        // Clean clean escaped slashes
-                        const cleanUrl = u.replace(/\\/g, '');
-                        extracted.push({ url: cleanUrl, type: cleanUrl.includes(".mp4") ? "video" : "image" });
-                    }
+            // Your API shape:
+            // { ok: true, type: "video", download_url: "...", thumbnail_url: "..." }
+            if (data.download_url) {
+                var t = (data.type || "").toLowerCase();
+                var isVideo = t === "video" || t === "reel" || String(data.download_url).indexOf(".mp4") !== -1;
+                list.push({
+                    url: data.download_url,
+                    type: isVideo ? "video" : "image"
                 });
             }
 
-            // Filter unique links
-            const unique = [];
-            const seen = new Set();
-            extracted.forEach(item => {
-                if (!seen.has(item.url)) {
-                    seen.add(item.url);
-                    unique.push(item);
-                }
-            });
+            // Sometimes image-only posts
+            if (data.image_url) {
+                list.push({ url: data.image_url, type: "image" });
+            }
 
+            // Array responses (carousel)
+            if (Object.prototype.toString.call(data.media) === "[object Array]") {
+                for (var i = 0; i < data.media.length; i++) {
+                    var item = data.media[i];
+                    if (!item) continue;
+                    if (typeof item === "string") {
+                        list.push({
+                            url: item,
+                            type: item.indexOf(".mp4") !== -1 ? "video" : "image"
+                        });
+                    } else if (item.download_url || item.url) {
+                        var u = item.download_url || item.url;
+                        var it = (item.type || "").toLowerCase();
+                        list.push({
+                            url: u,
+                            type: (it === "video" || String(u).indexOf(".mp4") !== -1) ? "video" : "image"
+                        });
+                    }
+                }
+            }
+
+            // Fallback single media string
+            if (typeof data.media === "string" && data.media.indexOf("http") === 0) {
+                list.push({
+                    url: data.media,
+                    type: (data.type || "").toLowerCase() === "video" || data.media.indexOf(".mp4") !== -1 ? "video" : "image"
+                });
+            }
+
+            // unique
+            var seen = {};
+            var unique = [];
+            for (var j = 0; j < list.length; j++) {
+                if (list[j].url && !seen[list[j].url]) {
+                    seen[list[j].url] = true;
+                    unique.push(list[j]);
+                }
+            }
             return unique;
         }
 
-        form.addEventListener("submit", async function (e) {
+        form.addEventListener("submit", function (e) {
             e.preventDefault();
 
-            const url = input.value.trim();
+            var url = (input.value || "").trim();
             clearResults();
 
             if (!isValidInstagramUrl(url)) {
-                showStatus("❌ Please enter a valid Instagram Reel, Post, or Story link.");
+                showStatus("❌ Please enter a valid Instagram URL.");
                 input.focus();
                 return;
             }
 
             btn.disabled = true;
             btn.textContent = "Please wait...";
-            showStatus("⏳ Fetching media from server. Please wait...");
+            showStatus("⏳ Fetching media details. Please wait a moment...");
 
-            try {
-                const apiUrl = RAPID_API_BASE + "?url=" + encodeURIComponent(url);
+            var apiUrl = RAPID_API_BASE + "?url=" + encodeURIComponent(url);
 
-                const response = await fetch(apiUrl, {
-                    method: "GET",
-                    headers: {
-                        "x-rapidapi-key": RAPID_API_KEY,
-                        "x-rapidapi-host": RAPID_API_HOST
-                    }
-                });
-
+            fetch(apiUrl, {
+                method: "GET",
+                headers: {
+                    "x-rapidapi-key": RAPID_API_KEY,
+                    "x-rapidapi-host": RAPID_API_HOST
+                }
+            })
+            .then(function (response) {
                 if (!response.ok) {
-                    throw new Error(`Server returned status ${response.status}. Please check your RapidAPI plan or key.`);
+                    if (response.status === 429) throw new Error("Rate limit reached. Please try again in a minute.");
+                    if (response.status === 401 || response.status === 403) throw new Error("API key error. Check your RapidAPI subscription.");
+                    throw new Error("Unable to fetch media (status " + response.status + ").");
+                }
+                return response.json();
+            })
+            .then(function (data) {
+                console.log("RapidAPI Response:", data);
+
+                if (!data || data.ok === false) {
+                    throw new Error((data && (data.error || data.message)) || "Media not available.");
                 }
 
-                const data = await response.json();
-                console.log("RapidAPI Response:", data); // Debugging info
-
-                const mediaList = extractUrlsFromResponse(data);
+                var mediaList = extractMedia(data);
 
                 if (!mediaList.length) {
-                    throw new Error("Could not find downloadable media in this link. It may be from a private account.");
+                    throw new Error("No downloadable media found. Link may be private or restricted.");
                 }
 
-                mediaList.forEach((m, idx) => {
-                    addMediaCard(m.url, m.type, mediaList.length > 1 ? `Media Item ${idx + 1}` : "Your file is ready.");
-                });
+                for (var i = 0; i < mediaList.length; i++) {
+                    var m = mediaList[i];
+                    var label = mediaList.length > 1
+                        ? ((m.type === "video" ? "Video " : "Photo ") + (i + 1))
+                        : (m.type === "video" ? "Your video is ready." : "Your photo is ready.");
+                    addMediaCard(m.url, m.type, label);
+                }
 
-                showStatus("✓ Download link generated successfully!");
-
-            } catch (err) {
-                console.error("Downloader Error:", err);
-                showStatus("❌ " + (err.message || "Failed to process request. Please try again."));
-            } finally {
+                showStatus("✓ Media ready! Click the button below to download.");
+            })
+            .catch(function (err) {
+                console.error("Downloader error:", err);
+                showStatus("❌ " + (err.message || "Unable to download. Please check the link and try again."));
+            })
+            .finally(function () {
                 btn.disabled = false;
                 btn.textContent = "Download";
-            }
+            });
         });
     </script>
+</body>
+</html>
