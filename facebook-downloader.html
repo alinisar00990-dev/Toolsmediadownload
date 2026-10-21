@@ -129,7 +129,6 @@
             color: var(--accent);
         }
         
-        /* 3-LINE HAMBURGER MENU (ALWAYS VISIBLE) */
         .tmd-menu-btn { 
             display: flex; 
             background: none; 
@@ -160,7 +159,6 @@
             transform: translateY(-7px) rotate(-45deg);
         }
 
-        /* HEADER DROPDOWN */
         .tmd-dropdown {
             display: none;
             flex-direction: column;
@@ -200,12 +198,8 @@
 
         @media (max-width: 768px) {
             .tmd-logo { font-size: 1rem; }
-            .tmd-nav-desktop-links {
-                display: none;
-            }
-            .tmd-mobile-link {
-                display: block;
-            }
+            .tmd-nav-desktop-links { display: none; }
+            .tmd-mobile-link { display: block; }
             .tmd-dropdown {
                 position: fixed;
                 top: 57px;
@@ -353,39 +347,19 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .result-content {
-            display: flex;
-            gap: 22px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .thumb {
-            width: 160px;
-            height: 110px;
-            object-fit: cover;
-            border-radius: 12px;
-            background: #000;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .result-info {
-            flex: 1;
-            min-width: 220px;
-        }
-
         .result-title {
             font-size: 16px;
             font-weight: 600;
             margin-bottom: 8px;
             line-height: 1.4;
             color: var(--text-light);
+            word-break: break-word;
         }
 
         .result-meta {
             font-size: 13.5px;
             color: var(--text-dim);
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
 
         .download-btns {
@@ -438,11 +412,6 @@
         @media (max-width: 600px) {
             .input-group button { width: 100%; }
             .downloader-box { padding: 30px 18px; }
-            .result-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            .thumb { width: 100%; height: 180px; }
             .download-btns { justify-content: center; }
             .dl-btn { width: 100%; }
         }
@@ -509,25 +478,20 @@
             ToolsMediaDownloader
         </a>
         <div class="tmd-nav-container">
-            <!-- Desktop Direct Links -->
             <div class="tmd-nav-desktop-links">
                 <a href="/#document-tools">PDF Tools</a>
                 <a href="/#video-tools">Video Tools</a>
                 <a href="blog.html">Blog</a>
             </div>
             
-            <!-- Hamburger Menu Button (Always visible) -->
             <button class="tmd-menu-btn" id="mobileMenuBtn" aria-label="Menu" aria-expanded="false">
                 <span></span><span></span><span></span>
             </button>
             
-            <!-- Universal Dropdown -->
             <nav class="tmd-dropdown" id="navLinks">
-                <!-- Mobile Navigation Injection Links -->
                 <a href="/#document-tools" class="tmd-mobile-link">PDF Tools</a>
                 <a href="/#video-tools" class="tmd-mobile-link">Video Tools</a>
                 <a href="blog.html" class="tmd-mobile-link">Blog</a>
-                <!-- General Links -->
                 <a href="about.html">About</a>
                 <a href="privacy.html">Privacy</a>
                 <a href="terms.html">Terms</a>
@@ -561,32 +525,13 @@
         <div class="status-msg" id="statusMsg" role="status" aria-live="polite"></div>
 
         <div class="result-card" id="resultCard">
-            <div class="result-content">
-                <img src="" id="thumb" class="thumb" alt="Video thumbnail" hidden>
-                <div class="result-info">
-                    <div class="result-title" id="videoTitle">Facebook Video Ready</div>
-                    <div class="result-meta" id="videoMeta">Your video is ready to save.</div>
-                    <div class="download-btns">
-                        <a
-                            href="#"
-                            id="hdBtn"
-                            class="dl-btn"
-                            download="facebook_video.mp4"
-                            hidden
-                        >⚡ Download Video</a>
-                        <a
-                            href="#"
-                            id="sdBtn"
-                            class="dl-btn secondary"
-                            hidden
-                        >Download SD</a>
-                    </div>
-                </div>
-            </div>
+            <div class="result-title" id="videoTitle">Facebook Video Ready</div>
+            <div class="result-meta" id="videoMeta">Select your preferred video quality below:</div>
+            <div class="download-btns" id="downloadBtns"></div>
         </div>
 
         <p class="note">
-            🔒 Works with accessible public videos. Private or restricted videos may not be available.
+            🔒 Works with accessible public Facebook videos and Reels.
             Only download content you have permission to save.
         </p>
     </div>
@@ -610,7 +555,7 @@
 
     <!-- ==================== SCRIPTS ==================== -->
     <script>
-        // Universal Header Mobile & Desktop Menu Dropdown Handler
+        // Universal Header Mobile Dropdown Handler
         document.getElementById('mobileMenuBtn').addEventListener('click', function(e) {
             e.stopPropagation();
             this.classList.toggle('active');
@@ -633,151 +578,193 @@
             });
         });
 
-        // Backend Facebook Core Logic
-        const BACKEND_URL = "https://instagram-downloader-backend-nd5n.onrender.com";
+        // ================= RAPIDAPI CONFIGURATION =================
+        const RAPID_API_KEY  = "823d313349msh8708f7c2bb986adp127814jsn5db46ebbd91b";
+        const RAPID_API_HOST = "free-facebook-downloader.p.rapidapi.com";
+        const RAPID_API_BASE = "https://free-facebook-downloader.p.rapidapi.com/external-api/facebook-video-downloader";
 
         const downloadForm = document.getElementById("downloadForm");
         const input = document.getElementById("fbUrl");
-        const status = document.getElementById("statusMsg");
+        const statusEl = document.getElementById("statusMsg");
         const resultCard = document.getElementById("resultCard");
         const btn = document.getElementById("fetchBtn");
-        const hdBtn = document.getElementById("hdBtn");
-        const sdBtn = document.getElementById("sdBtn");
-        const thumb = document.getElementById("thumb");
-
-        let currentObjectUrl = null;
+        const downloadBtnsContainer = document.getElementById("downloadBtns");
+        const videoTitleEl = document.getElementById("videoTitle");
 
         function isValidFacebookUrl(value) {
             try {
                 const parsed = new URL(value);
                 const allowedHosts = [
-                    "facebook.com",
-                    "www.facebook.com",
-                    "m.facebook.com",
-                    "web.facebook.com",
-                    "fb.watch",
-                    "fb.com",
-                    "www.fb.com"
+                    "facebook.com", "www.facebook.com", "m.facebook.com",
+                    "web.facebook.com", "fb.watch", "fb.com", "www.fb.com"
                 ];
-
-                return (
-                    parsed.protocol === "https:" &&
-                    allowedHosts.includes(parsed.hostname.toLowerCase()) &&
-                    parsed.pathname !== "/"
-                );
+                return (parsed.protocol === "https:" && allowedHosts.includes(parsed.hostname.toLowerCase()));
             } catch {
                 return false;
             }
         }
 
+        function showStatus(msg) {
+            statusEl.textContent = msg;
+        }
+
         function clearPreviousResult() {
             resultCard.style.display = "none";
-            hdBtn.hidden = true;
-            sdBtn.hidden = true;
-            thumb.hidden = true;
+            downloadBtnsContainer.innerHTML = "";
+            videoTitleEl.textContent = "Facebook Video Ready";
+        }
 
-            if (currentObjectUrl) {
-                URL.revokeObjectURL(currentObjectUrl);
-                currentObjectUrl = null;
+        // Generate Unique Filename (Prevents "Download Again" / Name Clashing Error)
+        function makeUniqueFilename(quality) {
+            const now = new Date();
+            const pad = (n) => (n < 10 ? "0" + n : "" + n);
+            const stamp =
+                now.getFullYear() +
+                pad(now.getMonth() + 1) +
+                pad(now.getDate()) + "_" +
+                pad(now.getHours()) +
+                pad(now.getMinutes()) +
+                pad(now.getSeconds());
+            const rand = Math.random().toString(36).slice(2, 6);
+            return `facebook_${quality}_${stamp}_${rand}.mp4`;
+        }
+
+        // Force Direct Download Trigger
+        async function forceDownload(mediaUrl, quality, buttonEl) {
+            const originalText = buttonEl.textContent;
+            const filename = makeUniqueFilename(quality);
+
+            try {
+                buttonEl.textContent = "Downloading...";
+                buttonEl.style.opacity = "0.7";
+                buttonEl.style.pointerEvents = "none";
+
+                // Step 1: Fetch blob directly to force download without opening a new tab
+                const response = await fetch(mediaUrl, { mode: 'cors' });
+                if (!response.ok) throw new Error("CORS_BLOCKED");
+
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+
+                const a = document.createElement("a");
+                a.href = blobUrl;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+
+                setTimeout(() => URL.revokeObjectURL(blobUrl), 5000);
+
+                buttonEl.textContent = "✓ Saved!";
+                setTimeout(() => {
+                    buttonEl.textContent = originalText;
+                    buttonEl.style.opacity = "1";
+                    buttonEl.style.pointerEvents = "auto";
+                }, 1500);
+
+            } catch (err) {
+                console.warn("Direct blob blocked (CORS). Falling back to direct URL trigger.", err);
+
+                // Step 2: Fallback trigger with unique download attribute
+                const a = document.createElement("a");
+                a.href = mediaUrl;
+                a.download = filename;
+                a.target = "_blank";
+                a.rel = "noopener noreferrer";
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+
+                buttonEl.textContent = originalText;
+                buttonEl.style.opacity = "1";
+                buttonEl.style.pointerEvents = "auto";
+                showStatus("✓ Download started. (If it opens in a new tab, press Ctrl+S to save)");
             }
-
-            hdBtn.removeAttribute("href");
-            sdBtn.removeAttribute("href");
         }
 
         downloadForm.addEventListener("submit", async function (event) {
             event.preventDefault();
-
             const url = input.value.trim();
 
             if (!isValidFacebookUrl(url)) {
                 clearPreviousResult();
-                status.textContent = "❌ Please paste a valid HTTPS Facebook video or Reel link.";
+                showStatus("❌ Please paste a valid Facebook video or Reel URL.");
                 return;
             }
 
             clearPreviousResult();
             btn.disabled = true;
-            btn.textContent = "Processing...";
-            status.textContent = "⏳ Connecting to server. The first request may take a moment to wake up...";
-
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 180000);
+            btn.textContent = "Please wait...";
+            showStatus("⏳ Fetching video details. Please wait a moment...");
 
             try {
-                const response = await fetch(BACKEND_URL + "/download", {
-                    method: "POST",
+                const apiUrl = `${RAPID_API_BASE}?url=${encodeURIComponent(url)}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
                     headers: {
-                        "Content-Type": "application/json"
+                        'x-rapidapi-key': RAPID_API_KEY,
+                        'x-rapidapi-host': RAPID_API_HOST,
+                        'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ url: url }),
-                    signal: controller.signal
+                    body: JSON.stringify({})
                 });
 
-                const contentType = response.headers.get("content-type") || "";
-
                 if (!response.ok) {
-                    let message = "Video could not be downloaded.";
-
-                    if (contentType.includes("application/json")) {
-                        const errorData = await response.json();
-                        message = errorData.error || message;
-                    } else {
-                        message = "Server error. Please try again with another public video link.";
-                    }
-
-                    throw new Error(message);
+                    if (response.status === 429) throw new Error("Rate limit reached. Please try again in a minute.");
+                    if (response.status === 401 || response.status === 403) throw new Error("API Key issue. Please check RapidAPI subscription.");
+                    throw new Error("Unable to fetch video from Facebook.");
                 }
 
-                if (contentType.includes("application/json")) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error || "Video could not be downloaded.");
+                const data = await response.json();
+                console.log("Facebook API Response:", data);
+
+                if (!data || !data.success || !data.links) {
+                    throw new Error("Video links not found. Make sure the video is publicly accessible.");
                 }
 
-                const blob = await response.blob();
-
-                if (!blob.size) {
-                    throw new Error("The server returned an empty file.");
+                if (data.title) {
+                    videoTitleEl.textContent = data.title;
                 }
 
-                currentObjectUrl = URL.createObjectURL(blob);
+                const links = data.links;
+                let hasLinks = false;
 
-                const disposition = response.headers.get("content-disposition") || "";
-                const match = disposition.match(/filename="?([^";]+)"?/i);
-                const filename = match ? match[1] : "facebook_video.mp4";
+                // Render High Quality (HD) Button
+                if (links["Download High Quality"]) {
+                    hasLinks = true;
+                    const hdBtn = document.createElement("button");
+                    hdBtn.type = "button";
+                    hdBtn.className = "dl-btn";
+                    hdBtn.textContent = "⚡ Download HD Quality";
+                    hdBtn.addEventListener("click", () => forceDownload(links["Download High Quality"], "HD", hdBtn));
+                    downloadBtnsContainer.appendChild(hdBtn);
+                }
 
-                hdBtn.href = currentObjectUrl;
-                hdBtn.download = filename;
-                hdBtn.textContent = "⚡ Download Video";
-                hdBtn.hidden = false;
+                // Render Low Quality (SD) Button
+                if (links["Download Low Quality"]) {
+                    hasLinks = true;
+                    const sdBtn = document.createElement("button");
+                    sdBtn.type = "button";
+                    sdBtn.className = "dl-btn secondary";
+                    sdBtn.textContent = "Download SD Quality";
+                    sdBtn.addEventListener("click", () => forceDownload(links["Download Low Quality"], "SD", sdBtn));
+                    downloadBtnsContainer.appendChild(sdBtn);
+                }
 
-                document.getElementById("videoTitle").textContent = "Facebook Video Ready";
-                document.getElementById("videoMeta").textContent = "File size: " + (blob.size / (1024 * 1024)).toFixed(2) + " MB";
+                if (!hasLinks) {
+                    throw new Error("No downloadable links available for this video.");
+                }
 
                 resultCard.style.display = "block";
-                status.textContent = "✓ Video is ready. Click Download Video to save it.";
+                showStatus("✓ Video ready! Click a button below to download.");
 
             } catch (error) {
                 console.error("Facebook downloader error:", error);
-
-                if (error.name === "AbortError") {
-                    status.textContent = "❌ The request took too long. Please try again.";
-                } else if (error instanceof TypeError) {
-                    status.textContent = "❌ Could not connect to the backend server. Please retry in a moment.";
-                } else {
-                    status.textContent = "❌ " + (error.message || "Download failed. Please try another public video.");
-                }
-
+                showStatus("❌ " + (error.message || "Failed to process video. Please check the link and try again."));
             } finally {
-                clearTimeout(timeoutId);
                 btn.disabled = false;
                 btn.textContent = "Download";
-            }
-        });
-
-        window.addEventListener("pagehide", function () {
-            if (currentObjectUrl) {
-                URL.revokeObjectURL(currentObjectUrl);
             }
         });
     </script>
