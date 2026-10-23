@@ -5,157 +5,179 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Facebook Video Downloader - Fast HD & SD Video Saver</title>
     <meta name="description" content="Download Facebook videos in High Definition (HD) and Standard Quality (SD) for free. Fast, direct downloads without installation.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📘</text></svg>">
     <style>
         :root {
             --primary: #1877f2;
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --gray: #64748b;
+            --dark-bg: #0f172a;
+            --card-bg: #ffffff;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --success-color: #10b981;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: var(--light);
-            color: var(--dark);
+            background-color: #f8fafc;
+            color: var(--text-dark);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
         header {
-            background: white;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            background: #ffffff;
+            border-bottom: 1px solid var(--border-color);
             padding: 1rem 2rem;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
         }
 
         .logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--dark);
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--primary);
             text-decoration: none;
         }
 
         .container {
             max-width: 800px;
             margin: 3rem auto;
-            padding: 0 1rem;
+            padding: 0 1.25rem;
             width: 100%;
             flex: 1;
         }
 
         .hero {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
 
         .hero h1 {
-            font-size: 2.25rem;
+            font-size: 2.5rem;
+            font-weight: 800;
             margin-bottom: 0.75rem;
+            line-height: 1.2;
+            color: var(--text-dark);
+        }
+
+        .hero h1 span {
             color: var(--primary);
         }
 
         .hero p {
-            color: var(--gray);
-            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-size: 1.125rem;
         }
 
         .input-card {
-            background: white;
+            background: var(--card-bg);
             padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+            border: 1px solid var(--border-color);
         }
 
         .input-group {
             display: flex;
-            gap: 10px;
+            gap: 12px;
+        }
+
+        @media (max-width: 640px) {
+            .input-group { flex-direction: column; }
+            .hero h1 { font-size: 1.85rem; }
         }
 
         input[type="url"] {
             flex: 1;
-            padding: 0.875rem 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
             font-size: 1rem;
             outline: none;
-            transition: border-color 0.2s;
+            transition: all 0.2s ease;
         }
 
         input[type="url"]:focus {
             border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.15);
         }
 
         button.btn-submit {
             background: var(--primary);
-            color: white;
+            color: #ffffff;
             border: none;
-            padding: 0.875rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 600;
+            padding: 1rem 1.75rem;
+            border-radius: 10px;
+            font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: transform 0.15s ease, background 0.2s;
         }
 
-        button.btn-submit:hover {
-            background: #166fe5;
-        }
+        button.btn-submit:hover { background: #166fe5; transform: translateY(-1px); }
+        button.btn-submit:active { transform: translateY(0); }
 
         .status {
-            margin-top: 1rem;
+            margin-top: 1.25rem;
             text-align: center;
-            font-weight: 500;
+            font-weight: 600;
             display: none;
+            padding: 0.75rem;
+            border-radius: 8px;
         }
 
-        .status.error { color: #dc2626; display: block; }
-        .status.loading { color: #2563eb; display: block; }
+        .status.error { color: #dc2626; background: #fef2f2; display: block; }
+        .status.loading { color: #2563eb; background: #eff6ff; display: block; }
 
         .result-container {
             margin-top: 2rem;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1.25rem;
+            gap: 1.5rem;
         }
 
         .btn-group {
             display: flex;
-            gap: 12px;
+            gap: 14px;
             flex-wrap: wrap;
             justify-content: center;
         }
 
         .btn-download {
-            background: #16a34a;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 600;
+            background: var(--success-color);
+            color: #ffffff;
+            padding: 0.875rem 1.75rem;
+            border-radius: 10px;
+            font-weight: 700;
             cursor: pointer;
             border: none;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+            transition: background 0.2s ease;
         }
 
         .btn-download.sd {
             background: #2563eb;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
         }
 
-        .btn-download:hover { opacity: 0.9; }
+        .btn-download:hover { opacity: 0.95; }
 
         footer {
-            background: #0f172a;
-            color: white;
-            padding: 3rem 1rem 1.5rem;
+            background: var(--dark-bg);
+            color: #ffffff;
+            padding: 3.5rem 1rem 1.5rem;
             margin-top: auto;
         }
 
@@ -164,24 +186,18 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
         }
 
         .footer-col h3 {
             font-size: 1.1rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
             color: #f1f5f9;
         }
 
-        .footer-col ul {
-            list-style: none;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 0.6rem;
-        }
-
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 0.75rem; }
         .footer-col ul li a {
             color: #94a3b8;
             text-decoration: none;
@@ -189,14 +205,12 @@
             transition: color 0.2s;
         }
 
-        .footer-col ul li a:hover {
-            color: white;
-        }
+        .footer-col ul li a:hover { color: #ffffff; }
 
         .copyright {
             text-align: center;
             border-top: 1px solid #334155;
-            padding-top: 1.5rem;
+            padding-top: 1.75rem;
             color: #64748b;
             font-size: 0.875rem;
         }
@@ -210,7 +224,7 @@
 
     <div class="container">
         <div class="hero">
-            <h1>Facebook Video Downloader</h1>
+            <h1>Facebook <span>Video Downloader</span></h1>
             <p>Paste a Facebook video link below to save HD or SD videos directly to your device.</p>
         </div>
 
@@ -233,6 +247,7 @@
                 <ul>
                     <li><a href="instagram-downloader.html">Instagram Downloader</a></li>
                     <li><a href="facebook-downloader.html">Facebook Downloader</a></li>
+                    <li><a href="tiktok-downloader.html">TikTok Downloader</a></li>
                 </ul>
             </div>
             <div class="footer-col">
