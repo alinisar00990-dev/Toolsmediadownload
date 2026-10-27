@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ToolsMediaDownload - Free Online Tools for Creators</title>
 <meta name="description" content="Free browser-based tools: media downloaders, image converters, PDF tools, QR generator, password generator & more. No signup needed.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='100' y2='100'%3E%3Cstop offset='0' stop-color='%23FF9E7D'/%3E%3Cstop offset='0.5' stop-color='%23E07A5F'/%3E%3Cstop offset='1' stop-color='%23D95D39'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Cpath d='M55 15 L30 55 L48 55 L42 85 L70 42 L52 42 Z' fill='white'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='100' y2='100'%3E%3Cstop offset='0' stop-color='%23FF9E7D'/%3E%3Cstop offset='0.5' stop-color='%23E07A5F'/%3E%3Cstop offset='1' stop-color='%23D95D39'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Cpath d='M55 15 L30 55 L48 55 L42 85 L70 42 L52 42 Z' fill='white'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#E07A5F">
 <style>
 :root{
   --bg-warm:#FAF5EE; --card-bg:#FFFFFF; --primary-peach:#E07A5F;
@@ -18,14 +20,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 a{text-decoration:none;color:inherit;}
 
 /* Header */
-header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border-warm);z-index:100;padding:1rem 1.5rem;}
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border-warm);z-index:100;padding:0.9rem 1.5rem;}
 .nav-wrap{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
-.logo{font-size:1.5rem;font-weight:800;color:var(--text-dark);}
-.logo span{background:var(--peach-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.nav-links{display:flex;gap:2rem;list-style:none;}
-.nav-links a{color:var(--text-dark);font-weight:500;transition:color 0.2s;}
+.logo{display:flex;align-items:center;gap:0.5rem;font-size:1.25rem;font-weight:800;color:var(--text-dark);}
+.logo-icon{width:32px;height:32px;border-radius:8px;background:var(--peach-gradient);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.logo-icon svg{width:18px;height:18px;}
+.logo-text{font-size:1.15rem;font-weight:800;letter-spacing:-0.5px;}
+.logo-text span{background:var(--peach-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-links{display:flex;gap:1.8rem;list-style:none;}
+.nav-links a{color:var(--text-dark);font-weight:500;transition:color 0.2s;font-size:0.95rem;}
 .nav-links a:hover{color:var(--primary-peach);}
-.hamburger{display:none;background:none;border:none;font-size:1.8rem;cursor:pointer;color:var(--text-dark);}
+.hamburger{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--text-dark);padding:0.25rem;}
 
 /* Mobile menu */
 .mobile-menu{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:200;}
@@ -52,7 +57,14 @@ section{padding:4rem 1.5rem;}
 .section-sub{text-align:center;color:var(--text-muted);margin-bottom:3rem;font-size:1.05rem;}
 
 .tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
-.tool-card{background:var(--card-bg);border:1px solid var(--border-warm);border-radius:16px;padding:1.75rem;transition:all 0.3s;position:relative;overflow:hidden;}
+
+/* CARD FIX — flex column so buttons align bottom */
+.tool-card{
+  background:var(--card-bg);border:1px solid var(--border-warm);
+  border-radius:16px;padding:1.75rem;transition:all 0.3s;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+}
 .tool-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px var(--glow-peach);border-color:var(--primary-peach);}
 .tool-tag{position:absolute;top:1rem;right:1rem;padding:0.25rem 0.7rem;border-radius:20px;font-size:0.7rem;font-weight:700;text-transform:uppercase;}
 .tag-popular{background:#D1FAE5;color:#065F46;}
@@ -63,8 +75,14 @@ section{padding:4rem 1.5rem;}
 .tool-icon-wrap{width:70px;height:70px;border-radius:16px;background:var(--bg-warm);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;}
 .tool-icon-wrap svg{width:40px;height:40px;}
 .tool-card h3{font-size:1.3rem;margin-bottom:0.5rem;font-weight:700;}
-.tool-card p{color:var(--text-muted);margin-bottom:1.2rem;font-size:0.98rem;}
-.tool-btn{display:block;width:100%;text-align:center;padding:0.85rem;border-radius:10px;color:#fff;font-weight:700;transition:all 0.2s;font-size:1rem;}
+.tool-card p{color:var(--text-muted);margin-bottom:1.2rem;font-size:0.98rem;flex-grow:1;}
+.tool-btn{
+  display:flex;align-items:center;justify-content:center;
+  width:100%;height:48px;padding:0 1rem;
+  border-radius:10px;color:#fff;font-weight:700;
+  transition:all 0.2s;font-size:1rem;line-height:1;
+  margin-top:auto;
+}
 .tool-btn:hover,.tool-btn:active{transform:scale(1.02);box-shadow:0 6px 16px var(--glow-peach);}
 
 .btn-instagram{background:linear-gradient(45deg,#F58529,#DD2A7B,#8134AF);}
@@ -118,8 +136,13 @@ footer{background:var(--dark-footer);color:#fff;padding:3rem 1.5rem 1.5rem;}
 @media(max-width:768px){
   .nav-links{display:none;}
   .hamburger{display:block;}
+  .logo-text{font-size:1.05rem;}
 }
 @media(max-width:640px){
+  header{padding:0.75rem 1rem;}
+  .logo-icon{width:28px;height:28px;}
+  .logo-icon svg{width:16px;height:16px;}
+  .logo-text{font-size:1rem;}
   .hero{padding:2.5rem 1rem;}
   .hero h1{font-size:2.1rem;}
   .hero p{font-size:1.05rem;}
@@ -131,7 +154,7 @@ footer{background:var(--dark-footer);color:#fff;padding:3rem 1.5rem 1.5rem;}
   .tool-card{padding:1.5rem 1.25rem;}
   .tool-card h3{font-size:1.2rem;}
   .tool-card p{font-size:0.95rem;}
-  .tool-btn{padding:0.9rem 1rem;font-size:0.95rem;}
+  .tool-btn{height:46px;font-size:0.95rem;}
   .tool-icon-wrap{width:60px;height:60px;}
   .tool-icon-wrap svg{width:34px;height:34px;}
 }
@@ -141,7 +164,14 @@ footer{background:var(--dark-footer);color:#fff;padding:3rem 1.5rem 1.5rem;}
 
 <header>
   <div class="nav-wrap">
-    <a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a>
+    <a href="index.html" class="logo">
+      <span class="logo-icon">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path d="M55 15 L30 55 L48 55 L42 85 L70 42 L52 42 Z" fill="white"/>
+        </svg>
+      </span>
+      <span class="logo-text">TMD<span>.online</span></span>
+    </a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="blog.html">Blog</a></li>
@@ -176,41 +206,8 @@ footer{background:var(--dark-footer);color:#fff;padding:3rem 1.5rem 1.5rem;}
   </div>
 </section>
 
-<!-- Media Downloaders -->
+<!-- Image & File Tools (MOVED UP) -->
 <section>
-  <div class="container">
-    <h2 class="section-title">📥 Media Downloaders</h2>
-    <p class="section-sub">Save videos, reels & stories from social platforms</p>
-    <div class="tools-grid">
-      <div class="tool-card">
-        <span class="tool-tag tag-hot">Hot</span>
-        <div class="tool-icon-wrap"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" fill="url(#ig)"/><circle cx="12" cy="12" r="4.5" stroke="#fff" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="#fff"/><defs><linearGradient id="ig" x1="0" y1="0" x2="24" y2="24"><stop stop-color="#F58529"/><stop offset=".5" stop-color="#DD2A7B"/><stop offset="1" stop-color="#8134AF"/></linearGradient></defs></svg></div>
-        <h3>Instagram Downloader</h3>
-        <p>Save Reels, Stories, Posts & IGTV in HD quality.</p>
-        <a href="instagram-downloader.html" class="tool-btn btn-instagram">Download</a>
-      </div>
-
-      <div class="tool-card">
-        <span class="tool-tag tag-popular">Popular</span>
-        <div class="tool-icon-wrap"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#1877F2"/><path d="M15.5 12h-2.5V20h-3v-8H8v-2.8h2V7.5c0-2 1-3.5 3.5-3.5h2.3v2.8h-1.5c-.8 0-1 .4-1 1v1.4h2.5l-.3 2.8z" fill="#fff"/></svg></div>
-        <h3>Facebook Downloader</h3>
-        <p>Download FB videos, reels & watch content easily.</p>
-        <a href="facebook-downloader.html" class="tool-btn btn-facebook">Save Video</a>
-      </div>
-
-      <div class="tool-card">
-        <span class="tool-tag tag-trending">Trending</span>
-        <div class="tool-icon-wrap"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#000"/><path d="M16.5 8.2c-1.3-.3-2.3-1-2.8-2.2h-2v9.5c0 1.2-1 2.2-2.2 2.2s-2.2-1-2.2-2.2 1-2.2 2.2-2.2c.2 0 .4 0 .6.1v-2c-.2 0-.4-.1-.6-.1-2.3 0-4.2 1.9-4.2 4.2s1.9 4.2 4.2 4.2 4.2-1.9 4.2-4.2v-5c.9.7 2 1.1 3.2 1.1V9.6c-.1 0-.3-.1-.4-.2z" fill="#FE2C55"/></svg></div>
-        <h3>TikTok Downloader</h3>
-        <p>No watermark TikTok video downloads in seconds.</p>
-        <a href="tiktok-downloader.html" class="tool-btn btn-tiktok">Grab Video</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Image & File Tools -->
-<section style="background:#fff;">
   <div class="container">
     <h2 class="section-title">🖼️ Image & File Tools</h2>
     <p class="section-sub">Convert, resize & optimize files instantly</p>
@@ -245,6 +242,47 @@ footer{background:var(--dark-footer);color:#fff;padding:3rem 1.5rem 1.5rem;}
         <h3>PDF Tools</h3>
         <p>Merge, split & convert images to PDF.</p>
         <a href="pdf-tools.html" class="tool-btn btn-pdf">Open PDF</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Media Downloaders (MOVED DOWN) -->
+<section style="background:#fff;">
+  <div class="container">
+    <h2 class="section-title">📥 Media Downloaders</h2>
+    <p class="section-sub">Save videos, reels & stories from social platforms</p>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <span class="tool-tag tag-hot">Hot</span>
+        <div class="tool-icon-wrap"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" fill="url(#ig)"/><circle cx="12" cy="12" r="4.5" stroke="#fff" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="#fff"/><defs><linearGradient id="ig" x1="0" y1="0" x2="24" y2="24"><stop stop-color="#F58529"/><stop offset=".5" stop-color="#DD2A7B"/><stop offset="1" stop-color="#8134AF"/></linearGradient></defs></svg></div>
+        <h3>Instagram Downloader</h3>
+        <p>Save Reels, Stories, Posts & IGTV in HD quality.</p>
+        <a href="instagram-downloader.html" class="tool-btn btn-instagram">Download</a>
+      </div>
+
+      <div class="tool-card">
+        <span class="tool-tag tag-popular">Popular</span>
+        <div class="tool-icon-wrap"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#1877F2"/><path d="M15.5 12h-2.5V20h-3v-8H8v-2.8h2V7.5c0-2 1-3.5 3.5-3.5h2.3v2.8h-1.5c-.8 0-1 .4-1 1v1.4h2.5l-.3 2.8z" fill="#fff"/></svg></div>
+        <h3>Facebook Downloader</h3>
+        <p>Download FB videos, reels & watch content easily.</p>
+        <a href="facebook-downloader.html" class="tool-btn btn-facebook">Save Video</a>
+      </div>
+
+      <div class="tool-card">
+        <span class="tool-tag tag-trending">Trending</span>
+        <div class="tool-icon-wrap">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <rect width="24" height="24" rx="5" fill="#000"/>
+            <!-- TikTok official-style logo: cyan + magenta offset notes -->
+            <path d="M14.5 4h-2.3v12.3c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2c.2 0 .4 0 .5.1v-2.3c-.2 0-.4 0-.5 0-2.4 0-4.3 1.9-4.3 4.2s1.9 4.2 4.3 4.2 4.3-1.9 4.3-4.2V9.8c.9.6 2 1 3.2 1V8.5c-1.8 0-3.2-1.4-3.2-3.2V4z" fill="#25F4EE" transform="translate(-0.7,-0.7)"/>
+            <path d="M14.5 4h-2.3v12.3c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2c.2 0 .4 0 .5.1v-2.3c-.2 0-.4 0-.5 0-2.4 0-4.3 1.9-4.3 4.2s1.9 4.2 4.3 4.2 4.3-1.9 4.3-4.2V9.8c.9.6 2 1 3.2 1V8.5c-1.8 0-3.2-1.4-3.2-3.2V4z" fill="#FE2C55" transform="translate(0.7,0.7)"/>
+            <path d="M14.5 4h-2.3v12.3c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2c.2 0 .4 0 .5.1v-2.3c-.2 0-.4 0-.5 0-2.4 0-4.3 1.9-4.3 4.2s1.9 4.2 4.3 4.2 4.3-1.9 4.3-4.2V9.8c.9.6 2 1 3.2 1V8.5c-1.8 0-3.2-1.4-3.2-3.2V4z" fill="#fff"/>
+          </svg>
+        </div>
+        <h3>TikTok Downloader</h3>
+        <p>No watermark TikTok video downloads in seconds.</p>
+        <a href="tiktok-downloader.html" class="tool-btn btn-tiktok">Grab Video</a>
       </div>
     </div>
   </div>
