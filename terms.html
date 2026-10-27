@@ -3,442 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms and Conditions - ToolsMediaDownloader</title>
-    <meta name="description" content="Read the terms and conditions policy for using ToolsMediaDownloader. Learn about acceptable use, content licensing, limitations of liability, and content ownership.">
+    <title>Terms of Service - ToolsMediaDownload</title>
+    <meta name="description" content="Terms of Service for ToolsMediaDownload. Read our terms and conditions for using our free online tools.">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://toolsmediadownload.online/terms.html">
-    
-    <!-- Peach Lightning Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23FFB39A'><path d='M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z'/></svg>">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    
+    <link rel="canonical" href="https://toolsmediadownload.com/terms.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        :root { 
-            --bg-dark: #0b0711; 
-            --bg-dark-alt: #0a0510;
-            --accent: #FFB39A; 
-            --accent-glow: #ff8a66; 
-            --purple: #542452; 
-            --text-light: #f0e6ef; 
-            --text-dim: #a08ca0; 
-        }
-        html { scroll-behavior: smooth; }
-        body { 
-            font-family: 'Space Grotesk', sans-serif; 
-            background: var(--bg-dark); 
-            color: var(--text-light); 
-            min-height: 100vh; 
-            overflow-x: hidden; 
-            position: relative; 
-            -webkit-font-smoothing: antialiased; 
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* BACKGROUND ORBS */
-        .orb { position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.3; pointer-events: none; z-index: 0; }
-        .orb-1 { width: 400px; height: 400px; background: #542452; top: -100px; left: -100px; animation: float1 15s infinite ease-in-out; }
-        .orb-2 { width: 350px; height: 350px; background: #ff8a66; bottom: -100px; right: -100px; animation: float2 18s infinite ease-in-out; }
-        @keyframes float1 { 50% { transform: translate(50px, 80px); } }
-        @keyframes float2 { 50% { transform: translate(-50px, -80px); } }
-
-        /* ==================== UNIVERSAL HEADER ==================== */
-        .tmd-header { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 14px 5%; 
-            background-color: var(--bg-dark); 
-            border-bottom: 1px solid rgba(255, 179, 154, 0.15); 
-            position: sticky; 
-            top: 0; 
-            z-index: 1000; 
-            font-family: 'Inter', sans-serif; 
-        }
-        .tmd-logo { 
-            display: flex; 
-            align-items: center; 
-            gap: 8px; 
-            text-decoration: none; 
-            font-family: 'Orbitron', sans-serif; 
-            font-size: 1.25rem; 
-            font-weight: 700; 
-            color: var(--accent) !important; 
-            white-space: nowrap; 
-        }
-        .tmd-logo svg { 
-            width: 20px; 
-            height: 20px; 
-            flex-shrink: 0; 
-            fill: var(--accent); 
-        }
-        .tmd-nav-container {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            position: relative;
-        }
-        .tmd-nav-desktop-links {
-            display: flex;
-            gap: 22px;
-            align-items: center;
-        }
-        .tmd-nav-desktop-links a {
-            color: #d1d5db;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        .tmd-nav-desktop-links a:hover {
-            color: var(--accent);
-        }
-        
-        /* 3-LINE HAMBURGER MENU (ALWAYS VISIBLE) */
-        .tmd-menu-btn { 
-            display: flex; 
-            background: none; 
-            border: none; 
-            cursor: pointer; 
-            flex-direction: column; 
-            justify-content: space-between; 
-            width: 22px; 
-            height: 16px; 
-            padding: 0; 
-            flex-shrink: 0; 
-        }
-        .tmd-menu-btn span { 
-            display: block; 
-            width: 100%; 
-            height: 2px; 
-            background-color: var(--accent); 
-            border-radius: 2px; 
-            transition: transform 0.3s, opacity 0.3s;
-        }
-        .tmd-menu-btn.active span:nth-child(1) {
-            transform: translateY(7px) rotate(45deg);
-        }
-        .tmd-menu-btn.active span:nth-child(2) {
-            opacity: 0;
-        }
-        .tmd-menu-btn.active span:nth-child(3) {
-            transform: translateY(-7px) rotate(-45deg);
-        }
-
-        /* HEADER DROPDOWN */
-        .tmd-dropdown {
-            display: none;
-            flex-direction: column;
-            position: absolute;
-            top: calc(100% + 15px);
-            right: 0;
-            width: 220px;
-            background-color: #120918;
-            border: 1px solid rgba(255, 179, 154, 0.15);
-            border-radius: 12px;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
-            overflow: hidden;
-            z-index: 1001;
-        }
-        .tmd-dropdown.active {
-            display: flex;
-        }
-        .tmd-dropdown a {
-            padding: 12px 20px;
-            font-size: 0.9rem;
-            color: #d1d5db;
-            text-decoration: none;
-            border-bottom: 1px solid rgba(255, 179, 154, 0.08);
-            transition: background 0.2s, color 0.2s;
-            text-align: left;
-        }
-        .tmd-dropdown a:last-child {
-            border-bottom: none;
-        }
-        .tmd-dropdown a:hover {
-            background: rgba(255, 179, 154, 0.08);
-            color: var(--accent);
-        }
-        .tmd-mobile-link {
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .tmd-logo { font-size: 1rem; }
-            .tmd-nav-desktop-links {
-                display: none;
-            }
-            .tmd-mobile-link {
-                display: block;
-            }
-            .tmd-dropdown {
-                position: fixed;
-                top: 57px;
-                left: 0;
-                right: 0;
-                width: 100%;
-                border-radius: 0;
-                border-left: none;
-                border-right: none;
-                border-bottom: 1px solid rgba(255, 179, 154, 0.15);
-            }
-        }
-
-        /* ==================== PAGE LAYOUT ==================== */
-        .page-container { 
-            max-width: 850px; 
-            margin: 40px auto; 
-            padding: 0 20px 60px; 
-            position: relative;
-            z-index: 2;
-        }
-        .legal-box { 
-            background: linear-gradient(135deg, rgba(84,36,82,0.15), rgba(26,13,26,0.5));
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 179, 154, 0.15); 
-            border-radius: 20px; 
-            padding: 50px; 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
-        }
-        .legal-box h1 { 
-            font-family: 'Orbitron', sans-serif; 
-            color: var(--accent); 
-            font-size: 2.2rem; 
-            margin-bottom: 6px; 
-            font-weight: 700; 
-            letter-spacing: 1px;
-        }
-        .legal-box .updated { 
-            color: var(--text-dim); 
-            font-size: 0.9rem; 
-            margin-bottom: 28px; 
-            border-bottom: 1px solid rgba(255, 179, 154, 0.15); 
-            padding-bottom: 14px; 
-            font-family: 'Inter', sans-serif;
-        }
-        .legal-box h2 { 
-            font-family: 'Orbitron', sans-serif;
-            color: #e5e7eb; 
-            font-size: 1.3rem; 
-            margin-top: 36px; 
-            margin-bottom: 14px; 
-            font-weight: 600; 
-            letter-spacing: 0.5px;
-        }
-        .legal-box p { 
-            margin-bottom: 18px; 
-            font-size: 1rem; 
-            color: var(--text-dim); 
-            line-height: 1.8;
-        }
-        .legal-box ul { 
-            margin-bottom: 20px; 
-            padding-left: 22px; 
-            color: var(--text-dim); 
-        }
-        .legal-box li { 
-            margin-bottom: 8px; 
-            font-size: 1rem; 
-            line-height: 1.7;
-        }
-        .legal-box a { 
-            color: var(--accent); 
-            text-decoration: none; 
-            font-weight: 500;
-            transition: color 0.2s, border-bottom 0.2s;
-            border-bottom: 1px solid transparent;
-        }
-        .legal-box a:hover { 
-            color: var(--accent-glow);
-            border-bottom-color: var(--accent-glow);
-        }
-
-        /* ==================== UNIVERSAL FOOTER ==================== */
-        .tmd-footer { 
-            background: linear-gradient(180deg, transparent, rgba(10,5,16,0.9)); 
-            border-top: 1px solid rgba(255,179,154,0.1); 
-            padding: 50px 20px 30px; 
-            text-align: center; 
-            font-family: 'Inter', sans-serif; 
-            margin-top: auto;
-            position: relative;
-            z-index: 2;
-        }
-        .tmd-footer-brand { 
-            font-family: 'Orbitron', sans-serif; 
-            font-size: 20px; 
-            font-weight: 700; 
-            color: var(--accent); 
-            margin-bottom: 15px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 8px; 
-        }
-        .tmd-footer-brand svg { 
-            width: 22px; 
-            height: 22px; 
-            fill: var(--accent); 
-        }
-        .tmd-footer-links { 
-            display: flex; 
-            justify-content: center; 
-            gap: 20px; 
-            margin: 20px 0; 
-            flex-wrap: wrap; 
-        }
-        .tmd-footer-links a { 
-            color: #a08ca0; 
-            text-decoration: none; 
-            font-size: 14px; 
-            transition: 0.3s; 
-        }
-        .tmd-footer-links a:hover { 
-            color: var(--accent); 
-        }
-        .tmd-footer-copy { 
-            color: rgba(255, 255, 255, 0.3); 
-            font-size: 13px; 
-            margin-top: 20px; 
-        }
-
-        @media (max-width: 768px) {
-            .page-container { margin: 20px auto; padding: 0 15px 40px; }
-            .legal-box { padding: 30px 20px; }
-            .legal-box h1 { font-size: 1.8rem; }
-            .legal-box h2 { font-size: 1.15rem; margin-top: 28px; }
-            .legal-box p, .legal-box li { font-size: 0.95rem; }
-        }
+        :root{--bg-warm:#FAF5EE;--card-bg:#FFFFFF;--primary-peach:#E07A5F;--peach-gradient:linear-gradient(135deg,#FF9E7D 0%,#E07A5F 50%,#D95D39 100%);--text-dark:#2C221E;--text-muted:#706661;--border-warm:#EFE3D8;--dark-footer:#1A1615}
+        *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+        body{background:var(--bg-warm);color:var(--text-dark);min-height:100vh;display:flex;flex-direction:column;line-height:1.7}
+        header{background:#fff;border-bottom:1px solid var(--border-warm);padding:0.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+        .logo{font-size:1.4rem;font-weight:800;color:var(--primary-peach);text-decoration:none;display:flex;align-items:center;gap:0.5rem}
+        .logo span{color:var(--text-dark)}
+        .nav-links{display:flex;gap:1.25rem}
+        .nav-links a{color:var(--text-dark);text-decoration:none;font-weight:600;font-size:0.9rem}
+        .nav-links a:hover{color:var(--primary-peach)}
+        @media(max-width:768px){.nav-links{display:none}}
+        .page-container{max-width:800px;margin:3rem auto;padding:0 1.25rem;flex:1}
+        .page-hero{text-align:center;margin-bottom:2.5rem}
+        .page-hero h1{font-size:2.5rem;font-weight:800;margin-bottom:0.75rem}
+        .page-hero h1 .g{background:var(--peach-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .page-hero p{color:var(--text-muted);font-size:1rem}
+        .content-card{background:#fff;border-radius:18px;padding:2.5rem;border:1px solid var(--border-warm);box-shadow:0 8px 25px rgba(224,122,95,0.06);margin-bottom:2rem}
+        .content-card h2{font-size:1.3rem;margin-bottom:1rem;margin-top:1.5rem;color:var(--text-dark)}
+        .content-card h2:first-child{margin-top:0}
+        .content-card p{color:var(--text-muted);margin-bottom:1rem;font-size:0.95rem}
+        .content-card ul{margin-left:1.5rem;margin-bottom:1rem;color:var(--text-muted)}
+        .content-card ul li{margin-bottom:0.5rem;font-size:0.95rem}
+        .last-updated{text-align:center;color:var(--text-muted);font-size:0.85rem;margin-bottom:2rem}
+        footer{background:var(--dark-footer);color:#fff;padding:3rem 1rem 1.5rem;margin-top:auto}
+        .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-bottom:2rem}
+        .footer-col h3{font-size:1.05rem;margin-bottom:1rem;color:#F7EDE2}
+        .footer-col ul{list-style:none}
+        .footer-col ul li{margin-bottom:0.6rem}
+        .footer-col ul li a{color:#A8A099;text-decoration:none;font-size:0.88rem}
+        .footer-col ul li a:hover{color:#F7EDE2}
+        .footer-col p{color:#A8A099;font-size:0.88rem}
+        .copyright{text-align:center;border-top:1px solid #332E2B;padding-top:1.5rem;color:#78706A;font-size:0.85rem}
+        @media(max-width:640px){.page-hero h1{font-size:1.8rem}.content-card{padding:1.5rem}}
     </style>
 </head>
 <body>
-
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-
-    <!-- ==================== UNIVERSAL HEADER ==================== -->
-    <header class="tmd-header">
-        <a href="/" class="tmd-logo">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/></svg>
-            ToolsMediaDownloader
-        </a>
-        <div class="tmd-nav-container">
-            <!-- Desktop Direct Links -->
-            <div class="tmd-nav-desktop-links">
-                <a href="/#document-tools">PDF Tools</a>
-                <a href="/#video-tools">Video Tools</a>
-                <a href="blog.html">Blog</a>
-            </div>
-            
-            <!-- Hamburger Menu Button (Always visible) -->
-            <button class="tmd-menu-btn" id="mobileMenuBtn" aria-label="Menu" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
-            
-            <!-- Universal Dropdown -->
-            <nav class="tmd-dropdown" id="navLinks">
-                <!-- Mobile Navigation Injection Links -->
-                <a href="/#document-tools" class="tmd-mobile-link">PDF Tools</a>
-                <a href="/#video-tools" class="tmd-mobile-link">Video Tools</a>
-                <a href="blog.html" class="tmd-mobile-link">Blog</a>
-                <!-- General Links -->
-                <a href="about.html">About</a>
-                <a href="privacy.html">Privacy</a>
-                <a href="terms.html">Terms</a>
-                <a href="disclaimer.html">Disclaimer</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-        </div>
+    <header>
+        <a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a>
+        <nav class="nav-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
     </header>
 
-    <!-- ==================== MAIN SECTION ==================== -->
     <div class="page-container">
-        <div class="legal-box">
-            <h1>Terms & Conditions</h1>
-            <div class="updated">Last Updated: January 2026</div>
-            
-            <p>Welcome to ToolsMediaDownloader. These terms and conditions outline the rules and regulations for the use of ToolsMediaDownloader's Website, located at toolsmediadownload.online.</p>
-            <p>By accessing this website we assume you accept these terms and conditions. Do not continue to use ToolsMediaDownloader if you do not agree to take all of the terms and conditions stated on this page.</p>
+        <div class="page-hero">
+            <h1>Terms of <span class="g">Service</span></h1>
+            <p>Please read these terms carefully before using our services.</p>
+        </div>
+        <div class="last-updated">Last Updated: January 1, 2026</div>
 
-            <h2>1. Terminology</h2>
-            <p>The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and all Agreements: "Client", "You" and "Your" refers to you, the person logged on this website and compliant to the Company's terms and conditions. "The Company", "Ourselves", "We", "Our" and "Us", refers to our Company. "Party", "Parties", or "Us", refers to both the Client and ourselves.</p>
+        <div class="content-card">
+            <h2>1. Acceptance of Terms</h2>
+            <p>By accessing and using ToolsMediaDownload ("the Site"), you accept and agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you may not use our services.</p>
 
-            <h2>2. Acceptable Use</h2>
-            <p>You agree to use ToolsMediaDownloader only for lawful purposes. You are strictly prohibited from using our services:</p>
+            <h2>2. Description of Service</h2>
+            <p>ToolsMediaDownload provides free, browser-based online tools including but not limited to:</p>
             <ul>
-                <li>To download any copyrighted content without the explicit permission of the content owner</li>
-                <li>To violate any international, federal, provincial or state regulations, rules, laws, or local ordinances</li>
-                <li>To infringe upon or violate our intellectual property rights or the intellectual property rights of others</li>
-                <li>To harass, abuse, insult, harm, defame, slander, disparage, intimidate, or discriminate</li>
-                <li>To submit false or misleading information</li>
-                <li>To upload or transmit viruses or any other type of malicious code</li>
+                <li>Social media video and image downloaders</li>
+                <li>Image compression and conversion tools</li>
+                <li>PDF manipulation tools</li>
+                <li>QR code generators</li>
+                <li>Text and utility tools</li>
             </ul>
 
-            <h2>3. Content Ownership</h2>
-            <p>ToolsMediaDownloader does not claim ownership of any media content downloaded through our tools. All videos, images, and media remain the property of their respective owners and the platforms they are hosted on (TikTok, Facebook, Instagram, etc.). Users are solely responsible for ensuring they have the right to download and use any content they access through our services.</p>
+            <h2>3. User Responsibilities</h2>
+            <p>When using our tools, you agree to:</p>
+            <ul>
+                <li>Use the tools only for lawful purposes</li>
+                <li>Respect copyright and intellectual property rights</li>
+                <li>Not use our tools to download content you don't have permission to download</li>
+                <li>Not attempt to reverse-engineer, hack, or disrupt our services</li>
+                <li>Not use automated scripts or bots to access our tools</li>
+            </ul>
 
-            <h2>4. License</h2>
-            <p>Permission is granted to temporarily download one copy of the materials on ToolsMediaDownloader's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not modify or copy the materials, use the materials for any commercial purpose, or remove any copyright notations.</p>
+            <h2>4. Intellectual Property</h2>
+            <p>The content, design, code, and all materials on ToolsMediaDownload are owned by us and are protected by copyright laws. You may not reproduce, distribute, or create derivative works without our written permission.</p>
 
-            <h2>5. Disclaimer of Warranties</h2>
-            <p>The materials on ToolsMediaDownloader's website are provided on an 'as is' basis. ToolsMediaDownloader makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
+            <h2>5. Copyright & Fair Use</h2>
+            <p>Our download tools are intended for personal, fair use purposes only. Users are responsible for ensuring they have the right to download any content. We do not host, store, or cache any downloaded content on our servers.</p>
 
-            <h2>6. Limitations of Liability</h2>
-            <p>In no event shall ToolsMediaDownloader or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on ToolsMediaDownloader's website, even if ToolsMediaDownloader or a ToolsMediaDownloader authorized representative has been notified orally or in writing of the possibility of such damage.</p>
+            <h2>6. Privacy</h2>
+            <p>All tools process data locally in your browser. We do not collect, store, or transmit your files. We may use cookies and third-party analytics/advertising services. For more details, see our privacy practices on the Disclaimer page.</p>
 
-            <h2>7. Revisions and Errata</h2>
-            <p>The materials appearing on ToolsMediaDownloader's website could include technical, typographical, or photographic errors. ToolsMediaDownloader does not warrant that any of the materials on its website are accurate, complete or current. ToolsMediaDownloader may make changes to the materials contained on its website at any time without notice.</p>
+            <h2>7. Advertisements</h2>
+            <p>We display advertisements through Google AdSense and other ad networks to support our free services. These third-party services may use cookies to serve relevant ads. By using our Site, you consent to the display of advertisements.</p>
 
-            <h2>8. Governing Law</h2>
-            <p>These terms and conditions are governed by and construed in accordance with applicable laws and you irrevocably submit to the exclusive jurisdiction of the courts in that location. If you have any questions about these Terms, please <a href="contact.html">contact us</a>.</p>
+            <h2>8. Disclaimer of Warranties</h2>
+            <p>Our tools are provided "as is" without warranties of any kind, either express or implied. We do not guarantee that our tools will be error-free, uninterrupted, or compatible with all devices and browsers.</p>
+
+            <h2>9. Limitation of Liability</h2>
+            <p>ToolsMediaDownload shall not be liable for any indirect, incidental, special, or consequential damages resulting from the use or inability to use our services, including but not limited to data loss, file corruption, or system damage.</p>
+
+            <h2>10. Changes to Terms</h2>
+            <p>We reserve the right to update or modify these Terms of Service at any time. Continued use of the Site after changes constitutes acceptance of the new terms.</p>
+
+            <h2>11. Governing Law</h2>
+            <p>These terms shall be governed by and construed in accordance with applicable laws, without regard to conflict of law principles.</p>
+
+            <h2>12. Contact</h2>
+            <p>For questions about these Terms, please <a href="contact.html" style="color:var(--primary-peach);font-weight:600;text-decoration:none">contact us</a>.</p>
         </div>
     </div>
 
-    <!-- ==================== UNIVERSAL FOOTER ==================== -->
-    <footer class="tmd-footer">
-        <div class="tmd-footer-brand">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/></svg>
-            ToolsMediaDownloader
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col"><h3>⚡ ToolsMediaDownload</h3><p>Free, private tools for creators.</p></div>
+            <div class="footer-col"><h3>Tools</h3><ul><li><a href="instagram-downloader.html">Instagram Downloader</a></li><li><a href="gif-compressor.html">Image Compressor</a></li><li><a href="pdf-tools.html">PDF Tools</a></li></ul></div>
+            <div class="footer-col"><h3>Company</h3><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="terms.html">Terms</a></li><li><a href="dmca.html">DMCA</a></li></ul></div>
         </div>
-        <div class="tmd-footer-links">
-            <a href="about.html">About</a>
-            <a href="privacy.html">Privacy</a>
-            <a href="terms.html">Terms</a>
-            <a href="disclaimer.html">Disclaimer</a>
-            <a href="contact.html">Contact</a>
-            <a href="blog.html">Blog</a>
-        </div>
-        <p class="tmd-footer-copy">© 2026 ToolsMediaDownloader. All rights reserved.</p>
+        <div class="copyright">&copy; 2026 ToolsMediaDownload. All rights reserved.</div>
     </footer>
-
-    <!-- ==================== SCRIPT ACTIONS ==================== -->
-    <script>
-        // Universal Header Mobile & Desktop Menu Dropdown Handler
-        document.getElementById('mobileMenuBtn').addEventListener('click', function(e) {
-            e.stopPropagation();
-            this.classList.toggle('active');
-            document.getElementById('navLinks').classList.toggle('active');
-        });
-
-        document.addEventListener('click', function(e) {
-            const nav = document.getElementById('navLinks');
-            const btn = document.getElementById('mobileMenuBtn');
-            if (nav.classList.contains('active') && !nav.contains(e.target) && !btn.contains(e.target)) {
-                nav.classList.remove('active');
-                btn.classList.remove('active');
-            }
-        });
-
-        document.querySelectorAll('.tmd-dropdown a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('navLinks').classList.remove('active');
-                document.getElementById('mobileMenuBtn').classList.remove('active');
-            });
-        });
-    </script>
 </body>
 </html>
