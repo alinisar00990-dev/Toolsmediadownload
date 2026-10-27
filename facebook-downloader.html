@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facebook Video Downloader - Rapid HD Downloads | ToolsMediaDownload</title>
+    <title>Facebook Video Downloader - Fast HD Downloads | ToolsMediaDownload</title>
+    <meta name="description" content="Download Facebook videos and Reels instantly in HD quality using ToolsMediaDownload. Fast, free, and secure online media utility.">
     
-    <!-- Round Peach Favicon -->
+    <!-- Round Peach Favicon for Google Search & Browser Tab -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="favicon.svg">
     <meta name="theme-color" content="#E07A5F">
 
-    <!-- Google Fonts & Icons -->
+    <!-- Google Fonts & FontAwesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
@@ -29,176 +30,149 @@
             --border-warm: #EFE3D8;
             --dark-footer: #1A1615;
             --shadow-soft: 0 10px 30px rgba(224, 122, 95, 0.08);
+            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04);
             --glow-peach: rgba(224, 122, 95, 0.3);
             --radius-main: 16px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
         html, body { overflow-x: hidden; }
-        body { background-color: var(--bg-warm); color: var(--text-dark); display: flex; flex-direction: column; min-height: 100vh; }
+        body { background-color: var(--bg-warm); color: var(--text-dark); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
 
-        /* HEADER - FULLY RESPONSIVE */
+        /* HEADER & NAVBAR (ORIGINAL BRANDING) */
         header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-warm); position: sticky; top: 0; z-index: 1000; }
-        .navbar { max-width: 1200px; margin: 0 auto; padding: 0.9rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .navbar { max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
         
         .logo { 
             font-family: 'Space Grotesk', sans-serif; 
-            font-size: 1.4rem; 
+            font-size: 1.6rem; 
             font-weight: 700; 
             color: var(--text-dark); 
             text-decoration: none; 
-            display: flex; 
-            align-items: center; 
-            gap: 0.4rem; 
-            white-space: nowrap;
-        }
-        .logo-bolt { color: #FF9E7D; font-size: 1.3rem; }
-        .logo span { background: var(--peach-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        .nav-links { 
-            display: flex; 
-            list-style: none; 
-            gap: 1.5rem; 
-            align-items: center;
-        }
-        .nav-links a { 
-            text-decoration: none; 
-            color: var(--text-dark); 
-            font-weight: 600; 
-            font-size: 0.95rem;
-            transition: color 0.2s;
-        }
-        .nav-links a:hover { color: var(--primary-peach); }
-
-        .mobile-menu-btn { 
-            display: none; 
-            background: none; 
-            border: none; 
-            font-size: 1.4rem; 
-            color: var(--text-dark); 
-            cursor: pointer; 
-            padding: 0.3rem;
-        }
-        
-        /* MAIN LAYOUT */
-        .container { max-width: 800px; margin: 2.5rem auto; padding: 0 1.25rem; flex: 1; width: 100%; }
-        .header-box { text-align: center; margin-bottom: 2rem; }
-        .header-box h1 { font-family: 'Space Grotesk', sans-serif; font-size: 2.3rem; margin-bottom: 0.5rem; line-height: 1.2; }
-        .header-box h1 span { color: var(--primary-peach); }
-        .header-box p { color: var(--text-muted); font-size: 1rem; }
-
-        .input-card { background: var(--card-bg); border: 1px solid var(--border-warm); border-radius: var(--radius-main); padding: 1.75rem; box-shadow: var(--shadow-soft); }
-        .input-group { display: flex; gap: 0.5rem; }
-        .url-input { 
-            flex: 1; 
-            padding: 1rem 1.1rem; 
-            border: 1px solid var(--border-warm); 
-            border-radius: 12px; 
-            font-size: 0.95rem; 
-            outline: none; 
-            background: #FAFAFA; 
-            min-width: 0;
-        }
-        .url-input:focus { border-color: var(--primary-peach); background: #FFF; box-shadow: 0 0 0 3px var(--glow-peach); }
-        
-        .btn-fetch { 
-            background: var(--peach-gradient); 
-            color: #FFF; 
-            border: none; 
-            padding: 0 1.75rem; 
-            border-radius: 12px; 
-            font-weight: 700; 
-            cursor: pointer; 
-            transition: 0.2s; 
             display: flex; 
             align-items: center; 
             gap: 0.5rem;
-            font-size: 0.95rem;
             white-space: nowrap;
         }
-        .btn-fetch:hover { transform: translateY(-2px); box-shadow: 0 4px 15px var(--glow-peach); }
-        .btn-fetch:disabled { opacity: 0.7; cursor: not-allowed; }
+        .logo-icon { 
+            color: #FF9E7D; 
+            filter: drop-shadow(0 2px 4px rgba(224,122,95,0.4)); 
+        }
+        .logo span { 
+            background: var(--peach-gradient); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+        }
 
-        #loading { display: none; text-align: center; margin-top: 2rem; }
-        .spinner { width: 40px; height: 40px; border: 4px solid var(--peach-light); border-top-color: var(--primary-peach); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 1rem; }
+        .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary-peach); }
+        
+        .dropdown { position: relative; }
+        .dropdown-menu { position: absolute; top: 100%; left: 0; background: var(--card-bg); border: 1px solid var(--border-warm); border-radius: 12px; box-shadow: var(--shadow-soft); padding: 0.75rem 0; min-width: 200px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.2s; z-index: 1100; }
+        .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-menu a { display: block; padding: 0.5rem 1.25rem; color: var(--text-dark); font-weight: 500; font-size: 0.9rem; }
+        .dropdown-menu a:hover { background: var(--bg-warm); color: var(--primary-peach); }
+
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.4rem; color: var(--text-dark); cursor: pointer; padding: 0.25rem; }
+
+        /* AD CONTAINER */
+        .ad-container { max-width: 1200px; margin: 1.5rem auto 0; padding: 0 1.5rem; text-align: center; }
+        .ad-box { background: #FFFFFF; border: 1px dashed #D1C4B9; border-radius: 12px; padding: 1.25rem; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; min-height: 90px; display: flex; align-items: center; justify-content: center; }
+
+        /* MAIN CONTENT WORKSPACE */
+        .downloader-section { max-width: 850px; margin: 2rem auto 4rem; padding: 0 1.5rem; flex: 1; width: 100%; }
+        
+        .downloader-header { text-align: center; margin-bottom: 2.5rem; }
+        .downloader-header h1 { font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; line-height: 1.2; }
+        .downloader-header h1 span { background: var(--peach-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .downloader-header p { color: var(--text-muted); font-size: 1.05rem; }
+
+        .input-card { background: var(--card-bg); border: 1px solid var(--border-warm); border-radius: var(--radius-main); padding: 2rem; box-shadow: var(--shadow-soft); margin-bottom: 2rem; }
+        
+        .input-group { display: flex; gap: 0.75rem; }
+        .input-wrapper { position: relative; flex: 1; display: flex; align-items: center; min-width: 0; }
+        .input-wrapper i { position: absolute; left: 1.2rem; color: var(--primary-peach); font-size: 1.2rem; }
+        
+        .url-input { width: 100%; padding: 1.1rem 1.1rem 1.1rem 3.2rem; border: 1px solid var(--border-warm); border-radius: 12px; background: #FAFAFA; font-size: 0.95rem; color: var(--text-dark); outline: none; transition: all 0.2s ease; }
+        .url-input:focus { background: #FFFFFF; border-color: var(--primary-peach); box-shadow: 0 0 0 3px var(--glow-peach); }
+        
+        .btn-download { background: var(--peach-gradient); color: #FFFFFF; border: none; padding: 0 2rem; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 15px var(--glow-peach); white-space: nowrap; }
+        .btn-download:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--glow-peach); }
+        .btn-download:disabled { opacity: 0.7; cursor: not-allowed; }
+
+        .quick-actions { display: flex; gap: 0.75rem; margin-top: 1rem; justify-content: flex-end; }
+        .btn-secondary { background: var(--bg-warm); border: 1px solid var(--border-warm); color: var(--text-dark); padding: 0.4rem 0.9rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.4rem; }
+        .btn-secondary:hover { background: var(--peach-light); color: var(--primary-peach); border-color: var(--primary-peach); }
+
+        /* LOADER & RESULTS */
+        .loading-state { display: none; text-align: center; padding: 2.5rem; background: var(--card-bg); border: 1px solid var(--border-warm); border-radius: var(--radius-main); margin-bottom: 2rem; }
+        .spinner { width: 45px; height: 45px; border: 4px solid var(--peach-light); border-top-color: var(--primary-peach); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 1rem; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        #errorBox { display: none; background: #FCE8E6; color: #C5221F; padding: 1rem; border-radius: 10px; margin-top: 1.5rem; text-align: center; font-weight: 600; font-size: 0.9rem; }
+        .error-box { display: none; background: #FCE8E6; border: 1px solid #FAD2CF; color: #C5221F; padding: 1.25rem; border-radius: 12px; font-size: 0.95rem; margin-bottom: 2rem; text-align: center; font-weight: 600; }
 
-        .result-card { display: none; background: #FFF; border: 1px solid var(--border-warm); border-radius: 16px; padding: 1.75rem; margin-top: 2rem; box-shadow: var(--shadow-soft); }
-        .video-info { display: flex; gap: 1.25rem; align-items: center; margin-bottom: 1.75rem; border-bottom: 1px solid var(--border-warm); padding-bottom: 1.25rem; }
-        .thumb { width: 140px; height: 80px; background: #000; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
-        .video-details h3 { font-size: 1.1rem; margin-bottom: 0.3rem; }
-        .video-details p { color: var(--text-muted); font-size: 0.85rem; }
-        
-        .download-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
-        .dl-btn { text-decoration: none; padding: 1rem; border-radius: 10px; font-weight: 700; text-align: center; display: flex; flex-direction: column; gap: 4px; transition: 0.2s; font-size: 0.95rem; }
-        .dl-hd { background: var(--peach-gradient); color: #FFF; }
-        .dl-sd { background: #F3F4F6; color: var(--text-dark); border: 1px solid var(--border-warm); }
+        .result-card { display: none; background: var(--card-bg); border: 1px solid var(--border-warm); border-radius: var(--radius-main); padding: 2rem; box-shadow: var(--shadow-soft); }
+        .video-info { display: flex; gap: 1.5rem; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-warm); padding-bottom: 1.5rem; }
+        .thumb { width: 160px; height: 90px; background: #000; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+        .video-details h3 { font-size: 1.2rem; margin-bottom: 0.3rem; }
+        .video-details p { color: var(--text-muted); font-size: 0.9rem; }
+
+        .download-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .dl-btn { text-decoration: none; padding: 1rem; border-radius: 10px; font-weight: 700; text-align: center; display: flex; flex-direction: column; gap: 4px; transition: all 0.2s; font-size: 0.95rem; }
+        .dl-hd { background: var(--peach-gradient); color: #FFF; box-shadow: 0 4px 12px var(--glow-peach); }
+        .dl-sd { background: var(--bg-warm); color: var(--text-dark); border: 1px solid var(--border-warm); }
         .dl-btn span { font-size: 0.7rem; opacity: 0.9; text-transform: uppercase; letter-spacing: 0.5px; }
         .dl-btn:hover { transform: translateY(-2px); }
 
         /* FOOTER */
-        footer { background: var(--dark-footer); color: #FFFFFF; padding: 2.5rem 1.25rem 1.5rem; margin-top: auto; text-align: center; }
-        .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin: 1.25rem 0; list-style: none; flex-wrap: wrap; }
-        .footer-links a { color: #A09691; text-decoration: none; font-size: 0.9rem; }
-        .footer-links a:hover { color: var(--primary-peach); }
-        .copy-text { color: #666; font-size: 0.8rem; }
-        
-        /* ========== MOBILE RESPONSIVE FIXES ========== */
+        footer { background: var(--dark-footer); color: #FFFFFF; padding: 3.5rem 1.5rem 2rem; margin-top: auto; }
+        .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 2.5rem; }
+        .footer-brand .logo { color: #FFFFFF; margin-bottom: 1rem; }
+        .footer-brand p { color: #A09691; font-size: 0.9rem; }
+        .footer-col h4 { color: #FFFFFF; font-size: 1.05rem; font-weight: 700; margin-bottom: 1.25rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+        .footer-col a { color: #A09691; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+        .footer-col a:hover { color: var(--primary-peach); }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid #2D2725; display: flex; justify-content: space-between; align-items: center; color: #A09691; font-size: 0.85rem; }
+
+        /* RESPONSIVE DESIGN & MOBILE LOGO SIZING */
         @media (max-width: 768px) {
-            .navbar { padding: 0.75rem 1rem; }
-            
-            .logo { 
-                font-size: 1.1rem; 
-                gap: 0.3rem;
-            }
-            .logo-bolt { font-size: 1.1rem; }
-            
+            .navbar { padding: 0.8rem 1.25rem; }
+            .logo { font-size: 1.25rem; gap: 0.35rem; }
             .mobile-menu-btn { display: block; }
             
-            .nav-links {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: #FFF;
-                flex-direction: column;
-                padding: 1rem;
-                gap: 1rem;
-                border-bottom: 1px solid var(--border-warm);
-                box-shadow: var(--shadow-soft);
-                display: none;
-            }
+            .nav-links { position: absolute; top: 100%; left: 0; right: 0; background: #FFFFFF; border-bottom: 1px solid var(--border-warm); flex-direction: column; padding: 1.5rem; gap: 1.25rem; display: none; box-shadow: var(--shadow-soft); }
             .nav-links.active { display: flex; }
-
-            .header-box h1 { font-size: 1.75rem; }
-            .header-box p { font-size: 0.9rem; }
-
+            .dropdown-menu { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; border: none; padding-left: 1rem; display: none; }
+            .dropdown.active .dropdown-menu { display: block; }
+            
+            .downloader-header h1 { font-size: 1.8rem; }
             .input-card { padding: 1.25rem; }
             .input-group { flex-direction: column; }
-            .btn-fetch { padding: 1rem; justify-content: center; }
-
+            .btn-download { width: 100%; padding: 0.9rem; }
+            
             .video-info { flex-direction: column; text-align: center; }
             .thumb { width: 100%; max-width: 280px; height: auto; aspect-ratio: 16/9; }
-            
             .download-grid { grid-template-columns: 1fr; }
+            
+            .footer-container { grid-template-columns: 1fr; gap: 2rem; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
         }
 
         @media (max-width: 380px) {
-            .logo { font-size: 0.95rem; }
-            .logo-bolt { font-size: 1rem; }
-            .header-box h1 { font-size: 1.5rem; }
-            .navbar { padding: 0.6rem 0.9rem; }
+            .logo { font-size: 1.05rem; }
+            .navbar { padding: 0.7rem 0.9rem; }
         }
     </style>
 </head>
 <body>
 
+    <!-- NAVBAR HEADER WITH STANDARD LOGO -->
     <header>
         <nav class="navbar">
             <a href="index.html" class="logo">
-                <span class="logo-bolt">⚡</span> ToolsMedia<span>Download</span>
+                <span class="logo-icon">⚡</span> ToolsMedia<span>Download</span>
             </a>
             
             <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu">
@@ -207,66 +181,147 @@
 
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Home</a></li>
+                <li class="dropdown" id="toolsDropdown">
+                    <a href="index.html#tools">Tools <i class="fas fa-chevron-down" style="font-size: 0.75rem;"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="gif-compressor.html">GIF Compressor</a>
+                        <a href="image-converter.html">Image Converter</a>
+                        <a href="pdf-tools.html">PDF Tools</a>
+                        <a href="instagram-downloader.html">Instagram Downloader</a>
+                        <a href="facebook-downloader.html" class="active">Facebook Downloader</a>
+                        <a href="tiktok-downloader.html">TikTok Downloader</a>
+                    </div>
+                </li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="container">
-        <div class="header-box">
+    <!-- AD SPACE TOP -->
+    <div class="ad-container">
+        <div class="ad-box"><span><i class="fas fa-ad"></i> Advertisement Space</span></div>
+    </div>
+
+    <!-- MAIN DOWNLOADER SECTION -->
+    <main class="downloader-section">
+        <div class="downloader-header">
             <h1>Facebook <span>Video Downloader</span></h1>
-            <p>Paste any public Facebook video link to download in HD quality.</p>
+            <p>Paste any public Facebook video or Reel link to extract fast download links.</p>
         </div>
 
         <div class="input-card">
             <div class="input-group">
-                <input type="url" id="fbUrl" class="url-input" placeholder="Paste Facebook URL here..." required>
-                <button class="btn-fetch" id="fetchBtn" onclick="handleRapidDownload()">
-                    <i class="fas fa-bolt"></i> <span>Download</span>
+                <div class="input-wrapper">
+                    <i class="fab fa-facebook-f"></i>
+                    <input type="url" id="fbUrl" class="url-input" placeholder="Paste Facebook video URL here..." required autocomplete="off">
+                </div>
+                <button class="btn-download" id="fetchBtn" onclick="handleRapidDownload()">
+                    <i class="fas fa-bolt"></i> <span>Download Now</span>
                 </button>
+            </div>
+            <div class="quick-actions">
+                <button type="button" class="btn-secondary" onclick="pasteClipboard()"><i class="fas fa-paste"></i> Paste</button>
+                <button type="button" class="btn-secondary" onclick="clearInput()"><i class="fas fa-eraser"></i> Clear</button>
             </div>
         </div>
 
-        <div id="loading">
+        <!-- ERROR MESSAGE -->
+        <div id="errorBox" class="error-box"></div>
+
+        <!-- LOADING STATE -->
+        <div id="loading" class="loading-state">
             <div class="spinner"></div>
-            <p>Extracting video...</p>
+            <h3 style="font-size: 1.1rem; font-weight: 700;">Extracting Video Stream...</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.3rem;">Connecting via RapidAPI engine...</p>
         </div>
 
-        <div id="errorBox"></div>
-
+        <!-- RESULT CARD -->
         <div id="resultCard" class="result-card">
             <div class="video-info">
                 <img src="" id="videoThumb" class="thumb" alt="Thumbnail">
                 <div class="video-details">
-                    <h3 id="videoTitle">Video Found</h3>
-                    <p>Choose quality below to download.</p>
+                    <h3 id="videoTitle">Facebook Video Ready</h3>
+                    <p>Select your download quality below:</p>
                 </div>
             </div>
             <div class="download-grid" id="dlGrid"></div>
         </div>
     </main>
 
+    <!-- AD SPACE BOTTOM -->
+    <div class="ad-container" style="margin-bottom: 3rem;">
+        <div class="ad-box"><span><i class="fas fa-ad"></i> Advertisement Space</span></div>
+    </div>
+
+    <!-- FOOTER -->
     <footer>
-        <ul class="footer-links">
-            <li><a href="about.html">About</a></li>
-            <li><a href="privacy.html">Privacy</a></li>
-            <li><a href="terms.html">Terms</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-        <p class="copy-text">&copy; 2025 ToolsMediaDownload - All Rights Reserved.</p>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">⚡</span> ToolsMedia<span>Download</span>
+                </a>
+                <p>Fast, free, and secure online media downloaders, file converters, and utility tools. 100% client-side processing for total privacy.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Tools</h4>
+                <ul>
+                    <li><a href="gif-compressor.html">GIF Compressor</a></li>
+                    <li><a href="image-converter.html">Image Converter</a></li>
+                    <li><a href="pdf-tools.html">PDF Tools</a></li>
+                    <li><a href="instagram-downloader.html">Instagram Downloader</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="blog.html">Blog & Guides</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal Info</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ToolsMediaDownload. All rights reserved.</p>
+        </div>
     </footer>
 
+    <!-- INTERACTIVE SCRIPT WITH RAPIDAPI KEY -->
     <script>
-        // Mobile menu toggle
+        // Mobile Navigation Toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navLinks = document.getElementById('navLinks');
+        const toolsDropdown = document.getElementById('toolsDropdown');
+
         mobileMenuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
         });
+        toolsDropdown.addEventListener('click', () => {
+            if (window.innerWidth <= 768) toolsDropdown.classList.toggle('active');
+        });
+
+        async function pasteClipboard() {
+            try {
+                const text = await navigator.clipboard.readText();
+                if (text) document.getElementById('fbUrl').value = text.trim();
+            } catch (err) {
+                alert('Please paste the URL manually into the box.');
+            }
+        }
+
+        function clearInput() {
+            document.getElementById('fbUrl').value = '';
+            document.getElementById('errorBox').style.display = 'none';
+            document.getElementById('resultCard').style.display = 'none';
+        }
 
         async function handleRapidDownload() {
             const videoUrl = document.getElementById('fbUrl').value.trim();
@@ -276,7 +331,7 @@
             const errorBox = document.getElementById('errorBox');
             const dlGrid = document.getElementById('dlGrid');
 
-            if (!videoUrl) return alert("Please paste a Facebook URL");
+            if (!videoUrl) return alert("Please paste a Facebook video URL");
 
             errorBox.style.display = 'none';
             resultCard.style.display = 'none';
@@ -309,7 +364,7 @@
                             const isHD = quality.toLowerCase().includes('hd') || quality.toLowerCase().includes('high');
                             dlGrid.innerHTML += `
                                 <a href="${link}" target="_blank" class="dl-btn ${isHD ? 'dl-hd' : 'dl-sd'}">
-                                    Download ${quality} <span>MP4 Format</span>
+                                    Download ${quality} <span>MP4 Video</span>
                                 </a>`;
                         }
                     } else {
@@ -317,7 +372,7 @@
                             dlGrid.innerHTML += `<a href="${result.hd}" target="_blank" class="dl-btn dl-hd">Download HD Quality <span>High Definition</span></a>`;
                         }
                         if (result.sd) {
-                            dlGrid.innerHTML += `<a href="${result.sd}" target="_blank" class="dl-btn dl-sd">Download SD Quality <span>Standard Definition</span></a>`;
+                            dlGrid.innerHTML += `<a href="${result.sd}" target="_blank" class="dl-btn dl-sd">Download SD Quality <span>Standard Quality</span></a>`;
                         }
                         if (!result.hd && !result.sd && result.url) {
                             dlGrid.innerHTML += `<a href="${result.url}" target="_blank" class="dl-btn dl-hd">Download Video <span>Original Quality</span></a>`;
@@ -326,13 +381,14 @@
 
                     loading.style.display = 'none';
                     resultCard.style.display = 'block';
+                    resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 } else {
-                    throw new Error("Could not find download links.");
+                    throw new Error("Could not extract download streams.");
                 }
 
             } catch (error) {
                 loading.style.display = 'none';
-                errorBox.innerText = "Error: " + error.message + ". Make sure the video is Public.";
+                errorBox.innerText = "API Error: " + error.message + ". Please ensure the Facebook video is Public.";
                 errorBox.style.display = 'block';
             } finally {
                 fetchBtn.disabled = false;
