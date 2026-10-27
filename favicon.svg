@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="peachGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF9E7D" />
+      <stop offset="50%" stop-color="#E07A5F" />
+      <stop offset="100%" stop-color="#D95D39" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  <!-- Perfect Circle Background -->
+  <circle cx="256" cy="256" r="256" fill="url(#peachGrad)" />
+  <!-- Crisp White Inner Ring -->
+  <circle cx="256" cy="256" r="240" fill="none" stroke="#FFFFFF" stroke-width="6" opacity="0.3" />
+  <!-- Sharp White Lightning Bolt Icon -->
+  <path d="M280 80 L160 272 H248 L224 432 L352 240 H264 Z" fill="#FFFFFF" filter="url(#shadow)"/>
+</svg>
