@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToolsMediaDownload - Free Online Media Tools, Downloaders & Compressors</title>
-    <meta name="description" content="Free online tools - download Instagram, Facebook, TikTok videos, compress images, convert PDFs, generate QR codes, and more. No signup, 100% private.">
-    <meta name="keywords" content="instagram downloader, facebook video downloader, tiktok downloader, gif compressor, image compressor, pdf tools, qr code generator, free online tools">
+    <meta name="description" content="Free online tools - download Instagram, Facebook, TikTok videos, compress images, convert PDFs, generate QR codes and more. No signup, 100% private.">
+    <meta name="keywords" content="instagram downloader, facebook video downloader, tiktok downloader, gif compressor, pdf tools, qr code generator, free online tools">
     <meta name="robots" content="index, follow">
     <meta name="author" content="ToolsMediaDownload">
     <link rel="canonical" href="https://toolsmediadownload.com/">
@@ -13,29 +13,9 @@
     <meta property="og:title" content="ToolsMediaDownload - Free Online Media Tools">
     <meta property="og:description" content="Download videos, compress images, convert PDFs and more. Free & private.">
     <meta property="og:url" content="https://toolsmediadownload.com/">
-    <meta property="og:image" content="https://toolsmediadownload.com/og-image.jpg">
     <meta property="og:site_name" content="ToolsMediaDownload">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="ToolsMediaDownload - Free Online Media Tools">
-    <meta name="twitter:description" content="Free tools for creators. Download, compress, convert - all in your browser.">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "ToolsMediaDownload",
-      "url": "https://toolsmediadownload.com/",
-      "description": "Free online media tools for downloading, compressing and converting.",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://toolsmediadownload.com/?s={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }
-    </script>
-
-    <!-- FAVICON - Lightning Logo -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-
     <style>
         :root {
             --bg-warm: #FAF5EE;
@@ -47,58 +27,30 @@
             --border-warm: #EFE3D8;
             --success-btn: #2A9D8F;
             --dark-footer: #1A1615;
+            --glow-peach: rgba(224, 122, 95, 0.4);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        body { background-color: var(--bg-warm); color: var(--text-dark); min-height: 100vh; display: flex; flex-direction: column; line-height: 1.6; }
-
-        /* LOADING SCREEN */
-        .loading-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg-warm); display: flex; align-items: center; justify-content: center;
-            flex-direction: column; z-index: 9999; transition: opacity 0.5s ease;
-        }
-        .loading-screen.hide { opacity: 0; pointer-events: none; }
-        .loading-logo { font-size: 3.5rem; animation: pulse 1.2s infinite; }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.15); opacity: 0.7; }
-        }
-        .loading-text { margin-top: 1rem; font-weight: 700; color: var(--primary-peach); font-size: 1.1rem; }
-        .loading-bar { width: 200px; height: 4px; background: var(--border-warm); border-radius: 4px; margin-top: 1rem; overflow: hidden; }
-        .loading-bar-fill { height: 100%; background: var(--peach-gradient); width: 0%; animation: loadFill 1.5s ease forwards; }
-        @keyframes loadFill { to { width: 100%; } }
+        body { background: var(--bg-warm); color: var(--text-dark); min-height: 100vh; display: flex; flex-direction: column; line-height: 1.6; }
 
         /* HEADER */
         header {
             background: #ffffff; border-bottom: 1px solid var(--border-warm);
             padding: 0.9rem 2rem; display: flex; align-items: center; justify-content: space-between;
-            box-shadow: 0 2px 10px rgba(224, 122, 95, 0.05);
-            position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 2px 10px rgba(224,122,95,0.05); position: sticky; top: 0; z-index: 100;
         }
-        .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary-peach); text-decoration: none; letter-spacing: -0.5px; display: flex; align-items: center; gap: 0.5rem; }
+        .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary-peach); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
         .logo span { color: var(--text-dark); }
-        .logo-icon { font-size: 1.6rem; }
         .nav-links { display: flex; gap: 1.25rem; align-items: center; }
         .nav-links a { color: var(--text-dark); text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: color 0.2s; }
         .nav-links a:hover { color: var(--primary-peach); }
         .hamburger { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-dark); }
-        .mobile-menu {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5); z-index: 200;
-        }
+        .mobile-menu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 200; }
         .mobile-menu.active { display: block; }
-        .mobile-menu-content {
-            background: #fff; width: 280px; height: 100%; padding: 2rem 1.5rem;
-            display: flex; flex-direction: column; gap: 1rem;
-            animation: slideIn 0.3s ease;
-        }
+        .mobile-menu-content { background: #fff; width: 300px; height: 100%; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; animation: slideIn 0.3s ease; overflow-y: auto; }
         @keyframes slideIn { from { transform: translateX(-100%); } to { transform: translateX(0); } }
-        .mobile-menu-content a { color: var(--text-dark); text-decoration: none; font-weight: 600; font-size: 1.1rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border-warm); }
-        .mobile-menu-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; align-self: flex-end; }
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hamburger { display: block; }
-        }
+        .mobile-menu-content a { color: var(--text-dark); text-decoration: none; font-weight: 600; font-size: 1rem; padding: 0.7rem 0.5rem; border-bottom: 1px solid var(--border-warm); display: flex; align-items: center; gap: 0.6rem; }
+        .mobile-menu-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; align-self: flex-end; padding: 0.5rem; }
+        @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: block; } }
 
         /* HERO */
         .hero-section { background: linear-gradient(180deg, #FFF4EC 0%, var(--bg-warm) 100%); padding: 4.5rem 1.5rem 3.5rem; text-align: center; }
@@ -110,11 +62,7 @@
         .hero-stats { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; margin-top: 2rem; }
         .stat-num { font-size: 1.75rem; font-weight: 800; color: var(--primary-peach); }
         .stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
-        @media (max-width: 640px) {
-            .hero-section h1 { font-size: 2rem; }
-            .hero-section p { font-size: 1rem; }
-            .hero-section { padding: 3rem 1.25rem 2.5rem; }
-        }
+        @media (max-width: 640px) { .hero-section h1 { font-size: 2rem; } .hero-section p { font-size: 1rem; } .hero-section { padding: 3rem 1.25rem 2.5rem; } }
 
         /* CONTAINER */
         .container { max-width: 1200px; margin: 0 auto; padding: 3.5rem 1.25rem; width: 100%; flex: 1; }
@@ -125,27 +73,80 @@
         .section-title p { color: var(--text-muted); font-size: 1.05rem; }
 
         /* TOOLS GRID */
-        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; margin-bottom: 4rem; }
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1.5rem; margin-bottom: 4rem; }
+        
         .tool-card {
-            background: var(--card-bg); border-radius: 18px; padding: 1.6rem; text-decoration: none; color: inherit;
-            border: 1px solid var(--border-warm); box-shadow: 0 4px 15px rgba(224, 122, 95, 0.06);
-            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s;
+            background: var(--card-bg); border-radius: 18px; padding: 1.75rem; text-decoration: none; color: inherit;
+            border: 2px solid var(--border-warm);
+            box-shadow: 0 4px 15px rgba(224,122,95,0.06);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex; flex-direction: column; position: relative; overflow: hidden;
+            cursor: pointer;
         }
-        .tool-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--peach-gradient); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
-        .tool-card:hover { transform: translateY(-6px); box-shadow: 0 15px 35px rgba(224, 122, 95, 0.15); border-color: var(--primary-peach); }
+        .tool-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+            background: var(--peach-gradient); transform: scaleX(0); transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .tool-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(224,122,95,0.2), 0 0 30px var(--glow-peach);
+            border-color: var(--primary-peach);
+        }
         .tool-card:hover::before { transform: scaleX(1); }
-        .tool-icon { width: 56px; height: 56px; border-radius: 14px; background: linear-gradient(135deg, #FFE4D9, #FFF4EC); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 1rem; }
-        .tool-card h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 0.5rem; }
-        .tool-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; flex: 1; }
-        .tool-tag { display: inline-block; padding: 0.2rem 0.65rem; border-radius: 12px; font-size: 0.72rem; font-weight: 700; margin-bottom: 0.75rem; align-self: flex-start; }
+        .tool-card:active {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 15px 40px rgba(224,122,95,0.25), 0 0 40px var(--glow-peach);
+        }
+
+        /* HD Tool Icons */
+        .tool-icon-wrap {
+            width: 64px; height: 64px; border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1.15rem; position: relative; overflow: hidden;
+        }
+        .tool-icon-wrap img {
+            width: 100%; height: 100%; object-fit: contain;
+        }
+        .tool-icon-wrap .icon-glow {
+            position: absolute; top: 50%; left: 50%; width: 80px; height: 80px;
+            border-radius: 50%; transform: translate(-50%, -50%);
+            filter: blur(15px); opacity: 0; transition: opacity 0.3s;
+        }
+        .tool-card:hover .icon-glow { opacity: 0.5; }
+
+        .tool-tag { display: inline-block; padding: 0.2rem 0.65rem; border-radius: 12px; font-size: 0.72rem; font-weight: 700; margin-bottom: 0.8rem; align-self: flex-start; }
         .tag-popular { background: #E8F8F5; color: var(--success-btn); }
         .tag-new { background: #FFE4D9; color: var(--primary-peach); }
         .tag-trending { background: #EBF4FF; color: #3B82F6; }
         .tag-free { background: #F0FFF4; color: #38A169; }
-        .tool-cta { color: var(--primary-peach); font-weight: 700; font-size: 0.9rem; display: flex; align-items: center; gap: 0.4rem; }
-        .tool-cta::after { content: '→'; transition: transform 0.2s; }
-        .tool-card:hover .tool-cta::after { transform: translateX(4px); }
+        .tag-hot { background: #FFF5F5; color: #E53E3E; }
+
+        .tool-card h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .tool-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem; flex: 1; }
+
+        /* Unique CTA Buttons */
+        .tool-btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            padding: 0.7rem 1.25rem; border-radius: 10px; font-weight: 700; font-size: 0.88rem;
+            border: none; cursor: pointer; transition: all 0.25s ease;
+            text-decoration: none; color: #fff;
+        }
+        .tool-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        .btn-instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .btn-facebook { background: linear-gradient(135deg, #1877F2, #0D65D9); }
+        .btn-tiktok { background: linear-gradient(135deg, #000000, #25F4EE, #FE2C55); }
+        .btn-youtube { background: linear-gradient(135deg, #FF0000, #CC0000); }
+        .btn-compress { background: linear-gradient(135deg, #FF9E7D, #E07A5F); }
+        .btn-pdf { background: linear-gradient(135deg, #E53E3E, #C53030); }
+        .btn-convert { background: linear-gradient(135deg, #667EEA, #764BA2); }
+        .btn-resize { background: linear-gradient(135deg, #38B2AC, #2C7A7B); }
+        .btn-qr { background: linear-gradient(135deg, #4299E1, #3182CE); }
+        .btn-color { background: linear-gradient(135deg, #ED64A6, #D53F8C, #9F7AEA); }
+        .btn-text { background: linear-gradient(135deg, #48BB78, #38A169); }
+        .btn-password { background: linear-gradient(135deg, #ECC94B, #D69E2E); }
+        .btn-json { background: linear-gradient(135deg, #4A5568, #2D3748); }
+        .btn-base64 { background: linear-gradient(135deg, #9F7AEA, #805AD5); }
 
         /* FEATURES */
         .features-section { background: #fff; border-radius: 20px; padding: 3rem 2rem; margin-bottom: 4rem; border: 1px solid var(--border-warm); }
@@ -184,15 +185,8 @@
 </head>
 <body>
 
-    <!-- LOADING SCREEN -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-logo">⚡</div>
-        <div class="loading-text">ToolsMediaDownload</div>
-        <div class="loading-bar"><div class="loading-bar-fill"></div></div>
-    </div>
-
     <header>
-        <a href="index.html" class="logo"><span class="logo-icon">⚡</span> ToolsMedia<span>Download</span></a>
+        <a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a>
         <nav class="nav-links">
             <a href="#tools">Tools</a>
             <a href="blog.html">Blog</a>
@@ -202,19 +196,24 @@
         <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('active')">☰</button>
     </header>
 
-    <!-- MOBILE MENU -->
     <div class="mobile-menu" id="mobileMenu" onclick="this.classList.remove('active')">
         <div class="mobile-menu-content" onclick="event.stopPropagation()">
             <button class="mobile-menu-close" onclick="document.getElementById('mobileMenu').classList.remove('active')">✕</button>
             <a href="index.html">🏠 Home</a>
             <a href="instagram-downloader.html">📸 Instagram Downloader</a>
-            <a href="facebook-downloader.html">👥 Facebook Downloader</a>
+            <a href="facebook-downloader.html">📘 Facebook Downloader</a>
             <a href="tiktok-downloader.html">🎵 TikTok Downloader</a>
+            <a href="youtube-thumbnail.html">🎬 YouTube Thumbnail</a>
             <a href="gif-compressor.html">🗜️ Image Compressor</a>
             <a href="pdf-tools.html">📄 PDF Tools</a>
-            <a href="qr-generator.html">📱 QR Code Generator</a>
+            <a href="image-converter.html">🔄 Image Converter</a>
+            <a href="image-resizer.html">📐 Image Resizer</a>
+            <a href="qr-generator.html">📱 QR Generator</a>
             <a href="color-picker.html">🎨 Color Picker</a>
             <a href="text-tools.html">✏️ Text Tools</a>
+            <a href="password-generator.html">🔐 Password Generator</a>
+            <a href="json-formatter.html">{ } JSON Formatter</a>
+            <a href="base64-tool.html">🔢 Base64 Tool</a>
             <a href="blog.html">📝 Blog</a>
             <a href="about.html">ℹ️ About</a>
             <a href="contact.html">📧 Contact</a>
@@ -228,7 +227,7 @@
             <h1>All-in-One <span class="gradient">Media Tools</span> for Creators</h1>
             <p>Download videos, compress images, convert PDFs, generate QR codes — all free, all in your browser.</p>
             <div class="hero-stats">
-                <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Free Tools</div></div>
+                <div class="stat"><div class="stat-num">14+</div><div class="stat-label">Free Tools</div></div>
                 <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Private</div></div>
                 <div class="stat"><div class="stat-num">0$</div><div class="stat-label">Forever Free</div></div>
             </div>
@@ -237,40 +236,60 @@
 
     <main class="container">
 
-        <!-- MEDIA DOWNLOADER TOOLS -->
+        <!-- MEDIA DOWNLOADERS -->
         <section id="tools">
             <div class="section-title">
                 <h2>📥 Media Downloader Tools</h2>
                 <p>Download videos and photos from your favorite platforms.</p>
             </div>
             <div class="tools-grid">
+
+                <!-- Instagram -->
                 <a href="instagram-downloader.html" class="tool-card">
-                    <div class="tool-icon">📸</div>
-                    <span class="tool-tag tag-popular">Popular</span>
+                    <div class="tool-icon-wrap">
+                        <div class="icon-glow" style="background:#E1306C"></div>
+                        <svg viewBox="0 0 48 48" width="64" height="64"><defs><radialGradient id="ig1" cx="20%" cy="100%" r="130%"><stop offset="0" stop-color="#ffd600"/><stop offset=".25" stop-color="#ff7a00"/><stop offset=".38" stop-color="#ff0169"/><stop offset=".52" stop-color="#d300c5"/><stop offset=".74" stop-color="#7638fa"/><stop offset="1" stop-color="#4f5bd5"/></radialGradient></defs><rect width="48" height="48" rx="12" fill="url(#ig1)"/><rect x="10" y="10" width="28" height="28" rx="8" fill="none" stroke="#fff" stroke-width="2.5"/><circle cx="24" cy="24" r="7.5" fill="none" stroke="#fff" stroke-width="2.5"/><circle cx="34" cy="14" r="2" fill="#fff"/></svg>
+                    </div>
+                    <span class="tool-tag tag-popular">⭐ Most Popular</span>
                     <h3>Instagram Downloader</h3>
-                    <p>Download Reels, Stories, posts, and photos from Instagram in HD quality.</p>
-                    <span class="tool-cta">Use Tool</span>
+                    <p>Download Reels, Stories, posts & photos in HD quality. Save any public Instagram content instantly.</p>
+                    <span class="tool-btn btn-instagram">📸 Download Reels & Stories</span>
                 </a>
+
+                <!-- Facebook -->
                 <a href="facebook-downloader.html" class="tool-card">
-                    <div class="tool-icon">👥</div>
-                    <span class="tool-tag tag-popular">Popular</span>
+                    <div class="tool-icon-wrap">
+                        <div class="icon-glow" style="background:#1877F2"></div>
+                        <svg viewBox="0 0 48 48" width="64" height="64"><rect width="48" height="48" rx="12" fill="#1877F2"/><path d="M29 25.5h-3.5V38h-5.5V25.5H17v-5h3V17.5c0-3.5 1.5-7.5 7-7.5h4v5h-3c-.5 0-1 .5-1 1V20.5h4l-1.5 5z" fill="#fff"/></svg>
+                    </div>
+                    <span class="tool-tag tag-popular">⭐ Popular</span>
                     <h3>Facebook Downloader</h3>
-                    <p>Save Facebook videos and reels in HD or SD quality instantly.</p>
-                    <span class="tool-cta">Use Tool</span>
+                    <p>Save Facebook videos & reels in HD or SD quality. Works with public posts and shared videos.</p>
+                    <span class="tool-btn btn-facebook">📘 Save FB Videos</span>
                 </a>
+
+                <!-- TikTok -->
                 <a href="tiktok-downloader.html" class="tool-card">
-                    <div class="tool-icon">🎵</div>
-                    <span class="tool-tag tag-trending">Trending</span>
+                    <div class="tool-icon-wrap">
+                        <div class="icon-glow" style="background:#FE2C55"></div>
+                        <svg viewBox="0 0 48 48" width="64" height="64"><rect width="48" height="48" rx="12" fill="#010101"/><path d="M33.5 17.5c-2.5-1.5-4-4-4-7h-4.5v19c0 2.5-2 4.5-4.5 4.5s-4.5-2-4.5-4.5 2-4.5 4.5-4.5c.5 0 1 0 1.5.2v-4.7c-.5 0-1-.2-1.5-.2-5 0-9 4-9 9s4 9 9 9 9-4 9-9V22c2 1.5 4.5 2.5 7 2.5v-4.5c-1.5 0-2.5-.5-3-2.5z" fill="#fff"/><path d="M33.5 17.5c-2.5-1.5-4-4-4-7h-4.5v19c0 2.5-2 4.5-4.5 4.5s-4.5-2-4.5-4.5 2-4.5 4.5-4.5" fill="none" stroke="#25F4EE" stroke-width="1" opacity="0.6"/></svg>
+                    </div>
+                    <span class="tool-tag tag-trending">🔥 Trending</span>
                     <h3>TikTok Downloader</h3>
-                    <p>Download TikTok videos without watermark in original quality.</p>
-                    <span class="tool-cta">Use Tool</span>
+                    <p>Download TikTok videos without watermark in original quality. Save to camera roll instantly.</p>
+                    <span class="tool-btn btn-tiktok">🎵 Remove Watermark & Save</span>
                 </a>
+
+                <!-- YouTube Thumbnail -->
                 <a href="youtube-thumbnail.html" class="tool-card">
-                    <div class="tool-icon">🎬</div>
-                    <span class="tool-tag tag-new">New</span>
+                    <div class="tool-icon-wrap">
+                        <div class="icon-glow" style="background:#FF0000"></div>
+                        <svg viewBox="0 0 48 48" width="64" height="64"><rect width="48" height="48" rx="12" fill="#FF0000"/><polygon points="20,14 20,34 34,24" fill="#fff"/></svg>
+                    </div>
+                    <span class="tool-tag tag-new">🆕 New</span>
                     <h3>YouTube Thumbnail Grabber</h3>
-                    <p>Download YouTube video thumbnails in HD, SD and all resolutions.</p>
-                    <span class="tool-cta">Use Tool</span>
+                    <p>Download YouTube video thumbnails in all resolutions — HD, SD, MQ and default quality.</p>
+                    <span class="tool-btn btn-youtube">🎬 Grab Thumbnails</span>
                 </a>
             </div>
         </section>
@@ -279,36 +298,56 @@
         <section>
             <div class="section-title">
                 <h2>🖼️ Image & File Tools</h2>
-                <p>Compress, convert, and optimize your files.</p>
+                <p>Compress, convert, resize and optimize your files.</p>
             </div>
             <div class="tools-grid">
+
+                <!-- GIF Compressor -->
                 <a href="gif-compressor.html" class="tool-card">
-                    <div class="tool-icon">🗜️</div>
-                    <span class="tool-tag tag-popular">Popular</span>
+                    <div class="tool-icon-wrap">
+                        <div class="icon-glow" style="background:#E07A5F"></div>
+                        <svg viewBox="0 0 48 48" width="64" height="64"><rect width="48" height="48" rx="12" fill="#E07A5F"/><path d="M14 18h20v12H14z" fill="none" stroke="#fff" stroke-width="2"/><path d="M18 22l4 4 3-3 5 5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="19" cy="22" r="2" fill="#fff"/><path d="M30 14l4 4M30 14h4v4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                    </div>
+                    <span class="tool-tag tag-popular">⭐ Popular</span>
                     <h3>GIF & Image Compressor</h3>
-                    <p>Compress GIFs, PNGs, JPGs & crop for Instagram, TikTok, YouTube aspect ratios.</p>
-                    <span class="tool-cta">Use Tool</span>
+                    <p>Compress GIFs, PNGs, JPGs & crop for Instagram, TikTok, YouTube aspect ratios. Batch support.</p>
+                    <span class="tool-btn btn-compress">🗜️ Compress & Crop Images</span>
                 </a>
+
+                <!-- PDF Tools -->
                 <a href="pdf-tools.html" class="tool-card">
-                    <div class="tool-icon">📄</div>
-                    <span class="tool-tag tag-popular">Popular</span>
+                    <div class="tool-icon-wrap">
+                        <div class="icon-glow" style="background:#E53E3E"></div>
+                        <svg viewBox="0 0 48 48" width="64" height="64"><rect width="48" height="48" rx="12" fill="#E53E3E"/><path d="M15 8h12l8 8v24c0 1-1 2-2 2H15c-1 0-2-1-2-2V10c0-1 1-2 2-2z" fill="none" stroke="#fff" stroke-width="2"/><path d="M27 8v8h8" fill="none" stroke="#fff" stroke-width="2"/><text x="17" y="32" font-size="8" fill="#fff" font-weight="bold">PDF</text></svg>
+                    </div>
+                    <span class="tool-tag tag-hot">🔥 Hot</span>
                     <h3>PDF Tools</h3>
-                    <p>Merge, split, compress PDFs and convert images to PDF — all in your browser.</p>
-                    <span class="tool-cta">Use Tool</span>
+                    <p>Merge, split PDFs and convert images to PDF — all processing happens in your browser.</p>
+                    <span class="tool-btn btn-pdf">📄 Merge & Split PDFs</span>
                 </a>
+
+                <!-- Image Converter -->
                 <a href="image-converter.html" class="tool-card">
-                    <div class="tool-icon">🔄</div>
-                    <span class="tool-tag tag-new">New</span>
+                    <div class="tool-icon-wrap">
+                        <div class="icon-glow" style="background:#667EEA"></div>
+                        <svg viewBox="0 0 48 48" width="64" height="64"><rect width="48" height="48" rx="12" fill="#667EEA"/><path d="M14 24h20M28 18l6 6-6 6" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M34 24H14M20 18l-6 6 6 6" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/></svg>
+                    </div>
+                    <span class="tool-tag tag-new">🆕 New</span>
                     <h3>Image Format Converter</h3>
-                    <p>Convert between PNG, JPG, WebP, GIF formats. Batch conversion supported.</p>
-                    <span class="tool-cta">Use Tool</span>
+                    <p>Convert between PNG, JPG, WebP, BMP formats instantly. Batch conversion supported.</p>
+                    <span class="tool-btn btn-convert">🔄 Convert Formats</span>
                 </a>
+
+                <!-- Image Resizer -->
                 <a href="image-resizer.html" class="tool-card">
-                    <div class="tool-icon">📐</div>
-                    <span class="tool-tag tag-free">Free</span>
+                    <div class="tool-icon-wrap">
+                        <div class="icon-glow" style="background:#38B2AC"></div>
+                        <svg viewBox="0 0 48 48" width="64" height="64"><rect width="48" height="48" rx="12" fill="#38B2AC"/><rect x="12" y="16" width="16" height="16" rx="2" fill="none" stroke="#fff" stroke-width="2"/><rect x="20" y="12" width="18" height="18" rx="2" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="4 2"/><path d="M32 26l4 4M36 26v4h-4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                    </div>
+                    <span class="tool-tag tag-free">🆓 Free</span>
                     <h3>Image Resizer</h3>
-                    <p>Resize images to exact dimensions or percentages. Perfect for social media.</p>
-                    <span class="tool-cta">Use Tool</span>
+                    <p>Resize images to exact dimensions or percentages. Social media presets included.</p>
+                    <span class="tool-btn btn-resize">📐 Resize Images</span>
                 </a>
             </div>
         </section>
@@ -317,50 +356,80 @@
         <section>
             <div class="section-title">
                 <h2>🛠️ Utility Tools</h2>
-                <p>Handy everyday tools that work instantly.</p>
+                <p>Handy everyday tools that work instantly in your browser.</p>
             </div>
             <div class="tools-grid">
+
+                <!-- QR Generator -->
                 <a href="qr-generator.html" class="tool-card">
-                    <div class="tool-icon">📱</div>
-                    <span class="tool-tag tag-trending">Trending</span>
+                    <div class="tool-icon-wrap">
+                        <div class="icon-glow" style="background:#4299E1"></div>
+                        <svg viewBox="0 0 48 48" width="64" height="64"><rect width="48" height="48" rx="12" fill="#4299E1"/><rect x="12" y="12" width="8" height="8" rx="1" fill="#fff"/><rect x="12" y="28" width="8" height="8" rx="1" fill="#fff"/><rect x="28" y="12" width="8" height="8" rx="1" fill="#fff"/><rect x="14" y="14" width="4" height="4" fill="#4299E1"/><rect x="14" y="30" width="4" height="4" fill="#4299E1"/><rect x="30" y="14" width="4" height="4" fill="#4299E1"/><rect x="28" y="28" width="3" height="3" fill="#fff"/><rect x="33" y="28" width="3" height="3" fill="#fff"/><rect x="28" y="33" width="3" height="3" fill="#fff"/><rect x="33" y="33" width="3" height="3" fill="#fff"/></svg>
+                    </div>
+                    <span class="tool-tag tag-trending">🔥 Trending</span>
                     <h3>QR Code Generator</h3>
-                    <p>Generate QR codes for URLs, text, Wi-Fi, vCards with custom colors and logo.</p>
-                    <span class="tool-cta">Use Tool</span>
+                    <p>Generate QR codes for URLs, text, Wi-Fi credentials. Customize colors & download PNG/SVG.</p>
+                    <span class="tool-btn btn-qr">📱 Generate QR Code</span>
                 </a>
+
+                <!-- Color Picker -->
                 <a href="color-picker.html" class="tool-card">
-                    <div class="tool-icon">🎨</div>
-                    <span class="tool-tag tag-new">New</span>
+                    <div class="tool-icon-wrap">
+                        <div class="icon-glow" style="background:#ED64A6"></div>
+                        <svg viewBox="0 0 48 48" width="64" height="64"><rect width="48" height="48" rx="12" fill="#ED64A6"/><circle cx="20" cy="20" r="5" fill="#FFD93D" opacity="0.8"/><circle cx="28" cy="20" r="5" fill="#6BCB77" opacity="0.8"/><circle cx="24" cy="27" r="5" fill="#4D96FF" opacity="0.8"/></svg>
+                    </div>
+                    <span class="tool-tag tag-new">🆕 New</span>
                     <h3>Color Picker & Palette</h3>
-                    <p>Pick colors from images, generate palettes, get HEX, RGB, HSL values.</p>
-                    <span class="tool-cta">Use Tool</span>
+                    <p>Pick colors, generate palettes, get HEX, RGB, HSL values. Extract colors from images.</p>
+                    <span class="tool-btn btn-color">🎨 Pick Colors</span>
                 </a>
+
+                <!-- Text Tools -->
                 <a href="text-tools.html" class="tool-card">
-                    <div class="tool-icon">✏️</div>
-                    <span class="tool-tag tag-free">Free</span>
+                    <div class="tool-icon-wrap">
+                        <div class="icon-glow" style="background:#48BB78"></div>
+                        <svg viewBox="0 0 48 48" width="64" height="64"><rect width="48" height="48" rx="12" fill="#48BB78"/><text x="12" y="22" font-size="14" fill="#fff" font-weight="bold">Aa</text><path d="M12 28h24M12 33h18M12 38h12" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.7"/></svg>
+                    </div>
+                    <span class="tool-tag tag-free">🆓 Free</span>
                     <h3>Text Tools</h3>
-                    <p>Word counter, case converter, remove duplicates, text to slug, and more.</p>
-                    <span class="tool-cta">Use Tool</span>
+                    <p>Word counter, case converter, slug generator, remove duplicates, Lorem Ipsum & more.</p>
+                    <span class="tool-btn btn-text">✏️ Transform Text</span>
                 </a>
+
+                <!-- Password Generator -->
                 <a href="password-generator.html" class="tool-card">
-                    <div class="tool-icon">🔐</div>
-                    <span class="tool-tag tag-new">New</span>
+                    <div class="tool-icon-wrap">
+                        <div class="icon-glow" style="background:#ECC94B"></div>
+                        <svg viewBox="0 0 48 48" width="64" height="64"><rect width="48" height="48" rx="12" fill="#ECC94B"/><rect x="14" y="20" width="20" height="16" rx="3" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M19 20v-4a5 5 0 0 1 10 0v4" fill="none" stroke="#fff" stroke-width="2.5"/><circle cx="24" cy="28" r="2" fill="#fff"/><path d="M24 30v3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                    </div>
+                    <span class="tool-tag tag-new">🆕 New</span>
                     <h3>Password Generator</h3>
-                    <p>Generate strong, secure passwords with customizable length and characters.</p>
-                    <span class="tool-cta">Use Tool</span>
+                    <p>Generate strong secure passwords with custom length, symbols, numbers & uppercase letters.</p>
+                    <span class="tool-btn btn-password">🔐 Generate Password</span>
                 </a>
+
+                <!-- JSON Formatter -->
                 <a href="json-formatter.html" class="tool-card">
-                    <div class="tool-icon">{ }</div>
-                    <span class="tool-tag tag-free">Free</span>
+                    <div class="tool-icon-wrap">
+                        <div class="icon-glow" style="background:#4A5568"></div>
+                        <svg viewBox="0 0 48 48" width="64" height="64"><rect width="48" height="48" rx="12" fill="#4A5568"/><text x="10" y="32" font-size="18" fill="#fff" font-weight="bold">{ }</text></svg>
+                    </div>
+                    <span class="tool-tag tag-free">🆓 Free</span>
                     <h3>JSON Formatter</h3>
-                    <p>Beautify, validate, and minify JSON data. Copy formatted output instantly.</p>
-                    <span class="tool-cta">Use Tool</span>
+                    <p>Beautify, validate, minify JSON data. Syntax highlighting & error detection included.</p>
+                    <span class="tool-btn btn-json">{ } Format JSON</span>
                 </a>
+
+                <!-- Base64 -->
                 <a href="base64-tool.html" class="tool-card">
-                    <div class="tool-icon">🔢</div>
-                    <span class="tool-tag tag-free">Free</span>
+                    <div class="tool-icon-wrap">
+                        <div class="icon-glow" style="background:#9F7AEA"></div>
+                        <svg viewBox="0 0 48 48" width="64" height="64"><rect width="48" height="48" rx="12" fill="#9F7AEA"/><text x="8" y="22" font-size="9" fill="#fff" font-weight="bold">BASE</text><text x="14" y="36" font-size="14" fill="#fff" font-weight="bold">64</text></svg>
+                    </div>
+                    <span class="tool-tag tag-free">🆓 Free</span>
                     <h3>Base64 Encoder/Decoder</h3>
-                    <p>Encode text or files to Base64, or decode Base64 strings. Supports images.</p>
-                    <span class="tool-cta">Use Tool</span>
+                    <p>Encode text or decode Base64 strings instantly. Supports file to Base64 conversion.</p>
+                    <span class="tool-btn btn-base64">🔢 Encode & Decode</span>
                 </a>
             </div>
         </section>
@@ -388,7 +457,7 @@
             <div class="blog-grid">
                 <a href="blog-make-money-online.html" class="blog-card">
                     <h4>💰 How to Monetize Utility Web Tools</h4>
-                    <p>Proven strategies to turn your tool website into a passive income machine.</p>
+                    <p>Proven strategies to turn your free tool website into a passive income machine.</p>
                     <span class="read-more">Read Article →</span>
                 </a>
                 <a href="blog-build-media-downloader-tools.html" class="blog-card">
@@ -456,20 +525,10 @@
                     <li><a href="disclaimer.html">Disclaimer</a></li>
                     <li><a href="terms.html">Terms of Service</a></li>
                     <li><a href="dmca.html">DMCA Policy</a></li>
-                    <li><a href="sitemap.xml">Sitemap</a></li>
                 </ul>
             </div>
         </div>
         <div class="copyright">&copy; 2026 ToolsMediaDownload. All rights reserved.</div>
     </footer>
-
-    <script>
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loadingScreen').classList.add('hide');
-                setTimeout(() => document.getElementById('loadingScreen').remove(), 500);
-            }, 1600);
-        });
-    </script>
 </body>
 </html>
