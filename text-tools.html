@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Text Tools Online - Word Counter, Case Converter | ToolsMediaDownload</title>
+    <meta name="description" content="Free online text tools - word counter, character counter, case converter, slug generator, duplicate remover, Lorem Ipsum generator.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://toolsmediadownload.com/text-tools.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <style>
+        :root{--bg-warm:#FAF5EE;--card-bg:#FFF;--primary-peach:#E07A5F;--text-dark:#2C221E;--text-muted:#706661;--border-warm:#EFE3D8;--success-btn:#2A9D8F;--dark-footer:#1A1615}
+        *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+        body{background:var(--bg-warm);color:var(--text-dark);min-height:100vh;display:flex;flex-direction:column;line-height:1.7}
+        header{background:#fff;border-bottom:1px solid var(--border-warm);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+        .logo{font-size:1.4rem;font-weight:800;color:var(--primary-peach);text-decoration:none;display:flex;align-items:center;gap:.5rem}.logo span{color:var(--text-dark)}
+        .nav-links{display:flex;gap:1.25rem}.nav-links a{color:var(--text-dark);text-decoration:none;font-weight:600;font-size:.9rem}.nav-links a:hover{color:var(--primary-peach)}
+        @media(max-width:768px){.nav-links{display:none}}
+        .page-container{max-width:800px;margin:3rem auto;padding:0 1.25rem;flex:1}
+        .page-hero{text-align:center;margin-bottom:2.5rem}
+        .page-hero h1{font-size:2.4rem;font-weight:800;margin-bottom:.75rem}.page-hero h1 .g{background:linear-gradient(135deg,#48BB78,#38A169);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .page-hero p{color:var(--text-muted);font-size:1.1rem}
+        .tool-card{background:var(--card-bg);padding:2.25rem;border-radius:20px;box-shadow:0 12px 30px -5px rgba(224,122,95,.08);border:1px solid var(--border-warm)}
+        textarea{width:100%;min-height:200px;padding:1rem;border:2px solid var(--border-warm);border-radius:12px;font-size:1rem;outline:none;resize:vertical;font-family:inherit;background:#FFFDFB}
+        textarea:focus{border-color:var(--primary-peach)}
+        .stats-bar{display:flex;gap:1.5rem;flex-wrap:wrap;margin:1rem 0;padding:.75rem 1rem;background:#FFFDFB;border-radius:8px;border:1px solid var(--border-warm)}
+        .stat-item{font-size:.85rem;color:var(--text-muted)}.stat-item strong{color:var(--text-dark)}
+        .btn-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.6rem;margin:1.25rem 0}
+        .tool-btn{padding:.65rem;border-radius:8px;border:2px solid var(--border-warm);background:#FFFDFB;font-weight:600;font-size:.82rem;cursor:pointer;transition:all .2s}
+        .tool-btn:hover{background:var(--primary-peach);color:#fff;border-color:var(--primary-peach)}
+        .output-area{margin-top:1.25rem}
+        .output-area h3{font-size:1.1rem;margin-bottom:.5rem}
+        .copy-btn{background:var(--success-btn);color:#fff;border:none;padding:.6rem 1.25rem;border-radius:8px;font-weight:700;cursor:pointer;margin-top:.75rem;font-size:.9rem}
+        .copy-btn:hover{background:#218378}
+        footer{background:var(--dark-footer);color:#fff;padding:3rem 1rem 1.5rem;margin-top:auto}
+        .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-bottom:2rem}
+        .footer-col h3{font-size:1.05rem;margin-bottom:1rem;color:#F7EDE2}.footer-col ul{list-style:none}.footer-col ul li{margin-bottom:.6rem}.footer-col ul li a{color:#A8A099;text-decoration:none;font-size:.88rem}.footer-col ul li a:hover{color:#F7EDE2}.footer-col p{color:#A8A099;font-size:.88rem}
+        .copyright{text-align:center;border-top:1px solid #332E2B;padding-top:1.5rem;color:#78706A;font-size:.85rem}
+        @media(max-width:640px){.page-hero h1{font-size:1.8rem}.tool-card{padding:1.5rem}.btn-grid{grid-template-columns:repeat(2,1fr)}}
+    </style>
+</head>
+<body>
+    <header><a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a><nav class="nav-links"><a href="index.html">Home</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></nav></header>
+    <div class="page-container">
+        <div class="page-hero"><h1><span class="g">Text Tools</span></h1><p>Word counter, case converter, slug generator & more — all free.</p></div>
+        <div class="tool-card">
+            <textarea id="inputText" placeholder="Type or paste your text here..." oninput="updateStats()"></textarea>
+            <div class="stats-bar">
+                <div class="stat-item">Words: <strong id="wordCount">0</strong></div>
+                <div class="stat-item">Characters: <strong id="charCount">0</strong></div>
+                <div class="stat-item">Sentences: <strong id="sentCount">0</strong></div>
+                <div class="stat-item">Lines: <strong id="lineCount">0</strong></div>
+                <div class="stat-item">Read Time: <strong id="readTime">0 sec</strong></div>
+            </div>
+            <div class="btn-grid">
+                <button class="tool-btn" onclick="transform(t=>t.toUpperCase())">UPPERCASE</button>
+                <button class="tool-btn" onclick="transform(t=>t.toLowerCase())">lowercase</button>
+                <button class="tool-btn" onclick="transform(t=>t.replace(/\b\w/g,c=>c.toUpperCase()))">Title Case</button>
+                <button class="tool-btn" onclick="transform(t=>t.charAt(0).toUpperCase()+t.slice(1).toLowerCase())">Sentence case</button>
+                <button class="tool-btn" onclick="transform(t=>t.split('').reverse().join(''))">Reverse Text</button>
+                <button class="tool-btn" onclick="transform(t=>[...new Set(t.split('\n'))].join('\n'))">Remove Duplicates</button>
+                <button class="tool-btn" onclick="transform(t=>t.replace(/\s+/g,' ').trim())">Remove Extra Spaces</button>
+                <button class="tool-btn" onclick="transform(t=>t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))">To URL Slug</button>
+                <button class="tool-btn" onclick="transform(t=>t.split('\n').sort().join('\n'))">Sort Lines A-Z</button>
+                <button class="tool-btn" onclick="transform(t=>t.split('\n').filter(l=>l.trim()).join('\n'))">Remove Empty Lines</button>
+                <button class="tool-btn" onclick="genLorem()">Generate Lorem Ipsum</button>
+                <button class="tool-btn" onclick="transform(t=>t.replace(/\n/g,' '))">Join Lines</button>
+            </div>
+            <div class="output-area">
+                <h3>Output:</h3>
+                <textarea id="outputText" readonly style="min-height:120px;background:#f9f9f9"></textarea>
+                <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('outputText').value);this.textContent='✅ Copied!';setTimeout(()=>this.textContent='📋 Copy Output',1500)">📋 Copy Output</button>
+            </div>
+        </div>
+    </div>
+    <footer><div class="footer-grid"><div class="footer-col"><h3>⚡ ToolsMediaDownload</h3><p>Free tools for creators.</p></div><div class="footer-col"><h3>Tools</h3><ul><li><a href="gif-compressor.html">Image Compressor</a></li><li><a href="qr-generator.html">QR Generator</a></li><li><a href="color-picker.html">Color Picker</a></li></ul></div><div class="footer-col"><h3>Company</h3><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="terms.html">Terms</a></li><li><a href="dmca.html">DMCA</a></li></ul></div></div><div class="copyright">© 2026 ToolsMediaDownload. All rights reserved.</div></footer>
+    <script>
+    function updateStats(){const t=document.getElementById('inputText').value;const words=t.trim()?t.trim().split(/\s+/).length:0;document.getElementById('wordCount').textContent=words;document.getElementById('charCount').textContent=t.length;document.getElementById('sentCount').textContent=t.split(/[.!?]+/).filter(s=>s.trim()).length;document.getElementById('lineCount').textContent=t.split('\n').length;const mins=Math.ceil(words/200);document.getElementById('readTime').textContent=mins<1?words*3+' sec':mins+' min'}
+    function transform(fn){const t=document.getElementById('inputText').value;document.getElementById('outputText').value=fn(t)}
+    function genLorem(){document.getElementById('outputText').value='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nPellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.'}
+    </script>
+</body>
+</html>
