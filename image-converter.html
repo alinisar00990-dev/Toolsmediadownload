@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Image Format Converter Online - PNG, JPG, WebP, BMP | ToolsMediaDownload</title>
+    <meta name="description" content="Convert images between PNG, JPG, WebP, BMP formats instantly. Batch conversion supported. Free, private, browser-based.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://toolsmediadownload.com/image-converter.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <style>
+        :root{--bg-warm:#FAF5EE;--card-bg:#FFF;--primary-peach:#E07A5F;--peach-gradient:linear-gradient(135deg,#FF9E7D,#E07A5F,#D95D39);--text-dark:#2C221E;--text-muted:#706661;--border-warm:#EFE3D8;--success-btn:#2A9D8F;--dark-footer:#1A1615}
+        *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+        body{background:var(--bg-warm);color:var(--text-dark);min-height:100vh;display:flex;flex-direction:column;line-height:1.7}
+        header{background:#fff;border-bottom:1px solid var(--border-warm);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+        .logo{font-size:1.4rem;font-weight:800;color:var(--primary-peach);text-decoration:none;display:flex;align-items:center;gap:.5rem}.logo span{color:var(--text-dark)}
+        .nav-links{display:flex;gap:1.25rem}.nav-links a{color:var(--text-dark);text-decoration:none;font-weight:600;font-size:.9rem}.nav-links a:hover{color:var(--primary-peach)}
+        @media(max-width:768px){.nav-links{display:none}}
+        .page-container{max-width:800px;margin:3rem auto;padding:0 1.25rem;flex:1}
+        .page-hero{text-align:center;margin-bottom:2.5rem}
+        .page-hero h1{font-size:2.4rem;font-weight:800;margin-bottom:.75rem}.page-hero h1 .g{background:linear-gradient(135deg,#667EEA,#764BA2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .page-hero p{color:var(--text-muted);font-size:1.1rem}
+        .tool-card{background:var(--card-bg);padding:2.25rem;border-radius:20px;box-shadow:0 12px 30px -5px rgba(224,122,95,.08);border:1px solid var(--border-warm)}
+        .upload-area{border:2px dashed var(--primary-peach);background:#FFFDFB;border-radius:14px;padding:2rem 1.5rem;text-align:center;cursor:pointer;transition:all .25s;margin-bottom:1.5rem}
+        .upload-area:hover{background:#FFF0EB}
+        .upload-area input{display:none}
+        .upload-icon{font-size:2.5rem;margin-bottom:.4rem}
+        .upload-text{font-weight:700;margin-bottom:.2rem}
+        .upload-sub{font-size:.85rem;color:var(--text-muted)}
+        .controls{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+        @media(max-width:640px){.controls{grid-template-columns:1fr}.page-hero h1{font-size:1.8rem}.tool-card{padding:1.5rem}}
+        .control-group label{display:block;font-weight:700;margin-bottom:.4rem;font-size:.95rem}
+        .control-group select,.control-group input{width:100%;padding:.75rem;border:2px solid var(--border-warm);border-radius:10px;font-size:.95rem;background:#FFFDFB;outline:none}
+        .control-group select:focus,.control-group input:focus{border-color:var(--primary-peach)}
+        .btn-action{width:100%;background:linear-gradient(135deg,#667EEA,#764BA2);color:#fff;border:none;padding:1rem;border-radius:12px;font-weight:700;font-size:1.05rem;cursor:pointer;transition:transform .15s}
+        .btn-action:hover:not(:disabled){transform:translateY(-2px)}.btn-action:disabled{opacity:.5;cursor:not-allowed}
+        .results{display:none;margin-top:1.5rem}.results.active{display:block}
+        .results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
+        .result-item{background:#FFFDFB;border:1px solid var(--border-warm);border-radius:12px;padding:1rem;text-align:center}
+        .result-item img{width:100%;height:120px;object-fit:contain;border-radius:8px;margin-bottom:.75rem;background:#f5f5f5}
+        .result-item .stats{font-size:.8rem;color:var(--text-muted);margin-bottom:.5rem}
+        .result-item a{display:inline-block;background:var(--success-btn);color:#fff;padding:.5rem 1rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:.85rem}
+        .result-item a:hover{background:#218378}
+        footer{background:var(--dark-footer);color:#fff;padding:3rem 1rem 1.5rem;margin-top:auto}
+        .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-bottom:2rem}
+        .footer-col h3{font-size:1.05rem;margin-bottom:1rem;color:#F7EDE2}.footer-col ul{list-style:none}.footer-col ul li{margin-bottom:.6rem}.footer-col ul li a{color:#A8A099;text-decoration:none;font-size:.88rem}.footer-col ul li a:hover{color:#F7EDE2}.footer-col p{color:#A8A099;font-size:.88rem}
+        .copyright{text-align:center;border-top:1px solid #332E2B;padding-top:1.5rem;color:#78706A;font-size:.85rem}
+    </style>
+</head>
+<body>
+    <header><a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a><nav class="nav-links"><a href="index.html">Home</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></nav></header>
+    <div class="page-container">
+        <div class="page-hero"><h1>Image <span class="g">Format Converter</span></h1><p>Convert between PNG, JPG, WebP, BMP formats instantly. Batch supported.</p></div>
+        <div class="tool-card">
+            <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                <div class="upload-icon">🔄</div>
+                <div class="upload-text" id="fileName">Click to Select Images</div>
+                <div class="upload-sub">PNG, JPG, WebP, BMP • Multiple files supported</div>
+                <input type="file" id="fileInput" accept="image/*" multiple>
+            </div>
+            <div class="controls">
+                <div class="control-group"><label>Convert To:</label><select id="outputFormat"><option value="image/png">PNG</option><option value="image/jpeg">JPG</option><option value="image/webp">WebP</option><option value="image/bmp">BMP</option></select></div>
+                <div class="control-group"><label>Quality (JPG/WebP):</label><input type="range" id="quality" min="10" max="100" value="85" oninput="document.getElementById('qVal').textContent=this.value+'%'"><span id="qVal" style="font-weight:700;color:var(--primary-peach)">85%</span></div>
+            </div>
+            <button class="btn-action" id="convertBtn" disabled onclick="convertImages()">🔄 Convert Images</button>
+            <div class="results" id="results"><div class="results-grid" id="resultsGrid"></div></div>
+        </div>
+    </div>
+    <footer><div class="footer-grid"><div class="footer-col"><h3>⚡ ToolsMediaDownload</h3><p>Free, private tools for creators.</p></div><div class="footer-col"><h3>Tools</h3><ul><li><a href="gif-compressor.html">Image Compressor</a></li><li><a href="pdf-tools.html">PDF Tools</a></li><li><a href="image-resizer.html">Image Resizer</a></li></ul></div><div class="footer-col"><h3>Company</h3><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="terms.html">Terms</a></li><li><a href="dmca.html">DMCA</a></li></ul></div></div><div class="copyright">© 2026 ToolsMediaDownload. All rights reserved.</div></footer>
+    <script>
+    let files=[];
+    document.getElementById('fileInput').addEventListener('change',e=>{files=Array.from(e.target.files);document.getElementById('fileName').textContent=files.length+' file(s) selected';document.getElementById('convertBtn').disabled=!files.length});
+    async function convertImages(){
+        const btn=document.getElementById('convertBtn');btn.disabled=true;btn.textContent='Converting...';
+        const fmt=document.getElementById('outputFormat').value;
+        const q=parseInt(document.getElementById('quality').value)/100;
+        const ext={['image/png']:'png',['image/jpeg']:'jpg',['image/webp']:'webp',['image/bmp']:'bmp'}[fmt]||'png';
+        const grid=document.getElementById('resultsGrid');grid.innerHTML='';
+        for(const file of files){
+            const img=await loadImg(file);
+            const c=document.createElement('canvas');c.width=img.width;c.height=img.height;
+            c.getContext('2d').drawImage(img,0,0);
+            const blob=await new Promise(r=>c.toBlob(r,fmt,q));
+            const url=URL.createObjectURL(blob);
+            const name=file.name.replace(/\.[^.]+$/,'')+'.'+ext;
+            grid.innerHTML+=`<div class="result-item"><img src="${url}" alt="Converted"><div class="stats">${(file.size/1024).toFixed(1)}KB → ${(blob.size/1024).toFixed(1)}KB</div><a href="${url}" download="${name}">⬇ Download .${ext.toUpperCase()}</a></div>`;
+        }
+        document.getElementById('results').classList.add('active');btn.disabled=false;btn.textContent='🔄 Convert Images';
+    }
+    function loadImg(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=e=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=e.target.result};r.readAsDataURL(file)})}
+    </script>
+</body>
+</html>
