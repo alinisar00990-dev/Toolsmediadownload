@@ -1,358 +1,433 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><!-- Google & Browser Round Peach Favicon -->
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="apple-touch-icon" sizes="180x180" href="favicon.svg">
-<meta name="theme-color" content="#E07A5F">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facebook Video Downloader - Fast HD & SD Video Saver</title>
-    <meta name="description" content="Download Facebook videos in High Definition (HD) and Standard Quality (SD) for free. Fast, direct downloads without installation.">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📘</text></svg>">
+    <title>Facebook Video Downloader - Fast HD & SD Downloads | ToolsMediaDownload</title>
+    <meta name="description" content="Free Facebook Video Downloader online. Download Facebook Reels, Watch videos, and clips in HD quality without software. Fast and 100% private.">
+    <meta name="keywords" content="facebook video downloader, download fb reels, facebook watch downloader, free fb video save">
+    
+    <!-- Round Peach Favicon & Theme Color -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.svg">
+    <meta name="theme-color" content="#E07A5F">
+
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            --primary: #1877f2;
-            --dark-bg: #0f172a;
-            --card-bg: #ffffff;
-            --text-dark: #1e293b;
-            --text-muted: #64748b;
-            --border-color: #e2e8f0;
-            --success-color: #10b981;
+            --bg-warm: #FAF5EE;
+            --card-bg: #FFFFFF;
+            --primary-peach: #E07A5F;
+            --peach-hover: #D95D39;
+            --peach-light: #FDE8E1;
+            --peach-gradient: linear-gradient(135deg, #FF9E7D 0%, #E07A5F 50%, #D95D39 100%);
+            --text-dark: #2C221E;
+            --text-muted: #706661;
+            --border-warm: #EFE3D8;
+            --dark-footer: #1A1615;
+            --shadow-soft: 0 10px 30px rgba(224, 122, 95, 0.08);
+            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04);
+            --glow-peach: rgba(224, 122, 95, 0.3);
+            --radius-main: 16px;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg-warm); color: var(--text-dark); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
 
-        body {
-            background-color: #f8fafc;
-            color: var(--text-dark);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+        /* HEADER & NAVBAR */
+        header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-warm); position: sticky; top: 0; z-index: 1000; }
+        .navbar { max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--text-dark); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+        .logo-icon { color: #FF9E7D; filter: drop-shadow(0 2px 4px rgba(224,122,95,0.4)); }
+        .logo span { background: var(--peach-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary-peach); }
+        
+        .dropdown { position: relative; }
+        .dropdown-menu { position: absolute; top: 100%; left: 0; background: var(--card-bg); border: 1px solid var(--border-warm); border-radius: 12px; box-shadow: var(--shadow-soft); padding: 0.75rem 0; min-width: 200px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.2s; z-index: 1100; }
+        .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-menu a { display: block; padding: 0.5rem 1.25rem; color: var(--text-dark); font-weight: 500; font-size: 0.9rem; }
+        .dropdown-menu a:hover { background: var(--bg-warm); color: var(--primary-peach); }
 
-        header {
-            background: #ffffff;
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-        }
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; color: var(--text-dark); cursor: pointer; }
 
-        .logo {
-            font-size: 1.35rem;
-            font-weight: 800;
-            color: var(--primary);
-            text-decoration: none;
-        }
+        /* AD CONTAINER */
+        .ad-container { max-width: 1200px; margin: 1.5rem auto 0; padding: 0 1.5rem; text-align: center; }
+        .ad-box { background: #FFFFFF; border: 1px dashed #D1C4B9; border-radius: 12px; padding: 1.25rem; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; min-height: 90px; display: flex; align-items: center; justify-content: center; }
 
-        .container {
-            max-width: 800px;
-            margin: 3rem auto;
-            padding: 0 1.25rem;
-            width: 100%;
-            flex: 1;
-        }
+        /* MAIN DOWNLOADER CONTAINER */
+        .downloader-section { max-width: 900px; margin: 2rem auto 4rem; padding: 0 1.5rem; flex: 1; }
+        
+        .downloader-header { text-align: center; margin-bottom: 2.5rem; }
+        .downloader-header h1 { font-family: 'Space Grotesk', sans-serif; font-size: 2.6rem; font-weight: 700; margin-bottom: 0.75rem; }
+        .downloader-header h1 span { background: var(--peach-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .downloader-header p { color: var(--text-muted); font-size: 1.05rem; }
 
-        .hero {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
+        .input-card { background: var(--card-bg); border: 1px solid var(--border-warm); border-radius: var(--radius-main); padding: 2rem; box-shadow: var(--shadow-soft); margin-bottom: 2rem; }
+        
+        .input-group { display: flex; gap: 0.75rem; position: relative; }
+        .input-wrapper { position: relative; flex: 1; display: flex; align-items: center; }
+        .input-wrapper i { position: absolute; left: 1.2rem; color: var(--primary-peach); font-size: 1.2rem; }
+        
+        .url-input { width: 100%; padding: 1.1rem 1.1rem 1.1rem 3.2rem; border: 1px solid var(--border-warm); border-radius: 12px; background: #FAFAFA; font-size: 1rem; color: var(--text-dark); outline: none; transition: all 0.2s ease; }
+        .url-input:focus { background: #FFFFFF; border-color: var(--primary-peach); box-shadow: 0 0 0 3px var(--glow-peach); }
+        
+        .btn-download { background: var(--peach-gradient); color: #FFFFFF; border: none; padding: 0 2rem; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 15px var(--glow-peach); white-space: nowrap; }
+        .btn-download:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--glow-peach); }
 
-        .hero h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 0.75rem;
-            line-height: 1.2;
-            color: var(--text-dark);
-        }
+        .quick-actions { display: flex; gap: 0.75rem; margin-top: 1rem; justify-content: flex-end; }
+        .btn-secondary { background: var(--bg-warm); border: 1px solid var(--border-warm); color: var(--text-dark); padding: 0.4rem 0.9rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.4rem; }
+        .btn-secondary:hover { background: var(--peach-light); color: var(--primary-peach); border-color: var(--primary-peach); }
 
-        .hero h1 span {
-            color: var(--primary);
-        }
+        /* LOADER & RESULTS */
+        .loading-state { display: none; text-align: center; padding: 2.5rem; background: var(--card-bg); border: 1px solid var(--border-warm); border-radius: var(--radius-main); margin-bottom: 2rem; }
+        .spinner { width: 45px; height: 45px; border: 4px solid var(--peach-light); border-top-color: var(--primary-peach); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 1rem; }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        .hero p {
-            color: var(--text-muted);
-            font-size: 1.125rem;
-        }
+        .error-box { display: none; background: #FCE8E6; border: 1px solid #FAD2CF; color: #C5221F; padding: 1.25rem; border-radius: 12px; font-size: 0.95rem; margin-bottom: 2rem; }
+        .error-box ul { margin-top: 0.5rem; padding-left: 1.5rem; line-height: 1.5; }
 
-        .input-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
-            border: 1px solid var(--border-color);
-        }
+        .result-card { display: none; background: var(--card-bg); border: 1px solid var(--border-warm); border-radius: var(--radius-main); padding: 2rem; box-shadow: var(--shadow-soft); }
+        .result-grid { display: grid; grid-template-columns: 280px 1fr; gap: 2rem; align-items: center; }
+        .video-preview { width: 100%; border-radius: 12px; background: #000; overflow: hidden; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; }
+        .video-preview video { width: 100%; height: 100%; object-fit: contain; }
 
-        .input-group {
-            display: flex;
-            gap: 12px;
-        }
+        .download-links-container h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+        .download-links-container p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+        
+        .download-options { display: flex; flex-direction: column; gap: 0.9rem; }
+        .dl-btn-item { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 1.2rem; background: var(--bg-warm); border: 1px solid var(--border-warm); border-radius: 10px; text-decoration: none; color: var(--text-dark); font-weight: 600; transition: all 0.2s; }
+        .dl-btn-item:hover { background: #FFFFFF; border-color: var(--primary-peach); box-shadow: 0 4px 12px var(--glow-peach); }
+        .dl-badge { background: var(--primary-peach); color: #FFF; font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 20px; font-weight: 700; text-transform: uppercase; }
 
-        @media (max-width: 640px) {
+        /* FOOTER */
+        footer { background: var(--dark-footer); color: #FFFFFF; padding: 3.5rem 1.5rem 2rem; margin-top: auto; }
+        .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 2.5rem; }
+        .footer-brand .logo { color: #FFFFFF; margin-bottom: 1rem; }
+        .footer-brand p { color: #A09691; font-size: 0.9rem; }
+        .footer-col h4 { color: #FFFFFF; font-size: 1.05rem; font-weight: 700; margin-bottom: 1.25rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+        .footer-col a { color: #A09691; text-decoration: none; font-size: 0.9rem; }
+        .footer-col a:hover { color: var(--primary-peach); }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid #2D2725; display: flex; justify-content: space-between; align-items: center; color: #A09691; font-size: 0.85rem; }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn { display: block; }
+            .nav-links { position: absolute; top: 100%; left: 0; right: 0; background: #FFFFFF; border-bottom: 1px solid var(--border-warm); flex-direction: column; padding: 1.5rem; gap: 1.25rem; display: none; box-shadow: var(--shadow-soft); }
+            .nav-links.active { display: flex; }
             .input-group { flex-direction: column; }
-            .hero h1 { font-size: 1.85rem; }
-        }
-
-        input[type="url"] {
-            flex: 1;
-            padding: 1rem 1.25rem;
-            border: 2px solid var(--border-color);
-            border-radius: 10px;
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.2s ease;
-        }
-
-        input[type="url"]:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.15);
-        }
-
-        button.btn-submit {
-            background: var(--primary);
-            color: #ffffff;
-            border: none;
-            padding: 1rem 1.75rem;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: transform 0.15s ease, background 0.2s;
-        }
-
-        button.btn-submit:hover { background: #166fe5; transform: translateY(-1px); }
-        button.btn-submit:active { transform: translateY(0); }
-
-        .status {
-            margin-top: 1.25rem;
-            text-align: center;
-            font-weight: 600;
-            display: none;
-            padding: 0.75rem;
-            border-radius: 8px;
-        }
-
-        .status.error { color: #dc2626; background: #fef2f2; display: block; }
-        .status.loading { color: #2563eb; background: #eff6ff; display: block; }
-
-        .result-container {
-            margin-top: 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .btn-download {
-            background: var(--success-color);
-            color: #ffffff;
-            padding: 0.875rem 1.75rem;
-            border-radius: 10px;
-            font-weight: 700;
-            cursor: pointer;
-            border: none;
-            font-size: 1rem;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
-            transition: background 0.2s ease;
-        }
-
-        .btn-download.sd {
-            background: #2563eb;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
-        }
-
-        .btn-download:hover { opacity: 0.95; }
-
-        footer {
-            background: var(--dark-bg);
-            color: #ffffff;
-            padding: 3.5rem 1rem 1.5rem;
-            margin-top: auto;
-        }
-
-        .footer-grid {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2.5rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .footer-col h3 {
-            font-size: 1.1rem;
-            margin-bottom: 1.2rem;
-            color: #f1f5f9;
-        }
-
-        .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 0.75rem; }
-        .footer-col ul li a {
-            color: #94a3b8;
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.2s;
-        }
-
-        .footer-col ul li a:hover { color: #ffffff; }
-
-        .copyright {
-            text-align: center;
-            border-top: 1px solid #334155;
-            padding-top: 1.75rem;
-            color: #64748b;
-            font-size: 0.875rem;
+            .btn-download { width: 100%; padding: 1rem; }
+            .result-grid { grid-template-columns: 1fr; }
+            .footer-container { grid-template-columns: 1fr; gap: 2rem; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
         }
     </style>
 </head>
 <body>
 
+    <!-- NAVBAR -->
     <header>
-        <a href="index.html" class="logo">ToolsMediaDownload</a>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚡</span> ToolsMedia<span>Download</span>
+            </a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu"><i class="fas fa-bars"></i></button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="index.html#tools">Tools <i class="fas fa-chevron-down" style="font-size: 0.75rem;"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="gif-compressor.html">GIF Compressor</a>
+                        <a href="image-converter.html">Image Converter</a>
+                        <a href="pdf-tools.html">PDF Tools</a>
+                        <a href="instagram-downloader.html">Instagram Downloader</a>
+                        <a href="facebook-downloader.html" class="active">Facebook Downloader</a>
+                        <a href="tiktok-downloader.html">TikTok Downloader</a>
+                    </div>
+                </li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <div class="container">
-        <div class="hero">
+    <!-- AD SPACE TOP -->
+    <div class="ad-container">
+        <div class="ad-box"><span><i class="fas fa-ad"></i> Advertisement Space</span></div>
+    </div>
+
+    <!-- MAIN SECTION -->
+    <main class="downloader-section">
+        <div class="downloader-header">
             <h1>Facebook <span>Video Downloader</span></h1>
-            <p>Paste a Facebook video link below to save HD or SD videos directly to your device.</p>
+            <p>Download Facebook videos, Reels, and Watch clips in HD or SD quality for free.</p>
         </div>
 
         <div class="input-card">
-            <form id="downloadForm">
+            <form id="fbForm" onsubmit="processFacebookDownload(event)">
                 <div class="input-group">
-                    <input type="url" id="mediaUrl" placeholder="https://www.facebook.com/watch/?v=..." required>
-                    <button type="submit" class="btn-submit">Fetch Video</button>
+                    <div class="input-wrapper">
+                        <i class="fab fa-facebook-f"></i>
+                        <input type="url" id="fbUrl" class="url-input" placeholder="Paste Facebook video URL here (e.g., https://www.facebook.com/watch?v=...)" required autocomplete="off">
+                    </div>
+                    <button type="submit" class="btn-download" id="submitBtn">
+                        <i class="fas fa-download"></i> <span>Save Video</span>
+                    </button>
+                </div>
+                <div class="quick-actions">
+                    <button type="button" class="btn-secondary" onclick="pasteClipboard()"><i class="fas fa-paste"></i> Paste</button>
+                    <button type="button" class="btn-secondary" onclick="clearInput()"><i class="fas fa-eraser"></i> Clear</button>
                 </div>
             </form>
-            <div id="statusMessage" class="status"></div>
-            <div id="resultContainer" class="result-container"></div>
         </div>
+
+        <!-- ERROR MESSAGE BOX -->
+        <div id="errorBox" class="error-box">
+            <strong><i class="fas fa-exclamation-triangle"></i> Unable to extract video link.</strong>
+            <ul>
+                <li>Make sure the Facebook video is set to <strong>Public</strong> (Private/Group videos cannot be extracted).</li>
+                <li>Check if the URL is correct (e.g. `facebook.com/reel/`, `facebook.com/watch/`, or `fb.watch/`).</li>
+                <li>Try copying the video link directly from the browser address bar.</li>
+            </ul>
+        </div>
+
+        <!-- LOADING STATE -->
+        <div id="loadingState" class="loading-state">
+            <div class="spinner"></div>
+            <h3 style="font-size: 1.1rem; font-weight: 700;">Analyzing Video URL...</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.3rem;" id="loadingText">Connecting to multi-proxy engine...</p>
+        </div>
+
+        <!-- RESULT CONTAINER -->
+        <div id="resultCard" class="result-card">
+            <div class="result-grid">
+                <div class="video-preview">
+                    <video id="previewVideo" controls poster="" src=""></video>
+                </div>
+                <div class="download-links-container">
+                    <h3>Video Ready to Download!</h3>
+                    <p>Select your preferred quality format below:</p>
+                    
+                    <div class="download-options" id="dlOptions">
+                        <!-- Dynamic Buttons rendered by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- AD SPACE BOTTOM -->
+    <div class="ad-container" style="margin-bottom: 3rem;">
+        <div class="ad-box"><span><i class="fas fa-ad"></i> Advertisement Space</span></div>
     </div>
 
+    <!-- FOOTER -->
     <footer>
-        <div class="footer-grid">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">⚡</span> ToolsMedia<span>Download</span>
+                </a>
+                <p>Fast, free, and secure online media downloaders, file converters, and utility tools. 100% client-side processing for total privacy.</p>
+            </div>
             <div class="footer-col">
-                <h3>Download Tools</h3>
+                <h4>Quick Tools</h4>
                 <ul>
+                    <li><a href="gif-compressor.html">GIF Compressor</a></li>
+                    <li><a href="image-converter.html">Image Converter</a></li>
+                    <li><a href="pdf-tools.html">PDF Tools</a></li>
                     <li><a href="instagram-downloader.html">Instagram Downloader</a></li>
-                    <li><a href="facebook-downloader.html">Facebook Downloader</a></li>
-                    <li><a href="tiktok-downloader.html">TikTok Downloader</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h3>Guides & Articles</h3>
+                <h4>Company</h4>
                 <ul>
-                    <li><a href="blog-make-money-online.html">Monetize Utility Web Tools</a></li>
-                    <li><a href="blog-build-media-downloader-tools.html">How Media Downloaders Work</a></li>
-                    <li><a href="blog-repurpose-content-passive-income.html">Repurpose Video Content</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="blog.html">Blog & Guides</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h3>About</h3>
+                <h4>Legal Info</h4>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="sitemap.xml">XML Sitemap</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
                 </ul>
             </div>
         </div>
-        <div class="copyright">
-            &copy; 2026 ToolsMediaDownload. All rights reserved.
+        <div class="footer-bottom">
+            <p>&copy; 2025 ToolsMediaDownload. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        document.getElementById('downloadForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const inputUrl = document.getElementById('mediaUrl').value.trim();
-            const statusMsg = document.getElementById('statusMessage');
-            const resultBox = document.getElementById('resultContainer');
+        // Mobile Navbar Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        if(mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
+        }
 
-            statusMsg.className = 'status loading';
-            statusMsg.textContent = 'Fetching Facebook video details... Please wait.';
-            resultBox.innerHTML = '';
-
+        async function pasteClipboard() {
             try {
-                const response = await fetch(`https://free-facebook-downloader.p.rapidapi.com/external-api/facebook-video-downloader?url=${encodeURIComponent(inputUrl)}`, {
-                    method: 'GET',
-                    headers: {
-                        'x-rapidapi-key': '823d313349msh8708f7c2bb986adp127814jsn5db46ebbd91b',
-                        'x-rapidapi-host': 'free-facebook-downloader.p.rapidapi.com'
-                    }
-                });
-
-                const data = await response.json();
-
-                if (!response.ok || !data) {
-                    throw new Error('Unable to extract video. Please check if the video URL is public.');
-                }
-
-                const links = data.links || {};
-                const hdUrl = links["Download High Quality"] || links["HD"] || data.hd;
-                const sdUrl = links["Download Low Quality"] || links["SD"] || data.sd;
-
-                if (!hdUrl && !sdUrl) {
-                    throw new Error('No downloadable video streams found for this Facebook link.');
-                }
-
-                statusMsg.style.display = 'none';
-
-                let buttonsHtml = '';
-                if (hdUrl) {
-                    buttonsHtml += `<button class="btn-download" onclick="triggerDirectDownload('${hdUrl}', 'hd')">Download HD Quality</button>`;
-                }
-                if (sdUrl) {
-                    buttonsHtml += `<button class="btn-download sd" onclick="triggerDirectDownload('${sdUrl}', 'sd')">Download SD Quality</button>`;
-                }
-
-                resultBox.innerHTML = `
-                    <div class="btn-group">${buttonsHtml}</div>
-                `;
-
+                const text = await navigator.clipboard.readText();
+                if(text) document.getElementById('fbUrl').value = text.trim();
             } catch (err) {
-                statusMsg.className = 'status error';
-                statusMsg.textContent = err.message || 'An error occurred while fetching the Facebook video.';
+                alert('Please paste the URL manually into the input box.');
             }
-        });
+        }
 
-        async function triggerDirectDownload(fileUrl, quality) {
-            const dateStr = new Date().toISOString().replace(/[-:T.]/g, "").slice(0, 14);
-            const randomNum = Math.floor(1000 + Math.random() * 9000);
-            const fileName = `facebook_${quality}_video_${dateStr}_${randomNum}.mp4`;
+        function clearInput() {
+            document.getElementById('fbUrl').value = '';
+            document.getElementById('errorBox').style.display = 'none';
+            document.getElementById('resultCard').style.display = 'none';
+        }
 
+        // Clean & Decode Unicode Strings from FB HTML
+        function cleanFBUrl(rawUrl) {
+            if (!rawUrl) return null;
+            let clean = rawUrl.replace(/\\/g, '');
             try {
-                const res = await fetch(fileUrl, { mode: 'cors' });
-                const blob = await res.blob();
-                const blobUrl = URL.createObjectURL(blob);
-                
-                const link = document.createElement('a');
-                link.href = blobUrl;
-                link.download = fileName;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                URL.revokeObjectURL(blobUrl);
+                clean = decodeURIComponent(JSON.parse(`"${rawUrl}"`));
             } catch (e) {
-                const link = document.createElement('a');
-                link.href = fileUrl;
-                link.download = fileName;
-                link.target = '_blank';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
+                clean = clean.replace(/\\u0026/g, '&').replace(/\\/g, '');
+            }
+            return clean;
+        }
+
+        async function processFacebookDownload(e) {
+            e.preventDefault();
+            const urlInput = document.getElementById('fbUrl').value.trim();
+            const errorBox = document.getElementById('errorBox');
+            const loadingState = document.getElementById('loadingState');
+            const resultCard = document.getElementById('resultCard');
+            const loadingText = document.getElementById('loadingText');
+            const submitBtn = document.getElementById('submitBtn');
+
+            errorBox.style.display = 'none';
+            resultCard.style.display = 'none';
+
+            if (!urlInput.includes('facebook.com') && !urlInput.includes('fb.watch') && !urlInput.includes('fb.gg')) {
+                errorBox.style.display = 'block';
+                return;
+            }
+
+            loadingState.style.display = 'block';
+            submitBtn.disabled = true;
+
+            // Strategy 1: Multi-Proxy HTML Scraping
+            const proxies = [
+                (u) => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+                (u) => `https://corsproxy.io/?${encodeURIComponent(u)}`,
+                (u) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}`
+            ];
+
+            let hdLink = null;
+            let sdLink = null;
+
+            for (let i = 0; i < proxies.length; i++) {
+                try {
+                    loadingText.innerText = `Trying proxy server engine ${i + 1}...`;
+                    const response = await fetch(proxies[i](urlInput), { headers: { 'User-Agent': 'Mozilla/5.0' } });
+                    if (!response.ok) continue;
+
+                    const html = await response.text();
+
+                    // Regex search for HD patterns
+                    const hdMatches = [
+                        /browser_native_hd_url":"([^"]+)"/,
+                        /playable_url_quality_hd":"([^"]+)"/,
+                        /hd_src:"([^"]+)"/,
+                        /hd_src_no_ratelimit:"([^"]+)"/
+                    ];
+
+                    for (let reg of hdMatches) {
+                        const m = html.match(reg);
+                        if (m && m[1]) {
+                            hdLink = cleanFBUrl(m[1]);
+                            if (hdLink) break;
+                        }
+                    }
+
+                    // Regex search for SD patterns
+                    const sdMatches = [
+                        /browser_native_sd_url":"([^"]+)"/,
+                        /playable_url":"([^"]+)"/,
+                        /sd_src:"([^"]+)"/,
+                        /sd_src_no_ratelimit:"([^"]+)"/
+                    ];
+
+                    for (let reg of sdMatches) {
+                        const m = html.match(reg);
+                        if (m && m[1]) {
+                            sdLink = cleanFBUrl(m[1]);
+                            if (sdLink) break;
+                        }
+                    }
+
+                    if (hdLink || sdLink) break; // Found streams successfully!
+                } catch (err) {
+                    console.warn(`Proxy ${i + 1} failed, trying next...`);
+                }
+            }
+
+            // Strategy 2: API Engine Fallback (If direct scraping yielded nothing)
+            if (!hdLink && !sdLink) {
+                try {
+                    loadingText.innerText = 'Engaging secondary API fallback...';
+                    const apiRes = await fetch(`https://api.vkrdown.com/fb/?url=${encodeURIComponent(urlInput)}`);
+                    const apiData = await apiRes.json();
+                    if (apiData && apiData.data) {
+                        if (apiData.data.hd) hdLink = apiData.data.hd;
+                        if (apiData.data.sd) sdLink = apiData.data.sd;
+                    }
+                } catch (e) {
+                    console.warn('API fallback bypass failed.');
+                }
+            }
+
+            loadingState.style.display = 'none';
+            submitBtn.disabled = false;
+
+            // Render Output
+            if (hdLink || sdLink) {
+                const videoUrl = hdLink || sdLink;
+                const previewVideo = document.getElementById('previewVideo');
+                const dlOptions = document.getElementById('dlOptions');
+
+                previewVideo.src = videoUrl;
+                dlOptions.innerHTML = '';
+
+                if (hdLink) {
+                    dlOptions.innerHTML += `
+                        <a href="${hdLink}" target="_blank" download="Facebook_HD_Video.mp4" class="dl-btn-item">
+                            <span><i class="fas fa-video" style="color:var(--primary-peach); margin-right:8px;"></i> Download HD Quality</span>
+                            <span class="dl-badge">720p / 1080p HD</span>
+                        </a>
+                    `;
+                }
+
+                if (sdLink) {
+                    dlOptions.innerHTML += `
+                        <a href="${sdLink}" target="_blank" download="Facebook_SD_Video.mp4" class="dl-btn-item">
+                            <span><i class="fas fa-file-video" style="color:var(--text-muted); margin-right:8px;"></i> Download SD Quality</span>
+                            <span class="dl-badge" style="background:#706661;">Standard SD</span>
+                        </a>
+                    `;
+                }
+
+                resultCard.style.display = 'block';
+                resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else {
+                errorBox.style.display = 'block';
+                errorBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
         }
     </script>
