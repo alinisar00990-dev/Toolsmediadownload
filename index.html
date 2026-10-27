@@ -22,7 +22,9 @@ a{text-decoration:none;color:inherit;}
 /* Header */
 header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border-warm);z-index:100;padding:0.9rem 1.5rem;}
 .nav-wrap{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
-.logo{font-size:1.35rem;font-weight:800;color:var(--text-dark);display:flex;align-items:center;gap:0.3rem;white-space:nowrap;}
+.logo{display:flex;align-items:center;gap:0.55rem;font-size:1.35rem;font-weight:800;color:var(--text-dark);white-space:nowrap;}
+.logo-icon{width:34px;height:34px;border-radius:10px;background:var(--peach-gradient);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 8px var(--glow-peach);}
+.logo-icon svg{width:20px;height:20px;}
 .logo span{background:var(--peach-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .nav-links{display:flex;gap:1.8rem;list-style:none;}
 .nav-links a{color:var(--text-dark);font-weight:500;transition:color 0.2s;font-size:0.95rem;}
@@ -42,10 +44,8 @@ header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--borde
 .hero{background:var(--peach-gradient);color:#fff;padding:4.5rem 1.5rem;text-align:center;}
 .hero h1{font-size:2.8rem;margin-bottom:1rem;font-weight:800;}
 .hero p{font-size:1.2rem;max-width:700px;margin:0 auto 1.8rem;opacity:0.95;}
-.hero-stats{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;margin-top:1.5rem;}
-.stat{text-align:center;}
-.stat-num{font-size:2rem;font-weight:800;display:block;}
-.stat-label{font-size:0.9rem;opacity:0.9;}
+.hero-badges{display:flex;justify-content:center;gap:0.8rem;flex-wrap:wrap;margin-top:1.8rem;}
+.badge-pill{background:rgba(255,255,255,0.22);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.35);padding:0.5rem 1.2rem;border-radius:30px;font-size:0.95rem;font-weight:600;color:#fff;display:inline-flex;align-items:center;gap:0.4rem;}
 
 /* Sections */
 section{padding:4rem 1.5rem;}
@@ -55,7 +55,7 @@ section{padding:4rem 1.5rem;}
 
 .tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
 
-/* CARD & BUTTON FIX */
+/* CARD & BUTTON FLEX ALIGNMENT */
 .tool-card{
   background:var(--card-bg);border:1px solid var(--border-warm);
   border-radius:16px;padding:1.75rem;transition:all 0.3s;
@@ -104,12 +104,14 @@ section{padding:4rem 1.5rem;}
 .feature h3{font-size:1.2rem;margin-bottom:0.5rem;}
 .feature p{color:var(--text-muted);font-size:0.95rem;}
 
-/* Blog preview */
+/* Blog preview with Images */
 .blog-preview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;}
-.blog-card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--border-warm);transition:all 0.3s;}
+.blog-card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--border-warm);transition:all 0.3s;display:flex;flex-direction:column;}
 .blog-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,0.08);}
-.blog-thumb{height:160px;background:var(--peach-gradient);}
-.blog-body{padding:1.3rem;}
+.blog-thumb{height:180px;width:100%;overflow:hidden;background:var(--bg-warm);position:relative;}
+.blog-thumb img{width:100%;height:100%;object-fit:cover;transition:transform 0.3s;}
+.blog-card:hover .blog-thumb img{transform:scale(1.05);}
+.blog-body{padding:1.3rem;flex-grow:1;}
 .blog-body h4{font-size:1.1rem;margin-bottom:0.5rem;}
 .blog-body p{color:var(--text-muted);font-size:0.9rem;}
 
@@ -137,11 +139,13 @@ footer{background:var(--dark-footer);color:#fff;padding:3rem 1.5rem 1.5rem;}
 @media(max-width:640px){
   header{padding:0.75rem 1rem;}
   .logo{font-size:1.1rem;}
+  .logo-icon{width:28px;height:28px;}
+  .logo-icon svg{width:16px;height:16px;}
   .hero{padding:2.5rem 1rem;}
   .hero h1{font-size:2rem;}
   .hero p{font-size:1rem;}
-  .hero-stats{gap:2rem;}
-  .stat-num{font-size:1.6rem;}
+  .hero-badges{gap:0.5rem;}
+  .badge-pill{font-size:0.82rem;padding:0.4rem 0.85rem;}
   section{padding:2.5rem 1rem;}
   .section-title{font-size:1.6rem;}
   .tools-grid{grid-template-columns:1fr;gap:1.1rem;}
@@ -158,7 +162,14 @@ footer{background:var(--dark-footer);color:#fff;padding:3rem 1.5rem 1.5rem;}
 
 <header>
   <div class="nav-wrap">
-    <a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a>
+    <a href="index.html" class="logo">
+      <span class="logo-icon">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path d="M55 15 L30 55 L48 55 L42 85 L70 42 L52 42 Z" fill="white"/>
+        </svg>
+      </span>
+      ToolsMedia<span>Download</span>
+    </a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="blog.html">Blog</a></li>
@@ -186,9 +197,10 @@ footer{background:var(--dark-footer);color:#fff;padding:3rem 1.5rem 1.5rem;}
 <section class="hero">
   <h1>Free Online Tools for Creators</h1>
   <p>Download media, convert images, generate QR codes & more. 100% browser-based. No signup, no limits.</p>
-  <div class="hero-stats">
-    <div class="stat"><span class="stat-num">13+</span><span class="stat-label">Free Tools</span></div>
-    <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Browser-Based</span></div>
+  <div class="hero-badges">
+    <span class="badge-pill">🔒 100% Private</span>
+    <span class="badge-pill">⚡ Lightning Fast</span>
+    <span class="badge-pill">✨ No Signup Required</span>
   </div>
 </section>
 
@@ -343,15 +355,39 @@ footer{background:var(--dark-footer);color:#fff;padding:3rem 1.5rem 1.5rem;}
   </div>
 </section>
 
-<!-- Blog Preview -->
+<!-- Blog Preview (Images Ready) -->
 <section>
   <div class="container">
     <h2 class="section-title">📚 Latest from Blog</h2>
     <p class="section-sub">Guides, tips & tutorials for creators</p>
     <div class="blog-preview-grid">
-      <a href="blog.html" class="blog-card"><div class="blog-thumb"></div><div class="blog-body"><h4>Monetize Utility Tools</h4><p>How to earn passive income from free tool websites.</p></div></a>
-      <a href="blog.html" class="blog-card"><div class="blog-thumb" style="background:linear-gradient(135deg,#667eea,#764ba2);"></div><div class="blog-body"><h4>Image Compression Guide</h4><p>Reduce file size without losing quality.</p></div></a>
-      <a href="blog.html" class="blog-card"><div class="blog-thumb" style="background:linear-gradient(135deg,#f093fb,#f5576c);"></div><div class="blog-body"><h4>QR Code Marketing</h4><p>Boost engagement with creative QR campaigns.</p></div></a>
+      <a href="blog.html" class="blog-card">
+        <div class="blog-thumb">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="Monetize Utility Tools">
+        </div>
+        <div class="blog-body">
+          <h4>Monetize Utility Tools</h4>
+          <p>How to earn passive income from free tool websites.</p>
+        </div>
+      </a>
+      <a href="blog.html" class="blog-card">
+        <div class="blog-thumb">
+          <img src="https://images.unsplash.com/photo-1542744094-3a31b272c490?auto=format&fit=crop&w=600&q=80" alt="Image Compression Guide">
+        </div>
+        <div class="blog-body">
+          <h4>Image Compression Guide</h4>
+          <p>Reduce file size without losing quality.</p>
+        </div>
+      </a>
+      <a href="blog.html" class="blog-card">
+        <div class="blog-thumb">
+          <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80" alt="QR Code Marketing">
+        </div>
+        <div class="blog-body">
+          <h4>QR Code Marketing</h4>
+          <p>Boost engagement with creative QR campaigns.</p>
+        </div>
+      </a>
     </div>
     <div style="text-align:center;margin-top:2rem;"><a href="blog.html" class="cta-btn" style="background:var(--peach-gradient);color:#fff;">View All Posts →</a></div>
   </div>
