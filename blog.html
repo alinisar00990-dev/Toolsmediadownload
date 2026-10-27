@@ -1,304 +1,485 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - ToolsMediaDownload | Guides, Tips & Tutorials</title>
-    <meta name="description" content="Read our latest guides on monetizing web tools, content repurposing, image compression, and more. Tips for creators and developers.">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://toolsmediadownload.com/blog.html">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-    <style>
-        :root{--bg-warm:#FAF5EE;--card-bg:#FFF;--primary-peach:#E07A5F;--peach-gradient:linear-gradient(135deg,#FF9E7D,#E07A5F,#D95D39);--text-dark:#2C221E;--text-muted:#706661;--border-warm:#EFE3D8;--dark-footer:#1A1615}
-        *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
-        body{background:var(--bg-warm);color:var(--text-dark);min-height:100vh;display:flex;flex-direction:column;line-height:1.7;overflow-x:hidden}
-        header{background:#fff;border-bottom:1px solid var(--border-warm);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-        .logo{font-size:1.3rem;font-weight:800;color:var(--primary-peach);text-decoration:none;display:flex;align-items:center;gap:.4rem}.logo span{color:var(--text-dark)}
-        .nav-links{display:flex;gap:1.25rem}.nav-links a{color:var(--text-dark);text-decoration:none;font-weight:600;font-size:.95rem}.nav-links a:hover{color:var(--primary-peach)}
-        .hamburger{display:none;background:none;border:none;font-size:1.75rem;cursor:pointer;color:var(--text-dark);padding:.3rem .5rem}
-        .mobile-menu{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:200}
-        .mobile-menu.active{display:block}
-        .mobile-menu-content{background:#fff;width:85%;max-width:320px;height:100%;padding:1.5rem 1.25rem;display:flex;flex-direction:column;gap:.3rem;animation:slideIn .3s ease;overflow-y:auto}
-        @keyframes slideIn{from{transform:translateX(-100%)}to{transform:translateX(0)}}
-        .mobile-menu-content a{color:var(--text-dark);text-decoration:none;font-weight:600;font-size:1.05rem;padding:.9rem .5rem;border-bottom:1px solid var(--border-warm)}
-        .mobile-menu-close{background:none;border:none;font-size:1.75rem;cursor:pointer;align-self:flex-end;padding:.5rem .75rem;margin-bottom:.5rem}
-        @media(max-width:768px){.nav-links{display:none}.hamburger{display:block}}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog & Guides - ToolsMediaDownload</title>
+<meta name="description" content="Learn how to build utility tools, monetize with AdSense, repurpose media content, optimize images, improve SEO & protect passwords.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='100' y2='100'%3E%3Cstop offset='0' stop-color='%23FF9E7D'/%3E%3Cstop offset='0.5' stop-color='%23E07A5F'/%3E%3Cstop offset='1' stop-color='%23D95D39'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Cpath d='M55 15 L30 55 L48 55 L42 85 L70 42 L52 42 Z' fill='white'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#E07A5F">
+<style>
+:root{
+  --bg-warm:#FAF5EE; --card-bg:#FFFFFF; --primary-peach:#E07A5F;
+  --peach-gradient:linear-gradient(135deg,#FF9E7D 0%,#E07A5F 50%,#D95D39 100%);
+  --text-dark:#2C221E; --text-muted:#706661; --border-warm:#EFE3D8;
+  --dark-footer:#1A1615; --glow-peach:rgba(224,122,95,0.4);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg-warm);color:var(--text-dark);line-height:1.6;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
 
-        .page-container{max-width:1000px;margin:3rem auto;padding:0 1.25rem;flex:1;width:100%}
-        .page-hero{text-align:center;margin-bottom:3rem}
-        .page-hero h1{font-size:2.75rem;font-weight:800;margin-bottom:.75rem;line-height:1.15}
-        .page-hero h1 .g{background:var(--peach-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .page-hero p{color:var(--text-muted);font-size:1.15rem}
-        @media(max-width:640px){
-            .page-container{margin:2rem auto}
-            .page-hero{margin-bottom:2rem}
-            .page-hero h1{font-size:2rem}
-            .page-hero p{font-size:1rem}
-        }
+/* Header */
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border-warm);z-index:100;padding:0.9rem 1.5rem;}
+.nav-wrap{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
+.logo{display:flex;align-items:center;gap:0.55rem;font-size:1.35rem;font-weight:800;color:var(--text-dark);white-space:nowrap;}
+.logo-icon{width:34px;height:34px;border-radius:10px;background:var(--peach-gradient);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 8px var(--glow-peach);}
+.logo-icon svg{width:20px;height:20px;}
+.logo span{background:var(--peach-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-links{display:flex;gap:1.8rem;list-style:none;}
+.nav-links a{color:var(--text-dark);font-weight:500;transition:color 0.2s;font-size:0.95rem;}
+.nav-links a:hover{color:var(--primary-peach);}
+.hamburger{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--text-dark);padding:0.25rem;}
 
-        /* FEATURED POST */
-        .featured-post{background:#fff;border-radius:20px;overflow:hidden;border:1px solid var(--border-warm);margin-bottom:2.5rem;display:grid;grid-template-columns:1fr 1fr;box-shadow:0 10px 30px rgba(224,122,95,.08);text-decoration:none;color:inherit;transition:all .3s}
-        .featured-post:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(224,122,95,.15)}
-        .featured-thumb{background:var(--peach-gradient);display:flex;align-items:center;justify-content:center;font-size:6rem;min-height:280px}
-        .featured-body{padding:2rem}
-        .featured-tag{display:inline-block;background:#FFE4D9;color:var(--primary-peach);padding:.3rem .8rem;border-radius:12px;font-size:.78rem;font-weight:700;margin-bottom:.75rem}
-        .featured-body h2{font-size:1.6rem;margin-bottom:.75rem;line-height:1.3}
-        .featured-body p{color:var(--text-muted);font-size:1rem;margin-bottom:1rem;line-height:1.6}
-        .featured-meta{font-size:.85rem;color:var(--text-muted);margin-bottom:1rem}
-        .featured-cta{color:var(--primary-peach);font-weight:700}
-        @media(max-width:768px){
-            .featured-post{grid-template-columns:1fr}
-            .featured-thumb{min-height:180px;font-size:4rem}
-            .featured-body{padding:1.5rem}
-            .featured-body h2{font-size:1.3rem}
-        }
+/* Mobile Menu */
+.mobile-menu{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:200;}
+.mobile-menu.active{display:block;}
+.mobile-menu-panel{background:#fff;width:85%;max-width:320px;height:100%;padding:2rem 1.5rem;}
+.mobile-menu-panel .close-btn{background:none;border:none;font-size:2rem;float:right;cursor:pointer;}
+.mobile-menu-panel ul{list-style:none;margin-top:3rem;}
+.mobile-menu-panel li{padding:1rem 0;border-bottom:1px solid var(--border-warm);}
+.mobile-menu-panel a{font-size:1.1rem;font-weight:500;}
 
-        /* CATEGORIES */
-        .categories{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;margin-bottom:2.5rem}
-        .category-btn{background:#fff;border:2px solid var(--border-warm);padding:.55rem 1.1rem;border-radius:20px;font-weight:600;font-size:.88rem;cursor:pointer;transition:all .2s;color:var(--text-dark)}
-        .category-btn:hover,.category-btn.active{background:var(--primary-peach);color:#fff;border-color:var(--primary-peach)}
+/* Blog Hero */
+.blog-hero{background:var(--peach-gradient);color:#fff;padding:3.5rem 1.5rem;text-align:center;}
+.blog-hero h1{font-size:2.5rem;margin-bottom:0.8rem;font-weight:800;}
+.blog-hero p{font-size:1.15rem;max-width:650px;margin:0 auto;opacity:0.95;}
 
-        /* BLOG GRID */
-        .blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.5rem;margin-bottom:3rem}
-        @media(max-width:640px){.blog-grid{grid-template-columns:1fr;gap:1.1rem}}
-        
-        .blog-card{background:#fff;border-radius:16px;overflow:hidden;text-decoration:none;color:inherit;border:1px solid var(--border-warm);transition:all .25s ease;display:flex;flex-direction:column}
-        .blog-card:hover,.blog-card:active{transform:translateY(-5px);box-shadow:0 14px 30px rgba(224,122,95,.12);border-color:var(--primary-peach)}
-        .blog-thumb{height:160px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:linear-gradient(135deg,#FFF4EC,#FFE4D9)}
-        .blog-thumb.g2{background:linear-gradient(135deg,#E0F7FA,#B2EBF2)}
-        .blog-thumb.g3{background:linear-gradient(135deg,#F3E5F5,#E1BEE7)}
-        .blog-thumb.g4{background:linear-gradient(135deg,#FFF9C4,#FFF59D)}
-        .blog-thumb.g5{background:linear-gradient(135deg,#C8E6C9,#A5D6A7)}
-        .blog-thumb.g6{background:linear-gradient(135deg,#FFCDD2,#EF9A9A)}
-        .blog-body{padding:1.4rem;flex:1;display:flex;flex-direction:column}
-        .blog-date{font-size:.78rem;color:var(--text-muted);margin-bottom:.5rem;font-weight:600}
-        .blog-card h3{font-size:1.1rem;margin-bottom:.6rem;font-weight:700;line-height:1.4}
-        .blog-card p{color:var(--text-muted);font-size:.92rem;flex:1;margin-bottom:1rem;line-height:1.55}
-        .read-more{color:var(--primary-peach);font-weight:700;font-size:.9rem}
+/* Category Filter Bar */
+.filter-bar{background:#fff;border-bottom:1px solid var(--border-warm);padding:1rem 1.5rem;position:sticky;top:61px;z-index:90;}
+.filter-container{max-width:1200px;margin:0 auto;display:flex;gap:0.75rem;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;}
+.filter-container::-webkit-scrollbar{display:none;}
+.filter-btn{padding:0.45rem 1.1rem;border-radius:25px;border:1px solid var(--border-warm);background:var(--bg-warm);color:var(--text-dark);font-size:0.9rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:all 0.2s;}
+.filter-btn:hover,.filter-btn.active{background:var(--primary-peach);color:#fff;border-color:var(--primary-peach);}
 
-        footer{background:var(--dark-footer);color:#fff;padding:3rem 1.25rem 1.5rem;margin-top:auto}
-        .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2.25rem;margin-bottom:2rem}
-        .footer-col h3{font-size:1.1rem;margin-bottom:1.1rem;color:#F7EDE2}.footer-col ul{list-style:none}.footer-col ul li{margin-bottom:.7rem}.footer-col ul li a{color:#A8A099;text-decoration:none;font-size:.95rem}.footer-col ul li a:hover{color:#F7EDE2}.footer-col p{color:#A8A099;font-size:.95rem}
-        .copyright{text-align:center;border-top:1px solid #332E2B;padding-top:1.5rem;color:#78706A;font-size:.88rem}
-    </style>
+/* Content Container */
+.blog-container{max-width:1200px;margin:3rem auto;padding:0 1.5rem;}
+
+/* Featured Post */
+.featured-card{background:#fff;border:1px solid var(--border-warm);border-radius:20px;overflow:hidden;margin-bottom:3rem;display:grid;grid-template-columns:1.1fr 1fr;gap:0;box-shadow:0 8px 24px rgba(0,0,0,0.04);transition:transform 0.3s,box-shadow 0.3s;}
+.featured-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px var(--glow-peach);border-color:var(--primary-peach);}
+.featured-img{width:100%;height:100%;min-height:300px;overflow:hidden;background:var(--bg-warm);position:relative;}
+.featured-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.3s;}
+.featured-card:hover .featured-img img{transform:scale(1.04);}
+.featured-content{padding:2.5rem;display:flex;flex-direction:column;justify-content:center;}
+.post-cat{display:inline-block;padding:0.25rem 0.75rem;border-radius:15px;background:#FEE4D6;color:#9A3412;font-size:0.75rem;font-weight:700;text-transform:uppercase;margin-bottom:1rem;width:fit-content;}
+.featured-content h2{font-size:1.8rem;margin-bottom:1rem;line-height:1.3;}
+.featured-content p{color:var(--text-muted);margin-bottom:1.5rem;font-size:1.02rem;}
+.post-meta{font-size:0.85rem;color:var(--text-muted);display:flex;gap:1rem;align-items:center;}
+.read-btn{display:inline-block;margin-top:1.5rem;color:var(--primary-peach);font-weight:700;font-size:1rem;}
+
+/* Grid Layout */
+.posts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2rem;}
+.post-card{background:#fff;border:1px solid var(--border-warm);border-radius:16px;overflow:hidden;transition:all 0.3s;display:flex;flex-direction:column;}
+.post-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,0.08);border-color:var(--primary-peach);}
+.post-thumb{height:200px;width:100%;overflow:hidden;background:var(--bg-warm);position:relative;}
+.post-thumb img{width:100%;height:100%;object-fit:cover;transition:transform 0.3s;}
+.post-card:hover .post-thumb img{transform:scale(1.05);}
+.post-body{padding:1.5rem;display:flex;flex-direction:column;flex-grow:1;}
+.post-body h3{font-size:1.2rem;margin-bottom:0.7rem;line-height:1.35;font-weight:700;}
+.post-body p{color:var(--text-muted);font-size:0.95rem;margin-bottom:1.2rem;flex-grow:1;line-height:1.55;}
+.post-footer{display:flex;justify-content:space-between;align-items:center;padding-top:1rem;border-top:1px solid var(--border-warm);font-size:0.85rem;color:var(--text-muted);}
+
+/* Footer */
+footer{background:var(--dark-footer);color:#fff;padding:3rem 1.5rem 1.5rem;margin-top:4rem;}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-bottom:2rem;}
+.footer-col h4{margin-bottom:1rem;color:var(--primary-peach);}
+.footer-col ul{list-style:none;}
+.footer-col li{margin-bottom:0.5rem;}
+.footer-col a{color:#ccc;font-size:0.95rem;}
+.footer-col a:hover{color:var(--primary-peach);}
+.footer-bottom{text-align:center;padding-top:1.5rem;border-top:1px solid #333;color:#999;font-size:0.9rem;}
+
+/* Mobile */
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .hamburger{display:block;}
+  .featured-card{grid-template-columns:1fr;}
+  .featured-img{height:220px;}
+  .featured-content{padding:1.5rem;}
+  .featured-content h2{font-size:1.4rem;}
+}
+@media(max-width:640px){
+  header{padding:0.75rem 1rem;}
+  .logo{font-size:1.1rem;}
+  .logo-icon{width:28px;height:28px;}
+  .logo-icon svg{width:16px;height:16px;}
+  .blog-hero{padding:2.5rem 1rem;}
+  .blog-hero h1{font-size:1.8rem;}
+  .blog-hero p{font-size:1rem;}
+  .blog-container{padding:0 1rem;margin:2rem auto;}
+  .posts-grid{grid-template-columns:1fr;gap:1.5rem;}
+}
+</style>
 </head>
 <body>
-    <header>
-        <a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a>
-        <nav class="nav-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
-        <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('active')">☰</button>
-    </header>
-    <div class="mobile-menu" id="mobileMenu" onclick="this.classList.remove('active')">
-        <div class="mobile-menu-content" onclick="event.stopPropagation()">
-            <button class="mobile-menu-close" onclick="document.getElementById('mobileMenu').classList.remove('active')">✕</button>
-            <a href="index.html">🏠 Home</a>
-            <a href="blog.html">📝 Blog</a>
-            <a href="about.html">ℹ️ About</a>
-            <a href="contact.html">📧 Contact</a>
-            <a href="gif-compressor.html">🗜️ Image Compressor</a>
-            <a href="pdf-tools.html">📄 PDF Tools</a>
-            <a href="qr-generator.html">📱 QR Generator</a>
-        </div>
+
+<header>
+  <div class="nav-wrap">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path d="M55 15 L30 55 L48 55 L42 85 L70 42 L52 42 Z" fill="white"/>
+        </svg>
+      </span>
+      ToolsMedia<span>Download</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="blog.html" style="color:var(--primary-peach);">Blog</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('active')">☰</button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-panel">
+    <button class="close-btn" onclick="document.getElementById('mobileMenu').classList.remove('active')">×</button>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="pdf-tools.html">PDF Tools</a></li>
+      <li><a href="disclaimer.html">Disclaimer</a></li>
+    </ul>
+  </div>
+</div>
+
+<section class="blog-hero">
+  <h1>Guides, Tips & Creator Insights</h1>
+  <p>Learn how to monetize free web tools, optimize media files, boost social media reach & protect your digital assets.</p>
+</section>
+
+<!-- Filter Bar -->
+<div class="filter-bar">
+  <div class="filter-container">
+    <button class="filter-btn active" onclick="filterPosts('all', this)">All Posts</button>
+    <button class="filter-btn" onclick="filterPosts('monetization', this)">💰 Monetization</button>
+    <button class="filter-btn" onclick="filterPosts('tools', this)">🛠️ Utility Tools</button>
+    <button class="filter-btn" onclick="filterPosts('tutorials', this)">📖 Tutorials</button>
+    <button class="filter-btn" onclick="filterPosts('seo', this)">🔍 SEO & Traffic</button>
+    <button class="filter-btn" onclick="filterPosts('creators', this)">🎨 Creators</button>
+  </div>
+</div>
+
+<main class="blog-container">
+
+  <!-- Featured Post -->
+  <article class="featured-card post-item" data-cat="monetization">
+    <div class="featured-img">
+      <img src="images/blog-monetize.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80';" alt="Monetize Free Utility Tools">
     </div>
-
-    <div class="page-container">
-        <div class="page-hero">
-            <h1>Our <span class="g">Blog</span></h1>
-            <p>Tips, guides, and tutorials for creators and developers.</p>
-        </div>
-
-        <!-- Featured Post -->
-        <a href="blog-make-money-online.html" class="featured-post">
-            <div class="featured-thumb">💰</div>
-            <div class="featured-body">
-                <span class="featured-tag">⭐ Featured Article</span>
-                <h2>How to Monetize Utility Web Tools with AdSense</h2>
-                <p>Learn the complete strategy to turn your free utility tool website into a passive income machine. From traffic generation to AdSense optimization.</p>
-                <div class="featured-meta">📅 December 15, 2025 • ⏱️ 8 min read</div>
-                <span class="featured-cta">Read Full Article →</span>
-            </div>
-        </a>
-
-        <!-- Categories -->
-        <div class="categories">
-            <button class="category-btn active" onclick="filterCat('all', this)">All Posts</button>
-            <button class="category-btn" onclick="filterCat('monetization', this)">💰 Monetization</button>
-            <button class="category-btn" onclick="filterCat('tools', this)">🛠️ Tools</button>
-            <button class="category-btn" onclick="filterCat('tutorials', this)">📚 Tutorials</button>
-            <button class="category-btn" onclick="filterCat('seo', this)">🔍 SEO</button>
-            <button class="category-btn" onclick="filterCat('creators', this)">🎨 Creators</button>
-        </div>
-
-        <div class="blog-grid" id="blogGrid">
-            <a href="blog-build-media-downloader-tools.html" class="blog-card" data-cat="tools">
-                <div class="blog-thumb g2">🔧</div>
-                <div class="blog-body">
-                    <div class="blog-date">December 10, 2025 • 6 min</div>
-                    <h3>How Media Downloaders Actually Work</h3>
-                    <p>A technical deep dive into the technology behind social media downloaders and how they fetch content.</p>
-                    <span class="read-more">Read Article →</span>
-                </div>
-            </a>
-
-            <a href="blog-repurpose-content-passive-income.html" class="blog-card" data-cat="creators">
-                <div class="blog-thumb g3">📈</div>
-                <div class="blog-body">
-                    <div class="blog-date">December 5, 2025 • 5 min</div>
-                    <h3>Repurpose Video Content for Passive Income</h3>
-                    <p>Learn how smart creators turn one video into content for 5+ platforms and multiply their reach.</p>
-                    <span class="read-more">Read Article →</span>
-                </div>
-            </a>
-
-            <a href="blog-image-compression-guide.html" class="blog-card" data-cat="tutorials">
-                <div class="blog-thumb g4">🖼️</div>
-                <div class="blog-body">
-                    <div class="blog-date">November 28, 2025 • 7 min</div>
-                    <h3>Complete Guide to Image Compression</h3>
-                    <p>Everything you need to know about reducing image file sizes without losing quality.</p>
-                    <span class="read-more">Read Article →</span>
-                </div>
-            </a>
-
-            <a href="blog-social-media-sizes.html" class="blog-card" data-cat="creators">
-                <div class="blog-thumb g5">📐</div>
-                <div class="blog-body">
-                    <div class="blog-date">November 20, 2025 • 4 min</div>
-                    <h3>Social Media Image Sizes Guide 2026</h3>
-                    <p>Ultimate cheat sheet for image dimensions across Instagram, TikTok, YouTube, Facebook.</p>
-                    <span class="read-more">Read Article →</span>
-                </div>
-            </a>
-
-            <a href="blog-pdf-tools-guide.html" class="blog-card" data-cat="tutorials">
-                <div class="blog-thumb g6">📄</div>
-                <div class="blog-body">
-                    <div class="blog-date">November 15, 2025 • 5 min</div>
-                    <h3>Free PDF Tools You Need to Know</h3>
-                    <p>Merge, split, compress PDFs without installing any software. Everything in your browser.</p>
-                    <span class="read-more">Read Article →</span>
-                </div>
-            </a>
-
-            <a href="blog-qr-code-marketing.html" class="blog-card" data-cat="creators">
-                <div class="blog-thumb g2">📱</div>
-                <div class="blog-body">
-                    <div class="blog-date">November 10, 2025 • 6 min</div>
-                    <h3>QR Code Marketing Strategies for 2026</h3>
-                    <p>How to use QR codes effectively in your marketing campaigns to boost engagement and sales.</p>
-                    <span class="read-more">Read Article →</span>
-                </div>
-            </a>
-
-            <a href="blog-password-security.html" class="blog-card" data-cat="tutorials">
-                <div class="blog-thumb g3">🔐</div>
-                <div class="blog-body">
-                    <div class="blog-date">November 5, 2025 • 7 min</div>
-                    <h3>Password Security: The Complete Guide</h3>
-                    <p>Learn why strong passwords matter and how to create ones hackers can never crack.</p>
-                    <span class="read-more">Read Article →</span>
-                </div>
-            </a>
-
-            <a href="blog-seo-for-tool-websites.html" class="blog-card" data-cat="seo">
-                <div class="blog-thumb g4">🔍</div>
-                <div class="blog-body">
-                    <div class="blog-date">October 28, 2025 • 10 min</div>
-                    <h3>SEO Guide for Tool Websites in 2026</h3>
-                    <p>Rank your free tool website on Google with these proven SEO strategies and techniques.</p>
-                    <span class="read-more">Read Article →</span>
-                </div>
-            </a>
-
-            <a href="blog-adsense-approval-tips.html" class="blog-card" data-cat="monetization">
-                <div class="blog-thumb g5">💵</div>
-                <div class="blog-body">
-                    <div class="blog-date">October 22, 2025 • 8 min</div>
-                    <h3>Google AdSense Approval: 10 Must-Follow Tips</h3>
-                    <p>Get your AdSense application approved on the first try with these proven strategies.</p>
-                    <span class="read-more">Read Article →</span>
-                </div>
-            </a>
-
-            <a href="blog-webp-vs-jpg.html" class="blog-card" data-cat="tutorials">
-                <div class="blog-thumb g6">🆚</div>
-                <div class="blog-body">
-                    <div class="blog-date">October 15, 2025 • 5 min</div>
-                    <h3>WebP vs JPG vs PNG: Which Is Best?</h3>
-                    <p>Compare image formats and learn when to use each for maximum quality and smallest size.</p>
-                    <span class="read-more">Read Article →</span>
-                </div>
-            </a>
-
-            <a href="blog-instagram-reels-growth.html" class="blog-card" data-cat="creators">
-                <div class="blog-thumb g2">📸</div>
-                <div class="blog-body">
-                    <div class="blog-date">October 10, 2025 • 9 min</div>
-                    <h3>Instagram Reels Growth Strategies for 2026</h3>
-                    <p>Explode your Instagram following with these proven Reels growth tactics creators swear by.</p>
-                    <span class="read-more">Read Article →</span>
-                </div>
-            </a>
-
-            <a href="blog-tiktok-algorithm.html" class="blog-card" data-cat="creators">
-                <div class="blog-thumb g3">🎵</div>
-                <div class="blog-body">
-                    <div class="blog-date">October 5, 2025 • 7 min</div>
-                    <h3>Understanding the TikTok Algorithm in 2026</h3>
-                    <p>Decode how TikTok decides which videos go viral and how to game the algorithm.</p>
-                    <span class="read-more">Read Article →</span>
-                </div>
-            </a>
-
-            <a href="blog-free-tools-vs-paid.html" class="blog-card" data-cat="tools">
-                <div class="blog-thumb g4">⚖️</div>
-                <div class="blog-body">
-                    <div class="blog-date">September 28, 2025 • 6 min</div>
-                    <h3>Free Online Tools vs Paid Software</h3>
-                    <p>When should you use free online tools vs paid desktop software? Here's the honest comparison.</p>
-                    <span class="read-more">Read Article →</span>
-                </div>
-            </a>
-
-            <a href="blog-color-theory-design.html" class="blog-card" data-cat="creators">
-                <div class="blog-thumb g5">🎨</div>
-                <div class="blog-body">
-                    <div class="blog-date">September 20, 2025 • 8 min</div>
-                    <h3>Color Theory Basics for Content Creators</h3>
-                    <p>Master color theory to make your social media content more visually appealing and engaging.</p>
-                    <span class="read-more">Read Article →</span>
-                </div>
-            </a>
-
-            <a href="blog-youtube-thumbnails-ctr.html" class="blog-card" data-cat="creators">
-                <div class="blog-thumb g6">🎬</div>
-                <div class="blog-body">
-                    <div class="blog-date">September 15, 2025 • 6 min</div>
-                    <h3>YouTube Thumbnails That Get 10x More Clicks</h3>
-                    <p>Design psychology secrets behind thumbnails that boost click-through rates on YouTube.</p>
-                    <span class="read-more">Read Article →</span>
-                </div>
-            </a>
-        </div>
+    <div class="featured-content">
+      <span class="post-cat">Monetization Guide</span>
+      <h2>How to Monetize Free Utility Tools with Google AdSense</h2>
+      <p>Building free browser-based online tools is one of the highest ROI strategies for passive AdSense revenue. Learn step-by-step setup, placement & approval strategies.</p>
+      <div class="post-meta">
+        <span>📅 Jan 15, 2026</span>
+        <span>⏱️ 6 min read</span>
+      </div>
+      <a href="blog-make-money-online.html" class="read-btn">Read Full Article →</a>
     </div>
+  </article>
 
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col"><h3>⚡ ToolsMediaDownload</h3><p>Free, private tools for creators.</p></div>
-            <div class="footer-col"><h3>Tools</h3><ul><li><a href="instagram-downloader.html">Instagram Downloader</a></li><li><a href="gif-compressor.html">Image Compressor</a></li><li><a href="pdf-tools.html">PDF Tools</a></li><li><a href="qr-generator.html">QR Code Generator</a></li></ul></div>
-            <div class="footer-col"><h3>Company</h3><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="terms.html">Terms</a></li><li><a href="dmca.html">DMCA</a></li></ul></div>
+  <!-- 15 Posts Grid -->
+  <div class="posts-grid">
+
+    <!-- Card 1: How Media Downloaders Work -->
+    <article class="post-card post-item" data-cat="tools">
+      <div class="post-thumb">
+        <img src="images/blog-downloaders.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80';" alt="How Media Downloaders Work">
+      </div>
+      <div class="post-body">
+        <span class="post-cat">Tool Architecture</span>
+        <h3>How Media Downloader Tools Work Under the Hood</h3>
+        <p>A technical dive into browser fetching, CORS proxies, media extraction, and client-side stream downloading.</p>
+        <div class="post-footer">
+          <span>Jan 14, 2026</span>
+          <a href="blog-build-media-downloader-tools.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
         </div>
-        <div class="copyright">&copy; 2026 ToolsMediaDownload. All rights reserved.</div>
-    </footer>
-    <script>
-    function filterCat(cat, btn){
-        document.querySelectorAll('.category-btn').forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
-        document.querySelectorAll('.blog-card').forEach(c=>{
-            if(cat==='all'||c.dataset.cat===cat)c.style.display='flex';
-            else c.style.display='none';
-        });
+      </div>
+    </article>
+
+    <!-- Card 2: Repurpose Content for Passive Income -->
+    <article class="post-card post-item" data-cat="creators">
+      <div class="post-thumb">
+        <img src="images/blog-passive-income.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=600&q=80';" alt="Repurpose Content for Passive Income">
+      </div>
+      <div class="post-body">
+        <span class="post-cat">Creator Growth</span>
+        <h3>How to Repurpose Content for Passive Income</h3>
+        <p>Turn long-form YouTube videos into Shorts, Reels, TikToks & Blog posts using simple free web utilities.</p>
+        <div class="post-footer">
+          <span>Jan 12, 2026</span>
+          <a href="blog-repurpose-content-passive-income.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 3: Image Compression Guide -->
+    <article class="post-card post-item" data-cat="tutorials">
+      <div class="post-thumb">
+        <img src="images/blog-compression.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1542744094-3a31b272c490?auto=format&fit=crop&w=600&q=80';" alt="Image Compression Guide">
+      </div>
+      <div class="post-body">
+        <span class="post-cat">Optimization</span>
+        <h3>Complete Guide to Image Compression & Optimization</h3>
+        <p>Learn how lossy and lossless algorithms shrink image file size up to 80% without losing visual quality.</p>
+        <div class="post-footer">
+          <span>Jan 10, 2026</span>
+          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 4: Social Media Image Sizes 2026 -->
+    <article class="post-card post-item" data-cat="creators">
+      <div class="post-thumb">
+        <img src="images/blog-social-sizes.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=600&q=80';" alt="Social Media Sizes 2026">
+      </div>
+      <div class="post-body">
+        <span class="post-cat">Cheat Sheet</span>
+        <h3>Social Media Image Sizes Cheat Sheet 2026</h3>
+        <p>Exact pixel dimensions for Instagram, YouTube, TikTok, Facebook, Twitter & LinkedIn posts, headers & stories.</p>
+        <div class="post-footer">
+          <span>Jan 08, 2026</span>
+          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 5: PDF Tools Guide -->
+    <article class="post-card post-item" data-cat="tutorials">
+      <div class="post-thumb">
+        <img src="images/blog-pdf-tools.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&w=600&q=80';" alt="PDF Tools Guide">
+      </div>
+      <div class="post-body">
+        <span class="post-cat">Productivity</span>
+        <h3>Top PDF Tools Every Creator & Freelancer Needs</h3>
+        <p>How client-side JavaScript PDF manipulation makes merging, splitting, and image conversion fast & secure.</p>
+        <div class="post-footer">
+          <span>Jan 05, 2026</span>
+          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 6: QR Code Marketing -->
+    <article class="post-card post-item" data-cat="creators">
+      <div class="post-thumb">
+        <img src="images/blog-qr.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80';" alt="QR Code Marketing">
+      </div>
+      <div class="post-body">
+        <span class="post-cat">Marketing</span>
+        <h3>How to Use QR Codes for Marketing in 2026</h3>
+        <p>Drive offline traffic to your online pages, social channels, WiFi networks, and email campaigns effortlessly.</p>
+        <div class="post-footer">
+          <span>Jan 03, 2026</span>
+          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 7: Password Security Guide -->
+    <article class="post-card post-item" data-cat="tutorials">
+      <div class="post-thumb">
+        <img src="images/blog-passwords.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80';" alt="Password Security Guide">
+      </div>
+      <div class="post-body">
+        <span class="post-cat">Cybersecurity</span>
+        <h3>Password Security Guide: Protecting Your Digital Life</h3>
+        <p>Understanding password entropy, brute-force resistance, multi-factor auth & how to generate unbreakable keys.</p>
+        <div class="post-footer">
+          <span>Jan 01, 2026</span>
+          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 8: SEO Strategies for Web Tools -->
+    <article class="post-card post-item" data-cat="seo">
+      <div class="post-thumb">
+        <img src="images/blog-seo.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80';" alt="SEO Strategies for Web Tools">
+      </div>
+      <div class="post-body">
+        <span class="post-cat">SEO & Ranking</span>
+        <h3>SEO Strategies for Web Tool Websites</h3>
+        <p>Rank #1 on Google for high-intent keywords like 'free image compressor' and 'QR generator online'.</p>
+        <div class="post-footer">
+          <span>Dec 28, 2025</span>
+          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 9: Google AdSense Approval Tips -->
+    <article class="post-card post-item" data-cat="monetization">
+      <div class="post-thumb">
+        <img src="images/blog-adsense.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&q=80';" alt="Google AdSense Approval Tips">
+      </div>
+      <div class="post-body">
+        <span class="post-cat">Monetization</span>
+        <h3>Google AdSense Approval Tips for Free Tool Sites</h3>
+        <p>Avoid 'Valueless Inventory' rejections. Essential legal pages, navigation, and content ratios required by Google.</p>
+        <div class="post-footer">
+          <span>Dec 25, 2025</span>
+          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 10: WebP vs JPG vs PNG -->
+    <article class="post-card post-item" data-cat="tutorials">
+      <div class="post-thumb">
+        <img src="images/blog-webp-jpg.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80';" alt="WebP vs JPG vs PNG">
+      </div>
+      <div class="post-body">
+        <span class="post-cat">Web Formats</span>
+        <h3>WebP vs JPG vs PNG: Which Image Format to Use?</h3>
+        <p>Compare compression speed, file sizes, transparency support, and browser compatibility across modern web image formats.</p>
+        <div class="post-footer">
+          <span>Dec 20, 2025</span>
+          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 11: Instagram Reels Growth -->
+    <article class="post-card post-item" data-cat="creators">
+      <div class="post-thumb">
+        <img src="images/blog-reels.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1611162616475-46b635cb6868?auto=format&fit=crop&w=600&q=80';" alt="Instagram Reels Growth">
+      </div>
+      <div class="post-body">
+        <span class="post-cat">Social Media</span>
+        <h3>Instagram Reels Growth Strategies for 2026</h3>
+        <p>Hook formulas, trending audio selection, watch-time optimization, and editing techniques that trigger viral reach.</p>
+        <div class="post-footer">
+          <span>Dec 18, 2025</span>
+          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 12: Decoding TikTok Algorithm -->
+    <article class="post-card post-item" data-cat="creators">
+      <div class="post-thumb">
+        <img src="images/blog-tiktok.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1596558450255-7c0b7be9d56a?auto=format&fit=crop&w=600&q=80';" alt="Decoding TikTok Algorithm">
+      </div>
+      <div class="post-body">
+        <span class="post-cat">Social Media</span>
+        <h3>Decoding the TikTok Algorithm in 2026</h3>
+        <p>A breakdown of completion rate metrics, SEO search keywords on TikTok, sound signals, and batch testing rules.</p>
+        <div class="post-footer">
+          <span>Dec 15, 2025</span>
+          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 13: Free Online Tools vs Paid SaaS Alternatives -->
+    <article class="post-card post-item" data-cat="tools">
+      <div class="post-thumb">
+        <img src="images/blog-free-vs-paid.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80';" alt="Free Online Tools vs Paid SaaS">
+      </div>
+      <div class="post-body">
+        <span class="post-cat">SaaS Comparison</span>
+        <h3>Free Online Tools vs Paid SaaS Alternatives</h3>
+        <p>Why browser-based client-side micro-tools are disrupting expensive monthly subscription software models.</p>
+        <div class="post-footer">
+          <span>Dec 10, 2025</span>
+          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 14: Color Theory Basics for Content Creators -->
+    <article class="post-card post-item" data-cat="creators">
+      <div class="post-thumb">
+        <img src="images/blog-color-theory.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?auto=format&fit=crop&w=600&q=80';" alt="Color Theory Basics">
+      </div>
+      <div class="post-body">
+        <span class="post-cat">Design Tips</span>
+        <h3>Color Theory Basics for Content Creators</h3>
+        <p>How to choose brand colors, complementary palettes, and HEX codes that invoke emotion & click actions.</p>
+        <div class="post-footer">
+          <span>Dec 05, 2025</span>
+          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 15: Designing YouTube Thumbnails That Get High CTR -->
+    <article class="post-card post-item" data-cat="creators">
+      <div class="post-thumb">
+        <img src="images/blog-thumbnails.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80';" alt="High CTR Thumbnails">
+      </div>
+      <div class="post-body">
+        <span class="post-cat">YouTube Growth</span>
+        <h3>Designing YouTube Thumbnails That Get High CTR</h3>
+        <p>Color contrast ratios, facial expressions, bold typography rules, and thumbnail sizing tips to double video impressions.</p>
+        <div class="post-footer">
+          <span>Dec 01, 2025</span>
+          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>⚡ ToolsMediaDownload</h4>
+      <p style="color:#ccc;font-size:0.9rem;">Free browser-based tools for creators, developers & everyone.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Tools</h4>
+      <ul>
+        <li><a href="pdf-tools.html">PDF Tools</a></li>
+        <li><a href="qr-generator.html">QR Generator</a></li>
+        <li><a href="image-converter.html">Image Converter</a></li>
+        <li><a href="password-generator.html">Password Generator</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="disclaimer.html">Disclaimer</a></li>
+        <li><a href="terms.html">Terms of Service</a></li>
+        <li><a href="dmca.html">DMCA</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 ToolsMediaDownload. All rights reserved.</div>
+</footer>
+
+<script>
+function filterPosts(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const items = document.querySelectorAll('.post-item');
+  items.forEach(item => {
+    if (cat === 'all' || item.getAttribute('data-cat') === cat) {
+      item.style.display = item.classList.contains('featured-card') ? 'grid' : 'flex';
+    } else {
+      item.style.display = 'none';
     }
-    </script>
+  });
+}
+</script>
+
 </body>
 </html>
