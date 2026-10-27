@@ -1,618 +1,385 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToolsMediaDownload - Free Online Media Tools, Downloaders & Compressors</title>
-    <meta name="description" content="Free online tools - download Instagram, Facebook, TikTok videos, compress images, convert PDFs, generate QR codes and more. No signup, 100% private.">
-    <meta name="keywords" content="instagram downloader, facebook video downloader, tiktok downloader, gif compressor, pdf tools, qr code generator, free online tools">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="ToolsMediaDownload">
-    <link rel="canonical" href="https://toolsmediadownload.com/">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="ToolsMediaDownload - Free Online Media Tools">
-    <meta property="og:description" content="Download videos, compress images, convert PDFs and more. Free & private.">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-    <style>
-        :root {
-            --bg-warm: #FAF5EE;
-            --card-bg: #FFFFFF;
-            --primary-peach: #E07A5F;
-            --peach-gradient: linear-gradient(135deg, #FF9E7D 0%, #E07A5F 50%, #D95D39 100%);
-            --text-dark: #2C221E;
-            --text-muted: #706661;
-            --border-warm: #EFE3D8;
-            --success-btn: #2A9D8F;
-            --dark-footer: #1A1615;
-            --glow-peach: rgba(224, 122, 95, 0.4);
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
-        html { font-size: 16px; }
-        body { background: var(--bg-warm); color: var(--text-dark); min-height: 100vh; display: flex; flex-direction: column; line-height: 1.6; overflow-x: hidden; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ToolsMediaDownload - Free Online Tools for Creators</title>
+<meta name="description" content="Free browser-based tools: media downloaders, image converters, PDF tools, QR generator, password generator & more. No signup needed.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<style>
+:root{
+  --bg-warm:#FAF5EE; --card-bg:#FFFFFF; --primary-peach:#E07A5F;
+  --peach-gradient:linear-gradient(135deg,#FF9E7D 0%,#E07A5F 50%,#D95D39 100%);
+  --text-dark:#2C221E; --text-muted:#706661; --border-warm:#EFE3D8;
+  --success-btn:#2A9D8F; --dark-footer:#1A1615; --glow-peach:rgba(224,122,95,0.4);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg-warm);color:var(--text-dark);line-height:1.6;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
 
-        /* HEADER */
-        header {
-            background: #ffffff; border-bottom: 1px solid var(--border-warm);
-            padding: 1rem 1.25rem; display: flex; align-items: center; justify-content: space-between;
-            box-shadow: 0 2px 10px rgba(224,122,95,0.05); position: sticky; top: 0; z-index: 100;
-        }
-        .logo { font-size: 1.3rem; font-weight: 800; color: var(--primary-peach); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; }
-        .logo span { color: var(--text-dark); }
-        .nav-links { display: flex; gap: 1.25rem; align-items: center; }
-        .nav-links a { color: var(--text-dark); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
-        .nav-links a:hover { color: var(--primary-peach); }
-        .hamburger { display: none; background: none; border: none; font-size: 1.75rem; cursor: pointer; color: var(--text-dark); padding: 0.3rem 0.5rem; }
-        .mobile-menu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 200; }
-        .mobile-menu.active { display: block; }
-        .mobile-menu-content { background: #fff; width: 85%; max-width: 320px; height: 100%; padding: 1.5rem 1.25rem; display: flex; flex-direction: column; gap: 0.3rem; animation: slideIn 0.3s ease; overflow-y: auto; }
-        @keyframes slideIn { from { transform: translateX(-100%); } to { transform: translateX(0); } }
-        .mobile-menu-content a { color: var(--text-dark); text-decoration: none; font-weight: 600; font-size: 1.05rem; padding: 0.9rem 0.5rem; border-bottom: 1px solid var(--border-warm); display: flex; align-items: center; gap: 0.7rem; }
-        .mobile-menu-close { background: none; border: none; font-size: 1.75rem; cursor: pointer; align-self: flex-end; padding: 0.5rem 0.75rem; margin-bottom: 0.5rem; }
-        @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: block; } }
+/* Header */
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border-warm);z-index:100;padding:1rem 1.5rem;}
+.nav-wrap{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
+.logo{font-size:1.5rem;font-weight:800;color:var(--text-dark);}
+.logo span{background:var(--peach-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{color:var(--text-dark);font-weight:500;transition:color 0.2s;}
+.nav-links a:hover{color:var(--primary-peach);}
+.hamburger{display:none;background:none;border:none;font-size:1.8rem;cursor:pointer;color:var(--text-dark);}
 
-        /* HERO */
-        .hero-section { background: linear-gradient(180deg, #FFF4EC 0%, var(--bg-warm) 100%); padding: 4rem 1.25rem 3.5rem; text-align: center; }
-        .hero-inner { max-width: 850px; margin: 0 auto; }
-        .hero-badge { display: inline-block; background: #FFE4D9; color: var(--primary-peach); padding: 0.5rem 1.1rem; border-radius: 20px; font-size: 0.9rem; font-weight: 700; margin-bottom: 1.5rem; }
-        .hero-section h1 { font-size: 3rem; font-weight: 800; margin-bottom: 1.25rem; line-height: 1.15; letter-spacing: -1px; }
-        .hero-section h1 .gradient { background: var(--peach-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-section p { color: var(--text-muted); font-size: 1.2rem; max-width: 650px; margin: 0 auto 2rem; line-height: 1.6; }
-        .hero-stats { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; margin-top: 2.5rem; }
-        .stat-num { font-size: 2rem; font-weight: 800; color: var(--primary-peach); }
-        .stat-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 0.25rem; }
+/* Mobile menu */
+.mobile-menu{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:200;}
+.mobile-menu.active{display:block;}
+.mobile-menu-panel{background:#fff;width:85%;max-width:320px;height:100%;padding:2rem 1.5rem;}
+.mobile-menu-panel .close-btn{background:none;border:none;font-size:2rem;float:right;cursor:pointer;}
+.mobile-menu-panel ul{list-style:none;margin-top:3rem;}
+.mobile-menu-panel li{padding:1rem 0;border-bottom:1px solid var(--border-warm);}
+.mobile-menu-panel a{font-size:1.1rem;font-weight:500;}
 
-        /* MOBILE HERO */
-        @media (max-width: 640px) {
-            .hero-section { padding: 2.5rem 1rem 2.5rem; }
-            .hero-section h1 { font-size: 2.1rem; line-height: 1.2; margin-bottom: 1rem; }
-            .hero-section p { font-size: 1.05rem; margin-bottom: 1.5rem; }
-            .hero-badge { font-size: 0.8rem; padding: 0.4rem 0.9rem; margin-bottom: 1rem; }
-            .hero-stats { gap: 1.75rem; margin-top: 1.75rem; }
-            .stat-num { font-size: 1.6rem; }
-            .stat-label { font-size: 0.75rem; }
-        }
+/* Hero */
+.hero{background:var(--peach-gradient);color:#fff;padding:5rem 1.5rem;text-align:center;}
+.hero h1{font-size:3rem;margin-bottom:1rem;font-weight:800;}
+.hero p{font-size:1.25rem;max-width:700px;margin:0 auto 2rem;opacity:0.95;}
+.hero-stats{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;margin-top:2rem;}
+.stat{text-align:center;}
+.stat-num{font-size:2.2rem;font-weight:800;display:block;}
+.stat-label{font-size:0.9rem;opacity:0.9;}
 
-        /* CONTAINER */
-        .container { max-width: 1200px; margin: 0 auto; padding: 3rem 1.25rem; width: 100%; flex: 1; }
-        @media (max-width: 640px) { .container { padding: 2.25rem 1rem; } }
+/* Sections */
+section{padding:4rem 1.5rem;}
+.container{max-width:1200px;margin:0 auto;}
+.section-title{font-size:2rem;font-weight:800;text-align:center;margin-bottom:0.5rem;}
+.section-sub{text-align:center;color:var(--text-muted);margin-bottom:3rem;font-size:1.05rem;}
 
-        /* SECTION TITLES */
-        .section-title { text-align: center; margin-bottom: 2.5rem; }
-        .section-title h2 { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; }
-        .section-title p { color: var(--text-muted); font-size: 1.05rem; }
-        @media (max-width: 640px) {
-            .section-title { margin-bottom: 1.75rem; }
-            .section-title h2 { font-size: 1.6rem; margin-bottom: 0.4rem; }
-            .section-title p { font-size: 0.95rem; }
-        }
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+.tool-card{background:var(--card-bg);border:1px solid var(--border-warm);border-radius:16px;padding:1.75rem;transition:all 0.3s;position:relative;overflow:hidden;}
+.tool-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px var(--glow-peach);border-color:var(--primary-peach);}
+.tool-tag{position:absolute;top:1rem;right:1rem;padding:0.25rem 0.7rem;border-radius:20px;font-size:0.7rem;font-weight:700;text-transform:uppercase;}
+.tag-popular{background:#D1FAE5;color:#065F46;}
+.tag-new{background:#FEE4D6;color:#9A3412;}
+.tag-trending{background:#DBEAFE;color:#1E40AF;}
+.tag-free{background:#D1FAE5;color:#065F46;}
+.tag-hot{background:#FEE2E2;color:#991B1B;}
+.tool-icon-wrap{width:70px;height:70px;border-radius:16px;background:var(--bg-warm);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;}
+.tool-icon-wrap svg{width:40px;height:40px;}
+.tool-card h3{font-size:1.3rem;margin-bottom:0.5rem;font-weight:700;}
+.tool-card p{color:var(--text-muted);margin-bottom:1.2rem;font-size:0.98rem;}
+.tool-btn{display:block;width:100%;text-align:center;padding:0.85rem;border-radius:10px;color:#fff;font-weight:700;transition:all 0.2s;font-size:1rem;}
+.tool-btn:hover,.tool-btn:active{transform:scale(1.02);box-shadow:0 6px 16px var(--glow-peach);}
 
-        /* TOOLS GRID */
-        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1.5rem; margin-bottom: 4rem; }
-        @media (max-width: 640px) {
-            .tools-grid { grid-template-columns: 1fr; gap: 1.1rem; margin-bottom: 2.5rem; }
-        }
+.btn-instagram{background:linear-gradient(45deg,#F58529,#DD2A7B,#8134AF);}
+.btn-facebook{background:#1877F2;}
+.btn-tiktok{background:linear-gradient(45deg,#000,#25F4EE,#FE2C55);}
+.btn-compress{background:var(--peach-gradient);}
+.btn-pdf{background:#DC2626;}
+.btn-convert{background:#7C3AED;}
+.btn-resize{background:#0D9488;}
+.btn-qr{background:#2563EB;}
+.btn-color{background:linear-gradient(45deg,#EC4899,#8B5CF6);}
+.btn-text{background:#16A34A;}
+.btn-password{background:#CA8A04;}
+.btn-json{background:#374151;}
+.btn-base64{background:#7E22CE;}
 
-        .tool-card {
-            background: var(--card-bg); border-radius: 18px; padding: 1.75rem; text-decoration: none; color: inherit;
-            border: 2px solid var(--border-warm);
-            box-shadow: 0 4px 15px rgba(224,122,95,0.06);
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex; flex-direction: column; position: relative; overflow: hidden;
-            cursor: pointer;
-        }
-        .tool-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-            background: var(--peach-gradient); transform: scaleX(0); transform-origin: left;
-            transition: transform 0.4s ease;
-        }
-        .tool-card:hover, .tool-card:active {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 18px 45px rgba(224,122,95,0.18), 0 0 25px var(--glow-peach);
-            border-color: var(--primary-peach);
-        }
-        .tool-card:hover::before, .tool-card:active::before { transform: scaleX(1); }
+/* Features */
+.features{background:#fff;}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2rem;}
+.feature{text-align:center;padding:1.5rem;}
+.feature-icon{font-size:2.5rem;margin-bottom:1rem;}
+.feature h3{font-size:1.2rem;margin-bottom:0.5rem;}
+.feature p{color:var(--text-muted);font-size:0.95rem;}
 
-        /* Mobile card tweaks */
-        @media (max-width: 640px) {
-            .tool-card { padding: 1.5rem 1.25rem; border-radius: 16px; }
-        }
+/* Blog preview */
+.blog-preview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;}
+.blog-card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--border-warm);transition:all 0.3s;}
+.blog-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,0.08);}
+.blog-thumb{height:160px;background:var(--peach-gradient);}
+.blog-body{padding:1.3rem;}
+.blog-body h4{font-size:1.1rem;margin-bottom:0.5rem;}
+.blog-body p{color:var(--text-muted);font-size:0.9rem;}
 
-        /* HD Tool Icons */
-        .tool-icon-wrap {
-            width: 68px; height: 68px; border-radius: 16px;
-            display: flex; align-items: center; justify-content: center;
-            margin-bottom: 1.25rem; position: relative; overflow: hidden;
-        }
-        .tool-icon-wrap svg { width: 100%; height: 100%; }
-        .tool-icon-wrap .icon-glow {
-            position: absolute; top: 50%; left: 50%; width: 85px; height: 85px;
-            border-radius: 50%; transform: translate(-50%, -50%);
-            filter: blur(15px); opacity: 0; transition: opacity 0.3s;
-        }
-        .tool-card:hover .icon-glow, .tool-card:active .icon-glow { opacity: 0.5; }
+/* CTA */
+.cta{background:var(--peach-gradient);color:#fff;text-align:center;}
+.cta h2{font-size:2rem;margin-bottom:1rem;}
+.cta p{margin-bottom:2rem;font-size:1.1rem;opacity:0.95;}
+.cta-btn{display:inline-block;background:#fff;color:var(--primary-peach);padding:1rem 2.5rem;border-radius:10px;font-weight:700;font-size:1.05rem;}
 
-        @media (max-width: 640px) {
-            .tool-icon-wrap { width: 60px; height: 60px; margin-bottom: 1rem; }
-        }
+/* Footer */
+footer{background:var(--dark-footer);color:#fff;padding:3rem 1.5rem 1.5rem;}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-bottom:2rem;}
+.footer-col h4{margin-bottom:1rem;color:var(--primary-peach);}
+.footer-col ul{list-style:none;}
+.footer-col li{margin-bottom:0.5rem;}
+.footer-col a{color:#ccc;font-size:0.95rem;}
+.footer-col a:hover{color:var(--primary-peach);}
+.footer-bottom{text-align:center;padding-top:1.5rem;border-top:1px solid #333;color:#999;font-size:0.9rem;}
 
-        .tool-tag { display: inline-block; padding: 0.3rem 0.75rem; border-radius: 12px; font-size: 0.78rem; font-weight: 700; margin-bottom: 0.85rem; align-self: flex-start; }
-        .tag-popular { background: #E8F8F5; color: var(--success-btn); }
-        .tag-new { background: #FFE4D9; color: var(--primary-peach); }
-        .tag-trending { background: #EBF4FF; color: #3B82F6; }
-        .tag-free { background: #F0FFF4; color: #38A169; }
-        .tag-hot { background: #FFF5F5; color: #E53E3E; }
-
-        .tool-card h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.6rem; line-height: 1.3; }
-        .tool-card p { color: var(--text-muted); font-size: 0.98rem; margin-bottom: 1.25rem; flex: 1; line-height: 1.55; }
-
-        @media (max-width: 640px) {
-            .tool-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
-            .tool-card p { font-size: 0.95rem; margin-bottom: 1rem; }
-            .tool-tag { font-size: 0.75rem; }
-        }
-
-        /* Unique CTA Buttons */
-        .tool-btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-            padding: 0.85rem 1.1rem; border-radius: 10px; font-weight: 700; font-size: 0.95rem;
-            border: none; cursor: pointer; transition: all 0.25s ease;
-            text-decoration: none; color: #fff;
-            text-align: center; line-height: 1.2;
-        }
-        .tool-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
-
-        @media (max-width: 640px) {
-            .tool-btn { padding: 0.9rem 1rem; font-size: 0.95rem; }
-        }
-
-        .btn-instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-        .btn-facebook { background: linear-gradient(135deg, #1877F2, #0D65D9); }
-        .btn-tiktok { background: linear-gradient(135deg, #000000, #25F4EE, #FE2C55); }
-        .btn-youtube { background: linear-gradient(135deg, #FF0000, #CC0000); }
-        .btn-compress { background: linear-gradient(135deg, #FF9E7D, #E07A5F); }
-        .btn-pdf { background: linear-gradient(135deg, #E53E3E, #C53030); }
-        .btn-convert { background: linear-gradient(135deg, #667EEA, #764BA2); }
-        .btn-resize { background: linear-gradient(135deg, #38B2AC, #2C7A7B); }
-        .btn-qr { background: linear-gradient(135deg, #4299E1, #3182CE); }
-        .btn-color { background: linear-gradient(135deg, #ED64A6, #D53F8C, #9F7AEA); }
-        .btn-text { background: linear-gradient(135deg, #48BB78, #38A169); }
-        .btn-password { background: linear-gradient(135deg, #ECC94B, #D69E2E); }
-        .btn-json { background: linear-gradient(135deg, #4A5568, #2D3748); }
-        .btn-base64 { background: linear-gradient(135deg, #9F7AEA, #805AD5); }
-
-        /* FEATURES */
-        .features-section { background: #fff; border-radius: 20px; padding: 3rem 2rem; margin-bottom: 4rem; border: 1px solid var(--border-warm); }
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 2rem; }
-        .feature-item { text-align: center; }
-        .feature-icon { font-size: 2.75rem; margin-bottom: 0.75rem; }
-        .feature-item h4 { font-size: 1.15rem; margin-bottom: 0.5rem; }
-        .feature-item p { color: var(--text-muted); font-size: 0.95rem; }
-        @media (max-width: 640px) {
-            .features-section { padding: 2rem 1.25rem; margin-bottom: 2.5rem; border-radius: 16px; }
-            .features-grid { gap: 1.5rem; margin-top: 1.5rem; }
-            .feature-item h4 { font-size: 1.1rem; }
-            .feature-item p { font-size: 0.9rem; }
-        }
-
-        /* BLOG */
-        .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.5rem; margin-bottom: 4rem; }
-        .blog-card { background: #fff; border-radius: 16px; overflow: hidden; text-decoration: none; color: inherit; border: 1px solid var(--border-warm); transition: all 0.25s ease; display: flex; flex-direction: column; }
-        .blog-card:hover, .blog-card:active { transform: translateY(-5px); box-shadow: 0 14px 30px rgba(224,122,95,0.12); border-color: var(--primary-peach); }
-        .blog-thumb { height: 140px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; background: linear-gradient(135deg, #FFF4EC, #FFE4D9); }
-        .blog-body { padding: 1.4rem; flex: 1; display: flex; flex-direction: column; }
-        .blog-date { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 600; }
-        .blog-card h4 { font-size: 1.1rem; margin-bottom: 0.6rem; font-weight: 700; line-height: 1.4; }
-        .blog-card p { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1rem; flex: 1; line-height: 1.55; }
-        .blog-card .read-more { color: var(--primary-peach); font-weight: 700; font-size: 0.92rem; }
-        @media (max-width: 640px) {
-            .blog-grid { grid-template-columns: 1fr; gap: 1.1rem; margin-bottom: 2.5rem; }
-            .blog-thumb { height: 120px; font-size: 3rem; }
-            .blog-body { padding: 1.25rem; }
-            .blog-card h4 { font-size: 1.05rem; }
-        }
-
-        /* CTA */
-        .cta-section { background: var(--peach-gradient); border-radius: 20px; padding: 3rem 2rem; text-align: center; color: #fff; margin-bottom: 3rem; }
-        .cta-section h2 { font-size: 2.1rem; margin-bottom: 0.75rem; font-weight: 800; }
-        .cta-section p { font-size: 1.1rem; margin-bottom: 1.75rem; opacity: 0.95; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6; }
-        .cta-btn { background: #fff; color: var(--primary-peach); padding: 1rem 2.25rem; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1.05rem; display: inline-block; transition: transform 0.15s; }
-        .cta-btn:hover { transform: translateY(-2px); }
-        @media (max-width: 640px) {
-            .cta-section { padding: 2.25rem 1.5rem; border-radius: 16px; margin-bottom: 2rem; }
-            .cta-section h2 { font-size: 1.65rem; }
-            .cta-section p { font-size: 1rem; margin-bottom: 1.5rem; }
-            .cta-btn { padding: 0.9rem 1.75rem; font-size: 1rem; width: 100%; }
-        }
-
-        /* FOOTER */
-        footer { background: var(--dark-footer); color: #ffffff; padding: 3rem 1.25rem 1.75rem; margin-top: auto; }
-        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2.25rem; margin-bottom: 2.5rem; }
-        .footer-col h3 { font-size: 1.1rem; margin-bottom: 1.1rem; color: #F7EDE2; }
-        .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 0.7rem; }
-        .footer-col ul li a { color: #A8A099; text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
-        .footer-col ul li a:hover { color: #F7EDE2; }
-        .footer-col p { color: #A8A099; font-size: 0.95rem; }
-        .copyright { text-align: center; border-top: 1px solid #332E2B; padding-top: 1.75rem; color: #78706A; font-size: 0.88rem; }
-        @media (max-width: 640px) {
-            footer { padding: 2.5rem 1rem 1.5rem; }
-            .footer-grid { gap: 1.75rem; margin-bottom: 2rem; }
-            .footer-col ul li a, .footer-col p { font-size: 0.92rem; }
-        }
-    </style>
+/* Mobile */
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .hamburger{display:block;}
+}
+@media(max-width:640px){
+  .hero{padding:2.5rem 1rem;}
+  .hero h1{font-size:2.1rem;}
+  .hero p{font-size:1.05rem;}
+  .hero-stats{gap:1.5rem;}
+  .stat-num{font-size:1.6rem;}
+  section{padding:2.5rem 1rem;}
+  .section-title{font-size:1.6rem;}
+  .tools-grid{grid-template-columns:1fr;gap:1.1rem;}
+  .tool-card{padding:1.5rem 1.25rem;}
+  .tool-card h3{font-size:1.2rem;}
+  .tool-card p{font-size:0.95rem;}
+  .tool-btn{padding:0.9rem 1rem;font-size:0.95rem;}
+  .tool-icon-wrap{width:60px;height:60px;}
+  .tool-icon-wrap svg{width:34px;height:34px;}
+}
+</style>
 </head>
 <body>
 
-    <header>
-        <a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a>
-        <nav class="nav-links">
-            <a href="#tools">Tools</a>
-            <a href="blog.html">Blog</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-        <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('active')">☰</button>
-    </header>
+<header>
+  <div class="nav-wrap">
+    <a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('active')">☰</button>
+  </div>
+</header>
 
-    <div class="mobile-menu" id="mobileMenu" onclick="this.classList.remove('active')">
-        <div class="mobile-menu-content" onclick="event.stopPropagation()">
-            <button class="mobile-menu-close" onclick="document.getElementById('mobileMenu').classList.remove('active')">✕</button>
-            <a href="index.html">🏠 Home</a>
-            <a href="instagram-downloader.html">📸 Instagram Downloader</a>
-            <a href="facebook-downloader.html">📘 Facebook Downloader</a>
-            <a href="tiktok-downloader.html">🎵 TikTok Downloader</a>
-            <a href="youtube-thumbnail.html">🎬 YouTube Thumbnail</a>
-            <a href="gif-compressor.html">🗜️ Image Compressor</a>
-            <a href="pdf-tools.html">📄 PDF Tools</a>
-            <a href="image-converter.html">🔄 Image Converter</a>
-            <a href="image-resizer.html">📐 Image Resizer</a>
-            <a href="qr-generator.html">📱 QR Generator</a>
-            <a href="color-picker.html">🎨 Color Picker</a>
-            <a href="text-tools.html">✏️ Text Tools</a>
-            <a href="password-generator.html">🔐 Password Generator</a>
-            <a href="json-formatter.html">{ } JSON Formatter</a>
-            <a href="base64-tool.html">🔢 Base64 Tool</a>
-            <a href="blog.html">📝 Blog</a>
-            <a href="about.html">ℹ️ About</a>
-            <a href="contact.html">📧 Contact</a>
-        </div>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-panel">
+    <button class="close-btn" onclick="document.getElementById('mobileMenu').classList.remove('active')">×</button>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="pdf-tools.html">PDF Tools</a></li>
+      <li><a href="disclaimer.html">Disclaimer</a></li>
+    </ul>
+  </div>
+</div>
+
+<section class="hero">
+  <h1>Free Online Tools for Creators</h1>
+  <p>Download media, convert images, generate QR codes & more. 100% browser-based. No signup, no limits.</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">13+</span><span class="stat-label">Free Tools</span></div>
+    <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Browser-Based</span></div>
+    <div class="stat"><span class="stat-num">$0</span><span class="stat-label">Always Free</span></div>
+  </div>
+</section>
+
+<!-- Media Downloaders -->
+<section>
+  <div class="container">
+    <h2 class="section-title">📥 Media Downloaders</h2>
+    <p class="section-sub">Save videos, reels & stories from social platforms</p>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <span class="tool-tag tag-hot">Hot</span>
+        <div class="tool-icon-wrap"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" fill="url(#ig)"/><circle cx="12" cy="12" r="4.5" stroke="#fff" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="#fff"/><defs><linearGradient id="ig" x1="0" y1="0" x2="24" y2="24"><stop stop-color="#F58529"/><stop offset=".5" stop-color="#DD2A7B"/><stop offset="1" stop-color="#8134AF"/></linearGradient></defs></svg></div>
+        <h3>Instagram Downloader</h3>
+        <p>Save Reels, Stories, Posts & IGTV in HD quality.</p>
+        <a href="instagram-downloader.html" class="tool-btn btn-instagram">Download</a>
+      </div>
+
+      <div class="tool-card">
+        <span class="tool-tag tag-popular">Popular</span>
+        <div class="tool-icon-wrap"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#1877F2"/><path d="M15.5 12h-2.5V20h-3v-8H8v-2.8h2V7.5c0-2 1-3.5 3.5-3.5h2.3v2.8h-1.5c-.8 0-1 .4-1 1v1.4h2.5l-.3 2.8z" fill="#fff"/></svg></div>
+        <h3>Facebook Downloader</h3>
+        <p>Download FB videos, reels & watch content easily.</p>
+        <a href="facebook-downloader.html" class="tool-btn btn-facebook">Save Video</a>
+      </div>
+
+      <div class="tool-card">
+        <span class="tool-tag tag-trending">Trending</span>
+        <div class="tool-icon-wrap"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#000"/><path d="M16.5 8.2c-1.3-.3-2.3-1-2.8-2.2h-2v9.5c0 1.2-1 2.2-2.2 2.2s-2.2-1-2.2-2.2 1-2.2 2.2-2.2c.2 0 .4 0 .6.1v-2c-.2 0-.4-.1-.6-.1-2.3 0-4.2 1.9-4.2 4.2s1.9 4.2 4.2 4.2 4.2-1.9 4.2-4.2v-5c.9.7 2 1.1 3.2 1.1V9.6c-.1 0-.3-.1-.4-.2z" fill="#FE2C55"/></svg></div>
+        <h3>TikTok Downloader</h3>
+        <p>No watermark TikTok video downloads in seconds.</p>
+        <a href="tiktok-downloader.html" class="tool-btn btn-tiktok">Grab Video</a>
+      </div>
     </div>
+  </div>
+</section>
 
-    <!-- HERO -->
-    <section class="hero-section">
-        <div class="hero-inner">
-            <div class="hero-badge">⚡ 100% Free • No Signup • Private</div>
-            <h1>All-in-One <span class="gradient">Media Tools</span> for Creators</h1>
-            <p>Download videos, compress images, convert PDFs, generate QR codes — all free, all in your browser.</p>
-            <div class="hero-stats">
-                <div class="stat"><div class="stat-num">14+</div><div class="stat-label">Free Tools</div></div>
-                <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Private</div></div>
-                <div class="stat"><div class="stat-num">0$</div><div class="stat-label">Forever Free</div></div>
-            </div>
-        </div>
-    </section>
+<!-- Image & File Tools -->
+<section style="background:#fff;">
+  <div class="container">
+    <h2 class="section-title">🖼️ Image & File Tools</h2>
+    <p class="section-sub">Convert, resize & optimize files instantly</p>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <span class="tool-tag tag-popular">Popular</span>
+        <div class="tool-icon-wrap"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="url(#cp)"/><path d="M7 8h10M7 12h10M7 16h6" stroke="#fff" stroke-width="2" stroke-linecap="round"/><defs><linearGradient id="cp" x1="0" y1="0" x2="24" y2="24"><stop stop-color="#FF9E7D"/><stop offset="1" stop-color="#D95D39"/></linearGradient></defs></svg></div>
+        <h3>Image Compressor</h3>
+        <p>Reduce image file size without losing quality.</p>
+        <a href="image-compressor.html" class="tool-btn btn-compress">Compress</a>
+      </div>
 
-    <main class="container">
+      <div class="tool-card">
+        <span class="tool-tag tag-new">New</span>
+        <div class="tool-icon-wrap"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#7C3AED"/><path d="M8 7v10M12 7v10M16 7v10" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M6 10h4M14 14h4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <h3>Image Converter</h3>
+        <p>Convert PNG, JPG, WebP & BMP in one click.</p>
+        <a href="image-converter.html" class="tool-btn btn-convert">Convert</a>
+      </div>
 
-        <!-- MEDIA DOWNLOADERS -->
-        <section id="tools">
-            <div class="section-title">
-                <h2>📥 Media Downloader Tools</h2>
-                <p>Download videos and photos from your favorite platforms.</p>
-            </div>
-            <div class="tools-grid">
-                <a href="instagram-downloader.html" class="tool-card">
-                    <div class="tool-icon-wrap">
-                        <div class="icon-glow" style="background:#E1306C"></div>
-                        <svg viewBox="0 0 48 48"><defs><radialGradient id="ig1" cx="20%" cy="100%" r="130%"><stop offset="0" stop-color="#ffd600"/><stop offset=".25" stop-color="#ff7a00"/><stop offset=".38" stop-color="#ff0169"/><stop offset=".52" stop-color="#d300c5"/><stop offset=".74" stop-color="#7638fa"/><stop offset="1" stop-color="#4f5bd5"/></radialGradient></defs><rect width="48" height="48" rx="12" fill="url(#ig1)"/><rect x="10" y="10" width="28" height="28" rx="8" fill="none" stroke="#fff" stroke-width="2.5"/><circle cx="24" cy="24" r="7.5" fill="none" stroke="#fff" stroke-width="2.5"/><circle cx="34" cy="14" r="2" fill="#fff"/></svg>
-                    </div>
-                    <span class="tool-tag tag-popular">⭐ Most Popular</span>
-                    <h3>Instagram Downloader</h3>
-                    <p>Download Reels, Stories, posts & photos in HD quality. Save any public Instagram content instantly.</p>
-                    <span class="tool-btn btn-instagram">📸 Download Reels & Stories</span>
-                </a>
+      <div class="tool-card">
+        <span class="tool-tag tag-free">Free</span>
+        <div class="tool-icon-wrap"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#0D9488"/><rect x="6" y="6" width="12" height="12" stroke="#fff" stroke-width="2" fill="none"/><path d="M10 10h4v4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <h3>Image Resizer</h3>
+        <p>Resize for Instagram, YouTube, FB & more.</p>
+        <a href="image-resizer.html" class="tool-btn btn-resize">Resize</a>
+      </div>
 
-                <a href="facebook-downloader.html" class="tool-card">
-                    <div class="tool-icon-wrap">
-                        <div class="icon-glow" style="background:#1877F2"></div>
-                        <svg viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#1877F2"/><path d="M29 25.5h-3.5V38h-5.5V25.5H17v-5h3V17.5c0-3.5 1.5-7.5 7-7.5h4v5h-3c-.5 0-1 .5-1 1V20.5h4l-1.5 5z" fill="#fff"/></svg>
-                    </div>
-                    <span class="tool-tag tag-popular">⭐ Popular</span>
-                    <h3>Facebook Downloader</h3>
-                    <p>Save Facebook videos & reels in HD or SD quality. Works with public posts and shared videos.</p>
-                    <span class="tool-btn btn-facebook">📘 Save FB Videos</span>
-                </a>
+      <div class="tool-card">
+        <span class="tool-tag tag-hot">Hot</span>
+        <div class="tool-icon-wrap"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#DC2626"/><path d="M8 5h5l3 3v11H8z" fill="#fff"/><text x="12" y="16" text-anchor="middle" font-size="5" font-weight="bold" fill="#DC2626">PDF</text></svg></div>
+        <h3>PDF Tools</h3>
+        <p>Merge, split & convert images to PDF.</p>
+        <a href="pdf-tools.html" class="tool-btn btn-pdf">Open PDF</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-                <a href="tiktok-downloader.html" class="tool-card">
-                    <div class="tool-icon-wrap">
-                        <div class="icon-glow" style="background:#FE2C55"></div>
-                        <svg viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#010101"/><path d="M33.5 17.5c-2.5-1.5-4-4-4-7h-4.5v19c0 2.5-2 4.5-4.5 4.5s-4.5-2-4.5-4.5 2-4.5 4.5-4.5c.5 0 1 0 1.5.2v-4.7c-.5 0-1-.2-1.5-.2-5 0-9 4-9 9s4 9 9 9 9-4 9-9V22c2 1.5 4.5 2.5 7 2.5v-4.5c-1.5 0-2.5-.5-3-2.5z" fill="#fff"/></svg>
-                    </div>
-                    <span class="tool-tag tag-trending">🔥 Trending</span>
-                    <h3>TikTok Downloader</h3>
-                    <p>Download TikTok videos without watermark in original quality. Save to camera roll instantly.</p>
-                    <span class="tool-btn btn-tiktok">🎵 Remove Watermark & Save</span>
-                </a>
+<!-- Utility Tools -->
+<section>
+  <div class="container">
+    <h2 class="section-title">⚙️ Utility Tools</h2>
+    <p class="section-sub">Everyday tools for developers & creators</p>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <span class="tool-tag tag-trending">Trending</span>
+        <div class="tool-icon-wrap"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#2563EB"/><rect x="6" y="6" width="4" height="4" fill="#fff"/><rect x="14" y="6" width="4" height="4" fill="#fff"/><rect x="6" y="14" width="4" height="4" fill="#fff"/><rect x="14" y="14" width="2" height="2" fill="#fff"/><rect x="16" y="16" width="2" height="2" fill="#fff"/></svg></div>
+        <h3>QR Code Generator</h3>
+        <p>Create QR codes for URLs, WiFi, text & email.</p>
+        <a href="qr-generator.html" class="tool-btn btn-qr">Generate QR</a>
+      </div>
 
-                <a href="youtube-thumbnail.html" class="tool-card">
-                    <div class="tool-icon-wrap">
-                        <div class="icon-glow" style="background:#FF0000"></div>
-                        <svg viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#FF0000"/><polygon points="20,14 20,34 34,24" fill="#fff"/></svg>
-                    </div>
-                    <span class="tool-tag tag-new">🆕 New</span>
-                    <h3>YouTube Thumbnail Grabber</h3>
-                    <p>Download YouTube video thumbnails in all resolutions — HD, SD, MQ and default quality.</p>
-                    <span class="tool-btn btn-youtube">🎬 Grab Thumbnails</span>
-                </a>
-            </div>
-        </section>
+      <div class="tool-card">
+        <span class="tool-tag tag-new">New</span>
+        <div class="tool-icon-wrap"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="url(#clp)"/><circle cx="8" cy="10" r="2" fill="#fff"/><circle cx="16" cy="10" r="2" fill="#fff"/><circle cx="12" cy="15" r="2" fill="#fff"/><defs><linearGradient id="clp" x1="0" y1="0" x2="24" y2="24"><stop stop-color="#EC4899"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs></svg></div>
+        <h3>Color Picker</h3>
+        <p>HEX, RGB, HSL codes + random palette generator.</p>
+        <a href="color-picker.html" class="tool-btn btn-color">Pick Colors</a>
+      </div>
 
-        <!-- IMAGE & FILE TOOLS -->
-        <section>
-            <div class="section-title">
-                <h2>🖼️ Image & File Tools</h2>
-                <p>Compress, convert, resize and optimize your files.</p>
-            </div>
-            <div class="tools-grid">
-                <a href="gif-compressor.html" class="tool-card">
-                    <div class="tool-icon-wrap">
-                        <div class="icon-glow" style="background:#E07A5F"></div>
-                        <svg viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#E07A5F"/><path d="M14 18h20v12H14z" fill="none" stroke="#fff" stroke-width="2"/><path d="M18 22l4 4 3-3 5 5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="19" cy="22" r="2" fill="#fff"/><path d="M30 14l4 4M30 14h4v4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
-                    </div>
-                    <span class="tool-tag tag-popular">⭐ Popular</span>
-                    <h3>GIF & Image Compressor</h3>
-                    <p>Compress GIFs, PNGs, JPGs & crop for Instagram, TikTok, YouTube aspect ratios. Batch support.</p>
-                    <span class="tool-btn btn-compress">🗜️ Compress & Crop Images</span>
-                </a>
+      <div class="tool-card">
+        <span class="tool-tag tag-free">Free</span>
+        <div class="tool-icon-wrap"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#16A34A"/><path d="M6 8h12M6 12h12M6 16h8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <h3>Text Tools</h3>
+        <p>Count, transform & clean text in 12+ ways.</p>
+        <a href="text-tools.html" class="tool-btn btn-text">Edit Text</a>
+      </div>
 
-                <a href="pdf-tools.html" class="tool-card">
-                    <div class="tool-icon-wrap">
-                        <div class="icon-glow" style="background:#E53E3E"></div>
-                        <svg viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#E53E3E"/><path d="M15 8h12l8 8v24c0 1-1 2-2 2H15c-1 0-2-1-2-2V10c0-1 1-2 2-2z" fill="none" stroke="#fff" stroke-width="2"/><path d="M27 8v8h8" fill="none" stroke="#fff" stroke-width="2"/><text x="17" y="32" font-size="8" fill="#fff" font-weight="bold">PDF</text></svg>
-                    </div>
-                    <span class="tool-tag tag-hot">🔥 Hot</span>
-                    <h3>PDF Tools</h3>
-                    <p>Merge, split PDFs and convert images to PDF — all processing happens in your browser.</p>
-                    <span class="tool-btn btn-pdf">📄 Merge & Split PDFs</span>
-                </a>
+      <div class="tool-card">
+        <span class="tool-tag tag-popular">Popular</span>
+        <div class="tool-icon-wrap"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#CA8A04"/><rect x="7" y="10" width="10" height="8" rx="1" fill="#fff"/><path d="M9 10V7a3 3 0 016 0v3" stroke="#fff" stroke-width="2" fill="none"/></svg></div>
+        <h3>Password Generator</h3>
+        <p>Create strong, secure passwords instantly.</p>
+        <a href="password-generator.html" class="tool-btn btn-password">Generate</a>
+      </div>
 
-                <a href="image-converter.html" class="tool-card">
-                    <div class="tool-icon-wrap">
-                        <div class="icon-glow" style="background:#667EEA"></div>
-                        <svg viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#667EEA"/><path d="M14 24h20M28 18l6 6-6 6" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M34 24H14M20 18l-6 6 6 6" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/></svg>
-                    </div>
-                    <span class="tool-tag tag-new">🆕 New</span>
-                    <h3>Image Format Converter</h3>
-                    <p>Convert between PNG, JPG, WebP, BMP formats instantly. Batch conversion supported.</p>
-                    <span class="tool-btn btn-convert">🔄 Convert Formats</span>
-                </a>
+      <div class="tool-card">
+        <span class="tool-tag tag-new">New</span>
+        <div class="tool-icon-wrap"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#374151"/><path d="M9 7l-3 5 3 5M15 7l3 5-3 5" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none"/></svg></div>
+        <h3>JSON Formatter</h3>
+        <p>Beautify, minify & validate JSON data.</p>
+        <a href="json-formatter.html" class="tool-btn btn-json">Format</a>
+      </div>
 
-                <a href="image-resizer.html" class="tool-card">
-                    <div class="tool-icon-wrap">
-                        <div class="icon-glow" style="background:#38B2AC"></div>
-                        <svg viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#38B2AC"/><rect x="12" y="16" width="16" height="16" rx="2" fill="none" stroke="#fff" stroke-width="2"/><rect x="20" y="12" width="18" height="18" rx="2" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="4 2"/><path d="M32 26l4 4M36 26v4h-4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
-                    </div>
-                    <span class="tool-tag tag-free">🆓 Free</span>
-                    <h3>Image Resizer</h3>
-                    <p>Resize images to exact dimensions or percentages. Social media presets included.</p>
-                    <span class="tool-btn btn-resize">📐 Resize Images</span>
-                </a>
-            </div>
-        </section>
+      <div class="tool-card">
+        <span class="tool-tag tag-trending">Trending</span>
+        <div class="tool-icon-wrap"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#7E22CE"/><text x="12" y="16" text-anchor="middle" font-size="7" font-weight="bold" fill="#fff">B64</text></svg></div>
+        <h3>Base64 Encoder</h3>
+        <p>Encode/decode text & files to Base64 format.</p>
+        <a href="base64-tool.html" class="tool-btn btn-base64">Encode</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <!-- UTILITY TOOLS -->
-        <section>
-            <div class="section-title">
-                <h2>🛠️ Utility Tools</h2>
-                <p>Handy everyday tools that work instantly in your browser.</p>
-            </div>
-            <div class="tools-grid">
-                <a href="qr-generator.html" class="tool-card">
-                    <div class="tool-icon-wrap">
-                        <div class="icon-glow" style="background:#4299E1"></div>
-                        <svg viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#4299E1"/><rect x="12" y="12" width="8" height="8" rx="1" fill="#fff"/><rect x="12" y="28" width="8" height="8" rx="1" fill="#fff"/><rect x="28" y="12" width="8" height="8" rx="1" fill="#fff"/><rect x="14" y="14" width="4" height="4" fill="#4299E1"/><rect x="14" y="30" width="4" height="4" fill="#4299E1"/><rect x="30" y="14" width="4" height="4" fill="#4299E1"/><rect x="28" y="28" width="3" height="3" fill="#fff"/><rect x="33" y="28" width="3" height="3" fill="#fff"/><rect x="28" y="33" width="3" height="3" fill="#fff"/><rect x="33" y="33" width="3" height="3" fill="#fff"/></svg>
-                    </div>
-                    <span class="tool-tag tag-trending">🔥 Trending</span>
-                    <h3>QR Code Generator</h3>
-                    <p>Generate QR codes for URLs, text, Wi-Fi credentials. Customize colors & download PNG/SVG.</p>
-                    <span class="tool-btn btn-qr">📱 Generate QR Code</span>
-                </a>
+<!-- Features -->
+<section class="features">
+  <div class="container">
+    <h2 class="section-title">Why Choose Us?</h2>
+    <p class="section-sub">Built with privacy and speed in mind</p>
+    <div class="features-grid">
+      <div class="feature"><div class="feature-icon">🔒</div><h3>100% Private</h3><p>Everything runs in your browser. No uploads to servers.</p></div>
+      <div class="feature"><div class="feature-icon">⚡</div><h3>Lightning Fast</h3><p>Instant results. No waiting, no queues.</p></div>
+      <div class="feature"><div class="feature-icon">💰</div><h3>Always Free</h3><p>No hidden fees, no subscriptions, no limits.</p></div>
+      <div class="feature"><div class="feature-icon">📱</div><h3>Works Everywhere</h3><p>Mobile, tablet, desktop — all browsers supported.</p></div>
+    </div>
+  </div>
+</section>
 
-                <a href="color-picker.html" class="tool-card">
-                    <div class="tool-icon-wrap">
-                        <div class="icon-glow" style="background:#ED64A6"></div>
-                        <svg viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#ED64A6"/><circle cx="20" cy="20" r="5" fill="#FFD93D" opacity="0.8"/><circle cx="28" cy="20" r="5" fill="#6BCB77" opacity="0.8"/><circle cx="24" cy="27" r="5" fill="#4D96FF" opacity="0.8"/></svg>
-                    </div>
-                    <span class="tool-tag tag-new">🆕 New</span>
-                    <h3>Color Picker & Palette</h3>
-                    <p>Pick colors, generate palettes, get HEX, RGB, HSL values. Extract colors from images.</p>
-                    <span class="tool-btn btn-color">🎨 Pick Colors</span>
-                </a>
+<!-- Blog Preview -->
+<section>
+  <div class="container">
+    <h2 class="section-title">📚 Latest from Blog</h2>
+    <p class="section-sub">Guides, tips & tutorials for creators</p>
+    <div class="blog-preview-grid">
+      <a href="blog.html" class="blog-card"><div class="blog-thumb"></div><div class="blog-body"><h4>Monetize Utility Tools</h4><p>How to earn passive income from free tool websites.</p></div></a>
+      <a href="blog.html" class="blog-card"><div class="blog-thumb" style="background:linear-gradient(135deg,#667eea,#764ba2);"></div><div class="blog-body"><h4>Image Compression Guide</h4><p>Reduce file size without losing quality.</p></div></a>
+      <a href="blog.html" class="blog-card"><div class="blog-thumb" style="background:linear-gradient(135deg,#f093fb,#f5576c);"></div><div class="blog-body"><h4>QR Code Marketing</h4><p>Boost engagement with creative QR campaigns.</p></div></a>
+    </div>
+    <div style="text-align:center;margin-top:2rem;"><a href="blog.html" class="cta-btn" style="background:var(--peach-gradient);color:#fff;">View All Posts →</a></div>
+  </div>
+</section>
 
-                <a href="text-tools.html" class="tool-card">
-                    <div class="tool-icon-wrap">
-                        <div class="icon-glow" style="background:#48BB78"></div>
-                        <svg viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#48BB78"/><text x="12" y="22" font-size="14" fill="#fff" font-weight="bold">Aa</text><path d="M12 28h24M12 33h18M12 38h12" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.7"/></svg>
-                    </div>
-                    <span class="tool-tag tag-free">🆓 Free</span>
-                    <h3>Text Tools</h3>
-                    <p>Word counter, case converter, slug generator, remove duplicates, Lorem Ipsum & more.</p>
-                    <span class="tool-btn btn-text">✏️ Transform Text</span>
-                </a>
+<!-- CTA -->
+<section class="cta">
+  <div class="container">
+    <h2>Ready to Create?</h2>
+    <p>Jump into any tool — no signup needed, 100% free.</p>
+    <a href="#" class="cta-btn" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Explore Tools ↑</a>
+  </div>
+</section>
 
-                <a href="password-generator.html" class="tool-card">
-                    <div class="tool-icon-wrap">
-                        <div class="icon-glow" style="background:#ECC94B"></div>
-                        <svg viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#ECC94B"/><rect x="14" y="20" width="20" height="16" rx="3" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M19 20v-4a5 5 0 0 1 10 0v4" fill="none" stroke="#fff" stroke-width="2.5"/><circle cx="24" cy="28" r="2" fill="#fff"/><path d="M24 30v3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
-                    </div>
-                    <span class="tool-tag tag-new">🆕 New</span>
-                    <h3>Password Generator</h3>
-                    <p>Generate strong secure passwords with custom length, symbols, numbers & uppercase letters.</p>
-                    <span class="tool-btn btn-password">🔐 Generate Password</span>
-                </a>
+<!-- Footer -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>⚡ ToolsMediaDownload</h4>
+      <p style="color:#ccc;font-size:0.9rem;">Free browser-based tools for creators, developers & everyone.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Tools</h4>
+      <ul>
+        <li><a href="pdf-tools.html">PDF Tools</a></li>
+        <li><a href="qr-generator.html">QR Generator</a></li>
+        <li><a href="image-converter.html">Image Converter</a></li>
+        <li><a href="password-generator.html">Password Generator</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="disclaimer.html">Disclaimer</a></li>
+        <li><a href="terms.html">Terms of Service</a></li>
+        <li><a href="dmca.html">DMCA</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 ToolsMediaDownload. All rights reserved.</div>
+</footer>
 
-                <a href="json-formatter.html" class="tool-card">
-                    <div class="tool-icon-wrap">
-                        <div class="icon-glow" style="background:#4A5568"></div>
-                        <svg viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#4A5568"/><text x="10" y="32" font-size="18" fill="#fff" font-weight="bold">{ }</text></svg>
-                    </div>
-                    <span class="tool-tag tag-free">🆓 Free</span>
-                    <h3>JSON Formatter</h3>
-                    <p>Beautify, validate, minify JSON data. Syntax highlighting & error detection included.</p>
-                    <span class="tool-btn btn-json">{ } Format JSON</span>
-                </a>
-
-                <a href="base64-tool.html" class="tool-card">
-                    <div class="tool-icon-wrap">
-                        <div class="icon-glow" style="background:#9F7AEA"></div>
-                        <svg viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#9F7AEA"/><text x="8" y="22" font-size="9" fill="#fff" font-weight="bold">BASE</text><text x="14" y="36" font-size="14" fill="#fff" font-weight="bold">64</text></svg>
-                    </div>
-                    <span class="tool-tag tag-free">🆓 Free</span>
-                    <h3>Base64 Encoder/Decoder</h3>
-                    <p>Encode text or decode Base64 strings instantly. Supports file to Base64 conversion.</p>
-                    <span class="tool-btn btn-base64">🔢 Encode & Decode</span>
-                </a>
-            </div>
-        </section>
-
-        <!-- FEATURES -->
-        <section id="features" class="features-section">
-            <div class="section-title">
-                <h2>Why Choose Our Tools?</h2>
-                <p>Built for speed, privacy, and simplicity.</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-item"><div class="feature-icon">🔒</div><h4>100% Private</h4><p>All processing in your browser. Files never leave your device.</p></div>
-                <div class="feature-item"><div class="feature-icon">⚡</div><h4>Lightning Fast</h4><p>No server queues. Instant results right in your browser.</p></div>
-                <div class="feature-item"><div class="feature-icon">🆓</div><h4>Totally Free</h4><p>No signup, subscriptions, or hidden fees. Use unlimited.</p></div>
-                <div class="feature-item"><div class="feature-icon">📱</div><h4>Works Everywhere</h4><p>Fully responsive on mobile, tablet, and desktop.</p></div>
-            </div>
-        </section>
-
-        <!-- BLOG -->
-        <section id="blog">
-            <div class="section-title">
-                <h2>📝 Latest Guides & Articles</h2>
-                <p>Learn tips, tricks and strategies for creators.</p>
-            </div>
-            <div class="blog-grid">
-                <a href="blog-make-money-online.html" class="blog-card">
-                    <div class="blog-thumb">💰</div>
-                    <div class="blog-body">
-                        <div class="blog-date">December 15, 2025</div>
-                        <h4>How to Monetize Utility Web Tools</h4>
-                        <p>Proven strategies to turn your free tool website into a passive income machine with AdSense.</p>
-                        <span class="read-more">Read Article →</span>
-                    </div>
-                </a>
-                <a href="blog-build-media-downloader-tools.html" class="blog-card">
-                    <div class="blog-thumb">🔧</div>
-                    <div class="blog-body">
-                        <div class="blog-date">December 10, 2025</div>
-                        <h4>How Media Downloaders Work</h4>
-                        <p>A technical deep dive into how social media downloaders fetch and serve content.</p>
-                        <span class="read-more">Read Article →</span>
-                    </div>
-                </a>
-                <a href="blog-repurpose-content-passive-income.html" class="blog-card">
-                    <div class="blog-thumb">📈</div>
-                    <div class="blog-body">
-                        <div class="blog-date">December 5, 2025</div>
-                        <h4>Repurpose Content for Passive Income</h4>
-                        <p>Turn one video into content for multiple platforms efficiently and multiply your reach.</p>
-                        <span class="read-more">Read Article →</span>
-                    </div>
-                </a>
-                <a href="blog-image-compression-guide.html" class="blog-card">
-                    <div class="blog-thumb">🖼️</div>
-                    <div class="blog-body">
-                        <div class="blog-date">November 28, 2025</div>
-                        <h4>Complete Guide to Image Compression</h4>
-                        <p>Everything you need to know about reducing image file sizes without losing quality.</p>
-                        <span class="read-more">Read Article →</span>
-                    </div>
-                </a>
-                <a href="blog-social-media-sizes.html" class="blog-card">
-                    <div class="blog-thumb">📐</div>
-                    <div class="blog-body">
-                        <div class="blog-date">November 20, 2025</div>
-                        <h4>Social Media Image Sizes Guide 2026</h4>
-                        <p>Ultimate cheat sheet for image dimensions across Instagram, TikTok, YouTube, Facebook.</p>
-                        <span class="read-more">Read Article →</span>
-                    </div>
-                </a>
-                <a href="blog-pdf-tools-guide.html" class="blog-card">
-                    <div class="blog-thumb">📄</div>
-                    <div class="blog-body">
-                        <div class="blog-date">November 15, 2025</div>
-                        <h4>Free PDF Tools You Need to Know</h4>
-                        <p>Merge, split, compress PDFs without installing any software. Everything in your browser.</p>
-                        <span class="read-more">Read Article →</span>
-                    </div>
-                </a>
-            </div>
-            <div style="text-align:center;">
-                <a href="blog.html" style="display:inline-block;background:var(--text-dark);color:#fff;padding:0.9rem 2rem;border-radius:10px;text-decoration:none;font-weight:700;">View All Articles →</a>
-            </div>
-        </section>
-
-        <!-- CTA -->
-        <section class="cta-section" style="margin-top:3rem;">
-            <h2>Ready to Create?</h2>
-            <p>Start with our most popular tool — compress and crop images for all social platforms.</p>
-            <a href="gif-compressor.html" class="cta-btn">🗜️ Try Image Compressor</a>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h3>⚡ ToolsMediaDownload</h3>
-                <p>Free, private, browser-based media tools for content creators worldwide. No signup needed.</p>
-            </div>
-            <div class="footer-col">
-                <h3>Downloader Tools</h3>
-                <ul>
-                    <li><a href="instagram-downloader.html">Instagram Downloader</a></li>
-                    <li><a href="facebook-downloader.html">Facebook Downloader</a></li>
-                    <li><a href="tiktok-downloader.html">TikTok Downloader</a></li>
-                    <li><a href="youtube-thumbnail.html">YouTube Thumbnail</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>File & Image Tools</h3>
-                <ul>
-                    <li><a href="gif-compressor.html">Image Compressor</a></li>
-                    <li><a href="pdf-tools.html">PDF Tools</a></li>
-                    <li><a href="image-converter.html">Image Converter</a></li>
-                    <li><a href="image-resizer.html">Image Resizer</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>Utility Tools</h3>
-                <ul>
-                    <li><a href="qr-generator.html">QR Code Generator</a></li>
-                    <li><a href="color-picker.html">Color Picker</a></li>
-                    <li><a href="text-tools.html">Text Tools</a></li>
-                    <li><a href="password-generator.html">Password Generator</a></li>
-                    <li><a href="json-formatter.html">JSON Formatter</a></li>
-                    <li><a href="base64-tool.html">Base64 Tool</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>Company</h3>
-                <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="disclaimer.html">Disclaimer</a></li>
-                    <li><a href="terms.html">Terms of Service</a></li>
-                    <li><a href="dmca.html">DMCA Policy</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="copyright">&copy; 2026 ToolsMediaDownload. All rights reserved.</div>
-    </footer>
 </body>
 </html>
