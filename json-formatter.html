@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Formatter & Validator - Beautify & Minify | ToolsMediaDownload</title>
+    <meta name="description" content="Format, validate, and minify JSON data online. Syntax highlighting, error detection. Free, browser-based JSON tool.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://toolsmediadownload.com/json-formatter.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <style>
+        :root{--bg-warm:#FAF5EE;--card-bg:#FFF;--primary-peach:#E07A5F;--text-dark:#2C221E;--text-muted:#706661;--border-warm:#EFE3D8;--success-btn:#2A9D8F;--dark-footer:#1A1615}
+        *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+        body{background:var(--bg-warm);color:var(--text-dark);min-height:100vh;display:flex;flex-direction:column;line-height:1.7}
+        header{background:#fff;border-bottom:1px solid var(--border-warm);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+        .logo{font-size:1.4rem;font-weight:800;color:var(--primary-peach);text-decoration:none;display:flex;align-items:center;gap:.5rem}.logo span{color:var(--text-dark)}
+        .nav-links{display:flex;gap:1.25rem}.nav-links a{color:var(--text-dark);text-decoration:none;font-weight:600;font-size:.9rem}.nav-links a:hover{color:var(--primary-peach)}
+        @media(max-width:768px){.nav-links{display:none}}
+        .page-container{max-width:900px;margin:3rem auto;padding:0 1.25rem;flex:1}
+        .page-hero{text-align:center;margin-bottom:2.5rem}
+        .page-hero h1{font-size:2.4rem;font-weight:800;margin-bottom:.75rem}.page-hero h1 .g{background:linear-gradient(135deg,#4A5568,#2D3748);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .page-hero p{color:var(--text-muted);font-size:1.1rem}
+        .tool-card{background:var(--card-bg);padding:2.25rem;border-radius:20px;box-shadow:0 12px 30px -5px rgba(224,122,95,.08);border:1px solid var(--border-warm)}
+        .editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem}
+        @media(max-width:640px){.editor-grid{grid-template-columns:1fr}.page-hero h1{font-size:1.8rem}.tool-card{padding:1.5rem}}
+        .editor-grid textarea{width:100%;min-height:300px;padding:1rem;border:2px solid var(--border-warm);border-radius:12px;font-family:'Courier New',monospace;font-size:.88rem;outline:none;resize:vertical;background:#FFFDFB;tab-size:2}
+        .editor-grid textarea:focus{border-color:var(--primary-peach)}
+        .editor-label{font-weight:700;font-size:.9rem;margin-bottom:.4rem;display:block}
+        .btn-row{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem}
+        .btn-row button{padding:.65rem 1.1rem;border-radius:8px;font-weight:700;cursor:pointer;font-size:.85rem;border:none;transition:transform .15s}
+        .btn-beautify{background:linear-gradient(135deg,#4A5568,#2D3748);color:#fff}
+        .btn-minify{background:#718096;color:#fff}
+        .btn-validate{background:var(--success-btn);color:#fff}
+        .btn-copy{background:var(--primary-peach);color:#fff}
+        .btn-clear{background:#E53E3E;color:#fff}
+        .btn-row button:hover{transform:translateY(-2px)}
+        .status-msg{padding:.75rem 1rem;border-radius:8px;margin-top:1rem;font-weight:600;font-size:.9rem;display:none}
+        .status-msg.active{display:block}
+        .status-success{background:#F0FFF4;color:#38A169;border:1px solid #C6F6D5}
+        .status-error{background:#FFF5F5;color:#E53E3E;border:1px solid #FEB2B2}
+        footer{background:var(--dark-footer);color:#fff;padding:3rem 1rem 1.5rem;margin-top:auto}
+        .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-bottom:2rem}
+        .footer-col h3{font-size:1.05rem;margin-bottom:1rem;color:#F7EDE2}.footer-col ul{list-style:none}.footer-col ul li{margin-bottom:.6rem}.footer-col ul li a{color:#A8A099;text-decoration:none;font-size:.88rem}.footer-col ul li a:hover{color:#F7EDE2}.footer-col p{color:#A8A099;font-size:.88rem}
+        .copyright{text-align:center;border-top:1px solid #332E2B;padding-top:1.5rem;color:#78706A;font-size:.85rem}
+    </style>
+</head>
+<body>
+    <header><a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a><nav class="nav-links"><a href="index.html">Home</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></nav></header>
+    <div class="page-container">
+        <div class="page-hero"><h1>JSON <span class="g">Formatter</span></h1><p>Beautify, validate, and minify JSON data instantly.</p></div>
+        <div class="tool-card">
+            <div class="btn-row">
+                <button class="btn-beautify" onclick="beautify()">✨ Beautify</button>
+                <button class="btn-minify" onclick="minify()">📦 Minify</button>
+                <button class="btn-validate" onclick="validate()">✅ Validate</button>
+                <button class="btn-copy" onclick="copyOutput()">📋 Copy Output</button>
+                <button class="btn-clear" onclick="clearAll()">🗑️ Clear</button>
+            </div>
+            <div class="editor-grid">
+                <div><span class="editor-label">Input JSON:</span><textarea id="jsonInput" placeholder='{"name": "John", "age": 30}'></textarea></div>
+                <div><span class="editor-label">Output:</span><textarea id="jsonOutput" readonly style="background:#f9f9f9"></textarea></div>
+            </div>
+            <div class="status-msg" id="statusMsg"></div>
+        </div>
+    </div>
+    <footer><div class="footer-grid"><div class="footer-col"><h3>⚡ ToolsMediaDownload</h3><p>Free tools for creators.</p></div><div class="footer-col"><h3>Tools</h3><ul><li><a href="text-tools.html">Text Tools</a></li><li><a href="base64-tool.html">Base64 Tool</a></li><li><a href="password-generator.html">Password Generator</a></li></ul></div><div class="footer-col"><h3>Company</h3><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="terms.html">Terms</a></li><li><a href="dmca.html">DMCA</a></li></ul></div></div><div class="copyright">© 2026 ToolsMediaDownload. All rights reserved.</div></footer>
+    <script>
+    function showStatus(msg,type){const s=document.getElementById('statusMsg');s.textContent=msg;s.className='status-msg active '+(type==='error'?'status-error':'status-success');setTimeout(()=>s.classList.remove('active'),4000)}
+    function beautify(){try{const j=JSON.parse(document.getElementById('jsonInput').value);document.getElementById('jsonOutput').value=JSON.stringify(j,null,2);showStatus('✅ JSON beautified successfully!','success')}catch(e){showStatus('❌ Invalid JSON: '+e.message,'error')}}
+    function minify(){try{const j=JSON.parse(document.getElementById('jsonInput').value);document.getElementById('jsonOutput').value=JSON.stringify(j);showStatus('✅ JSON minified successfully!','success')}catch(e){showStatus('❌ Invalid JSON: '+e.message,'error')}}
+    function validate(){try{JSON.parse(document.getElementById('jsonInput').value);showStatus('✅ Valid JSON!','success')}catch(e){showStatus('❌ Invalid JSON: '+e.message,'error')}}
+    function copyOutput(){const t=document.getElementById('jsonOutput').value;if(t)navigator.clipboard.writeText(t).then(()=>showStatus('📋 Copied to clipboard!','success'))}
+    function clearAll(){document.getElementById('jsonInput').value='';document.getElementById('jsonOutput').value=''}
+    </script>
+</body>
+</html>
