@@ -52,7 +52,7 @@ section{padding:4rem 1.5rem;}
 
 .tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
 
-/* Tool Card & Button Flex Layout */
+/* Tool Card Flex Layout */
 .tool-card{
   background:var(--card-bg);border:1px solid var(--border-warm);
   border-radius:16px;padding:1.75rem;transition:all 0.3s;
@@ -105,7 +105,7 @@ section{padding:4rem 1.5rem;}
 .blog-preview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;}
 .blog-card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--border-warm);transition:all 0.3s;display:flex;flex-direction:column;}
 .blog-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,0.08);}
-.blog-thumb{height:180px;width:100%;overflow:hidden;background:var(--bg-warm);position:relative;}
+.blog-thumb{height:180px;width:100%;overflow:hidden;background:var(--peach-gradient);position:relative;}
 .blog-thumb img{width:100%;height:100%;object-fit:cover;transition:transform 0.3s;}
 .blog-card:hover .blog-thumb img{transform:scale(1.05);}
 .blog-body{padding:1.3rem;flex-grow:1;}
@@ -199,7 +199,7 @@ footer{background:var(--dark-footer);color:#fff;padding:3rem 1.5rem 1.5rem;}
     <p class="section-sub">Convert, resize & optimize files instantly</p>
     <div class="tools-grid">
 
-      <!-- GIF Compressor Restored -->
+      <!-- GIF Compressor -->
       <div class="tool-card">
         <span class="tool-tag tag-popular">Popular</span>
         <div class="tool-icon-wrap"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="url(#cp)"/><path d="M7 8h10M7 12h10M7 16h6" stroke="#fff" stroke-width="2" stroke-linecap="round"/><defs><linearGradient id="cp" x1="0" y1="0" x2="24" y2="24"><stop stop-color="#FF9E7D"/><stop offset="1" stop-color="#D95D39"/></linearGradient></defs></svg></div>
@@ -345,7 +345,7 @@ footer{background:var(--dark-footer);color:#fff;padding:3rem 1.5rem 1.5rem;}
   </div>
 </section>
 
-<!-- Blog Preview (High Quality Direct URLs) -->
+<!-- Blog Preview -->
 <section>
   <div class="container">
     <h2 class="section-title">📚 Latest from Blog</h2>
@@ -362,11 +362,11 @@ footer{background:var(--dark-footer);color:#fff;padding:3rem 1.5rem 1.5rem;}
       </a>
       <a href="blog.html" class="blog-card">
         <div class="blog-thumb">
-          <img src="https://images.unsplash.com/photo-1542744094-3a31b272c490?auto=format&fit=crop&w=600&q=80" alt="Image Compression Guide">
+          <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=600&q=80" alt="Image Compression Guide">
         </div>
         <div class="blog-body">
-          <h4>Image Compression Guide</h4>
-          <p>Reduce file size without losing quality. JPEG vs PNG vs WebP.</p>
+          <h4>Image & GIF Compression Guide</h4>
+          <p>Reduce file size without losing quality. Lossy vs Lossless algorithms.</p>
         </div>
       </a>
       <a href="blog.html" class="blog-card">
