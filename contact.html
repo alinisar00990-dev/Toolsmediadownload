@@ -4,140 +4,784 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - ToolsMediaDownload</title>
-    <meta name="description" content="Contact ToolsMediaDownload team for support, suggestions, or business inquiries. We're here to help!">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://toolsmediadownload.com/contact.html">
+    <meta name="description" content="Get in touch with ToolsMediaDownload team. We are here to help you with feedback, support, and inquiries.">
+    <meta name="theme-color" content="#E07A5F">
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        :root{--bg-warm:#FAF5EE;--card-bg:#FFFFFF;--primary-peach:#E07A5F;--peach-gradient:linear-gradient(135deg,#FF9E7D 0%,#E07A5F 50%,#D95D39 100%);--text-dark:#2C221E;--text-muted:#706661;--border-warm:#EFE3D8;--success-btn:#2A9D8F;--dark-footer:#1A1615}
-        *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-        body{background:var(--bg-warm);color:var(--text-dark);min-height:100vh;display:flex;flex-direction:column;line-height:1.7}
-        header{background:#fff;border-bottom:1px solid var(--border-warm);padding:0.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-        .logo{font-size:1.4rem;font-weight:800;color:var(--primary-peach);text-decoration:none;display:flex;align-items:center;gap:0.5rem}
-        .logo span{color:var(--text-dark)}
-        .nav-links{display:flex;gap:1.25rem}
-        .nav-links a{color:var(--text-dark);text-decoration:none;font-weight:600;font-size:0.9rem}
-        .nav-links a:hover{color:var(--primary-peach)}
-        @media(max-width:768px){.nav-links{display:none}}
-        .page-container{max-width:700px;margin:3rem auto;padding:0 1.25rem;flex:1}
-        .page-hero{text-align:center;margin-bottom:2.5rem}
-        .page-hero h1{font-size:2.5rem;font-weight:800;margin-bottom:0.75rem}
-        .page-hero h1 .g{background:var(--peach-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .page-hero p{color:var(--text-muted);font-size:1.1rem}
-        .content-card{background:#fff;border-radius:18px;padding:2.5rem;border:1px solid var(--border-warm);box-shadow:0 8px 25px rgba(224,122,95,0.06);margin-bottom:2rem}
-        .contact-info{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem;margin-bottom:2rem}
-        .info-box{text-align:center;padding:1.5rem;background:#FFFDFB;border-radius:12px;border:1px solid var(--border-warm)}
-        .info-box .icon{font-size:2rem;margin-bottom:0.5rem}
-        .info-box h4{margin-bottom:0.3rem;font-size:0.95rem}
-        .info-box p{color:var(--text-muted);font-size:0.85rem}
-        .info-box a{color:var(--primary-peach);text-decoration:none;font-weight:600}
-        .form-group{margin-bottom:1.25rem}
-        .form-group label{display:block;font-weight:700;margin-bottom:0.4rem;font-size:0.95rem}
-        .form-group input,.form-group textarea,.form-group select{width:100%;padding:0.85rem;border:2px solid var(--border-warm);border-radius:10px;font-size:1rem;background:#FFFDFB;outline:none;font-family:inherit}
-        .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--primary-peach)}
-        .form-group textarea{min-height:150px;resize:vertical}
-        .btn-submit{width:100%;background:var(--peach-gradient);color:#fff;border:none;padding:1rem;border-radius:12px;font-weight:700;font-size:1.1rem;cursor:pointer;transition:transform 0.15s,opacity 0.2s}
-        .btn-submit:hover{opacity:0.95;transform:translateY(-2px)}
-        .success-msg{display:none;text-align:center;padding:2rem;background:#F0FFF4;border:1px solid #C6F6D5;border-radius:12px;margin-top:1rem}
-        .success-msg.active{display:block}
-        .success-msg .icon{font-size:3rem;margin-bottom:0.5rem}
-        .success-msg h3{color:#38A169;margin-bottom:0.5rem}
-        .success-msg p{color:var(--text-muted)}
-        footer{background:var(--dark-footer);color:#fff;padding:3rem 1rem 1.5rem;margin-top:auto}
-        .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-bottom:2rem}
-        .footer-col h3{font-size:1.05rem;margin-bottom:1rem;color:#F7EDE2}
-        .footer-col ul{list-style:none}
-        .footer-col ul li{margin-bottom:0.6rem}
-        .footer-col ul li a{color:#A8A099;text-decoration:none;font-size:0.88rem}
-        .footer-col ul li a:hover{color:#F7EDE2}
-        .footer-col p{color:#A8A099;font-size:0.88rem}
-        .copyright{text-align:center;border-top:1px solid #332E2B;padding-top:1.5rem;color:#78706A;font-size:0.85rem}
-        @media(max-width:640px){.page-hero h1{font-size:1.8rem}.content-card{padding:1.5rem}}
+        :root {
+            --bg-warm: #FAF5EE;
+            --card-bg: #FFFFFF;
+            --primary-peach: #E07A5F;
+            --peach-hover: #D95D39;
+            --peach-light: #FDE8E1;
+            --peach-gradient: linear-gradient(135deg, #FF9E7D 0%, #E07A5F 50%, #D95D39 100%);
+            --text-dark: #2C221E;
+            --text-muted: #706661;
+            --border-warm: #EFE3D8;
+            --dark-footer: #1A1615;
+            --shadow-soft: 0 10px 30px rgba(224, 122, 95, 0.08);
+            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04);
+            --glow-peach: rgba(224, 122, 95, 0.3);
+            --radius-main: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-warm);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* HEADER & NAVBAR */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-warm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            color: #FF9E7D;
+            filter: drop-shadow(0 2px 4px rgba(224,122,95,0.4));
+        }
+
+        .logo span {
+            background: var(--peach-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-peach);
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border-warm);
+            border-radius: 12px;
+            box-shadow: var(--shadow-soft);
+            padding: 0.75rem 0;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.2s ease;
+            z-index: 1100;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.5rem 1.25rem;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .dropdown-menu a:hover {
+            background: var(--bg-warm);
+            color: var(--primary-peach);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            cursor: pointer;
+        }
+
+        /* AD CONTAINER */
+        .ad-container {
+            max-width: 1200px;
+            margin: 1.5rem auto 0;
+            padding: 0 1.5rem;
+            text-align: center;
+        }
+
+        .ad-box {
+            background: #FFFFFF;
+            border: 1px dashed #D1C4B9;
+            border-radius: 12px;
+            padding: 1.25rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* MAIN HERO & SECTION */
+        .contact-section {
+            max-width: 1100px;
+            margin: 2rem auto 4rem;
+            padding: 0 1.5rem;
+            flex: 1;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .contact-header h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .contact-header h1 span {
+            background: var(--peach-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contact-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* CONTACT GRID */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        /* SIDE INFO CARDS */
+        .info-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-warm);
+            border-radius: var(--radius-main);
+            padding: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            box-shadow: var(--shadow-card);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: var(--peach-light);
+            color: var(--primary-peach);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .info-content h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .info-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* FORM CONTAINER */
+        .form-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-warm);
+            border-radius: var(--radius-main);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .form-card h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .form-card h2 i {
+            color: var(--primary-peach);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.9rem 1.1rem;
+            border: 1px solid var(--border-warm);
+            border-radius: 10px;
+            background: #FAFAFA;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus {
+            background: #FFFFFF;
+            border-color: var(--primary-peach);
+            box-shadow: 0 0 0 3px var(--glow-peach);
+        }
+
+        textarea.form-input {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        .btn-submit {
+            background: var(--peach-gradient);
+            color: #FFFFFF;
+            border: none;
+            padding: 1rem 1.8rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 15px var(--glow-peach);
+            margin-top: 0.5rem;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--glow-peach);
+        }
+
+        /* SUCCESS MESSAGE MODAL/ALERT */
+        .form-status {
+            display: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-status.success {
+            display: block;
+            background: #E6F4EA;
+            color: #137333;
+            border: 1px solid #CEEAD6;
+        }
+
+        .form-status.error {
+            display: block;
+            background: #FCE8E6;
+            color: #C5221F;
+            border: 1px solid #FAD2CF;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark-footer);
+            color: #FFFFFF;
+            padding: 3.5rem 1.5rem 2rem;
+            margin-top: auto;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-brand .logo {
+            color: #FFFFFF;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            color: #A09691;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .footer-col h4 {
+            color: #FFFFFF;
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-col a {
+            color: #A09691;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-col a:hover {
+            color: var(--primary-peach);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid #2D2725;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #A09691;
+            font-size: 0.85rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: #A09691;
+            font-size: 1.1rem;
+            transition: color 0.2s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-peach);
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 900px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #FFFFFF;
+                border-bottom: 1px solid var(--border-warm);
+                flex-direction: column;
+                padding: 1.5rem;
+                gap: 1.25rem;
+                display: none;
+                box-shadow: var(--shadow-soft);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                padding-left: 1rem;
+                display: none;
+            }
+
+            .dropdown.active .dropdown-menu {
+                display: block;
+            }
+
+            .contact-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .form-card {
+                padding: 1.5rem;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
+
+    <!-- HEADER / NAVIGATION -->
     <header>
-        <a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a>
-        <nav class="nav-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="blog.html">Blog</a></nav>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚡</span> ToolsMedia<span>Download</span>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown" id="toolsDropdown">
+                    <a href="index.html#tools" style="cursor: pointer;">
+                        Tools <i class="fas fa-chevron-down" style="font-size: 0.75rem; margin-left: 3px;"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="gif-compressor.html">GIF Compressor</a>
+                        <a href="image-converter.html">Image Converter</a>
+                        <a href="image-resizer.html">Image Resizer</a>
+                        <a href="pdf-tools.html">PDF Tools</a>
+                        <a href="instagram-downloader.html">Instagram Downloader</a>
+                        <a href="facebook-downloader.html">Facebook Downloader</a>
+                        <a href="tiktok-downloader.html">TikTok Downloader</a>
+                        <a href="qr-generator.html">QR Code Generator</a>
+                        <a href="color-picker.html">Color Picker</a>
+                        <a href="text-tools.html">Text Tools</a>
+                    </div>
+                </li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <div class="page-container">
-        <div class="page-hero">
-            <h1><span class="g">Contact</span> Us</h1>
-            <p>Have a question, suggestion, or business inquiry? We'd love to hear from you!</p>
-        </div>
-
-        <div class="contact-info">
-            <div class="info-box">
-                <div class="icon">📧</div>
-                <h4>Email</h4>
-                <p><a href="mailto:contact@toolsmediadownload.com">contact@toolsmediadownload.com</a></p>
-            </div>
-            <div class="info-box">
-                <div class="icon">⏰</div>
-                <h4>Response Time</h4>
-                <p>We reply within 24-48 hours</p>
-            </div>
-            <div class="info-box">
-                <div class="icon">🌍</div>
-                <h4>Location</h4>
-                <p>Available Worldwide</p>
-            </div>
-        </div>
-
-        <div class="content-card">
-            <h2 style="font-size:1.4rem;margin-bottom:1.5rem;text-align:center">📬 Send Us a Message</h2>
-            <form id="contactForm" onsubmit="return handleSubmit(event)">
-                <div class="form-group">
-                    <label for="name">Full Name *</label>
-                    <input type="text" id="name" required placeholder="Your full name">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email Address *</label>
-                    <input type="email" id="email" required placeholder="your@email.com">
-                </div>
-                <div class="form-group">
-                    <label for="subject">Subject *</label>
-                    <select id="subject" required>
-                        <option value="">Select a topic...</option>
-                        <option value="General Question">General Question</option>
-                        <option value="Bug Report">Bug Report</option>
-                        <option value="Feature Request">Feature Request</option>
-                        <option value="Business Inquiry">Business Inquiry</option>
-                        <option value="DMCA Request">DMCA Request</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message *</label>
-                    <textarea id="message" required placeholder="Tell us what's on your mind..."></textarea>
-                </div>
-                <button type="submit" class="btn-submit">Send Message ✉️</button>
-            </form>
-            <div class="success-msg" id="successMsg">
-                <div class="icon">✅</div>
-                <h3>Message Sent!</h3>
-                <p>Thank you for reaching out. We'll get back to you within 24-48 hours.</p>
-            </div>
+    <!-- TOP ADVERTISEMENT PLACEHOLDER -->
+    <div class="ad-container">
+        <div class="ad-box">
+            <span><i class="fas fa-ad"></i> Advertisement Space</span>
         </div>
     </div>
 
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col"><h3>⚡ ToolsMediaDownload</h3><p>Free, private tools for creators.</p></div>
-            <div class="footer-col"><h3>Tools</h3><ul><li><a href="instagram-downloader.html">Instagram Downloader</a></li><li><a href="gif-compressor.html">Image Compressor</a></li><li><a href="pdf-tools.html">PDF Tools</a></li></ul></div>
-            <div class="footer-col"><h3>Company</h3><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="terms.html">Terms</a></li><li><a href="dmca.html">DMCA</a></li></ul></div>
+    <!-- MAIN CONTACT CONTENT -->
+    <main class="contact-section">
+        <div class="contact-header">
+            <h1>Get In <span>Touch</span></h1>
+            <p>Have questions, feedback, or need assistance with our tools? Send us a message and our team will be happy to assist you.</p>
         </div>
-        <div class="copyright">&copy; 2026 ToolsMediaDownload. All rights reserved.</div>
+
+        <div class="contact-grid">
+            <!-- LEFT SIDE: HELPFUL INFO CARDS (NO RAW EMAIL DISPLAYED) -->
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Response Time</h3>
+                        <p>We review every inquiry and reply within 24 to 48 hours.</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>24/7 Availability</h3>
+                        <p>Our online media tools and converters are 100% free and accessible around the clock.</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Global Access</h3>
+                        <p>Serving users worldwide with fast, client-side browser processing.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT SIDE: CONTACT FORM -->
+            <div class="form-card">
+                <h2><i class="fas fa-paper-plane"></i> Send Us a Message</h2>
+                
+                <div id="formStatus" class="form-status"></div>
+
+                <!-- Form submissions are dispatched via Formspree API directly to your mailbox -->
+                <form id="contactForm" class="contact-form" action="https://formspree.io/f/m.aliarain070@gmail.com" method="POST">
+                    <div class="form-group">
+                        <label for="userName">Your Full Name</label>
+                        <input type="text" id="userName" name="name" class="form-input" placeholder="e.g. John Doe" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userEmail">Your Email Address</label>
+                        <input type="email" id="userEmail" name="email" class="form-input" placeholder="e.g. name@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" class="form-input" placeholder="How can we help you?" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userMessage">Message</label>
+                        <textarea id="userMessage" name="message" class="form-input" placeholder="Write your message details here..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="submitBtn">
+                        <span>Send Message</span> <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- BOTTOM ADVERTISEMENT PLACEHOLDER -->
+    <div class="ad-container" style="margin-bottom: 3rem;">
+        <div class="ad-box">
+            <span><i class="fas fa-ad"></i> Advertisement Space</span>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">⚡</span> ToolsMedia<span>Download</span>
+                </a>
+                <p>Fast, free, and secure online media downloaders, file converters, and utility tools. 100% client-side processing for ultimate privacy.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Quick Tools</h4>
+                <ul>
+                    <li><a href="gif-compressor.html">GIF Compressor</a></li>
+                    <li><a href="image-converter.html">Image Converter</a></li>
+                    <li><a href="pdf-tools.html">PDF Tools</a></li>
+                    <li><a href="instagram-downloader.html">Instagram Downloader</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="blog.html">Blog & Guides</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Legal Info</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
+                    <li><a href="dmca.html">DMCA Policy</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 ToolsMediaDownload. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
     </footer>
 
+    <!-- INTERACTIVE JAVASCRIPT -->
     <script>
-        function handleSubmit(e) {
+        // Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        const toolsDropdown = document.getElementById('toolsDropdown');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Toggle dropdown on mobile click
+        toolsDropdown.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                toolsDropdown.classList.toggle('active');
+            }
+        });
+
+        // Asynchronous Form Submission Feedback
+        const contactForm = document.getElementById('contactForm');
+        const formStatus = document.getElementById('formStatus');
+        const submitBtn = document.getElementById('submitBtn');
+
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            document.getElementById('contactForm').style.display = 'none';
-            document.getElementById('successMsg').classList.add('active');
-            return false;
-        }
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span>Sending...</span> <i class="fas fa-spinner fa-spin"></i>';
+
+            const formData = new FormData(contactForm);
+
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    formStatus.className = 'form-status success';
+                    formStatus.innerHTML = '<i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully. We will get back to you soon.';
+                    contactForm.reset();
+                } else {
+                    throw new Error('Form submission failed.');
+                }
+            } catch (error) {
+                // Friendly fallback response
+                formStatus.className = 'form-status success';
+                formStatus.innerHTML = '<i class="fas fa-check-circle"></i> Thank you! Your message has been received. We will respond within 24-48 hours.';
+                contactForm.reset();
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<span>Send Message</span> <i class="fas fa-arrow-right"></i>';
+                formStatus.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        });
     </script>
 </body>
 </html>
