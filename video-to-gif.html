@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Video to GIF Converter - Free Online | ToolsMediaDownload</title>
+    
+    <!-- Round Peach Favicon for Google Search -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.svg">
+    <meta name="theme-color" content="#E07A5F">
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- GIF Encoding Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
+
+    <style>
+        :root {
+            --bg-warm: #FAF5EE;
+            --card-bg: #FFFFFF;
+            --primary-peach: #E07A5F;
+            --peach-hover: #D95D39;
+            --peach-light: #FDE8E1;
+            --peach-gradient: linear-gradient(135deg, #FF9E7D 0%, #E07A5F 50%, #D95D39 100%);
+            --text-dark: #2C221E;
+            --text-muted: #706661;
+            --border-warm: #EFE3D8;
+            --dark-footer: #1A1615;
+            --shadow-soft: 0 10px 30px rgba(224, 122, 95, 0.08);
+            --radius-main: 16px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: var(--bg-warm); color: var(--text-dark); display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
+
+        /* HEADER */
+        header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-warm); position: sticky; top: 0; z-index: 1000; }
+        .navbar { max-width: 1200px; margin: 0 auto; padding: 0.8rem 1.25rem; display: flex; align-items: center; justify-content: space-between; }
+        
+        .logo { 
+            font-family: 'Space Grotesk', sans-serif; 
+            font-size: clamp(1.1rem, 4.5vw, 1.6rem); 
+            font-weight: 700; 
+            color: var(--text-dark); 
+            text-decoration: none; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.4rem;
+        }
+        .logo-icon { color: #FF9E7D; }
+        .logo span { background: var(--peach-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* CONTAINER */
+        .container { max-width: 800px; margin: 2rem auto; padding: 0 1.25rem; flex: 1; }
+        .header-box { text-align: center; margin-bottom: 2rem; }
+        .header-box h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.8rem, 6vw, 2.5rem); margin-bottom: 0.5rem; }
+        .header-box h1 span { color: var(--primary-peach); }
+
+        .card { background: var(--card-bg); border: 1px solid var(--border-warm); border-radius: var(--radius-main); padding: 2rem; box-shadow: var(--shadow-soft); text-align: center; }
+        
+        /* DROP ZONE */
+        .drop-zone { border: 2px dashed var(--primary-peach); border-radius: 14px; padding: 2.5rem 1rem; background: var(--peach-light); cursor: pointer; transition: 0.2s; }
+        .drop-zone i { font-size: 3rem; color: var(--primary-peach); margin-bottom: 1rem; }
+        .drop-zone h3 { font-size: 1.2rem; }
+        #fileInput { display: none; }
+
+        /* VIDEO PREVIEW CARD */
+        .file-preview { display: none; margin-top: 1.5rem; border: 1px solid var(--border-warm); border-radius: 12px; padding: 1rem; background: #FAFAFA; text-align: left; }
+        .file-preview video { width: 100%; border-radius: 8px; background: #000; margin-bottom: 1rem; max-height: 250px; }
+        .file-info { display: flex; justify-content: space-between; align-items: center; }
+        .file-info b { font-size: 0.9rem; word-break: break-all; }
+
+        /* CONTROLS */
+        .controls { display: none; margin-top: 1.5rem; }
+        .grid-settings { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; text-align: left; margin-bottom: 1.5rem; }
+        .setting-item label { display: block; font-weight: 700; font-size: 0.8rem; margin-bottom: 0.4rem; }
+        .range { width: 100%; accent-color: var(--primary-peach); }
+
+        .btn-main { width: 100%; background: var(--peach-gradient); color: #FFF; border: none; padding: 1rem; border-radius: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 4px 15px var(--glow-peach); }
+        .btn-main:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        /* PROGRESS bar */
+        .progress-box { display: none; margin-top: 1.5rem; }
+        .bar-container { width: 100%; height: 10px; background: var(--bg-warm); border-radius: 10px; overflow: hidden; margin-top: 8px; }
+        .bar-fill { width: 0%; height: 100%; background: var(--peach-gradient); transition: 0.3s; }
+
+        .error-msg { display: none; background: #FCE8E6; color: #C5221F; padding: 1rem; border-radius: 10px; margin-top: 1.5rem; font-weight: 600; font-size: 0.9rem; }
+
+        /* RESULT */
+        .result-area { display: none; margin-top: 2rem; border-top: 2px solid var(--border-warm); pt: 2rem; }
+        .result-img { max-width: 100%; border-radius: 12px; margin-bottom: 1.5rem; box-shadow: var(--shadow-soft); }
+
+        footer { background: var(--dark-footer); color: #FFFFFF; padding: 2rem 1.25rem; margin-top: auto; text-align: center; font-size: 0.85rem; }
+
+        @media (max-width: 600px) {
+            .grid-settings { grid-template-columns: 1fr; }
+            .card { padding: 1.25rem; }
+            .logo { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚡</span> ToolsMedia<span>Download</span>
+            </a>
+            <a href="index.html" style="text-decoration:none; color:var(--text-dark); font-weight:600; font-size:0.9rem;">Home</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="header-box">
+            <h1>Video to <span>GIF</span></h1>
+            <p>Convert MP4/WebM videos to high-quality GIFs (Max 20MB).</p>
+        </div>
+
+        <div class="card">
+            <div class="drop-zone" onclick="document.getElementById('fileInput').click()" id="dropZone">
+                <i class="fas fa-video"></i>
+                <h3>Select Video File</h3>
+                <p>MP4 or WebM (Max 20MB)</p>
+                <input type="file" id="fileInput" accept="video/mp4,video/webm">
+            </div>
+
+            <div class="file-preview" id="previewCard">
+                <video id="vPreview" muted controls></video>
+                <div class="file-info">
+                    <b id="vName">video.mp4</b>
+                    <span id="vSize" style="font-size: 0.8rem; color:#888;">0 MB</span>
+                </div>
+            </div>
+
+            <div class="controls" id="controls">
+                <div class="grid-settings">
+                    <div class="setting-item">
+                        <label>Capture Speed (FPS): <span id="fpsVal">10</span></label>
+                        <input type="range" id="fpsRange" class="range" min="5" max="20" value="10" oninput="document.getElementById('fpsVal').innerText=this.value">
+                    </div>
+                    <div class="setting-item">
+                        <label>GIF Width: <span id="wVal">400</span>px</label>
+                        <input type="range" id="wRange" class="range" min="200" max="800" step="50" value="400" oninput="document.getElementById('wVal').innerText=this.value">
+                    </div>
+                </div>
+                <button class="btn-main" id="btnConvert" onclick="convertVideoToGif()">
+                    <i class="fas fa-magic"></i> Convert to GIF
+                </button>
+            </div>
+
+            <div id="errorMsg" class="error-msg"></div>
+
+            <div class="progress-box" id="progressBox">
+                <h4 id="statusText">Processing frames...</h4>
+                <div class="bar-container">
+                    <div class="bar-fill" id="barFill"></div>
+                </div>
+            </div>
+
+            <div class="result-area" id="resultArea">
+                <h3>Conversion Successful!</h3>
+                <img src="" id="finalGif" class="result-img">
+                <a id="dlLink" href="#" download="converted.gif" class="btn-main" style="max-width:300px; margin: 0 auto; text-decoration:none;">
+                    <i class="fas fa-download"></i> Download GIF
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 ToolsMediaDownload - Fast, Free & Private.</p>
+    </footer>
+
+    <script>
+        let videoFile = null;
+        let workerBlobUrl = null;
+
+        // INLINE WORKER SETUP (Fast & No CORS issues)
+        async function setupWorker() {
+            try {
+                const res = await fetch('https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js');
+                const js = await res.text();
+                workerBlobUrl = URL.createObjectURL(new Blob([js], {type: 'application/javascript'}));
+            } catch(e) {}
+        }
+        setupWorker();
+
+        const fileInput = document.getElementById('fileInput');
+        fileInput.onchange = (e) => {
+            if(e.target.files.length) handleVideo(e.target.files[0]);
+        };
+
+        function handleVideo(file) {
+            const err = document.getElementById('errorMsg');
+            err.style.display = 'none';
+
+            // 20MB LIMIT CHECK
+            if (file.size > 20 * 1024 * 1024) {
+                err.innerText = "Error: File size exceeds 20MB limit. Please select a smaller video.";
+                err.style.display = 'block';
+                return;
+            }
+
+            videoFile = file;
+            document.getElementById('vName').innerText = file.name;
+            document.getElementById('vSize').innerText = (file.size / 1048576).toFixed(2) + " MB";
+            
+            const url = URL.createObjectURL(file);
+            document.getElementById('vPreview').src = url;
+            
+            document.getElementById('previewCard').style.display = 'block';
+            document.getElementById('controls').style.display = 'block';
+            document.getElementById('resultArea').style.display = 'none';
+        }
+
+        async function convertVideoToGif() {
+            if(!videoFile) return;
+
+            const btn = document.getElementById('btnConvert');
+            const progress = document.getElementById('progressBox');
+            const bar = document.getElementById('barFill');
+            const status = document.getElementById('statusText');
+            
+            btn.disabled = true;
+            progress.style.display = 'block';
+            bar.style.width = '5%';
+
+            const video = document.createElement('video');
+            video.src = URL.createObjectURL(videoFile);
+            video.muted = true;
+
+            video.onloadedmetadata = async () => {
+                const duration = video.duration;
+                const fps = parseInt(document.getElementById('fpsRange').value);
+                const targetWidth = parseInt(document.getElementById('wRange').value);
+                const targetHeight = video.videoHeight * (targetWidth / video.videoWidth);
+
+                const gif = new GIF({
+                    workers: 2,
+                    quality: 10,
+                    width: targetWidth,
+                    height: targetHeight,
+                    workerScript: workerBlobUrl || 'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js'
+                });
+
+                const canvas = document.createElement('canvas');
+                canvas.width = targetWidth;
+                canvas.height = targetHeight;
+                const ctx = canvas.getContext('2d');
+
+                status.innerText = "Extracting frames...";
+                
+                let currentTime = 0;
+                const interval = 1 / fps;
+
+                while (currentTime < duration) {
+                    video.currentTime = currentTime;
+                    await new Promise(r => video.onseeked = r);
+                    
+                    ctx.drawImage(video, 0, 0, targetWidth, targetHeight);
+                    gif.addFrame(ctx, {copy: true, delay: interval * 1000});
+                    
+                    currentTime += interval;
+                    bar.style.width = (5 + (currentTime / duration) * 60) + "%";
+                }
+
+                status.innerText = "Building GIF animation...";
+                gif.on('progress', p => { bar.style.width = (65 + p * 30) + "%"; });
+
+                gif.on('finished', blob => {
+                    bar.style.width = "100%";
+                    const finalUrl = URL.createObjectURL(blob);
+                    document.getElementById('finalGif').src = finalUrl;
+                    document.getElementById('dlLink').href = finalUrl;
+                    
+                    progress.style.display = 'none';
+                    document.getElementById('resultArea').style.display = 'block';
+                    document.getElementById('resultArea').scrollIntoView({behavior:'smooth'});
+                    btn.disabled = false;
+                });
+
+                gif.render();
+            };
+        }
+    </script>
+</body>
+</html>
