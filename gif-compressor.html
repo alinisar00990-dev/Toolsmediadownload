@@ -269,4 +269,1253 @@ nav[aria-label="Main navigation"] .nav-links {
   background: #fff;
   width: 85%;
   max-width: 320px;
-  height: 
+  height: 100%;
+  padding: 2rem 1.5rem;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+}
+.mobile-menu.active .mobile-menu-panel {
+  transform: translateX(0);
+}
+.mobile-menu-panel .close-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  float: right;
+  cursor: pointer;
+  color: var(--text-dark);
+  padding: 0.25rem;
+}
+.mobile-menu-panel .close-btn:focus-visible {
+  outline: 2px solid var(--primary-peach);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.mobile-menu-panel ul {
+  list-style: none;
+  margin-top: 3rem;
+}
+.mobile-menu-panel li {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-warm);
+}
+.mobile-menu-panel a {
+  font-size: 1.1rem;
+  font-weight: 500;
+  display: block;
+}
+.mobile-menu-panel a:hover,
+.mobile-menu-panel a:focus-visible {
+  color: var(--primary-peach);
+}
+
+/* Page Hero */
+.page-hero {
+  background: var(--peach-gradient);
+  color: #fff;
+  padding: 3rem 1.5rem 2.5rem;
+  text-align: center;
+}
+.page-hero h1 {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+.page-hero p {
+  font-size: 1.05rem;
+  max-width: 600px;
+  margin: 0 auto;
+  opacity: 0.95;
+}
+
+/* Main */
+main {
+  flex: 1;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 2.5rem auto;
+  padding: 0 1.25rem;
+}
+
+/* Card */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-warm);
+  border-radius: var(--radius-main);
+  padding: 2rem;
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+}
+
+/* Drop Zone */
+.drop-zone {
+  border: 2px dashed var(--gif-compress-solid);
+  border-radius: 14px;
+  padding: 2.5rem 1rem;
+  background: var(--gif-compress-light);
+  cursor: pointer;
+  transition: 0.2s;
+}
+.drop-zone:hover {
+  background: #DDD6FE;
+}
+.drop-zone:focus-visible {
+  outline: 3px solid var(--text-dark);
+  outline-offset: 3px;
+}
+.drop-zone.dragover {
+  background: #DDD6FE;
+  border-color: #6366F1;
+}
+.drop-zone-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 1rem;
+  display: block;
+  color: var(--gif-compress-solid);
+}
+.drop-zone h3 {
+  font-size: 1.2rem;
+  margin: 0 0 0.4rem;
+  font-weight: 700;
+}
+.drop-zone p {
+  margin: 0.4rem 0;
+  color: var(--text-muted);
+}
+
+#fileInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Preview */
+.preview-box {
+  display: none;
+  margin-top: 1.5rem;
+  border: 1px solid var(--border-warm);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: left;
+  background: #FAFAFA;
+}
+.preview-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+}
+.preview-header img {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #000;
+}
+.file-meta {
+  min-width: 0;
+}
+.file-meta b {
+  display: block;
+  font-size: 0.95rem;
+  overflow-wrap: anywhere;
+}
+.file-meta span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Controls */
+.controls {
+  display: none;
+  margin-top: 1.5rem;
+}
+.quality-title {
+  font-weight: 800;
+  text-align: left;
+  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+}
+.quality-help {
+  text-align: left;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0 0 1rem;
+}
+.quality-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+  margin-bottom: 1rem;
+}
+.quality-option {
+  border: 2px solid var(--border-warm);
+  border-radius: 12px;
+  background: #fff;
+  padding: 0.9rem 0.4rem;
+  cursor: pointer;
+  color: var(--text-dark);
+  transition: 0.15s;
+  font-family: inherit;
+}
+.quality-option:hover {
+  border-color: var(--gif-compress-solid);
+}
+.quality-option:focus-visible {
+  outline: 3px solid var(--gif-compress-solid);
+  outline-offset: 2px;
+}
+.quality-option strong {
+  display: block;
+  font-size: 1.05rem;
+}
+.quality-option small {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+.quality-option.selected {
+  border-color: var(--gif-compress-solid);
+  background: var(--gif-compress-light);
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.15);
+}
+
+/* Estimate */
+.estimate-box {
+  background: var(--bg-warm);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 0 0 1.2rem;
+  text-align: left;
+}
+.estimate-box strong {
+  font-size: 1.35rem;
+  color: var(--gif-compress-solid);
+}
+.estimate-box small {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+/* Buttons */
+.btn-main {
+  width: 100%;
+  background: var(--gif-compress-gradient);
+  color: #fff;
+  border: 0;
+  padding: 1rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+.btn-main:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--gif-compress-glow);
+}
+.btn-main:focus-visible {
+  outline: 3px solid var(--text-dark);
+  outline-offset: 2px;
+}
+.btn-main:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.btn-main svg {
+  width: 20px;
+  height: 20px;
+}
+
+.secondary-btn {
+  margin-top: 0.75rem;
+  background: #fff;
+  color: var(--text-dark);
+  border: 1px solid var(--border-warm);
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.secondary-btn:hover {
+  border-color: var(--gif-compress-solid);
+  color: var(--gif-compress-solid);
+}
+.secondary-btn:focus-visible {
+  outline: 2px solid var(--gif-compress-solid);
+  outline-offset: 2px;
+}
+
+/* Progress */
+.progress-area {
+  display: none;
+  margin-top: 1.5rem;
+}
+.progress-area h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.bar-container {
+  width: 100%;
+  height: 10px;
+  background: var(--bg-warm);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+.bar-fill {
+  width: 0;
+  height: 100%;
+  background: var(--gif-compress-gradient);
+  transition: width 0.2s;
+}
+
+/* Messages */
+.error-msg, .success-msg {
+  display: none;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 1.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.error-msg {
+  background: #FCE8E6;
+  color: #C5221F;
+}
+.success-msg {
+  background: #e6f4ea;
+  color: #137333;
+}
+
+/* Result */
+.result-area {
+  display: none;
+  margin-top: 2rem;
+  border-top: 2px solid var(--border-warm);
+  padding-top: 2rem;
+}
+.result-area h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.result-img {
+  max-width: 100%;
+  max-height: 360px;
+  border-radius: 12px;
+  margin: 1rem auto 1.5rem;
+  display: block;
+  box-shadow: var(--shadow-soft);
+}
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.stat-item {
+  background: var(--bg-warm);
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  min-width: 110px;
+}
+.stat-item small {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+.stat-item strong {
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+#downloadHint {
+  margin-top: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Footer */
+footer {
+  background: var(--dark-footer);
+  color: #fff;
+  padding: 3rem 1.5rem 1.5rem;
+}
+.footer-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+.footer-col h4 {
+  margin-bottom: 1rem;
+  color: var(--primary-peach);
+}
+.footer-col ul {
+  list-style: none;
+}
+.footer-col li {
+  margin-bottom: 0.5rem;
+}
+.footer-col a {
+  color: #ccc;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+.footer-col a:hover,
+.footer-col a:focus-visible {
+  color: var(--primary-peach);
+}
+.footer-bottom {
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid #333;
+  color: #999;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav[aria-label="Main navigation"] .nav-links {
+    display: none;
+  }
+  .hamburger {
+    display: block;
+  }
+}
+
+@media (max-width: 640px) {
+  header { padding: 0.75rem 1rem; }
+  .logo { font-size: 1.15rem; }
+  .page-hero { padding: 2rem 1rem 1.75rem; }
+  .container { margin: 1.5rem auto; padding: 0 0.9rem; }
+  .card { padding: 1.25rem; }
+  .quality-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem;
+  }
+  .stats { gap: 0.5rem; }
+  .stat-item { flex: 1; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Skip Navigation -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Header -->
+<header>
+  <div class="nav-wrap">
+    <a href="index.html" class="logo" aria-label="ToolsMediaDownload Home">⚡ ToolsMedia<span>Download</span></a>
+    <nav aria-label="Main navigation">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" id="menuToggle">☰</button>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Mobile navigation menu">
+  <div class="mobile-menu-panel">
+    <button class="close-btn" aria-label="Close menu" id="menuClose">×</button>
+    <nav aria-label="Mobile navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="pdf-tools.html">PDF Tools</a></li>
+        <li><a href="disclaimer.html">Disclaimer</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- Main Content -->
+<main id="main-content">
+
+  <!-- Page Hero -->
+  <section class="page-hero" aria-labelledby="hero-heading">
+    <h1 id="hero-heading">GIF Compressor</h1>
+    <p>Reduce animated GIF file size on mobile and desktop — 100% private, runs in your browser.</p>
+  </section>
+
+  <div class="container">
+    <section class="card" aria-label="GIF compressor tool">
+
+      <div class="drop-zone" id="dropZone" role="button" tabindex="0" aria-controls="fileInput">
+        <svg class="drop-zone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="17 8 12 3 7 8"/>
+          <line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+        <h3>Select Animated GIF</h3>
+        <p>Tap to browse or drag a file here</p>
+        <p><small>For best results, start with a reasonably sized GIF.</small></p>
+      </div>
+
+      <input type="file" id="fileInput" accept=".gif,image/gif" aria-label="Choose a GIF file">
+
+      <div class="preview-box" id="previewBox">
+        <div class="preview-header">
+          <img id="thumbPreview" alt="Selected GIF preview">
+          <div class="file-meta">
+            <b id="fileNameText">animation.gif</b>
+            <span id="fileSizeText">0 KB</span>
+          </div>
+        </div>
+        <button type="button" class="secondary-btn" id="changeFileBtn">Choose another GIF</button>
+      </div>
+
+      <div class="controls" id="controls">
+        <h3 class="quality-title">Choose output quality</h3>
+        <p class="quality-help">Select a resolution. The estimated file size updates automatically.</p>
+
+        <div class="quality-grid" id="qualityGrid" role="group" aria-label="Output resolution">
+          <button type="button" class="quality-option" data-height="144" aria-pressed="false">
+            <strong>144p</strong><small class="estimate">Estimate: —</small>
+          </button>
+          <button type="button" class="quality-option" data-height="240" aria-pressed="false">
+            <strong>240p</strong><small class="estimate">Estimate: —</small>
+          </button>
+          <button type="button" class="quality-option selected" data-height="360" aria-pressed="true">
+            <strong>360p</strong><small class="estimate">Estimate: —</small>
+          </button>
+          <button type="button" class="quality-option" data-height="420" aria-pressed="false">
+            <strong>420p</strong><small class="estimate">Estimate: —</small>
+          </button>
+          <button type="button" class="quality-option" data-height="720" aria-pressed="false">
+            <strong>720p</strong><small class="estimate">Estimate: —</small>
+          </button>
+          <button type="button" class="quality-option" data-height="1080" aria-pressed="false">
+            <strong>1080p</strong><small class="estimate">Estimate: —</small>
+          </button>
+        </div>
+
+        <div class="estimate-box">
+          <span>Estimated output size</span><br>
+          <strong id="selectedEstimate">—</strong>
+          <small>Estimate only. The final size depends on the GIF's frames and colors.</small>
+        </div>
+
+        <button class="btn-main" id="btnGo" type="button" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="4 14 10 14 10 20"/>
+            <polyline points="20 10 14 10 14 4"/>
+            <line x1="14" y1="10" x2="21" y2="3"/>
+            <line x1="3" y1="21" x2="10" y2="14"/>
+          </svg>
+          Compress GIF
+        </button>
+      </div>
+
+      <div id="errorMsg" class="error-msg" role="alert"></div>
+      <div id="successMsg" class="success-msg" role="status"></div>
+
+      <div class="progress-area" id="progressArea" aria-live="polite">
+        <h4 id="statusText">Preparing GIF…</h4>
+        <div class="bar-container">
+          <div class="bar-fill" id="barFill"></div>
+        </div>
+        <span id="progressPercent">0%</span>
+      </div>
+
+      <div class="result-area" id="resultArea">
+        <h3>Compression Ready!</h3>
+        <img id="finalGif" class="result-img" alt="Compressed GIF preview">
+
+        <div class="stats">
+          <div class="stat-item">
+            <small>Original size</small><strong id="oldSize">0 KB</strong>
+          </div>
+          <div class="stat-item">
+            <small>New size</small><strong id="newSize">0 KB</strong>
+          </div>
+          <div class="stat-item">
+            <small>Saved</small><strong id="savePercent">0%</strong>
+          </div>
+        </div>
+
+        <a id="dlLink" href="#" download="compressed.gif" class="btn-main">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download GIF
+        </a>
+
+        <p id="downloadHint">
+          <small>If your browser opens the GIF instead of saving it, use the browser's Share or Save option.</small>
+        </p>
+      </div>
+    </section>
+  </div>
+
+</main>
+
+<!-- Footer -->
+<footer role="contentinfo">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>⚡ ToolsMediaDownload</h4>
+      <p style="color:#ccc;font-size:0.9rem;">Free browser-based tools for creators, developers & everyone.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Tools</h4>
+      <ul>
+        <li><a href="pdf-tools.html">PDF Tools</a></li>
+        <li><a href="video-to-gif.html">Video to GIF</a></li>
+        <li><a href="qr-generator.html">QR Generator</a></li>
+        <li><a href="image-converter.html">Image Converter</a></li>
+        <li><a href="password-generator.html">Password Generator</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="disclaimer.html">Disclaimer</a></li>
+        <li><a href="terms.html">Terms of Service</a></li>
+        <li><a href="dmca.html">DMCA</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>Files are processed in your browser. Your GIF is not uploaded by this page.</p>
+    <p style="margin-top:0.5rem;">© <span id="footerYear"></span> ToolsMediaDownload. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Mobile Menu Script -->
+<script>
+document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+const mobileMenu = document.getElementById('mobileMenu');
+const menuToggle = document.getElementById('menuToggle');
+const menuClose = document.getElementById('menuClose');
+let lastFocused = null;
+
+function openMenu() {
+  lastFocused = document.activeElement;
+  mobileMenu.classList.add('active');
+  menuToggle.setAttribute('aria-expanded', 'true');
+  menuClose.focus();
+  document.body.style.overflow = 'hidden';
+  trapFocus(mobileMenu);
+}
+
+function closeMenu() {
+  mobileMenu.classList.remove('active');
+  menuToggle.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+  if (lastFocused) lastFocused.focus();
+}
+
+menuToggle.addEventListener('click', openMenu);
+menuClose.addEventListener('click', closeMenu);
+
+mobileMenu.addEventListener('click', function(e) {
+  if (e.target === mobileMenu) closeMenu();
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+    closeMenu();
+  }
+});
+
+mobileMenu.querySelectorAll('a').forEach(function(link) {
+  link.addEventListener('click', closeMenu);
+});
+
+function trapFocus(element) {
+  const focusableEls = element.querySelectorAll(
+    'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
+  );
+  const firstEl = focusableEls[0];
+  const lastEl = focusableEls[focusableEls.length - 1];
+
+  function handleTab(e) {
+    if (e.key !== 'Tab') return;
+    if (!mobileMenu.classList.contains('active')) {
+      element.removeEventListener('keydown', handleTab);
+      return;
+    }
+    if (e.shiftKey) {
+      if (document.activeElement === firstEl) {
+        lastEl.focus();
+        e.preventDefault();
+      }
+    } else {
+      if (document.activeElement === lastEl) {
+        firstEl.focus();
+        e.preventDefault();
+      }
+    }
+  }
+
+  element.addEventListener('keydown', handleTab);
+}
+</script>
+
+<!-- GIF Compressor Tool Logic (UNCHANGED) -->
+<script>
+(() => {
+  'use strict';
+
+  const $ = id => document.getElementById(id);
+  const fileInput = $('fileInput');
+  const dropZone = $('dropZone');
+  const btn = $('btnGo');
+
+  let originalFile = null;
+  let gifData = null;
+  let previewUrl = null;
+  let outputUrl = null;
+  let workerBlobUrl = null;
+  let selectionToken = 0;
+  let originalWidth = 0;
+  let originalHeight = 0;
+  let selectedHeight = 360;
+
+  const qualityButtons = Array.from(
+    document.querySelectorAll('.quality-option')
+  );
+
+  function formatSize(bytes) {
+    if (!Number.isFinite(bytes)) return 'Unknown size';
+    if (bytes < 1024) return bytes + ' Bytes';
+    if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / 1048576).toFixed(2) + ' MB';
+  }
+
+  function showError(message) {
+    $('errorMsg').textContent = message;
+    $('errorMsg').style.display = 'block';
+    $('successMsg').style.display = 'none';
+  }
+
+  function clearError() {
+    $('errorMsg').style.display = 'none';
+    $('errorMsg').textContent = '';
+  }
+
+  function setProgress(value, message) {
+    const n = Math.max(0, Math.min(100, Math.round(value)));
+    $('barFill').style.width = n + '%';
+    $('progressPercent').textContent = n + '%';
+    if (message) $('statusText').textContent = message;
+  }
+
+  function findGifHeaderOffset(bytes) {
+    const maxScan = Math.min(bytes.length - 6, 512 * 1024);
+    for (let i = 0; i <= maxScan; i++) {
+      if (
+        bytes[i] === 0x47 &&
+        bytes[i + 1] === 0x49 &&
+        bytes[i + 2] === 0x46 &&
+        bytes[i + 3] === 0x38 &&
+        (bytes[i + 4] === 0x37 || bytes[i + 4] === 0x39) &&
+        bytes[i + 5] === 0x61
+      ) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  function isGifHeader(bytes) {
+    return findGifHeaderOffset(bytes) === 0;
+  }
+
+  function readAsArrayBuffer(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => reject(
+        new Error('The browser could not read this file. Please choose it again.')
+      );
+      reader.onabort = () => reject(
+        new Error('File reading was cancelled. Please try again.')
+      );
+      reader.readAsArrayBuffer(file);
+    });
+  }
+
+  async function ensureWorker() {
+    if (workerBlobUrl) return workerBlobUrl;
+
+    const urls = window.__gifWorkerUrls || [];
+    let lastError;
+
+    for (const url of urls) {
+      try {
+        const response = await fetch(url, { cache: 'force-cache', mode: 'cors' });
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+
+        const source = await response.text();
+        if (!source || source.length < 100) {
+          throw new Error('Worker file was empty or incomplete');
+        }
+
+        workerBlobUrl = URL.createObjectURL(
+          new Blob([source], { type: 'application/javascript' })
+        );
+        return workerBlobUrl;
+      } catch (e) {
+        lastError = e;
+      }
+    }
+
+    throw new Error(
+      'Could not load gif.worker.js. Try again, or add gif.worker.js next to this page. ' +
+      (lastError && lastError.message || '')
+    );
+  }
+
+  function cleanupOutput() {
+    if (outputUrl) URL.revokeObjectURL(outputUrl);
+    outputUrl = null;
+  }
+
+  function dimensionsFor(targetHeight) {
+    if (!originalWidth || !originalHeight) {
+      return { width: 0, height: 0, scale: 1 };
+    }
+    const scale = Math.min(1, targetHeight / originalHeight);
+    return {
+      width: Math.max(1, Math.round(originalWidth * scale)),
+      height: Math.max(1, Math.round(originalHeight * scale)),
+      scale
+    };
+  }
+
+  function estimateSize(targetHeight) {
+    if (!originalFile || !originalWidth || !originalHeight) {
+      return 'Waiting for GIF…';
+    }
+    const dims = dimensionsFor(targetHeight);
+    const ratio = (dims.width * dims.height) / (originalWidth * originalHeight);
+    const estimatedBytes = Math.max(
+      1024,
+      Math.min(originalFile.size * 1.15, originalFile.size * ratio * 0.9)
+    );
+    return formatSize(estimatedBytes);
+  }
+
+  function updateEstimates() {
+    qualityButtons.forEach(button => {
+      const height = Number(button.dataset.height);
+      button.querySelector('.estimate').textContent = 'Est. ' + estimateSize(height);
+      const selected = height === selectedHeight;
+      button.classList.toggle('selected', selected);
+      button.setAttribute('aria-pressed', String(selected));
+    });
+    $('selectedEstimate').textContent = estimateSize(selectedHeight);
+  }
+
+  function selectQuality(height) {
+    selectedHeight = height;
+    updateEstimates();
+    $('resultArea').style.display = 'none';
+    clearError();
+  }
+
+  qualityButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      selectQuality(Number(button.dataset.height));
+    });
+  });
+
+  function handleFile(file) {
+    const token = ++selectionToken;
+
+    clearError();
+    $('successMsg').style.display = 'none';
+    $('resultArea').style.display = 'none';
+    $('progressArea').style.display = 'none';
+
+    if (!file) return;
+
+    const nameLooksGif = /\.gif$/i.test(file.name || '');
+    if (file.type && file.type.toLowerCase() !== 'image/gif' && !nameLooksGif) {
+      showError('Please select a GIF file (.gif).');
+      return;
+    }
+
+    if (file.size < 14) {
+      showError('This file is too small to be a valid GIF. Please choose another file.');
+      return;
+    }
+
+    if (file.size > 100 * 1024 * 1024) {
+      showError('This GIF is larger than 100 MB and may exceed your device’s memory. Try a smaller GIF first.');
+      return;
+    }
+
+    originalFile = file;
+    gifData = null;
+    originalWidth = 0;
+    originalHeight = 0;
+    btn.disabled = true;
+
+    $('fileNameText').textContent = file.name || 'selected.gif';
+    $('fileSizeText').textContent = formatSize(file.size);
+
+    if (previewUrl) URL.revokeObjectURL(previewUrl);
+    previewUrl = URL.createObjectURL(file);
+    $('thumbPreview').src = previewUrl;
+    $('previewBox').style.display = 'block';
+    $('controls').style.display = 'block';
+    updateEstimates();
+
+    readAsArrayBuffer(file).then(buffer => {
+      if (token !== selectionToken) return;
+
+      let bytes = new Uint8Array(buffer);
+      const offset = findGifHeaderOffset(bytes);
+
+      if (offset < 0) {
+        throw new Error('This file does not contain a valid GIF header. Please choose a real .gif file.');
+      }
+
+      if (offset > 0) {
+        bytes = bytes.subarray(offset);
+      }
+
+      if (!isGifHeader(bytes) && offset === 0) {
+        throw new Error('This file does not have a valid GIF header. Please choose a real .gif file.');
+      }
+
+      gifData = bytes;
+
+      originalWidth = bytes[6] | (bytes[7] << 8);
+      originalHeight = bytes[8] | (bytes[9] << 8);
+
+      updateEstimates();
+      btn.disabled = false;
+
+      $('successMsg').textContent = 'GIF loaded successfully. You can now compress it.';
+      $('successMsg').style.display = 'block';
+    }).catch(error => {
+      if (token !== selectionToken) return;
+      gifData = null;
+      btn.disabled = true;
+      showError(error.message || 'Could not read this GIF. Please try another file.');
+    });
+  }
+
+  fileInput.addEventListener('change', event => {
+    const file = event.target.files && event.target.files[0];
+    handleFile(file);
+    fileInput.value = '';
+  });
+
+  dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      fileInput.click();
+    }
+  });
+
+  $('changeFileBtn').addEventListener('click', () => fileInput.click());
+
+  ['dragenter', 'dragover'].forEach(type => {
+    dropZone.addEventListener(type, event => {
+      event.preventDefault();
+      dropZone.classList.add('dragover');
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(type => {
+    dropZone.addEventListener(type, event => {
+      event.preventDefault();
+      dropZone.classList.remove('dragover');
+    });
+  });
+
+  dropZone.addEventListener('drop', event => {
+    const file = event.dataTransfer &&
+      event.dataTransfer.files &&
+      event.dataTransfer.files[0];
+    if (file) handleFile(file);
+  });
+
+  function waitForRender(gif) {
+    return new Promise((resolve, reject) => {
+      let settled = false;
+      const timeout = setTimeout(() => {
+        finish(
+          reject,
+          new Error('Compression took too long. Try a lower resolution or a GIF with fewer frames.')
+        );
+      }, 180000);
+
+      function finish(fn, value) {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timeout);
+        fn(value);
+      }
+
+      gif.on('finished', blob => {
+        if (!(blob instanceof Blob) || blob.size === 0) {
+          return finish(
+            reject,
+            new Error('The compressor returned an empty file. Please try a different GIF.')
+          );
+        }
+        finish(resolve, blob);
+      });
+
+      gif.on('progress', progress => {
+        setProgress(60 + progress * 38, 'Encoding compressed animation…');
+      });
+
+      try {
+        gif.render();
+      } catch (error) {
+        finish(reject, error);
+      }
+    });
+  }
+
+  async function processGif() {
+    if (!originalFile || !gifData) {
+      showError('Please select a GIF and wait until it finishes loading.');
+      return;
+    }
+
+    btn.disabled = true;
+    clearError();
+    $('successMsg').style.display = 'none';
+    $('resultArea').style.display = 'none';
+    $('progressArea').style.display = 'block';
+    setProgress(3, 'Preparing compression…');
+
+    try {
+      setProgress(4, 'Loading compression libraries…');
+
+      try {
+        await window.__gifLibsReady;
+      } catch (libraryError) {
+        throw new Error(
+          (libraryError && libraryError.message
+            ? libraryError.message
+            : 'The compression libraries could not load.') +
+          ' Check your internet connection. Optional: host omggif.js, gif.js, and gif.worker.js next to this page.'
+        );
+      }
+
+      const omggif = window.__omggif;
+      if (!omggif || typeof omggif.GifReader !== 'function' || typeof window.GIF !== 'function') {
+        throw new Error(
+          'The libraries loaded but their APIs are unavailable. Please refresh and try again.'
+        );
+      }
+
+      const workerScript = await ensureWorker();
+      setProgress(8, 'Reading animation frames…');
+
+      const reader = new omggif.GifReader(gifData);
+      const frameCount = reader.numFrames();
+
+      if (!frameCount || frameCount > 2000) {
+        throw new Error(
+          'This GIF has an unsupported number of frames. Please try a GIF with fewer than 2,000 frames.'
+        );
+      }
+
+      if (!reader.width || !reader.height || reader.width > 10000 || reader.height > 10000) {
+        throw new Error('This GIF has invalid or excessively large dimensions.');
+      }
+
+      const scale = Math.min(1, selectedHeight / reader.height);
+      const width = Math.max(1, Math.round(reader.width * scale));
+      const height = Math.max(1, Math.round(reader.height * scale));
+      const quality = 10;
+
+      let loop = 0;
+      try {
+        if (typeof reader.loopCount === 'function') loop = reader.loopCount() || 0;
+      } catch (_) {
+        loop = 0;
+      }
+
+      const gif = new GIF({
+        workers: 2,
+        quality,
+        width,
+        height,
+        workerScript,
+        repeat: loop,
+        transparent: null
+      });
+
+      const sourceCanvas = document.createElement('canvas');
+      sourceCanvas.width = reader.width;
+      sourceCanvas.height = reader.height;
+      const sourceCtx = sourceCanvas.getContext('2d', { willReadFrequently: true });
+
+      const targetCanvas = document.createElement('canvas');
+      targetCanvas.width = width;
+      targetCanvas.height = height;
+      const targetCtx = targetCanvas.getContext('2d');
+
+      if (!sourceCtx || !targetCtx) {
+        throw new Error(
+          'Your browser could not create a canvas. Try another browser or a smaller GIF.'
+        );
+      }
+
+      for (let i = 0; i < frameCount; i++) {
+        const info = reader.frameInfo(i);
+        const framePixels = new Uint8ClampedArray(reader.width * reader.height * 4);
+        reader.decodeAndBlitFrameRGBA(i, framePixels);
+
+        const imageData = new ImageData(framePixels, reader.width, reader.height);
+        sourceCtx.putImageData(imageData, 0, 0);
+        targetCtx.clearRect(0, 0, width, height);
+        targetCtx.drawImage(sourceCanvas, 0, 0, width, height);
+
+        const delay = Math.max(20, Number(info.delay || 10) * 10);
+        gif.addFrame(targetCtx, { delay, copy: true });
+
+        if (i % 5 === 0 || i === frameCount - 1) {
+          setProgress(
+            8 + ((i + 1) / frameCount) * 50,
+            `Preparing frame ${i + 1} of ${frameCount}…`
+          );
+        }
+
+        if (i % 10 === 0) {
+          await new Promise(resolve => setTimeout(resolve, 0));
+        }
+      }
+
+      sourceCanvas.width = 1;
+      sourceCanvas.height = 1;
+      targetCanvas.width = 1;
+      targetCanvas.height = 1;
+
+      const blob = await waitForRender(gif);
+      cleanupOutput();
+      outputUrl = URL.createObjectURL(blob);
+
+      $('finalGif').src = outputUrl;
+      $('dlLink').href = outputUrl;
+      $('dlLink').download =
+        (originalFile.name || 'animation.gif').replace(/\.gif$/i, '') +
+        '-' + selectedHeight + 'p.gif';
+
+      $('oldSize').textContent = formatSize(originalFile.size);
+      $('newSize').textContent = formatSize(blob.size);
+
+      const saved = Math.round((1 - blob.size / originalFile.size) * 100);
+      $('savePercent').textContent = (saved > 0 ? saved : 0) + '%';
+
+      $('resultArea').style.display = 'block';
+      $('progressArea').style.display = 'none';
+      $('resultArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      if (blob.size >= originalFile.size) {
+        $('successMsg').textContent =
+          'Compression completed, but this version is not smaller. Try choosing a lower resolution.';
+      } else {
+        $('successMsg').textContent =
+          'Compression completed. Your GIF is ready to download.';
+      }
+      $('successMsg').style.display = 'block';
+
+    } catch (error) {
+      console.error('GIF compression failed:', error);
+      $('progressArea').style.display = 'none';
+      showError(
+        error && error.message
+          ? error.message
+          : 'Compression failed. Please try another GIF or reduce its dimensions.'
+      );
+    } finally {
+      btn.disabled = !gifData;
+    }
+  }
+
+  window.__gifLibsReady.catch(error => {
+    console.error('GIF library loading failed:', error);
+    showError(
+      (error && error.message
+        ? error.message
+        : 'GIF compression libraries failed to load.') +
+      ' Please check your internet connection and try again.'
+    );
+  });
+
+  btn.addEventListener('click', processGif);
+
+  $('dlLink').addEventListener('click', event => {
+    if (!outputUrl) {
+      event.preventDefault();
+      showError('There is no compressed GIF to download yet. Please compress a GIF first.');
+    }
+  });
+
+  window.addEventListener('beforeunload', () => {
+    if (previewUrl) URL.revokeObjectURL(previewUrl);
+    if (outputUrl) URL.revokeObjectURL(outputUrl);
+    if (workerBlobUrl) URL.revokeObjectURL(workerBlobUrl);
+  });
+})();
+</script>
+
+</body>
+</html>
