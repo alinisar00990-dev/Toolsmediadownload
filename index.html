@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToolsMediaDownload - Free Online Media & File Tools</title>
-    <meta name="description" content="Free online browser-based media downloaders, video converters, GIF tools, image utilities, and web dev tools. 100% safe, fast, and private.">
-    <meta name="keywords" content="media downloader, video to gif, gif compressor, image converter, pdf tools, instagram downloader, tiktok downloader">
+    <meta name="description" content="Free online browser-based media downloaders, file converters, image utilities, and web dev tools. 100% safe, fast, and private.">
+    <meta name="keywords" content="media downloader, image converter, gif compressor, pdf tools, instagram downloader, tiktok downloader">
     
     <!-- Round Peach Favicon & Theme Color -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -36,74 +36,60 @@
             --radius-main: 16px;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
-        html, body { overflow-x: hidden; width: 100%; min-height: 100vh; }
-        body { background-color: var(--bg-warm); color: var(--text-dark); line-height: 1.6; display: flex; flex-direction: column; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg-warm); color: var(--text-dark); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
 
-        /* HEADER & NAVBAR */
+        /* HEADER */
         header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-warm); position: sticky; top: 0; z-index: 1000; }
-        .navbar { max-width: 1200px; margin: 0 auto; padding: 0.8rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
-        
-        .logo { 
-            font-family: 'Space Grotesk', sans-serif; 
-            font-size: clamp(1.1rem, 4.5vw, 1.6rem); 
-            font-weight: 700; 
-            color: var(--text-dark); 
-            text-decoration: none; 
-            display: flex; 
-            align-items: center; 
-            gap: 0.4rem; 
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
+        .navbar { max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--text-dark); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
         .logo-icon { color: #FF9E7D; filter: drop-shadow(0 2px 4px rgba(224,122,95,0.4)); }
         .logo span { background: var(--peach-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
         .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
         .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
         .nav-links a:hover, .nav-links a.active { color: var(--primary-peach); }
 
         .dropdown { position: relative; }
-        .dropdown-menu { position: absolute; top: 100%; left: 0; background: var(--card-bg); border: 1px solid var(--border-warm); border-radius: 12px; box-shadow: var(--shadow-soft); padding: 0.75rem 0; min-width: 220px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.2s; z-index: 1100; }
+        .dropdown-menu { position: absolute; top: 100%; left: 0; background: var(--card-bg); border: 1px solid var(--border-warm); border-radius: 12px; box-shadow: var(--shadow-soft); padding: 0.75rem 0; min-width: 200px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.2s; z-index: 1100; }
         .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-        .dropdown-menu a { display: block; padding: 0.5rem 1.25rem; color: var(--text-dark); font-weight: 500; font-size: 0.9rem; text-decoration: none; }
+        .dropdown-menu a { display: block; padding: 0.5rem 1.25rem; color: var(--text-dark); font-weight: 500; font-size: 0.9rem; }
         .dropdown-menu a:hover { background: var(--bg-warm); color: var(--primary-peach); }
 
-        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.4rem; color: var(--text-dark); cursor: pointer; padding: 0.25rem; }
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; color: var(--text-dark); cursor: pointer; }
 
-        /* HERO SECTION */
-        .hero { text-align: center; padding: 3rem 1.25rem 2rem; max-width: 900px; margin: 0 auto; }
-        .hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 5.5vw, 3.2rem); font-weight: 700; line-height: 1.2; margin-bottom: 0.8rem; }
+        /* HERO */
+        .hero { text-align: center; padding: 3.5rem 1.5rem 2.5rem; max-width: 900px; margin: 0 auto; }
+        .hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: 3rem; font-weight: 700; line-height: 1.2; margin-bottom: 1rem; }
         .hero h1 span { background: var(--peach-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 1.75rem; }
+        .hero p { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 2rem; }
 
-        /* HERO BADGES */
-        .hero-badges { display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
-        .badge { background: #FFFFFF; border: 1px solid var(--border-warm); border-radius: 50px; padding: 0.5rem 1.25rem; font-size: 0.85rem; font-weight: 600; color: var(--text-dark); box-shadow: var(--shadow-card); display: flex; align-items: center; gap: 0.4rem; }
+        /* HERO BADGES (OPTION A) */
+        .hero-badges { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+        .badge { background: #FFFFFF; border: 1px solid var(--border-warm); border-radius: 50px; padding: 0.6rem 1.25rem; font-size: 0.9rem; font-weight: 600; color: var(--text-dark); box-shadow: var(--shadow-card); display: flex; align-items: center; gap: 0.5rem; }
 
-        /* AD CONTAINERS */
-        .ad-container { max-width: 1200px; margin: 1.25rem auto 0; padding: 0 1.25rem; text-align: center; width: 100%; }
-        .ad-box { background: #FFFFFF; border: 1px dashed #D1C4B9; border-radius: 12px; padding: 1.25rem; color: var(--text-muted); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; min-height: 85px; display: flex; align-items: center; justify-content: center; }
+        /* AD CONTAINER */
+        .ad-container { max-width: 1200px; margin: 1.5rem auto; padding: 0 1.5rem; text-align: center; }
+        .ad-box { background: #FFFFFF; border: 1px dashed #D1C4B9; border-radius: 12px; padding: 1.25rem; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; min-height: 90px; display: flex; align-items: center; justify-content: center; }
 
         /* TOOLS SECTION */
-        .tools-container { max-width: 1200px; margin: 0 auto; padding: 1rem 1.25rem 4rem; }
+        .tools-container { max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem 4rem; }
         .category-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.75rem; font-weight: 700; margin: 2.5rem 0 1.5rem; display: flex; align-items: center; gap: 0.75rem; border-bottom: 2px solid var(--border-warm); padding-bottom: 0.5rem; }
         .category-title i { color: var(--primary-peach); }
 
         .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
         .tool-card { background: var(--card-bg); border: 1px solid var(--border-warm); border-radius: var(--radius-main); padding: 1.75rem; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; box-shadow: var(--shadow-card); }
-        .tool-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-soft); border-color: var(--primary-peach); }
+        .tool-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-soft); border-color: var(--primary-peach); }
 
         .tool-icon { width: 56px; height: 56px; border-radius: 14px; background: var(--peach-light); color: var(--primary-peach); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.25rem; }
         .tool-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-dark); }
         .tool-card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; flex-grow: 1; line-height: 1.5; }
         
-        /* CARD BUTTON HORIZONTAL ALIGNMENT */
+        /* CARD BUTTON ALIGNMENT */
         .tool-btn { margin-top: auto; height: 48px; background: var(--peach-gradient); color: #FFFFFF; border: none; border-radius: 10px; font-weight: 700; font-size: 0.95rem; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; transition: opacity 0.2s, transform 0.2s; box-shadow: 0 4px 12px var(--glow-peach); }
         .tool-btn:hover { opacity: 0.95; transform: translateY(-1px); }
 
         /* FOOTER */
-        footer { background: var(--dark-footer); color: #FFFFFF; padding: 3.5rem 1.25rem 2rem; margin-top: auto; }
+        footer { background: var(--dark-footer); color: #FFFFFF; padding: 3.5rem 1.5rem 2rem; margin-top: auto; }
         .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 2.5rem; }
         .footer-brand .logo { color: #FFFFFF; margin-bottom: 1rem; }
         .footer-brand p { color: #A09691; font-size: 0.9rem; }
@@ -117,14 +103,13 @@
         .social-links a { color: #A09691; font-size: 1.1rem; }
         .social-links a:hover { color: var(--primary-peach); }
 
-        /* RESPONSIVE MEDIA QUERIES */
         @media (max-width: 768px) {
-            .navbar { padding: 0.75rem 1rem; }
             .mobile-menu-btn { display: block; }
-            .nav-links { position: absolute; top: 100%; left: 0; right: 0; background: #FFFFFF; border-bottom: 1px solid var(--border-warm); flex-direction: column; padding: 1.25rem; gap: 1rem; display: none; box-shadow: var(--shadow-soft); z-index: 999; }
+            .nav-links { position: absolute; top: 100%; left: 0; right: 0; background: #FFFFFF; border-bottom: 1px solid var(--border-warm); flex-direction: column; padding: 1.5rem; gap: 1.25rem; display: none; box-shadow: var(--shadow-soft); }
             .nav-links.active { display: flex; }
             .dropdown-menu { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; border: none; padding-left: 1rem; display: none; }
             .dropdown.active .dropdown-menu { display: block; }
+            .hero h1 { font-size: 2.2rem; }
             .footer-container { grid-template-columns: 1fr; gap: 2rem; }
             .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
         }
@@ -145,7 +130,6 @@
                     <a href="#tools">Tools <i class="fas fa-chevron-down" style="font-size: 0.75rem;"></i></a>
                     <div class="dropdown-menu">
                         <a href="gif-compressor.html">GIF Compressor</a>
-                        <a href="video-to-gif.html">Video to GIF</a>
                         <a href="image-converter.html">Image Converter</a>
                         <a href="image-resizer.html">Image Resizer</a>
                         <a href="pdf-tools.html">PDF Tools</a>
@@ -164,7 +148,7 @@
     <!-- HERO SECTION -->
     <section class="hero">
         <h1>Powerful Online Media & <span>File Tools</span></h1>
-        <p>Convert images, turn videos to GIFs, compress animations, download clips, and edit documents directly in your browser. Completely free and private.</p>
+        <p>Convert images, compress GIFs, download media clips, and edit documents directly in your web browser. Completely free, private, and instant.</p>
         
         <div class="hero-badges">
             <div class="badge">🔒 100% Private</div>
@@ -187,18 +171,9 @@
             <div class="tool-card">
                 <div class="tool-icon"><i class="fas fa-file-archive"></i></div>
                 <h3>GIF Compressor</h3>
-                <p>Reduce animated GIF file sizes without losing visual animation quality.</p>
+                <p>Reduce animated GIF file sizes without losing visual quality.</p>
                 <a href="gif-compressor.html" class="tool-btn">Compress GIF <i class="fas fa-arrow-right"></i></a>
             </div>
-
-            <!-- NEW VIDEO TO GIF CONVERTER CARD -->
-            <div class="tool-card">
-                <div class="tool-icon"><i class="fas fa-film"></i></div>
-                <h3>Video to GIF</h3>
-                <p>Convert MP4 or WebM video clips into high-quality animated GIFs (Up to 20MB).</p>
-                <a href="video-to-gif.html" class="tool-btn">Convert to GIF <i class="fas fa-arrow-right"></i></a>
-            </div>
-
             <div class="tool-card">
                 <div class="tool-icon"><i class="fas fa-sync-alt"></i></div>
                 <h3>Image Converter</h3>
@@ -308,7 +283,6 @@
                 <h4>Quick Tools</h4>
                 <ul>
                     <li><a href="gif-compressor.html">GIF Compressor</a></li>
-                    <li><a href="video-to-gif.html">Video to GIF</a></li>
                     <li><a href="image-converter.html">Image Converter</a></li>
                     <li><a href="pdf-tools.html">PDF Tools</a></li>
                     <li><a href="instagram-downloader.html">Instagram Downloader</a></li>
