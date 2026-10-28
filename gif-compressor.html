@@ -1,1117 +1,1115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GIF Compressor - ToolsMediaDownload</title>
-<meta name="theme-color" content="#E07A5F">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GIF Compressor - ToolsMediaDownload</title>
+  <meta name="theme-color" content="#E07A5F">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<script>
-window.__gifLibsReady = (async function () {
-  function loadScript(url) {
-    return new Promise(function (resolve, reject) {
-      var script = document.createElement("script");
-      script.src = url;
-      script.async = true;
-      script.onload = function () { resolve(url); };
-      script.onerror = function () {
-        script.remove();
-        reject(new Error("Could not load " + url));
-      };
-      document.head.appendChild(script);
-    });
-  }
+  <script>
+    window.__gifLibsReady = (async function () {
+      function loadScript(url) {
+        return new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = url;
+          script.async = true;
+          script.onload = () => resolve(url);
+          script.onerror = () => {
+            script.remove();
+            reject(new Error('Could not load ' + url));
+          };
+          document.head.appendChild(script);
+        });
+      }
 
-  async function loadAny(urls, test, name) {
-    var lastError;
+      async function loadAny(urls, test, label) {
+        let lastError;
 
-    for (var i = 0; i < urls.length; i++) {
-      try {
-        await loadScript(urls[i]);
+        for (const url of urls) {
+          try {
+            await loadScript(url);
 
-        if (test()) {
-          console.log(name + " loaded:", urls[i]);
-          return urls[i];
+            if (test()) return url;
+
+            throw new Error(label + ' loaded but its API was not found.');
+          } catch (error) {
+            lastError = error;
+          }
         }
 
-        throw new Error("Library loaded, but its API was not found.");
-      } catch (error) {
-        lastError = error;
-        console.warn(name + " failed:", urls[i], error);
+        throw new Error(
+          'Could not load ' + label + '. Check your internet connection or try again. ' +
+          (lastError ? lastError.message : '')
+        );
       }
+
+      const omggifUrl = await loadAny([
+        'https://cdn.jsdelivr.net/npm/omggif@1.0.10/omggif.js',
+        'https://unpkg.com/omggif@1.0.10/omggif.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/omggif/1.0.10/omggif.js'
+      ], () => {
+        const library = window.omggif || window.Omggif;
+        return !!(library && library.GifReader);
+      }, 'Omggif');
+
+      window.__omggif = window.omggif || window.Omggif;
+
+      const gifUrl = await loadAny([
+        'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js',
+        'https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.js',
+        'https://unpkg.com/gif.js@0.2.0/dist/gif.js'
+      ], () => typeof window.GIF === 'function', 'gif.js');
+
+      window.__gifWorkerUrls = [
+        'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js',
+        'https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js',
+        'https://unpkg.com/gif.js@0.2.0/dist/gif.worker.js'
+      ];
+
+      return { omggifUrl, gifUrl };
+    })();
+  </script>
+
+  <style>
+    :root {
+      --background: #FAF5EE;
+      --primary: #E07A5F;
+      --primary-light: #FDE8E1;
+      --gradient: linear-gradient(135deg, #FF9E7D, #E07A5F, #D95D39);
+      --text: #2C221E;
+      --muted: #706661;
+      --border: #EFE3D8;
     }
 
-    throw new Error(
-      "Could not load " + name + " from any CDN. " +
-      "Check your internet connection, browser extensions, or security settings. " +
-      (lastError ? lastError.message : "")
-    );
-  }
+    * {
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-  /*
-   * Omggif may expose its API as:
-   * window.omggif, window.Omggif, or browser globals.
-   * Normalize the different exports to window.__omggif.
-   */
-  await loadAny(
-    [
-      "https://cdn.jsdelivr.net/npm/omggif@1.0.10/omggif.js",
-      "https://unpkg.com/omggif@1.0.10/omggif.js"
-    ],
-    function () {
-      var lib = window.omggif || window.Omggif;
-      return !!(
-        (lib && typeof lib.GifReader === "function") ||
-        typeof window.GifReader === "function"
-      );
-    },
-    "Omggif"
-  );
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--background);
+      color: var(--text);
+    }
 
-  var omggif = window.omggif || window.Omggif;
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+    }
 
-  if (!omggif && typeof window.GifReader === "function") {
-    omggif = {
-      GifReader: window.GifReader,
-      GifWriter: window.GifWriter
-    };
-  }
+    .navbar {
+      max-width: 1100px;
+      margin: auto;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-  window.__omggif = omggif;
+    .logo {
+      color: var(--text);
+      text-decoration: none;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
 
-  if (!window.__omggif || typeof window.__omggif.GifReader !== "function") {
-    throw new Error("Omggif loaded, but GifReader was not found.");
-  }
+    .logo span {
+      color: var(--primary);
+    }
 
-  await loadAny(
-    [
-      "https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js",
-      "https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.js",
-      "https://unpkg.com/gif.js@0.2.0/dist/gif.js"
-    ],
-    function () {
-      return typeof window.GIF === "function";
-    },
-    "GIF.js"
-  );
+    .container {
+      width: 100%;
+      max-width: 760px;
+      margin: 35px auto;
+      padding: 0 18px;
+      flex: 1;
+    }
 
-  window.__gifWorkerUrls = [
-    "https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js",
-    "https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js",
-    "https://unpkg.com/gif.js@0.2.0/dist/gif.worker.js"
-  ];
+    .heading {
+      text-align: center;
+      margin-bottom: 25px;
+    }
 
-  return true;
-})();
-</script>
+    .heading h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 6vw, 2.6rem);
+      margin: 0 0 8px;
+    }
 
-<style>
-:root {
-  --bg-warm:#FAF5EE;
-  --card-bg:#fff;
-  --primary-peach:#E07A5F;
-  --peach-hover:#D95D39;
-  --peach-light:#FDE8E1;
-  --peach-gradient:linear-gradient(135deg,#FF9E7D 0%,#E07A5F 50%,#D95D39 100%);
-  --text-dark:#2C221E;
-  --text-muted:#706661;
-  --border-warm:#EFE3D8;
-  --shadow-soft:0 10px 30px rgba(224,122,95,.08);
-  --radius-main:16px;
-}
+    .heading h1 span {
+      color: var(--primary);
+    }
 
-* {
-  box-sizing:border-box;
-  font-family:'Plus Jakarta Sans',sans-serif;
-  -webkit-tap-highlight-color:transparent;
-}
+    .heading p {
+      color: var(--muted);
+      margin: 0;
+    }
 
-body {
-  margin:0;
-  background:var(--bg-warm);
-  color:var(--text-dark);
-  display:flex;
-  flex-direction:column;
-  min-height:100vh;
-  overflow-x:hidden;
-}
+    .card {
+      padding: 25px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(224, 122, 95, .08);
+    }
 
-header {
-  background:rgba(255,255,255,.96);
-  border-bottom:1px solid var(--border-warm);
-  position:sticky;
-  top:0;
-  z-index:10;
-}
+    .drop-zone {
+      padding: 35px 15px;
+      text-align: center;
+      border: 2px dashed var(--primary);
+      border-radius: 14px;
+      background: var(--primary-light);
+      cursor: pointer;
+      transition: .2s;
+    }
 
-.navbar {
-  max-width:1200px;
-  margin:auto;
-  padding:.8rem 1.25rem;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
+    .drop-zone:hover,
+    .drop-zone.dragover {
+      background: #fbd8cd;
+    }
 
-.logo {
-  font-family:'Space Grotesk',sans-serif;
-  font-size:clamp(1.1rem,4.5vw,1.6rem);
-  font-weight:700;
-  color:var(--text-dark);
-  text-decoration:none;
-  display:flex;
-  align-items:center;
-  gap:.4rem;
-}
+    .drop-zone i {
+      font-size: 2.8rem;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
 
-.logo-icon { color:#FF9E7D; }
+    .drop-zone h3 {
+      margin: 5px 0;
+    }
 
-.logo span:last-child {
-  background:var(--peach-gradient);
-  -webkit-background-clip:text;
-  background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
+    .drop-zone p {
+      margin: 6px 0;
+    }
 
-.nav-links {
-  display:flex;
-  gap:1.5rem;
-  list-style:none;
-}
+    #fileInput {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
 
-.nav-links a {
-  text-decoration:none;
-  color:var(--text-dark);
-  font-weight:600;
-  font-size:.9rem;
-}
+    .preview-box {
+      display: none;
+      margin-top: 20px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fafafa;
+      text-align: left;
+    }
 
-.container {
-  width:100%;
-  max-width:800px;
-  margin:2rem auto;
-  padding:0 1.25rem;
-  flex:1;
-}
+    .preview-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
 
-.header-box {
-  text-align:center;
-  margin-bottom:2rem;
-}
+    .preview-header img {
+      width: 75px;
+      height: 75px;
+      object-fit: contain;
+      flex-shrink: 0;
+      background: #222;
+      border-radius: 8px;
+    }
 
-.header-box h1 {
-  font-family:'Space Grotesk',sans-serif;
-  font-size:clamp(1.8rem,6vw,2.5rem);
-  margin:0 0 .5rem;
-}
+    .file-meta {
+      min-width: 0;
+    }
 
-.header-box h1 span { color:var(--primary-peach); }
+    .file-meta b {
+      display: block;
+      overflow-wrap: anywhere;
+    }
 
-.card {
-  background:var(--card-bg);
-  border:1px solid var(--border-warm);
-  border-radius:var(--radius-main);
-  padding:2rem;
-  box-shadow:var(--shadow-soft);
-  text-align:center;
-}
+    .file-meta span {
+      color: var(--muted);
+      font-size: .85rem;
+    }
 
-.drop-zone {
-  border:2px dashed var(--primary-peach);
-  border-radius:14px;
-  padding:2.5rem 1rem;
-  background:var(--peach-light);
-  cursor:pointer;
-  transition:.2s;
-}
+    .secondary-btn {
+      margin-top: 12px;
+      padding: 9px 14px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      cursor: pointer;
+      font-weight: 600;
+    }
 
-.drop-zone:focus-visible {
-  outline:3px solid #2C221E;
-  outline-offset:3px;
-}
+    .controls {
+      display: none;
+      margin-top: 24px;
+    }
 
-.drop-zone.dragover { background:#fbd8cd; }
+    .quality-title {
+      margin: 0 0 5px;
+      text-align: left;
+      font-weight: 800;
+    }
 
-.drop-zone i {
-  font-size:3rem;
-  color:var(--primary-peach);
-  margin-bottom:1rem;
-}
+    .quality-help {
+      text-align: left;
+      color: var(--muted);
+      font-size: .85rem;
+      margin: 0 0 16px;
+    }
 
-.drop-zone h3 {
-  font-size:1.2rem;
-  margin:0 0 .4rem;
-}
+    .quality-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
 
-.drop-zone p { margin:.4rem 0; }
+    .quality-option {
+      padding: 14px 5px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--text);
+      cursor: pointer;
+      transition: .15s;
+    }
 
-#fileInput {
-  position:absolute;
-  width:1px;
-  height:1px;
-  opacity:0;
-  pointer-events:none;
-}
+    .quality-option:hover {
+      border-color: var(--primary);
+    }
 
-.preview-box {
-  display:none;
-  margin-top:1.5rem;
-  border:1px solid var(--border-warm);
-  border-radius:12px;
-  padding:1rem;
-  text-align:left;
-  background:#FAFAFA;
-}
+    .quality-option.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      box-shadow: 0 0 0 2px rgba(224, 122, 95, .12);
+    }
 
-.preview-header {
-  display:flex;
-  align-items:center;
-  gap:1rem;
-  min-width:0;
-}
+    .quality-option strong {
+      display: block;
+      font-size: 1.15rem;
+    }
 
-.preview-header img {
-  width:80px;
-  height:80px;
-  flex-shrink:0;
-  object-fit:contain;
-  border-radius:8px;
-  background:#000;
-}
+    .quality-option small {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: .72rem;
+    }
 
-.file-meta { min-width:0; }
+    .estimate-box {
+      padding: 16px;
+      margin-bottom: 16px;
+      border-radius: 12px;
+      background: var(--background);
+      text-align: left;
+    }
 
-.file-meta b {
-  display:block;
-  font-size:.95rem;
-  overflow-wrap:anywhere;
-}
+    .estimate-box strong {
+      display: block;
+      margin-top: 4px;
+      color: var(--primary);
+      font-size: 1.6rem;
+    }
 
-.file-meta span {
-  font-size:.8rem;
-  color:var(--text-muted);
-}
+    .estimate-box small {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: .75rem;
+      line-height: 1.5;
+    }
 
-.controls {
-  display:none;
-  margin-top:1.5rem;
-}
+    .btn-main {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 9px;
+      padding: 16px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--gradient);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+    }
 
-.grid-settings {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:1.5rem;
-  text-align:left;
-  margin-bottom:1.5rem;
-}
+    .btn-main:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
 
-.setting-item label {
-  display:block;
-  font-weight:700;
-  font-size:.85rem;
-  margin-bottom:.5rem;
-}
+    .error-msg,
+    .success-msg {
+      display: none;
+      padding: 14px;
+      margin-top: 18px;
+      border-radius: 10px;
+      text-align: left;
+      font-size: .9rem;
+      overflow-wrap: anywhere;
+    }
 
-.range {
-  width:100%;
-  accent-color:var(--primary-peach);
-  cursor:pointer;
-}
+    .error-msg {
+      background: #FCE8E6;
+      color: #C5221F;
+    }
 
-.btn-main {
-  width:100%;
-  background:var(--peach-gradient);
-  color:#fff;
-  border:0;
-  padding:1rem;
-  border-radius:12px;
-  font-weight:700;
-  font-size:1rem;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:.5rem;
-  text-decoration:none;
-}
+    .success-msg {
+      background: #e6f4ea;
+      color: #137333;
+    }
 
-.btn-main:disabled {
-  opacity:.6;
-  cursor:wait;
-}
+    .progress-area {
+      display: none;
+      margin-top: 22px;
+    }
 
-.secondary-btn {
-  margin-top:.75rem;
-  background:#fff;
-  color:var(--text-dark);
-  border:1px solid var(--border-warm);
-  padding:.7rem 1rem;
-  border-radius:10px;
-  font-weight:600;
-  cursor:pointer;
-}
+    .bar-container {
+      height: 10px;
+      margin: 12px 0;
+      overflow: hidden;
+      border-radius: 10px;
+      background: var(--background);
+    }
 
-.progress-area {
-  display:none;
-  margin-top:1.5rem;
-}
+    .bar-fill {
+      width: 0;
+      height: 100%;
+      background: var(--gradient);
+      transition: width .2s;
+    }
 
-.bar-container {
-  width:100%;
-  height:10px;
-  background:var(--bg-warm);
-  border-radius:10px;
-  overflow:hidden;
-  margin:10px 0;
-}
+    .result-area {
+      display: none;
+      margin-top: 28px;
+      padding-top: 25px;
+      border-top: 2px solid var(--border);
+    }
 
-.bar-fill {
-  width:0;
-  height:100%;
-  background:var(--peach-gradient);
-  transition:width .2s;
-}
+    .result-img {
+      display: block;
+      max-width: 100%;
+      max-height: 360px;
+      margin: 18px auto;
+      border-radius: 12px;
+    }
 
-.error-msg,.success-msg {
-  display:none;
-  padding:1rem;
-  border-radius:10px;
-  margin-top:1.5rem;
-  font-weight:600;
-  font-size:.9rem;
-  text-align:left;
-  overflow-wrap:anywhere;
-}
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
 
-.error-msg {
-  background:#FCE8E6;
-  color:#C5221F;
-}
+    .stat-item {
+      flex: 1;
+      min-width: 100px;
+      padding: 12px;
+      border-radius: 9px;
+      background: var(--background);
+    }
 
-.success-msg {
-  background:#e6f4ea;
-  color:#137333;
-}
+    .stat-item small {
+      display: block;
+      color: var(--muted);
+      font-size: .75rem;
+    }
 
-.result-area {
-  display:none;
-  margin-top:2rem;
-  border-top:2px solid var(--border-warm);
-  padding-top:2rem;
-}
+    footer {
+      padding: 20px;
+      text-align: center;
+      color: var(--muted);
+      font-size: .85rem;
+    }
 
-.result-img {
-  max-width:100%;
-  max-height:360px;
-  border-radius:12px;
-  margin:1rem auto 1.5rem;
-  display:block;
-  box-shadow:var(--shadow-soft);
-}
+    @media (max-width: 500px) {
+      .container {
+        margin: 22px auto;
+        padding: 0 12px;
+      }
 
-.stats {
-  display:flex;
-  justify-content:center;
-  gap:1rem;
-  margin-bottom:1.5rem;
-  flex-wrap:wrap;
-}
+      .card {
+        padding: 16px;
+      }
 
-.stat-item {
-  background:var(--bg-warm);
-  padding:.7rem 1rem;
-  border-radius:8px;
-  min-width:110px;
-}
+      .quality-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
 
-.stat-item small {
-  display:block;
-  font-size:.7rem;
-  color:#777;
-}
-
-footer {
-  text-align:center;
-  padding:1.5rem;
-  color:var(--text-muted);
-  font-size:.85rem;
-}
-
-@media(max-width:600px) {
-  .grid-settings {
-    grid-template-columns:1fr;
-    gap:1rem;
-  }
-
-  .nav-links { display:none; }
-
-  .card { padding:1.1rem; }
-
-  .container {
-    margin:1.25rem auto;
-    padding:0 .8rem;
-  }
-
-  .stats { gap:.5rem; }
-
-  .stat-item { flex:1; }
-}
-</style>
+      .quality-option {
+        padding: 13px 4px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a>
+    </nav>
+  </header>
 
-<header>
-  <nav class="navbar">
-    <a href="index.html" class="logo">
-      <span class="logo-icon">⚡</span>
-      ToolsMedia<span>Download</span>
-    </a>
-
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="blog.html">Blog</a></li>
-    </ul>
-  </nav>
-</header>
-
-<main class="container">
-
-  <div class="header-box">
-    <h1>GIF <span>Compressor</span></h1>
-    <p>Reduce animated GIF file size on mobile and desktop.</p>
-  </div>
-
-  <section class="card" aria-label="GIF compressor">
-
-    <div class="drop-zone" id="dropZone" role="button" tabindex="0" aria-controls="fileInput">
-      <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>
-      <h3>Select Animated GIF</h3>
-      <p>Tap to browse or drag a file here</p>
-      <p><small>For best results, start with a reasonably sized GIF.</small></p>
+  <main class="container">
+    <div class="heading">
+      <h1>GIF <span>Compressor</span></h1>
+      <p>Choose a quality, check the estimated size, and compress your GIF.</p>
     </div>
 
-    <input type="file" id="fileInput" accept=".gif,image/gif" aria-label="Choose a GIF file">
-
-    <div class="preview-box" id="previewBox">
-      <div class="preview-header">
-        <img id="thumbPreview" alt="Selected GIF preview">
-        <div class="file-meta">
-          <b id="fileNameText">animation.gif</b>
-          <span id="fileSizeText">0 KB</span>
-        </div>
+    <section class="card" aria-label="GIF compressor">
+      <div class="drop-zone" id="dropZone" role="button" tabindex="0" aria-controls="fileInput">
+        <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>
+        <h3>Select Animated GIF</h3>
+        <p>Tap to browse or drag a GIF here</p>
+        <p><small>Your file stays on your device.</small></p>
       </div>
 
-      <button type="button" class="secondary-btn" id="changeFileBtn">
-        Choose another GIF
-      </button>
-    </div>
+      <input type="file" id="fileInput" accept=".gif,image/gif" aria-label="Choose a GIF file">
 
-    <div class="controls" id="controls">
-
-      <div class="grid-settings">
-
-        <div class="setting-item">
-          <label for="qRange">Compression: <span id="qLabel">60%</span></label>
-          <input type="range" id="qRange" class="range" min="10" max="90" value="60">
+      <div class="preview-box" id="previewBox">
+        <div class="preview-header">
+          <img id="thumbPreview" alt="Selected GIF preview">
+          <div class="file-meta">
+            <b id="fileNameText">animation.gif</b>
+            <span id="fileSizeText">0 KB</span>
+          </div>
         </div>
-
-        <div class="setting-item">
-          <label for="sRange">Resize: <span id="sLabel">100%</span></label>
-          <input type="range" id="sRange" class="range" min="20" max="100" value="100">
-        </div>
-
+        <button type="button" class="secondary-btn" id="changeFileBtn">Choose another GIF</button>
       </div>
 
-      <button class="btn-main" id="btnGo" type="button">
-        <i class="fas fa-compress-arrows-alt" aria-hidden="true"></i>
-        Compress GIF
-      </button>
+      <div class="controls" id="controls">
+        <h3 class="quality-title">Choose output quality</h3>
+        <p class="quality-help">Select a resolution to see its estimated file size.</p>
 
-    </div>
+        <div class="quality-grid" id="qualityGrid" role="group" aria-label="Output resolution">
+          <button type="button" class="quality-option" data-height="144" aria-pressed="false">
+            <strong>144p</strong>
+            <small class="estimate">Est. —</small>
+          </button>
 
-    <div id="errorMsg" class="error-msg" role="alert"></div>
-    <div id="successMsg" class="success-msg" role="status"></div>
+          <button type="button" class="quality-option" data-height="240" aria-pressed="false">
+            <strong>240p</strong>
+            <small class="estimate">Est. —</small>
+          </button>
 
-    <div class="progress-area" id="progressArea" aria-live="polite">
-      <h4 id="statusText">Preparing GIF…</h4>
-      <div class="bar-container">
-        <div class="bar-fill" id="barFill"></div>
+          <button type="button" class="quality-option selected" data-height="360" aria-pressed="true">
+            <strong>360p</strong>
+            <small class="estimate">Est. —</small>
+          </button>
+
+          <button type="button" class="quality-option" data-height="420" aria-pressed="false">
+            <strong>420p</strong>
+            <small class="estimate">Est. —</small>
+          </button>
+
+          <button type="button" class="quality-option" data-height="720" aria-pressed="false">
+            <strong>720p</strong>
+            <small class="estimate">Est. —</small>
+          </button>
+
+          <button type="button" class="quality-option" data-height="1080" aria-pressed="false">
+            <strong>1080p</strong>
+            <small class="estimate">Est. —</small>
+          </button>
+        </div>
+
+        <div class="estimate-box">
+          <span>Estimated output size</span>
+          <strong id="selectedEstimate">—</strong>
+          <small>Approximate estimate. Actual size depends on the GIF's frames and colors.</small>
+        </div>
+
+        <button class="btn-main" id="btnGo" type="button" disabled>
+          <i class="fas fa-compress-arrows-alt" aria-hidden="true"></i>
+          Compress GIF
+        </button>
       </div>
-      <span id="progressPercent">0%</span>
-    </div>
 
-    <div class="result-area" id="resultArea">
-      <h3>Compression Ready!</h3>
+      <div id="errorMsg" class="error-msg" role="alert"></div>
+      <div id="successMsg" class="success-msg" role="status"></div>
 
-      <img id="finalGif" class="result-img" alt="Compressed GIF preview">
-
-      <div class="stats">
-        <div class="stat-item">
-          <small>Original size</small>
-          <strong id="oldSize">0 KB</strong>
+      <div class="progress-area" id="progressArea" aria-live="polite">
+        <h4 id="statusText">Preparing GIF…</h4>
+        <div class="bar-container">
+          <div class="bar-fill" id="barFill"></div>
         </div>
-
-        <div class="stat-item">
-          <small>New size</small>
-          <strong id="newSize">0 KB</strong>
-        </div>
-
-        <div class="stat-item">
-          <small>Saved</small>
-          <strong id="savePercent">0%</strong>
-        </div>
+        <span id="progressPercent">0%</span>
       </div>
 
-      <a id="dlLink" href="#" download="compressed.gif" class="btn-main">
-        <i class="fas fa-download" aria-hidden="true"></i>
-        Download GIF
-      </a>
+      <div class="result-area" id="resultArea">
+        <h3>Compression Complete!</h3>
+        <img id="finalGif" class="result-img" alt="Compressed GIF preview">
 
-      <p id="downloadHint">
-        <small>If your browser opens the GIF instead of saving it, use the browser's Share or Save option.</small>
-      </p>
-    </div>
+        <div class="stats">
+          <div class="stat-item">
+            <small>Original size</small>
+            <strong id="oldSize">0 KB</strong>
+          </div>
+          <div class="stat-item">
+            <small>New size</small>
+            <strong id="newSize">0 KB</strong>
+          </div>
+          <div class="stat-item">
+            <small>Saved</small>
+            <strong id="savePercent">0%</strong>
+          </div>
+        </div>
 
-  </section>
-</main>
+        <a id="dlLink" href="#" download="compressed.gif" class="btn-main">
+          <i class="fas fa-download" aria-hidden="true"></i>
+          Download GIF
+        </a>
+      </div>
+    </section>
+  </main>
 
-<footer>Files are processed in your browser. Your GIF is not uploaded by this page.</footer>
+  <footer>Files are processed in your browser. Your GIF is not uploaded by this page.</footer>
 
-<script>
-(function () {
-  "use strict";
+  <script>
+    (() => {
+      'use strict';
 
-  var $ = function (id) {
-    return document.getElementById(id);
-  };
+      const $ = id => document.getElementById(id);
+      const fileInput = $('fileInput');
+      const dropZone = $('dropZone');
+      const btn = $('btnGo');
+      const qualityButtons = Array.from(document.querySelectorAll('.quality-option'));
 
-  var fileInput = $("fileInput");
-  var dropZone = $("dropZone");
-  var btn = $("btnGo");
+      let originalFile = null;
+      let gifData = null;
+      let previewUrl = null;
+      let outputUrl = null;
+      let workerBlobUrl = null;
+      let selectionToken = 0;
+      let originalWidth = 0;
+      let originalHeight = 0;
+      let selectedHeight = 360;
 
-  var originalFile = null;
-  var gifData = null;
-  var previewUrl = null;
-  var outputUrl = null;
-  var workerBlobUrl = null;
-  var selectionToken = 0;
+      function formatSize(bytes) {
+        if (!Number.isFinite(bytes)) return 'Unknown size';
+        if (bytes < 1024) return bytes + ' Bytes';
+        if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+        return (bytes / 1048576).toFixed(2) + ' MB';
+      }
 
-  function formatSize(bytes) {
-    if (!Number.isFinite(bytes)) return "Unknown size";
-    if (bytes < 1024) return bytes + " Bytes";
-    if (bytes < 1048576) return (bytes / 1024).toFixed(1) + " KB";
-    return (bytes / 1048576).toFixed(2) + " MB";
-  }
+      function showError(message) {
+        $('errorMsg').textContent = message;
+        $('errorMsg').style.display = 'block';
+        $('successMsg').style.display = 'none';
+      }
 
-  function showError(message) {
-    $("errorMsg").textContent = message;
-    $("errorMsg").style.display = "block";
-    $("successMsg").style.display = "none";
-  }
+      function clearError() {
+        $('errorMsg').style.display = 'none';
+        $('errorMsg').textContent = '';
+      }
 
-  function clearError() {
-    $("errorMsg").style.display = "none";
-    $("errorMsg").textContent = "";
-  }
+      function setProgress(value, message) {
+        const number = Math.max(0, Math.min(100, Math.round(value)));
+        $('barFill').style.width = number + '%';
+        $('progressPercent').textContent = number + '%';
 
-  function setProgress(value, message) {
-    var n = Math.max(0, Math.min(100, Math.round(value)));
-    $("barFill").style.width = n + "%";
-    $("progressPercent").textContent = n + "%";
+        if (message) $('statusText').textContent = message;
+      }
 
-    if (message) {
-      $("statusText").textContent = message;
-    }
-  }
+      function isGifHeader(bytes) {
+        return bytes.length >= 10 &&
+          bytes[0] === 0x47 &&
+          bytes[1] === 0x49 &&
+          bytes[2] === 0x46 &&
+          bytes[3] === 0x38 &&
+          (bytes[4] === 0x37 || bytes[4] === 0x39) &&
+          bytes[5] === 0x61;
+      }
 
-  function isGifHeader(bytes) {
-    return bytes.length >= 6 &&
-      bytes[0] === 0x47 &&
-      bytes[1] === 0x49 &&
-      bytes[2] === 0x46 &&
-      bytes[3] === 0x38 &&
-      (bytes[4] === 0x37 || bytes[4] === 0x39) &&
-      bytes[5] === 0x61;
-  }
+      function readAsArrayBuffer(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
 
-  function readAsArrayBuffer(file) {
-    return new Promise(function (resolve, reject) {
-      var reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = () => reject(new Error('The browser could not read this file.'));
+          reader.onabort = () => reject(new Error('File reading was cancelled.'));
 
-      reader.onload = function () {
-        resolve(reader.result);
-      };
+          reader.readAsArrayBuffer(file);
+        });
+      }
 
-      reader.onerror = function () {
-        reject(new Error("The browser could not read this file. Please choose it again."));
-      };
+      async function ensureWorker() {
+        if (workerBlobUrl) return workerBlobUrl;
 
-      reader.onabort = function () {
-        reject(new Error("File reading was cancelled. Please try again."));
-      };
+        const urls = window.__gifWorkerUrls || [];
+        let lastError;
 
-      reader.readAsArrayBuffer(file);
-    });
-  }
+        for (const url of urls) {
+          try {
+            const response = await fetch(url, { cache: 'force-cache' });
 
-  async function ensureWorker() {
-    if (workerBlobUrl) return workerBlobUrl;
+            if (!response.ok) throw new Error('HTTP ' + response.status);
 
-    var urls = window.__gifWorkerUrls || [];
-    var lastError;
+            const source = await response.text();
 
-    for (var i = 0; i < urls.length; i++) {
-      try {
-        var response = await fetch(urls[i], { cache: "force-cache" });
+            if (!source || source.length < 100) {
+              throw new Error('Worker file was empty or incomplete.');
+            }
 
-        if (!response.ok) {
-          throw new Error("HTTP " + response.status);
+            workerBlobUrl = URL.createObjectURL(
+              new Blob([source], { type: 'application/javascript' })
+            );
+
+            return workerBlobUrl;
+          } catch (error) {
+            lastError = error;
+          }
         }
 
-        var source = await response.text();
+        throw new Error(
+          'The compression worker could not load. Please try again. ' +
+          (lastError ? lastError.message : '')
+        );
+      }
 
-        if (!source || source.length < 100) {
-          throw new Error("Worker file was empty or incomplete.");
+      function cleanupOutput() {
+        if (outputUrl) URL.revokeObjectURL(outputUrl);
+        outputUrl = null;
+      }
+
+      function dimensionsFor(targetHeight) {
+        if (!originalWidth || !originalHeight) {
+          return { width: 0, height: 0 };
         }
 
-        workerBlobUrl = URL.createObjectURL(
-          new Blob([source], { type: "application/javascript" })
-        );
+        // Preserve aspect ratio and never enlarge a smaller GIF.
+        const scale = Math.min(1, targetHeight / originalHeight);
 
-        return workerBlobUrl;
-
-      } catch (error) {
-        lastError = error;
-        console.warn("Worker loading failed:", urls[i], error);
-      }
-    }
-
-    throw new Error(
-      "The GIF worker could not load. Your browser or network may be blocking the worker CDN. " +
-      "Try another network or allow access to the CDN. " +
-      (lastError ? lastError.message : "")
-    );
-  }
-
-  function cleanupOutput() {
-    if (outputUrl) {
-      URL.revokeObjectURL(outputUrl);
-    }
-
-    outputUrl = null;
-  }
-
-  function handleFile(file) {
-    var token = ++selectionToken;
-
-    clearError();
-    $("successMsg").style.display = "none";
-    $("resultArea").style.display = "none";
-    $("progressArea").style.display = "none";
-
-    if (!file) return;
-
-    var nameLooksGif = /\.gif$/i.test(file.name || "");
-
-    if (file.type && file.type.toLowerCase() !== "image/gif" && !nameLooksGif) {
-      showError("Please select a GIF file (.gif).");
-      return;
-    }
-
-    if (file.size < 14) {
-      showError("This file is too small to be a valid GIF.");
-      return;
-    }
-
-    if (file.size > 100 * 1024 * 1024) {
-      showError("This GIF is larger than 100 MB. Try a smaller GIF first.");
-      return;
-    }
-
-    originalFile = file;
-    gifData = null;
-    btn.disabled = true;
-
-    $("fileNameText").textContent = file.name || "selected.gif";
-    $("fileSizeText").textContent = formatSize(file.size);
-
-    if (previewUrl) {
-      URL.revokeObjectURL(previewUrl);
-    }
-
-    previewUrl = URL.createObjectURL(file);
-    $("thumbPreview").src = previewUrl;
-    $("previewBox").style.display = "block";
-    $("controls").style.display = "block";
-
-    readAsArrayBuffer(file).then(function (buffer) {
-      if (token !== selectionToken) return;
-
-      var bytes = new Uint8Array(buffer);
-
-      if (!isGifHeader(bytes)) {
-        throw new Error("This file does not have a valid GIF header. Please select a real GIF file.");
+        return {
+          width: Math.max(1, Math.round(originalWidth * scale)),
+          height: Math.max(1, Math.round(originalHeight * scale))
+        };
       }
 
-      gifData = bytes;
-      btn.disabled = false;
-
-      $("successMsg").textContent = "GIF loaded successfully. You can now compress it.";
-      $("successMsg").style.display = "block";
-
-    }).catch(function (error) {
-      if (token !== selectionToken) return;
-
-      gifData = null;
-      btn.disabled = true;
-
-      showError(error.message || "Could not read this GIF.");
-    });
-  }
-
-  fileInput.addEventListener("change", function (event) {
-    var file = event.target.files && event.target.files[0];
-
-    handleFile(file);
-    fileInput.value = "";
-  });
-
-  dropZone.addEventListener("click", function () {
-    fileInput.click();
-  });
-
-  dropZone.addEventListener("keydown", function (event) {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      fileInput.click();
-    }
-  });
-
-  $("changeFileBtn").addEventListener("click", function () {
-    fileInput.click();
-  });
-
-  $("qRange").addEventListener("input", function (event) {
-    $("qLabel").textContent = event.target.value + "%";
-  });
-
-  $("sRange").addEventListener("input", function (event) {
-    $("sLabel").textContent = event.target.value + "%";
-  });
-
-  ["dragenter", "dragover"].forEach(function (type) {
-    dropZone.addEventListener(type, function (event) {
-      event.preventDefault();
-      dropZone.classList.add("dragover");
-    });
-  });
-
-  ["dragleave", "drop"].forEach(function (type) {
-    dropZone.addEventListener(type, function (event) {
-      event.preventDefault();
-      dropZone.classList.remove("dragover");
-    });
-  });
-
-  dropZone.addEventListener("drop", function (event) {
-    var file = event.dataTransfer &&
-      event.dataTransfer.files &&
-      event.dataTransfer.files[0];
-
-    if (file) handleFile(file);
-  });
-
-  function waitForRender(gif) {
-    return new Promise(function (resolve, reject) {
-      var settled = false;
-
-      var timeout = setTimeout(function () {
-        finish(
-          reject,
-          new Error("Compression took too long. Try resizing the GIF smaller.")
-        );
-      }, 180000);
-
-      function finish(fn, value) {
-        if (settled) return;
-
-        settled = true;
-        clearTimeout(timeout);
-        fn(value);
-      }
-
-      gif.on("finished", function (blob) {
-        if (!(blob instanceof Blob) || blob.size === 0) {
-          return finish(
-            reject,
-            new Error("The compressor returned an empty file. Try another GIF.")
-          );
+      function estimateSize(targetHeight) {
+        if (!originalFile || !originalWidth || !originalHeight) {
+          return 'Waiting for GIF…';
         }
 
-        finish(resolve, blob);
-      });
+        const dimensions = dimensionsFor(targetHeight);
+        const originalPixels = originalWidth * originalHeight;
+        const outputPixels = dimensions.width * dimensions.height;
+        const pixelRatio = outputPixels / originalPixels;
 
-      gif.on("progress", function (progress) {
-        setProgress(60 + progress * 38, "Encoding compressed animation…");
-      });
-
-      try {
-        gif.render();
-      } catch (error) {
-        finish(reject, error);
-      }
-    });
-  }
-
-  async function processGif() {
-    if (!originalFile || !gifData) {
-      showError("Please select a GIF and wait until it finishes loading.");
-      return;
-    }
-
-    btn.disabled = true;
-    clearError();
-
-    $("successMsg").style.display = "none";
-    $("resultArea").style.display = "none";
-    $("progressArea").style.display = "block";
-
-    setProgress(3, "Preparing compression…");
-
-    try {
-      setProgress(4, "Loading compression libraries…");
-
-      try {
-        await window.__gifLibsReady;
-      } catch (libraryError) {
-        throw new Error(
-          (libraryError && libraryError.message
-            ? libraryError.message
-            : "The compression libraries could not load.") +
-          " Check your connection or browser security settings."
+        // This is an estimate, not a guaranteed final file size.
+        const estimatedBytes = Math.max(
+          1024,
+          originalFile.size * pixelRatio * 0.9
         );
+
+        return formatSize(estimatedBytes);
       }
 
-      var Omggif = window.__omggif;
+      function updateEstimates() {
+        qualityButtons.forEach(button => {
+          const height = Number(button.dataset.height);
+          const isSelected = height === selectedHeight;
 
-      if (
-        !Omggif ||
-        typeof Omggif.GifReader !== "function" ||
-        typeof window.GIF !== "function"
-      ) {
-        throw new Error(
-          "The GIF libraries did not initialize correctly. Refresh the page and try again."
-        );
-      }
+          button.querySelector('.estimate').textContent =
+            'Est. ' + estimateSize(height);
 
-      var workerScript = await ensureWorker();
-
-      setProgress(8, "Reading animation frames…");
-
-      var reader = new Omggif.GifReader(gifData);
-      var frameCount = reader.numFrames();
-
-      if (!frameCount || frameCount > 2000) {
-        throw new Error(
-          "This GIF has an unsupported number of frames. Please try a GIF with fewer than 2,000 frames."
-        );
-      }
-
-      if (
-        !reader.width ||
-        !reader.height ||
-        reader.width > 10000 ||
-        reader.height > 10000
-      ) {
-        throw new Error("This GIF has invalid or excessively large dimensions.");
-      }
-
-      var scale = Number($("sRange").value) / 100;
-
-      var width = Math.max(1, Math.round(reader.width * scale));
-      var height = Math.max(1, Math.round(reader.height * scale));
-
-      var quality = Math.max(
-        1,
-        Math.min(30, Math.round((100 - Number($("qRange").value)) / 3))
-      );
-
-      var gif = new window.GIF({
-        workers: 2,
-        quality: quality,
-        width: width,
-        height: height,
-        workerScript: workerScript,
-        repeat: typeof reader.loopCount === "function"
-          ? reader.loopCount()
-          : 0
-      });
-
-      var sourceCanvas = document.createElement("canvas");
-      sourceCanvas.width = reader.width;
-      sourceCanvas.height = reader.height;
-
-      var sourceCtx = sourceCanvas.getContext("2d", {
-        willReadFrequently: true
-      });
-
-      var targetCanvas = document.createElement("canvas");
-      targetCanvas.width = width;
-      targetCanvas.height = height;
-
-      var targetCtx = targetCanvas.getContext("2d");
-
-      if (!sourceCtx || !targetCtx) {
-        throw new Error(
-          "Your browser could not create a canvas. Try another browser or a smaller GIF."
-        );
-      }
-
-      for (var i = 0; i < frameCount; i++) {
-        var info = reader.frameInfo(i);
-
-        var framePixels = new Uint8ClampedArray(
-          reader.width * reader.height * 4
-        );
-
-        reader.decodeAndBlitFrameRGBA(i, framePixels);
-
-        var imageData = new ImageData(
-          framePixels,
-          reader.width,
-          reader.height
-        );
-
-        sourceCtx.putImageData(imageData, 0, 0);
-
-        targetCtx.clearRect(0, 0, width, height);
-
-        targetCtx.drawImage(
-          sourceCanvas,
-          0,
-          0,
-          width,
-          height
-        );
-
-        var delay = Math.max(20, Number(info.delay || 10) * 10);
-
-        gif.addFrame(targetCtx, {
-          delay: delay,
-          copy: true
+          button.classList.toggle('selected', isSelected);
+          button.setAttribute('aria-pressed', String(isSelected));
         });
 
-        if (i % 5 === 0 || i === frameCount - 1) {
-          setProgress(
-            8 + ((i + 1) / frameCount) * 50,
-            "Preparing frame " + (i + 1) + " of " + frameCount + "…"
-          );
-        }
-
-        if (i % 10 === 0) {
-          await new Promise(function (resolve) {
-            setTimeout(resolve, 0);
-          });
-        }
+        $('selectedEstimate').textContent = estimateSize(selectedHeight);
       }
 
-      sourceCanvas.width = 1;
-      sourceCanvas.height = 1;
-      targetCanvas.width = 1;
-      targetCanvas.height = 1;
+      function selectQuality(height) {
+        selectedHeight = height;
+        updateEstimates();
 
-      setProgress(60, "Encoding compressed animation…");
+        $('resultArea').style.display = 'none';
+        clearError();
+      }
 
-      var blob = await waitForRender(gif);
-
-      cleanupOutput();
-
-      outputUrl = URL.createObjectURL(blob);
-
-      $("finalGif").src = outputUrl;
-      $("dlLink").href = outputUrl;
-
-      $("dlLink").download =
-        (originalFile.name || "animation.gif").replace(/\.gif$/i, "") +
-        "-compressed.gif";
-
-      $("oldSize").textContent = formatSize(originalFile.size);
-      $("newSize").textContent = formatSize(blob.size);
-
-      var saved = Math.round(
-        (1 - blob.size / originalFile.size) * 100
-      );
-
-      $("savePercent").textContent = Math.max(0, saved) + "%";
-
-      $("resultArea").style.display = "block";
-      $("progressArea").style.display = "none";
-
-      $("resultArea").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
+      qualityButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          selectQuality(Number(button.dataset.height));
+        });
       });
 
-      if (blob.size >= originalFile.size) {
-        $("successMsg").textContent =
-          "Compression completed, but the new GIF is not smaller. Try lowering the resize setting.";
-      } else {
-        $("successMsg").textContent =
-          "Compression completed. Your GIF is ready to download.";
+      function handleFile(file) {
+        const token = ++selectionToken;
+
+        clearError();
+        $('successMsg').style.display = 'none';
+        $('resultArea').style.display = 'none';
+        $('progressArea').style.display = 'none';
+
+        if (!file) return;
+
+        const nameLooksGif = /\.gif$/i.test(file.name || '');
+
+        if (file.type && file.type.toLowerCase() !== 'image/gif' && !nameLooksGif) {
+          showError('Please select a GIF file.');
+          return;
+        }
+
+        if (file.size < 14) {
+          showError('This file is too small to be a valid GIF.');
+          return;
+        }
+
+        if (file.size > 100 * 1024 * 1024) {
+          showError('This GIF is larger than 100 MB. Try a smaller GIF.');
+          return;
+        }
+
+        originalFile = file;
+        gifData = null;
+        originalWidth = 0;
+        originalHeight = 0;
+        btn.disabled = true;
+
+        $('fileNameText').textContent = file.name || 'selected.gif';
+        $('fileSizeText').textContent = formatSize(file.size);
+
+        if (previewUrl) URL.revokeObjectURL(previewUrl);
+
+        previewUrl = URL.createObjectURL(file);
+        $('thumbPreview').src = previewUrl;
+        $('previewBox').style.display = 'block';
+        $('controls').style.display = 'block';
+
+        updateEstimates();
+
+        readAsArrayBuffer(file).then(buffer => {
+          if (token !== selectionToken) return;
+
+          const bytes = new Uint8Array(buffer);
+
+          if (!isGifHeader(bytes)) {
+            throw new Error('This is not a valid GIF file. Please select a real GIF.');
+          }
+
+          gifData = bytes;
+
+          // GIF dimensions are stored in bytes 6–9.
+          originalWidth = bytes[6] | (bytes[7] << 8);
+          originalHeight = bytes[8] | (bytes[9] << 8);
+
+          if (!originalWidth || !originalHeight) {
+            throw new Error('Could not read the GIF dimensions.');
+          }
+
+          updateEstimates();
+
+          btn.disabled = false;
+          $('successMsg').textContent = 'GIF loaded. Choose a resolution and compress it.';
+          $('successMsg').style.display = 'block';
+        }).catch(error => {
+          if (token !== selectionToken) return;
+
+          gifData = null;
+          btn.disabled = true;
+          showError(error.message || 'Could not read this GIF.');
+        });
       }
 
-      $("successMsg").style.display = "block";
+      fileInput.addEventListener('change', event => {
+        const file = event.target.files && event.target.files[0];
+        handleFile(file);
+        fileInput.value = '';
+      });
 
-    } catch (error) {
-      console.error("GIF compression failed:", error);
+      dropZone.addEventListener('click', () => fileInput.click());
 
-      $("progressArea").style.display = "none";
+      dropZone.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          fileInput.click();
+        }
+      });
 
-      showError(
-        error && error.message
-          ? error.message
-          : "Compression failed. Please try another GIF or reduce its dimensions."
-      );
+      $('changeFileBtn').addEventListener('click', () => fileInput.click());
 
-    } finally {
-      btn.disabled = !gifData;
-    }
-  }
+      ['dragenter', 'dragover'].forEach(type => {
+        dropZone.addEventListener(type, event => {
+          event.preventDefault();
+          dropZone.classList.add('dragover');
+        });
+      });
 
-  window.__gifLibsReady.catch(function (error) {
-    console.error("GIF library loading failed:", error);
+      ['dragleave', 'drop'].forEach(type => {
+        dropZone.addEventListener(type, event => {
+          event.preventDefault();
+          dropZone.classList.remove('dragover');
+        });
+      });
 
-    showError(
-      (error && error.message
-        ? error.message
-        : "GIF compression libraries failed to load.") +
-      " You can select a GIF, but compression requires the libraries to load."
-    );
-  });
+      dropZone.addEventListener('drop', event => {
+        const file = event.dataTransfer &&
+          event.dataTransfer.files &&
+          event.dataTransfer.files[0];
 
-  btn.addEventListener("click", processGif);
+        if (file) handleFile(file);
+      });
 
-  $("dlLink").addEventListener("click", function (event) {
-    if (!outputUrl) {
-      event.preventDefault();
-      showError("There is no compressed GIF to download yet. Please compress a GIF first.");
-    }
-  });
+      function waitForRender(gif) {
+        return new Promise((resolve, reject) => {
+          let settled = false;
 
-  window.addEventListener("beforeunload", function () {
-    if (previewUrl) URL.revokeObjectURL(previewUrl);
-    if (outputUrl) URL.revokeObjectURL(outputUrl);
-    if (workerBlobUrl) URL.revokeObjectURL(workerBlobUrl);
-  });
+          const timeout = setTimeout(() => {
+            finish(
+              reject,
+              new Error('Compression took too long. Try a lower resolution.')
+            );
+          }, 180000);
 
-})();
-</script>
+          function finish(callback, value) {
+            if (settled) return;
+            settled = true;
+            clearTimeout(timeout);
+            callback(value);
+          }
 
+          gif.on('finished', blob => {
+            if (!(blob instanceof Blob) || blob.size === 0) {
+              return finish(reject, new Error('The compressor returned an empty file.'));
+            }
+
+            finish(resolve, blob);
+          });
+
+          gif.on('progress', progress => {
+            setProgress(60 + progress * 38, 'Encoding compressed GIF…');
+          });
+
+          try {
+            gif.render();
+          } catch (error) {
+            finish(reject, error);
+          }
+        });
+      }
+
+      async function processGif() {
+        if (!originalFile || !gifData) {
+          showError('Please select a GIF and wait for it to finish loading.');
+          return;
+        }
+
+        btn.disabled = true;
+        clearError();
+        $('successMsg').style.display = 'none';
+        $('resultArea').style.display = 'none';
+        $('progressArea').style.display = 'block';
+
+        setProgress(3, 'Preparing GIF…');
+
+        try {
+          setProgress(4, 'Loading compression libraries…');
+
+          try {
+            await window.__gifLibsReady;
+          } catch (error) {
+            throw new Error(
+              (error && error.message ? error.message : 'Compression libraries could not load.') +
+              ' Please check your internet connection and try again.'
+            );
+          }
+
+          if (!window.__omggif || !window.GIF) {
+            throw new Error('The compression libraries loaded incorrectly. Please refresh and try again.');
+          }
+
+          const workerScript = await ensureWorker();
+
+          setProgress(8, 'Reading animation frames…');
+
+          const reader = new window.__omggif.GifReader(gifData);
+          const frameCount = reader.numFrames();
+
+          if (!frameCount || frameCount > 2000) {
+            throw new Error('This GIF has too many frames. Please try one with fewer than 2,000 frames.');
+          }
+
+          if (
+            !reader.width ||
+            !reader.height ||
+            reader.width > 10000 ||
+            reader.height > 10000
+          ) {
+            throw new Error('This GIF has invalid or excessively large dimensions.');
+          }
+
+          // The selected resolution sets the maximum output height.
+          const scale = Math.min(1, selectedHeight / reader.height);
+          const width = Math.max(1, Math.round(reader.width * scale));
+          const height = Math.max(1, Math.round(reader.height * scale));
+
+          // One balanced compression setting for every preset.
+          const quality = 10;
+
+          const gif = new GIF({
+            workers: 2,
+            quality,
+            width,
+            height,
+            workerScript,
+            repeat: reader.loopCount ? reader.loopCount() : 0,
+            transparent: null
+          });
+
+          const sourceCanvas = document.createElement('canvas');
+          sourceCanvas.width = reader.width;
+          sourceCanvas.height = reader.height;
+
+          const sourceCtx = sourceCanvas.getContext('2d', {
+            willReadFrequently: true
+          });
+
+          const targetCanvas = document.createElement('canvas');
+          targetCanvas.width = width;
+          targetCanvas.height = height;
+
+          const targetCtx = targetCanvas.getContext('2d');
+
+          if (!sourceCtx || !targetCtx) {
+            throw new Error('Your browser could not create a canvas. Try a smaller GIF.');
+          }
+
+          for (let i = 0; i < frameCount; i++) {
+            const info = reader.frameInfo(i);
+
+            const framePixels = new Uint8ClampedArray(
+              reader.width * reader.height * 4
+            );
+
+            reader.decodeAndBlitFrameRGBA(i, framePixels);
+
+            const imageData = new ImageData(
+              framePixels,
+              reader.width,
+              reader.height
+            );
+
+            sourceCtx.putImageData(imageData, 0, 0);
+            targetCtx.clearRect(0, 0, width, height);
+            targetCtx.drawImage(sourceCanvas, 0, 0, width, height);
+
+            const delay = Math.max(20, Number(info.delay || 10) * 10);
+
+            gif.addFrame(targetCtx, {
+              delay,
+              copy: true
+            });
+
+            if (i % 5 === 0 || i === frameCount - 1) {
+              setProgress(
+                8 + ((i + 1) / frameCount) * 50,
+                `Preparing frame ${i + 1} of ${frameCount}…`
+              );
+            }
+
+            if (i % 10 === 0) {
+              await new Promise(resolve => setTimeout(resolve, 0));
+            }
+          }
+
+          sourceCanvas.width = 1;
+          sourceCanvas.height = 1;
+          targetCanvas.width = 1;
+          targetCanvas.height = 1;
+
+          const blob = await waitForRender(gif);
+
+          cleanupOutput();
+
+          outputUrl = URL.createObjectURL(blob);
+          $('finalGif').src = outputUrl;
+          $('dlLink').href = outputUrl;
+
+          $('dlLink').download =
+            (originalFile.name || 'animation.gif').replace(/\.gif$/i, '') +
+            '-' + selectedHeight + 'p.gif';
+
+          $('oldSize').textContent = formatSize(originalFile.size);
+          $('newSize').textContent = formatSize(blob.size);
+
+          const saved = Math.round(
+            (1 - blob.size / originalFile.size) * 100
+          );
+
+          $('savePercent').textContent = (saved > 0 ? saved : 0) + '%';
+
+          $('resultArea').style.display = 'block';
+          $('progressArea').style.display = 'none';
+          $('resultArea').scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+
+          if (blob.size >= originalFile.size) {
+            $('successMsg').textContent =
+              'Compression completed, but the new GIF is not smaller. Try a lower resolution.';
+          } else {
+            $('successMsg').textContent =
+              'Compression complete! Your GIF is ready to download.';
+          }
+
+          $('successMsg').style.display = 'block';
+
+        } catch (error) {
+          console.error('GIF compression failed:', error);
+
+          $('progressArea').style.display = 'none';
+
+          showError(
+            error && error.message
+              ? error.message
+              : 'Compression failed. Please try another GIF.'
+          );
+        } finally {
+          btn.disabled = !gifData;
+        }
+      }
+
+      window.__gifLibsReady.catch(error => {
+        console.error('GIF library loading failed:', error);
+        showError(
+          (error && error.message ? error.message : 'Compression libraries could not load.') +
+          ' Please check your internet connection.'
+        );
+      });
+
+      btn.addEventListener('click', processGif);
+
+      $('dlLink').addEventListener('click', event => {
+        if (!outputUrl) {
+          event.preventDefault();
+          showError('There is no compressed GIF to download yet.');
+        }
+      });
+
+      window.addEventListener('beforeunload', () => {
+        if (previewUrl) URL.revokeObjectURL(previewUrl);
+        if (outputUrl) URL.revokeObjectURL(outputUrl);
+        if (workerBlobUrl) URL.revokeObjectURL(workerBlobUrl);
+      });
+    })();
+  </script>
 </body>
 </html>
