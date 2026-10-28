@@ -1,292 +1,928 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Video to GIF Converter - Free Online | ToolsMediaDownload</title>
-    
-    <!-- Round Peach Favicon for Google Search -->
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon.svg">
-    <meta name="theme-color" content="#E07A5F">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video to GIF Converter - Free Online MP4 to GIF | ToolsMediaDownload</title>
+<meta name="description" content="Free online Video to GIF converter. Convert MP4 & WebM videos to high-quality animated GIFs instantly in your browser. No upload, 100% private.">
+<link rel="canonical" href="https://toolsmediadownload.com/video-to-gif.html">
+<meta property="og:title" content="Video to GIF Converter - Free Online MP4 to GIF">
+<meta property="og:description" content="Convert MP4 & WebM videos to animated GIFs instantly in your browser. No signup required.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://toolsmediadownload.com/video-to-gif.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Video to GIF Converter - Free Online">
+<meta name="twitter:description" content="Convert MP4 & WebM videos to animated GIFs instantly.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<meta name="theme-color" content="#E07A5F">
 
-    <!-- Fonts & Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Video to GIF Converter",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Any (Browser-based)",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Free browser-based Video to GIF converter. Convert MP4 and WebM videos into animated GIFs.",
+  "url": "https://toolsmediadownload.com/video-to-gif.html"
+}
+</script>
 
-    <!-- GIF Encoding Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
+<!-- GIF Encoding Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
 
-    <style>
-        :root {
-            --bg-warm: #FAF5EE;
-            --card-bg: #FFFFFF;
-            --primary-peach: #E07A5F;
-            --peach-hover: #D95D39;
-            --peach-light: #FDE8E1;
-            --peach-gradient: linear-gradient(135deg, #FF9E7D 0%, #E07A5F 50%, #D95D39 100%);
-            --text-dark: #2C221E;
-            --text-muted: #706661;
-            --border-warm: #EFE3D8;
-            --dark-footer: #1A1615;
-            --shadow-soft: 0 10px 30px rgba(224, 122, 95, 0.08);
-            --radius-main: 16px;
-        }
+<style>
+:root {
+  --bg-warm: #FAF5EE;
+  --card-bg: #FFFFFF;
+  --primary-peach: #E07A5F;
+  --peach-hover: #D95D39;
+  --peach-light: #FDE8E1;
+  --peach-gradient: linear-gradient(135deg, #FF9E7D 0%, #E07A5F 50%, #D95D39 100%);
+  --text-dark: #2C221E;
+  --text-muted: #5C534E;
+  --border-warm: #EFE3D8;
+  --dark-footer: #1A1615;
+  --glow-peach: rgba(224, 122, 95, 0.4);
+  --shadow-soft: 0 10px 30px rgba(224, 122, 95, 0.08);
+  --radius-main: 16px;
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--bg-warm); color: var(--text-dark); display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
+  /* Video to GIF accent (matches homepage card) */
+  --video-gif-gradient: linear-gradient(135deg, #06B6D4 0%, #0891B2 50%, #0E7490 100%);
+  --video-gif-solid: #0891B2;
+  --video-gif-glow: rgba(6, 182, 212, 0.4);
+  --video-gif-light: #CFFAFE;
+}
 
-        /* HEADER */
-        header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-warm); position: sticky; top: 0; z-index: 1000; }
-        .navbar { max-width: 1200px; margin: 0 auto; padding: 0.8rem 1.25rem; display: flex; align-items: center; justify-content: space-between; }
-        
-        .logo { 
-            font-family: 'Space Grotesk', sans-serif; 
-            font-size: clamp(1.1rem, 4.5vw, 1.6rem); 
-            font-weight: 700; 
-            color: var(--text-dark); 
-            text-decoration: none; 
-            display: flex; 
-            align-items: center; 
-            gap: 0.4rem;
-        }
-        .logo-icon { color: #FF9E7D; }
-        .logo span { background: var(--peach-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
 
-        /* CONTAINER */
-        .container { max-width: 800px; margin: 2rem auto; padding: 0 1.25rem; flex: 1; }
-        .header-box { text-align: center; margin-bottom: 2rem; }
-        .header-box h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.8rem, 6vw, 2.5rem); margin-bottom: 0.5rem; }
-        .header-box h1 span { color: var(--primary-peach); }
+html {
+  scroll-behavior: smooth;
+}
 
-        .card { background: var(--card-bg); border: 1px solid var(--border-warm); border-radius: var(--radius-main); padding: 2rem; box-shadow: var(--shadow-soft); text-align: center; }
-        
-        /* DROP ZONE */
-        .drop-zone { border: 2px dashed var(--primary-peach); border-radius: 14px; padding: 2.5rem 1rem; background: var(--peach-light); cursor: pointer; transition: 0.2s; }
-        .drop-zone i { font-size: 3rem; color: var(--primary-peach); margin-bottom: 1rem; }
-        .drop-zone h3 { font-size: 1.2rem; }
-        #fileInput { display: none; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-warm);
+  color: var(--text-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-        /* VIDEO PREVIEW CARD */
-        .file-preview { display: none; margin-top: 1.5rem; border: 1px solid var(--border-warm); border-radius: 12px; padding: 1rem; background: #FAFAFA; text-align: left; }
-        .file-preview video { width: 100%; border-radius: 8px; background: #000; margin-bottom: 1rem; max-height: 250px; }
-        .file-info { display: flex; justify-content: space-between; align-items: center; }
-        .file-info b { font-size: 0.9rem; word-break: break-all; }
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
-        /* CONTROLS */
-        .controls { display: none; margin-top: 1.5rem; }
-        .grid-settings { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; text-align: left; margin-bottom: 1.5rem; }
-        .setting-item label { display: block; font-weight: 700; font-size: 0.8rem; margin-bottom: 0.4rem; }
-        .range { width: 100%; accent-color: var(--primary-peach); }
+/* Skip Link */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  background: var(--primary-peach);
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0 0 8px 8px;
+  z-index: 999;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+}
 
-        .btn-main { width: 100%; background: var(--peach-gradient); color: #FFF; border: none; padding: 1rem; border-radius: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 4px 15px var(--glow-peach); }
-        .btn-main:disabled { opacity: 0.6; cursor: not-allowed; }
+/* Header */
+header {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  border-bottom: 1px solid var(--border-warm);
+  z-index: 100;
+  padding: 0.9rem 1.5rem;
+}
+.nav-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  white-space: nowrap;
+}
+.logo span {
+  background: var(--peach-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+nav[aria-label="Main navigation"] .nav-links {
+  display: flex;
+  gap: 1.8rem;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--text-dark);
+  font-weight: 500;
+  transition: color 0.2s;
+  font-size: 0.95rem;
+}
+.nav-links a:hover,
+.nav-links a:focus-visible {
+  color: var(--primary-peach);
+}
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: var(--text-dark);
+  padding: 0.25rem;
+}
+.hamburger:focus-visible {
+  outline: 2px solid var(--primary-peach);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
 
-        /* PROGRESS bar */
-        .progress-box { display: none; margin-top: 1.5rem; }
-        .bar-container { width: 100%; height: 10px; background: var(--bg-warm); border-radius: 10px; overflow: hidden; margin-top: 8px; }
-        .bar-fill { width: 0%; height: 100%; background: var(--peach-gradient); transition: 0.3s; }
+/* Mobile Menu */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 200;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.mobile-menu.active {
+  display: block;
+  opacity: 1;
+}
+.mobile-menu-panel {
+  background: #fff;
+  width: 85%;
+  max-width: 320px;
+  height: 100%;
+  padding: 2rem 1.5rem;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+}
+.mobile-menu.active .mobile-menu-panel {
+  transform: translateX(0);
+}
+.mobile-menu-panel .close-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  float: right;
+  cursor: pointer;
+  color: var(--text-dark);
+  padding: 0.25rem;
+}
+.mobile-menu-panel .close-btn:focus-visible {
+  outline: 2px solid var(--primary-peach);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.mobile-menu-panel ul {
+  list-style: none;
+  margin-top: 3rem;
+}
+.mobile-menu-panel li {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-warm);
+}
+.mobile-menu-panel a {
+  font-size: 1.1rem;
+  font-weight: 500;
+  display: block;
+}
+.mobile-menu-panel a:hover,
+.mobile-menu-panel a:focus-visible {
+  color: var(--primary-peach);
+}
 
-        .error-msg { display: none; background: #FCE8E6; color: #C5221F; padding: 1rem; border-radius: 10px; margin-top: 1.5rem; font-weight: 600; font-size: 0.9rem; }
+/* Page Hero */
+.page-hero {
+  background: var(--peach-gradient);
+  color: #fff;
+  padding: 3rem 1.5rem 2.5rem;
+  text-align: center;
+}
+.page-hero h1 {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+.page-hero p {
+  font-size: 1.05rem;
+  max-width: 600px;
+  margin: 0 auto;
+  opacity: 0.95;
+}
 
-        /* RESULT */
-        .result-area { display: none; margin-top: 2rem; border-top: 2px solid var(--border-warm); pt: 2rem; }
-        .result-img { max-width: 100%; border-radius: 12px; margin-bottom: 1.5rem; box-shadow: var(--shadow-soft); }
+/* Main */
+main {
+  flex: 1;
+}
 
-        footer { background: var(--dark-footer); color: #FFFFFF; padding: 2rem 1.25rem; margin-top: auto; text-align: center; font-size: 0.85rem; }
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 2.5rem auto;
+  padding: 0 1.25rem;
+}
 
-        @media (max-width: 600px) {
-            .grid-settings { grid-template-columns: 1fr; }
-            .card { padding: 1.25rem; }
-            .logo { font-size: 1.1rem; }
-        }
-    </style>
+/* Card */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-warm);
+  border-radius: var(--radius-main);
+  padding: 2rem;
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+}
+
+/* Drop Zone */
+.drop-zone {
+  border: 2px dashed var(--video-gif-solid);
+  border-radius: 14px;
+  padding: 2.5rem 1rem;
+  background: var(--video-gif-light);
+  cursor: pointer;
+  transition: 0.2s;
+}
+.drop-zone:hover {
+  background: #A5F3FC;
+}
+.drop-zone:focus-visible {
+  outline: 3px solid var(--text-dark);
+  outline-offset: 3px;
+}
+.drop-zone.dragover {
+  background: #A5F3FC;
+  border-color: #06B6D4;
+}
+.drop-zone-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 1rem;
+  display: block;
+  color: var(--video-gif-solid);
+}
+.drop-zone h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.drop-zone p {
+  color: var(--text-muted);
+  margin: 0.3rem 0;
+}
+
+#fileInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* File Preview */
+.file-preview {
+  display: none;
+  margin-top: 1.5rem;
+  border: 1px solid var(--border-warm);
+  border-radius: 12px;
+  padding: 1rem;
+  background: #FAFAFA;
+  text-align: left;
+}
+.file-preview video {
+  width: 100%;
+  border-radius: 8px;
+  background: #000;
+  margin-bottom: 1rem;
+  max-height: 250px;
+}
+.file-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.file-info b {
+  font-size: 0.9rem;
+  word-break: break-all;
+}
+.file-info span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Controls */
+.controls {
+  display: none;
+  margin-top: 1.5rem;
+}
+.grid-settings {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+.setting-item label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+  color: var(--text-dark);
+}
+.range {
+  width: 100%;
+  accent-color: var(--video-gif-solid);
+  cursor: pointer;
+}
+.range:focus-visible {
+  outline: 2px solid var(--video-gif-solid);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Buttons */
+.btn-main {
+  width: 100%;
+  background: var(--video-gif-gradient);
+  color: #fff;
+  border: 0;
+  padding: 1rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+.btn-main:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--video-gif-glow);
+}
+.btn-main:focus-visible {
+  outline: 3px solid var(--text-dark);
+  outline-offset: 2px;
+}
+.btn-main:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.btn-main svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Progress */
+.progress-box {
+  display: none;
+  margin-top: 1.5rem;
+}
+.progress-box h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+}
+.bar-container {
+  width: 100%;
+  height: 10px;
+  background: var(--bg-warm);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+.bar-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--video-gif-gradient);
+  transition: width 0.3s;
+}
+
+/* Error */
+.error-msg {
+  display: none;
+  background: #FCE8E6;
+  color: #C5221F;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 1.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+/* Result */
+.result-area {
+  display: none;
+  margin-top: 2rem;
+  border-top: 2px solid var(--border-warm);
+  padding-top: 2rem;
+}
+.result-area h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.result-img {
+  max-width: 100%;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-soft);
+}
+
+/* Footer */
+footer {
+  background: var(--dark-footer);
+  color: #fff;
+  padding: 3rem 1.5rem 1.5rem;
+}
+.footer-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+.footer-col h4 {
+  margin-bottom: 1rem;
+  color: var(--primary-peach);
+}
+.footer-col ul {
+  list-style: none;
+}
+.footer-col li {
+  margin-bottom: 0.5rem;
+}
+.footer-col a {
+  color: #ccc;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+.footer-col a:hover,
+.footer-col a:focus-visible {
+  color: var(--primary-peach);
+}
+.footer-bottom {
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid #333;
+  color: #999;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav[aria-label="Main navigation"] .nav-links {
+    display: none;
+  }
+  .hamburger {
+    display: block;
+  }
+}
+
+@media (max-width: 640px) {
+  header { padding: 0.75rem 1rem; }
+  .logo { font-size: 1.15rem; }
+  .page-hero { padding: 2rem 1rem 1.75rem; }
+  .container { margin: 1.5rem auto; padding: 0 0.9rem; }
+  .card { padding: 1.25rem; }
+  .grid-settings { grid-template-columns: 1fr; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
 </head>
 <body>
 
-    <header>
-        <nav class="navbar">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">⚡</span> ToolsMedia<span>Download</span>
-            </a>
-            <a href="index.html" style="text-decoration:none; color:var(--text-dark); font-weight:600; font-size:0.9rem;">Home</a>
-        </nav>
-    </header>
+<!-- Skip Navigation -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <main class="container">
-        <div class="header-box">
-            <h1>Video to <span>GIF</span></h1>
-            <p>Convert MP4/WebM videos to high-quality GIFs (Max 20MB).</p>
+<!-- Header -->
+<header>
+  <div class="nav-wrap">
+    <a href="index.html" class="logo" aria-label="ToolsMediaDownload Home">⚡ ToolsMedia<span>Download</span></a>
+    <nav aria-label="Main navigation">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" id="menuToggle">☰</button>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Mobile navigation menu">
+  <div class="mobile-menu-panel">
+    <button class="close-btn" aria-label="Close menu" id="menuClose">×</button>
+    <nav aria-label="Mobile navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="pdf-tools.html">PDF Tools</a></li>
+        <li><a href="disclaimer.html">Disclaimer</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- Main Content -->
+<main id="main-content">
+
+  <!-- Page Hero -->
+  <section class="page-hero" aria-labelledby="hero-heading">
+    <h1 id="hero-heading">Video to GIF</h1>
+    <p>Convert MP4 & WebM videos to high-quality animated GIFs — 100% private, runs in your browser (Max 20MB).</p>
+  </section>
+
+  <div class="container">
+    <section class="card" aria-label="Video to GIF converter tool">
+
+      <div class="drop-zone" id="dropZone" role="button" tabindex="0" aria-controls="fileInput">
+        <svg class="drop-zone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="23 7 16 12 23 17 23 7"/>
+          <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+        </svg>
+        <h3>Select Video File</h3>
+        <p>MP4 or WebM (Max 20MB)</p>
+        <input type="file" id="fileInput" accept="video/mp4,video/webm" aria-label="Choose a video file">
+      </div>
+
+      <div class="file-preview" id="previewCard">
+        <video id="vPreview" muted controls playsinline preload="auto"></video>
+        <div class="file-info">
+          <b id="vName">video.mp4</b>
+          <span id="vSize">0 MB</span>
         </div>
+      </div>
 
-        <div class="card">
-            <div class="drop-zone" onclick="document.getElementById('fileInput').click()" id="dropZone">
-                <i class="fas fa-video"></i>
-                <h3>Select Video File</h3>
-                <p>MP4 or WebM (Max 20MB)</p>
-                <input type="file" id="fileInput" accept="video/mp4,video/webm">
-            </div>
-
-            <div class="file-preview" id="previewCard">
-                <video id="vPreview" muted controls></video>
-                <div class="file-info">
-                    <b id="vName">video.mp4</b>
-                    <span id="vSize" style="font-size: 0.8rem; color:#888;">0 MB</span>
-                </div>
-            </div>
-
-            <div class="controls" id="controls">
-                <div class="grid-settings">
-                    <div class="setting-item">
-                        <label>Capture Speed (FPS): <span id="fpsVal">10</span></label>
-                        <input type="range" id="fpsRange" class="range" min="5" max="20" value="10" oninput="document.getElementById('fpsVal').innerText=this.value">
-                    </div>
-                    <div class="setting-item">
-                        <label>GIF Width: <span id="wVal">400</span>px</label>
-                        <input type="range" id="wRange" class="range" min="200" max="800" step="50" value="400" oninput="document.getElementById('wVal').innerText=this.value">
-                    </div>
-                </div>
-                <button class="btn-main" id="btnConvert" onclick="convertVideoToGif()">
-                    <i class="fas fa-magic"></i> Convert to GIF
-                </button>
-            </div>
-
-            <div id="errorMsg" class="error-msg"></div>
-
-            <div class="progress-box" id="progressBox">
-                <h4 id="statusText">Processing frames...</h4>
-                <div class="bar-container">
-                    <div class="bar-fill" id="barFill"></div>
-                </div>
-            </div>
-
-            <div class="result-area" id="resultArea">
-                <h3>Conversion Successful!</h3>
-                <img src="" id="finalGif" class="result-img">
-                <a id="dlLink" href="#" download="converted.gif" class="btn-main" style="max-width:300px; margin: 0 auto; text-decoration:none;">
-                    <i class="fas fa-download"></i> Download GIF
-                </a>
-            </div>
+      <div class="controls" id="controls">
+        <div class="grid-settings">
+          <div class="setting-item">
+            <label for="fpsRange">Capture Speed (FPS): <span id="fpsVal">10</span></label>
+            <input type="range" id="fpsRange" class="range" min="5" max="20" value="10" aria-label="Frames per second">
+          </div>
+          <div class="setting-item">
+            <label for="wRange">GIF Width: <span id="wVal">400</span>px</label>
+            <input type="range" id="wRange" class="range" min="200" max="800" step="50" value="400" aria-label="GIF width in pixels">
+          </div>
         </div>
-    </main>
+        <button class="btn-main" id="btnConvert" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M15 4V2M15 16v-2M8 9h2M20 9h2M17.8 11.8L19 13M15 9h.01M17.8 6.2L19 5M3 21l9-9M12.2 6.2L11 5"/>
+          </svg>
+          Convert to GIF
+        </button>
+      </div>
 
-    <footer>
-        <p>&copy; 2025 ToolsMediaDownload - Fast, Free & Private.</p>
-    </footer>
+      <div id="errorMsg" class="error-msg" role="alert"></div>
 
-    <script>
-        let videoFile = null;
-        let workerBlobUrl = null;
+      <div class="progress-box" id="progressBox" aria-live="polite">
+        <h4 id="statusText">Processing frames...</h4>
+        <div class="bar-container">
+          <div class="bar-fill" id="barFill"></div>
+        </div>
+      </div>
 
-        // INLINE WORKER SETUP (Fast & No CORS issues)
-        async function setupWorker() {
-            try {
-                const res = await fetch('https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js');
-                const js = await res.text();
-                workerBlobUrl = URL.createObjectURL(new Blob([js], {type: 'application/javascript'}));
-            } catch(e) {}
-        }
-        setupWorker();
+      <div class="result-area" id="resultArea">
+        <h3>Conversion Successful!</h3>
+        <img src="" id="finalGif" class="result-img" alt="Converted GIF preview">
+        <a id="dlLink" href="#" download="converted.gif" class="btn-main" style="max-width:300px; margin:0 auto;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download GIF
+        </a>
+      </div>
+    </section>
+  </div>
 
-        const fileInput = document.getElementById('fileInput');
-        fileInput.onchange = (e) => {
-            if(e.target.files.length) handleVideo(e.target.files[0]);
-        };
+</main>
 
-        function handleVideo(file) {
-            const err = document.getElementById('errorMsg');
-            err.style.display = 'none';
+<!-- Footer -->
+<footer role="contentinfo">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>⚡ ToolsMediaDownload</h4>
+      <p style="color:#ccc;font-size:0.9rem;">Free browser-based tools for creators, developers & everyone.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Tools</h4>
+      <ul>
+        <li><a href="gif-compressor.html">GIF Compressor</a></li>
+        <li><a href="pdf-tools.html">PDF Tools</a></li>
+        <li><a href="qr-generator.html">QR Generator</a></li>
+        <li><a href="image-converter.html">Image Converter</a></li>
+        <li><a href="password-generator.html">Password Generator</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="disclaimer.html">Disclaimer</a></li>
+        <li><a href="terms.html">Terms of Service</a></li>
+        <li><a href="dmca.html">DMCA</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>Files are processed in your browser. Your video is not uploaded by this page.</p>
+    <p style="margin-top:0.5rem;">© <span id="footerYear"></span> ToolsMediaDownload. All rights reserved.</p>
+  </div>
+</footer>
 
-            // 20MB LIMIT CHECK
-            if (file.size > 20 * 1024 * 1024) {
-                err.innerText = "Error: File size exceeds 20MB limit. Please select a smaller video.";
-                err.style.display = 'block';
-                return;
-            }
+<!-- Mobile Menu Script -->
+<script>
+document.getElementById('footerYear').textContent = new Date().getFullYear();
 
-            videoFile = file;
-            document.getElementById('vName').innerText = file.name;
-            document.getElementById('vSize').innerText = (file.size / 1048576).toFixed(2) + " MB";
+const mobileMenu = document.getElementById('mobileMenu');
+const menuToggle = document.getElementById('menuToggle');
+const menuClose = document.getElementById('menuClose');
+let lastFocused = null;
+
+function openMenu() {
+  lastFocused = document.activeElement;
+  mobileMenu.classList.add('active');
+  menuToggle.setAttribute('aria-expanded', 'true');
+  menuClose.focus();
+  document.body.style.overflow = 'hidden';
+  trapFocus(mobileMenu);
+}
+
+function closeMenu() {
+  mobileMenu.classList.remove('active');
+  menuToggle.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+  if (lastFocused) lastFocused.focus();
+}
+
+menuToggle.addEventListener('click', openMenu);
+menuClose.addEventListener('click', closeMenu);
+
+mobileMenu.addEventListener('click', function(e) {
+  if (e.target === mobileMenu) closeMenu();
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+    closeMenu();
+  }
+});
+
+mobileMenu.querySelectorAll('a').forEach(function(link) {
+  link.addEventListener('click', closeMenu);
+});
+
+function trapFocus(element) {
+  const focusableEls = element.querySelectorAll(
+    'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
+  );
+  const firstEl = focusableEls[0];
+  const lastEl = focusableEls[focusableEls.length - 1];
+
+  function handleTab(e) {
+    if (e.key !== 'Tab') return;
+    if (!mobileMenu.classList.contains('active')) {
+      element.removeEventListener('keydown', handleTab);
+      return;
+    }
+    if (e.shiftKey) {
+      if (document.activeElement === firstEl) {
+        lastEl.focus();
+        e.preventDefault();
+      }
+    } else {
+      if (document.activeElement === lastEl) {
+        firstEl.focus();
+        e.preventDefault();
+      }
+    }
+  }
+
+  element.addEventListener('keydown', handleTab);
+}
+</script>
+
+<!-- Video to GIF Tool Logic -->
+<script>
+let videoFile = null;
+let workerBlobUrl = null;
+
+// INLINE WORKER SETUP (Fast & No CORS issues)
+async function setupWorker() {
+    try {
+        const res = await fetch('https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js');
+        const js = await res.text();
+        workerBlobUrl = URL.createObjectURL(new Blob([js], {type: 'application/javascript'}));
+    } catch(e) {}
+}
+setupWorker();
+
+const fileInput = document.getElementById('fileInput');
+const dropZone = document.getElementById('dropZone');
+
+fileInput.onchange = (e) => {
+    if(e.target.files.length) handleVideo(e.target.files[0]);
+};
+
+// Drop zone click & keyboard
+dropZone.addEventListener('click', () => fileInput.click());
+dropZone.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        fileInput.click();
+    }
+});
+
+// Drag & drop support
+['dragenter', 'dragover'].forEach(type => {
+    dropZone.addEventListener(type, (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+    });
+});
+['dragleave', 'drop'].forEach(type => {
+    dropZone.addEventListener(type, (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+    });
+});
+dropZone.addEventListener('drop', (e) => {
+    const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+    if (file) handleVideo(file);
+});
+
+// Range input live updates
+document.getElementById('fpsRange').addEventListener('input', function() {
+    document.getElementById('fpsVal').innerText = this.value;
+});
+document.getElementById('wRange').addEventListener('input', function() {
+    document.getElementById('wVal').innerText = this.value;
+});
+
+// Convert button
+document.getElementById('btnConvert').addEventListener('click', convertVideoToGif);
+
+function handleVideo(file) {
+    const err = document.getElementById('errorMsg');
+    err.style.display = 'none';
+
+    // 20MB LIMIT CHECK
+    if (file.size > 20 * 1024 * 1024) {
+        err.innerText = "Error: File size exceeds 20MB limit. Please select a smaller video.";
+        err.style.display = 'block';
+        return;
+    }
+
+    videoFile = file;
+    document.getElementById('vName').innerText = file.name;
+    document.getElementById('vSize').innerText = (file.size / 1048576).toFixed(2) + " MB";
+    
+    const url = URL.createObjectURL(file);
+    document.getElementById('vPreview').src = url;
+    
+    document.getElementById('previewCard').style.display = 'block';
+    document.getElementById('controls').style.display = 'block';
+    document.getElementById('resultArea').style.display = 'none';
+}
+
+async function convertVideoToGif() {
+    if(!videoFile) return;
+
+    const btn = document.getElementById('btnConvert');
+    const progress = document.getElementById('progressBox');
+    const bar = document.getElementById('barFill');
+    const status = document.getElementById('statusText');
+    
+    btn.disabled = true;
+    progress.style.display = 'block';
+    bar.style.width = '5%';
+
+    const video = document.createElement('video');
+    video.src = URL.createObjectURL(videoFile);
+    video.muted = true;
+    video.playsInline = true;
+    video.preload = 'auto';
+
+    video.onloadedmetadata = async () => {
+        const duration = video.duration;
+        const fps = parseInt(document.getElementById('fpsRange').value);
+        const targetWidth = parseInt(document.getElementById('wRange').value);
+        const targetHeight = video.videoHeight * (targetWidth / video.videoWidth);
+
+        const gif = new GIF({
+            workers: 2,
+            quality: 10,
+            width: targetWidth,
+            height: targetHeight,
+            workerScript: workerBlobUrl || 'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js'
+        });
+
+        const canvas = document.createElement('canvas');
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+        const ctx = canvas.getContext('2d');
+
+        status.innerText = "Extracting frames...";
+        
+        let currentTime = 0;
+        const interval = 1 / fps;
+
+        while (currentTime < duration) {
+            video.currentTime = currentTime;
+            await new Promise(r => video.onseeked = r);
             
-            const url = URL.createObjectURL(file);
-            document.getElementById('vPreview').src = url;
+            ctx.drawImage(video, 0, 0, targetWidth, targetHeight);
+            gif.addFrame(ctx, {copy: true, delay: interval * 1000});
             
-            document.getElementById('previewCard').style.display = 'block';
-            document.getElementById('controls').style.display = 'block';
-            document.getElementById('resultArea').style.display = 'none';
+            currentTime += interval;
+            bar.style.width = (5 + (currentTime / duration) * 60) + "%";
         }
 
-        async function convertVideoToGif() {
-            if(!videoFile) return;
+        status.innerText = "Building GIF animation...";
+        gif.on('progress', p => { bar.style.width = (65 + p * 30) + "%"; });
 
-            const btn = document.getElementById('btnConvert');
-            const progress = document.getElementById('progressBox');
-            const bar = document.getElementById('barFill');
-            const status = document.getElementById('statusText');
+        gif.on('finished', blob => {
+            bar.style.width = "100%";
+            const finalUrl = URL.createObjectURL(blob);
+            document.getElementById('finalGif').src = finalUrl;
+            document.getElementById('dlLink').href = finalUrl;
             
-            btn.disabled = true;
-            progress.style.display = 'block';
-            bar.style.width = '5%';
+            progress.style.display = 'none';
+            document.getElementById('resultArea').style.display = 'block';
+            document.getElementById('resultArea').scrollIntoView({behavior:'smooth'});
+            btn.disabled = false;
+        });
 
-            const video = document.createElement('video');
-            video.src = URL.createObjectURL(videoFile);
-            video.muted = true;
+        gif.render();
+    };
+}
+</script>
 
-            video.onloadedmetadata = async () => {
-                const duration = video.duration;
-                const fps = parseInt(document.getElementById('fpsRange').value);
-                const targetWidth = parseInt(document.getElementById('wRange').value);
-                const targetHeight = video.videoHeight * (targetWidth / video.videoWidth);
-
-                const gif = new GIF({
-                    workers: 2,
-                    quality: 10,
-                    width: targetWidth,
-                    height: targetHeight,
-                    workerScript: workerBlobUrl || 'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js'
-                });
-
-                const canvas = document.createElement('canvas');
-                canvas.width = targetWidth;
-                canvas.height = targetHeight;
-                const ctx = canvas.getContext('2d');
-
-                status.innerText = "Extracting frames...";
-                
-                let currentTime = 0;
-                const interval = 1 / fps;
-
-                while (currentTime < duration) {
-                    video.currentTime = currentTime;
-                    await new Promise(r => video.onseeked = r);
-                    
-                    ctx.drawImage(video, 0, 0, targetWidth, targetHeight);
-                    gif.addFrame(ctx, {copy: true, delay: interval * 1000});
-                    
-                    currentTime += interval;
-                    bar.style.width = (5 + (currentTime / duration) * 60) + "%";
-                }
-
-                status.innerText = "Building GIF animation...";
-                gif.on('progress', p => { bar.style.width = (65 + p * 30) + "%"; });
-
-                gif.on('finished', blob => {
-                    bar.style.width = "100%";
-                    const finalUrl = URL.createObjectURL(blob);
-                    document.getElementById('finalGif').src = finalUrl;
-                    document.getElementById('dlLink').href = finalUrl;
-                    
-                    progress.style.display = 'none';
-                    document.getElementById('resultArea').style.display = 'block';
-                    document.getElementById('resultArea').scrollIntoView({behavior:'smooth'});
-                    btn.disabled = false;
-                });
-
-                gif.render();
-            };
-        }
-    </script>
 </body>
 </html>
