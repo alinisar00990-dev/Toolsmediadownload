@@ -1,324 +1,1117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GIF Compressor - Fast Animated GIF Compression | ToolsMediaDownload</title>
-    
-    <!-- Round Peach Favicon -->
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon.svg">
-    <meta name="theme-color" content="#E07A5F">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GIF Compressor - ToolsMediaDownload</title>
+<meta name="theme-color" content="#E07A5F">
 
-    <!-- Fonts & Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Standalone Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/omggif@1.0.10/omggif.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
+<script>
+window.__gifLibsReady = (async function () {
+  function loadScript(url) {
+    return new Promise(function (resolve, reject) {
+      var script = document.createElement("script");
+      script.src = url;
+      script.async = true;
+      script.onload = function () { resolve(url); };
+      script.onerror = function () {
+        script.remove();
+        reject(new Error("Could not load " + url));
+      };
+      document.head.appendChild(script);
+    });
+  }
 
-    <style>
-        :root {
-            --bg-warm: #FAF5EE;
-            --card-bg: #FFFFFF;
-            --primary-peach: #E07A5F;
-            --peach-hover: #D95D39;
-            --peach-light: #FDE8E1;
-            --peach-gradient: linear-gradient(135deg, #FF9E7D 0%, #E07A5F 50%, #D95D39 100%);
-            --text-dark: #2C221E;
-            --text-muted: #706661;
-            --border-warm: #EFE3D8;
-            --dark-footer: #1A1615;
-            --shadow-soft: 0 10px 30px rgba(224, 122, 95, 0.08);
-            --radius-main: 16px;
+  async function loadAny(urls, test, name) {
+    var lastError;
+
+    for (var i = 0; i < urls.length; i++) {
+      try {
+        await loadScript(urls[i]);
+
+        if (test()) {
+          console.log(name + " loaded:", urls[i]);
+          return urls[i];
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--bg-warm); color: var(--text-dark); display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
+        throw new Error("Library loaded, but its API was not found.");
+      } catch (error) {
+        lastError = error;
+        console.warn(name + " failed:", urls[i], error);
+      }
+    }
 
-        /* HEADER */
-        header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-warm); position: sticky; top: 0; z-index: 1000; }
-        .navbar { max-width: 1200px; margin: 0 auto; padding: 0.8rem 1.25rem; display: flex; align-items: center; justify-content: space-between; }
-        
-        .logo { 
-            font-family: 'Space Grotesk', sans-serif; 
-            font-size: clamp(1.1rem, 4.5vw, 1.6rem); 
-            font-weight: 700; 
-            color: var(--text-dark); 
-            text-decoration: none; 
-            display: flex; 
-            align-items: center; 
-            gap: 0.4rem;
-        }
-        .logo-icon { color: #FF9E7D; }
-        .logo span { background: var(--peach-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    throw new Error(
+      "Could not load " + name + " from any CDN. " +
+      "Check your internet connection, browser extensions, or security settings. " +
+      (lastError ? lastError.message : "")
+    );
+  }
 
-        .nav-links { display: flex; gap: 1.5rem; list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 0.9rem; }
+  /*
+   * Omggif may expose its API as:
+   * window.omggif, window.Omggif, or browser globals.
+   * Normalize the different exports to window.__omggif.
+   */
+  await loadAny(
+    [
+      "https://cdn.jsdelivr.net/npm/omggif@1.0.10/omggif.js",
+      "https://unpkg.com/omggif@1.0.10/omggif.js"
+    ],
+    function () {
+      var lib = window.omggif || window.Omggif;
+      return !!(
+        (lib && typeof lib.GifReader === "function") ||
+        typeof window.GifReader === "function"
+      );
+    },
+    "Omggif"
+  );
 
-        /* MAIN CONTENT */
-        .container { max-width: 800px; margin: 2rem auto; padding: 0 1.25rem; flex: 1; }
-        .header-box { text-align: center; margin-bottom: 2rem; }
-        .header-box h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.8rem, 6vw, 2.5rem); margin-bottom: 0.5rem; }
-        .header-box h1 span { color: var(--primary-peach); }
+  var omggif = window.omggif || window.Omggif;
 
-        .card { background: var(--card-bg); border: 1px solid var(--border-warm); border-radius: var(--radius-main); padding: 2rem; box-shadow: var(--shadow-soft); text-align: center; }
-        
-        /* DROP ZONE */
-        .drop-zone { border: 2px dashed var(--primary-peach); border-radius: 14px; padding: 2.5rem 1rem; background: var(--peach-light); cursor: pointer; transition: 0.2s; }
-        .drop-zone i { font-size: 3rem; color: var(--primary-peach); margin-bottom: 1rem; }
-        .drop-zone h3 { font-size: 1.2rem; margin-bottom: 0.4rem; }
-        #fileInput { display: none; }
+  if (!omggif && typeof window.GifReader === "function") {
+    omggif = {
+      GifReader: window.GifReader,
+      GifWriter: window.GifWriter
+    };
+  }
 
-        /* PREVIEW AREA */
-        .preview-box { display: none; margin-top: 1.5rem; border: 1px solid var(--border-warm); border-radius: 12px; padding: 1rem; text-align: left; background: #FAFAFA; }
-        .preview-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
-        .preview-header img { width: 80px; height: 80px; object-fit: contain; border-radius: 8px; background: #000; }
-        .file-meta b { display: block; font-size: 0.95rem; word-break: break-all; }
-        .file-meta span { font-size: 0.8rem; color: var(--text-muted); }
+  window.__omggif = omggif;
 
-        /* CONTROLS */
-        .controls { display: none; margin-top: 1.5rem; }
-        .grid-settings { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; text-align: left; margin-bottom: 1.5rem; }
-        .setting-item label { display: block; font-weight: 700; font-size: 0.85rem; margin-bottom: 0.5rem; }
-        .range { width: 100%; accent-color: var(--primary-peach); cursor: pointer; }
+  if (!window.__omggif || typeof window.__omggif.GifReader !== "function") {
+    throw new Error("Omggif loaded, but GifReader was not found.");
+  }
 
-        .btn-main { width: 100%; background: var(--peach-gradient); color: #FFF; border: none; padding: 1rem; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 15px var(--glow-peach); display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
-        .btn-main:disabled { opacity: 0.6; cursor: not-allowed; }
+  await loadAny(
+    [
+      "https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js",
+      "https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.js",
+      "https://unpkg.com/gif.js@0.2.0/dist/gif.js"
+    ],
+    function () {
+      return typeof window.GIF === "function";
+    },
+    "GIF.js"
+  );
 
-        /* PROGRESS */
-        .progress-area { display: none; margin-top: 1.5rem; }
-        .bar-container { width: 100%; height: 10px; background: var(--bg-warm); border-radius: 10px; overflow: hidden; margin: 10px 0; }
-        .bar-fill { width: 0%; height: 100%; background: var(--peach-gradient); transition: 0.3s; }
+  window.__gifWorkerUrls = [
+    "https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js",
+    "https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js",
+    "https://unpkg.com/gif.js@0.2.0/dist/gif.worker.js"
+  ];
 
-        .error-msg { display: none; background: #FCE8E6; color: #C5221F; padding: 1rem; border-radius: 10px; margin-top: 1.5rem; font-weight: 600; font-size: 0.9rem; }
+  return true;
+})();
+</script>
 
-        /* RESULT */
-        .result-area { display: none; margin-top: 2rem; border-top: 2px solid var(--border-warm); pt: 2rem; }
-        .result-img { max-width: 100%; border-radius: 12px; margin-bottom: 1.5rem; box-shadow: var(--shadow-soft); }
-        .stats { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; }
-        .stat-item { background: var(--bg-warm); padding: 0.5rem 1rem; border-radius: 8px; }
-        .stat-item small { display: block; font-size: 0.7rem; color: #777; }
+<style>
+:root {
+  --bg-warm:#FAF5EE;
+  --card-bg:#fff;
+  --primary-peach:#E07A5F;
+  --peach-hover:#D95D39;
+  --peach-light:#FDE8E1;
+  --peach-gradient:linear-gradient(135deg,#FF9E7D 0%,#E07A5F 50%,#D95D39 100%);
+  --text-dark:#2C221E;
+  --text-muted:#706661;
+  --border-warm:#EFE3D8;
+  --shadow-soft:0 10px 30px rgba(224,122,95,.08);
+  --radius-main:16px;
+}
 
-        @media (max-width: 600px) {
-            .grid-settings { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
-            .card { padding: 1.25rem; }
-        }
-    </style>
+* {
+  box-sizing:border-box;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  -webkit-tap-highlight-color:transparent;
+}
+
+body {
+  margin:0;
+  background:var(--bg-warm);
+  color:var(--text-dark);
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+header {
+  background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--border-warm);
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+.navbar {
+  max-width:1200px;
+  margin:auto;
+  padding:.8rem 1.25rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(1.1rem,4.5vw,1.6rem);
+  font-weight:700;
+  color:var(--text-dark);
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:.4rem;
+}
+
+.logo-icon { color:#FF9E7D; }
+
+.logo span:last-child {
+  background:var(--peach-gradient);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.nav-links {
+  display:flex;
+  gap:1.5rem;
+  list-style:none;
+}
+
+.nav-links a {
+  text-decoration:none;
+  color:var(--text-dark);
+  font-weight:600;
+  font-size:.9rem;
+}
+
+.container {
+  width:100%;
+  max-width:800px;
+  margin:2rem auto;
+  padding:0 1.25rem;
+  flex:1;
+}
+
+.header-box {
+  text-align:center;
+  margin-bottom:2rem;
+}
+
+.header-box h1 {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(1.8rem,6vw,2.5rem);
+  margin:0 0 .5rem;
+}
+
+.header-box h1 span { color:var(--primary-peach); }
+
+.card {
+  background:var(--card-bg);
+  border:1px solid var(--border-warm);
+  border-radius:var(--radius-main);
+  padding:2rem;
+  box-shadow:var(--shadow-soft);
+  text-align:center;
+}
+
+.drop-zone {
+  border:2px dashed var(--primary-peach);
+  border-radius:14px;
+  padding:2.5rem 1rem;
+  background:var(--peach-light);
+  cursor:pointer;
+  transition:.2s;
+}
+
+.drop-zone:focus-visible {
+  outline:3px solid #2C221E;
+  outline-offset:3px;
+}
+
+.drop-zone.dragover { background:#fbd8cd; }
+
+.drop-zone i {
+  font-size:3rem;
+  color:var(--primary-peach);
+  margin-bottom:1rem;
+}
+
+.drop-zone h3 {
+  font-size:1.2rem;
+  margin:0 0 .4rem;
+}
+
+.drop-zone p { margin:.4rem 0; }
+
+#fileInput {
+  position:absolute;
+  width:1px;
+  height:1px;
+  opacity:0;
+  pointer-events:none;
+}
+
+.preview-box {
+  display:none;
+  margin-top:1.5rem;
+  border:1px solid var(--border-warm);
+  border-radius:12px;
+  padding:1rem;
+  text-align:left;
+  background:#FAFAFA;
+}
+
+.preview-header {
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  min-width:0;
+}
+
+.preview-header img {
+  width:80px;
+  height:80px;
+  flex-shrink:0;
+  object-fit:contain;
+  border-radius:8px;
+  background:#000;
+}
+
+.file-meta { min-width:0; }
+
+.file-meta b {
+  display:block;
+  font-size:.95rem;
+  overflow-wrap:anywhere;
+}
+
+.file-meta span {
+  font-size:.8rem;
+  color:var(--text-muted);
+}
+
+.controls {
+  display:none;
+  margin-top:1.5rem;
+}
+
+.grid-settings {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.5rem;
+  text-align:left;
+  margin-bottom:1.5rem;
+}
+
+.setting-item label {
+  display:block;
+  font-weight:700;
+  font-size:.85rem;
+  margin-bottom:.5rem;
+}
+
+.range {
+  width:100%;
+  accent-color:var(--primary-peach);
+  cursor:pointer;
+}
+
+.btn-main {
+  width:100%;
+  background:var(--peach-gradient);
+  color:#fff;
+  border:0;
+  padding:1rem;
+  border-radius:12px;
+  font-weight:700;
+  font-size:1rem;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+  text-decoration:none;
+}
+
+.btn-main:disabled {
+  opacity:.6;
+  cursor:wait;
+}
+
+.secondary-btn {
+  margin-top:.75rem;
+  background:#fff;
+  color:var(--text-dark);
+  border:1px solid var(--border-warm);
+  padding:.7rem 1rem;
+  border-radius:10px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.progress-area {
+  display:none;
+  margin-top:1.5rem;
+}
+
+.bar-container {
+  width:100%;
+  height:10px;
+  background:var(--bg-warm);
+  border-radius:10px;
+  overflow:hidden;
+  margin:10px 0;
+}
+
+.bar-fill {
+  width:0;
+  height:100%;
+  background:var(--peach-gradient);
+  transition:width .2s;
+}
+
+.error-msg,.success-msg {
+  display:none;
+  padding:1rem;
+  border-radius:10px;
+  margin-top:1.5rem;
+  font-weight:600;
+  font-size:.9rem;
+  text-align:left;
+  overflow-wrap:anywhere;
+}
+
+.error-msg {
+  background:#FCE8E6;
+  color:#C5221F;
+}
+
+.success-msg {
+  background:#e6f4ea;
+  color:#137333;
+}
+
+.result-area {
+  display:none;
+  margin-top:2rem;
+  border-top:2px solid var(--border-warm);
+  padding-top:2rem;
+}
+
+.result-img {
+  max-width:100%;
+  max-height:360px;
+  border-radius:12px;
+  margin:1rem auto 1.5rem;
+  display:block;
+  box-shadow:var(--shadow-soft);
+}
+
+.stats {
+  display:flex;
+  justify-content:center;
+  gap:1rem;
+  margin-bottom:1.5rem;
+  flex-wrap:wrap;
+}
+
+.stat-item {
+  background:var(--bg-warm);
+  padding:.7rem 1rem;
+  border-radius:8px;
+  min-width:110px;
+}
+
+.stat-item small {
+  display:block;
+  font-size:.7rem;
+  color:#777;
+}
+
+footer {
+  text-align:center;
+  padding:1.5rem;
+  color:var(--text-muted);
+  font-size:.85rem;
+}
+
+@media(max-width:600px) {
+  .grid-settings {
+    grid-template-columns:1fr;
+    gap:1rem;
+  }
+
+  .nav-links { display:none; }
+
+  .card { padding:1.1rem; }
+
+  .container {
+    margin:1.25rem auto;
+    padding:0 .8rem;
+  }
+
+  .stats { gap:.5rem; }
+
+  .stat-item { flex:1; }
+}
+</style>
 </head>
+
 <body>
 
-    <header>
-        <nav class="navbar">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">⚡</span> ToolsMedia<span>Download</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="blog.html">Blog</a></li>
-            </ul>
-        </nav>
-    </header>
+<header>
+  <nav class="navbar">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">⚡</span>
+      ToolsMedia<span>Download</span>
+    </a>
 
-    <main class="container">
-        <div class="header-box">
-            <h1>GIF <span>Compressor</span></h1>
-            <p>High-quality animated GIF reduction for mobile and desktop.</p>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="container">
+
+  <div class="header-box">
+    <h1>GIF <span>Compressor</span></h1>
+    <p>Reduce animated GIF file size on mobile and desktop.</p>
+  </div>
+
+  <section class="card" aria-label="GIF compressor">
+
+    <div class="drop-zone" id="dropZone" role="button" tabindex="0" aria-controls="fileInput">
+      <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>
+      <h3>Select Animated GIF</h3>
+      <p>Tap to browse or drag a file here</p>
+      <p><small>For best results, start with a reasonably sized GIF.</small></p>
+    </div>
+
+    <input type="file" id="fileInput" accept=".gif,image/gif" aria-label="Choose a GIF file">
+
+    <div class="preview-box" id="previewBox">
+      <div class="preview-header">
+        <img id="thumbPreview" alt="Selected GIF preview">
+        <div class="file-meta">
+          <b id="fileNameText">animation.gif</b>
+          <span id="fileSizeText">0 KB</span>
+        </div>
+      </div>
+
+      <button type="button" class="secondary-btn" id="changeFileBtn">
+        Choose another GIF
+      </button>
+    </div>
+
+    <div class="controls" id="controls">
+
+      <div class="grid-settings">
+
+        <div class="setting-item">
+          <label for="qRange">Compression: <span id="qLabel">60%</span></label>
+          <input type="range" id="qRange" class="range" min="10" max="90" value="60">
         </div>
 
-        <div class="card">
-            <div class="drop-zone" onclick="document.getElementById('fileInput').click()" id="dropZone">
-                <i class="fas fa-cloud-upload-alt"></i>
-                <h3>Select Animated GIF</h3>
-                <p>Click to browse or drag file here</p>
-                <input type="file" id="fileInput" accept="image/gif">
-            </div>
-
-            <div class="preview-box" id="previewBox">
-                <div class="preview-header">
-                    <img id="thumbPreview" src="" alt="">
-                    <div class="file-meta">
-                        <b id="fileNameText">animation.gif</b>
-                        <span id="fileSizeText">0 KB</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="controls" id="controls">
-                <div class="grid-settings">
-                    <div class="setting-item">
-                        <label>Compression: <span id="qLabel">60%</span></label>
-                        <input type="range" id="qRange" class="range" min="10" max="90" value="60" oninput="document.getElementById('qLabel').innerText=this.value+'%'">
-                    </div>
-                    <div class="setting-item">
-                        <label>Resize: <span id="sLabel">100%</span></label>
-                        <input type="range" id="sRange" class="range" min="20" max="100" value="100" oninput="document.getElementById('sLabel').innerText=this.value+'%'">
-                    </div>
-                </div>
-                <button class="btn-main" id="btnGo" onclick="processGif()">
-                    <i class="fas fa-compress-arrows-alt"></i> Compress GIF
-                </button>
-            </div>
-
-            <div id="errorMsg" class="error-msg"></div>
-
-            <div class="progress-area" id="progressArea">
-                <h4 id="statusText">Processing...</h4>
-                <div class="bar-container">
-                    <div class="bar-fill" id="barFill"></div>
-                </div>
-            </div>
-
-            <div class="result-area" id="resultArea">
-                <h3>Compression Ready!</h3>
-                <img src="" id="finalGif" class="result-img">
-                <div class="stats">
-                    <div class="stat-item"><small>New Size</small><strong id="newSize">0 KB</strong></div>
-                    <div class="stat-card stat-item"><small>Saved</small><strong id="savePercent" style="color:green">0%</strong></div>
-                </div>
-                <a id="dlLink" href="#" download="compressed.gif" class="btn-main" style="max-width:300px; margin: 0 auto; text-decoration:none;">
-                    <i class="fas fa-download"></i> Download GIF
-                </a>
-            </div>
+        <div class="setting-item">
+          <label for="sRange">Resize: <span id="sLabel">100%</span></label>
+          <input type="range" id="sRange" class="range" min="20" max="100" value="100">
         </div>
-    </main>
 
-    <script>
-        let gifData = null;
-        let originalFile = null;
-        let workerBlobUrl = null;
+      </div>
 
-        // INLINE WORKER to prevent all CORS / Loading issues
-        async function setupWorker() {
-            try {
-                const res = await fetch('https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js');
-                const js = await res.text();
-                workerBlobUrl = URL.createObjectURL(new Blob([js], {type: 'application/javascript'}));
-            } catch(e) { console.error("Worker failed to init"); }
+      <button class="btn-main" id="btnGo" type="button">
+        <i class="fas fa-compress-arrows-alt" aria-hidden="true"></i>
+        Compress GIF
+      </button>
+
+    </div>
+
+    <div id="errorMsg" class="error-msg" role="alert"></div>
+    <div id="successMsg" class="success-msg" role="status"></div>
+
+    <div class="progress-area" id="progressArea" aria-live="polite">
+      <h4 id="statusText">Preparing GIF…</h4>
+      <div class="bar-container">
+        <div class="bar-fill" id="barFill"></div>
+      </div>
+      <span id="progressPercent">0%</span>
+    </div>
+
+    <div class="result-area" id="resultArea">
+      <h3>Compression Ready!</h3>
+
+      <img id="finalGif" class="result-img" alt="Compressed GIF preview">
+
+      <div class="stats">
+        <div class="stat-item">
+          <small>Original size</small>
+          <strong id="oldSize">0 KB</strong>
+        </div>
+
+        <div class="stat-item">
+          <small>New size</small>
+          <strong id="newSize">0 KB</strong>
+        </div>
+
+        <div class="stat-item">
+          <small>Saved</small>
+          <strong id="savePercent">0%</strong>
+        </div>
+      </div>
+
+      <a id="dlLink" href="#" download="compressed.gif" class="btn-main">
+        <i class="fas fa-download" aria-hidden="true"></i>
+        Download GIF
+      </a>
+
+      <p id="downloadHint">
+        <small>If your browser opens the GIF instead of saving it, use the browser's Share or Save option.</small>
+      </p>
+    </div>
+
+  </section>
+</main>
+
+<footer>Files are processed in your browser. Your GIF is not uploaded by this page.</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  var $ = function (id) {
+    return document.getElementById(id);
+  };
+
+  var fileInput = $("fileInput");
+  var dropZone = $("dropZone");
+  var btn = $("btnGo");
+
+  var originalFile = null;
+  var gifData = null;
+  var previewUrl = null;
+  var outputUrl = null;
+  var workerBlobUrl = null;
+  var selectionToken = 0;
+
+  function formatSize(bytes) {
+    if (!Number.isFinite(bytes)) return "Unknown size";
+    if (bytes < 1024) return bytes + " Bytes";
+    if (bytes < 1048576) return (bytes / 1024).toFixed(1) + " KB";
+    return (bytes / 1048576).toFixed(2) + " MB";
+  }
+
+  function showError(message) {
+    $("errorMsg").textContent = message;
+    $("errorMsg").style.display = "block";
+    $("successMsg").style.display = "none";
+  }
+
+  function clearError() {
+    $("errorMsg").style.display = "none";
+    $("errorMsg").textContent = "";
+  }
+
+  function setProgress(value, message) {
+    var n = Math.max(0, Math.min(100, Math.round(value)));
+    $("barFill").style.width = n + "%";
+    $("progressPercent").textContent = n + "%";
+
+    if (message) {
+      $("statusText").textContent = message;
+    }
+  }
+
+  function isGifHeader(bytes) {
+    return bytes.length >= 6 &&
+      bytes[0] === 0x47 &&
+      bytes[1] === 0x49 &&
+      bytes[2] === 0x46 &&
+      bytes[3] === 0x38 &&
+      (bytes[4] === 0x37 || bytes[4] === 0x39) &&
+      bytes[5] === 0x61;
+  }
+
+  function readAsArrayBuffer(file) {
+    return new Promise(function (resolve, reject) {
+      var reader = new FileReader();
+
+      reader.onload = function () {
+        resolve(reader.result);
+      };
+
+      reader.onerror = function () {
+        reject(new Error("The browser could not read this file. Please choose it again."));
+      };
+
+      reader.onabort = function () {
+        reject(new Error("File reading was cancelled. Please try again."));
+      };
+
+      reader.readAsArrayBuffer(file);
+    });
+  }
+
+  async function ensureWorker() {
+    if (workerBlobUrl) return workerBlobUrl;
+
+    var urls = window.__gifWorkerUrls || [];
+    var lastError;
+
+    for (var i = 0; i < urls.length; i++) {
+      try {
+        var response = await fetch(urls[i], { cache: "force-cache" });
+
+        if (!response.ok) {
+          throw new Error("HTTP " + response.status);
         }
-        setupWorker();
 
-        const fileInput = document.getElementById('fileInput');
-        fileInput.onchange = (e) => {
-            if(e.target.files.length) handleFile(e.target.files[0]);
-        };
+        var source = await response.text();
 
-        function formatSize(bytes) {
-            if (bytes < 1024) return bytes + ' Bytes';
-            else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
-            else return (bytes / 1048576).toFixed(1) + ' MB';
+        if (!source || source.length < 100) {
+          throw new Error("Worker file was empty or incomplete.");
         }
 
-        function handleFile(file) {
-            if(!file.type.includes('gif')) return alert("Select a GIF file");
-            
-            originalFile = file;
-            document.getElementById('fileNameText').innerText = file.name;
-            document.getElementById('fileSizeText').innerText = formatSize(file.size);
-            document.getElementById('thumbPreview').src = URL.createObjectURL(file);
-            document.getElementById('previewBox').style.display = 'block';
-            document.getElementById('controls').style.display = 'block';
-            document.getElementById('errorMsg').style.display = 'none';
-            document.getElementById('resultArea').style.display = 'none';
+        workerBlobUrl = URL.createObjectURL(
+          new Blob([source], { type: "application/javascript" })
+        );
 
-            const reader = new FileReader();
-            reader.onload = (ev) => {
-                let buf = new Uint8Array(ev.target.result);
-                // Robust Scan for GIF Header (Handles Mobile Metadata)
-                let start = -1;
-                for(let i=0; i<Math.min(buf.length, 3000); i++) {
-                    if(buf[i]===0x47 && buf[i+1]===0x49 && buf[i+2]===0x46) {
-                        start = i; break;
-                    }
-                }
-                gifData = start === -1 ? buf : buf.subarray(start);
-            };
-            reader.readAsArrayBuffer(file);
+        return workerBlobUrl;
+
+      } catch (error) {
+        lastError = error;
+        console.warn("Worker loading failed:", urls[i], error);
+      }
+    }
+
+    throw new Error(
+      "The GIF worker could not load. Your browser or network may be blocking the worker CDN. " +
+      "Try another network or allow access to the CDN. " +
+      (lastError ? lastError.message : "")
+    );
+  }
+
+  function cleanupOutput() {
+    if (outputUrl) {
+      URL.revokeObjectURL(outputUrl);
+    }
+
+    outputUrl = null;
+  }
+
+  function handleFile(file) {
+    var token = ++selectionToken;
+
+    clearError();
+    $("successMsg").style.display = "none";
+    $("resultArea").style.display = "none";
+    $("progressArea").style.display = "none";
+
+    if (!file) return;
+
+    var nameLooksGif = /\.gif$/i.test(file.name || "");
+
+    if (file.type && file.type.toLowerCase() !== "image/gif" && !nameLooksGif) {
+      showError("Please select a GIF file (.gif).");
+      return;
+    }
+
+    if (file.size < 14) {
+      showError("This file is too small to be a valid GIF.");
+      return;
+    }
+
+    if (file.size > 100 * 1024 * 1024) {
+      showError("This GIF is larger than 100 MB. Try a smaller GIF first.");
+      return;
+    }
+
+    originalFile = file;
+    gifData = null;
+    btn.disabled = true;
+
+    $("fileNameText").textContent = file.name || "selected.gif";
+    $("fileSizeText").textContent = formatSize(file.size);
+
+    if (previewUrl) {
+      URL.revokeObjectURL(previewUrl);
+    }
+
+    previewUrl = URL.createObjectURL(file);
+    $("thumbPreview").src = previewUrl;
+    $("previewBox").style.display = "block";
+    $("controls").style.display = "block";
+
+    readAsArrayBuffer(file).then(function (buffer) {
+      if (token !== selectionToken) return;
+
+      var bytes = new Uint8Array(buffer);
+
+      if (!isGifHeader(bytes)) {
+        throw new Error("This file does not have a valid GIF header. Please select a real GIF file.");
+      }
+
+      gifData = bytes;
+      btn.disabled = false;
+
+      $("successMsg").textContent = "GIF loaded successfully. You can now compress it.";
+      $("successMsg").style.display = "block";
+
+    }).catch(function (error) {
+      if (token !== selectionToken) return;
+
+      gifData = null;
+      btn.disabled = true;
+
+      showError(error.message || "Could not read this GIF.");
+    });
+  }
+
+  fileInput.addEventListener("change", function (event) {
+    var file = event.target.files && event.target.files[0];
+
+    handleFile(file);
+    fileInput.value = "";
+  });
+
+  dropZone.addEventListener("click", function () {
+    fileInput.click();
+  });
+
+  dropZone.addEventListener("keydown", function (event) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      fileInput.click();
+    }
+  });
+
+  $("changeFileBtn").addEventListener("click", function () {
+    fileInput.click();
+  });
+
+  $("qRange").addEventListener("input", function (event) {
+    $("qLabel").textContent = event.target.value + "%";
+  });
+
+  $("sRange").addEventListener("input", function (event) {
+    $("sLabel").textContent = event.target.value + "%";
+  });
+
+  ["dragenter", "dragover"].forEach(function (type) {
+    dropZone.addEventListener(type, function (event) {
+      event.preventDefault();
+      dropZone.classList.add("dragover");
+    });
+  });
+
+  ["dragleave", "drop"].forEach(function (type) {
+    dropZone.addEventListener(type, function (event) {
+      event.preventDefault();
+      dropZone.classList.remove("dragover");
+    });
+  });
+
+  dropZone.addEventListener("drop", function (event) {
+    var file = event.dataTransfer &&
+      event.dataTransfer.files &&
+      event.dataTransfer.files[0];
+
+    if (file) handleFile(file);
+  });
+
+  function waitForRender(gif) {
+    return new Promise(function (resolve, reject) {
+      var settled = false;
+
+      var timeout = setTimeout(function () {
+        finish(
+          reject,
+          new Error("Compression took too long. Try resizing the GIF smaller.")
+        );
+      }, 180000);
+
+      function finish(fn, value) {
+        if (settled) return;
+
+        settled = true;
+        clearTimeout(timeout);
+        fn(value);
+      }
+
+      gif.on("finished", function (blob) {
+        if (!(blob instanceof Blob) || blob.size === 0) {
+          return finish(
+            reject,
+            new Error("The compressor returned an empty file. Try another GIF.")
+          );
         }
 
-        async function processGif() {
-            if(!gifData) return;
+        finish(resolve, blob);
+      });
 
-            const btn = document.getElementById('btnGo');
-            const progress = document.getElementById('progressArea');
-            const bar = document.getElementById('barFill');
-            const status = document.getElementById('statusText');
-            const err = document.getElementById('errorMsg');
+      gif.on("progress", function (progress) {
+        setProgress(60 + progress * 38, "Encoding compressed animation…");
+      });
 
-            btn.disabled = true;
-            err.style.display = 'none';
-            progress.style.display = 'block';
-            bar.style.width = '10%';
+      try {
+        gif.render();
+      } catch (error) {
+        finish(reject, error);
+      }
+    });
+  }
 
-            try {
-                const reader = new Omggif.GifReader(gifData);
-                const n = reader.numFrames();
-                const scale = document.getElementById('sRange').value / 100;
-                const w = Math.round(reader.width * scale);
-                const h = Math.round(reader.height * scale);
-                const quality = Math.max(1, Math.min(30, Math.round((100 - document.getElementById('qRange').value)/3)));
+  async function processGif() {
+    if (!originalFile || !gifData) {
+      showError("Please select a GIF and wait until it finishes loading.");
+      return;
+    }
 
-                const gif = new GIF({
-                    workers: 2,
-                    quality: quality,
-                    width: w,
-                    height: h,
-                    workerScript: workerBlobUrl || 'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js'
-                });
+    btn.disabled = true;
+    clearError();
 
-                const c = document.createElement('canvas');
-                c.width = reader.width; c.height = reader.height;
-                const ctx = c.getContext('2d');
+    $("successMsg").style.display = "none";
+    $("resultArea").style.display = "none";
+    $("progressArea").style.display = "block";
 
-                const c2 = document.createElement('canvas');
-                c2.width = w; c2.height = h;
-                const ctx2 = c2.getContext('2d');
+    setProgress(3, "Preparing compression…");
 
-                status.innerText = `Extracting ${n} frames...`;
-                for(let i=0; i<n; i++) {
-                    const info = reader.frameInfo(i);
-                    const imgData = ctx.createImageData(reader.width, reader.height);
-                    reader.decodeAndBlitFrameRGBA(i, imgData.data);
-                    ctx.putImageData(imgData, 0, 0);
-                    
-                    ctx2.clearRect(0,0,w,h);
-                    ctx2.drawImage(c, 0, 0, w, h);
-                    gif.addFrame(ctx2, {delay: info.delay * 10, copy: true});
-                    bar.style.width = (10 + (i/n)*50) + '%';
-                }
+    try {
+      setProgress(4, "Loading compression libraries…");
 
-                status.innerText = "Encoding animation...";
-                gif.on('progress', p => { bar.style.width = (60 + p*35) + '%'; });
-                
-                gif.on('finished', blob => {
-                    bar.style.width = '100%';
-                    const url = URL.createObjectURL(blob);
-                    document.getElementById('finalGif').src = url;
-                    document.getElementById('dlLink').href = url;
-                    document.getElementById('newSize').innerText = formatSize(blob.size);
-                    const saved = Math.max(0, Math.round((1 - blob.size/originalFile.size)*100));
-                    document.getElementById('savePercent').innerText = saved + '%';
-                    
-                    progress.style.display = 'none';
-                    document.getElementById('resultArea').style.display = 'block';
-                    document.getElementById('resultArea').scrollIntoView({behavior:'smooth'});
-                    btn.disabled = false;
-                });
+      try {
+        await window.__gifLibsReady;
+      } catch (libraryError) {
+        throw new Error(
+          (libraryError && libraryError.message
+            ? libraryError.message
+            : "The compression libraries could not load.") +
+          " Check your connection or browser security settings."
+        );
+      }
 
-                gif.render();
+      var Omggif = window.__omggif;
 
-            } catch(e) {
-                console.error(e);
-                btn.disabled = false;
-                progress.style.display = 'none';
-                err.innerText = "Error: This GIF file structure is not supported or corrupted.";
-                err.style.display = 'block';
-            }
+      if (
+        !Omggif ||
+        typeof Omggif.GifReader !== "function" ||
+        typeof window.GIF !== "function"
+      ) {
+        throw new Error(
+          "The GIF libraries did not initialize correctly. Refresh the page and try again."
+        );
+      }
+
+      var workerScript = await ensureWorker();
+
+      setProgress(8, "Reading animation frames…");
+
+      var reader = new Omggif.GifReader(gifData);
+      var frameCount = reader.numFrames();
+
+      if (!frameCount || frameCount > 2000) {
+        throw new Error(
+          "This GIF has an unsupported number of frames. Please try a GIF with fewer than 2,000 frames."
+        );
+      }
+
+      if (
+        !reader.width ||
+        !reader.height ||
+        reader.width > 10000 ||
+        reader.height > 10000
+      ) {
+        throw new Error("This GIF has invalid or excessively large dimensions.");
+      }
+
+      var scale = Number($("sRange").value) / 100;
+
+      var width = Math.max(1, Math.round(reader.width * scale));
+      var height = Math.max(1, Math.round(reader.height * scale));
+
+      var quality = Math.max(
+        1,
+        Math.min(30, Math.round((100 - Number($("qRange").value)) / 3))
+      );
+
+      var gif = new window.GIF({
+        workers: 2,
+        quality: quality,
+        width: width,
+        height: height,
+        workerScript: workerScript,
+        repeat: typeof reader.loopCount === "function"
+          ? reader.loopCount()
+          : 0
+      });
+
+      var sourceCanvas = document.createElement("canvas");
+      sourceCanvas.width = reader.width;
+      sourceCanvas.height = reader.height;
+
+      var sourceCtx = sourceCanvas.getContext("2d", {
+        willReadFrequently: true
+      });
+
+      var targetCanvas = document.createElement("canvas");
+      targetCanvas.width = width;
+      targetCanvas.height = height;
+
+      var targetCtx = targetCanvas.getContext("2d");
+
+      if (!sourceCtx || !targetCtx) {
+        throw new Error(
+          "Your browser could not create a canvas. Try another browser or a smaller GIF."
+        );
+      }
+
+      for (var i = 0; i < frameCount; i++) {
+        var info = reader.frameInfo(i);
+
+        var framePixels = new Uint8ClampedArray(
+          reader.width * reader.height * 4
+        );
+
+        reader.decodeAndBlitFrameRGBA(i, framePixels);
+
+        var imageData = new ImageData(
+          framePixels,
+          reader.width,
+          reader.height
+        );
+
+        sourceCtx.putImageData(imageData, 0, 0);
+
+        targetCtx.clearRect(0, 0, width, height);
+
+        targetCtx.drawImage(
+          sourceCanvas,
+          0,
+          0,
+          width,
+          height
+        );
+
+        var delay = Math.max(20, Number(info.delay || 10) * 10);
+
+        gif.addFrame(targetCtx, {
+          delay: delay,
+          copy: true
+        });
+
+        if (i % 5 === 0 || i === frameCount - 1) {
+          setProgress(
+            8 + ((i + 1) / frameCount) * 50,
+            "Preparing frame " + (i + 1) + " of " + frameCount + "…"
+          );
         }
-    </script>
+
+        if (i % 10 === 0) {
+          await new Promise(function (resolve) {
+            setTimeout(resolve, 0);
+          });
+        }
+      }
+
+      sourceCanvas.width = 1;
+      sourceCanvas.height = 1;
+      targetCanvas.width = 1;
+      targetCanvas.height = 1;
+
+      setProgress(60, "Encoding compressed animation…");
+
+      var blob = await waitForRender(gif);
+
+      cleanupOutput();
+
+      outputUrl = URL.createObjectURL(blob);
+
+      $("finalGif").src = outputUrl;
+      $("dlLink").href = outputUrl;
+
+      $("dlLink").download =
+        (originalFile.name || "animation.gif").replace(/\.gif$/i, "") +
+        "-compressed.gif";
+
+      $("oldSize").textContent = formatSize(originalFile.size);
+      $("newSize").textContent = formatSize(blob.size);
+
+      var saved = Math.round(
+        (1 - blob.size / originalFile.size) * 100
+      );
+
+      $("savePercent").textContent = Math.max(0, saved) + "%";
+
+      $("resultArea").style.display = "block";
+      $("progressArea").style.display = "none";
+
+      $("resultArea").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+      if (blob.size >= originalFile.size) {
+        $("successMsg").textContent =
+          "Compression completed, but the new GIF is not smaller. Try lowering the resize setting.";
+      } else {
+        $("successMsg").textContent =
+          "Compression completed. Your GIF is ready to download.";
+      }
+
+      $("successMsg").style.display = "block";
+
+    } catch (error) {
+      console.error("GIF compression failed:", error);
+
+      $("progressArea").style.display = "none";
+
+      showError(
+        error && error.message
+          ? error.message
+          : "Compression failed. Please try another GIF or reduce its dimensions."
+      );
+
+    } finally {
+      btn.disabled = !gifData;
+    }
+  }
+
+  window.__gifLibsReady.catch(function (error) {
+    console.error("GIF library loading failed:", error);
+
+    showError(
+      (error && error.message
+        ? error.message
+        : "GIF compression libraries failed to load.") +
+      " You can select a GIF, but compression requires the libraries to load."
+    );
+  });
+
+  btn.addEventListener("click", processGif);
+
+  $("dlLink").addEventListener("click", function (event) {
+    if (!outputUrl) {
+      event.preventDefault();
+      showError("There is no compressed GIF to download yet. Please compress a GIF first.");
+    }
+  });
+
+  window.addEventListener("beforeunload", function () {
+    if (previewUrl) URL.revokeObjectURL(previewUrl);
+    if (outputUrl) URL.revokeObjectURL(outputUrl);
+    if (workerBlobUrl) URL.revokeObjectURL(workerBlobUrl);
+  });
+
+})();
+</script>
+
 </body>
 </html>
