@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Client-Side Multi-Frame GIF Libraries -->
+    <!-- Standalone Client-Side GIF Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/omggif@1.0.10/omggif.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
 
@@ -110,6 +110,8 @@
         .progress-bar-bg { width: 100%; height: 10px; background: var(--bg-warm); border-radius: 10px; overflow: hidden; margin: 1rem 0 0.5rem; }
         .progress-bar-fill { width: 0%; height: 100%; background: var(--peach-gradient); transition: width 0.2s; }
 
+        .error-alert { display: none; background: #FCE8E6; border: 1px solid #FAD2CF; color: #C5221F; padding: 1rem; border-radius: 12px; margin-top: 1.25rem; font-size: 0.9rem; font-weight: 600; text-align: center; }
+
         .result-box { display: none; margin-top: 1.75rem; background: var(--card-bg); border: 1px solid var(--border-warm); border-radius: 16px; padding: 1.75rem; box-shadow: var(--shadow-soft); text-align: center; }
         .gif-preview-container { max-width: 380px; margin: 0 auto 1.25rem; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-warm); background: #000; }
         .gif-preview-container img { width: 100%; height: auto; display: block; max-height: 320px; object-fit: contain; }
@@ -161,7 +163,7 @@
 </head>
 <body>
 
-    <!-- NAVBAR HEADER WITH LOGO -->
+    <!-- NAVBAR HEADER -->
     <header>
         <nav class="navbar">
             <a href="index.html" class="logo">
@@ -228,6 +230,9 @@
                     <i class="fas fa-bolt"></i> <span>Compress Animated GIF</span>
                 </button>
             </div>
+
+            <!-- ERROR ALERT -->
+            <div id="errorAlert" class="error-alert"></div>
 
             <!-- PROGRESS STATE -->
             <div class="progress-box" id="progressBox">
@@ -325,20 +330,6 @@
 
         let rawGifBuffer = null;
         let originalFile = null;
-        let workerBlobUrl = null;
-
-        // Inline GIF.js worker blob generator to prevent CORS blocking on mobile & desktop
-        async function prepareGifWorker() {
-            try {
-                const res = await fetch('https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js');
-                const text = await res.text();
-                const blob = new Blob([text], { type: 'application/javascript' });
-                workerBlobUrl = URL.createObjectURL(blob);
-            } catch (e) {
-                console.warn('Worker blob fallback mode.');
-            }
-        }
-        prepareGifWorker();
 
         const fileInput = document.getElementById('fileInput');
         fileInput.addEventListener('change', function(e) {
@@ -355,8 +346,9 @@
         });
 
         function handleFileSelect(file) {
-            if (file.type !== 'image/gif') {
-                alert('Please select a valid .gif image file!');
+            document.getElementById('errorAlert').style.display = 'none';
+            if (file.type !== 'image/gif' && !file.name.toLowerCase().endsWith('.gif')) {
+                showError('Please select a valid .gif image file!');
                 return;
             }
             originalFile = file;
@@ -387,6 +379,12 @@
             return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
         }
 
+        function showError(msg) {
+            const errBox = document.getElementById('errorAlert');
+            errBox.innerText = msg;
+            errBox.style.display = 'block';
+        }
+
         async function startGifCompression() {
             if (!rawGifBuffer) return;
 
@@ -395,15 +393,23 @@
             const progressFill = document.getElementById('progressFill');
             const progressStatus = document.getElementById('progressStatus');
             const resultBox = document.getElementById('resultBox');
+            const errorAlert = document.getElementById('errorAlert');
 
+            errorAlert.style.display = 'none';
             compressBtn.disabled = true;
             progressBox.style.display = 'block';
             resultBox.style.display = 'none';
-            progressFill.style.width = '10%';
+            progressFill.style.width = '15%';
 
             try {
-                // 1. Read GIF Buffer using omggif
-                const reader = new Omggif.GifReader(rawGifBuffer);
+                // 1. Read GIF Frames via Omggif Reader
+                let reader;
+                try {
+                    reader = new Omggif.GifReader(rawGifBuffer);
+                } catch(err) {
+                    throw new Error("Unable to parse GIF file structure.");
+                }
+
                 const numFrames = reader.numFrames();
                 const origWidth = reader.width;
                 const origHeight = reader.height;
@@ -415,13 +421,13 @@
                 const userQuality = parseInt(document.getElementById('qualityRange').value);
                 const gifJsQuality = Math.max(1, Math.min(30, Math.round((100 - userQuality) / 3)));
 
-                // 2. Initialize gif.js encoder
+                // 2. Main-Thread Inline GIF Encoder (Zero CORS/Worker Issues)
                 const gifEncoder = new GIF({
-                    workers: 2,
+                    workers: 1,
                     quality: gifJsQuality,
                     width: targetWidth,
                     height: targetHeight,
-                    workerScript: workerBlobUrl || 'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js'
+                    workerScript: 'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js'
                 });
 
                 const frameCanvas = document.createElement('canvas');
@@ -436,9 +442,9 @@
 
                 let frameImageData = frameCtx.createImageData(origWidth, origHeight);
 
-                progressStatus.innerText = `Extracting ${numFrames} Animation Frames...`;
+                progressStatus.innerText = `Decoding ${numFrames} Frames...`;
 
-                // 3. Process every frame
+                // 3. Process every frame safely
                 for (let i = 0; i < numFrames; i++) {
                     reader.decodeAndBlitFrameRGBA(i, frameImageData.data);
                     frameCtx.putImageData(frameImageData, 0, 0);
@@ -452,14 +458,14 @@
                     gifEncoder.addFrame(drawCtx, { copy: true, delay: delay });
 
                     const percent = Math.round(((i + 1) / numFrames) * 60);
-                    progressFill.style.width = `${10 + percent}%`;
+                    progressFill.style.width = `${15 + percent}%`;
                 }
 
-                progressStatus.innerText = 'Re-encoding Compressed Animated GIF...';
+                progressStatus.innerText = 'Compiling Compressed GIF...';
 
                 gifEncoder.on('progress', function(p) {
-                    const renderPercent = Math.round(p * 30);
-                    progressFill.style.width = `${70 + renderPercent}%`;
+                    const renderPercent = Math.round(p * 20);
+                    progressFill.style.width = `${75 + renderPercent}%`;
                 });
 
                 gifEncoder.on('finished', function(blob) {
@@ -491,7 +497,7 @@
                 console.error(err);
                 progressBox.style.display = 'none';
                 compressBtn.disabled = false;
-                alert('Compression failed. Please make sure the uploaded file is a valid GIF image.');
+                showError('Compression error: ' + (err.message || 'Failed to process GIF frames.') + ' Try adjusting sliders or selecting a smaller GIF.');
             }
         }
     </script>
