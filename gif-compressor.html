@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- Load libraries from local files and several fallback sources. -->
+  <!-- Load libraries: local first, then CDNs. omggif exposes global GifReader (not window.omggif). -->
   <script>
     window.__gifLibsReady = (async function () {
       function loadScript(url) {
@@ -29,18 +29,32 @@
         });
       }
 
+      function getOmggifApi() {
+        // npm/cdn builds usually expose globals GifReader + GifWriter
+        if (typeof window.GifReader === 'function') {
+          return {
+            GifReader: window.GifReader,
+            GifWriter: window.GifWriter
+          };
+        }
+        // rare bundled shapes
+        const lib = window.omggif || window.Omggif || window.OMGGIF;
+        if (lib && typeof lib.GifReader === 'function') return lib;
+        return null;
+      }
+
+      function hasGifJs() {
+        return typeof window.GIF === 'function';
+      }
+
       async function loadAny(urls, test, label) {
         let lastError;
 
         for (const url of urls) {
           try {
             await loadScript(url);
-
             if (test()) return url;
-
-            throw new Error(
-              label + ' loaded but did not expose its expected API.'
-            );
+            throw new Error(label + ' loaded but did not expose its expected API from ' + url);
           } catch (e) {
             lastError = e;
           }
@@ -48,7 +62,7 @@
 
         throw new Error(
           'Could not load the ' + label +
-          ' library. Tried local files, jsDelivr, unpkg, and GitHub. ' +
+          ' library. Tried local files and CDNs. ' +
           'Your network, browser extension, firewall, or Content Security Policy ' +
           'may be blocking scripts. Last error: ' +
           (lastError && lastError.message || 'unknown error')
@@ -60,31 +74,28 @@
         './lib/omggif.js',
         'https://cdn.jsdelivr.net/npm/omggif@1.0.10/omggif.js',
         'https://unpkg.com/omggif@1.0.10/omggif.js',
-        'https://cdn.jsdelivr.net/gh/deanm/omggif@master/omggif.js',
-        'https://raw.githubusercontent.com/deanm/omggif/master/omggif.js'
-      ], () => {
-        const lib = window.omggif || window.Omggif;
-        return !!(lib && typeof lib.GifReader === 'function');
-      }, 'Omggif');
+        'https://cdn.jsdelivr.net/gh/deanm/omggif@1.0.10/omggif.js'
+      ], () => !!getOmggifApi(), 'Omggif');
 
-      window.__omggif = window.omggif || window.Omggif;
+      window.__omggif = getOmggifApi();
 
       const gifUrl = await loadAny([
         './gif.js',
         './lib/gif.js',
         'https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.js',
         'https://unpkg.com/gif.js@0.2.0/dist/gif.js',
-        'https://cdn.jsdelivr.net/gh/jnordberg/gif.js@master/dist/gif.js',
-        'https://raw.githubusercontent.com/jnordberg/gif.js/master/dist/gif.js'
-      ], () => typeof window.GIF === 'function', 'gif.js');
+        'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js',
+        'https://cdn.jsdelivr.net/gh/jnordberg/gif.js@0.2.0/dist/gif.js'
+      ], hasGifJs, 'gif.js');
 
+      // Prefer same-origin / jsDelivr / unpkg / cdnjs worker paths (blob-fetched later)
       window.__gifWorkerUrls = [
         './gif.worker.js',
         './lib/gif.worker.js',
         'https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js',
         'https://unpkg.com/gif.js@0.2.0/dist/gif.worker.js',
-        'https://cdn.jsdelivr.net/gh/jnordberg/gif.js@master/dist/gif.worker.js',
-        'https://raw.githubusercontent.com/jnordberg/gif.js/master/dist/gif.worker.js'
+        'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js',
+        'https://cdn.jsdelivr.net/gh/jnordberg/gif.js@0.2.0/dist/gif.worker.js'
       ];
 
       return { omggifUrl, gifUrl };
@@ -148,6 +159,7 @@
       display: flex;
       align-items: center;
       gap: .4rem;
+      white-space: nowrap;
     }
 
     .logo-icon { color: #FF9E7D; }
@@ -651,24 +663,34 @@
     const n = Math.max(0, Math.min(100, Math.round(value)));
     $('barFill').style.width = n + '%';
     $('progressPercent').textContent = n + '%';
-
     if (message) $('statusText').textContent = message;
   }
 
+  /** Find real GIF header even if mobile apps prepend metadata. */
+  function findGifHeaderOffset(bytes) {
+    const maxScan = Math.min(bytes.length - 6, 512 * 1024);
+    for (let i = 0; i <= maxScan; i++) {
+      if (
+        bytes[i] === 0x47 && // G
+        bytes[i + 1] === 0x49 && // I
+        bytes[i + 2] === 0x46 && // F
+        bytes[i + 3] === 0x38 && // 8
+        (bytes[i + 4] === 0x37 || bytes[i + 4] === 0x39) && // 7|9
+        bytes[i + 5] === 0x61 // a
+      ) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
   function isGifHeader(bytes) {
-    return bytes.length >= 6 &&
-      bytes[0] === 0x47 &&
-      bytes[1] === 0x49 &&
-      bytes[2] === 0x46 &&
-      bytes[3] === 0x38 &&
-      (bytes[4] === 0x37 || bytes[4] === 0x39) &&
-      bytes[5] === 0x61;
+    return findGifHeaderOffset(bytes) === 0;
   }
 
   function readAsArrayBuffer(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-
       reader.onload = () => resolve(reader.result);
       reader.onerror = () => reject(
         new Error('The browser could not read this file. Please choose it again.')
@@ -676,7 +698,6 @@
       reader.onabort = () => reject(
         new Error('File reading was cancelled. Please try again.')
       );
-
       reader.readAsArrayBuffer(file);
     });
   }
@@ -689,12 +710,10 @@
 
     for (const url of urls) {
       try {
-        const response = await fetch(url, { cache: 'force-cache' });
-
+        const response = await fetch(url, { cache: 'force-cache', mode: 'cors' });
         if (!response.ok) throw new Error('HTTP ' + response.status);
 
         const source = await response.text();
-
         if (!source || source.length < 100) {
           throw new Error('Worker file was empty or incomplete');
         }
@@ -702,7 +721,6 @@
         workerBlobUrl = URL.createObjectURL(
           new Blob([source], { type: 'application/javascript' })
         );
-
         return workerBlobUrl;
       } catch (e) {
         lastError = e;
@@ -710,8 +728,7 @@
     }
 
     throw new Error(
-      'Could not load gif.worker.js. The network may be blocking external files. ' +
-      'Try again, or add gif.worker.js beside index.html in your GitHub repository. ' +
+      'Could not load gif.worker.js. Try again, or add gif.worker.js next to this page. ' +
       (lastError && lastError.message || '')
     );
   }
@@ -725,9 +742,7 @@
     if (!originalWidth || !originalHeight) {
       return { width: 0, height: 0, scale: 1 };
     }
-
     const scale = Math.min(1, targetHeight / originalHeight);
-
     return {
       width: Math.max(1, Math.round(originalWidth * scale)),
       height: Math.max(1, Math.round(originalHeight * scale)),
@@ -739,33 +754,23 @@
     if (!originalFile || !originalWidth || !originalHeight) {
       return 'Waiting for GIF…';
     }
-
     const dims = dimensionsFor(targetHeight);
-    const ratio = (dims.width * dims.height) /
-      (originalWidth * originalHeight);
-
-    // This is only a rough estimate, not a guaranteed file size.
+    const ratio = (dims.width * dims.height) / (originalWidth * originalHeight);
     const estimatedBytes = Math.max(
       1024,
       Math.min(originalFile.size * 1.15, originalFile.size * ratio * 0.9)
     );
-
     return formatSize(estimatedBytes);
   }
 
   function updateEstimates() {
     qualityButtons.forEach(button => {
       const height = Number(button.dataset.height);
-
-      button.querySelector('.estimate').textContent =
-        'Est. ' + estimateSize(height);
-
+      button.querySelector('.estimate').textContent = 'Est. ' + estimateSize(height);
       const selected = height === selectedHeight;
-
       button.classList.toggle('selected', selected);
       button.setAttribute('aria-pressed', String(selected));
     });
-
     $('selectedEstimate').textContent = estimateSize(selectedHeight);
   }
 
@@ -793,12 +798,7 @@
     if (!file) return;
 
     const nameLooksGif = /\.gif$/i.test(file.name || '');
-
-    if (
-      file.type &&
-      file.type.toLowerCase() !== 'image/gif' &&
-      !nameLooksGif
-    ) {
+    if (file.type && file.type.toLowerCase() !== 'image/gif' && !nameLooksGif) {
       showError('Please select a GIF file (.gif).');
       return;
     }
@@ -823,57 +823,57 @@
     $('fileSizeText').textContent = formatSize(file.size);
 
     if (previewUrl) URL.revokeObjectURL(previewUrl);
-
     previewUrl = URL.createObjectURL(file);
     $('thumbPreview').src = previewUrl;
     $('previewBox').style.display = 'block';
     $('controls').style.display = 'block';
-
     updateEstimates();
 
     readAsArrayBuffer(file).then(buffer => {
       if (token !== selectionToken) return;
 
-      const bytes = new Uint8Array(buffer);
+      let bytes = new Uint8Array(buffer);
+      const offset = findGifHeaderOffset(bytes);
 
-      if (!isGifHeader(bytes)) {
+      if (offset < 0) {
+        throw new Error('This file does not contain a valid GIF header. Please choose a real .gif file.');
+      }
+
+      // Strip mobile/Android prepended metadata before GIF8xa
+      if (offset > 0) {
+        bytes = bytes.subarray(offset);
+      }
+
+      if (!isGifHeader(bytes) && offset === 0) {
         throw new Error('This file does not have a valid GIF header. Please choose a real .gif file.');
       }
 
       gifData = bytes;
 
-      // GIF logical-screen dimensions are stored in bytes 6–9.
+      // GIF logical-screen dimensions are stored in bytes 6–9 of the GIF stream
       originalWidth = bytes[6] | (bytes[7] << 8);
       originalHeight = bytes[8] | (bytes[9] << 8);
 
       updateEstimates();
-
       btn.disabled = false;
 
-      $('successMsg').textContent =
-        'GIF loaded successfully. You can now compress it.';
+      $('successMsg').textContent = 'GIF loaded successfully. You can now compress it.';
       $('successMsg').style.display = 'block';
     }).catch(error => {
       if (token !== selectionToken) return;
-
       gifData = null;
       btn.disabled = true;
-
       showError(error.message || 'Could not read this GIF. Please try another file.');
     });
   }
 
   fileInput.addEventListener('change', event => {
     const file = event.target.files && event.target.files[0];
-
     handleFile(file);
-
-    // Allows choosing the same file again after a failure.
     fileInput.value = '';
   });
 
   dropZone.addEventListener('click', () => fileInput.click());
-
   dropZone.addEventListener('keydown', event => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
@@ -901,24 +901,21 @@
     const file = event.dataTransfer &&
       event.dataTransfer.files &&
       event.dataTransfer.files[0];
-
     if (file) handleFile(file);
   });
 
   function waitForRender(gif) {
     return new Promise((resolve, reject) => {
       let settled = false;
-
       const timeout = setTimeout(() => {
         finish(
           reject,
-          new Error('Compression took too long. Try resizing the GIF smaller or using fewer frames.')
+          new Error('Compression took too long. Try a lower resolution or a GIF with fewer frames.')
         );
       }, 180000);
 
       function finish(fn, value) {
         if (settled) return;
-
         settled = true;
         clearTimeout(timeout);
         fn(value);
@@ -931,7 +928,6 @@
             new Error('The compressor returned an empty file. Please try a different GIF.')
           );
         }
-
         finish(resolve, blob);
       });
 
@@ -958,7 +954,6 @@
     $('successMsg').style.display = 'none';
     $('resultArea').style.display = 'none';
     $('progressArea').style.display = 'block';
-
     setProgress(3, 'Preparing compression…');
 
     try {
@@ -971,23 +966,21 @@
           (libraryError && libraryError.message
             ? libraryError.message
             : 'The compression libraries could not load.') +
-          ' Check your internet connection or browser extensions. ' +
-          'If your network blocks external libraries, add omggif.js, gif.js, ' +
-          'and gif.worker.js beside index.html in your GitHub repository.'
+          ' Check your internet connection. Optional: host omggif.js, gif.js, and gif.worker.js next to this page.'
         );
       }
 
-      if (!window.__omggif || !window.GIF) {
+      const omggif = window.__omggif;
+      if (!omggif || typeof omggif.GifReader !== 'function' || typeof window.GIF !== 'function') {
         throw new Error(
           'The libraries loaded but their APIs are unavailable. Please refresh and try again.'
         );
       }
 
       const workerScript = await ensureWorker();
-
       setProgress(8, 'Reading animation frames…');
 
-      const reader = new window.__omggif.GifReader(gifData);
+      const reader = new omggif.GifReader(gifData);
       const frameCount = reader.numFrames();
 
       if (!frameCount || frameCount > 2000) {
@@ -996,23 +989,21 @@
         );
       }
 
-      if (
-        !reader.width ||
-        !reader.height ||
-        reader.width > 10000 ||
-        reader.height > 10000
-      ) {
+      if (!reader.width || !reader.height || reader.width > 10000 || reader.height > 10000) {
         throw new Error('This GIF has invalid or excessively large dimensions.');
       }
 
-      // Selected resolution controls the maximum output height.
-      // Smaller source GIFs are not enlarged.
       const scale = Math.min(1, selectedHeight / reader.height);
       const width = Math.max(1, Math.round(reader.width * scale));
       const height = Math.max(1, Math.round(reader.height * scale));
-
-      // A single balanced compression setting keeps the interface simple.
       const quality = 10;
+
+      let loop = 0;
+      try {
+        if (typeof reader.loopCount === 'function') loop = reader.loopCount() || 0;
+      } catch (_) {
+        loop = 0;
+      }
 
       const gif = new GIF({
         workers: 2,
@@ -1020,22 +1011,18 @@
         width,
         height,
         workerScript,
-        repeat: reader.loopCount ? reader.loopCount() : 0,
+        repeat: loop,
         transparent: null
       });
 
       const sourceCanvas = document.createElement('canvas');
       sourceCanvas.width = reader.width;
       sourceCanvas.height = reader.height;
-
-      const sourceCtx = sourceCanvas.getContext('2d', {
-        willReadFrequently: true
-      });
+      const sourceCtx = sourceCanvas.getContext('2d', { willReadFrequently: true });
 
       const targetCanvas = document.createElement('canvas');
       targetCanvas.width = width;
       targetCanvas.height = height;
-
       const targetCtx = targetCanvas.getContext('2d');
 
       if (!sourceCtx || !targetCtx) {
@@ -1046,31 +1033,16 @@
 
       for (let i = 0; i < frameCount; i++) {
         const info = reader.frameInfo(i);
-
-        const framePixels = new Uint8ClampedArray(
-          reader.width * reader.height * 4
-        );
-
+        const framePixels = new Uint8ClampedArray(reader.width * reader.height * 4);
         reader.decodeAndBlitFrameRGBA(i, framePixels);
 
-        const imageData = new ImageData(
-          framePixels,
-          reader.width,
-          reader.height
-        );
-
+        const imageData = new ImageData(framePixels, reader.width, reader.height);
         sourceCtx.putImageData(imageData, 0, 0);
-
         targetCtx.clearRect(0, 0, width, height);
         targetCtx.drawImage(sourceCanvas, 0, 0, width, height);
 
-        // gif.js expects frame delays in milliseconds.
         const delay = Math.max(20, Number(info.delay || 10) * 10);
-
-        gif.addFrame(targetCtx, {
-          delay,
-          copy: true
-        });
+        gif.addFrame(targetCtx, { delay, copy: true });
 
         if (i % 5 === 0 || i === frameCount - 1) {
           setProgress(
@@ -1079,7 +1051,6 @@
           );
         }
 
-        // Let the browser update the progress display periodically.
         if (i % 10 === 0) {
           await new Promise(resolve => setTimeout(resolve, 0));
         }
@@ -1091,14 +1062,11 @@
       targetCanvas.height = 1;
 
       const blob = await waitForRender(gif);
-
       cleanupOutput();
-
       outputUrl = URL.createObjectURL(blob);
 
       $('finalGif').src = outputUrl;
       $('dlLink').href = outputUrl;
-
       $('dlLink').download =
         (originalFile.name || 'animation.gif').replace(/\.gif$/i, '') +
         '-' + selectedHeight + 'p.gif';
@@ -1106,20 +1074,12 @@
       $('oldSize').textContent = formatSize(originalFile.size);
       $('newSize').textContent = formatSize(blob.size);
 
-      const saved = Math.round(
-        (1 - blob.size / originalFile.size) * 100
-      );
-
-      $('savePercent').textContent =
-        (saved > 0 ? saved : 0) + '%';
+      const saved = Math.round((1 - blob.size / originalFile.size) * 100);
+      $('savePercent').textContent = (saved > 0 ? saved : 0) + '%';
 
       $('resultArea').style.display = 'block';
       $('progressArea').style.display = 'none';
-
-      $('resultArea').scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
+      $('resultArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
       if (blob.size >= originalFile.size) {
         $('successMsg').textContent =
@@ -1128,14 +1088,11 @@
         $('successMsg').textContent =
           'Compression completed. Your GIF is ready to download.';
       }
-
       $('successMsg').style.display = 'block';
 
     } catch (error) {
       console.error('GIF compression failed:', error);
-
       $('progressArea').style.display = 'none';
-
       showError(
         error && error.message
           ? error.message
@@ -1146,10 +1103,8 @@
     }
   }
 
-  // Report library-loading failures clearly.
   window.__gifLibsReady.catch(error => {
     console.error('GIF library loading failed:', error);
-
     showError(
       (error && error.message
         ? error.message
