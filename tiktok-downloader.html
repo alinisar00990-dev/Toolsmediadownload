@@ -12,10 +12,9 @@
 <meta property="og:url" content="https://toolsmediadownload.com/tiktok-downloader.html">
 <meta name="theme-color" content="#E07A5F">
 
-<!-- Real TikTok Logo Favicon -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><path fill='%2325F4EE' d='M37 16.5c-3.3 0-6-2.7-6-6V8h-5v22a5 5 0 1 1-5-5v-5c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10V18.3c2 1.4 4.5 2.2 7 2.2v-4z' transform='translate(-1.5 -1.5)'/><path fill='%23FE2C55' d='M37 16.5c-3.3 0-6-2.7-6-6V8h-5v22a5 5 0 1 1-5-5v-5c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10V18.3c2 1.4 4.5 2.2 7 2.2v-4z' transform='translate(1.5 1.5)'/><path fill='%23000' d='M37 16.5c-3.3 0-6-2.7-6-6V8h-5v22a5 5 0 1 1-5-5v-5c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10V18.3c2 1.4 4.5 2.2 7 2.2v-4z'/></svg>">
+<!-- TikTok Logo Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><path fill='%2325F4EE' d='M35.5 15c-3.3 0-6-2.7-6-6V6.5h-5v22a5 5 0 1 1-5-5v-5c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10V16.8c2 1.4 4.5 2.2 7 2.2v-4z' transform='translate(-1.5 -1.5)'/><path fill='%23FE2C55' d='M35.5 15c-3.3 0-6-2.7-6-6V6.5h-5v22a5 5 0 1 1-5-5v-5c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10V16.8c2 1.4 4.5 2.2 7 2.2v-4z' transform='translate(1.5 1.5)'/><path fill='%23000' d='M35.5 15c-3.3 0-6-2.7-6-6V6.5h-5v22a5 5 0 1 1-5-5v-5c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10V16.8c2 1.4 4.5 2.2 7 2.2v-4z'/></svg>">
 
-<!-- JSON-LD -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -34,7 +33,6 @@
   --card-bg: #FFFFFF;
   --primary-peach: #E07A5F;
   --peach-gradient: linear-gradient(135deg, #FF9E7D 0%, #E07A5F 50%, #D95D39 100%);
-  --tiktok-gradient: linear-gradient(135deg, #000 0%, #25F4EE 50%, #FE2C55 100%);
   --text-dark: #2C221E;
   --text-muted: #5C534E;
   --border-warm: #EFE3D8;
@@ -70,7 +68,6 @@ body {
 }
 
 a { text-decoration: none; color: inherit; }
-
 ::selection { background: rgba(224, 122, 95, 0.2); color: var(--text-dark); }
 
 ::-webkit-scrollbar { width: 10px; height: 10px; }
@@ -83,498 +80,305 @@ a { text-decoration: none; color: inherit; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(224, 122, 95, 0.5); }
 
 .skip-link {
-  position: absolute;
-  top: -100%;
-  left: 1rem;
-  background: var(--primary-peach);
-  color: #fff;
-  padding: 0.6rem 1.2rem;
-  border-radius: 0 0 8px 8px;
-  z-index: 999;
-  font-weight: 600;
-  transition: top 0.2s;
+  position: absolute; top: -100%; left: 1rem;
+  background: var(--primary-peach); color: #fff;
+  padding: 0.6rem 1.2rem; border-radius: 0 0 8px 8px;
+  z-index: 999; font-weight: 600; transition: top 0.2s;
 }
 .skip-link:focus { top: 0; }
 
-/* Header */
+/* ===== HEADER ===== */
 header {
-  position: sticky;
-  top: 0;
+  position: sticky; top: 0;
   background: rgba(255, 255, 255, 0.72);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid rgba(239, 227, 216, 0.6);
-  z-index: 100;
-  padding: 0.9rem 1.5rem;
+  z-index: 100; padding: 0.9rem 1.5rem;
 }
 .nav-wrap {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  max-width: 1200px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
 }
 .logo {
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: var(--text-dark);
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  white-space: nowrap;
-  letter-spacing: -0.02em;
+  font-size: 1.4rem; font-weight: 800; color: var(--text-dark);
+  display: flex; align-items: center; gap: 0.3rem;
+  white-space: nowrap; letter-spacing: -0.02em;
 }
 .logo span {
   background: var(--peach-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 nav[aria-label="Main navigation"] .nav-links {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
+  display: flex; gap: 2rem; list-style: none;
 }
 .nav-links a {
-  color: var(--text-dark);
-  font-weight: 500;
-  font-size: 0.95rem;
-  position: relative;
-  transition: color 0.3s var(--ease-premium);
+  color: var(--text-dark); font-weight: 500; font-size: 0.95rem;
+  position: relative; transition: color 0.3s var(--ease-premium);
 }
 .nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--peach-gradient);
-  border-radius: 2px;
-  transition: width 0.3s var(--ease-premium);
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 2px; background: var(--peach-gradient);
+  border-radius: 2px; transition: width 0.3s var(--ease-premium);
 }
 .nav-links a:hover::after, .nav-links a:focus-visible::after { width: 100%; }
 .nav-links a:hover, .nav-links a:focus-visible { color: var(--primary-peach); }
 
 .hamburger {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.6rem;
-  cursor: pointer;
-  color: var(--text-dark);
-  padding: 0.25rem;
+  display: none; background: none; border: none;
+  font-size: 1.6rem; cursor: pointer; color: var(--text-dark); padding: 0.25rem;
 }
 .hamburger:focus-visible {
-  outline: 2px solid var(--primary-peach);
-  outline-offset: 2px;
-  border-radius: 4px;
+  outline: 2px solid var(--primary-peach); outline-offset: 2px; border-radius: 4px;
 }
 
-/* Mobile Menu */
+/* ===== MOBILE MENU ===== */
 .mobile-menu {
-  display: none;
-  position: fixed;
-  inset: 0;
+  display: none; position: fixed; inset: 0;
   background: rgba(26, 22, 21, 0.5);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  z-index: 200;
-  opacity: 0;
-  transition: opacity 0.3s var(--ease-premium);
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+  z-index: 200; opacity: 0; transition: opacity 0.3s var(--ease-premium);
 }
 .mobile-menu.active { display: block; opacity: 1; }
 .mobile-menu-panel {
-  background: #fff;
-  width: 85%;
-  max-width: 320px;
-  height: 100%;
-  padding: 2rem 1.5rem;
-  transform: translateX(-100%);
+  background: #fff; width: 85%; max-width: 320px; height: 100%;
+  padding: 2rem 1.5rem; transform: translateX(-100%);
   transition: transform 0.35s var(--ease-premium);
-  overflow-y: auto;
-  box-shadow: 20px 0 60px rgba(0, 0, 0, 0.15);
+  overflow-y: auto; box-shadow: 20px 0 60px rgba(0,0,0,0.15);
 }
 .mobile-menu.active .mobile-menu-panel { transform: translateX(0); }
 .mobile-menu-panel .close-btn {
-  background: none;
-  border: none;
-  font-size: 2rem;
-  float: right;
-  cursor: pointer;
-  color: var(--text-dark);
-  padding: 0.25rem;
+  background: none; border: none; font-size: 2rem;
+  float: right; cursor: pointer; color: var(--text-dark); padding: 0.25rem;
 }
 .mobile-menu-panel ul { list-style: none; margin-top: 3rem; }
 .mobile-menu-panel li { padding: 1rem 0; border-bottom: 1px solid var(--border-warm); }
 .mobile-menu-panel a {
-  font-size: 1.1rem;
-  font-weight: 500;
-  display: block;
+  font-size: 1.1rem; font-weight: 500; display: block;
   transition: transform 0.25s var(--ease-premium), color 0.25s var(--ease-premium);
 }
 .mobile-menu-panel a:hover, .mobile-menu-panel a:focus-visible {
-  color: var(--primary-peach);
-  transform: translateX(4px);
+  color: var(--primary-peach); transform: translateX(4px);
 }
 
-/* Hero */
+/* ===== HERO ===== */
 .hero {
-  background: var(--peach-gradient);
-  color: #fff;
-  padding: 4.5rem 1.5rem 3.5rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+  background: var(--peach-gradient); color: #fff;
+  padding: 4.5rem 1.5rem 3.5rem; text-align: center;
+  position: relative; overflow: hidden;
 }
 .hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
+  content: ''; position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse at 20% 20%, rgba(255, 255, 255, 0.25) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 80%, rgba(255, 158, 125, 0.3) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 100%, rgba(217, 93, 57, 0.2) 0%, transparent 60%);
+    radial-gradient(ellipse at 20% 20%, rgba(255,255,255,0.25) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(255,158,125,0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(217,93,57,0.2) 0%, transparent 60%);
   pointer-events: none;
 }
 .hero > * { position: relative; z-index: 1; }
 .hero-icon {
-  width: 72px;
-  height: 72px;
-  margin: 0 auto 1.25rem;
-  background: #000;
-  border-radius: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  width: 72px; height: 72px; margin: 0 auto 1.25rem;
+  background: #000; border-radius: 18px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
 }
 .hero-icon svg { width: 44px; height: 44px; }
 .hero h1 {
-  font-size: 2.6rem;
-  margin-bottom: 1rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+  font-size: 2.6rem; margin-bottom: 1rem; font-weight: 800;
+  letter-spacing: -0.03em; line-height: 1.15;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.08);
 }
-.hero p {
-  font-size: 1.15rem;
-  max-width: 620px;
-  margin: 0 auto;
-  opacity: 0.96;
-}
+.hero p { font-size: 1.15rem; max-width: 620px; margin: 0 auto; opacity: 0.96; }
 
-/* Main */
-main {
-  flex: 1;
-  padding: 3rem 1.25rem;
-  width: 100%;
-}
-.container {
-  max-width: 820px;
-  margin: 0 auto;
-  width: 100%;
-}
+/* ===== MAIN ===== */
+main { flex: 1; padding: 3rem 1.25rem; width: 100%; }
+.container { max-width: 820px; margin: 0 auto; width: 100%; }
 
-/* Input Card */
+/* ===== INPUT CARD ===== */
 .input-card {
-  background: var(--card-bg);
-  padding: 2.25rem;
-  border-radius: 20px;
-  box-shadow: var(--shadow-md);
+  background: var(--card-bg); padding: 2.25rem;
+  border-radius: 20px; box-shadow: var(--shadow-md);
   border: 1px solid var(--border-warm);
 }
-
-.input-group {
-  display: flex;
-  gap: 12px;
-}
+.input-group { display: flex; gap: 12px; }
 
 input[type="url"] {
-  flex: 1;
-  min-width: 0;
-  padding: 1.05rem 1.25rem;
-  border: 2px solid var(--border-warm);
-  border-radius: 12px;
-  font-size: 1rem;
-  outline: none;
-  background: #FFFDFB;
-  color: var(--text-dark);
-  transition: all 0.25s var(--ease-premium);
-  font-family: inherit;
-  -webkit-appearance: none;
-  appearance: none;
+  flex: 1; min-width: 0; padding: 1.05rem 1.25rem;
+  border: 2px solid var(--border-warm); border-radius: 12px;
+  font-size: 1rem; outline: none; background: #FFFDFB;
+  color: var(--text-dark); transition: all 0.25s var(--ease-premium);
+  font-family: inherit; -webkit-appearance: none; appearance: none;
 }
 input[type="url"]:focus {
   border-color: var(--primary-peach);
-  box-shadow: 0 0 0 4px rgba(224, 122, 95, 0.15);
-  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(224,122,95,0.15); background: #fff;
 }
 
 .btn-submit {
-  background: var(--peach-gradient);
-  color: #fff;
-  border: none;
-  padding: 1.05rem 2rem;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 1rem;
-  cursor: pointer;
-  box-shadow: 0 6px 15px var(--glow-peach);
-  transition: all 0.3s var(--ease-premium);
-  white-space: nowrap;
-  font-family: inherit;
+  background: var(--peach-gradient); color: #fff; border: none;
+  padding: 1.05rem 2rem; border-radius: 12px; font-weight: 700;
+  font-size: 1rem; cursor: pointer; box-shadow: 0 6px 15px var(--glow-peach);
+  transition: all 0.3s var(--ease-premium); white-space: nowrap; font-family: inherit;
 }
 .btn-submit:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px var(--glow-peach);
+  transform: translateY(-2px); box-shadow: 0 10px 25px var(--glow-peach);
   filter: brightness(1.05);
 }
 .btn-submit:active { transform: translateY(0); }
 .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
 
 .paste-helper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 0.85rem;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 0.85rem; gap: 0.5rem; flex-wrap: wrap;
 }
 .paste-btn {
-  background: transparent;
-  border: 1px solid var(--border-warm);
-  padding: 0.5rem 0.9rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  font-weight: 600;
-  transition: all 0.2s var(--ease-premium);
-  font-family: inherit;
+  background: transparent; border: 1px solid var(--border-warm);
+  padding: 0.5rem 0.9rem; border-radius: 8px; cursor: pointer;
+  font-size: 0.85rem; color: var(--text-muted); font-weight: 600;
+  transition: all 0.2s var(--ease-premium); font-family: inherit;
 }
 .paste-btn:hover {
-  background: var(--bg-warm);
-  color: var(--primary-peach);
+  background: var(--bg-warm); color: var(--primary-peach);
   border-color: var(--primary-peach);
 }
 .clear-btn {
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  cursor: pointer;
-  font-weight: 500;
+  background: transparent; border: none; color: var(--text-muted);
+  font-size: 0.85rem; cursor: pointer; font-weight: 500;
 }
 .clear-btn:hover { color: var(--primary-peach); }
 
-/* Status */
+/* ===== STATUS ===== */
 .status {
-  margin-top: 1.25rem;
-  text-align: center;
-  font-weight: 600;
-  display: none;
-  padding: 0.95rem 1rem;
-  border-radius: 10px;
-  font-size: 0.95rem;
+  margin-top: 1.25rem; text-align: center; font-weight: 600;
+  display: none; padding: 0.95rem 1rem; border-radius: 10px; font-size: 0.95rem;
 }
 .status.error {
-  color: #c53030;
-  background: #FFF5F5;
-  border: 1px solid #FEB2B2;
-  display: block;
+  color: #c53030; background: #FFF5F5; border: 1px solid #FEB2B2; display: block;
+}
+.status.success {
+  color: #276749; background: #F0FFF4; border: 1px solid #9AE6B4; display: block;
 }
 .status.loading {
-  color: #2B6CB0;
-  background: #EBF8FF;
-  border: 1px solid #90CDF4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
+  color: #2B6CB0; background: #EBF8FF; border: 1px solid #90CDF4;
+  display: flex; align-items: center; justify-content: center; gap: 0.6rem;
 }
 .spinner {
-  width: 18px;
-  height: 18px;
-  border: 2.5px solid #90CDF4;
-  border-top-color: #2B6CB0;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  flex-shrink: 0;
+  width: 18px; height: 18px; border: 2.5px solid #90CDF4;
+  border-top-color: #2B6CB0; border-radius: 50%;
+  animation: spin 0.8s linear infinite; flex-shrink: 0;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* Result */
+/* ===== RESULT ===== */
 .result-container {
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
+  margin-top: 2rem; display: flex; flex-direction: column;
+  align-items: center; gap: 1.25rem;
 }
 .media-preview {
-  max-width: 100%;
-  max-height: 420px;
-  border-radius: 14px;
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--border-warm);
-  object-fit: contain;
-  background: #000;
+  max-width: 100%; max-height: 420px; border-radius: 14px;
+  box-shadow: var(--shadow-md); border: 1px solid var(--border-warm);
+  object-fit: contain; background: #000;
 }
 .result-title {
-  font-weight: 600;
-  text-align: center;
-  max-width: 520px;
-  color: var(--text-dark);
-  font-size: 1rem;
-  padding: 0 0.5rem;
+  font-weight: 600; text-align: center; max-width: 520px;
+  color: var(--text-dark); font-size: 1rem; padding: 0 0.5rem;
   word-break: break-word;
 }
 .result-meta {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  color: var(--text-muted);
-  font-size: 0.88rem;
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  justify-content: center; color: var(--text-muted); font-size: 0.88rem;
 }
-.result-meta span {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-}
+.result-meta span { display: flex; align-items: center; gap: 0.3rem; }
 
 .btn-group {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 100%;
+  display: flex; gap: 12px; flex-wrap: wrap;
+  justify-content: center; width: 100%;
 }
 .btn-download {
-  background: var(--success-btn);
-  color: #fff;
-  padding: 0.95rem 1.5rem;
-  border-radius: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  border: none;
-  font-size: 1rem;
-  box-shadow: 0 6px 16px rgba(42, 157, 143, 0.3);
-  transition: all 0.3s var(--ease-premium);
-  font-family: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  min-width: 180px;
-  flex: 1 1 auto;
-  max-width: 280px;
+  background: var(--success-btn); color: #fff;
+  padding: 0.95rem 1.5rem; border-radius: 12px; font-weight: 700;
+  cursor: pointer; border: none; font-size: 1rem;
+  box-shadow: 0 6px 16px rgba(42,157,143,0.3);
+  transition: all 0.3s var(--ease-premium); font-family: inherit;
+  display: flex; align-items: center; justify-content: center;
+  gap: 0.5rem; min-width: 180px; flex: 1 1 auto; max-width: 280px;
 }
 .btn-download:hover:not(:disabled) {
-  transform: translateY(-2px);
-  filter: brightness(1.08);
-  box-shadow: 0 10px 22px rgba(42, 157, 143, 0.4);
+  transform: translateY(-2px); filter: brightness(1.08);
+  box-shadow: 0 10px 22px rgba(42,157,143,0.4);
 }
 .btn-download:disabled { opacity: 0.7; cursor: wait; }
-.btn-download.hd { background: #000; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3); }
-.btn-download.hd:hover:not(:disabled) { box-shadow: 0 10px 22px rgba(0, 0, 0, 0.4); }
+.btn-download.hd {
+  background: #000; box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+.btn-download.hd:hover:not(:disabled) {
+  box-shadow: 0 10px 22px rgba(0,0,0,0.4);
+}
 .btn-download.music {
   background: linear-gradient(135deg, #000 0%, #25F4EE 50%, #FE2C55 100%);
-  box-shadow: 0 6px 16px rgba(254, 44, 85, 0.3);
+  box-shadow: 0 6px 16px rgba(254,44,85,0.3);
 }
-.btn-download.music:hover:not(:disabled) { box-shadow: 0 10px 22px rgba(254, 44, 85, 0.4); }
+.btn-download.music:hover:not(:disabled) {
+  box-shadow: 0 10px 22px rgba(254,44,85,0.4);
+}
 
-/* How To / Info */
-.info-section {
-  margin-top: 3rem;
-}
+/* ===== INFO SECTIONS ===== */
+.info-section { margin-top: 3rem; }
 .info-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.25rem;
 }
 .info-card {
-  background: #fff;
-  padding: 1.5rem;
-  border-radius: 14px;
-  border: 1px solid var(--border-warm);
-  box-shadow: var(--shadow-sm);
+  background: #fff; padding: 1.5rem; border-radius: 14px;
+  border: 1px solid var(--border-warm); box-shadow: var(--shadow-sm);
 }
 .info-card h3 {
-  font-size: 1.05rem;
-  margin-bottom: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--text-dark);
+  font-size: 1.05rem; margin-bottom: 0.5rem;
+  display: flex; align-items: center; gap: 0.5rem; color: var(--text-dark);
 }
-.info-card p {
-  color: var(--text-muted);
-  font-size: 0.92rem;
-  line-height: 1.55;
-}
+.info-card p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.55; }
 
 .section-title {
-  font-size: 1.6rem;
-  font-weight: 800;
-  margin-bottom: 0.4rem;
-  text-align: center;
-  letter-spacing: -0.02em;
+  font-size: 1.6rem; font-weight: 800; margin-bottom: 0.4rem;
+  text-align: center; letter-spacing: -0.02em;
 }
 .section-sub {
-  text-align: center;
-  color: var(--text-muted);
-  margin-bottom: 1.75rem;
-  font-size: 0.98rem;
+  text-align: center; color: var(--text-muted);
+  margin-bottom: 1.75rem; font-size: 0.98rem;
 }
 
-/* Footer */
+/* ===== FOOTER ===== */
 footer {
-  background: var(--dark-footer);
-  color: #fff;
-  padding: 3.5rem 1.5rem 1.75rem;
-  margin-top: auto;
+  background: var(--dark-footer); color: #fff;
+  padding: 3.5rem 1.5rem 1.75rem; margin-top: auto;
 }
 .footer-grid {
-  max-width: 1200px;
-  margin: 0 auto 2.5rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  max-width: 1200px; margin: 0 auto 2.5rem;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2.5rem;
 }
-.footer-col h4 {
-  margin-bottom: 1.1rem;
-  color: var(--primary-peach);
-  font-size: 1rem;
-}
+.footer-col h4 { margin-bottom: 1.1rem; color: var(--primary-peach); font-size: 1rem; }
 .footer-col ul { list-style: none; }
 .footer-col li { margin-bottom: 0.6rem; }
 .footer-col a {
-  color: #ccc;
-  font-size: 0.95rem;
+  color: #ccc; font-size: 0.95rem;
   transition: color 0.3s var(--ease-premium), transform 0.3s var(--ease-premium);
   display: inline-block;
 }
 .footer-col a:hover, .footer-col a:focus-visible {
-  color: var(--primary-peach);
-  transform: translateX(3px);
+  color: var(--primary-peach); transform: translateX(3px);
 }
 .footer-bottom {
-  text-align: center;
-  padding-top: 1.75rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  color: #999;
-  font-size: 0.9rem;
+  text-align: center; padding-top: 1.75rem;
+  border-top: 1px solid rgba(255,255,255,0.08); color: #999; font-size: 0.9rem;
 }
 
-/* Responsive */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   nav[aria-label="Main navigation"] .nav-links { display: none; }
   .hamburger { display: block; }
 }
-
 @media (max-width: 640px) {
   header { padding: 0.75rem 1rem; }
   .logo { font-size: 1.1rem; }
@@ -586,7 +390,7 @@ footer {
   main { padding: 2rem 1rem; }
   .input-card { padding: 1.4rem; border-radius: 16px; }
   .input-group { flex-direction: column; gap: 10px; }
-  input[type="url"] { padding: 0.95rem 1rem; font-size: 16px; } /* 16px prevents iOS zoom */
+  input[type="url"] { padding: 0.95rem 1rem; font-size: 16px; }
   .btn-submit { padding: 1rem; width: 100%; }
   .btn-download { min-width: unset; width: 100%; max-width: unset; }
   .btn-group { flex-direction: column; width: 100%; }
@@ -594,12 +398,10 @@ footer {
   .section-title { font-size: 1.35rem; }
   .info-card { padding: 1.25rem; }
 }
-
 @media (max-width: 380px) {
   .hero h1 { font-size: 1.6rem; }
   .input-card { padding: 1.1rem; }
 }
-
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -786,7 +588,7 @@ document.addEventListener('keydown', e => {
 });
 mobileMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', closeMenu));
 
-// ============ TikTok Downloader Logic ============
+// ============ DOM Elements ============
 const form = document.getElementById('downloadForm');
 const input = document.getElementById('mediaUrl');
 const submitBtn = document.getElementById('submitBtn');
@@ -795,7 +597,7 @@ const resultBox = document.getElementById('resultContainer');
 const pasteBtn = document.getElementById('pasteBtn');
 const clearBtn = document.getElementById('clearBtn');
 
-// Show/hide clear button
+// ============ UI Helpers ============
 input.addEventListener('input', () => {
   clearBtn.style.display = input.value ? 'inline' : 'none';
 });
@@ -803,11 +605,11 @@ clearBtn.addEventListener('click', () => {
   input.value = '';
   clearBtn.style.display = 'none';
   statusMsg.style.display = 'none';
+  statusMsg.className = 'status';
   resultBox.innerHTML = '';
   input.focus();
 });
 
-// Paste button
 pasteBtn.addEventListener('click', async () => {
   try {
     const text = await navigator.clipboard.readText();
@@ -816,7 +618,7 @@ pasteBtn.addEventListener('click', async () => {
       input.dispatchEvent(new Event('input'));
       input.focus();
     }
-  } catch (err) {
+  } catch {
     showStatus('error', 'Clipboard access denied. Please paste manually.');
   }
 });
@@ -824,7 +626,7 @@ pasteBtn.addEventListener('click', async () => {
 function showStatus(type, message) {
   statusMsg.className = 'status ' + type;
   if (type === 'loading') {
-    statusMsg.innerHTML = `<span class="spinner"></span><span>${message}</span>`;
+    statusMsg.innerHTML = '<span class="spinner"></span><span>' + message + '</span>';
   } else {
     statusMsg.textContent = message;
   }
@@ -833,55 +635,30 @@ function showStatus(type, message) {
 function isValidTikTokUrl(url) {
   try {
     const u = new URL(url);
-    return /(^|\.)tiktok\.com$/i.test(u.hostname) || /(^|\.)vm\.tiktok\.com$/i.test(u.hostname) || /(^|\.)vt\.tiktok\.com$/i.test(u.hostname);
+    return /(^|\.)tiktok\.com$/i.test(u.hostname) ||
+           /(^|\.)vm\.tiktok\.com$/i.test(u.hostname) ||
+           /(^|\.)vt\.tiktok\.com$/i.test(u.hostname);
   } catch {
     return false;
   }
 }
 
-// Multiple API endpoints for reliability
-const API_ENDPOINTS = [
-  {
-    name: 'tikwm',
-    url: (link) => `https://www.tikwm.com/api/?url=${encodeURIComponent(link)}&hd=1`,
-    parse: (data) => {
-      if (data.code !== 0 || !data.data) throw new Error(data.msg || 'API error');
-      const d = data.data;
-      return {
-        title: d.title || 'TikTok Video',
-        cover: d.cover || d.origin_cover,
-        author: d.author?.nickname || d.author?.unique_id,
-        duration: d.duration,
-        videoNoWm: d.play,
-        videoHd: d.hdplay || d.play,
-        audio: d.music
-      };
-    }
-  },
-  {
-    name: 'tikwm-fallback',
-    url: (link) => `https://tikwm.com/api/?url=${encodeURIComponent(link)}`,
-    parse: (data) => {
-      if (data.code !== 0 || !data.data) throw new Error(data.msg || 'API error');
-      const d = data.data;
-      return {
-        title: d.title || 'TikTok Video',
-        cover: d.cover || d.origin_cover,
-        author: d.author?.nickname || d.author?.unique_id,
-        duration: d.duration,
-        videoNoWm: d.play,
-        videoHd: d.hdplay || d.play,
-        audio: d.music
-      };
-    }
-  }
-];
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/[&<>"']/g, m => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  })[m]);
+}
 
-async function fetchWithTimeout(url, timeout = 20000) {
+// ============ API Configuration ============
+const RAPIDAPI_KEY = 'b4ae13065cmsh2871fc755a3c59dp1346eejsn2d5a9c6dd1ce';
+const RAPIDAPI_HOST = 'tiktok-downloader-download-tiktok-videos-without-watermark.p.rapidapi.com';
+
+async function fetchWithTimeout(url, options = {}, timeout = 25000) {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), timeout);
   try {
-    const res = await fetch(url, { signal: controller.signal });
+    const res = await fetch(url, { ...options, signal: controller.signal });
     clearTimeout(timeoutId);
     return res;
   } catch (err) {
@@ -890,146 +667,249 @@ async function fetchWithTimeout(url, timeout = 20000) {
   }
 }
 
-async function tryApi(link) {
+// ============ API 1: RapidAPI (Primary) ============
+async function fetchFromRapidAPI(tiktokUrl) {
+  const apiUrl = `https://${RAPIDAPI_HOST}/vid/index?url=${encodeURIComponent(tiktokUrl)}`;
+
+  const res = await fetchWithTimeout(apiUrl, {
+    method: 'GET',
+    headers: {
+      'x-rapidapi-key': RAPIDAPI_KEY,
+      'x-rapidapi-host': RAPIDAPI_HOST
+    }
+  }, 25000);
+
+  if (!res.ok) throw new Error('RapidAPI HTTP ' + res.status);
+
+  const json = await res.json();
+  console.log('RapidAPI Response:', json);
+
+  // Flexible parsing — handles multiple possible response structures
+  const data = json.result || json.data || json;
+
+  // Extract video URL (try many field names)
+  const videoUrl = data.video || data.video_url || data.download_url ||
+                   data.play || data.noWatermark || data.no_watermark ||
+                   data.hdplay || data.hd || null;
+
+  // Extract HD video URL
+  const hdUrl = data.hdplay || data.hd || data.hd_video ||
+                data.video_hd || data.videoHD || null;
+
+  // Extract audio URL
+  const audioUrl = data.music || data.music_url || data.audio ||
+                   data.audio_url || data.sound || data.sound_url || null;
+
+  // Extract cover/thumbnail
+  const coverUrl = data.cover || data.cover_url || data.thumbnail ||
+                   data.thumb || data.image || data.origin_cover || null;
+
+  // Extract title
+  const title = data.title || data.description || data.desc ||
+                data.caption || 'TikTok Video';
+
+  // Extract author
+  const author = data.author || data.nickname || data.creator ||
+                 (data.author_info && (data.author_info.nickname || data.author_info.unique_id)) || null;
+
+  // Extract duration
+  const duration = data.duration || data.video_duration || null;
+
+  if (!videoUrl && !hdUrl) {
+    throw new Error('No video URL found in API response');
+  }
+
+  return {
+    title: title,
+    cover: coverUrl,
+    author: author,
+    duration: duration,
+    videoNoWm: videoUrl,
+    videoHd: (hdUrl && hdUrl !== videoUrl) ? hdUrl : null,
+    audio: audioUrl
+  };
+}
+
+// ============ API 2: TikWM (Fallback) ============
+async function fetchFromTikWM(tiktokUrl) {
+  const res = await fetchWithTimeout(
+    `https://www.tikwm.com/api/?url=${encodeURIComponent(tiktokUrl)}&hd=1`,
+    {}, 20000
+  );
+  if (!res.ok) throw new Error('TikWM HTTP ' + res.status);
+  const json = await res.json();
+  if (json.code !== 0 || !json.data) throw new Error(json.msg || 'TikWM error');
+
+  const d = json.data;
+  return {
+    title: d.title || 'TikTok Video',
+    cover: d.cover || d.origin_cover,
+    author: d.author?.nickname || d.author?.unique_id,
+    duration: d.duration,
+    videoNoWm: d.play,
+    videoHd: (d.hdplay && d.hdplay !== d.play) ? d.hdplay : null,
+    audio: d.music
+  };
+}
+
+// ============ API 3: TikWM Alternate (Second Fallback) ============
+async function fetchFromTikWMAlt(tiktokUrl) {
+  const res = await fetchWithTimeout(
+    `https://tikwm.com/api/?url=${encodeURIComponent(tiktokUrl)}`,
+    {}, 20000
+  );
+  if (!res.ok) throw new Error('TikWM-Alt HTTP ' + res.status);
+  const json = await res.json();
+  if (json.code !== 0 || !json.data) throw new Error(json.msg || 'TikWM-Alt error');
+
+  const d = json.data;
+  return {
+    title: d.title || 'TikTok Video',
+    cover: d.cover || d.origin_cover,
+    author: d.author?.nickname || d.author?.unique_id,
+    duration: d.duration,
+    videoNoWm: d.play,
+    videoHd: (d.hdplay && d.hdplay !== d.play) ? d.hdplay : null,
+    audio: d.music
+  };
+}
+
+// ============ Main Fetch with Fallback Chain ============
+async function fetchTikTokData(tiktokUrl) {
+  const apis = [
+    { name: 'RapidAPI', fn: fetchFromRapidAPI },
+    { name: 'TikWM', fn: fetchFromTikWM },
+    { name: 'TikWM-Alt', fn: fetchFromTikWMAlt }
+  ];
+
   let lastError;
-  for (const api of API_ENDPOINTS) {
+  for (const api of apis) {
     try {
-      const res = await fetchWithTimeout(api.url(link));
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      const data = await res.json();
-      return api.parse(data);
+      console.log(`Trying ${api.name}...`);
+      const result = await api.fn(tiktokUrl);
+      console.log(`✅ Success via ${api.name}`);
+      return result;
     } catch (err) {
+      console.warn(`❌ ${api.name} failed:`, err.message);
       lastError = err;
-      console.warn(`API ${api.name} failed:`, err.message);
     }
   }
   throw lastError || new Error('All APIs failed');
 }
 
+// ============ Form Submit ============
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const link = input.value.trim();
-  
+
   resultBox.innerHTML = '';
-  
+  statusMsg.className = 'status';
+
   if (!link) {
     showStatus('error', 'Please paste a TikTok video link.');
     return;
   }
-  
+
   if (!isValidTikTokUrl(link)) {
     showStatus('error', 'Invalid link. Please paste a valid TikTok URL (tiktok.com, vm.tiktok.com, or vt.tiktok.com).');
     return;
   }
-  
+
   submitBtn.disabled = true;
   submitBtn.textContent = 'Processing...';
-  showStatus('loading', 'Fetching TikTok video — removing watermark...');
-  
+  showStatus('loading', 'Fetching video — removing watermark...');
+
   try {
-    const result = await tryApi(link);
+    const result = await fetchTikTokData(link);
+    statusMsg.className = 'status';
     statusMsg.style.display = 'none';
     renderResult(result);
   } catch (err) {
-    console.error(err);
-    showStatus('error', '❌ Could not fetch this video. The link may be private, deleted, region-locked, or the service is temporarily unavailable. Please try another link.');
+    console.error('All APIs failed:', err);
+    showStatus('error', '❌ Could not fetch this video. The link may be private, deleted, region-locked, or the service is temporarily down. Please try a different link.');
   } finally {
     submitBtn.disabled = false;
     submitBtn.textContent = 'Download';
   }
 });
 
+// ============ Render Result ============
 function renderResult(data) {
   const parts = [];
-  
-  // Cover image
+
   if (data.cover) {
-    parts.push(`<img src="${escapeAttr(data.cover)}" class="media-preview" alt="TikTok video cover" loading="lazy" onerror="this.style.display='none'">`);
+    parts.push('<img src="' + escapeHtml(data.cover) + '" class="media-preview" alt="TikTok video cover" loading="lazy" onerror="this.style.display=\'none\'">');
   }
-  
-  // Title
-  parts.push(`<p class="result-title">${escapeHtml(data.title)}</p>`);
-  
-  // Meta
+
+  parts.push('<p class="result-title">' + escapeHtml(data.title) + '</p>');
+
   const meta = [];
-  if (data.author) meta.push(`<span>👤 @${escapeHtml(data.author)}</span>`);
-  if (data.duration) meta.push(`<span>⏱️ ${data.duration}s</span>`);
-  if (meta.length) parts.push(`<div class="result-meta">${meta.join('')}</div>`);
-  
-  // Buttons
+  if (data.author) meta.push('<span>👤 @' + escapeHtml(data.author) + '</span>');
+  if (data.duration) meta.push('<span>⏱️ ' + data.duration + 's</span>');
+  if (meta.length) parts.push('<div class="result-meta">' + meta.join('') + '</div>');
+
   const btns = [];
   if (data.videoNoWm) {
-    btns.push(`<button class="btn-download" data-url="${escapeAttr(data.videoNoWm)}" data-type="video" data-label="nowm">⬇️ MP4 No Watermark</button>`);
+    btns.push('<button class="btn-download" data-url="' + escapeHtml(data.videoNoWm) + '" data-type="video" data-label="nowm">⬇️ MP4 No Watermark</button>');
   }
-  if (data.videoHd && data.videoHd !== data.videoNoWm) {
-    btns.push(`<button class="btn-download hd" data-url="${escapeAttr(data.videoHd)}" data-type="video" data-label="hd">🎬 HD Quality</button>`);
+  if (data.videoHd) {
+    btns.push('<button class="btn-download hd" data-url="' + escapeHtml(data.videoHd) + '" data-type="video" data-label="hd">🎬 HD Quality</button>');
   }
   if (data.audio) {
-    btns.push(`<button class="btn-download music" data-url="${escapeAttr(data.audio)}" data-type="audio" data-label="audio">🎵 MP3 Audio</button>`);
+    btns.push('<button class="btn-download music" data-url="' + escapeHtml(data.audio) + '" data-type="audio" data-label="audio">🎵 MP3 Audio</button>');
   }
-  
+
   if (btns.length === 0) {
     showStatus('error', 'No downloadable media found in this TikTok.');
     return;
   }
-  
-  parts.push(`<div class="btn-group">${btns.join('')}</div>`);
-  
+
+  parts.push('<div class="btn-group">' + btns.join('') + '</div>');
   resultBox.innerHTML = parts.join('');
-  
-  // Bind download buttons
+
   resultBox.querySelectorAll('.btn-download').forEach(btn => {
     btn.addEventListener('click', () => downloadFile(btn));
   });
-  
-  // Scroll into view
+
   resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
+// ============ Download Logic ============
 async function downloadFile(btn) {
   const url = btn.dataset.url;
   const type = btn.dataset.type;
   const label = btn.dataset.label || type;
   const originalText = btn.textContent;
-  
+
   btn.disabled = true;
-  btn.innerHTML = `<span class="spinner" style="border-color:rgba(255,255,255,0.3);border-top-color:#fff;"></span> Downloading...`;
-  
+  btn.innerHTML = '<span class="spinner" style="border-color:rgba(255,255,255,0.3);border-top-color:#fff;"></span> Downloading...';
+
   const dateStr = new Date().toISOString().replace(/[-:T.]/g, '').slice(0, 14);
   const randomNum = Math.floor(1000 + Math.random() * 9000);
   const ext = type === 'audio' ? 'mp3' : 'mp4';
-  const fileName = `tiktok_${label}_${dateStr}_${randomNum}.${ext}`;
-  
-  // Try multiple strategies
+  const fileName = 'tiktok_' + label + '_' + dateStr + '_' + randomNum + '.' + ext;
+
   const strategies = [
-    // Strategy 1: Direct fetch and blob
+    // Strategy 1: Direct fetch → blob
     async () => {
-      const res = await fetchWithTimeout(url, 60000);
+      const res = await fetchWithTimeout(url, {}, 60000);
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const blob = await res.blob();
       saveBlob(blob, fileName);
     },
-    // Strategy 2: Via tikwm proxy if available
-    async () => {
-      const proxyUrl = `https://www.tikwm.com/video/media/play/${encodeURIComponent(url)}`;
-      const res = await fetchWithTimeout(proxyUrl, 60000);
-      if (!res.ok) throw new Error('Proxy HTTP ' + res.status);
-      const blob = await res.blob();
-      saveBlob(blob, fileName);
-    },
-    // Strategy 3: Direct link (opens in new tab as fallback)
+    // Strategy 2: Open in new tab with download attribute
     async () => {
       const a = document.createElement('a');
       a.href = url;
       a.download = fileName;
       a.target = '_blank';
-      a.rel = 'noopener';
+      a.rel = 'noopener noreferrer';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
     }
   ];
-  
+
   let success = false;
   for (const strategy of strategies) {
     try {
@@ -1040,12 +920,12 @@ async function downloadFile(btn) {
       console.warn('Download strategy failed:', err.message);
     }
   }
-  
+
   btn.disabled = false;
   btn.textContent = originalText;
-  
+
   if (!success) {
-    showStatus('error', 'Download failed. Try right-click → Save link as, or try a different video.');
+    showStatus('error', 'Download failed. Try right-click → "Save link as", or try a different video.');
   }
 }
 
@@ -1058,16 +938,6 @@ function saveBlob(blob, fileName) {
   a.click();
   document.body.removeChild(a);
   setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
-}
-
-function escapeHtml(str) {
-  if (!str) return '';
-  return String(str).replace(/[&<>"']/g, m => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-  })[m]);
-}
-function escapeAttr(str) {
-  return escapeHtml(str);
 }
 </script>
 
