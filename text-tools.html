@@ -1,83 +1,475 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Text Tools Online - Word Counter, Case Converter | ToolsMediaDownload</title>
-    <meta name="description" content="Free online text tools - word counter, character counter, case converter, slug generator, duplicate remover, Lorem Ipsum generator.">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://toolsmediadownload.com/text-tools.html">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-    <style>
-        :root{--bg-warm:#FAF5EE;--card-bg:#FFF;--primary-peach:#E07A5F;--text-dark:#2C221E;--text-muted:#706661;--border-warm:#EFE3D8;--success-btn:#2A9D8F;--dark-footer:#1A1615}
-        *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-        body{background:var(--bg-warm);color:var(--text-dark);min-height:100vh;display:flex;flex-direction:column;line-height:1.7}
-        header{background:#fff;border-bottom:1px solid var(--border-warm);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-        .logo{font-size:1.4rem;font-weight:800;color:var(--primary-peach);text-decoration:none;display:flex;align-items:center;gap:.5rem}.logo span{color:var(--text-dark)}
-        .nav-links{display:flex;gap:1.25rem}.nav-links a{color:var(--text-dark);text-decoration:none;font-weight:600;font-size:.9rem}.nav-links a:hover{color:var(--primary-peach)}
-        @media(max-width:768px){.nav-links{display:none}}
-        .page-container{max-width:800px;margin:3rem auto;padding:0 1.25rem;flex:1}
-        .page-hero{text-align:center;margin-bottom:2.5rem}
-        .page-hero h1{font-size:2.4rem;font-weight:800;margin-bottom:.75rem}.page-hero h1 .g{background:linear-gradient(135deg,#48BB78,#38A169);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .page-hero p{color:var(--text-muted);font-size:1.1rem}
-        .tool-card{background:var(--card-bg);padding:2.25rem;border-radius:20px;box-shadow:0 12px 30px -5px rgba(224,122,95,.08);border:1px solid var(--border-warm)}
-        textarea{width:100%;min-height:200px;padding:1rem;border:2px solid var(--border-warm);border-radius:12px;font-size:1rem;outline:none;resize:vertical;font-family:inherit;background:#FFFDFB}
-        textarea:focus{border-color:var(--primary-peach)}
-        .stats-bar{display:flex;gap:1.5rem;flex-wrap:wrap;margin:1rem 0;padding:.75rem 1rem;background:#FFFDFB;border-radius:8px;border:1px solid var(--border-warm)}
-        .stat-item{font-size:.85rem;color:var(--text-muted)}.stat-item strong{color:var(--text-dark)}
-        .btn-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.6rem;margin:1.25rem 0}
-        .tool-btn{padding:.65rem;border-radius:8px;border:2px solid var(--border-warm);background:#FFFDFB;font-weight:600;font-size:.82rem;cursor:pointer;transition:all .2s}
-        .tool-btn:hover{background:var(--primary-peach);color:#fff;border-color:var(--primary-peach)}
-        .output-area{margin-top:1.25rem}
-        .output-area h3{font-size:1.1rem;margin-bottom:.5rem}
-        .copy-btn{background:var(--success-btn);color:#fff;border:none;padding:.6rem 1.25rem;border-radius:8px;font-weight:700;cursor:pointer;margin-top:.75rem;font-size:.9rem}
-        .copy-btn:hover{background:#218378}
-        footer{background:var(--dark-footer);color:#fff;padding:3rem 1rem 1.5rem;margin-top:auto}
-        .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-bottom:2rem}
-        .footer-col h3{font-size:1.05rem;margin-bottom:1rem;color:#F7EDE2}.footer-col ul{list-style:none}.footer-col ul li{margin-bottom:.6rem}.footer-col ul li a{color:#A8A099;text-decoration:none;font-size:.88rem}.footer-col ul li a:hover{color:#F7EDE2}.footer-col p{color:#A8A099;font-size:.88rem}
-        .copyright{text-align:center;border-top:1px solid #332E2B;padding-top:1.5rem;color:#78706A;font-size:.85rem}
-        @media(max-width:640px){.page-hero h1{font-size:1.8rem}.tool-card{padding:1.5rem}.btn-grid{grid-template-columns:repeat(2,1fr)}}
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Free online text tools — word counter, case converter, find & replace, remove duplicates, sort lines, encode/decode text and more. No signup required.">
+<meta name="keywords" content="text tools, word counter, character counter, case converter, find replace, remove duplicates, sort lines, online text tool">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#E07A5F">
+<title>Text Tools – Word Counter, Case Converter & More | ToolsMediaDownload</title>
+<link rel="canonical" href="https://toolsmediadownload.com/text-tools.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Text Tools",
+  "url":"https://toolsmediadownload.com/text-tools.html",
+  "description":"Free online text tools — word counter, case converter, find & replace, remove duplicates, sort lines and more.",
+  "applicationCategory":"UtilityApplication",
+  "operatingSystem":"Any",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+}
+</script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg-warm:#FAF5EE;--card-bg:#FFFFFF;--primary-peach:#E07A5F;--peach-hover:#D95D39;--peach-light:#FDE8E1;
+--peach-gradient:linear-gradient(135deg,#FF9E7D 0%,#E07A5F 50%,#D95D39 100%);
+--text-dark:#2C221E;--text-muted:#5C534E;--border-warm:#EFE3D8;
+--success-btn:#2A9D8F;--dark-footer:#1A1615;--glow-peach:rgba(224,122,95,0.4);
+--ease-premium:cubic-bezier(0.4,0,0.2,1);--radius-main:16px;
+--shadow-sm:0 1px 2px rgba(44,34,30,0.04),0 2px 6px rgba(44,34,30,0.03);
+--shadow-md:0 2px 4px rgba(44,34,30,0.04),0 8px 20px rgba(44,34,30,0.05);
+--shadow-lg:0 4px 12px rgba(44,34,30,0.06),0 20px 40px rgba(44,34,30,0.08);
+}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg-warm);color:var(--text-dark);overflow-x:hidden;-webkit-text-size-adjust:100%}
+/* HEADER */
+#siteHeader{position:sticky;top:0;z-index:1000;background:rgba(250,245,238,0.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border-warm);transition:box-shadow .3s var(--ease-premium)}
+#siteHeader.scrolled{box-shadow:var(--shadow-md)}
+.nav-wrap{max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Space Grotesk',sans-serif;font-size:1.45rem;font-weight:700;color:var(--text-dark);text-decoration:none;display:flex;align-items:center;gap:8px}
+.logo span{background:var(--peach-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{list-style:none;display:flex;align-items:center;gap:8px}
+.nav-links>li>a{text-decoration:none;color:var(--text-dark);font-size:.91rem;font-weight:500;padding:8px 14px;border-radius:10px;transition:background .2s,color .2s}
+.nav-links>li>a:hover{background:var(--peach-light);color:var(--primary-peach)}
+.dropdown{position:relative}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--card-bg);border:1px solid var(--border-warm);border-radius:14px;padding:10px;min-width:220px;box-shadow:var(--shadow-lg);z-index:999}
+.dropdown:hover .dropdown-menu{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.dropdown-menu a{text-decoration:none;color:var(--text-dark);font-size:.85rem;padding:8px 12px;border-radius:8px;transition:background .15s;white-space:nowrap}
+.dropdown-menu a:hover{background:var(--peach-light);color:var(--primary-peach)}
+.hamburger{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--text-dark);padding:6px}
+/* MOBILE PANEL */
+.mobile-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:1100;opacity:0;transition:opacity .3s}
+.mobile-overlay.open{display:block;opacity:1}
+.mobile-panel{position:fixed;top:0;right:0;width:280px;max-width:85vw;height:100%;background:var(--card-bg);z-index:1200;transform:translateX(100%);transition:transform .35s var(--ease-premium);padding:24px 20px;overflow-y:auto;display:flex;flex-direction:column}
+.mobile-panel.open{transform:translateX(0)}
+.mobile-panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.mobile-panel-head .logo{font-size:1.2rem}
+.mobile-close{background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--text-dark);padding:4px}
+.mobile-panel nav a{display:block;padding:12px 14px;text-decoration:none;color:var(--text-dark);font-weight:500;font-size:.95rem;border-radius:10px;margin-bottom:2px;transition:background .15s}
+.mobile-panel nav a:hover,.mobile-panel nav a:focus{background:var(--peach-light);color:var(--primary-peach)}
+.mobile-panel .mp-divider{height:1px;background:var(--border-warm);margin:12px 0}
+.mobile-panel .mp-label{font-size:.75rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;padding:8px 14px}
+
+/* HERO */
+.page-hero{position:relative;padding:100px 24px 60px;text-align:center;overflow:hidden}
+.page-hero::before{content:'';position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(255,158,125,0.15) 0%,rgba(224,122,95,0.06) 40%,transparent 70%);pointer-events:none}
+.page-hero h1{font-family:'Space Grotesk',sans-serif;font-size:2.6rem;font-weight:700;margin-bottom:12px;position:relative}
+.page-hero h1 span{background:var(--peach-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.page-hero p{color:var(--text-muted);font-size:1.08rem;max-width:600px;margin:0 auto;position:relative}
+
+/* MAIN */
+.main-container{max-width:900px;margin:0 auto;padding:0 24px 60px}
+
+/* TAB NAV */
+.tab-nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:28px;background:var(--card-bg);border:1px solid var(--border-warm);border-radius:14px;padding:6px;box-shadow:var(--shadow-sm)}
+.tab-btn{flex:1;min-width:100px;padding:10px 14px;border:none;background:transparent;font-family:inherit;font-size:.88rem;font-weight:600;color:var(--text-muted);border-radius:10px;cursor:pointer;transition:all .25s var(--ease-premium);white-space:nowrap}
+.tab-btn.active{background:var(--peach-gradient);color:#fff;box-shadow:0 4px 12px var(--glow-peach)}
+.tab-btn:hover:not(.active){background:var(--peach-light);color:var(--primary-peach)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* CARD */
+.tool-card{background:var(--card-bg);border:1px solid var(--border-warm);border-radius:var(--radius-main);padding:28px;box-shadow:var(--shadow-md);margin-bottom:24px}
+.tool-card h3{font-family:'Space Grotesk',sans-serif;font-size:1.15rem;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.tool-card h3 i{color:var(--primary-peach)}
+
+/* INPUTS */
+textarea,.text-input{width:100%;font-family:inherit;font-size:16px;padding:14px 16px;border:1.5px solid var(--border-warm);border-radius:12px;background:var(--bg-warm);color:var(--text-dark);resize:vertical;transition:border-color .2s,box-shadow .2s;min-height:140px}
+textarea:focus,.text-input:focus{outline:none;border-color:var(--primary-peach);box-shadow:0 0 0 3px rgba(224,122,95,0.13)}
+input[type="text"]{width:100%;font-family:inherit;font-size:16px;padding:12px 16px;border:1.5px solid var(--border-warm);border-radius:12px;background:var(--bg-warm);color:var(--text-dark);transition:border-color .2s,box-shadow .2s}
+input[type="text"]:focus{outline:none;border-color:var(--primary-peach);box-shadow:0 0 0 3px rgba(224,122,95,0.13)}
+label{font-size:.88rem;font-weight:600;display:block;margin-bottom:6px;color:var(--text-dark)}
+
+/* STAT ROW */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-top:16px}
+.stat-card{background:var(--bg-warm);border:1px solid var(--border-warm);border-radius:12px;padding:14px;text-align:center}
+.stat-card .val{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:700;color:var(--primary-peach)}
+.stat-card .lbl{font-size:.78rem;color:var(--text-muted);margin-top:2px}
+
+/* BUTTONS */
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.btn{padding:11px 22px;border:none;border-radius:12px;font-family:inherit;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .25s var(--ease-premium);display:inline-flex;align-items:center;gap:7px}
+.btn-primary{background:var(--peach-gradient);color:#fff;box-shadow:0 4px 12px var(--glow-peach)}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px var(--glow-peach)}
+.btn-outline{background:transparent;color:var(--primary-peach);border:1.5px solid var(--primary-peach)}
+.btn-outline:hover{background:var(--peach-light)}
+.btn-success{background:var(--success-btn);color:#fff;box-shadow:0 4px 12px rgba(42,157,143,0.3)}
+.btn-success:hover{transform:translateY(-1px)}
+.btn-sm{padding:8px 16px;font-size:.82rem;border-radius:10px}
+
+/* FIND REPLACE ROW */
+.fr-row{display:flex;gap:10px;margin-bottom:10px;align-items:end}
+.fr-row .fr-field{flex:1}
+.fr-row .fr-field input{width:100%}
+
+/* STATUS */
+.status-box{padding:12px 16px;border-radius:12px;font-size:.88rem;font-weight:500;display:none;align-items:center;gap:8px;margin-top:12px}
+.status-box.success{display:flex;background:#E6F4EA;color:#137333;border:1px solid #B7E1CD}
+.status-box.error{display:flex;background:#FDECEA;color:#C5221F;border:1px solid #F5C6CB}
+
+/* FOOTER */
+footer{background:var(--dark-footer);color:rgba(255,255,255,0.7);padding:60px 24px 24px}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+.footer-brand .logo{color:#fff;font-size:1.3rem;margin-bottom:12px;display:inline-flex}
+.footer-brand .logo span{background:var(--peach-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.footer-brand p{font-size:.88rem;line-height:1.6;color:rgba(255,255,255,0.5);max-width:300px}
+footer h4{color:#fff;font-size:.95rem;font-weight:700;margin-bottom:16px}
+footer ul{list-style:none}
+footer ul li{margin-bottom:8px}
+footer ul a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:.88rem;transition:color .2s}
+footer ul a:hover{color:var(--primary-peach)}
+.footer-bottom{max-width:1200px;margin:40px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-size:.82rem;color:rgba(255,255,255,0.4)}
+.footer-social{display:flex;gap:16px}
+.footer-social a{color:rgba(255,255,255,0.4);font-size:1.1rem;transition:color .2s}
+.footer-social a:hover{color:var(--primary-peach)}
+
+/* RESPONSIVE */
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px}}
+@media(max-width:768px){
+  .nav-links{display:none}.hamburger{display:block}
+  .page-hero{padding:80px 20px 40px}.page-hero h1{font-size:1.9rem}.page-hero p{font-size:.95rem}
+  .main-container{padding:0 16px 48px}
+  .tool-card{padding:20px 16px}
+  .tab-nav{gap:4px;padding:4px}
+  .tab-btn{padding:9px 10px;font-size:.82rem;min-width:0}
+  .fr-row{flex-direction:column}
+}
+@media(max-width:640px){
+  .logo{font-size:1.25rem}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .btn-row{flex-direction:column}.btn-row .btn{width:100%;justify-content:center}
+  .footer-grid{grid-template-columns:1fr}
+}
+@media(max-width:400px){
+  .logo{font-size:1.1rem}
+  .page-hero h1{font-size:1.5rem}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
 </head>
 <body>
-    <header><a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a><nav class="nav-links"><a href="index.html">Home</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></nav></header>
-    <div class="page-container">
-        <div class="page-hero"><h1><span class="g">Text Tools</span></h1><p>Word counter, case converter, slug generator & more — all free.</p></div>
-        <div class="tool-card">
-            <textarea id="inputText" placeholder="Type or paste your text here..." oninput="updateStats()"></textarea>
-            <div class="stats-bar">
-                <div class="stat-item">Words: <strong id="wordCount">0</strong></div>
-                <div class="stat-item">Characters: <strong id="charCount">0</strong></div>
-                <div class="stat-item">Sentences: <strong id="sentCount">0</strong></div>
-                <div class="stat-item">Lines: <strong id="lineCount">0</strong></div>
-                <div class="stat-item">Read Time: <strong id="readTime">0 sec</strong></div>
-            </div>
-            <div class="btn-grid">
-                <button class="tool-btn" onclick="transform(t=>t.toUpperCase())">UPPERCASE</button>
-                <button class="tool-btn" onclick="transform(t=>t.toLowerCase())">lowercase</button>
-                <button class="tool-btn" onclick="transform(t=>t.replace(/\b\w/g,c=>c.toUpperCase()))">Title Case</button>
-                <button class="tool-btn" onclick="transform(t=>t.charAt(0).toUpperCase()+t.slice(1).toLowerCase())">Sentence case</button>
-                <button class="tool-btn" onclick="transform(t=>t.split('').reverse().join(''))">Reverse Text</button>
-                <button class="tool-btn" onclick="transform(t=>[...new Set(t.split('\n'))].join('\n'))">Remove Duplicates</button>
-                <button class="tool-btn" onclick="transform(t=>t.replace(/\s+/g,' ').trim())">Remove Extra Spaces</button>
-                <button class="tool-btn" onclick="transform(t=>t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))">To URL Slug</button>
-                <button class="tool-btn" onclick="transform(t=>t.split('\n').sort().join('\n'))">Sort Lines A-Z</button>
-                <button class="tool-btn" onclick="transform(t=>t.split('\n').filter(l=>l.trim()).join('\n'))">Remove Empty Lines</button>
-                <button class="tool-btn" onclick="genLorem()">Generate Lorem Ipsum</button>
-                <button class="tool-btn" onclick="transform(t=>t.replace(/\n/g,' '))">Join Lines</button>
-            </div>
-            <div class="output-area">
-                <h3>Output:</h3>
-                <textarea id="outputText" readonly style="min-height:120px;background:#f9f9f9"></textarea>
-                <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('outputText').value);this.textContent='✅ Copied!';setTimeout(()=>this.textContent='📋 Copy Output',1500)">📋 Copy Output</button>
-            </div>
-        </div>
-    </div>
-    <footer><div class="footer-grid"><div class="footer-col"><h3>⚡ ToolsMediaDownload</h3><p>Free tools for creators.</p></div><div class="footer-col"><h3>Tools</h3><ul><li><a href="gif-compressor.html">Image Compressor</a></li><li><a href="qr-generator.html">QR Generator</a></li><li><a href="color-picker.html">Color Picker</a></li></ul></div><div class="footer-col"><h3>Company</h3><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="terms.html">Terms</a></li><li><a href="dmca.html">DMCA</a></li></ul></div></div><div class="copyright">© 2026 ToolsMediaDownload. All rights reserved.</div></footer>
-    <script>
-    function updateStats(){const t=document.getElementById('inputText').value;const words=t.trim()?t.trim().split(/\s+/).length:0;document.getElementById('wordCount').textContent=words;document.getElementById('charCount').textContent=t.length;document.getElementById('sentCount').textContent=t.split(/[.!?]+/).filter(s=>s.trim()).length;document.getElementById('lineCount').textContent=t.split('\n').length;const mins=Math.ceil(words/200);document.getElementById('readTime').textContent=mins<1?words*3+' sec':mins+' min'}
-    function transform(fn){const t=document.getElementById('inputText').value;document.getElementById('outputText').value=fn(t)}
-    function genLorem(){document.getElementById('outputText').value='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nPellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.'}
-    </script>
+
+<header id="siteHeader">
+<div class="nav-wrap">
+<a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a>
+<nav aria-label="Main navigation">
+<ul class="nav-links">
+<li><a href="index.html">Home</a></li>
+<li class="dropdown"><a href="index.html#tools">Tools <i class="fas fa-chevron-down"></i></a>
+<div class="dropdown-menu">
+<a href="tiktok-downloader.html">TikTok Downloader</a>
+<a href="instagram-downloader.html">Instagram Downloader</a>
+<a href="facebook-downloader.html">Facebook Downloader</a>
+<a href="image-converter.html">Image Converter</a>
+<a href="image-resizer.html">Image Resizer</a>
+<a href="gif-compressor.html">GIF Compressor</a>
+<a href="video-to-gif.html">Video to GIF</a>
+<a href="pdf-tools.html">PDF Tools</a>
+<a href="qr-generator.html">QR Generator</a>
+<a href="color-picker.html">Color Picker</a>
+<a href="text-tools.html">Text Tools</a>
+<a href="password-generator.html">Password Generator</a>
+<a href="json-formatter.html">JSON Formatter</a>
+<a href="base64-tool.html">Base64 Encoder</a>
+</div>
+</li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</nav>
+<button class="hamburger" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+</div>
+</header>
+
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<div class="mobile-panel" id="mobilePanel" role="dialog" aria-label="Mobile navigation">
+<div class="mobile-panel-head">
+<a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a>
+<button class="mobile-close" id="menuClose" aria-label="Close menu">✕</button>
+</div>
+<nav>
+<a href="index.html">Home</a>
+<a href="blog.html">Blog</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+<div class="mp-divider"></div>
+<div class="mp-label">Tools</div>
+<a href="tiktok-downloader.html">TikTok Downloader</a>
+<a href="instagram-downloader.html">Instagram Downloader</a>
+<a href="facebook-downloader.html">Facebook Downloader</a>
+<a href="image-converter.html">Image Converter</a>
+<a href="image-resizer.html">Image Resizer</a>
+<a href="gif-compressor.html">GIF Compressor</a>
+<a href="video-to-gif.html">Video to GIF</a>
+<a href="pdf-tools.html">PDF Tools</a>
+<a href="qr-generator.html">QR Generator</a>
+<a href="color-picker.html">Color Picker</a>
+<a href="text-tools.html">Text Tools</a>
+<a href="password-generator.html">Password Generator</a>
+<a href="json-formatter.html">JSON Formatter</a>
+<a href="base64-tool.html">Base64 Encoder</a>
+<div class="mp-divider"></div>
+<div class="mp-label">Legal</div>
+<a href="disclaimer.html">Disclaimer</a>
+<a href="terms.html">Terms of Service</a>
+<a href="dmca.html">DMCA Policy</a>
+</nav>
+</div>
+
+<section class="page-hero">
+<h1><i class="fas fa-font"></i> Text <span>Tools</span></h1>
+<p>Word counter, case converter, find &amp; replace, remove duplicates, sort lines — all free, all instant, right in your browser.</p>
+</section>
+
+<main class="main-container">
+
+<div class="tab-nav" role="tablist">
+<button class="tab-btn active" data-tab="counter" role="tab" aria-selected="true">Word Counter</button>
+<button class="tab-btn" data-tab="case" role="tab" aria-selected="false">Case Converter</button>
+<button class="tab-btn" data-tab="findreplace" role="tab" aria-selected="false">Find &amp; Replace</button>
+<button class="tab-btn" data-tab="lines" role="tab" aria-selected="false">Line Tools</button>
+</div>
+
+<!-- TAB 1: WORD COUNTER -->
+<div class="tab-panel active" id="tab-counter" role="tabpanel">
+<div class="tool-card">
+<h3><i class="fas fa-calculator"></i> Word &amp; Character Counter</h3>
+<label for="counterInput">Paste or type your text below:</label>
+<textarea id="counterInput" placeholder="Start typing or paste text here…" rows="8"></textarea>
+<div class="stats-row" id="counterStats">
+<div class="stat-card"><div class="val" id="statWords">0</div><div class="lbl">Words</div></div>
+<div class="stat-card"><div class="val" id="statChars">0</div><div class="lbl">Characters</div></div>
+<div class="stat-card"><div class="val" id="statCharsNo">0</div><div class="lbl">No Spaces</div></div>
+<div class="stat-card"><div class="val" id="statSentences">0</div><div class="lbl">Sentences</div></div>
+<div class="stat-card"><div class="val" id="statParagraphs">0</div><div class="lbl">Paragraphs</div></div>
+<div class="stat-card"><div class="val" id="statReadTime">0m</div><div class="lbl">Read Time</div></div>
+</div>
+<div class="btn-row">
+<button class="btn btn-outline btn-sm" onclick="document.getElementById('counterInput').value='';updateCounter()"><i class="fas fa-eraser"></i> Clear</button>
+<button class="btn btn-outline btn-sm" onclick="copyText(document.getElementById('counterInput').value,'Counter')"><i class="fas fa-copy"></i> Copy Text</button>
+</div>
+<div class="status-box" id="statusCounter"></div>
+</div>
+</div>
+
+<!-- TAB 2: CASE CONVERTER -->
+<div class="tab-panel" id="tab-case" role="tabpanel">
+<div class="tool-card">
+<h3><i class="fas fa-text-height"></i> Case Converter</h3>
+<label for="caseInput">Enter text to convert:</label>
+<textarea id="caseInput" placeholder="Type or paste text here…" rows="6"></textarea>
+<div class="btn-row" style="margin-top:14px">
+<button class="btn btn-primary btn-sm" onclick="convertCase('upper')">UPPERCASE</button>
+<button class="btn btn-primary btn-sm" onclick="convertCase('lower')">lowercase</button>
+<button class="btn btn-primary btn-sm" onclick="convertCase('title')">Title Case</button>
+<button class="btn btn-primary btn-sm" onclick="convertCase('sentence')">Sentence case</button>
+<button class="btn btn-primary btn-sm" onclick="convertCase('toggle')">tOGGLE</button>
+<button class="btn btn-primary btn-sm" onclick="convertCase('capitalize')">Capitalize Each</button>
+</div>
+<label for="caseOutput" style="margin-top:18px">Result:</label>
+<textarea id="caseOutput" readonly rows="6" placeholder="Converted text appears here…"></textarea>
+<div class="btn-row">
+<button class="btn btn-outline btn-sm" onclick="copyText(document.getElementById('caseOutput').value,'Case')"><i class="fas fa-copy"></i> Copy</button>
+<button class="btn btn-outline btn-sm" onclick="document.getElementById('caseInput').value='';document.getElementById('caseOutput').value=''"><i class="fas fa-eraser"></i> Clear</button>
+</div>
+<div class="status-box" id="statusCase"></div>
+</div>
+</div>
+
+<!-- TAB 3: FIND & REPLACE -->
+<div class="tab-panel" id="tab-findreplace" role="tabpanel">
+<div class="tool-card">
+<h3><i class="fas fa-search"></i> Find &amp; Replace</h3>
+<label for="frInput">Your text:</label>
+<textarea id="frInput" placeholder="Paste text here…" rows="6"></textarea>
+<div class="fr-row" style="margin-top:14px">
+<div class="fr-field"><label for="frFind">Find:</label><input type="text" id="frFind" placeholder="Search term…"></div>
+<div class="fr-field"><label for="frReplace">Replace with:</label><input type="text" id="frReplace" placeholder="Replacement…"></div>
+</div>
+<div style="display:flex;align-items:center;gap:16px;margin-bottom:12px">
+<label style="display:inline-flex;align-items:center;gap:6px;margin:0;cursor:pointer;font-weight:500"><input type="checkbox" id="frCase"> Case sensitive</label>
+<label style="display:inline-flex;align-items:center;gap:6px;margin:0;cursor:pointer;font-weight:500"><input type="checkbox" id="frRegex"> Regex</label>
+</div>
+<div class="btn-row">
+<button class="btn btn-primary btn-sm" onclick="doFindReplace()"><i class="fas fa-exchange-alt"></i> Replace All</button>
+<button class="btn btn-outline btn-sm" onclick="copyText(document.getElementById('frOutput').value,'Find')"><i class="fas fa-copy"></i> Copy Result</button>
+</div>
+<label for="frOutput" style="margin-top:16px">Result:</label>
+<textarea id="frOutput" readonly rows="6" placeholder="Result appears here…"></textarea>
+<div class="status-box" id="statusFR"></div>
+</div>
+</div>
+
+<!-- TAB 4: LINE TOOLS -->
+<div class="tab-panel" id="tab-lines" role="tabpanel">
+<div class="tool-card">
+<h3><i class="fas fa-list-ol"></i> Line Tools</h3>
+<label for="lineInput">Enter text (one item per line):</label>
+<textarea id="lineInput" placeholder="Line 1&#10;Line 2&#10;Line 3&#10;…" rows="8"></textarea>
+<div class="btn-row" style="margin-top:14px">
+<button class="btn btn-primary btn-sm" onclick="lineTool('sort-asc')"><i class="fas fa-sort-alpha-down"></i> Sort A–Z</button>
+<button class="btn btn-primary btn-sm" onclick="lineTool('sort-desc')"><i class="fas fa-sort-alpha-up"></i> Sort Z–A</button>
+<button class="btn btn-primary btn-sm" onclick="lineTool('reverse')"><i class="fas fa-exchange-alt fa-rotate-90"></i> Reverse</button>
+<button class="btn btn-primary btn-sm" onclick="lineTool('dedupe')"><i class="fas fa-filter"></i> Remove Duplicates</button>
+<button class="btn btn-primary btn-sm" onclick="lineTool('trim')"><i class="fas fa-cut"></i> Trim Lines</button>
+<button class="btn btn-primary btn-sm" onclick="lineTool('empty')"><i class="fas fa-minus"></i> Remove Empty</button>
+<button class="btn btn-primary btn-sm" onclick="lineTool('number')"><i class="fas fa-list-ol"></i> Add Numbers</button>
+<button class="btn btn-primary btn-sm" onclick="lineTool('shuffle')"><i class="fas fa-random"></i> Shuffle</button>
+</div>
+<label for="lineOutput" style="margin-top:18px">Result:</label>
+<textarea id="lineOutput" readonly rows="8" placeholder="Processed text appears here…"></textarea>
+<div class="btn-row">
+<button class="btn btn-outline btn-sm" onclick="copyText(document.getElementById('lineOutput').value,'Line')"><i class="fas fa-copy"></i> Copy</button>
+<button class="btn btn-outline btn-sm" onclick="document.getElementById('lineInput').value='';document.getElementById('lineOutput').value=''"><i class="fas fa-eraser"></i> Clear</button>
+</div>
+<div class="status-box" id="statusLine"></div>
+</div>
+</div>
+
+</main>
+
+<footer>
+<div class="footer-grid">
+<div class="footer-brand">
+<a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a>
+<p>Free online tools for downloading, converting, and optimizing your media &amp; text content.</p>
+</div>
+<div><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="blog.html">Blog</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+<div><h4>Popular Tools</h4><ul><li><a href="gif-compressor.html">GIF Compressor</a></li><li><a href="image-converter.html">Image Converter</a></li><li><a href="instagram-downloader.html">Instagram Downloader</a></li><li><a href="tiktok-downloader.html">TikTok Downloader</a></li><li><a href="pdf-tools.html">PDF Tools</a></li></ul></div>
+<div><h4>Legal</h4><ul><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="terms.html">Terms of Service</a></li><li><a href="dmca.html">DMCA Policy</a></li></ul></div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2025 ToolsMediaDownload. All rights reserved.</p>
+<div class="footer-social">
+<a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+<a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+<a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+<a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+</div>
+</div>
+</footer>
+
+<script>
+/* MOBILE MENU */
+const menuToggle=document.getElementById('menuToggle'),menuClose=document.getElementById('menuClose'),mobilePanel=document.getElementById('mobilePanel'),mobileOverlay=document.getElementById('mobileOverlay');
+function openMenu(){mobilePanel.classList.add('open');mobileOverlay.classList.add('open');menuToggle.setAttribute('aria-expanded','true');document.body.style.overflow='hidden'}
+function closeMenu(){mobilePanel.classList.remove('open');mobileOverlay.classList.remove('open');menuToggle.setAttribute('aria-expanded','false');document.body.style.overflow=''}
+menuToggle.addEventListener('click',openMenu);menuClose.addEventListener('click',closeMenu);mobileOverlay.addEventListener('click',closeMenu);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
+
+/* SCROLL SHADOW */
+(function(){const h=document.getElementById('siteHeader');let t=false;function onScroll(){const s=window.scrollY>10;if(s!==t){t=s;h.classList.toggle('scrolled',s)}}window.addEventListener('scroll',()=>requestAnimationFrame(onScroll),{passive:true});onScroll()})();
+
+/* TABS */
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-selected','false')});
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');btn.setAttribute('aria-selected','true');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+  });
+});
+
+/* COPY */
+function copyText(text,src){
+  if(!text){showStatus('status'+src,'Nothing to copy','error');return}
+  navigator.clipboard.writeText(text).then(()=>showStatus('status'+src,'Copied to clipboard!','success')).catch(()=>showStatus('status'+src,'Copy failed','error'));
+}
+function showStatus(id,msg,type){const el=document.getElementById(id);if(!el)return;el.className='status-box '+type;el.innerHTML='<i class="fas fa-'+(type==='success'?'check-circle':'exclamation-circle')+'"></i>'+msg;setTimeout(()=>{el.className='status-box';el.style.display='none'},3000);el.style.display='flex'}
+
+/* TAB 1: COUNTER */
+const counterInput=document.getElementById('counterInput');
+function updateCounter(){
+  const t=counterInput.value;
+  const words=t.trim()?t.trim().split(/\s+/).length:0;
+  const chars=t.length;
+  const charsNo=t.replace(/\s/g,'').length;
+  const sentences=t.trim()?t.split(/[.!?]+/).filter(s=>s.trim()).length:0;
+  const paragraphs=t.trim()?t.split(/\n\s*\n/).filter(p=>p.trim()).length:0;
+  const mins=Math.ceil(words/200);
+  document.getElementById('statWords').textContent=words;
+  document.getElementById('statChars').textContent=chars;
+  document.getElementById('statCharsNo').textContent=charsNo;
+  document.getElementById('statSentences').textContent=sentences;
+  document.getElementById('statParagraphs').textContent=paragraphs;
+  document.getElementById('statReadTime').textContent=mins+'m';
+}
+counterInput.addEventListener('input',updateCounter);
+
+/* TAB 2: CASE */
+function convertCase(mode){
+  const t=document.getElementById('caseInput').value;
+  if(!t){showStatus('statusCase','Please enter text first','error');return}
+  let r='';
+  switch(mode){
+    case'upper':r=t.toUpperCase();break;
+    case'lower':r=t.toLowerCase();break;
+    case'title':r=t.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());break;
+    case'sentence':r=t.toLowerCase().replace(/(^\s*\w|[.!?]\s+\w)/g,c=>c.toUpperCase());break;
+    case'toggle':r=[...t].map(c=>c===c.toUpperCase()?c.toLowerCase():c.toUpperCase()).join('');break;
+    case'capitalize':r=t.replace(/\b\w/g,c=>c.toUpperCase());break;
+  }
+  document.getElementById('caseOutput').value=r;
+  showStatus('statusCase','Converted!','success');
+}
+
+/* TAB 3: FIND & REPLACE */
+function doFindReplace(){
+  const text=document.getElementById('frInput').value;
+  const find=document.getElementById('frFind').value;
+  const replace=document.getElementById('frReplace').value;
+  if(!text){showStatus('statusFR','Please enter text','error');return}
+  if(!find){showStatus('statusFR','Please enter search term','error');return}
+  const caseSensitive=document.getElementById('frCase').checked;
+  const useRegex=document.getElementById('frRegex').checked;
+  let count=0;
+  try{
+    let regex;
+    if(useRegex){regex=new RegExp(find,caseSensitive?'g':'gi')}
+    else{const escaped=find.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');regex=new RegExp(escaped,caseSensitive?'g':'gi')}
+    const result=text.replace(regex,(m)=>{count++;return replace});
+    document.getElementById('frOutput').value=result;
+    showStatus('statusFR',count+' replacement'+(count!==1?'s':'')+' made','success');
+  }catch(e){showStatus('statusFR','Invalid regex: '+e.message,'error')}
+}
+
+/* TAB 4: LINE TOOLS */
+function lineTool(mode){
+  const text=document.getElementById('lineInput').value;
+  if(!text.trim()){showStatus('statusLine','Please enter text','error');return}
+  let lines=text.split('\n');
+  let result;
+  switch(mode){
+    case'sort-asc':result=lines.slice().sort((a,b)=>a.localeCompare(b)).join('\n');break;
+    case'sort-desc':result=lines.slice().sort((a,b)=>b.localeCompare(a)).join('\n');break;
+    case'reverse':result=lines.slice().reverse().join('\n');break;
+    case'dedupe':result=[...new Set(lines)].join('\n');break;
+    case'trim':result=lines.map(l=>l.trim()).join('\n');break;
+    case'empty':result=lines.filter(l=>l.trim()).join('\n');break;
+    case'number':result=lines.map((l,i)=>(i+1)+'. '+l).join('\n');break;
+    case'shuffle':result=lines.slice().sort(()=>Math.random()-0.5).join('\n');break;
+  }
+  document.getElementById('lineOutput').value=result;
+  showStatus('statusLine','Done!','success');
+}
+</script>
 </body>
 </html>
