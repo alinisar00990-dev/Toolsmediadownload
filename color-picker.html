@@ -1,87 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><!-- Google & Browser Round Peach Favicon -->
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="apple-touch-icon" sizes="180x180" href="favicon.svg">
-<meta name="theme-color" content="#E07A5F">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Color Picker & Palette Generator - Free Online | ToolsMediaDownload</title>
-    <meta name="description" content="Pick colors, generate palettes, get HEX, RGB, HSL values. Extract colors from images. Free online color tool.">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://toolsmediadownload.com/color-picker.html">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-    <style>
-        :root{--bg-warm:#FAF5EE;--card-bg:#FFF;--primary-peach:#E07A5F;--text-dark:#2C221E;--text-muted:#706661;--border-warm:#EFE3D8;--success-btn:#2A9D8F;--dark-footer:#1A1615}
-        *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-        body{background:var(--bg-warm);color:var(--text-dark);min-height:100vh;display:flex;flex-direction:column;line-height:1.7}
-        header{background:#fff;border-bottom:1px solid var(--border-warm);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-        .logo{font-size:1.4rem;font-weight:800;color:var(--primary-peach);text-decoration:none;display:flex;align-items:center;gap:.5rem}.logo span{color:var(--text-dark)}
-        .nav-links{display:flex;gap:1.25rem}.nav-links a{color:var(--text-dark);text-decoration:none;font-weight:600;font-size:.9rem}.nav-links a:hover{color:var(--primary-peach)}
-        @media(max-width:768px){.nav-links{display:none}}
-        .page-container{max-width:800px;margin:3rem auto;padding:0 1.25rem;flex:1}
-        .page-hero{text-align:center;margin-bottom:2.5rem}
-        .page-hero h1{font-size:2.4rem;font-weight:800;margin-bottom:.75rem}.page-hero h1 .g{background:linear-gradient(135deg,#ED64A6,#D53F8C,#9F7AEA);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .page-hero p{color:var(--text-muted);font-size:1.1rem}
-        .tool-card{background:var(--card-bg);padding:2.25rem;border-radius:20px;box-shadow:0 12px 30px -5px rgba(224,122,95,.08);border:1px solid var(--border-warm);margin-bottom:2rem}
-        .picker-area{display:flex;gap:2rem;align-items:center;flex-wrap:wrap;justify-content:center;margin-bottom:2rem}
-        .color-input-wrap{position:relative}
-        .color-input-wrap input[type="color"]{width:150px;height:150px;border:4px solid var(--border-warm);border-radius:20px;cursor:pointer;padding:0}
-        .color-preview{width:150px;height:60px;border-radius:12px;border:2px solid var(--border-warm);margin-top:1rem}
-        .color-values{flex:1;min-width:250px}
-        .val-row{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;background:#FFFDFB;padding:.65rem 1rem;border-radius:8px;border:1px solid var(--border-warm)}
-        .val-row label{font-weight:700;font-size:.85rem;min-width:40px}
-        .val-row input{flex:1;border:none;background:none;font-size:.95rem;font-weight:600;outline:none;font-family:monospace}
-        .val-row button{background:var(--primary-peach);color:#fff;border:none;padding:.35rem .65rem;border-radius:6px;font-size:.75rem;cursor:pointer;font-weight:600}
-        .val-row button:hover{background:#D95D39}
-        .palette-section h3{font-size:1.2rem;margin-bottom:1rem;text-align:center}
-        .palette-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem;margin-bottom:1rem}
-        .palette-swatch{height:60px;border-radius:8px;cursor:pointer;transition:transform .2s;position:relative;display:flex;align-items:flex-end;justify-content:center;padding:.4rem;font-size:.65rem;font-weight:700}
-        .palette-swatch:hover{transform:scale(1.1)}
-        .btn-generate{background:linear-gradient(135deg,#ED64A6,#9F7AEA);color:#fff;border:none;padding:.75rem 1.5rem;border-radius:10px;font-weight:700;cursor:pointer;display:block;margin:0 auto;font-size:.95rem}
-        .btn-generate:hover{transform:translateY(-2px)}
-        .copied{position:fixed;top:20px;right:20px;background:#38A169;color:#fff;padding:.75rem 1.5rem;border-radius:8px;font-weight:700;font-size:.9rem;z-index:999;display:none}
-        .copied.active{display:block;animation:fadeOut 2s forwards}
-        @keyframes fadeOut{0%{opacity:1}70%{opacity:1}100%{opacity:0}}
-        footer{background:var(--dark-footer);color:#fff;padding:3rem 1rem 1.5rem;margin-top:auto}
-        .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-bottom:2rem}
-        .footer-col h3{font-size:1.05rem;margin-bottom:1rem;color:#F7EDE2}.footer-col ul{list-style:none}.footer-col ul li{margin-bottom:.6rem}.footer-col ul li a{color:#A8A099;text-decoration:none;font-size:.88rem}.footer-col ul li a:hover{color:#F7EDE2}.footer-col p{color:#A8A099;font-size:.88rem}
-        .copyright{text-align:center;border-top:1px solid #332E2B;padding-top:1.5rem;color:#78706A;font-size:.85rem}
-        @media(max-width:640px){.page-hero h1{font-size:1.8rem}.tool-card{padding:1.5rem}.picker-area{flex-direction:column}.palette-grid{grid-template-columns:repeat(3,1fr)}}
-    </style>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Free online color picker tool. Pick colors from any point, convert between HEX, RGB, HSL, CMYK formats, generate palettes, check contrast ratios.">
+<title>Color Picker - Free Online Color Tool | ToolsMediaDownload</title>
+<link rel="canonical" href="https://toolsmediadownload.com/color-picker.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='85'>🎨</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Color Picker","url":"https://toolsmediadownload.com/color-picker.html","description":"Pick colors, convert between HEX/RGB/HSL/CMYK, generate palettes.","applicationCategory":"DesignApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg-warm:#FAF5EE;--card-bg:#FFFFFF;--primary-peach:#E07A5F;--peach-hover:#D95D39;--peach-light:#FDE8E1;--peach-gradient:linear-gradient(135deg,#FF9E7D 0%,#E07A5F 50%,#D95D39 100%);--text-dark:#2C221E;--text-muted:#5C534E;--border-warm:#EFE3D8;--success-btn:#2A9D8F;--dark-footer:#1A1615;--ease-premium:cubic-bezier(0.4,0,0.2,1);--radius-main:16px;--shadow-sm:0 1px 2px rgba(44,34,30,0.04),0 2px 6px rgba(44,34,30,0.03);--shadow-md:0 2px 4px rgba(44,34,30,0.04),0 8px 20px rgba(44,34,30,0.05);--shadow-lg:0 4px 12px rgba(44,34,30,0.06),0 20px 40px rgba(44,34,30,0.08)}
+html{scroll-behavior:smooth}body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg-warm);color:var(--text-dark);overflow-x:hidden;-webkit-text-size-adjust:100%}
+header{position:sticky;top:0;z-index:1000;background:rgba(250,245,238,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border-warm);transition:box-shadow .3s var(--ease-premium)}header.scrolled{box-shadow:0 1px 8px rgba(44,34,30,.06)}
+.nav-wrap{max-width:1260px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:.85rem 2rem}
+.logo{font-family:'Space Grotesk',sans-serif;font-size:1.45rem;font-weight:700;color:var(--text-dark);text-decoration:none;display:flex;align-items:center;gap:.45rem}.logo span{background:var(--peach-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;list-style:none;gap:.25rem;align-items:center}.nav-links>li>a{padding:.55rem 1rem;border-radius:10px;text-decoration:none;font-size:.92rem;font-weight:500;color:var(--text-dark);transition:background .2s,color .2s}.nav-links>li>a:hover{background:var(--peach-light);color:var(--primary-peach)}
+.dropdown{position:relative}.dropdown-menu{position:absolute;top:calc(100% + .5rem);left:50%;transform:translateX(-50%);background:var(--card-bg);border:1px solid var(--border-warm);border-radius:14px;box-shadow:var(--shadow-lg);padding:.6rem;display:grid;grid-template-columns:1fr 1fr;gap:.25rem;min-width:380px;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}.dropdown:hover .dropdown-menu,.dropdown:focus-within .dropdown-menu{opacity:1;visibility:visible}.dropdown-menu a{display:flex;align-items:center;gap:.65rem;padding:.7rem 1rem;border-radius:10px;text-decoration:none;font-size:.85rem;font-weight:500;color:var(--text-dark);transition:background .15s}.dropdown-menu a:hover{background:var(--peach-light)}.dropdown-menu i{width:18px;text-align:center;color:var(--primary-peach)}
+.hamburger{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--text-dark);padding:.5rem}
+.mobile-overlay{position:fixed;inset:0;background:rgba(44,34,30,.4);z-index:9998;opacity:0;visibility:hidden;transition:opacity .3s}.mobile-overlay.active{opacity:1;visibility:visible}
+.mobile-panel{position:fixed;top:0;right:0;width:min(320px,85vw);height:100%;background:var(--card-bg);z-index:9999;transform:translateX(100%);transition:transform .35s var(--ease-premium);display:flex;flex-direction:column;box-shadow:-4px 0 20px rgba(0,0,0,.08)}.mobile-panel.active{transform:translateX(0)}
+.mp-head{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;border-bottom:1px solid var(--border-warm)}.mp-head .logo{font-size:1.25rem}.mp-close{background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--text-muted);padding:.3rem}
+.mp-body{flex:1;overflow-y:auto;padding:1rem 1.5rem}.mp-body a{display:flex;align-items:center;gap:.75rem;padding:.85rem .75rem;border-radius:10px;text-decoration:none;color:var(--text-dark);font-weight:500;font-size:.95rem;transition:background .15s}.mp-body a:hover{background:var(--peach-light)}.mp-body a i{width:20px;text-align:center;color:var(--primary-peach)}.mp-section{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);padding:.75rem .75rem .35rem;margin-top:.5rem}
+.page-hero{position:relative;padding:7rem 2rem 4rem;text-align:center;overflow:hidden}.page-hero::before{content:'';position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(255,158,125,.15) 0%,rgba(224,122,95,.06) 40%,transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--peach-light);color:var(--primary-peach);padding:.45rem 1.1rem;border-radius:99px;font-size:.82rem;font-weight:600;margin-bottom:1.2rem;position:relative}
+.page-hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.75rem,4vw,2.75rem);font-weight:700;line-height:1.2;margin-bottom:1rem;position:relative}.page-hero h1 span{background:var(--peach-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.page-hero p{font-size:1.08rem;color:var(--text-muted);max-width:640px;margin:0 auto;line-height:1.7;position:relative}
+.tool-section{max-width:960px;margin:0 auto;padding:0 2rem 4rem}
+.tool-card{background:var(--card-bg);border:1px solid var(--border-warm);border-radius:var(--radius-main);box-shadow:var(--shadow-md);padding:2.5rem;margin-bottom:2rem}
+.tool-card h2{font-family:'Space Grotesk',sans-serif;font-size:1.15rem;margin-bottom:1.5rem}
+.picker-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
+.color-preview{width:100%;aspect-ratio:1;border-radius:var(--radius-main);border:2px solid var(--border-warm);cursor:pointer;position:relative;overflow:hidden;max-height:300px}
+.color-preview input[type=color]{position:absolute;inset:0;width:100%;height:100%;border:none;cursor:pointer;padding:0}
+.color-values{display:flex;flex-direction:column;gap:1rem}
+.cv-row{display:flex;align-items:center;gap:.75rem}
+.cv-label{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);width:42px;flex-shrink:0}
+.cv-input{flex:1;padding:.55rem .8rem;border:1.5px solid var(--border-warm);border-radius:8px;font-family:'Space Grotesk',monospace;font-size:.9rem;font-weight:600;color:var(--text-dark);background:var(--bg-warm);transition:border-color .2s}
+.cv-input:focus{outline:none;border-color:var(--primary-peach)}
+.cv-copy{background:none;border:1.5px solid var(--border-warm);border-radius:8px;padding:.55rem .7rem;cursor:pointer;color:var(--text-muted);transition:all .15s;font-size:.85rem;flex-shrink:0}
+.cv-copy:hover{border-color:var(--primary-peach);color:var(--primary-peach);background:var(--peach-light)}
+.cv-copy.copied{border-color:var(--success-btn);color:var(--success-btn);background:#e6f4ea}
+/* PALETTE */
+.palette-section{margin-top:2rem}
+.palette-section h3{font-size:1rem;font-weight:600;margin-bottom:1rem}
+.palette-row{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.palette-row .swatch{flex:1;min-width:60px;height:60px;border-radius:10px;cursor:pointer;position:relative;border:2px solid transparent;transition:border-color .2s,transform .2s}
+.palette-row .swatch:hover{transform:translateY(-3px);border-color:rgba(0,0,0,.2)}
+.palette-row .swatch .swatch-hex{position:absolute;bottom:4px;left:50%;transform:translateX(-50%);font-size:.65rem;font-weight:700;padding:2px 6px;border-radius:4px;background:rgba(255,255,255,.85);color:#333;white-space:nowrap}
+.palette-tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
+.pal-tab{padding:.4rem .85rem;border:2px solid var(--border-warm);border-radius:8px;background:var(--card-bg);cursor:pointer;font-family:inherit;font-size:.78rem;font-weight:600;color:var(--text-dark);transition:all .2s}
+.pal-tab:hover{border-color:var(--primary-peach)}.pal-tab.active{border-color:var(--primary-peach);background:var(--peach-gradient);color:#fff}
+/* CONTRAST */
+.contrast-box{background:var(--bg-warm);border:1px solid var(--border-warm);border-radius:12px;padding:1.5rem;margin-top:2rem}
+.contrast-box h3{font-size:1rem;margin-bottom:1rem}
+.contrast-inputs{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.contrast-inputs .ci{display:flex;align-items:center;gap:.5rem}
+.contrast-inputs label{font-size:.82rem;font-weight:600;color:var(--text-muted)}
+.contrast-inputs input[type=color]{width:44px;height:36px;border:none;cursor:pointer;border-radius:6px;padding:2px}
+.contrast-inputs input[type=text]{width:90px;padding:.4rem .6rem;border:1.5px solid var(--border-warm);border-radius:8px;font-family:inherit;font-size:16px}
+.contrast-result{display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap}
+.contrast-ratio{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700}
+.contrast-badges{display:flex;gap:.5rem;flex-wrap:wrap}
+.contrast-badge{padding:.3rem .7rem;border-radius:6px;font-size:.75rem;font-weight:700}
+.contrast-badge.pass{background:#e6f4ea;color:#137333}.contrast-badge.fail{background:#fce8e6;color:#C5221F}
+.contrast-preview{margin-top:1rem;padding:1rem;border-radius:10px;text-align:center;font-weight:600}
+footer{background:var(--dark-footer);color:rgba(255,255,255,.7);padding:4rem 2rem 2rem}
+.footer-grid{max-width:1260px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem}
+.footer-brand .logo{color:#fff;font-size:1.3rem;margin-bottom:1rem;display:inline-flex}.footer-brand p{font-size:.88rem;line-height:1.7;color:rgba(255,255,255,.5);max-width:300px}
+.footer-col h4{color:#fff;font-size:.9rem;font-weight:700;margin-bottom:1.25rem;text-transform:uppercase;letter-spacing:.05em}.footer-col a{display:block;color:rgba(255,255,255,.55);text-decoration:none;font-size:.85rem;padding:.3rem 0;transition:color .2s}.footer-col a:hover{color:var(--primary-peach)}
+.footer-bottom{max-width:1260px;margin:3rem auto 0;padding-top:2rem;border-top:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}.footer-bottom p{font-size:.82rem;color:rgba(255,255,255,.4)}
+.social-links{display:flex;gap:.75rem}.social-links a{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);text-decoration:none;font-size:.9rem;transition:background .2s,color .2s}.social-links a:hover{background:var(--primary-peach);color:#fff}
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:2rem}.picker-grid{grid-template-columns:1fr}}
+@media(max-width:768px){.nav-links{display:none}.hamburger{display:block}.nav-wrap{padding:.75rem 1.25rem}.page-hero{padding:6rem 1.25rem 3rem}.tool-section{padding:0 1.25rem 3rem}.tool-card{padding:1.75rem 1.25rem}}
+@media(max-width:640px){.logo{font-size:1.25rem}.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column;text-align:center}.contrast-inputs{flex-direction:column}}
+@media(max-width:400px){.logo{font-size:1.1rem}.page-hero h1{font-size:1.45rem}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
 </head>
 <body>
-    <header><a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a><nav class="nav-links"><a href="index.html">Home</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></nav></header>
-    <div class="copied" id="copiedMsg">✅ Copied!</div>
-    <div class="page-container">
-        <div class="page-hero"><h1>Color <span class="g">Picker & Palette</span></h1><p>Pick colors, generate palettes, get HEX, RGB, HSL values.</p></div>
-        <div class="tool-card">
-            <div class="picker-area">
-                <div class="color-input-wrap">
-                    <input type="color" id="colorPicker" value="#E07A5F" oninput="updateColor(this.value)">
-                    <div class="color-preview" id="colorPreview" style="background:#E07A5F"></div>
-                </div>
-                <div class="color-values">
-                    <div class="val-row"><label>HEX</label><input id="hexVal" value="#E07A5F" readonly><button onclick="copyVal('hexVal')">Copy</button></div>
-                    <div class="val-row"><label>RGB</label><input id="rgbVal" value="rgb(224, 122, 95)" readonly><button onclick="copyVal('rgbVal')">Copy</button></div>
-                    <div class="val-row"><label>HSL</label><input id="hslVal" value="hsl(13, 68%, 63%)" readonly><button onclick="copyVal('hslVal')">Copy</button></div>
-                </div>
-            </div>
-        </div>
-        <div class="tool-card palette-section">
-            <h3>🎨 Random Palette Generator</h3>
-            <div class="palette-grid" id="paletteGrid"></div>
-            <button class="btn-generate" onclick="generatePalette()">🎲 Generate New Palette</button>
-        </div>
-    </div>
-    <footer><div class="footer-grid"><div class="footer-col"><h3>⚡ ToolsMediaDownload</h3><p>Free tools for creators.</p></div><div class="footer-col"><h3>Tools</h3><ul><li><a href="gif-compressor.html">Image Compressor</a></li><li><a href="text-tools.html">Text Tools</a></li><li><a href="qr-generator.html">QR Generator</a></li></ul></div><div class="footer-col"><h3>Company</h3><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="terms.html">Terms</a></li><li><a href="dmca.html">DMCA</a></li></ul></div></div><div class="copyright">© 2026 ToolsMediaDownload. All rights reserved.</div></footer>
-    <script>
-    function hexToRgb(h){const r=parseInt(h.slice(1,3),16),g=parseInt(h.slice(3,5),16),b=parseInt(h.slice(5,7),16);return{r,g,b}}
-    function rgbToHsl(r,g,b){r/=255;g/=255;b/=255;const max=Math.max(r,g,b),min=Math.min(r,g,b);let h,s,l=(max+min)/2;if(max===min){h=s=0}else{const d=max-min;s=l>.5?d/(2-max-min):d/(max+min);switch(max){case r:h=((g-b)/d+(g<b?6:0))/6;break;case g:h=((b-r)/d+2)/6;break;case b:h=((r-g)/d+4)/6;break}}return{h:Math.round(h*360),s:Math.round(s*100),l:Math.round(l*100)}}
-    function updateColor(hex){document.getElementById('colorPreview').style.background=hex;document.getElementById('hexVal').value=hex.toUpperCase();const{r,g,b}=hexToRgb(hex);document.getElementById('rgbVal').value=`rgb(${r}, ${g}, ${b})`;const{h,s,l}=rgbToHsl(r,g,b);document.getElementById('hslVal').value=`hsl(${h}, ${s}%, ${l}%)`}
-    function copyVal(id){navigator.clipboard.writeText(document.getElementById(id).value);const m=document.getElementById('copiedMsg');m.classList.remove('active');setTimeout(()=>m.classList.add('active'),10);setTimeout(()=>m.classList.remove('active'),2200)}
-    function generatePalette(){const grid=document.getElementById('paletteGrid');grid.innerHTML='';for(let i=0;i<10;i++){const hex='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');const{r,g,b}=hexToRgb(hex);const lum=(r*299+g*587+b*114)/1000;const txtColor=lum>128?'#000':'#fff';grid.innerHTML+=`<div class="palette-swatch" style="background:${hex};color:${txtColor}" onclick="updateColor('${hex}');document.getElementById('colorPicker').value='${hex}';copyVal(this.id)" id="sw${i}"><span>${hex}</span></div>`}}
-    generatePalette();
-    </script>
+<header id="siteHeader"><div class="nav-wrap"><a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a><nav aria-label="Main navigation"><ul class="nav-links"><li><a href="index.html">Home</a></li><li class="dropdown"><a href="index.html#tools">Tools <i class="fas fa-chevron-down"></i></a><div class="dropdown-menu"><a href="gif-compressor.html"><i class="fas fa-compress"></i>GIF Compressor</a><a href="video-to-gif.html"><i class="fas fa-video"></i>Video to GIF</a><a href="image-converter.html"><i class="fas fa-exchange-alt"></i>Image Converter</a><a href="image-resizer.html"><i class="fas fa-expand-arrows-alt"></i>Image Resizer</a><a href="pdf-tools.html"><i class="fas fa-file-pdf"></i>PDF Tools</a><a href="instagram-downloader.html"><i class="fab fa-instagram"></i>Instagram DL</a><a href="facebook-downloader.html"><i class="fab fa-facebook"></i>Facebook DL</a><a href="tiktok-downloader.html"><i class="fab fa-tiktok"></i>TikTok DL</a><a href="qr-generator.html"><i class="fas fa-qrcode"></i>QR Generator</a><a href="color-picker.html"><i class="fas fa-palette"></i>Color Picker</a><a href="text-tools.html"><i class="fas fa-font"></i>Text Tools</a><a href="password-generator.html"><i class="fas fa-key"></i>Password Gen</a><a href="json-formatter.html"><i class="fas fa-code"></i>JSON Formatter</a><a href="base64-tool.html"><i class="fas fa-lock"></i>Base64 Tool</a></div></li><li><a href="blog.html">Blog</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></nav><button class="hamburger" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button></div></header>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<div class="mobile-panel" id="mobilePanel" role="dialog" aria-label="Mobile navigation"><div class="mp-head"><a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a><button class="mp-close" id="menuClose" aria-label="Close menu">✕</button></div><div class="mp-body"><a href="index.html"><i class="fas fa-home"></i>Home</a><a href="blog.html"><i class="fas fa-rss"></i>Blog</a><a href="about.html"><i class="fas fa-info-circle"></i>About</a><a href="contact.html"><i class="fas fa-envelope"></i>Contact</a><div class="mp-section">Tools</div><a href="gif-compressor.html"><i class="fas fa-compress"></i>GIF Compressor</a><a href="video-to-gif.html"><i class="fas fa-video"></i>Video to GIF</a><a href="image-converter.html"><i class="fas fa-exchange-alt"></i>Image Converter</a><a href="image-resizer.html"><i class="fas fa-expand-arrows-alt"></i>Image Resizer</a><a href="pdf-tools.html"><i class="fas fa-file-pdf"></i>PDF Tools</a><a href="instagram-downloader.html"><i class="fab fa-instagram"></i>Instagram DL</a><a href="facebook-downloader.html"><i class="fab fa-facebook"></i>Facebook DL</a><a href="tiktok-downloader.html"><i class="fab fa-tiktok"></i>TikTok DL</a><a href="qr-generator.html"><i class="fas fa-qrcode"></i>QR Generator</a><a href="color-picker.html"><i class="fas fa-palette"></i>Color Picker</a><a href="text-tools.html"><i class="fas fa-font"></i>Text Tools</a><a href="password-generator.html"><i class="fas fa-key"></i>Password Gen</a><a href="json-formatter.html"><i class="fas fa-code"></i>JSON Formatter</a><a href="base64-tool.html"><i class="fas fa-lock"></i>Base64 Tool</a><div class="mp-section">Legal</div><a href="disclaimer.html"><i class="fas fa-exclamation-circle"></i>Disclaimer</a><a href="terms.html"><i class="fas fa-file-contract"></i>Terms</a><a href="dmca.html"><i class="fas fa-shield-alt"></i>DMCA</a></div></div>
+
+<section class="page-hero">
+<div class="hero-badge"><i class="fas fa-palette"></i> Color Picker</div>
+<h1>Pick &amp; Convert <span>Colors</span></h1>
+<p>Free color picker with HEX, RGB, HSL &amp; CMYK conversion. Generate harmonious palettes and check contrast ratios for accessibility.</p>
+</section>
+
+<section class="tool-section">
+<div class="tool-card">
+<h2><i class="fas fa-eyedropper" style="color:var(--primary-peach);margin-right:.5rem"></i>Color Picker</h2>
+<div class="picker-grid">
+<div>
+<div class="color-preview"><input type="color" id="mainPicker" value="#E07A5F"></div>
+</div>
+<div class="color-values">
+<div class="cv-row"><span class="cv-label">HEX</span><input class="cv-input" id="hexVal" value="#E07A5F"><button class="cv-copy" data-target="hexVal"><i class="fas fa-copy"></i></button></div>
+<div class="cv-row"><span class="cv-label">RGB</span><input class="cv-input" id="rgbVal" value="rgb(224, 122, 95)"><button class="cv-copy" data-target="rgbVal"><i class="fas fa-copy"></i></button></div>
+<div class="cv-row"><span class="cv-label">HSL</span><input class="cv-input" id="hslVal" value="hsl(13, 67%, 63%)"><button class="cv-copy" data-target="hslVal"><i class="fas fa-copy"></i></button></div>
+<div class="cv-row"><span class="cv-label">CMYK</span><input class="cv-input" id="cmykVal" value="cmyk(0, 46, 58, 12)"><button class="cv-copy" data-target="cmykVal"><i class="fas fa-copy"></i></button></div>
+</div>
+</div>
+
+<div class="palette-section">
+<h3><i class="fas fa-swatchbook" style="color:var(--primary-peach);margin-right:.5rem"></i>Color Palette</h3>
+<div class="palette-tabs">
+<button class="pal-tab active" data-pal="complementary">Complementary</button>
+<button class="pal-tab" data-pal="analogous">Analogous</button>
+<button class="pal-tab" data-pal="triadic">Triadic</button>
+<button class="pal-tab" data-pal="shades">Shades</button>
+<button class="pal-tab" data-pal="tints">Tints</button>
+</div>
+<div class="palette-row" id="paletteRow"></div>
+</div>
+
+<div class="contrast-box">
+<h3><i class="fas fa-universal-access" style="color:var(--primary-peach);margin-right:.5rem"></i>Contrast Checker</h3>
+<div class="contrast-inputs">
+<div class="ci"><label>Text</label><input type="color" id="cFg" value="#2C221E"><input type="text" id="cFgHex" value="#2C221E"></div>
+<div class="ci"><label>Background</label><input type="color" id="cBg" value="#FFFFFF"><input type="text" id="cBgHex" value="#FFFFFF"></div>
+</div>
+<div class="contrast-result">
+<div class="contrast-ratio" id="contrastRatio">14.7:1</div>
+<div class="contrast-badges" id="contrastBadges">
+<span class="contrast-badge pass">AA Normal ✓</span>
+<span class="contrast-badge pass">AA Large ✓</span>
+<span class="contrast-badge pass">AAA Normal ✓</span>
+<span class="contrast-badge pass">AAA Large ✓</span>
+</div>
+</div>
+<div class="contrast-preview" id="contrastPreview" style="background:#FFFFFF;color:#2C221E">Sample text preview — The quick brown fox</div>
+</div>
+</div>
+</section>
+
+<footer><div class="footer-grid"><div class="footer-brand"><a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a><p>Free online tools for media downloading, image editing, PDF manipulation, and developer utilities. No signup required.</p></div><div class="footer-col"><h4>Quick Links</h4><a href="index.html">Home</a><a href="blog.html">Blog</a><a href="about.html">About Us</a><a href="contact.html">Contact</a></div><div class="footer-col"><h4>Popular Tools</h4><a href="gif-compressor.html">GIF Compressor</a><a href="image-converter.html">Image Converter</a><a href="instagram-downloader.html">Instagram DL</a><a href="facebook-downloader.html">Facebook DL</a><a href="pdf-tools.html">PDF Tools</a></div><div class="footer-col"><h4>Legal</h4><a href="disclaimer.html">Disclaimer</a><a href="terms.html">Terms of Service</a><a href="dmca.html">DMCA Policy</a></div></div><div class="footer-bottom"><p>&copy; 2025 ToolsMediaDownload. All rights reserved.</p><div class="social-links"><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a><a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a></div></div></footer>
+
+<script>
+const header=document.getElementById('siteHeader'),menuToggle=document.getElementById('menuToggle'),menuClose=document.getElementById('menuClose'),ov=document.getElementById('mobileOverlay'),pn=document.getElementById('mobilePanel');
+function openMenu(){pn.classList.add('active');ov.classList.add('active');document.body.style.overflow='hidden';menuToggle.setAttribute('aria-expanded','true');menuClose.focus()}
+function closeMenu(){pn.classList.remove('active');ov.classList.remove('active');document.body.style.overflow='';menuToggle.setAttribute('aria-expanded','false');menuToggle.focus()}
+menuToggle.addEventListener('click',openMenu);menuClose.addEventListener('click',closeMenu);ov.addEventListener('click',closeMenu);document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
+(function(){let t=!1;function c(){header.classList.toggle('scrolled',window.scrollY>10);t=!1}window.addEventListener('scroll',()=>{if(!t){t=!0;requestAnimationFrame(c)}})})();
+
+// COLOR UTILS
+function hexToRgb(h){h=h.replace('#','');if(h.length===3)h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];return{r:parseInt(h.slice(0,2),16),g:parseInt(h.slice(2,4),16),b:parseInt(h.slice(4,6),16)}}
+function rgbToHex(r,g,b){return'#'+[r,g,b].map(x=>x.toString(16).padStart(2,'0')).join('').toUpperCase()}
+function rgbToHsl(r,g,b){r/=255;g/=255;b/=255;const mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2;let h,s;if(mx===mn){h=s=0}else{const d=mx-mn;s=l>.5?d/(2-mx-mn):d/(mx+mn);switch(mx){case r:h=((g-b)/d+(g<b?6:0))/6;break;case g:h=((b-r)/d+2)/6;break;case b:h=((r-g)/d+4)/6;break}}return{h:Math.round(h*360),s:Math.round(s*100),l:Math.round(l*100)}}
+function hslToRgb(h,s,l){h/=360;s/=100;l/=100;let r,g,b;if(s===0){r=g=b=l}else{const hue2rgb=(p,q,t)=>{if(t<0)t+=1;if(t>1)t-=1;if(t<1/6)return p+(q-p)*6*t;if(t<1/2)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p};const q=l<.5?l*(1+s):l+s-l*s,p=2*l-q;r=hue2rgb(p,q,h+1/3);g=hue2rgb(p,q,h);b=hue2rgb(p,q,h-1/3)}return{r:Math.round(r*255),g:Math.round(g*255),b:Math.round(b*255)}}
+function rgbToCmyk(r,g,b){if(r===0&&g===0&&b===0)return{c:0,m:0,y:0,k:100};const rr=r/255,gg=g/255,bb=b/255,k=1-Math.max(rr,gg,bb);return{c:Math.round((1-rr-k)/(1-k)*100),m:Math.round((1-gg-k)/(1-k)*100),y:Math.round((1-bb-k)/(1-k)*100),k:Math.round(k*100)}}
+
+const picker=document.getElementById('mainPicker');
+const hexInput=document.getElementById('hexVal'),rgbInput=document.getElementById('rgbVal'),hslInput=document.getElementById('hslVal'),cmykInput=document.getElementById('cmykVal');
+
+function updateAll(hex){
+  const rgb=hexToRgb(hex),hsl=rgbToHsl(rgb.r,rgb.g,rgb.b),cmyk=rgbToCmyk(rgb.r,rgb.g,rgb.b);
+  picker.value=hex;hexInput.value=hex.toUpperCase();
+  rgbInput.value=`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+  hslInput.value=`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+  cmykInput.value=`cmyk(${cmyk.c}, ${cmyk.m}, ${cmyk.y}, ${cmyk.k})`;
+  generatePalette(hex);
+}
+
+picker.addEventListener('input',e=>updateAll(e.target.value));
+hexInput.addEventListener('change',()=>{const v=hexInput.value.trim();if(/^#?[0-9a-fA-F]{3,6}$/.test(v)){updateAll(v.startsWith('#')?v:'#'+v)}});
+
+// COPY
+document.querySelectorAll('.cv-copy').forEach(btn=>btn.addEventListener('click',()=>{
+  const inp=document.getElementById(btn.dataset.target);
+  navigator.clipboard.writeText(inp.value).then(()=>{btn.classList.add('copied');btn.innerHTML='<i class="fas fa-check"></i>';setTimeout(()=>{btn.classList.remove('copied');btn.innerHTML='<i class="fas fa-copy"></i>'},1500)});
+}));
+
+// PALETTE
+let palMode='complementary';
+document.querySelectorAll('.pal-tab').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.pal-tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+  palMode=b.dataset.pal;generatePalette(picker.value);
+}));
+
+function generatePalette(hex){
+  const rgb=hexToRgb(hex),hsl=rgbToHsl(rgb.r,rgb.g,rgb.b);let colors=[];
+  switch(palMode){
+    case'complementary':colors=[hex,rgbToHex(...Object.values(hslToRgb((hsl.h+180)%360,hsl.s,hsl.l)))];break;
+    case'analogous':colors=[rgbToHex(...Object.values(hslToRgb((hsl.h+330)%360,hsl.s,hsl.l))),hex,rgbToHex(...Object.values(hslToRgb((hsl.h+30)%360,hsl.s,hsl.l)))];break;
+    case'triadic':colors=[hex,rgbToHex(...Object.values(hslToRgb((hsl.h+120)%360,hsl.s,hsl.l))),rgbToHex(...Object.values(hslToRgb((hsl.h+240)%360,hsl.s,hsl.l)))];break;
+    case'shades':for(let i=0;i<7;i++){const l=Math.max(0,hsl.l-i*12);colors.push(rgbToHex(...Object.values(hslToRgb(hsl.h,hsl.s,l))))}break;
+    case'tints':for(let i=0;i<7;i++){const l=Math.min(100,hsl.l+i*10);colors.push(rgbToHex(...Object.values(hslToRgb(hsl.h,hsl.s,l))))}break;
+  }
+  const row=document.getElementById('paletteRow');row.innerHTML='';
+  colors.forEach(c=>{
+    const d=document.createElement('div');d.className='swatch';d.style.background=c;
+    d.innerHTML=`<span class="swatch-hex">${c.toUpperCase()}</span>`;
+    d.addEventListener('click',()=>{updateAll(c);navigator.clipboard.writeText(c)});
+    row.appendChild(d);
+  });
+}
+
+// CONTRAST CHECKER
+const cFg=document.getElementById('cFg'),cBg=document.getElementById('cBg'),cFgHex=document.getElementById('cFgHex'),cBgHex=document.getElementById('cBgHex');
+function luminance(r,g,b){const a=[r,g,b].map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return a[0]*.2126+a[1]*.7152+a[2]*.0722}
+function contrastRatio(fg,bg){const l1=luminance(fg.r,fg.g,fg.b),l2=luminance(bg.r,bg.g,bg.b);const lighter=Math.max(l1,l2),darker=Math.min(l1,l2);return(lighter+.05)/(darker+.05)}
+function updateContrast(){
+  const fg=hexToRgb(cFg.value),bg=hexToRgb(cBg.value);
+  const ratio=contrastRatio(fg,bg);
+  document.getElementById('contrastRatio').textContent=ratio.toFixed(1)+':1';
+  const badges=document.getElementById('contrastBadges');
+  badges.innerHTML='';
+  const tests=[['AA Normal',4.5],['AA Large',3],['AAA Normal',7],['AAA Large',4.5]];
+  tests.forEach(([label,min])=>{const pass=ratio>=min;badges.innerHTML+=`<span class="contrast-badge ${pass?'pass':'fail'}">${label} ${pass?'✓':'✗'}</span>`});
+  const preview=document.getElementById('contrastPreview');preview.style.background=cBg.value;preview.style.color=cFg.value;
+}
+cFg.addEventListener('input',()=>{cFgHex.value=cFg.value.toUpperCase();updateContrast()});
+cBg.addEventListener('input',()=>{cBgHex.value=cBg.value.toUpperCase();updateContrast()});
+cFgHex.addEventListener('change',()=>{const v=cFgHex.value.trim();if(/^#?[0-9a-fA-F]{6}$/.test(v)){cFg.value=v.startsWith('#')?v:'#'+v;updateContrast()}});
+cBgHex.addEventListener('change',()=>{const v=cBgHex.value.trim();if(/^#?[0-9a-fA-F]{6}$/.test(v)){cBg.value=v.startsWith('#')?v:'#'+v;updateContrast()}});
+
+// INIT
+updateAll('#E07A5F');updateContrast();
+</script>
 </body>
 </html>
