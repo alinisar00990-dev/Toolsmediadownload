@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.toolsmediadownload.com/sitemap.xml
+Sitemap: https://toolsmediadownload.com/sitemap.xml
