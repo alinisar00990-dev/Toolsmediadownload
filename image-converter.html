@@ -1,96 +1,465 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><!-- Google & Browser Round Peach Favicon -->
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="apple-touch-icon" sizes="180x180" href="favicon.svg">
-<meta name="theme-color" content="#E07A5F">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Image Format Converter Online - PNG, JPG, WebP, BMP | ToolsMediaDownload</title>
-    <meta name="description" content="Convert images between PNG, JPG, WebP, BMP formats instantly. Batch conversion supported. Free, private, browser-based.">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://toolsmediadownload.com/image-converter.html">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-    <style>
-        :root{--bg-warm:#FAF5EE;--card-bg:#FFF;--primary-peach:#E07A5F;--peach-gradient:linear-gradient(135deg,#FF9E7D,#E07A5F,#D95D39);--text-dark:#2C221E;--text-muted:#706661;--border-warm:#EFE3D8;--success-btn:#2A9D8F;--dark-footer:#1A1615}
-        *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-        body{background:var(--bg-warm);color:var(--text-dark);min-height:100vh;display:flex;flex-direction:column;line-height:1.7}
-        header{background:#fff;border-bottom:1px solid var(--border-warm);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-        .logo{font-size:1.4rem;font-weight:800;color:var(--primary-peach);text-decoration:none;display:flex;align-items:center;gap:.5rem}.logo span{color:var(--text-dark)}
-        .nav-links{display:flex;gap:1.25rem}.nav-links a{color:var(--text-dark);text-decoration:none;font-weight:600;font-size:.9rem}.nav-links a:hover{color:var(--primary-peach)}
-        @media(max-width:768px){.nav-links{display:none}}
-        .page-container{max-width:800px;margin:3rem auto;padding:0 1.25rem;flex:1}
-        .page-hero{text-align:center;margin-bottom:2.5rem}
-        .page-hero h1{font-size:2.4rem;font-weight:800;margin-bottom:.75rem}.page-hero h1 .g{background:linear-gradient(135deg,#667EEA,#764BA2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .page-hero p{color:var(--text-muted);font-size:1.1rem}
-        .tool-card{background:var(--card-bg);padding:2.25rem;border-radius:20px;box-shadow:0 12px 30px -5px rgba(224,122,95,.08);border:1px solid var(--border-warm)}
-        .upload-area{border:2px dashed var(--primary-peach);background:#FFFDFB;border-radius:14px;padding:2rem 1.5rem;text-align:center;cursor:pointer;transition:all .25s;margin-bottom:1.5rem}
-        .upload-area:hover{background:#FFF0EB}
-        .upload-area input{display:none}
-        .upload-icon{font-size:2.5rem;margin-bottom:.4rem}
-        .upload-text{font-weight:700;margin-bottom:.2rem}
-        .upload-sub{font-size:.85rem;color:var(--text-muted)}
-        .controls{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
-        @media(max-width:640px){.controls{grid-template-columns:1fr}.page-hero h1{font-size:1.8rem}.tool-card{padding:1.5rem}}
-        .control-group label{display:block;font-weight:700;margin-bottom:.4rem;font-size:.95rem}
-        .control-group select,.control-group input{width:100%;padding:.75rem;border:2px solid var(--border-warm);border-radius:10px;font-size:.95rem;background:#FFFDFB;outline:none}
-        .control-group select:focus,.control-group input:focus{border-color:var(--primary-peach)}
-        .btn-action{width:100%;background:linear-gradient(135deg,#667EEA,#764BA2);color:#fff;border:none;padding:1rem;border-radius:12px;font-weight:700;font-size:1.05rem;cursor:pointer;transition:transform .15s}
-        .btn-action:hover:not(:disabled){transform:translateY(-2px)}.btn-action:disabled{opacity:.5;cursor:not-allowed}
-        .results{display:none;margin-top:1.5rem}.results.active{display:block}
-        .results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
-        .result-item{background:#FFFDFB;border:1px solid var(--border-warm);border-radius:12px;padding:1rem;text-align:center}
-        .result-item img{width:100%;height:120px;object-fit:contain;border-radius:8px;margin-bottom:.75rem;background:#f5f5f5}
-        .result-item .stats{font-size:.8rem;color:var(--text-muted);margin-bottom:.5rem}
-        .result-item a{display:inline-block;background:var(--success-btn);color:#fff;padding:.5rem 1rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:.85rem}
-        .result-item a:hover{background:#218378}
-        footer{background:var(--dark-footer);color:#fff;padding:3rem 1rem 1.5rem;margin-top:auto}
-        .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-bottom:2rem}
-        .footer-col h3{font-size:1.05rem;margin-bottom:1rem;color:#F7EDE2}.footer-col ul{list-style:none}.footer-col ul li{margin-bottom:.6rem}.footer-col ul li a{color:#A8A099;text-decoration:none;font-size:.88rem}.footer-col ul li a:hover{color:#F7EDE2}.footer-col p{color:#A8A099;font-size:.88rem}
-        .copyright{text-align:center;border-top:1px solid #332E2B;padding-top:1.5rem;color:#78706A;font-size:.85rem}
-    </style>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Free online image converter. Convert images between PNG, JPG, WEBP, BMP, GIF, AVIF, TIFF and ICO formats instantly in your browser. No upload needed.">
+<title>Image Converter - Free Online Format Converter | ToolsMediaDownload</title>
+<link rel="canonical" href="https://toolsmediadownload.com/image-converter.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='85'>🔄</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Image Converter","url":"https://toolsmediadownload.com/image-converter.html","description":"Convert images between PNG, JPG, WEBP, BMP, GIF, AVIF, TIFF and ICO formats.","applicationCategory":"MultimediaApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg-warm:#FAF5EE;--card-bg:#FFFFFF;--primary-peach:#E07A5F;--peach-hover:#D95D39;
+--peach-light:#FDE8E1;--peach-gradient:linear-gradient(135deg,#FF9E7D 0%,#E07A5F 50%,#D95D39 100%);
+--text-dark:#2C221E;--text-muted:#5C534E;--border-warm:#EFE3D8;--success-btn:#2A9D8F;
+--dark-footer:#1A1615;--glow-peach:rgba(224,122,95,0.4);
+--ease-premium:cubic-bezier(0.4,0,0.2,1);--radius-main:16px;
+--shadow-sm:0 1px 2px rgba(44,34,30,0.04),0 2px 6px rgba(44,34,30,0.03);
+--shadow-md:0 2px 4px rgba(44,34,30,0.04),0 8px 20px rgba(44,34,30,0.05);
+--shadow-lg:0 4px 12px rgba(44,34,30,0.06),0 20px 40px rgba(44,34,30,0.08);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg-warm);color:var(--text-dark);overflow-x:hidden;-webkit-text-size-adjust:100%}
+/* HEADER */
+header{position:sticky;top:0;z-index:1000;background:rgba(250,245,238,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border-warm);transition:box-shadow .3s var(--ease-premium)}
+header.scrolled{box-shadow:0 1px 8px rgba(44,34,30,.06)}
+.nav-wrap{max-width:1260px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:.85rem 2rem}
+.logo{font-family:'Space Grotesk',sans-serif;font-size:1.45rem;font-weight:700;color:var(--text-dark);text-decoration:none;display:flex;align-items:center;gap:.45rem}
+.logo span{background:var(--peach-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;list-style:none;gap:.25rem;align-items:center}
+.nav-links>li>a{padding:.55rem 1rem;border-radius:10px;text-decoration:none;font-size:.92rem;font-weight:500;color:var(--text-dark);transition:background .2s,color .2s}
+.nav-links>li>a:hover{background:var(--peach-light);color:var(--primary-peach)}
+.dropdown{position:relative}
+.dropdown-menu{position:absolute;top:calc(100% + .5rem);left:50%;transform:translateX(-50%);background:var(--card-bg);border:1px solid var(--border-warm);border-radius:14px;box-shadow:var(--shadow-lg);padding:.6rem;display:grid;grid-template-columns:1fr 1fr;gap:.25rem;min-width:380px;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.dropdown:hover .dropdown-menu,.dropdown:focus-within .dropdown-menu{opacity:1;visibility:visible}
+.dropdown-menu a{display:flex;align-items:center;gap:.65rem;padding:.7rem 1rem;border-radius:10px;text-decoration:none;font-size:.85rem;font-weight:500;color:var(--text-dark);transition:background .15s}
+.dropdown-menu a:hover{background:var(--peach-light)}
+.dropdown-menu i{width:18px;text-align:center;color:var(--primary-peach)}
+.hamburger{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--text-dark);padding:.5rem}
+/* MOBILE PANEL */
+.mobile-overlay{position:fixed;inset:0;background:rgba(44,34,30,.4);z-index:9998;opacity:0;visibility:hidden;transition:opacity .3s}
+.mobile-overlay.active{opacity:1;visibility:visible}
+.mobile-panel{position:fixed;top:0;right:0;width:min(320px,85vw);height:100%;background:var(--card-bg);z-index:9999;transform:translateX(100%);transition:transform .35s var(--ease-premium);display:flex;flex-direction:column;box-shadow:-4px 0 20px rgba(0,0,0,.08)}
+.mobile-panel.active{transform:translateX(0)}
+.mp-head{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;border-bottom:1px solid var(--border-warm)}
+.mp-head .logo{font-size:1.25rem}
+.mp-close{background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--text-muted);padding:.3rem}
+.mp-body{flex:1;overflow-y:auto;padding:1rem 1.5rem}
+.mp-body a{display:flex;align-items:center;gap:.75rem;padding:.85rem .75rem;border-radius:10px;text-decoration:none;color:var(--text-dark);font-weight:500;font-size:.95rem;transition:background .15s}
+.mp-body a:hover,.mp-body a:focus{background:var(--peach-light)}
+.mp-body a i{width:20px;text-align:center;color:var(--primary-peach)}
+.mp-section{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);padding:.75rem .75rem .35rem;margin-top:.5rem}
+/* HERO */
+.page-hero{position:relative;padding:7rem 2rem 4rem;text-align:center;overflow:hidden}
+.page-hero::before{content:'';position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(255,158,125,.15) 0%,rgba(224,122,95,.06) 40%,transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--peach-light);color:var(--primary-peach);padding:.45rem 1.1rem;border-radius:99px;font-size:.82rem;font-weight:600;margin-bottom:1.2rem;position:relative}
+.page-hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.75rem,4vw,2.75rem);font-weight:700;line-height:1.2;margin-bottom:1rem;position:relative}
+.page-hero h1 span{background:var(--peach-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.page-hero p{font-size:1.08rem;color:var(--text-muted);max-width:640px;margin:0 auto;line-height:1.7;position:relative}
+/* MAIN */
+.tool-section{max-width:900px;margin:0 auto;padding:0 2rem 4rem}
+.tool-card{background:var(--card-bg);border:1px solid var(--border-warm);border-radius:var(--radius-main);box-shadow:var(--shadow-md);padding:2.5rem;margin-bottom:2rem}
+.tool-card h2{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;margin-bottom:1.5rem;color:var(--text-dark)}
+/* DROP ZONE */
+.drop-zone{border:2px dashed var(--border-warm);border-radius:var(--radius-main);padding:3rem 2rem;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;position:relative}
+.drop-zone:hover,.drop-zone.drag-over{border-color:var(--primary-peach);background:var(--peach-light)}
+.drop-zone i{font-size:2.5rem;color:var(--primary-peach);margin-bottom:1rem}
+.drop-zone p{color:var(--text-muted);font-size:.95rem;margin-bottom:.5rem}
+.drop-zone small{color:var(--text-muted);font-size:.8rem}
+.drop-zone input{position:absolute;inset:0;opacity:0;cursor:pointer}
+/* FORMAT SELECTOR */
+.format-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:.5rem;margin:1.5rem 0}
+.format-btn{padding:.65rem .5rem;border:2px solid var(--border-warm);border-radius:10px;background:var(--card-bg);cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-dark);transition:all .2s;text-align:center}
+.format-btn:hover{border-color:var(--primary-peach);background:var(--peach-light)}
+.format-btn.active{border-color:var(--primary-peach);background:var(--peach-gradient);color:#fff}
+/* QUALITY */
+.quality-row{display:flex;align-items:center;gap:1rem;margin:1.5rem 0;flex-wrap:wrap}
+.quality-row label{font-weight:600;font-size:.9rem;white-space:nowrap}
+.quality-row input[type=range]{flex:1;min-width:120px;accent-color:var(--primary-peach)}
+.quality-val{font-weight:700;color:var(--primary-peach);font-size:.95rem;min-width:40px;text-align:center}
+/* PREVIEW GRID */
+.preview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;margin-top:1.5rem}
+.preview-item{background:var(--bg-warm);border:1px solid var(--border-warm);border-radius:12px;overflow:hidden;position:relative}
+.preview-item img{width:100%;height:140px;object-fit:contain;background:#f5f0ea;padding:.5rem}
+.preview-info{padding:.75rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.preview-name{font-size:.78rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.preview-size{font-size:.72rem;color:var(--text-muted);white-space:nowrap}
+.preview-remove{background:none;border:none;color:#C5221F;cursor:pointer;font-size:.9rem;padding:.25rem}
+/* BTN */
+.btn-convert{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:var(--peach-gradient);color:#fff;border:none;border-radius:12px;font-family:inherit;font-size:1rem;font-weight:600;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 15px rgba(224,122,95,.3)}
+.btn-convert:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(224,122,95,.4)}
+.btn-convert:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-download-all{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:var(--success-btn);color:#fff;border:none;border-radius:12px;font-family:inherit;font-size:1rem;font-weight:600;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 12px rgba(42,157,143,.3);margin-top:1rem}
+.btn-download-all:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(42,157,143,.4)}
+.btn-sm{padding:.45rem .9rem;font-size:.8rem;border-radius:8px;border:none;cursor:pointer;font-family:inherit;font-weight:600;transition:all .15s}
+.btn-sm.dl{background:var(--success-btn);color:#fff}
+.btn-sm.dl:hover{background:#238b7e}
+/* STATUS */
+.status-box{display:none;padding:1rem 1.25rem;border-radius:12px;font-size:.9rem;font-weight:500;margin-top:1rem;align-items:center;gap:.75rem}
+.status-box.show{display:flex}
+.status-box.loading{background:var(--peach-light);color:var(--primary-peach)}
+.status-box.success{background:#e6f4ea;color:#137333}
+.status-box.error{background:#fce8e6;color:#C5221F}
+.spinner{width:18px;height:18px;border:2.5px solid currentColor;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* PROGRESS */
+.progress-bar{width:100%;height:6px;background:var(--border-warm);border-radius:6px;margin-top:.75rem;overflow:hidden;display:none}
+.progress-bar.show{display:block}
+.progress-fill{height:100%;background:var(--peach-gradient);border-radius:6px;transition:width .3s}
+/* RESULTS */
+.results-section{display:none;margin-top:2rem}
+.results-section.show{display:block}
+.result-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.result-card{background:var(--bg-warm);border:1px solid var(--border-warm);border-radius:12px;overflow:hidden;text-align:center}
+.result-card img{width:100%;height:150px;object-fit:contain;background:#f5f0ea;padding:.5rem}
+.result-card .rc-info{padding:.75rem}
+.result-card .rc-name{font-size:.8rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:.25rem}
+.result-card .rc-size{font-size:.72rem;color:var(--text-muted);margin-bottom:.5rem}
+/* HOW-TO */
+.how-to{background:var(--card-bg);border:1px solid var(--border-warm);border-radius:var(--radius-main);box-shadow:var(--shadow-sm);padding:2.5rem}
+.how-to h2{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;margin-bottom:1.5rem;text-align:center}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem}
+.step{text-align:center;padding:1rem}
+.step-num{width:40px;height:40px;background:var(--peach-gradient);color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;margin-bottom:.75rem}
+.step h3{font-size:.95rem;margin-bottom:.5rem}
+.step p{font-size:.85rem;color:var(--text-muted);line-height:1.5}
+/* FOOTER */
+footer{background:var(--dark-footer);color:rgba(255,255,255,.7);padding:4rem 2rem 2rem}
+.footer-grid{max-width:1260px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem}
+.footer-brand .logo{color:#fff;font-size:1.3rem;margin-bottom:1rem;display:inline-flex}
+.footer-brand p{font-size:.88rem;line-height:1.7;color:rgba(255,255,255,.5);max-width:300px}
+.footer-col h4{color:#fff;font-size:.9rem;font-weight:700;margin-bottom:1.25rem;text-transform:uppercase;letter-spacing:.05em}
+.footer-col a{display:block;color:rgba(255,255,255,.55);text-decoration:none;font-size:.85rem;padding:.3rem 0;transition:color .2s}
+.footer-col a:hover{color:var(--primary-peach)}
+.footer-bottom{max-width:1260px;margin:3rem auto 0;padding-top:2rem;border-top:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-bottom p{font-size:.82rem;color:rgba(255,255,255,.4)}
+.social-links{display:flex;gap:.75rem}
+.social-links a{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);text-decoration:none;font-size:.9rem;transition:background .2s,color .2s}
+.social-links a:hover{background:var(--primary-peach);color:#fff}
+/* RESPONSIVE */
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:2rem}}
+@media(max-width:768px){
+  .nav-links{display:none}.hamburger{display:block}
+  .nav-wrap{padding:.75rem 1.25rem}
+  .page-hero{padding:6rem 1.25rem 3rem}
+  .tool-section{padding:0 1.25rem 3rem}
+  .tool-card{padding:1.75rem 1.25rem}
+  .drop-zone{padding:2rem 1.25rem}
+  .how-to{padding:1.75rem 1.25rem}
+  .format-grid{grid-template-columns:repeat(4,1fr)}
+}
+@media(max-width:640px){
+  .logo{font-size:1.25rem}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .preview-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+  .result-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+  .quality-row{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:400px){
+  .logo{font-size:1.1rem}
+  .page-hero h1{font-size:1.45rem}
+  .format-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
 </head>
 <body>
-    <header><a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a><nav class="nav-links"><a href="index.html">Home</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></nav></header>
-    <div class="page-container">
-        <div class="page-hero"><h1>Image <span class="g">Format Converter</span></h1><p>Convert between PNG, JPG, WebP, BMP formats instantly. Batch supported.</p></div>
-        <div class="tool-card">
-            <div class="upload-area" onclick="document.getElementById('fileInput').click()">
-                <div class="upload-icon">🔄</div>
-                <div class="upload-text" id="fileName">Click to Select Images</div>
-                <div class="upload-sub">PNG, JPG, WebP, BMP • Multiple files supported</div>
-                <input type="file" id="fileInput" accept="image/*" multiple>
-            </div>
-            <div class="controls">
-                <div class="control-group"><label>Convert To:</label><select id="outputFormat"><option value="image/png">PNG</option><option value="image/jpeg">JPG</option><option value="image/webp">WebP</option><option value="image/bmp">BMP</option></select></div>
-                <div class="control-group"><label>Quality (JPG/WebP):</label><input type="range" id="quality" min="10" max="100" value="85" oninput="document.getElementById('qVal').textContent=this.value+'%'"><span id="qVal" style="font-weight:700;color:var(--primary-peach)">85%</span></div>
-            </div>
-            <button class="btn-action" id="convertBtn" disabled onclick="convertImages()">🔄 Convert Images</button>
-            <div class="results" id="results"><div class="results-grid" id="resultsGrid"></div></div>
-        </div>
-    </div>
-    <footer><div class="footer-grid"><div class="footer-col"><h3>⚡ ToolsMediaDownload</h3><p>Free, private tools for creators.</p></div><div class="footer-col"><h3>Tools</h3><ul><li><a href="gif-compressor.html">Image Compressor</a></li><li><a href="pdf-tools.html">PDF Tools</a></li><li><a href="image-resizer.html">Image Resizer</a></li></ul></div><div class="footer-col"><h3>Company</h3><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="terms.html">Terms</a></li><li><a href="dmca.html">DMCA</a></li></ul></div></div><div class="copyright">© 2026 ToolsMediaDownload. All rights reserved.</div></footer>
-    <script>
-    let files=[];
-    document.getElementById('fileInput').addEventListener('change',e=>{files=Array.from(e.target.files);document.getElementById('fileName').textContent=files.length+' file(s) selected';document.getElementById('convertBtn').disabled=!files.length});
-    async function convertImages(){
-        const btn=document.getElementById('convertBtn');btn.disabled=true;btn.textContent='Converting...';
-        const fmt=document.getElementById('outputFormat').value;
-        const q=parseInt(document.getElementById('quality').value)/100;
-        const ext={['image/png']:'png',['image/jpeg']:'jpg',['image/webp']:'webp',['image/bmp']:'bmp'}[fmt]||'png';
-        const grid=document.getElementById('resultsGrid');grid.innerHTML='';
-        for(const file of files){
-            const img=await loadImg(file);
-            const c=document.createElement('canvas');c.width=img.width;c.height=img.height;
-            c.getContext('2d').drawImage(img,0,0);
-            const blob=await new Promise(r=>c.toBlob(r,fmt,q));
-            const url=URL.createObjectURL(blob);
-            const name=file.name.replace(/\.[^.]+$/,'')+'.'+ext;
-            grid.innerHTML+=`<div class="result-item"><img src="${url}" alt="Converted"><div class="stats">${(file.size/1024).toFixed(1)}KB → ${(blob.size/1024).toFixed(1)}KB</div><a href="${url}" download="${name}">⬇ Download .${ext.toUpperCase()}</a></div>`;
-        }
-        document.getElementById('results').classList.add('active');btn.disabled=false;btn.textContent='🔄 Convert Images';
-    }
-    function loadImg(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=e=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=e.target.result};r.readAsDataURL(file)})}
-    </script>
+<!-- HEADER -->
+<header id="siteHeader">
+<div class="nav-wrap">
+<a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a>
+<nav aria-label="Main navigation">
+<ul class="nav-links">
+<li><a href="index.html">Home</a></li>
+<li class="dropdown"><a href="index.html#tools">Tools <i class="fas fa-chevron-down"></i></a>
+<div class="dropdown-menu">
+<a href="gif-compressor.html"><i class="fas fa-compress"></i>GIF Compressor</a>
+<a href="video-to-gif.html"><i class="fas fa-video"></i>Video to GIF</a>
+<a href="image-converter.html"><i class="fas fa-exchange-alt"></i>Image Converter</a>
+<a href="image-resizer.html"><i class="fas fa-expand-arrows-alt"></i>Image Resizer</a>
+<a href="pdf-tools.html"><i class="fas fa-file-pdf"></i>PDF Tools</a>
+<a href="instagram-downloader.html"><i class="fab fa-instagram"></i>Instagram DL</a>
+<a href="facebook-downloader.html"><i class="fab fa-facebook"></i>Facebook DL</a>
+<a href="tiktok-downloader.html"><i class="fab fa-tiktok"></i>TikTok DL</a>
+<a href="qr-generator.html"><i class="fas fa-qrcode"></i>QR Generator</a>
+<a href="color-picker.html"><i class="fas fa-palette"></i>Color Picker</a>
+<a href="text-tools.html"><i class="fas fa-font"></i>Text Tools</a>
+<a href="password-generator.html"><i class="fas fa-key"></i>Password Gen</a>
+<a href="json-formatter.html"><i class="fas fa-code"></i>JSON Formatter</a>
+<a href="base64-tool.html"><i class="fas fa-lock"></i>Base64 Tool</a>
+</div>
+</li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</nav>
+<button class="hamburger" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+</div>
+</header>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<div class="mobile-panel" id="mobilePanel" role="dialog" aria-label="Mobile navigation">
+<div class="mp-head"><a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a><button class="mp-close" id="menuClose" aria-label="Close menu">✕</button></div>
+<div class="mp-body">
+<a href="index.html"><i class="fas fa-home"></i>Home</a>
+<a href="blog.html"><i class="fas fa-rss"></i>Blog</a>
+<a href="about.html"><i class="fas fa-info-circle"></i>About</a>
+<a href="contact.html"><i class="fas fa-envelope"></i>Contact</a>
+<div class="mp-section">Tools</div>
+<a href="gif-compressor.html"><i class="fas fa-compress"></i>GIF Compressor</a>
+<a href="video-to-gif.html"><i class="fas fa-video"></i>Video to GIF</a>
+<a href="image-converter.html"><i class="fas fa-exchange-alt"></i>Image Converter</a>
+<a href="image-resizer.html"><i class="fas fa-expand-arrows-alt"></i>Image Resizer</a>
+<a href="pdf-tools.html"><i class="fas fa-file-pdf"></i>PDF Tools</a>
+<a href="instagram-downloader.html"><i class="fab fa-instagram"></i>Instagram DL</a>
+<a href="facebook-downloader.html"><i class="fab fa-facebook"></i>Facebook DL</a>
+<a href="tiktok-downloader.html"><i class="fab fa-tiktok"></i>TikTok DL</a>
+<a href="qr-generator.html"><i class="fas fa-qrcode"></i>QR Generator</a>
+<a href="color-picker.html"><i class="fas fa-palette"></i>Color Picker</a>
+<a href="text-tools.html"><i class="fas fa-font"></i>Text Tools</a>
+<a href="password-generator.html"><i class="fas fa-key"></i>Password Gen</a>
+<a href="json-formatter.html"><i class="fas fa-code"></i>JSON Formatter</a>
+<a href="base64-tool.html"><i class="fas fa-lock"></i>Base64 Tool</a>
+<div class="mp-section">Legal</div>
+<a href="disclaimer.html"><i class="fas fa-exclamation-circle"></i>Disclaimer</a>
+<a href="terms.html"><i class="fas fa-file-contract"></i>Terms</a>
+<a href="dmca.html"><i class="fas fa-shield-alt"></i>DMCA</a>
+</div>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+<div class="hero-badge"><i class="fas fa-exchange-alt"></i> Image Converter</div>
+<h1>Convert Images to <span>Any Format</span></h1>
+<p>Free online image converter. Convert between PNG, JPG, WEBP, BMP, GIF, AVIF, TIFF &amp; ICO instantly — all processing happens in your browser, nothing is uploaded.</p>
+</section>
+
+<!-- TOOL -->
+<section class="tool-section">
+<div class="tool-card">
+<h2><i class="fas fa-upload" style="color:var(--primary-peach);margin-right:.5rem"></i>Upload Images</h2>
+<div class="drop-zone" id="dropZone">
+<input type="file" id="fileInput" accept="image/*" multiple>
+<i class="fas fa-cloud-upload-alt"></i>
+<p>Drag &amp; drop images here or <strong>click to browse</strong></p>
+<small>PNG, JPG, WEBP, BMP, GIF, AVIF, TIFF, ICO • Multiple files supported</small>
+</div>
+<div class="preview-grid" id="previewGrid"></div>
+</div>
+
+<div class="tool-card">
+<h2><i class="fas fa-cog" style="color:var(--primary-peach);margin-right:.5rem"></i>Conversion Settings</h2>
+<p style="font-size:.9rem;color:var(--text-muted);margin-bottom:1rem">Select output format:</p>
+<div class="format-grid" id="formatGrid">
+<button class="format-btn active" data-format="png">PNG</button>
+<button class="format-btn" data-format="jpeg">JPG</button>
+<button class="format-btn" data-format="webp">WEBP</button>
+<button class="format-btn" data-format="bmp">BMP</button>
+<button class="format-btn" data-format="gif">GIF</button>
+<button class="format-btn" data-format="avif">AVIF</button>
+<button class="format-btn" data-format="ico">ICO</button>
+</div>
+<div class="quality-row" id="qualityRow">
+<label>Quality:</label>
+<input type="range" id="qualitySlider" min="10" max="100" value="92">
+<span class="quality-val" id="qualityVal">92%</span>
+</div>
+<div style="margin-top:1.5rem">
+<button class="btn-convert" id="convertBtn" disabled><i class="fas fa-sync-alt"></i> Convert Images</button>
+</div>
+<div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div class="status-box" id="statusBox"></div>
+</div>
+
+<div class="results-section" id="resultsSection">
+<div class="tool-card">
+<h2><i class="fas fa-check-circle" style="color:var(--success-btn);margin-right:.5rem"></i>Converted Images</h2>
+<div class="result-grid" id="resultGrid"></div>
+<div style="text-align:center;margin-top:1.5rem">
+<button class="btn-download-all" id="downloadAllBtn"><i class="fas fa-download"></i> Download All (ZIP)</button>
+</div>
+</div>
+</div>
+</section>
+
+<!-- HOW-TO -->
+<section class="tool-section" style="padding-top:0">
+<div class="how-to">
+<h2>How to Convert Images</h2>
+<div class="steps">
+<div class="step"><div class="step-num">1</div><h3>Upload</h3><p>Drag &amp; drop or click to select one or more images from your device.</p></div>
+<div class="step"><div class="step-num">2</div><h3>Choose Format</h3><p>Select your desired output format (PNG, JPG, WEBP, etc.) and adjust quality.</p></div>
+<div class="step"><div class="step-num">3</div><h3>Convert</h3><p>Click convert and download individual files or all at once as a ZIP.</p></div>
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="footer-grid">
+<div class="footer-brand"><a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a><p>Free online tools for media downloading, image editing, PDF manipulation, and developer utilities. No signup required.</p></div>
+<div class="footer-col"><h4>Quick Links</h4><a href="index.html">Home</a><a href="blog.html">Blog</a><a href="about.html">About Us</a><a href="contact.html">Contact</a></div>
+<div class="footer-col"><h4>Popular Tools</h4><a href="gif-compressor.html">GIF Compressor</a><a href="image-converter.html">Image Converter</a><a href="instagram-downloader.html">Instagram DL</a><a href="facebook-downloader.html">Facebook DL</a><a href="pdf-tools.html">PDF Tools</a></div>
+<div class="footer-col"><h4>Legal</h4><a href="disclaimer.html">Disclaimer</a><a href="terms.html">Terms of Service</a><a href="dmca.html">DMCA Policy</a></div>
+</div>
+<div class="footer-bottom"><p>&copy; 2025 ToolsMediaDownload. All rights reserved.</p><div class="social-links"><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a><a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a></div></div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+// NAV
+const header=document.getElementById('siteHeader');
+const menuToggle=document.getElementById('menuToggle');
+const menuClose=document.getElementById('menuClose');
+const overlay=document.getElementById('mobileOverlay');
+const panel=document.getElementById('mobilePanel');
+function openMenu(){panel.classList.add('active');overlay.classList.add('active');document.body.style.overflow='hidden';menuToggle.setAttribute('aria-expanded','true');menuClose.focus()}
+function closeMenu(){panel.classList.remove('active');overlay.classList.remove('active');document.body.style.overflow='';menuToggle.setAttribute('aria-expanded','false');menuToggle.focus()}
+menuToggle.addEventListener('click',openMenu);
+menuClose.addEventListener('click',closeMenu);
+overlay.addEventListener('click',closeMenu);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
+(function scrollShadow(){let t=!1;function c(){header.classList.toggle('scrolled',window.scrollY>10);t=!1}window.addEventListener('scroll',()=>{if(!t){t=!0;requestAnimationFrame(c)}})})();
+
+// STATE
+let files=[];
+let convertedBlobs=[];
+let selectedFormat='png';
+const dropZone=document.getElementById('dropZone');
+const fileInput=document.getElementById('fileInput');
+const previewGrid=document.getElementById('previewGrid');
+const formatGrid=document.getElementById('formatGrid');
+const qualitySlider=document.getElementById('qualitySlider');
+const qualityVal=document.getElementById('qualityVal');
+const qualityRow=document.getElementById('qualityRow');
+const convertBtn=document.getElementById('convertBtn');
+const progressBar=document.getElementById('progressBar');
+const progressFill=document.getElementById('progressFill');
+const statusBox=document.getElementById('statusBox');
+const resultsSection=document.getElementById('resultsSection');
+const resultGrid=document.getElementById('resultGrid');
+const downloadAllBtn=document.getElementById('downloadAllBtn');
+
+// DROP ZONE
+['dragenter','dragover'].forEach(e=>dropZone.addEventListener(e,ev=>{ev.preventDefault();dropZone.classList.add('drag-over')}));
+['dragleave','drop'].forEach(e=>dropZone.addEventListener(e,ev=>{ev.preventDefault();dropZone.classList.remove('drag-over')}));
+dropZone.addEventListener('drop',e=>{const dt=e.dataTransfer;if(dt.files.length)addFiles(dt.files)});
+fileInput.addEventListener('change',e=>{if(e.target.files.length)addFiles(e.target.files)});
+
+function addFiles(newFiles){
+  for(const f of newFiles){
+    if(f.type.startsWith('image/')){files.push(f)}
+  }
+  renderPreviews();
+  convertBtn.disabled=files.length===0;
+  resultsSection.classList.remove('show');
+}
+
+function renderPreviews(){
+  previewGrid.innerHTML='';
+  files.forEach((f,i)=>{
+    const div=document.createElement('div');div.className='preview-item';
+    const img=document.createElement('img');img.alt=f.name;
+    const url=URL.createObjectURL(f);img.src=url;
+    const info=document.createElement('div');info.className='preview-info';
+    info.innerHTML=`<span class="preview-name" title="${f.name}">${f.name}</span><span class="preview-size">${formatBytes(f.size)}</span><button class="preview-remove" title="Remove" data-idx="${i}"><i class="fas fa-times"></i></button>`;
+    div.append(img,info);previewGrid.appendChild(div);
+  });
+  previewGrid.querySelectorAll('.preview-remove').forEach(b=>b.addEventListener('click',e=>{
+    const idx=parseInt(e.currentTarget.dataset.idx);files.splice(idx,1);renderPreviews();convertBtn.disabled=files.length===0;
+  }));
+}
+
+// FORMAT
+formatGrid.querySelectorAll('.format-btn').forEach(b=>b.addEventListener('click',()=>{
+  formatGrid.querySelectorAll('.format-btn').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');selectedFormat=b.dataset.format;
+  // Quality relevant only for lossy
+  const lossy=['jpeg','webp','avif'];
+  qualityRow.style.display=lossy.includes(selectedFormat)?'flex':'none';
+}));
+qualitySlider.addEventListener('input',()=>{qualityVal.textContent=qualitySlider.value+'%'});
+
+// CONVERT
+convertBtn.addEventListener('click',async()=>{
+  if(!files.length)return;
+  convertedBlobs=[];resultGrid.innerHTML='';resultsSection.classList.remove('show');
+  progressBar.classList.add('show');progressFill.style.width='0%';
+  showStatus('loading','Converting images...');
+  convertBtn.disabled=true;
+  const total=files.length;let done=0;
+  for(const f of files){
+    try{
+      const blob=await convertImage(f,selectedFormat,parseInt(qualitySlider.value)/100);
+      const ext=selectedFormat==='jpeg'?'jpg':selectedFormat;
+      const name=f.name.replace(/\.[^.]+$/,'')+'.'+ext;
+      convertedBlobs.push({blob,name});
+      addResultCard(blob,name);
+    }catch(err){console.error(err)}
+    done++;progressFill.style.width=Math.round(done/total*100)+'%';
+  }
+  progressBar.classList.remove('show');convertBtn.disabled=false;
+  if(convertedBlobs.length){showStatus('success',`✅ Converted ${convertedBlobs.length} image(s) successfully!`);resultsSection.classList.add('show');setTimeout(()=>hideStatus(),4000)}
+  else showStatus('error','❌ No images could be converted.');
+});
+
+function convertImage(file,format,quality){
+  return new Promise((resolve,reject)=>{
+    const img=new Image();const url=URL.createObjectURL(file);
+    img.onload=()=>{
+      const c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;
+      const ctx=c.getContext('2d');
+      // For formats that don't support transparency, fill white bg
+      if(['jpeg','bmp','ico'].includes(format)){ctx.fillStyle='#ffffff';ctx.fillRect(0,0,c.width,c.height)}
+      ctx.drawImage(img,0,0);URL.revokeObjectURL(url);
+      let mime='image/'+format;
+      if(format==='ico'){
+        // ICO: render as 64x64 png (browser limitation)
+        const ic=document.createElement('canvas');ic.width=64;ic.height=64;
+        ic.getContext('2d').drawImage(img,0,0,64,64);
+        ic.toBlob(b=>b?resolve(b):reject('ICO fail'),'image/png');return;
+      }
+      if(format==='bmp'){mime='image/bmp'}
+      const lossy=['jpeg','webp','avif'];
+      c.toBlob(b=>b?resolve(b):reject('Conversion failed'),mime,lossy.includes(format)?quality:undefined);
+    };
+    img.onerror=()=>{URL.revokeObjectURL(url);reject('Load failed')};
+    img.src=url;
+  });
+}
+
+function addResultCard(blob,name){
+  const div=document.createElement('div');div.className='result-card';
+  const img=document.createElement('img');img.src=URL.createObjectURL(blob);img.alt=name;
+  const info=document.createElement('div');info.className='rc-info';
+  info.innerHTML=`<div class="rc-name" title="${name}">${name}</div><div class="rc-size">${formatBytes(blob.size)}</div><button class="btn-sm dl" onclick="dlBlob(this)" data-name="${name}"><i class="fas fa-download"></i> Download</button>`;
+  div.append(img,info);resultGrid.appendChild(div);
+}
+
+window.dlBlob=function(btn){
+  const name=btn.dataset.name;const item=convertedBlobs.find(c=>c.name===name);if(!item)return;
+  const a=document.createElement('a');a.href=URL.createObjectURL(item.blob);a.download=name;document.body.appendChild(a);a.click();a.remove();
+};
+
+downloadAllBtn.addEventListener('click',async()=>{
+  if(!convertedBlobs.length)return;
+  showStatus('loading','Creating ZIP...');
+  const zip=new JSZip();
+  convertedBlobs.forEach(c=>zip.file(c.name,c.blob));
+  const content=await zip.generateAsync({type:'blob'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(content);a.download='converted-images.zip';document.body.appendChild(a);a.click();a.remove();
+  showStatus('success','✅ ZIP downloaded!');setTimeout(()=>hideStatus(),3000);
+});
+
+// UTILS
+function formatBytes(b){if(b===0)return'0 B';const k=1024;const s=['B','KB','MB','GB'];const i=Math.floor(Math.log(b)/Math.log(k));return parseFloat((b/Math.pow(k,i)).toFixed(1))+' '+s[i]}
+function showStatus(type,msg){statusBox.className='status-box show '+type;statusBox.innerHTML=(type==='loading'?'<div class="spinner"></div>':'')+msg}
+function hideStatus(){statusBox.className='status-box';statusBox.innerHTML=''}
+</script>
 </body>
 </html>
