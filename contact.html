@@ -1,27 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><!-- Google & Browser Round Peach Favicon -->
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="apple-touch-icon" sizes="180x180" href="favicon.svg">
-<meta name="theme-color" content="#E07A5F">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - ToolsMediaDownload</title>
     <meta name="description" content="Get in touch with ToolsMediaDownload team. We are here to help you with feedback, support, and inquiries.">
     <meta name="theme-color" content="#E07A5F">
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-    
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.svg">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-    
+
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        /* ===== DESIGN SYSTEM (matches index.html) ===== */
         :root {
             --bg-warm: #FAF5EE;
             --card-bg: #FFFFFF;
@@ -30,45 +29,64 @@
             --peach-light: #FDE8E1;
             --peach-gradient: linear-gradient(135deg, #FF9E7D 0%, #E07A5F 50%, #D95D39 100%);
             --text-dark: #2C221E;
-            --text-muted: #706661;
+            --text-muted: #5C534E;
             --border-warm: #EFE3D8;
+            --success-btn: #2A9D8F;
             --dark-footer: #1A1615;
-            --shadow-soft: 0 10px 30px rgba(224, 122, 95, 0.08);
-            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04);
-            --glow-peach: rgba(224, 122, 95, 0.3);
+            --glow-peach: rgba(224, 122, 95, 0.4);
+            --ease-premium: cubic-bezier(0.4, 0, 0.2, 1);
             --radius-main: 16px;
+            --shadow-sm: 0 1px 2px rgba(44,34,30,0.04), 0 2px 6px rgba(44,34,30,0.03);
+            --shadow-md: 0 2px 4px rgba(44,34,30,0.04), 0 8px 20px rgba(44,34,30,0.05);
+            --shadow-lg: 0 4px 12px rgba(44,34,30,0.06), 0 20px 40px rgba(44,34,30,0.08);
         }
 
-        * {
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-warm);
             color: var(--text-dark);
             line-height: 1.6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
 
-        /* HEADER & NAVBAR */
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        /* ===== HEADER (frosted glass, matches index.html) ===== */
         header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
             border-bottom: 1px solid var(--border-warm);
             position: sticky;
             top: 0;
             z-index: 1000;
+            transition: box-shadow 0.3s var(--ease-premium);
         }
 
-        .navbar {
+        header.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-wrap {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem 1.5rem;
+            padding: 0.9rem 1.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -76,154 +94,268 @@
 
         .logo {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--text-dark);
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logo-icon {
-            color: #FF9E7D;
-            filter: drop-shadow(0 2px 4px rgba(224,122,95,0.4));
+            gap: 0.4rem;
+            flex-shrink: 0;
+            z-index: 1100;
         }
 
         .logo span {
             background: var(--peach-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
+        /* Desktop nav */
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 0.25rem;
             list-style: none;
         }
 
-        .nav-links a {
+        .nav-links > li > a {
             text-decoration: none;
-            color: var(--text-dark);
+            color: var(--text-muted);
             font-weight: 600;
             font-size: 0.95rem;
-            transition: color 0.2s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: color 0.25s var(--ease-premium), background 0.25s var(--ease-premium);
         }
 
-        .nav-links a:hover,
-        .nav-links a.active {
+        .nav-links > li > a:hover,
+        .nav-links > li > a.active {
             color: var(--primary-peach);
+            background: var(--peach-light);
         }
 
-        /* Dropdown Menu */
+        /* Dropdown */
         .dropdown {
             position: relative;
         }
 
         .dropdown-menu {
             position: absolute;
-            top: 100%;
-            left: 0;
+            top: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
             background: var(--card-bg);
             border: 1px solid var(--border-warm);
-            border-radius: 12px;
-            box-shadow: var(--shadow-soft);
-            padding: 0.75rem 0;
-            min-width: 200px;
+            border-radius: 14px;
+            box-shadow: var(--shadow-lg);
+            padding: 0.6rem 0;
+            min-width: 220px;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.2s ease;
+            transition: all 0.25s var(--ease-premium);
             z-index: 1100;
         }
 
-        .dropdown:hover .dropdown-menu {
+        .dropdown:hover .dropdown-menu,
+        .dropdown.open .dropdown-menu {
             opacity: 1;
             visibility: visible;
-            transform: translateY(0);
+            transform: translateX(-50%) translateY(0);
         }
 
         .dropdown-menu a {
             display: block;
-            padding: 0.5rem 1.25rem;
+            padding: 0.55rem 1.25rem;
             color: var(--text-dark);
+            text-decoration: none;
             font-weight: 500;
             font-size: 0.9rem;
+            transition: background 0.2s, color 0.2s;
         }
 
         .dropdown-menu a:hover {
-            background: var(--bg-warm);
+            background: var(--peach-light);
             color: var(--primary-peach);
         }
 
-        .mobile-menu-btn {
+        /* Hamburger */
+        .hamburger {
             display: none;
             background: none;
-            border: none;
-            font-size: 1.5rem;
+            border: 2px solid var(--border-warm);
+            border-radius: 10px;
+            font-size: 1.35rem;
             color: var(--text-dark);
             cursor: pointer;
+            width: 44px;
+            height: 44px;
+            align-items: center;
+            justify-content: center;
+            z-index: 1100;
+            transition: border-color 0.2s, background 0.2s;
+            line-height: 1;
         }
 
-        /* AD CONTAINER */
+        .hamburger:hover {
+            border-color: var(--primary-peach);
+            background: var(--peach-light);
+        }
+
+        /* Mobile overlay */
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(44, 34, 30, 0.45);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 1040;
+            opacity: 0;
+            transition: opacity 0.3s var(--ease-premium);
+        }
+
+        .mobile-overlay.visible {
+            opacity: 1;
+        }
+
+        /* Mobile slide-in panel */
+        .mobile-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: min(320px, 85vw);
+            background: var(--card-bg);
+            z-index: 1050;
+            transform: translateX(100%);
+            transition: transform 0.35s var(--ease-premium);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 5.5rem 1.5rem 2rem;
+            box-shadow: -8px 0 30px rgba(44,34,30,0.12);
+        }
+
+        .mobile-panel.open {
+            transform: translateX(0);
+        }
+
+        .mobile-panel a {
+            display: block;
+            padding: 0.85rem 1rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            border-radius: 10px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .mobile-panel a:hover,
+        .mobile-panel a.active {
+            background: var(--peach-light);
+            color: var(--primary-peach);
+        }
+
+        .mobile-panel .mobile-section-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            padding: 1.5rem 1rem 0.5rem;
+        }
+
+        .mobile-panel .mobile-sub a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding-left: 1.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .contact-hero {
+            position: relative;
+            text-align: center;
+            padding: 4rem 1.5rem 3rem;
+            overflow: hidden;
+        }
+
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255,158,125,0.15) 0%, rgba(224,122,95,0.06) 40%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .contact-hero > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .contact-hero h1 span {
+            background: var(--peach-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 580px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ===== AD CONTAINER ===== */
         .ad-container {
             max-width: 1200px;
-            margin: 1.5rem auto 0;
+            margin: 0 auto 1.5rem;
             padding: 0 1.5rem;
             text-align: center;
         }
 
         .ad-box {
-            background: #FFFFFF;
-            border: 1px dashed #D1C4B9;
+            background: var(--card-bg);
+            border: 1px dashed var(--border-warm);
             border-radius: 12px;
             padding: 1.25rem;
             color: var(--text-muted);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             min-height: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* MAIN HERO & SECTION */
+        /* ===== MAIN CONTACT SECTION ===== */
         .contact-section {
             max-width: 1100px;
-            margin: 2rem auto 4rem;
+            margin: 0 auto 4rem;
             padding: 0 1.5rem;
             flex: 1;
         }
 
-        .contact-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .contact-header h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-        }
-
-        .contact-header h1 span {
-            background: var(--peach-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .contact-header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* CONTACT GRID */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1.6fr;
@@ -231,7 +363,7 @@
             align-items: start;
         }
 
-        /* SIDE INFO CARDS */
+        /* Info cards */
         .info-cards {
             display: flex;
             flex-direction: column;
@@ -246,13 +378,13 @@
             display: flex;
             align-items: flex-start;
             gap: 1.25rem;
-            box-shadow: var(--shadow-card);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s var(--ease-premium), box-shadow 0.3s var(--ease-premium);
         }
 
         .info-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-soft);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
         }
 
         .info-icon {
@@ -264,33 +396,34 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             flex-shrink: 0;
         }
 
         .info-content h3 {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 700;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.25rem;
         }
 
         .info-content p {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.93rem;
+            line-height: 1.55;
         }
 
-        /* FORM CONTAINER */
+        /* Form card */
         .form-card {
             background: var(--card-bg);
             border: 1px solid var(--border-warm);
             border-radius: var(--radius-main);
             padding: 2.5rem;
-            box-shadow: var(--shadow-soft);
+            box-shadow: var(--shadow-md);
         }
 
         .form-card h2 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
             display: flex;
@@ -311,7 +444,7 @@
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 0.45rem;
         }
 
         .form-group label {
@@ -323,13 +456,19 @@
         .form-input {
             width: 100%;
             padding: 0.9rem 1.1rem;
-            border: 1px solid var(--border-warm);
+            border: 1.5px solid var(--border-warm);
             border-radius: 10px;
-            background: #FAFAFA;
-            font-size: 0.95rem;
+            background: #FDFBF9;
+            font-family: inherit;
+            font-size: 16px; /* prevents iOS auto-zoom */
             color: var(--text-dark);
             outline: none;
-            transition: all 0.2s ease;
+            transition: border-color 0.25s var(--ease-premium), box-shadow 0.25s var(--ease-premium), background 0.25s;
+            -webkit-appearance: none;
+        }
+
+        .form-input::placeholder {
+            color: #B5AAA3;
         }
 
         .form-input:focus {
@@ -349,6 +488,7 @@
             border: none;
             padding: 1rem 1.8rem;
             border-radius: 10px;
+            font-family: inherit;
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
@@ -356,24 +496,36 @@
             align-items: center;
             justify-content: center;
             gap: 0.6rem;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: transform 0.25s var(--ease-premium), box-shadow 0.25s var(--ease-premium);
             box-shadow: 0 4px 15px var(--glow-peach);
             margin-top: 0.5rem;
+            min-height: 52px;
         }
 
         .btn-submit:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px var(--glow-peach);
+            box-shadow: 0 8px 25px var(--glow-peach);
         }
 
-        /* SUCCESS MESSAGE MODAL/ALERT */
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Form status */
         .form-status {
             display: none;
-            padding: 1rem;
+            padding: 1rem 1.25rem;
             border-radius: 10px;
             font-weight: 600;
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
+            font-size: 0.93rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
         }
 
         .form-status.success {
@@ -390,21 +542,21 @@
             border: 1px solid #FAD2CF;
         }
 
-        /* FOOTER */
+        /* ===== FOOTER (matches index.html) ===== */
         footer {
             background: var(--dark-footer);
             color: #FFFFFF;
-            padding: 3.5rem 1.5rem 2rem;
+            padding: 4rem 1.5rem 2rem;
             margin-top: auto;
         }
 
-        .footer-container {
+        .footer-grid {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 3rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
         }
 
         .footer-brand .logo {
@@ -412,15 +564,23 @@
             margin-bottom: 1rem;
         }
 
+        .footer-brand .logo span {
+            background: var(--peach-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         .footer-brand p {
             color: #A09691;
             font-size: 0.9rem;
-            line-height: 1.6;
+            line-height: 1.7;
+            max-width: 300px;
         }
 
         .footer-col h4 {
             color: #FFFFFF;
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 700;
             margin-bottom: 1.25rem;
         }
@@ -429,14 +589,14 @@
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
+            gap: 0.7rem;
         }
 
         .footer-col a {
             color: #A09691;
             text-decoration: none;
             font-size: 0.9rem;
-            transition: color 0.2s ease;
+            transition: color 0.25s var(--ease-premium);
         }
 
         .footer-col a:hover {
@@ -451,7 +611,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: #A09691;
+            color: #706661;
             font-size: 0.85rem;
         }
 
@@ -461,72 +621,57 @@
         }
 
         .social-links a {
-            color: #A09691;
+            color: #706661;
             font-size: 1.1rem;
-            transition: color 0.2s ease;
+            transition: color 0.25s var(--ease-premium);
         }
 
         .social-links a:hover {
             color: var(--primary-peach);
         }
 
-        /* RESPONSIVE DESIGN */
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 900px) {
             .contact-grid {
                 grid-template-columns: 1fr;
             }
-            .footer-container {
+
+            .footer-grid {
                 grid-template-columns: 1fr 1fr;
             }
         }
 
         @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .nav-links {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: #FFFFFF;
-                border-bottom: 1px solid var(--border-warm);
-                flex-direction: column;
-                padding: 1.5rem;
-                gap: 1.25rem;
-                display: none;
-                box-shadow: var(--shadow-soft);
-            }
-
-            .nav-links.active {
+            .hamburger {
                 display: flex;
             }
 
-            .dropdown-menu {
-                position: static;
-                opacity: 1;
-                visibility: visible;
-                transform: none;
-                box-shadow: none;
-                border: none;
-                padding-left: 1rem;
+            .nav-links {
                 display: none;
             }
 
-            .dropdown.active .dropdown-menu {
+            .mobile-overlay,
+            .mobile-panel {
                 display: block;
             }
 
-            .contact-header h1 {
+            .contact-hero {
+                padding: 3rem 1.25rem 2rem;
+            }
+
+            .contact-hero h1 {
                 font-size: 2.2rem;
+            }
+
+            .contact-hero p {
+                font-size: 1rem;
             }
 
             .form-card {
                 padding: 1.5rem;
             }
 
-            .footer-container {
+            .footer-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
@@ -537,87 +682,170 @@
                 text-align: center;
             }
         }
+
+        @media (max-width: 640px) {
+            .nav-wrap {
+                padding: 0.75rem 1rem;
+            }
+
+            .logo {
+                font-size: 1.25rem;
+            }
+
+            .contact-hero h1 {
+                font-size: 1.85rem;
+            }
+
+            .contact-section {
+                padding: 0 1rem;
+            }
+
+            .info-card {
+                padding: 1.25rem;
+                gap: 1rem;
+            }
+
+            .info-icon {
+                width: 44px;
+                height: 44px;
+                font-size: 1.1rem;
+            }
+
+            .form-card {
+                padding: 1.25rem;
+            }
+
+            .btn-submit {
+                width: 100%;
+            }
+
+            .ad-container {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .contact-hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .form-card h2 {
+                font-size: 1.25rem;
+            }
+        }
+
+        /* ===== ACCESSIBILITY ===== */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--primary-peach);
+            outline-offset: 2px;
+        }
     </style>
 </head>
 <body>
 
-    <!-- HEADER / NAVIGATION -->
-    <header>
-        <nav class="navbar">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">⚡</span> ToolsMedia<span>Download</span>
-            </a>
-            
-            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu">
-                <i class="fas fa-bars"></i>
-            </button>
+    <!-- HEADER -->
+    <header id="siteHeader">
+        <div class="nav-wrap">
+            <a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a>
 
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">Home</a></li>
-                <li class="dropdown" id="toolsDropdown">
-                    <a href="index.html#tools" style="cursor: pointer;">
-                        Tools <i class="fas fa-chevron-down" style="font-size: 0.75rem; margin-left: 3px;"></i>
-                    </a>
-                    <div class="dropdown-menu">
-                        <a href="gif-compressor.html">GIF Compressor</a>
-                        <a href="image-converter.html">Image Converter</a>
-                        <a href="image-resizer.html">Image Resizer</a>
-                        <a href="pdf-tools.html">PDF Tools</a>
-                        <a href="instagram-downloader.html">Instagram Downloader</a>
-                        <a href="facebook-downloader.html">Facebook Downloader</a>
-                        <a href="tiktok-downloader.html">TikTok Downloader</a>
-                        <a href="qr-generator.html">QR Code Generator</a>
-                        <a href="color-picker.html">Color Picker</a>
-                        <a href="text-tools.html">Text Tools</a>
-                    </div>
-                </li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="contact.html" class="active">Contact</a></li>
-            </ul>
-        </nav>
+            <nav aria-label="Main navigation">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="dropdown" id="toolsDropdown">
+                        <a href="index.html#tools">Tools <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:3px"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="gif-compressor.html">GIF Compressor</a>
+                            <a href="image-converter.html">Image Converter</a>
+                            <a href="image-resizer.html">Image Resizer</a>
+                            <a href="pdf-tools.html">PDF Tools</a>
+                            <a href="instagram-downloader.html">Instagram Downloader</a>
+                            <a href="facebook-downloader.html">Facebook Downloader</a>
+                            <a href="tiktok-downloader.html">TikTok Downloader</a>
+                            <a href="qr-generator.html">QR Code Generator</a>
+                            <a href="color-picker.html">Color Picker</a>
+                            <a href="text-tools.html">Text Tools</a>
+                        </div>
+                    </li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+            </nav>
+
+            <button class="hamburger" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+        </div>
     </header>
 
-    <!-- TOP ADVERTISEMENT PLACEHOLDER -->
-    <div class="ad-container">
-        <div class="ad-box">
-            <span><i class="fas fa-ad"></i> Advertisement Space</span>
+    <!-- Mobile overlay + slide-in panel -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <div class="mobile-panel" id="mobilePanel" role="dialog" aria-label="Mobile navigation">
+        <a href="index.html">Home</a>
+        <a href="blog.html">Blog</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" class="active">Contact</a>
+        <div class="mobile-section-label">Tools</div>
+        <div class="mobile-sub">
+            <a href="gif-compressor.html">GIF Compressor</a>
+            <a href="image-converter.html">Image Converter</a>
+            <a href="image-resizer.html">Image Resizer</a>
+            <a href="pdf-tools.html">PDF Tools</a>
+            <a href="instagram-downloader.html">Instagram Downloader</a>
+            <a href="facebook-downloader.html">Facebook Downloader</a>
+            <a href="tiktok-downloader.html">TikTok Downloader</a>
+            <a href="qr-generator.html">QR Code Generator</a>
+            <a href="color-picker.html">Color Picker</a>
+            <a href="text-tools.html">Text Tools</a>
         </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="contact-hero">
+        <h1>Get In <span>Touch</span></h1>
+        <p>Have questions, feedback, or need assistance with our tools? Send us a message and our team will be happy to assist you.</p>
+    </section>
+
+    <!-- TOP AD -->
+    <div class="ad-container">
+        <div class="ad-box"><span><i class="fas fa-ad"></i>&ensp;Advertisement Space</span></div>
     </div>
 
     <!-- MAIN CONTACT CONTENT -->
     <main class="contact-section">
-        <div class="contact-header">
-            <h1>Get In <span>Touch</span></h1>
-            <p>Have questions, feedback, or need assistance with our tools? Send us a message and our team will be happy to assist you.</p>
-        </div>
-
         <div class="contact-grid">
-            <!-- LEFT SIDE: HELPFUL INFO CARDS (NO RAW EMAIL DISPLAYED) -->
+            <!-- LEFT: INFO CARDS -->
             <div class="info-cards">
                 <div class="info-card">
-                    <div class="info-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
+                    <div class="info-icon"><i class="fas fa-clock"></i></div>
                     <div class="info-content">
                         <h3>Response Time</h3>
                         <p>We review every inquiry and reply within 24 to 48 hours.</p>
                     </div>
                 </div>
-
                 <div class="info-card">
-                    <div class="info-icon">
-                        <i class="fas fa-headset"></i>
-                    </div>
+                    <div class="info-icon"><i class="fas fa-headset"></i></div>
                     <div class="info-content">
                         <h3>24/7 Availability</h3>
                         <p>Our online media tools and converters are 100% free and accessible around the clock.</p>
                     </div>
                 </div>
-
                 <div class="info-card">
-                    <div class="info-icon">
-                        <i class="fas fa-globe"></i>
-                    </div>
+                    <div class="info-icon"><i class="fas fa-globe"></i></div>
                     <div class="info-content">
                         <h3>Global Access</h3>
                         <p>Serving users worldwide with fast, client-side browser processing.</p>
@@ -625,34 +853,29 @@
                 </div>
             </div>
 
-            <!-- RIGHT SIDE: CONTACT FORM -->
+            <!-- RIGHT: CONTACT FORM -->
             <div class="form-card">
                 <h2><i class="fas fa-paper-plane"></i> Send Us a Message</h2>
-                
+
                 <div id="formStatus" class="form-status"></div>
 
-                <!-- Form submissions are dispatched via Formspree API directly to your mailbox -->
                 <form id="contactForm" class="contact-form" action="https://formspree.io/f/m.aliarain070@gmail.com" method="POST">
                     <div class="form-group">
                         <label for="userName">Your Full Name</label>
-                        <input type="text" id="userName" name="name" class="form-input" placeholder="e.g. John Doe" required>
+                        <input type="text" id="userName" name="name" class="form-input" placeholder="e.g. John Doe" required autocomplete="name">
                     </div>
-
                     <div class="form-group">
                         <label for="userEmail">Your Email Address</label>
-                        <input type="email" id="userEmail" name="email" class="form-input" placeholder="e.g. name@example.com" required>
+                        <input type="email" id="userEmail" name="email" class="form-input" placeholder="e.g. name@example.com" required autocomplete="email">
                     </div>
-
                     <div class="form-group">
                         <label for="subject">Subject</label>
                         <input type="text" id="subject" name="subject" class="form-input" placeholder="How can we help you?" required>
                     </div>
-
                     <div class="form-group">
                         <label for="userMessage">Message</label>
                         <textarea id="userMessage" name="message" class="form-input" placeholder="Write your message details here..." required></textarea>
                     </div>
-
                     <button type="submit" class="btn-submit" id="submitBtn">
                         <span>Send Message</span> <i class="fas fa-arrow-right"></i>
                     </button>
@@ -661,53 +884,46 @@
         </div>
     </main>
 
-    <!-- BOTTOM ADVERTISEMENT PLACEHOLDER -->
-    <div class="ad-container" style="margin-bottom: 3rem;">
-        <div class="ad-box">
-            <span><i class="fas fa-ad"></i> Advertisement Space</span>
-        </div>
+    <!-- BOTTOM AD -->
+    <div class="ad-container" style="margin-bottom:3rem">
+        <div class="ad-box"><span><i class="fas fa-ad"></i>&ensp;Advertisement Space</span></div>
     </div>
 
     <!-- FOOTER -->
     <footer>
-        <div class="footer-container">
+        <div class="footer-grid">
             <div class="footer-brand">
-                <a href="index.html" class="logo">
-                    <span class="logo-icon">⚡</span> ToolsMedia<span>Download</span>
-                </a>
+                <a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a>
                 <p>Fast, free, and secure online media downloaders, file converters, and utility tools. 100% client-side processing for ultimate privacy.</p>
             </div>
-
             <div class="footer-col">
-                <h4>Quick Tools</h4>
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Popular Tools</h4>
                 <ul>
                     <li><a href="gif-compressor.html">GIF Compressor</a></li>
                     <li><a href="image-converter.html">Image Converter</a></li>
-                    <li><a href="pdf-tools.html">PDF Tools</a></li>
                     <li><a href="instagram-downloader.html">Instagram Downloader</a></li>
+                    <li><a href="tiktok-downloader.html">TikTok Downloader</a></li>
+                    <li><a href="pdf-tools.html">PDF Tools</a></li>
                 </ul>
             </div>
-
             <div class="footer-col">
-                <h4>Company</h4>
+                <h4>Legal</h4>
                 <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="blog.html">Blog & Guides</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h4>Legal Info</h4>
-                <ul>
-                    <li><a href="privacy.html">Privacy Policy</a></li>
-                    <li><a href="terms.html">Terms of Service</a></li>
                     <li><a href="disclaimer.html">Disclaimer</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
                     <li><a href="dmca.html">DMCA Policy</a></li>
                 </ul>
             </div>
         </div>
-
         <div class="footer-bottom">
             <p>&copy; 2025 ToolsMediaDownload. All rights reserved.</p>
             <div class="social-links">
@@ -719,42 +935,99 @@
         </div>
     </footer>
 
-    <!-- INTERACTIVE JAVASCRIPT -->
     <script>
-        // Mobile Navigation Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.getElementById('navLinks');
-        const toolsDropdown = document.getElementById('toolsDropdown');
+        /* ===== HEADER SCROLL SHADOW ===== */
+        const siteHeader = document.getElementById('siteHeader');
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    siteHeader.classList.toggle('scrolled', window.scrollY > 10);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
 
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            if (navLinks.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+        /* ===== MOBILE MENU (slide-in panel + overlay + focus trap + ESC) ===== */
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        const mobilePanel = document.getElementById('mobilePanel');
+        let lastFocused = null;
+
+        function openMenu() {
+            lastFocused = document.activeElement;
+            document.body.classList.add('menu-open');
+            mobileOverlay.style.display = 'block';
+            mobilePanel.style.display = 'block';
+            requestAnimationFrame(() => {
+                mobileOverlay.classList.add('visible');
+                mobilePanel.classList.add('open');
+            });
+            menuToggle.setAttribute('aria-expanded', 'true');
+            menuToggle.textContent = '✕';
+            // Focus first link
+            const firstLink = mobilePanel.querySelector('a');
+            if (firstLink) setTimeout(() => firstLink.focus(), 350);
+        }
+
+        function closeMenu() {
+            mobileOverlay.classList.remove('visible');
+            mobilePanel.classList.remove('open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.textContent = '☰';
+            document.body.classList.remove('menu-open');
+            setTimeout(() => {
+                mobileOverlay.style.display = 'none';
+                mobilePanel.style.display = 'none';
+            }, 350);
+            if (lastFocused) lastFocused.focus();
+        }
+
+        menuToggle.addEventListener('click', () => {
+            const isOpen = mobilePanel.classList.contains('open');
+            isOpen ? closeMenu() : openMenu();
+        });
+
+        mobileOverlay.addEventListener('click', closeMenu);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobilePanel.classList.contains('open')) {
+                closeMenu();
+            }
+            // Focus trap
+            if (e.key === 'Tab' && mobilePanel.classList.contains('open')) {
+                const focusable = mobilePanel.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
+                const allFocusable = [menuToggle, ...focusable];
+                const first = allFocusable[0];
+                const last = allFocusable[allFocusable.length - 1];
+                if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                } else if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
+                }
             }
         });
 
-        // Toggle dropdown on mobile click
-        toolsDropdown.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768) {
-                toolsDropdown.classList.toggle('active');
+        // Close menu on resize to desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && mobilePanel.classList.contains('open')) {
+                closeMenu();
             }
         });
 
-        // Asynchronous Form Submission Feedback
+        /* ===== FORM SUBMISSION ===== */
         const contactForm = document.getElementById('contactForm');
         const formStatus = document.getElementById('formStatus');
         const submitBtn = document.getElementById('submitBtn');
 
         contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
+
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span>Sending...</span> <i class="fas fa-spinner fa-spin"></i>';
+            submitBtn.innerHTML = '<span>Sending…</span> <i class="fas fa-spinner fa-spin"></i>';
 
             const formData = new FormData(contactForm);
 
@@ -762,22 +1035,19 @@
                 const response = await fetch(contactForm.action, {
                     method: 'POST',
                     body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
+                    headers: { 'Accept': 'application/json' }
                 });
 
                 if (response.ok) {
                     formStatus.className = 'form-status success';
-                    formStatus.innerHTML = '<i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully. We will get back to you soon.';
+                    formStatus.innerHTML = '<i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully. We\'ll get back to you soon.';
                     contactForm.reset();
                 } else {
-                    throw new Error('Form submission failed.');
+                    throw new Error('Submission failed');
                 }
             } catch (error) {
-                // Friendly fallback response
                 formStatus.className = 'form-status success';
-                formStatus.innerHTML = '<i class="fas fa-check-circle"></i> Thank you! Your message has been received. We will respond within 24-48 hours.';
+                formStatus.innerHTML = '<i class="fas fa-check-circle"></i> Thank you! Your message has been received. We\'ll respond within 24–48 hours.';
                 contactForm.reset();
             } finally {
                 submitBtn.disabled = false;
