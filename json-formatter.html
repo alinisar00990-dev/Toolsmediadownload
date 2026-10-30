@@ -1,79 +1,411 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><!-- Google & Browser Round Peach Favicon -->
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="apple-touch-icon" sizes="180x180" href="favicon.svg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Free online JSON formatter, validator and minifier. Beautify JSON, validate syntax, minify and copy — all in your browser.">
+<meta name="keywords" content="JSON formatter, JSON validator, JSON beautifier, JSON minifier, online JSON tool, pretty print JSON">
+<meta name="robots" content="index, follow">
 <meta name="theme-color" content="#E07A5F">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON Formatter & Validator - Beautify & Minify | ToolsMediaDownload</title>
-    <meta name="description" content="Format, validate, and minify JSON data online. Syntax highlighting, error detection. Free, browser-based JSON tool.">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://toolsmediadownload.com/json-formatter.html">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-    <style>
-        :root{--bg-warm:#FAF5EE;--card-bg:#FFF;--primary-peach:#E07A5F;--text-dark:#2C221E;--text-muted:#706661;--border-warm:#EFE3D8;--success-btn:#2A9D8F;--dark-footer:#1A1615}
-        *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-        body{background:var(--bg-warm);color:var(--text-dark);min-height:100vh;display:flex;flex-direction:column;line-height:1.7}
-        header{background:#fff;border-bottom:1px solid var(--border-warm);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-        .logo{font-size:1.4rem;font-weight:800;color:var(--primary-peach);text-decoration:none;display:flex;align-items:center;gap:.5rem}.logo span{color:var(--text-dark)}
-        .nav-links{display:flex;gap:1.25rem}.nav-links a{color:var(--text-dark);text-decoration:none;font-weight:600;font-size:.9rem}.nav-links a:hover{color:var(--primary-peach)}
-        @media(max-width:768px){.nav-links{display:none}}
-        .page-container{max-width:900px;margin:3rem auto;padding:0 1.25rem;flex:1}
-        .page-hero{text-align:center;margin-bottom:2.5rem}
-        .page-hero h1{font-size:2.4rem;font-weight:800;margin-bottom:.75rem}.page-hero h1 .g{background:linear-gradient(135deg,#4A5568,#2D3748);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .page-hero p{color:var(--text-muted);font-size:1.1rem}
-        .tool-card{background:var(--card-bg);padding:2.25rem;border-radius:20px;box-shadow:0 12px 30px -5px rgba(224,122,95,.08);border:1px solid var(--border-warm)}
-        .editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem}
-        @media(max-width:640px){.editor-grid{grid-template-columns:1fr}.page-hero h1{font-size:1.8rem}.tool-card{padding:1.5rem}}
-        .editor-grid textarea{width:100%;min-height:300px;padding:1rem;border:2px solid var(--border-warm);border-radius:12px;font-family:'Courier New',monospace;font-size:.88rem;outline:none;resize:vertical;background:#FFFDFB;tab-size:2}
-        .editor-grid textarea:focus{border-color:var(--primary-peach)}
-        .editor-label{font-weight:700;font-size:.9rem;margin-bottom:.4rem;display:block}
-        .btn-row{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem}
-        .btn-row button{padding:.65rem 1.1rem;border-radius:8px;font-weight:700;cursor:pointer;font-size:.85rem;border:none;transition:transform .15s}
-        .btn-beautify{background:linear-gradient(135deg,#4A5568,#2D3748);color:#fff}
-        .btn-minify{background:#718096;color:#fff}
-        .btn-validate{background:var(--success-btn);color:#fff}
-        .btn-copy{background:var(--primary-peach);color:#fff}
-        .btn-clear{background:#E53E3E;color:#fff}
-        .btn-row button:hover{transform:translateY(-2px)}
-        .status-msg{padding:.75rem 1rem;border-radius:8px;margin-top:1rem;font-weight:600;font-size:.9rem;display:none}
-        .status-msg.active{display:block}
-        .status-success{background:#F0FFF4;color:#38A169;border:1px solid #C6F6D5}
-        .status-error{background:#FFF5F5;color:#E53E3E;border:1px solid #FEB2B2}
-        footer{background:var(--dark-footer);color:#fff;padding:3rem 1rem 1.5rem;margin-top:auto}
-        .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-bottom:2rem}
-        .footer-col h3{font-size:1.05rem;margin-bottom:1rem;color:#F7EDE2}.footer-col ul{list-style:none}.footer-col ul li{margin-bottom:.6rem}.footer-col ul li a{color:#A8A099;text-decoration:none;font-size:.88rem}.footer-col ul li a:hover{color:#F7EDE2}.footer-col p{color:#A8A099;font-size:.88rem}
-        .copyright{text-align:center;border-top:1px solid #332E2B;padding-top:1.5rem;color:#78706A;font-size:.85rem}
-    </style>
+<title>JSON Formatter &amp; Validator – Beautify, Minify JSON | ToolsMediaDownload</title>
+<link rel="canonical" href="https://toolsmediadownload.com/json-formatter.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>{ }</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"JSON Formatter & Validator",
+  "url":"https://toolsmediadownload.com/json-formatter.html",
+  "description":"Free online JSON formatter, validator and minifier.",
+  "applicationCategory":"DeveloperApplication",
+  "operatingSystem":"Any",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+}
+</script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg-warm:#FAF5EE;--card-bg:#FFFFFF;--primary-peach:#E07A5F;--peach-hover:#D95D39;--peach-light:#FDE8E1;
+--peach-gradient:linear-gradient(135deg,#FF9E7D 0%,#E07A5F 50%,#D95D39 100%);
+--text-dark:#2C221E;--text-muted:#5C534E;--border-warm:#EFE3D8;
+--success-btn:#2A9D8F;--dark-footer:#1A1615;--glow-peach:rgba(224,122,95,0.4);
+--ease-premium:cubic-bezier(0.4,0,0.2,1);--radius-main:16px;
+--shadow-sm:0 1px 2px rgba(44,34,30,0.04),0 2px 6px rgba(44,34,30,0.03);
+--shadow-md:0 2px 4px rgba(44,34,30,0.04),0 8px 20px rgba(44,34,30,0.05);
+--shadow-lg:0 4px 12px rgba(44,34,30,0.06),0 20px 40px rgba(44,34,30,0.08);
+}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg-warm);color:var(--text-dark);overflow-x:hidden;-webkit-text-size-adjust:100%}
+#siteHeader{position:sticky;top:0;z-index:1000;background:rgba(250,245,238,0.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border-warm);transition:box-shadow .3s var(--ease-premium)}
+#siteHeader.scrolled{box-shadow:var(--shadow-md)}
+.nav-wrap{max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Space Grotesk',sans-serif;font-size:1.45rem;font-weight:700;color:var(--text-dark);text-decoration:none;display:flex;align-items:center;gap:8px}
+.logo span{background:var(--peach-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{list-style:none;display:flex;align-items:center;gap:8px}
+.nav-links>li>a{text-decoration:none;color:var(--text-dark);font-size:.91rem;font-weight:500;padding:8px 14px;border-radius:10px;transition:background .2s,color .2s}
+.nav-links>li>a:hover{background:var(--peach-light);color:var(--primary-peach)}
+.dropdown{position:relative}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--card-bg);border:1px solid var(--border-warm);border-radius:14px;padding:10px;min-width:220px;box-shadow:var(--shadow-lg);z-index:999}
+.dropdown:hover .dropdown-menu{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.dropdown-menu a{text-decoration:none;color:var(--text-dark);font-size:.85rem;padding:8px 12px;border-radius:8px;transition:background .15s;white-space:nowrap}
+.dropdown-menu a:hover{background:var(--peach-light);color:var(--primary-peach)}
+.hamburger{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--text-dark);padding:6px}
+.mobile-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:1100;opacity:0;transition:opacity .3s}
+.mobile-overlay.open{display:block;opacity:1}
+.mobile-panel{position:fixed;top:0;right:0;width:280px;max-width:85vw;height:100%;background:var(--card-bg);z-index:1200;transform:translateX(100%);transition:transform .35s var(--ease-premium);padding:24px 20px;overflow-y:auto;display:flex;flex-direction:column}
+.mobile-panel.open{transform:translateX(0)}
+.mobile-panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.mobile-panel-head .logo{font-size:1.2rem}
+.mobile-close{background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--text-dark);padding:4px}
+.mobile-panel nav a{display:block;padding:12px 14px;text-decoration:none;color:var(--text-dark);font-weight:500;font-size:.95rem;border-radius:10px;margin-bottom:2px;transition:background .15s}
+.mobile-panel nav a:hover,.mobile-panel nav a:focus{background:var(--peach-light);color:var(--primary-peach)}
+.mobile-panel .mp-divider{height:1px;background:var(--border-warm);margin:12px 0}
+.mobile-panel .mp-label{font-size:.75rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;padding:8px 14px}
+
+.page-hero{position:relative;padding:100px 24px 60px;text-align:center;overflow:hidden}
+.page-hero::before{content:'';position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(255,158,125,0.15) 0%,rgba(224,122,95,0.06) 40%,transparent 70%);pointer-events:none}
+.page-hero h1{font-family:'Space Grotesk',sans-serif;font-size:2.6rem;font-weight:700;margin-bottom:12px;position:relative}
+.page-hero h1 span{background:var(--peach-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.page-hero p{color:var(--text-muted);font-size:1.08rem;max-width:600px;margin:0 auto;position:relative}
+
+.main-container{max-width:900px;margin:0 auto;padding:0 24px 60px}
+.tool-card{background:var(--card-bg);border:1px solid var(--border-warm);border-radius:var(--radius-main);padding:28px;box-shadow:var(--shadow-md);margin-bottom:24px}
+.tool-card h3{font-family:'Space Grotesk',sans-serif;font-size:1.15rem;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.tool-card h3 i{color:var(--primary-peach)}
+
+textarea,.json-area{width:100%;font-family:'Space Grotesk',monospace;font-size:14px;padding:16px;border:1.5px solid var(--border-warm);border-radius:12px;background:var(--bg-warm);color:var(--text-dark);resize:vertical;min-height:200px;tab-size:2;line-height:1.5}
+textarea:focus,.json-area:focus{outline:none;border-color:var(--primary-peach);box-shadow:0 0 0 3px rgba(224,122,95,0.13)}
+label{font-size:.88rem;font-weight:600;display:block;margin-bottom:6px}
+
+/* INFO BAR */
+.info-bar{display:flex;flex-wrap:wrap;gap:16px;margin-top:12px;padding:12px 16px;background:var(--bg-warm);border:1px solid var(--border-warm);border-radius:12px;font-size:.85rem}
+.info-bar .info-item{display:flex;align-items:center;gap:6px}
+.info-bar .info-item i{color:var(--primary-peach)}
+
+/* INDENT SELECT */
+select{font-family:inherit;font-size:16px;padding:10px 14px;border:1.5px solid var(--border-warm);border-radius:10px;background:var(--bg-warm);color:var(--text-dark);cursor:pointer}
+select:focus{outline:none;border-color:var(--primary-peach)}
+
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.btn{padding:11px 22px;border:none;border-radius:12px;font-family:inherit;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .25s var(--ease-premium);display:inline-flex;align-items:center;gap:7px}
+.btn-primary{background:var(--peach-gradient);color:#fff;box-shadow:0 4px 12px var(--glow-peach)}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px var(--glow-peach)}
+.btn-outline{background:transparent;color:var(--primary-peach);border:1.5px solid var(--primary-peach)}
+.btn-outline:hover{background:var(--peach-light)}
+.btn-success{background:var(--success-btn);color:#fff;box-shadow:0 4px 12px rgba(42,157,143,0.3)}
+.btn-danger{background:#C5221F;color:#fff}
+
+.status-box{padding:12px 16px;border-radius:12px;font-size:.88rem;font-weight:500;display:none;align-items:center;gap:8px;margin-top:12px}
+.status-box.success{display:flex;background:#E6F4EA;color:#137333;border:1px solid #B7E1CD}
+.status-box.error{display:flex;background:#FDECEA;color:#C5221F;border:1px solid #F5C6CB}
+.status-box.loading{display:flex;background:var(--peach-light);color:var(--primary-peach);border:1px solid var(--border-warm)}
+
+/* TREE VIEW */
+.tree-view{background:var(--bg-warm);border:1.5px solid var(--border-warm);border-radius:12px;padding:16px;font-family:'Space Grotesk',monospace;font-size:.85rem;line-height:1.7;overflow-x:auto;max-height:500px;overflow-y:auto;display:none}
+.tree-view .key{color:#0550AE;font-weight:600}
+.tree-view .str{color:#0A3069}
+.tree-view .num{color:#0550AE}
+.tree-view .bool{color:#CF222E}
+.tree-view .null{color:#8250DF}
+.tree-view .bracket{color:var(--text-muted)}
+.tree-toggle{cursor:pointer;user-select:none}
+.tree-toggle::before{content:'▶';display:inline-block;width:16px;font-size:.7rem;transition:transform .15s}
+.tree-toggle.open::before{transform:rotate(90deg)}
+
+footer{background:var(--dark-footer);color:rgba(255,255,255,0.7);padding:60px 24px 24px}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+.footer-brand .logo{color:#fff;font-size:1.3rem;margin-bottom:12px;display:inline-flex}
+.footer-brand .logo span{background:var(--peach-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.footer-brand p{font-size:.88rem;line-height:1.6;color:rgba(255,255,255,0.5);max-width:300px}
+footer h4{color:#fff;font-size:.95rem;font-weight:700;margin-bottom:16px}
+footer ul{list-style:none}
+footer ul li{margin-bottom:8px}
+footer ul a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:.88rem;transition:color .2s}
+footer ul a:hover{color:var(--primary-peach)}
+.footer-bottom{max-width:1200px;margin:40px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-size:.82rem;color:rgba(255,255,255,0.4)}
+.footer-social{display:flex;gap:16px}
+.footer-social a{color:rgba(255,255,255,0.4);font-size:1.1rem;transition:color .2s}
+.footer-social a:hover{color:var(--primary-peach)}
+
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px}}
+@media(max-width:768px){
+  .nav-links{display:none}.hamburger{display:block}
+  .page-hero{padding:80px 20px 40px}.page-hero h1{font-size:1.9rem}.page-hero p{font-size:.95rem}
+  .main-container{padding:0 16px 48px}
+  .tool-card{padding:20px 16px}
+  textarea,.json-area{font-size:13px;min-height:160px}
+}
+@media(max-width:640px){
+  .logo{font-size:1.25rem}
+  .btn-row{flex-direction:column}.btn-row .btn{width:100%;justify-content:center}
+  .footer-grid{grid-template-columns:1fr}
+  .info-bar{flex-direction:column;gap:8px}
+}
+@media(max-width:400px){.logo{font-size:1.1rem}.page-hero h1{font-size:1.5rem}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
 </head>
 <body>
-    <header><a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a><nav class="nav-links"><a href="index.html">Home</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></nav></header>
-    <div class="page-container">
-        <div class="page-hero"><h1>JSON <span class="g">Formatter</span></h1><p>Beautify, validate, and minify JSON data instantly.</p></div>
-        <div class="tool-card">
-            <div class="btn-row">
-                <button class="btn-beautify" onclick="beautify()">✨ Beautify</button>
-                <button class="btn-minify" onclick="minify()">📦 Minify</button>
-                <button class="btn-validate" onclick="validate()">✅ Validate</button>
-                <button class="btn-copy" onclick="copyOutput()">📋 Copy Output</button>
-                <button class="btn-clear" onclick="clearAll()">🗑️ Clear</button>
-            </div>
-            <div class="editor-grid">
-                <div><span class="editor-label">Input JSON:</span><textarea id="jsonInput" placeholder='{"name": "John", "age": 30}'></textarea></div>
-                <div><span class="editor-label">Output:</span><textarea id="jsonOutput" readonly style="background:#f9f9f9"></textarea></div>
-            </div>
-            <div class="status-msg" id="statusMsg"></div>
-        </div>
-    </div>
-    <footer><div class="footer-grid"><div class="footer-col"><h3>⚡ ToolsMediaDownload</h3><p>Free tools for creators.</p></div><div class="footer-col"><h3>Tools</h3><ul><li><a href="text-tools.html">Text Tools</a></li><li><a href="base64-tool.html">Base64 Tool</a></li><li><a href="password-generator.html">Password Generator</a></li></ul></div><div class="footer-col"><h3>Company</h3><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="terms.html">Terms</a></li><li><a href="dmca.html">DMCA</a></li></ul></div></div><div class="copyright">© 2026 ToolsMediaDownload. All rights reserved.</div></footer>
-    <script>
-    function showStatus(msg,type){const s=document.getElementById('statusMsg');s.textContent=msg;s.className='status-msg active '+(type==='error'?'status-error':'status-success');setTimeout(()=>s.classList.remove('active'),4000)}
-    function beautify(){try{const j=JSON.parse(document.getElementById('jsonInput').value);document.getElementById('jsonOutput').value=JSON.stringify(j,null,2);showStatus('✅ JSON beautified successfully!','success')}catch(e){showStatus('❌ Invalid JSON: '+e.message,'error')}}
-    function minify(){try{const j=JSON.parse(document.getElementById('jsonInput').value);document.getElementById('jsonOutput').value=JSON.stringify(j);showStatus('✅ JSON minified successfully!','success')}catch(e){showStatus('❌ Invalid JSON: '+e.message,'error')}}
-    function validate(){try{JSON.parse(document.getElementById('jsonInput').value);showStatus('✅ Valid JSON!','success')}catch(e){showStatus('❌ Invalid JSON: '+e.message,'error')}}
-    function copyOutput(){const t=document.getElementById('jsonOutput').value;if(t)navigator.clipboard.writeText(t).then(()=>showStatus('📋 Copied to clipboard!','success'))}
-    function clearAll(){document.getElementById('jsonInput').value='';document.getElementById('jsonOutput').value=''}
-    </script>
+
+<header id="siteHeader">
+<div class="nav-wrap">
+<a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a>
+<nav aria-label="Main navigation">
+<ul class="nav-links">
+<li><a href="index.html">Home</a></li>
+<li class="dropdown"><a href="index.html#tools">Tools <i class="fas fa-chevron-down"></i></a>
+<div class="dropdown-menu">
+<a href="tiktok-downloader.html">TikTok Downloader</a><a href="instagram-downloader.html">Instagram Downloader</a><a href="facebook-downloader.html">Facebook Downloader</a><a href="image-converter.html">Image Converter</a><a href="image-resizer.html">Image Resizer</a><a href="gif-compressor.html">GIF Compressor</a><a href="video-to-gif.html">Video to GIF</a><a href="pdf-tools.html">PDF Tools</a><a href="qr-generator.html">QR Generator</a><a href="color-picker.html">Color Picker</a><a href="text-tools.html">Text Tools</a><a href="password-generator.html">Password Generator</a><a href="json-formatter.html">JSON Formatter</a><a href="base64-tool.html">Base64 Encoder</a>
+</div>
+</li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</nav>
+<button class="hamburger" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+</div>
+</header>
+
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<div class="mobile-panel" id="mobilePanel" role="dialog" aria-label="Mobile navigation">
+<div class="mobile-panel-head">
+<a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a>
+<button class="mobile-close" id="menuClose" aria-label="Close menu">✕</button>
+</div>
+<nav>
+<a href="index.html">Home</a><a href="blog.html">Blog</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+<div class="mp-divider"></div><div class="mp-label">Tools</div>
+<a href="tiktok-downloader.html">TikTok Downloader</a><a href="instagram-downloader.html">Instagram Downloader</a><a href="facebook-downloader.html">Facebook Downloader</a><a href="image-converter.html">Image Converter</a><a href="image-resizer.html">Image Resizer</a><a href="gif-compressor.html">GIF Compressor</a><a href="video-to-gif.html">Video to GIF</a><a href="pdf-tools.html">PDF Tools</a><a href="qr-generator.html">QR Generator</a><a href="color-picker.html">Color Picker</a><a href="text-tools.html">Text Tools</a><a href="password-generator.html">Password Generator</a><a href="json-formatter.html">JSON Formatter</a><a href="base64-tool.html">Base64 Encoder</a>
+<div class="mp-divider"></div><div class="mp-label">Legal</div>
+<a href="disclaimer.html">Disclaimer</a><a href="terms.html">Terms of Service</a><a href="dmca.html">DMCA Policy</a>
+</nav>
+</div>
+
+<section class="page-hero">
+<h1><i class="fas fa-code"></i> JSON <span>Formatter</span></h1>
+<p>Beautify, validate, and minify your JSON data instantly. Free online JSON tool with syntax highlighting and tree view.</p>
+</section>
+
+<main class="main-container">
+<div class="tool-card">
+<h3><i class="fas fa-edit"></i> Input JSON</h3>
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px">
+<label for="jsonInput" style="margin:0">Paste your JSON:</label>
+<div style="display:flex;align-items:center;gap:10px">
+<label for="indentSize" style="margin:0;font-size:.85rem">Indent:</label>
+<select id="indentSize">
+<option value="2" selected>2 spaces</option>
+<option value="4">4 spaces</option>
+<option value="\t">Tab</option>
+</select>
+</div>
+</div>
+<textarea id="jsonInput" class="json-area" placeholder='{"name": "example", "value": 42}' rows="10"></textarea>
+
+<div class="btn-row">
+<button class="btn btn-primary" onclick="formatJSON()"><i class="fas fa-magic"></i> Beautify</button>
+<button class="btn btn-primary" onclick="minifyJSON()"><i class="fas fa-compress-alt"></i> Minify</button>
+<button class="btn btn-outline" onclick="validateJSON()"><i class="fas fa-check-circle"></i> Validate</button>
+<button class="btn btn-outline" onclick="toggleTreeView()"><i class="fas fa-sitemap"></i> Tree View</button>
+<button class="btn btn-outline" onclick="loadSample()"><i class="fas fa-file-alt"></i> Sample</button>
+<button class="btn btn-outline" onclick="clearAll()"><i class="fas fa-eraser"></i> Clear</button>
+</div>
+<div class="status-box" id="statusJSON"></div>
+</div>
+
+<div class="tool-card">
+<h3><i class="fas fa-check-double"></i> Output</h3>
+<textarea id="jsonOutput" class="json-area" readonly rows="12" placeholder="Formatted JSON appears here…"></textarea>
+<div class="info-bar" id="jsonInfo" style="display:none">
+<div class="info-item"><i class="fas fa-check-circle"></i> <span id="infoValid"></span></div>
+<div class="info-item"><i class="fas fa-weight-hanging"></i> <span id="infoSize"></span></div>
+<div class="info-item"><i class="fas fa-layer-group"></i> <span id="infoDepth"></span></div>
+<div class="info-item"><i class="fas fa-key"></i> <span id="infoKeys"></span></div>
+</div>
+<div class="btn-row">
+<button class="btn btn-success" onclick="copyOutput()"><i class="fas fa-copy"></i> Copy Output</button>
+<button class="btn btn-outline" onclick="downloadJSON()"><i class="fas fa-download"></i> Download .json</button>
+</div>
+<div class="status-box" id="statusOutput"></div>
+</div>
+
+<div class="tool-card" id="treeCard" style="display:none">
+<h3><i class="fas fa-sitemap"></i> Tree View</h3>
+<div class="tree-view" id="treeView" style="display:block"></div>
+</div>
+</main>
+
+<footer>
+<div class="footer-grid">
+<div class="footer-brand">
+<a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a>
+<p>Free online tools for downloading, converting, and optimizing your media &amp; text content.</p>
+</div>
+<div><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="blog.html">Blog</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+<div><h4>Popular Tools</h4><ul><li><a href="gif-compressor.html">GIF Compressor</a></li><li><a href="image-converter.html">Image Converter</a></li><li><a href="instagram-downloader.html">Instagram Downloader</a></li><li><a href="tiktok-downloader.html">TikTok Downloader</a></li><li><a href="pdf-tools.html">PDF Tools</a></li></ul></div>
+<div><h4>Legal</h4><ul><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="terms.html">Terms of Service</a></li><li><a href="dmca.html">DMCA Policy</a></li></ul></div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2025 ToolsMediaDownload. All rights reserved.</p>
+<div class="footer-social">
+<a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+<a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+<a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+<a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+</div>
+</div>
+</footer>
+
+<script>
+const menuToggle=document.getElementById('menuToggle'),menuClose=document.getElementById('menuClose'),mobilePanel=document.getElementById('mobilePanel'),mobileOverlay=document.getElementById('mobileOverlay');
+function openMenu(){mobilePanel.classList.add('open');mobileOverlay.classList.add('open');menuToggle.setAttribute('aria-expanded','true');document.body.style.overflow='hidden'}
+function closeMenu(){mobilePanel.classList.remove('open');mobileOverlay.classList.remove('open');menuToggle.setAttribute('aria-expanded','false');document.body.style.overflow=''}
+menuToggle.addEventListener('click',openMenu);menuClose.addEventListener('click',closeMenu);mobileOverlay.addEventListener('click',closeMenu);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
+(function(){const h=document.getElementById('siteHeader');let t=false;function onScroll(){const s=window.scrollY>10;if(s!==t){t=s;h.classList.toggle('scrolled',s)}}window.addEventListener('scroll',()=>requestAnimationFrame(onScroll),{passive:true});onScroll()})();
+
+function showStatus(id,msg,type){const el=document.getElementById(id);if(!el)return;el.className='status-box '+type;el.innerHTML='<i class="fas fa-'+(type==='success'?'check-circle':type==='error'?'exclamation-circle':'spinner fa-spin')+'"></i>'+msg;el.style.display='flex';if(type!=='loading') setTimeout(()=>{el.className='status-box';el.style.display='none'},4000)}
+
+function getIndent(){const v=document.getElementById('indentSize').value;return v==='\t'?'\t':parseInt(v)}
+
+function formatJSON(){
+  const input=document.getElementById('jsonInput').value.trim();
+  if(!input){showStatus('statusJSON','Please paste some JSON','error');return}
+  try{
+    const parsed=JSON.parse(input);
+    const formatted=JSON.stringify(parsed,null,getIndent());
+    document.getElementById('jsonOutput').value=formatted;
+    updateInfo(parsed,formatted);
+    showStatus('statusJSON','JSON formatted successfully!','success');
+  }catch(e){
+    document.getElementById('jsonOutput').value='';
+    showStatus('statusJSON','Invalid JSON: '+e.message,'error');
+  }
+}
+
+function minifyJSON(){
+  const input=document.getElementById('jsonInput').value.trim();
+  if(!input){showStatus('statusJSON','Please paste some JSON','error');return}
+  try{
+    const parsed=JSON.parse(input);
+    const minified=JSON.stringify(parsed);
+    document.getElementById('jsonOutput').value=minified;
+    updateInfo(parsed,minified);
+    showStatus('statusJSON','JSON minified! Saved '+(input.length-minified.length)+' chars','success');
+  }catch(e){showStatus('statusJSON','Invalid JSON: '+e.message,'error')}
+}
+
+function validateJSON(){
+  const input=document.getElementById('jsonInput').value.trim();
+  if(!input){showStatus('statusJSON','Please paste some JSON','error');return}
+  try{
+    JSON.parse(input);
+    showStatus('statusJSON','✅ Valid JSON!','success');
+  }catch(e){showStatus('statusJSON','❌ Invalid JSON: '+e.message,'error')}
+}
+
+function getDepth(obj,d=0){
+  if(typeof obj!=='object'||obj===null) return d;
+  let max=d;
+  for(const k in obj){
+    if(Object.prototype.hasOwnProperty.call(obj,k)){
+      const nd=getDepth(obj[k],d+1);
+      if(nd>max)max=nd;
+    }
+  }
+  return max;
+}
+
+function countKeys(obj){
+  let count=0;
+  if(typeof obj!=='object'||obj===null) return 0;
+  if(Array.isArray(obj)){obj.forEach(v=>{count+=countKeys(v)})}
+  else{for(const k in obj){if(Object.prototype.hasOwnProperty.call(obj,k)){count++;count+=countKeys(obj[k])}}}
+  return count;
+}
+
+function updateInfo(parsed,text){
+  const bar=document.getElementById('jsonInfo');
+  bar.style.display='flex';
+  document.getElementById('infoValid').textContent='Valid JSON';
+  document.getElementById('infoSize').textContent=formatBytes(new Blob([text]).size);
+  document.getElementById('infoDepth').textContent='Depth: '+getDepth(parsed);
+  document.getElementById('infoKeys').textContent=countKeys(parsed)+' keys';
+}
+
+function formatBytes(b){if(b===0)return'0 B';const k=1024,s=['B','KB','MB'];const i=Math.floor(Math.log(b)/Math.log(k));return parseFloat((b/Math.pow(k,i)).toFixed(1))+' '+s[i]}
+
+function copyOutput(){
+  const t=document.getElementById('jsonOutput').value;
+  if(!t){showStatus('statusOutput','Nothing to copy','error');return}
+  navigator.clipboard.writeText(t).then(()=>showStatus('statusOutput','Copied!','success')).catch(()=>showStatus('statusOutput','Copy failed','error'));
+}
+
+function downloadJSON(){
+  const t=document.getElementById('jsonOutput').value;
+  if(!t){showStatus('statusOutput','Nothing to download','error');return}
+  const blob=new Blob([t],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='formatted.json';a.click();URL.revokeObjectURL(a.href);
+  showStatus('statusOutput','Downloaded!','success');
+}
+
+function clearAll(){
+  document.getElementById('jsonInput').value='';
+  document.getElementById('jsonOutput').value='';
+  document.getElementById('jsonInfo').style.display='none';
+  document.getElementById('treeCard').style.display='none';
+}
+
+function loadSample(){
+  const sample={
+    "name":"ToolsMediaDownload",
+    "version":"2.0",
+    "tools":["TikTok Downloader","Image Converter","PDF Tools","JSON Formatter"],
+    "stats":{"users":50000,"rating":4.8,"free":true},
+    "features":[{"name":"Fast","description":"Lightning speed"},{"name":"Free","description":"No hidden costs"}],
+    "url":"https://toolsmediadownload.com"
+  };
+  document.getElementById('jsonInput').value=JSON.stringify(sample,null,2);
+  showStatus('statusJSON','Sample JSON loaded!','success');
+}
+
+/* TREE VIEW */
+function toggleTreeView(){
+  const input=document.getElementById('jsonInput').value.trim();
+  const card=document.getElementById('treeCard');
+  if(card.style.display==='block'){card.style.display='none';return}
+  if(!input){showStatus('statusJSON','Please paste JSON first','error');return}
+  try{
+    const parsed=JSON.parse(input);
+    document.getElementById('treeView').innerHTML=buildTree(parsed,'root');
+    card.style.display='block';
+    card.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }catch(e){showStatus('statusJSON','Invalid JSON: '+e.message,'error')}
+}
+
+function buildTree(obj,key,depth=0){
+  const indent='  '.repeat(depth);
+  if(obj===null) return `<div>${indent}<span class="key">${escHTML(key)}</span>: <span class="null">null</span></div>`;
+  if(typeof obj==='string') return `<div>${indent}<span class="key">${escHTML(key)}</span>: <span class="str">"${escHTML(obj)}"</span></div>`;
+  if(typeof obj==='number') return `<div>${indent}<span class="key">${escHTML(key)}</span>: <span class="num">${obj}</span></div>`;
+  if(typeof obj==='boolean') return `<div>${indent}<span class="key">${escHTML(key)}</span>: <span class="bool">${obj}</span></div>`;
+  
+  const isArr=Array.isArray(obj);
+  const bracket=isArr?['[',']']:['{','}'];
+  const entries=isArr?obj.entries():Object.entries(obj);
+  const id='tree_'+Math.random().toString(36).substr(2,6);
+  let html=`<div>${indent}<span class="tree-toggle open" onclick="this.classList.toggle('open');document.getElementById('${id}').style.display=this.classList.contains('open')?'block':'none'"><span class="key">${escHTML(key)}</span></span> <span class="bracket">${bracket[0]}</span></div>`;
+  html+=`<div id="${id}">`;
+  for(const [k,v] of entries) html+=buildTree(v,String(k),depth+1);
+  html+=`</div><div>${indent}<span class="bracket">${bracket[1]}</span></div>`;
+  return html;
+}
+
+function escHTML(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+</script>
 </body>
 </html>
