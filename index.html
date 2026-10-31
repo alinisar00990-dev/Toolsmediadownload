@@ -14,7 +14,7 @@
 <meta name="twitter:title" content="ToolsMediaDownload - Free Online Tools for Creators">
 <meta name="twitter:description" content="Free browser-based tools for creators. No signup needed.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-<meta name="theme-color" content="#E07A5F">
+<meta name="theme-color" content="#071638">
 
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json">
@@ -23,12 +23,7 @@
   "@type": "WebSite",
   "name": "ToolsMediaDownload",
   "url": "https://toolsmediadownload.com/",
-  "description": "Free browser-based tools for creators, developers & everyone.",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://toolsmediadownload.com/?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
+  "description": "Free browser-based tools for creators, developers & everyone."
 }
 </script>
 <script type="application/ld+json">
@@ -56,92 +51,83 @@
 </script>
 
 <style>
+/* ═══════════════════════════════════════════
+   DESIGN 4 – ELEGANT DARK-LIGHT
+   Color System
+   ═══════════════════════════════════════════ */
 :root {
-  --bg-warm: #FAF5EE;
-  --card-bg: #FFFFFF;
-  --primary-peach: #E07A5F;
-  --peach-gradient: linear-gradient(135deg, #FF9E7D 0%, #E07A5F 50%, #D95D39 100%);
-  --text-dark: #2C221E;
-  --text-muted: #5C534E;
-  --border-warm: #EFE3D8;
-  --success-btn: #2A9D8F;
-  --dark-footer: #1A1615;
-  --glow-peach: rgba(224, 122, 95, 0.4);
+  /* Primary Palette */
+  --primary-navy: #071638;
+  --deep-navy: #0B1B3A;
+  --dark-blue: #102A5C;
+  --royal-blue: #0866F5;
+  --bright-blue: #287BFF;
+  --golden-yellow: #FFB000;
+  --golden-orange: #F59E0B;
+  --warm-cream: #FFF9F1;
+  --pure-white: #FFFFFF;
+  --soft-blue: #F0F5FF;
+  --light-border: #E3EAF7;
+  --text-primary: #0B1736;
+  --text-secondary: #53627D;
 
-  /* Premium easing & shadows */
-  --ease-premium: cubic-bezier(0.4, 0, 0.2, 1);
-  --shadow-sm: 0 1px 2px rgba(44, 34, 30, 0.04), 0 2px 6px rgba(44, 34, 30, 0.03);
-  --shadow-md: 0 2px 4px rgba(44, 34, 30, 0.04), 0 8px 20px rgba(44, 34, 30, 0.05);
-  --shadow-lg: 0 4px 12px rgba(44, 34, 30, 0.06), 0 20px 40px rgba(44, 34, 30, 0.08);
+  /* Semantic */
+  --success-green: #10B981;
+  --danger-red: #EF4444;
 
-  /* GIF Compressor card */
-  --gif-compress-gradient: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #A78BFA 100%);
-  --gif-compress-solid: #7C3AED;
-  --gif-compress-glow: rgba(139, 92, 246, 0.4);
+  /* Easing */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Video to GIF card */
-  --video-gif-gradient: linear-gradient(135deg, #06B6D4 0%, #0891B2 50%, #0E7490 100%);
-  --video-gif-solid: #0891B2;
-  --video-gif-glow: rgba(6, 182, 212, 0.4);
+  /* Shadows */
+  --shadow-sm: 0 4px 12px rgba(7, 22, 56, 0.06);
+  --shadow-md: 0 8px 24px rgba(7, 22, 56, 0.09);
+  --shadow-lg: 0 15px 40px rgba(7, 22, 56, 0.12);
+  --shadow-gold: 0 8px 24px rgba(255, 176, 0, 0.3);
+  --shadow-blue: 0 8px 24px rgba(8, 102, 245, 0.2);
+
+  /* Radii */
+  --r-sm: 12px;
+  --r-md: 18px;
+  --r-lg: 22px;
+  --r-xl: 28px;
+  --r-pill: 999px;
 }
 
+/* ═══ Reset ═══ */
 *, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
 }
-
-html {
-  scroll-behavior: smooth;
-}
-
+html { scroll-behavior: smooth; }
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: var(--bg-warm);
-  color: var(--text-dark);
+  background: var(--warm-cream);
+  color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
-  font-feature-settings: "ss01", "cv11", "kern";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-/* Premium selection */
-::selection {
-  background: rgba(224, 122, 95, 0.2);
-  color: var(--text-dark);
-}
-
-/* Premium scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-warm);
-}
+a { text-decoration: none; color: inherit; }
+::selection { background: rgba(8, 102, 245, 0.2); color: var(--primary-navy); }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--warm-cream); }
 ::-webkit-scrollbar-thumb {
-  background: rgba(224, 122, 95, 0.3);
+  background: var(--light-border);
   border-radius: 10px;
-  border: 2px solid var(--bg-warm);
+  border: 2px solid var(--warm-cream);
 }
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(224, 122, 95, 0.5);
-}
+::-webkit-scrollbar-thumb:hover { background: var(--royal-blue); }
 
-/* Skip Link */
+/* ═══ Skip Link ═══ */
 .skip-link {
   position: absolute;
   top: -100%;
   left: 1rem;
-  background: var(--primary-peach);
-  color: #fff;
+  background: var(--primary-navy);
+  color: var(--pure-white);
   padding: 0.6rem 1.2rem;
   border-radius: 0 0 8px 8px;
   z-index: 999;
@@ -149,653 +135,966 @@ a {
   font-size: 0.95rem;
   transition: top 0.2s;
 }
-.skip-link:focus {
-  top: 0;
-}
+.skip-link:focus { top: 0; }
 
-/* Header — Frosted Glass */
+/* ═══════════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════════ */
 header {
   position: sticky;
   top: 0;
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 1px solid rgba(239, 227, 216, 0.6);
+  border-bottom: 1px solid var(--light-border);
   z-index: 100;
-  padding: 0.9rem 1.5rem;
+  padding: 0.85rem 1.5rem;
 }
 .nav-wrap {
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1.5rem;
 }
 .logo {
-  font-size: 1.4rem;
+  font-size: 1.35rem;
   font-weight: 800;
-  color: var(--text-dark);
+  color: var(--primary-navy);
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.4rem;
   white-space: nowrap;
   letter-spacing: -0.02em;
 }
-.logo span {
-  background: var(--peach-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.logo-bolt {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: var(--golden-yellow);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(255, 176, 0, 0.35);
+  font-size: 1.1rem;
 }
-nav[aria-label="Main navigation"] .nav-links {
+.logo-accent { color: var(--royal-blue); }
+
+/* Nav links */
+.nav-links {
   display: flex;
-  gap: 2rem;
+  gap: 0.4rem;
   list-style: none;
+  align-items: center;
 }
 .nav-links a {
-  color: var(--text-dark);
+  color: var(--primary-navy);
   font-weight: 500;
-  transition: color 0.3s var(--ease-premium);
   font-size: 0.95rem;
-  position: relative;
-}
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--peach-gradient);
-  border-radius: 2px;
-  transition: width 0.3s var(--ease-premium);
-}
-.nav-links a:hover::after,
-.nav-links a:focus-visible::after {
-  width: 100%;
+  padding: 0.55rem 1rem;
+  border-radius: var(--r-pill);
+  transition: all 0.25s var(--ease);
+  display: inline-block;
 }
 .nav-links a:hover,
 .nav-links a:focus-visible {
-  color: var(--primary-peach);
+  color: var(--royal-blue);
+  background: var(--soft-blue);
 }
-.hamburger {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.6rem;
-  cursor: pointer;
-  color: var(--text-dark);
-  padding: 0.25rem;
-}
-.hamburger:focus-visible {
-  outline: 2px solid var(--primary-peach);
-  outline-offset: 2px;
-  border-radius: 4px;
+.nav-links a[aria-current="page"] {
+  background: var(--royal-blue);
+  color: var(--pure-white);
 }
 
-/* Mobile Menu */
-.mobile-menu {
+/* Tools Dropdown */
+.has-dropdown { position: relative; }
+.dropdown-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  color: var(--primary-navy);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.55rem 1rem;
+  border-radius: var(--r-pill);
+  transition: all 0.25s var(--ease);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.dropdown-toggle:hover,
+.dropdown-toggle[aria-expanded="true"] {
+  color: var(--royal-blue);
+  background: var(--soft-blue);
+}
+.dropdown-toggle svg {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.25s var(--ease);
+}
+.dropdown-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  min-width: 240px;
+  background: var(--pure-white);
+  border: 1px solid var(--light-border);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-lg);
+  padding: 0.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease), visibility 0.25s var(--ease);
+  list-style: none;
+}
+.dropdown-menu.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+.dropdown-menu li { margin: 0; }
+.dropdown-menu a {
+  display: block;
+  padding: 0.65rem 0.9rem;
+  border-radius: 10px;
+  color: var(--primary-navy);
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: all 0.2s var(--ease);
+}
+.dropdown-menu a:hover,
+.dropdown-menu a:focus-visible {
+  background: var(--soft-blue);
+  color: var(--royal-blue);
+}
+
+/* Header CTA */
+.header-cta {
+  background: var(--golden-yellow);
+  color: var(--primary-navy);
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 0.65rem 1.4rem;
+  border-radius: var(--r-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: var(--shadow-gold);
+  transition: all 0.25s var(--ease);
+  border: none;
+  cursor: pointer;
+}
+.header-cta:hover {
+  background: var(--golden-orange);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(255, 176, 0, 0.4);
+}
+.header-cta:active { transform: scale(0.97); }
+.header-cta:focus-visible {
+  outline: 3px solid var(--primary-navy);
+  outline-offset: 2px;
+}
+
+.hamburger {
   display: none;
+  background: var(--pure-white);
+  border: 1px solid var(--light-border);
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: var(--primary-navy);
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+}
+.hamburger:focus-visible {
+  outline: 2px solid var(--royal-blue);
+  outline-offset: 2px;
+}
+
+/* ═══ Mobile Menu ═══ */
+.mobile-menu {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(26, 22, 21, 0.5);
+  inset: 0;
+  background: rgba(7, 22, 56, 0.5);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   z-index: 200;
+  visibility: hidden;
   opacity: 0;
-  transition: opacity 0.3s var(--ease-premium);
+  transition: opacity 0.3s var(--ease), visibility 0.3s var(--ease);
 }
-.mobile-menu.active {
-  display: block;
-  opacity: 1;
-}
+.mobile-menu.active { visibility: visible; opacity: 1; }
 .mobile-menu-panel {
-  background: #fff;
+  background: var(--pure-white);
   width: 85%;
-  max-width: 320px;
+  max-width: 340px;
   height: 100%;
-  padding: 2rem 1.5rem;
+  padding: 1.5rem;
   transform: translateX(-100%);
-  transition: transform 0.35s var(--ease-premium);
+  transition: transform 0.35s var(--ease);
   overflow-y: auto;
-  box-shadow: 20px 0 60px rgba(0, 0, 0, 0.15);
+  box-shadow: 20px 0 60px rgba(7, 22, 56, 0.2);
 }
-.mobile-menu.active .mobile-menu-panel {
-  transform: translateX(0);
+.mobile-menu.active .mobile-menu-panel { transform: translateX(0); }
+.mobile-menu-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--light-border);
 }
 .mobile-menu-panel .close-btn {
-  background: none;
+  background: var(--soft-blue);
   border: none;
-  font-size: 2rem;
-  float: right;
+  font-size: 1.5rem;
   cursor: pointer;
-  color: var(--text-dark);
-  padding: 0.25rem;
+  color: var(--primary-navy);
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .mobile-menu-panel .close-btn:focus-visible {
-  outline: 2px solid var(--primary-peach);
+  outline: 2px solid var(--royal-blue);
   outline-offset: 2px;
-  border-radius: 4px;
 }
-.mobile-menu-panel ul {
-  list-style: none;
-  margin-top: 3rem;
-}
-.mobile-menu-panel li {
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--border-warm);
-}
+.mobile-menu-panel ul { list-style: none; }
+.mobile-menu-panel li { margin-bottom: 0.3rem; }
 .mobile-menu-panel a {
-  font-size: 1.1rem;
-  font-weight: 500;
   display: block;
-  transition: transform 0.25s var(--ease-premium), color 0.25s var(--ease-premium);
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--primary-navy);
+  transition: all 0.25s var(--ease);
 }
 .mobile-menu-panel a:hover,
 .mobile-menu-panel a:focus-visible {
-  color: var(--primary-peach);
-  transform: translateX(4px);
+  background: var(--soft-blue);
+  color: var(--royal-blue);
+}
+.mobile-menu-panel .mobile-cta {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  background: var(--golden-yellow);
+  color: var(--primary-navy);
+  font-weight: 700;
+  padding: 0.85rem;
+  border-radius: var(--r-pill);
+}
+.mobile-section-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  padding: 1rem 1rem 0.5rem;
+  font-weight: 600;
 }
 
-/* Hero — Premium Gradient Mesh */
+/* ═══════════════════════════════════════════
+   HERO — Two Column
+   ═══════════════════════════════════════════ */
 .hero {
-  background: var(--peach-gradient);
-  color: #fff;
-  padding: 6rem 1.5rem;
-  text-align: center;
+  background: var(--warm-cream);
+  padding: 4.5rem 1.5rem 5rem;
   position: relative;
   overflow: hidden;
 }
 .hero::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 20% 20%, rgba(255, 255, 255, 0.25) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 80%, rgba(255, 158, 125, 0.3) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 100%, rgba(217, 93, 57, 0.2) 0%, transparent 60%);
+  top: -200px; left: -150px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(8, 102, 245, 0.1), transparent 70%);
   pointer-events: none;
 }
-.hero > * {
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -150px; right: -100px;
+  width: 450px; height: 450px;
+  background: radial-gradient(circle, rgba(255, 176, 0, 0.12), transparent 70%);
+  pointer-events: none;
+}
+.hero-wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 4rem;
+  align-items: center;
   position: relative;
   z-index: 1;
 }
-.hero h1 {
-  font-size: 3rem;
-  margin-bottom: 1.2rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
-}
-.hero p {
-  font-size: 1.2rem;
-  max-width: 680px;
-  margin: 0 auto 1.8rem;
-  opacity: 0.96;
-  font-weight: 400;
-  letter-spacing: -0.005em;
-}
-.hero-badges {
-  display: flex;
-  justify-content: center;
-  gap: 0.8rem;
-  flex-wrap: wrap;
-  margin-top: 2.2rem;
-}
-.badge-pill {
-  background: rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 0.55rem 1.25rem;
-  border-radius: 30px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #fff;
+.hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s var(--ease-premium);
+  background: var(--soft-blue);
+  color: var(--primary-navy);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: var(--r-pill);
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(8, 102, 245, 0.15);
 }
-.badge-pill:hover {
+.hero-badge-icon { color: var(--golden-yellow); font-size: 1rem; }
+.hero h1 {
+  font-size: 3.4rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--primary-navy);
+  margin-bottom: 1.3rem;
+}
+.hero h1 .accent-blue { color: var(--royal-blue); }
+.hero h1 .accent-gold { color: var(--golden-orange); }
+.hero p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 540px;
+  margin-bottom: 2rem;
+  line-height: 1.65;
+}
+.hero-ctas {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.95rem 1.8rem;
+  border-radius: var(--r-pill);
+  font-weight: 700;
+  font-size: 0.98rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+.btn-primary {
+  background: var(--golden-yellow);
+  color: var(--primary-navy);
+  box-shadow: var(--shadow-gold);
+}
+.btn-primary:hover {
+  background: var(--golden-orange);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(255, 176, 0, 0.4);
+}
+.btn-primary:active { transform: scale(0.97); }
+.btn-outline {
+  background: var(--pure-white);
+  color: var(--primary-navy);
+  border: 1.5px solid var(--light-border);
+}
+.btn-outline:hover {
+  background: var(--soft-blue);
+  border-color: var(--royal-blue);
+  color: var(--royal-blue);
   transform: translateY(-2px);
 }
+.btn:focus-visible {
+  outline: 3px solid var(--royal-blue);
+  outline-offset: 3px;
+}
 
-/* Sections */
-section {
-  padding: 5.5rem 1.5rem;
+/* Hero Visual — Floating Tool Cards */
+.hero-visual {
+  position: relative;
+  height: 440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.section-alt {
-  background: #fff;
+.hero-visual-bg {
+  position: absolute;
+  width: 85%;
+  height: 85%;
+  background: linear-gradient(135deg, var(--soft-blue), rgba(255, 176, 0, 0.08));
+  border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%;
+  animation: morph 12s ease-in-out infinite;
 }
-.container {
-  max-width: 1200px;
+@keyframes morph {
+  0%, 100% { border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%; }
+  50% { border-radius: 55% 45% 40% 60% / 45% 55% 50% 50%; }
+}
+.float-card {
+  position: absolute;
+  background: var(--pure-white);
+  border-radius: var(--r-md);
+  padding: 1rem 1.2rem;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--light-border);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  animation: float 6s ease-in-out infinite;
+}
+.float-card .fc-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+.float-card .fc-text {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--primary-navy);
+  white-space: nowrap;
+}
+.float-card .fc-sub {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  display: block;
+  font-weight: 500;
+}
+.fc-1 { top: 10%; left: 8%; animation-delay: 0s; }
+.fc-1 .fc-icon { background: linear-gradient(135deg, #6366F1, #8B5CF6); }
+.fc-2 { top: 42%; right: 5%; animation-delay: 1.5s; }
+.fc-2 .fc-icon { background: linear-gradient(135deg, #0891B2, #06B6D4); }
+.fc-3 { bottom: 15%; left: 15%; animation-delay: 3s; }
+.fc-3 .fc-icon { background: var(--golden-yellow); color: var(--primary-navy); }
+.fc-4 { top: 20%; right: 15%; animation-delay: 2s; }
+.fc-4 .fc-icon { background: var(--royal-blue); }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+/* ═══════════════════════════════════════════
+   STATISTICS BAR
+   ═══════════════════════════════════════════ */
+.stats-section {
+  padding: 0 1.5rem;
+  margin-top: -3rem;
+  position: relative;
+  z-index: 5;
+}
+.stats-bar {
+  max-width: 1100px;
   margin: 0 auto;
+  background: var(--pure-white);
+  border: 1px solid var(--light-border);
+  border-radius: var(--r-xl);
+  padding: 2rem 2.5rem;
+  box-shadow: var(--shadow-lg);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  position: relative;
+}
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem;
+  position: relative;
+}
+.stat-item + .stat-item::before {
+  content: '';
+  position: absolute;
+  left: -0.75rem;
+  top: 10%;
+  bottom: 10%;
+  width: 1px;
+  background: var(--light-border);
+}
+.stat-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--golden-yellow), var(--golden-orange));
+  color: var(--primary-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(255, 176, 0, 0.25);
+}
+.stat-number {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--primary-navy);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════
+   SECTIONS
+   ═══════════════════════════════════════════ */
+section.content-section { padding: 5.5rem 1.5rem; }
+.section-alt { background: var(--pure-white); }
+.container { max-width: 1240px; margin: 0 auto; }
+.section-head {
+  text-align: center;
+  margin-bottom: 3.5rem;
 }
 .section-title {
-  font-size: 2.2rem;
+  font-size: 2.3rem;
   font-weight: 800;
-  text-align: center;
-  margin-bottom: 0.75rem;
+  color: var(--primary-navy);
   letter-spacing: -0.025em;
   line-height: 1.2;
+  margin-bottom: 0.75rem;
 }
+.section-title .highlight { color: var(--royal-blue); }
+.section-title .highlight-gold { color: var(--golden-orange); }
 .section-sub {
-  text-align: center;
-  color: var(--text-muted);
-  margin: 0 auto 3.5rem;
+  color: var(--text-secondary);
   font-size: 1.05rem;
-  max-width: 580px;
-  letter-spacing: -0.005em;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.section-underline {
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--golden-yellow);
+  border-radius: 2px;
+  margin: 1rem auto 0;
 }
 
+/* ═══════════════════════════════════════════
+   TOOL CARDS
+   ═══════════════════════════════════════════ */
 .tools-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
   gap: 1.75rem;
 }
-
-/* Premium Tool Card */
 .tool-card {
-  background: var(--card-bg);
-  border: 1px solid transparent;
-  border-radius: 18px;
-  padding: 2rem 1.75rem;
-  transition: all 0.4s var(--ease-premium);
+  background: var(--pure-white);
+  border: 1px solid var(--light-border);
+  border-radius: var(--r-lg);
+  padding: 1.9rem 1.75rem;
+  transition: all 0.3s var(--ease);
   position: relative;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-sm);
 }
-.tool-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
-  opacity: 0;
-  transition: opacity 0.4s var(--ease-premium);
-}
 .tool-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px var(--glow-peach), var(--shadow-md);
-  border-color: rgba(224, 122, 95, 0.3);
-}
-.tool-card:hover::before {
-  opacity: 1;
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--royal-blue);
 }
 .tool-card:focus-within {
-  box-shadow: 0 0 0 3px var(--glow-peach), var(--shadow-md);
+  box-shadow: 0 0 0 3px rgba(8, 102, 245, 0.25), var(--shadow-md);
 }
-
-/* Special card hover glows */
-.tool-card--gif-compress:hover {
-  box-shadow: 0 20px 40px var(--gif-compress-glow), var(--shadow-md);
-  border-color: rgba(139, 92, 246, 0.3);
-}
-.tool-card--gif-compress:focus-within {
-  box-shadow: 0 0 0 3px var(--gif-compress-glow), var(--shadow-md);
-}
-.tool-card--video-gif:hover {
-  box-shadow: 0 20px 40px var(--video-gif-glow), var(--shadow-md);
-  border-color: rgba(6, 182, 212, 0.3);
-}
-.tool-card--video-gif:focus-within {
-  box-shadow: 0 0 0 3px var(--video-gif-glow), var(--shadow-md);
-}
-
 .tool-tag {
   position: absolute;
   top: 1rem;
   right: 1rem;
   padding: 0.3rem 0.75rem;
-  border-radius: 20px;
+  border-radius: var(--r-pill);
   font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  letter-spacing: 0.05em;
 }
-.tag-popular { background: #D1FAE5; color: #065F46; }
-.tag-new { background: #FEE4D6; color: #9A3412; }
-.tag-trending { background: #DBEAFE; color: #1E40AF; }
-.tag-free { background: #D1FAE5; color: #065F46; }
-.tag-hot { background: #FEE2E2; color: #991B1B; }
+.tag-popular { background: #DBEAFE; color: #1E40AF; }
+.tag-new     { background: #FEF3C7; color: #92400E; }
+.tag-trending{ background: #E0E7FF; color: #4338CA; }
+.tag-free    { background: #D1FAE5; color: #065F46; }
+.tag-hot     { background: #FEE2E2; color: #991B1B; }
 
 .tool-icon-wrap {
-  width: 72px;
-  height: 72px;
-  border-radius: 18px;
-  background: var(--bg-warm);
+  width: 68px;
+  height: 68px;
+  border-radius: var(--r-md);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1.3rem;
-  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6), 0 2px 8px rgba(44, 34, 30, 0.04);
-  transition: transform 0.4s var(--ease-premium);
+  transition: transform 0.3s var(--ease);
 }
-.tool-card:hover .tool-icon-wrap {
-  transform: scale(1.05);
-}
-.tool-icon-wrap svg {
-  width: 40px;
-  height: 40px;
-}
+.tool-card:hover .tool-icon-wrap { transform: scale(1.08) rotate(-3deg); }
+.tool-icon-wrap svg { width: 36px; height: 36px; }
 
-/* Special icon backgrounds */
-.tool-card--gif-compress .tool-icon-wrap {
-  background: linear-gradient(135deg, #EDE9FE, #DDD6FE);
-}
-.tool-card--video-gif .tool-icon-wrap {
-  background: linear-gradient(135deg, #CFFAFE, #A5F3FC);
-}
+/* Per-tool icon backgrounds */
+.ic-gif    { background: linear-gradient(135deg, #EDE9FE, #DDD6FE); }
+.ic-video  { background: linear-gradient(135deg, #CFFAFE, #A5F3FC); }
+.ic-img    { background: linear-gradient(135deg, #EDE9FE, #C7D2FE); }
+.ic-pdf    { background: linear-gradient(135deg, #FEE2E2, #FECACA); }
+.ic-qr     { background: linear-gradient(135deg, #DBEAFE, #BFDBFE); }
+.ic-text   { background: linear-gradient(135deg, #D1FAE5, #A7F3D0); }
+.ic-ig     { background: linear-gradient(135deg, #FEE4D6, #FBCFE8); }
+.ic-fb     { background: linear-gradient(135deg, #DBEAFE, #BFDBFE); }
+.ic-tiktok { background: linear-gradient(135deg, #F3E8FF, #E0E7FF); }
 
 .tool-card h3 {
-  font-size: 1.3rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  color: var(--primary-navy);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.015em;
 }
 .tool-card p {
-  color: var(--text-muted);
-  margin-bottom: 1.3rem;
-  font-size: 0.98rem;
+  color: var(--text-secondary);
+  font-size: 0.96rem;
   flex-grow: 1;
-  line-height: 1.55;
+  margin-bottom: 1.4rem;
+  line-height: 1.6;
 }
-
 .tool-btn {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.4rem;
   width: 100%;
   height: 46px;
   padding: 0 1rem;
-  border-radius: 10px;
-  color: #fff;
+  border-radius: var(--r-sm);
   font-weight: 700;
-  transition: all 0.3s var(--ease-premium);
-  font-size: 0.98rem;
-  line-height: 1;
-  margin-top: auto;
+  font-size: 0.95rem;
+  transition: all 0.25s var(--ease);
   border: none;
   cursor: pointer;
+  margin-top: auto;
+  background: var(--soft-blue);
+  color: var(--royal-blue);
   letter-spacing: 0.01em;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 4px 12px rgba(0, 0, 0, 0.08);
 }
-.tool-btn:hover,
-.tool-btn:active {
+.tool-btn:hover {
+  background: var(--royal-blue);
+  color: var(--pure-white);
   transform: translateY(-1px);
-  filter: brightness(1.08);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 8px 20px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-blue);
 }
 .tool-btn:focus-visible {
-  outline: 3px solid var(--text-dark);
+  outline: 3px solid var(--royal-blue);
   outline-offset: 2px;
 }
+.tool-btn-gold {
+  background: var(--golden-yellow);
+  color: var(--primary-navy);
+}
+.tool-btn-gold:hover {
+  background: var(--golden-orange);
+  color: var(--primary-navy);
+  box-shadow: var(--shadow-gold);
+}
+.tool-btn svg { width: 16px; height: 16px; }
 
-/* Button Colors */
-.btn-instagram { background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF); }
-.btn-facebook { background: #1877F2; }
-.btn-tiktok { background: linear-gradient(45deg, #000, #25F4EE, #FE2C55); }
-.btn-gif-compress { background: var(--gif-compress-gradient); }
-.btn-video-gif { background: var(--video-gif-gradient); }
-.btn-pdf { background: #DC2626; }
-.btn-convert { background: #7C3AED; }
-.btn-resize { background: #0D9488; }
-.btn-qr { background: #2563EB; }
-.btn-color { background: linear-gradient(45deg, #EC4899, #8B5CF6); }
-.btn-text { background: #16A34A; }
-.btn-password { background: #CA8A04; }
-.btn-json { background: #374151; }
-.btn-base64 { background: #7E22CE; }
-
-/* Features */
+/* ═══════════════════════════════════════════
+   FEATURES
+   ═══════════════════════════════════════════ */
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 2rem;
 }
 .feature {
+  background: var(--pure-white);
+  border: 1px solid var(--light-border);
+  border-radius: var(--r-lg);
+  padding: 2rem 1.75rem;
   text-align: center;
-  padding: 1.5rem;
-  transition: transform 0.3s var(--ease-premium);
+  transition: all 0.3s var(--ease);
+  box-shadow: var(--shadow-sm);
 }
 .feature:hover {
   transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--royal-blue);
 }
-.feature-icon {
-  font-size: 2.75rem;
-  margin-bottom: 1rem;
-  display: inline-block;
-  filter: drop-shadow(0 4px 12px rgba(224, 122, 95, 0.25));
+.feature-icon-wrap {
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 1.2rem;
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--soft-blue), #fff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  box-shadow: 0 4px 12px rgba(8, 102, 245, 0.15);
 }
 .feature h3 {
+  color: var(--primary-navy);
   font-size: 1.2rem;
+  font-weight: 700;
   margin-bottom: 0.5rem;
-  letter-spacing: -0.02em;
 }
 .feature p {
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-size: 0.95rem;
 }
 
-/* Blog Preview */
-.blog-preview-grid {
+/* ═══════════════════════════════════════════
+   BLOG PREVIEW
+   ═══════════════════════════════════════════ */
+.blog-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.75rem;
 }
 .blog-card {
-  background: #fff;
-  border-radius: 16px;
+  background: var(--pure-white);
+  border: 1px solid var(--light-border);
+  border-radius: var(--r-lg);
   overflow: hidden;
-  border: 1px solid transparent;
-  transition: all 0.4s var(--ease-premium);
   display: flex;
   flex-direction: column;
+  transition: all 0.3s var(--ease);
   box-shadow: var(--shadow-sm);
 }
 .blog-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
-  border-color: rgba(239, 227, 216, 0.8);
+  border-color: var(--royal-blue);
 }
 .blog-card:focus-visible {
-  outline: 3px solid var(--primary-peach);
+  outline: 3px solid var(--royal-blue);
   outline-offset: 2px;
 }
 .blog-thumb {
-  height: 190px;
-  width: 100%;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
-  background: var(--peach-gradient);
+  background: var(--soft-blue);
   position: relative;
-}
-.blog-thumb::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.15));
-  z-index: 1;
-  pointer-events: none;
 }
 .blog-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s var(--ease-premium);
+  transition: transform 0.6s var(--ease);
 }
-.blog-card:hover .blog-thumb img {
-  transform: scale(1.08);
+.blog-card:hover .blog-thumb img { transform: scale(1.06); }
+.blog-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: var(--golden-yellow);
+  color: var(--primary-navy);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--r-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  z-index: 2;
 }
 .blog-body {
-  padding: 1.4rem 1.5rem;
+  padding: 1.4rem 1.5rem 1.6rem;
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 .blog-body h4 {
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-  letter-spacing: -0.02em;
+  font-size: 1.15rem;
   font-weight: 700;
+  color: var(--primary-navy);
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
 }
 .blog-body p {
-  color: var(--text-muted);
-  font-size: 0.92rem;
+  color: var(--text-secondary);
+  font-size: 0.93rem;
   line-height: 1.55;
+  flex-grow: 1;
+  margin-bottom: 1rem;
 }
+.blog-read {
+  color: var(--royal-blue);
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: gap 0.25s var(--ease);
+}
+.blog-card:hover .blog-read { gap: 0.6rem; }
 
-/* CTA */
+.blog-cta-wrap { text-align: center; margin-top: 2.5rem; }
+
+/* ═══════════════════════════════════════════
+   CTA SECTION
+   ═══════════════════════════════════════════ */
 .cta {
-  background: var(--peach-gradient);
-  color: #fff;
+  padding: 5.5rem 1.5rem;
+}
+.cta-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, var(--primary-navy), var(--dark-blue));
+  color: var(--pure-white);
   text-align: center;
+  padding: 4rem 2rem;
+  border-radius: var(--r-xl);
   position: relative;
   overflow: hidden;
 }
-.cta::before {
+.cta-inner::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 30% 50%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
-    radial-gradient(ellipse at 70% 50%, rgba(217, 93, 57, 0.25) 0%, transparent 50%);
-  pointer-events: none;
+  top: -100px; left: -100px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(8, 102, 245, 0.35), transparent 70%);
 }
-.cta > * {
-  position: relative;
-  z-index: 1;
+.cta-inner::after {
+  content: '';
+  position: absolute;
+  bottom: -100px; right: -100px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(255, 176, 0, 0.2), transparent 70%);
 }
+.cta-inner > * { position: relative; z-index: 1; }
 .cta h2 {
-  font-size: 2.2rem;
-  margin-bottom: 1rem;
+  font-size: 2.3rem;
+  font-weight: 800;
   letter-spacing: -0.025em;
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1rem;
 }
 .cta p {
-  margin-bottom: 2rem;
   font-size: 1.1rem;
-  opacity: 0.96;
-}
-.cta-btn {
-  display: inline-block;
-  background: #fff;
-  color: var(--primary-peach);
-  padding: 1rem 2.5rem;
-  border-radius: 10px;
-  font-weight: 700;
-  font-size: 1.05rem;
-  transition: all 0.3s var(--ease-premium);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  letter-spacing: 0.01em;
-}
-.cta-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
-}
-.cta-btn:focus-visible {
-  outline: 3px solid #fff;
-  outline-offset: 3px;
-}
-.cta-btn--peach {
-  background: var(--peach-gradient);
-  color: #fff;
-  box-shadow: 0 4px 20px var(--glow-peach);
-}
-.cta-btn--peach:hover {
-  box-shadow: 0 12px 30px var(--glow-peach);
-}
-.cta-btn--peach:focus-visible {
-  outline-color: var(--primary-peach);
+  color: rgba(255, 249, 241, 0.85);
+  margin-bottom: 2rem;
+  max-width: 580px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Footer */
+/* ═══════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════ */
 footer {
-  background: var(--dark-footer);
-  color: #fff;
-  padding: 3.5rem 1.5rem 1.75rem;
+  background: var(--primary-navy);
+  color: var(--pure-white);
+  padding: 4rem 1.5rem 1.75rem;
 }
 .footer-grid {
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: 1.5fr repeat(3, 1fr);
   gap: 2.5rem;
   margin-bottom: 2.5rem;
 }
+.footer-brand .logo {
+  color: var(--pure-white);
+  margin-bottom: 1rem;
+}
+.footer-brand p {
+  color: rgba(255, 249, 241, 0.7);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  max-width: 320px;
+}
 .footer-col h4 {
-  margin-bottom: 1.1rem;
-  color: var(--primary-peach);
-  letter-spacing: -0.01em;
+  color: var(--pure-white);
   font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  position: relative;
+  padding-bottom: 0.6rem;
 }
-.footer-col ul {
-  list-style: none;
+.footer-col h4::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 28px;
+  height: 2.5px;
+  background: var(--golden-yellow);
+  border-radius: 2px;
 }
-.footer-col li {
-  margin-bottom: 0.6rem;
-}
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 0.65rem; }
 .footer-col a {
-  color: #ccc;
-  font-size: 0.95rem;
-  transition: color 0.3s var(--ease-premium), transform 0.3s var(--ease-premium);
+  color: rgba(255, 249, 241, 0.75);
+  font-size: 0.93rem;
+  transition: all 0.25s var(--ease);
   display: inline-block;
 }
 .footer-col a:hover,
 .footer-col a:focus-visible {
-  color: var(--primary-peach);
+  color: var(--golden-yellow);
   transform: translateX(3px);
 }
 .footer-bottom {
+  max-width: 1240px;
+  margin: 0 auto;
   text-align: center;
   padding-top: 1.75rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  color: #999;
-  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 249, 241, 0.6);
+  font-size: 0.88rem;
 }
 
-/* Responsive */
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════ */
+@media (max-width: 960px) {
+  .nav-links, .header-cta { display: none; }
+  .hamburger { display: inline-flex; }
+  .hero-wrap { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+  .hero p { margin-left: auto; margin-right: auto; }
+  .hero-ctas { justify-content: center; }
+  .hero-visual { height: 360px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
 @media (max-width: 768px) {
-  nav[aria-label="Main navigation"] .nav-links {
-    display: none;
-  }
-  .hamburger {
-    display: block;
-  }
+  .stats-bar { grid-template-columns: 1fr; padding: 1.75rem; }
+  .stat-item + .stat-item::before { display: none; }
+  .stat-item { padding: 0; border-top: 1px solid var(--light-border); padding-top: 1.5rem; }
+  .stat-item:first-child { border-top: none; padding-top: 0; }
 }
-
 @media (max-width: 640px) {
   header { padding: 0.75rem 1rem; }
-  .logo { font-size: 1.15rem; }
-  .hero { padding: 3rem 1rem; }
-  .hero h1 { font-size: 2rem; }
+  .logo { font-size: 1.1rem; }
+  .logo-bolt { width: 30px; height: 30px; }
+  .hero { padding: 3rem 1rem 4rem; }
+  .hero h1 { font-size: 2.1rem; }
   .hero p { font-size: 1rem; }
-  .hero-badges { gap: 0.5rem; margin-top: 1.6rem; }
-  .badge-pill { font-size: 0.82rem; padding: 0.4rem 0.9rem; }
-  section { padding: 3rem 1rem; }
-  .section-title { font-size: 1.65rem; }
-  .section-sub { margin-bottom: 2.5rem; }
+  .hero-visual { height: 300px; }
+  .float-card { padding: 0.75rem 1rem; }
+  .float-card .fc-icon { width: 36px; height: 36px; font-size: 1rem; }
+  .float-card .fc-text { font-size: 0.82rem; }
+  section.content-section { padding: 3.5rem 1rem; }
+  .section-title { font-size: 1.7rem; }
+  .section-head { margin-bottom: 2.5rem; }
   .tools-grid { grid-template-columns: 1fr; gap: 1.2rem; }
-  .tool-card { padding: 1.5rem 1.25rem; }
-  .tool-card h3 { font-size: 1.2rem; }
-  .tool-card p { font-size: 0.95rem; }
-  .tool-btn { height: 46px; font-size: 0.95rem; }
-  .tool-icon-wrap { width: 62px; height: 62px; }
-  .tool-icon-wrap svg { width: 34px; height: 34px; }
-  .blog-preview-grid { grid-template-columns: 1fr; }
-  .cta h2 { font-size: 1.65rem; }
-  .footer-grid { gap: 2rem; }
+  .tool-card { padding: 1.5rem 1.3rem; }
+  .cta { padding: 3.5rem 1rem; }
+  .cta-inner { padding: 2.75rem 1.5rem; }
+  .cta h2 { font-size: 1.7rem; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .btn { padding: 0.85rem 1.5rem; font-size: 0.92rem; }
 }
 
-/* Reduced motion */
+/* ═══ Reduced Motion ═══ */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -808,361 +1107,328 @@ footer {
 </head>
 <body>
 
-<!-- Skip Navigation -->
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<!-- Header -->
+<!-- ═══ HEADER ═══ -->
 <header>
   <div class="nav-wrap">
-    <a href="index.html" class="logo" aria-label="ToolsMediaDownload Home">⚡ ToolsMedia<span>Download</span></a>
+    <a href="index.html" class="logo" aria-label="ToolsMediaDownload Home">
+      <span class="logo-bolt">⚡</span>
+      ToolsMedia<span class="logo-accent">Download</span>
+    </a>
+
     <nav aria-label="Main navigation">
       <ul class="nav-links">
         <li><a href="index.html" aria-current="page">Home</a></li>
+        <li class="has-dropdown">
+          <button class="dropdown-toggle" aria-expanded="false" aria-controls="toolsDropdown" id="toolsBtn">
+            Tools
+            <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="dropdown-menu" id="toolsDropdown" role="menu">
+            <li><a href="gif-compressor.html" role="menuitem">GIF Compressor</a></li>
+            <li><a href="video-to-gif.html" role="menuitem">Video to GIF</a></li>
+            <li><a href="image-converter.html" role="menuitem">Image Converter</a></li>
+            <li><a href="pdf-tools.html" role="menuitem">PDF Tools</a></li>
+            <li><a href="qr-generator.html" role="menuitem">QR Code Generator</a></li>
+            <li><a href="text-tools.html" role="menuitem">Text Tools</a></li>
+            <li><a href="instagram-downloader.html" role="menuitem">Instagram Downloader</a></li>
+            <li><a href="facebook-downloader.html" role="menuitem">Facebook Downloader</a></li>
+            <li><a href="tiktok-downloader.html" role="menuitem">TikTok Downloader</a></li>
+          </ul>
+        </li>
         <li><a href="blog.html">Blog</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
+
+    <a href="#tools-start" class="header-cta">
+      Explore Tools
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8m0 0L7.5 3.5M11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
     <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" id="menuToggle">☰</button>
   </div>
 </header>
 
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Mobile navigation menu">
+<!-- ═══ MOBILE MENU ═══ -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Mobile menu">
   <div class="mobile-menu-panel">
-    <button class="close-btn" aria-label="Close menu" id="menuClose">×</button>
+    <div class="mobile-menu-head">
+      <a href="index.html" class="logo"><span class="logo-bolt">⚡</span>Menu</a>
+      <button class="close-btn" aria-label="Close menu" id="menuClose">×</button>
+    </div>
     <nav aria-label="Mobile navigation">
       <ul>
         <li><a href="index.html" aria-current="page">Home</a></li>
         <li><a href="blog.html">Blog</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
-        <li><a href="pdf-tools.html">PDF Tools</a></li>
-        <li><a href="disclaimer.html">Disclaimer</a></li>
       </ul>
+      <div class="mobile-section-label">Tools</div>
+      <ul>
+        <li><a href="gif-compressor.html">GIF Compressor</a></li>
+        <li><a href="video-to-gif.html">Video to GIF</a></li>
+        <li><a href="image-converter.html">Image Converter</a></li>
+        <li><a href="pdf-tools.html">PDF Tools</a></li>
+        <li><a href="qr-generator.html">QR Generator</a></li>
+        <li><a href="text-tools.html">Text Tools</a></li>
+        <li><a href="instagram-downloader.html">Instagram Downloader</a></li>
+        <li><a href="facebook-downloader.html">Facebook Downloader</a></li>
+        <li><a href="tiktok-downloader.html">TikTok Downloader</a></li>
+      </ul>
+      <a href="#tools-start" class="mobile-cta">Explore Tools →</a>
     </nav>
   </div>
 </div>
 
-<!-- Main Content -->
+<!-- ═══ MAIN ═══ -->
 <main id="main-content">
 
-  <!-- Hero -->
+  <!-- HERO -->
   <section class="hero" aria-labelledby="hero-heading">
-    <h1 id="hero-heading">Free Online Tools for Creators</h1>
-    <p>Download media, convert images, generate QR codes & more. 100% browser-based. No signup, no limits.</p>
-    <div class="hero-badges" aria-label="Key features">
-      <span class="badge-pill">🔒 100% Private</span>
-      <span class="badge-pill">⚡ Lightning Fast</span>
-      <span class="badge-pill">✨ No Signup Required</span>
+    <div class="hero-wrap">
+      <div class="hero-copy">
+        <span class="hero-badge">
+          <span class="hero-badge-icon">⚡</span> Smart Tools for Everyone
+        </span>
+        <h1 id="hero-heading">
+          Free Online Tools<br>
+          for <span class="accent-blue">Creators</span> &amp;
+          <span class="accent-gold">Everyone</span>
+        </h1>
+        <p>Download media, convert images, generate QR codes &amp; more. 100% browser-based processing — no signup, no limits, no uploads.</p>
+        <div class="hero-ctas">
+          <a href="#tools-start" class="btn btn-primary">
+            Explore Tools
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="blog.html" class="btn btn-outline">
+            Read Blog
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-visual-bg"></div>
+        <div class="float-card fc-1">
+          <div class="fc-icon">🎬</div>
+          <div><div class="fc-text">GIF Compressor</div><span class="fc-sub">Optimize instantly</span></div>
+        </div>
+        <div class="float-card fc-2">
+          <div class="fc-icon">📹</div>
+          <div><div class="fc-text">Video → GIF</div><span class="fc-sub">MP4 to animated</span></div>
+        </div>
+        <div class="float-card fc-3">
+          <div class="fc-icon">⚡</div>
+          <div><div class="fc-text">100% Private</div><span class="fc-sub">No uploads</span></div>
+        </div>
+        <div class="float-card fc-4">
+          <div class="fc-icon">🔗</div>
+          <div><div class="fc-text">QR Generator</div><span class="fc-sub">Any content</span></div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Image & File Tools -->
-  <section aria-labelledby="image-tools-heading">
+  <!-- STATISTICS BAR -->
+  <section class="stats-section" aria-label="Site statistics">
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-icon">⚡</div>
+        <div>
+          <div class="stat-number">9+</div>
+          <div class="stat-label">Free Tools Available</div>
+        </div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon">🔒</div>
+        <div>
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Private &amp; Browser-Based</div>
+        </div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon">✨</div>
+        <div>
+          <div class="stat-number">$0</div>
+          <div class="stat-label">No Signup Required</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREATOR TOOLS -->
+  <section class="content-section" id="tools-start" aria-labelledby="creator-tools-heading">
     <div class="container">
-      <h2 class="section-title" id="image-tools-heading">🖼️ Image & File Tools</h2>
-      <p class="section-sub">Convert, resize & optimize files instantly</p>
+      <div class="section-head">
+        <h2 class="section-title" id="creator-tools-heading">🛠️ <span class="highlight">Creator</span> Tools</h2>
+        <p class="section-sub">Convert, resize, optimize files and generate QR codes instantly in your browser.</p>
+        <span class="section-underline"></span>
+      </div>
+
       <div class="tools-grid">
 
         <!-- GIF Compressor -->
-        <article class="tool-card tool-card--gif-compress">
-          <span class="tool-tag tag-popular" aria-label="Popular tool">Popular</span>
-          <div class="tool-icon-wrap">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <rect width="24" height="24" rx="5" fill="url(#gc1)"/>
-              <path d="M12 6v5l3 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              <circle cx="12" cy="12" r="7" stroke="#fff" stroke-width="2" fill="none"/>
-              <path d="M5 17l-1.5 1.5M19 17l1.5 1.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
-              <defs>
-                <linearGradient id="gc1" x1="0" y1="0" x2="24" y2="24">
-                  <stop stop-color="#818CF8"/>
-                  <stop offset="1" stop-color="#6D28D9"/>
-                </linearGradient>
-              </defs>
-            </svg>
+        <article class="tool-card">
+          <span class="tool-tag tag-popular">Popular</span>
+          <div class="tool-icon-wrap ic-gif">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#7C3AED"/><path d="M12 6v5l3 3" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="12" cy="12" r="7" stroke="#fff" stroke-width="2" fill="none"/></svg>
           </div>
           <h3>GIF Compressor</h3>
-          <p>Reduce GIF file size & optimize animated graphics instantly.</p>
-          <a href="gif-compressor.html" class="tool-btn btn-gif-compress">Compress GIF</a>
+          <p>Reduce GIF file size &amp; optimize animated graphics instantly.</p>
+          <a href="gif-compressor.html" class="tool-btn">Compress GIF →</a>
         </article>
 
         <!-- Video to GIF -->
-        <article class="tool-card tool-card--video-gif">
-          <span class="tool-tag tag-new" aria-label="New tool">New</span>
-          <div class="tool-icon-wrap">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <rect width="24" height="24" rx="5" fill="url(#vg1)"/>
-              <rect x="4" y="6" width="10" height="12" rx="2" stroke="#fff" stroke-width="1.8" fill="none"/>
-              <path d="M14 10l4-2v8l-4-2" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              <path d="M17 18l3 2M20 18l-1 2.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
-              <defs>
-                <linearGradient id="vg1" x1="0" y1="0" x2="24" y2="24">
-                  <stop stop-color="#22D3EE"/>
-                  <stop offset="1" stop-color="#0E7490"/>
-                </linearGradient>
-              </defs>
-            </svg>
+        <article class="tool-card">
+          <span class="tool-tag tag-new">New</span>
+          <div class="tool-icon-wrap ic-video">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#0891B2"/><rect x="4" y="6" width="10" height="12" rx="2" stroke="#fff" stroke-width="1.8" fill="none"/><path d="M14 10l4-2v8l-4-2" stroke="#fff" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
           </div>
           <h3>Video to GIF</h3>
-          <p>Convert MP4 & WebM videos into animated GIFs instantly.</p>
-          <a href="video-to-gif.html" class="tool-btn btn-video-gif">Convert to GIF</a>
+          <p>Convert MP4 &amp; WebM videos into animated GIFs instantly.</p>
+          <a href="video-to-gif.html" class="tool-btn">Convert Now →</a>
         </article>
 
         <!-- Image Converter -->
         <article class="tool-card">
-          <span class="tool-tag tag-new" aria-label="New tool">New</span>
-          <div class="tool-icon-wrap">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <rect width="24" height="24" rx="5" fill="#7C3AED"/>
-              <path d="M8 7v10M12 7v10M16 7v10" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-              <path d="M6 10h4M14 14h4" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-            </svg>
+          <span class="tool-tag tag-new">New</span>
+          <div class="tool-icon-wrap ic-img">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#7C3AED"/><path d="M8 7v10M12 7v10M16 7v10" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M6 10h4M14 14h4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
           </div>
           <h3>Image Converter</h3>
-          <p>Convert PNG, JPG, WebP & BMP in one click.</p>
-          <a href="image-converter.html" class="tool-btn btn-convert">Convert</a>
-        </article>
-
-        <!-- Image Resizer -->
-        <article class="tool-card">
-          <span class="tool-tag tag-free" aria-label="Free tool">Free</span>
-          <div class="tool-icon-wrap">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <rect width="24" height="24" rx="5" fill="#0D9488"/>
-              <rect x="6" y="6" width="12" height="12" stroke="#fff" stroke-width="2" fill="none"/>
-              <path d="M10 10h4v4" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <h3>Image Resizer</h3>
-          <p>Resize for Instagram, YouTube, FB & more.</p>
-          <a href="image-resizer.html" class="tool-btn btn-resize">Resize</a>
+          <p>Convert PNG, JPG, WebP &amp; BMP formats in one click.</p>
+          <a href="image-converter.html" class="tool-btn">Convert →</a>
         </article>
 
         <!-- PDF Tools -->
         <article class="tool-card">
-          <span class="tool-tag tag-hot" aria-label="Hot tool">Hot</span>
-          <div class="tool-icon-wrap">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <rect width="24" height="24" rx="5" fill="#DC2626"/>
-              <path d="M8 5h5l3 3v11H8z" fill="#fff"/>
-              <text x="12" y="16" text-anchor="middle" font-size="5" font-weight="bold" fill="#DC2626">PDF</text>
-            </svg>
+          <span class="tool-tag tag-hot">Hot</span>
+          <div class="tool-icon-wrap ic-pdf">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#DC2626"/><path d="M8 5h5l3 3v11H8z" fill="#fff"/><text x="12" y="16" text-anchor="middle" font-size="5" font-weight="bold" fill="#DC2626">PDF</text></svg>
           </div>
           <h3>PDF Tools</h3>
-          <p>Merge, split & convert images to PDF.</p>
-          <a href="pdf-tools.html" class="tool-btn btn-pdf">Open PDF</a>
+          <p>Merge, split &amp; convert images to PDF with ease.</p>
+          <a href="pdf-tools.html" class="tool-btn tool-btn-gold">Open PDF →</a>
         </article>
 
-      </div>
-    </div>
-  </section>
-
-  <!-- Media Downloaders -->
-  <section class="section-alt" aria-labelledby="downloaders-heading">
-    <div class="container">
-      <h2 class="section-title" id="downloaders-heading">📥 Media Downloaders</h2>
-      <p class="section-sub">Save videos, reels & stories from social platforms</p>
-      <div class="tools-grid">
-
-        <!-- Instagram -->
+        <!-- QR Code Generator -->
         <article class="tool-card">
-          <span class="tool-tag tag-hot" aria-label="Hot tool">Hot</span>
-          <div class="tool-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-              <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#ig)"/>
-              <circle cx="12" cy="12" r="4.5" stroke="#fff" stroke-width="2"/>
-              <circle cx="17.5" cy="6.5" r="1.3" fill="#fff"/>
-              <defs>
-                <linearGradient id="ig" x1="0" y1="0" x2="24" y2="24">
-                  <stop stop-color="#F58529"/>
-                  <stop offset=".5" stop-color="#DD2A7B"/>
-                  <stop offset="1" stop-color="#8134AF"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-          <h3>Instagram Downloader</h3>
-          <p>Save Reels, Stories, Posts & IGTV in HD quality.</p>
-          <a href="instagram-downloader.html" class="tool-btn btn-instagram">Download</a>
-        </article>
-
-        <!-- Facebook -->
-        <article class="tool-card">
-          <span class="tool-tag tag-popular" aria-label="Popular tool">Popular</span>
-          <div class="tool-icon-wrap">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <rect width="24" height="24" rx="5" fill="#1877F2"/>
-              <path d="M15.5 12h-2.5V20h-3v-8H8v-2.8h2V7.5c0-2 1-3.5 3.5-3.5h2.3v2.8h-1.5c-.8 0-1 .4-1 1v1.4h2.5l-.3 2.8z" fill="#fff"/>
-            </svg>
-          </div>
-          <h3>Facebook Downloader</h3>
-          <p>Download FB videos, reels & watch content easily.</p>
-          <a href="facebook-downloader.html" class="tool-btn btn-facebook">Save Video</a>
-        </article>
-
-        <!-- TikTok -->
-        <article class="tool-card">
-          <span class="tool-tag tag-trending" aria-label="Trending tool">Trending</span>
-          <div class="tool-icon-wrap">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-              <rect width="24" height="24" rx="5" fill="#000"/>
-              <path d="M14.5 4h-2.3v12.3c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2c.2 0 .4 0 .5.1v-2.3c-.2 0-.4 0-.5 0-2.4 0-4.3 1.9-4.3 4.2s1.9 4.2 4.3 4.2 4.3-1.9 4.3-4.2V9.8c.9.6 2 1 3.2 1V8.5c-1.8 0-3.2-1.4-3.2-3.2V4z" fill="#25F4EE" transform="translate(-0.7,-0.7)"/>
-              <path d="M14.5 4h-2.3v12.3c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2c.2 0 .4 0 .5.1v-2.3c-.2 0-.4 0-.5 0-2.4 0-4.3 1.9-4.3 4.2s1.9 4.2 4.3 4.2 4.3-1.9 4.3-4.2V9.8c.9.6 2 1 3.2 1V8.5c-1.8 0-3.2-1.4-3.2-3.2V4z" fill="#FE2C55" transform="translate(0.7,0.7)"/>
-              <path d="M14.5 4h-2.3v12.3c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2c.2 0 .4 0 .5.1v-2.3c-.2 0-.4 0-.5 0-2.4 0-4.3 1.9-4.3 4.2s1.9 4.2 4.3 4.2 4.3-1.9 4.3-4.2V9.8c.9.6 2 1 3.2 1V8.5c-1.8 0-3.2-1.4-3.2-3.2V4z" fill="#fff"/>
-            </svg>
-          </div>
-          <h3>TikTok Downloader</h3>
-          <p>No watermark TikTok video downloads in seconds.</p>
-          <a href="tiktok-downloader.html" class="tool-btn btn-tiktok">Download</a>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Utility Tools -->
-  <section aria-labelledby="utility-heading">
-    <div class="container">
-      <h2 class="section-title" id="utility-heading">⚙️ Utility Tools</h2>
-      <p class="section-sub">Everyday tools for developers & creators</p>
-      <div class="tools-grid">
-
-        <!-- QR Code -->
-        <article class="tool-card">
-          <span class="tool-tag tag-trending" aria-label="Trending tool">Trending</span>
-          <div class="tool-icon-wrap">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <rect width="24" height="24" rx="5" fill="#2563EB"/>
-              <rect x="6" y="6" width="4" height="4" fill="#fff"/>
-              <rect x="14" y="6" width="4" height="4" fill="#fff"/>
-              <rect x="6" y="14" width="4" height="4" fill="#fff"/>
-              <rect x="14" y="14" width="2" height="2" fill="#fff"/>
-              <rect x="16" y="16" width="2" height="2" fill="#fff"/>
-            </svg>
+          <span class="tool-tag tag-trending">Trending</span>
+          <div class="tool-icon-wrap ic-qr">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#2563EB"/><rect x="6" y="6" width="4" height="4" fill="#fff"/><rect x="14" y="6" width="4" height="4" fill="#fff"/><rect x="6" y="14" width="4" height="4" fill="#fff"/><rect x="14" y="14" width="2" height="2" fill="#fff"/><rect x="16" y="16" width="2" height="2" fill="#fff"/></svg>
           </div>
           <h3>QR Code Generator</h3>
-          <p>Create QR codes for URLs, WiFi, text & email.</p>
-          <a href="qr-generator.html" class="tool-btn btn-qr">Generate QR</a>
-        </article>
-
-        <!-- Color Picker -->
-        <article class="tool-card">
-          <span class="tool-tag tag-new" aria-label="New tool">New</span>
-          <div class="tool-icon-wrap">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <rect width="24" height="24" rx="5" fill="url(#clp)"/>
-              <circle cx="8" cy="10" r="2" fill="#fff"/>
-              <circle cx="16" cy="10" r="2" fill="#fff"/>
-              <circle cx="12" cy="15" r="2" fill="#fff"/>
-              <defs>
-                <linearGradient id="clp" x1="0" y1="0" x2="24" y2="24">
-                  <stop stop-color="#EC4899"/>
-                  <stop offset="1" stop-color="#8B5CF6"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-          <h3>Color Picker</h3>
-          <p>HEX, RGB, HSL codes + random palette generator.</p>
-          <a href="color-picker.html" class="tool-btn btn-color">Pick Colors</a>
+          <p>Create QR codes for URLs, WiFi, text &amp; email in seconds.</p>
+          <a href="qr-generator.html" class="tool-btn">Generate QR →</a>
         </article>
 
         <!-- Text Tools -->
         <article class="tool-card">
-          <span class="tool-tag tag-free" aria-label="Free tool">Free</span>
-          <div class="tool-icon-wrap">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <rect width="24" height="24" rx="5" fill="#16A34A"/>
-              <path d="M6 8h12M6 12h12M6 16h8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-            </svg>
+          <span class="tool-tag tag-free">Free</span>
+          <div class="tool-icon-wrap ic-text">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#16A34A"/><path d="M6 8h12M6 12h12M6 16h8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
           </div>
           <h3>Text Tools</h3>
-          <p>Count, transform & clean text in 12+ ways.</p>
-          <a href="text-tools.html" class="tool-btn btn-text">Edit Text</a>
-        </article>
-
-        <!-- Password Generator -->
-        <article class="tool-card">
-          <span class="tool-tag tag-popular" aria-label="Popular tool">Popular</span>
-          <div class="tool-icon-wrap">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <rect width="24" height="24" rx="5" fill="#CA8A04"/>
-              <rect x="7" y="10" width="10" height="8" rx="1" fill="#fff"/>
-              <path d="M9 10V7a3 3 0 016 0v3" stroke="#fff" stroke-width="2" fill="none"/>
-            </svg>
-          </div>
-          <h3>Password Generator</h3>
-          <p>Create strong, secure passwords instantly.</p>
-          <a href="password-generator.html" class="tool-btn btn-password">Generate</a>
-        </article>
-
-        <!-- JSON Formatter -->
-        <article class="tool-card">
-          <span class="tool-tag tag-new" aria-label="New tool">New</span>
-          <div class="tool-icon-wrap">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <rect width="24" height="24" rx="5" fill="#374151"/>
-              <path d="M9 7l-3 5 3 5M15 7l3 5-3 5" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none"/>
-            </svg>
-          </div>
-          <h3>JSON Formatter</h3>
-          <p>Beautify, minify & validate JSON data.</p>
-          <a href="json-formatter.html" class="tool-btn btn-json">Format</a>
-        </article>
-
-        <!-- Base64 -->
-        <article class="tool-card">
-          <span class="tool-tag tag-trending" aria-label="Trending tool">Trending</span>
-          <div class="tool-icon-wrap">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <rect width="24" height="24" rx="5" fill="#7E22CE"/>
-              <text x="12" y="16" text-anchor="middle" font-size="7" font-weight="bold" fill="#fff">B64</text>
-            </svg>
-          </div>
-          <h3>Base64 Encoder</h3>
-          <p>Encode/decode text & files to Base64 format.</p>
-          <a href="base64-tool.html" class="tool-btn btn-base64">Encode</a>
+          <p>Count, transform &amp; clean text in 12+ different ways.</p>
+          <a href="text-tools.html" class="tool-btn">Edit Text →</a>
         </article>
 
       </div>
     </div>
   </section>
 
-  <!-- Features -->
-  <section class="section-alt" aria-labelledby="features-heading">
+  <!-- MEDIA DOWNLOADERS -->
+  <section class="content-section section-alt" aria-labelledby="downloaders-heading">
     <div class="container">
-      <h2 class="section-title" id="features-heading">Why Choose Us?</h2>
-      <p class="section-sub">Built with privacy and speed in mind</p>
+      <div class="section-head">
+        <h2 class="section-title" id="downloaders-heading">📥 Media <span class="highlight">Downloaders</span></h2>
+        <p class="section-sub">Save videos, reels &amp; stories from your favorite social platforms.</p>
+        <span class="section-underline"></span>
+      </div>
+
+      <div class="tools-grid">
+
+        <!-- Instagram -->
+        <article class="tool-card">
+          <span class="tool-tag tag-hot">Hot</span>
+          <div class="tool-icon-wrap ic-ig">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" fill="url(#ig)"/><circle cx="12" cy="12" r="4.5" stroke="#fff" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="#fff"/><defs><linearGradient id="ig" x1="0" y1="0" x2="24" y2="24"><stop stop-color="#F58529"/><stop offset=".5" stop-color="#DD2A7B"/><stop offset="1" stop-color="#8134AF"/></linearGradient></defs></svg>
+          </div>
+          <h3>Instagram Downloader</h3>
+          <p>Save Reels, Stories, Posts &amp; IGTV in HD quality.</p>
+          <a href="instagram-downloader.html" class="tool-btn">Download →</a>
+        </article>
+
+        <!-- Facebook -->
+        <article class="tool-card">
+          <span class="tool-tag tag-popular">Popular</span>
+          <div class="tool-icon-wrap ic-fb">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#1877F2"/><path d="M15.5 12h-2.5V20h-3v-8H8v-2.8h2V7.5c0-2 1-3.5 3.5-3.5h2.3v2.8h-1.5c-.8 0-1 .4-1 1v1.4h2.5l-.3 2.8z" fill="#fff"/></svg>
+          </div>
+          <h3>Facebook Downloader</h3>
+          <p>Download FB videos, reels &amp; watch content easily.</p>
+          <a href="facebook-downloader.html" class="tool-btn">Save Video →</a>
+        </article>
+
+        <!-- TikTok -->
+        <article class="tool-card">
+          <span class="tool-tag tag-trending">Trending</span>
+          <div class="tool-icon-wrap ic-tiktok">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#000"/><path d="M14.5 4h-2.3v12.3c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2c.2 0 .4 0 .5.1v-2.3c-.2 0-.4 0-.5 0-2.4 0-4.3 1.9-4.3 4.2s1.9 4.2 4.3 4.2 4.3-1.9 4.3-4.2V9.8c.9.6 2 1 3.2 1V8.5c-1.8 0-3.2-1.4-3.2-3.2V4z" fill="#fff"/></svg>
+          </div>
+          <h3>TikTok Downloader</h3>
+          <p>No watermark TikTok video downloads in seconds.</p>
+          <a href="tiktok-downloader.html" class="tool-btn">Download →</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="content-section" aria-labelledby="features-heading">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title" id="features-heading">Why <span class="highlight-gold">Choose Us?</span></h2>
+        <p class="section-sub">Built with privacy, speed and simplicity in mind.</p>
+        <span class="section-underline"></span>
+      </div>
       <div class="features-grid">
         <div class="feature">
-          <div class="feature-icon" aria-hidden="true">🔒</div>
+          <div class="feature-icon-wrap">🔒</div>
           <h3>100% Private</h3>
-          <p>Everything runs in your browser. No uploads to servers.</p>
+          <p>Everything runs in your browser. No uploads, no tracking, no server storage.</p>
         </div>
         <div class="feature">
-          <div class="feature-icon" aria-hidden="true">⚡</div>
+          <div class="feature-icon-wrap">⚡</div>
           <h3>Lightning Fast</h3>
-          <p>Instant results. No waiting, no queues.</p>
+          <p>Instant results. No waiting in queues, no artificial delays, no limits.</p>
         </div>
         <div class="feature">
-          <div class="feature-icon" aria-hidden="true">📱</div>
+          <div class="feature-icon-wrap">📱</div>
           <h3>Works Everywhere</h3>
-          <p>Mobile, tablet, desktop — all browsers supported.</p>
+          <p>Mobile, tablet, desktop — all modern browsers are fully supported.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Blog Preview -->
-  <section aria-labelledby="blog-heading">
+  <!-- BLOG PREVIEW -->
+  <section class="content-section section-alt" aria-labelledby="blog-heading">
     <div class="container">
-      <h2 class="section-title" id="blog-heading">📚 Latest from Blog</h2>
-      <p class="section-sub">Guides, tips & tutorials for creators</p>
-      <div class="blog-preview-grid">
+      <div class="section-head">
+        <h2 class="section-title" id="blog-heading">📚 Latest from <span class="highlight">Blog</span></h2>
+        <p class="section-sub">Guides, tips &amp; tutorials for creators and developers.</p>
+        <span class="section-underline"></span>
+      </div>
+      <div class="blog-grid">
 
-        <a href="blog.html" class="blog-card" aria-label="Read: Monetize Utility Tools">
+        <a href="blog.html" class="blog-card">
           <div class="blog-thumb">
+            <span class="blog-badge">Guide</span>
             <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80"
                  alt="Dashboard analytics showing monetization data"
                  loading="lazy" decoding="async" width="600" height="400">
@@ -1170,57 +1436,65 @@ footer {
           <div class="blog-body">
             <h4>Monetize Utility Tools</h4>
             <p>How to earn passive income from free tool websites using AdSense.</p>
+            <span class="blog-read">Read More →</span>
           </div>
         </a>
 
-        <a href="blog.html" class="blog-card" aria-label="Read: Image & GIF Compression Guide">
+        <a href="blog.html" class="blog-card">
           <div class="blog-thumb">
+            <span class="blog-badge">Tutorial</span>
             <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=600&q=80"
                  alt="Computer screen showing image editing software"
                  loading="lazy" decoding="async" width="600" height="400">
           </div>
           <div class="blog-body">
-            <h4>Image & GIF Compression Guide</h4>
-            <p>Reduce file size without losing quality. Lossy vs Lossless algorithms.</p>
+            <h4>Image &amp; GIF Compression Guide</h4>
+            <p>Reduce file size without losing quality. Lossy vs lossless explained.</p>
+            <span class="blog-read">Read More →</span>
           </div>
         </a>
 
-        <a href="blog.html" class="blog-card" aria-label="Read: QR Code Marketing">
+        <a href="blog.html" class="blog-card">
           <div class="blog-thumb">
+            <span class="blog-badge">Marketing</span>
             <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80"
                  alt="Digital matrix code representing QR technology"
                  loading="lazy" decoding="async" width="600" height="400">
           </div>
           <div class="blog-body">
             <h4>QR Code Marketing</h4>
-            <p>Boost engagement with creative QR campaigns in 2026.</p>
+            <p>Boost engagement with creative QR code campaigns in 2026.</p>
+            <span class="blog-read">Read More →</span>
           </div>
         </a>
 
       </div>
-      <div style="text-align:center;margin-top:2.5rem;">
-        <a href="blog.html" class="cta-btn cta-btn--peach">View All Posts →</a>
+      <div class="blog-cta-wrap">
+        <a href="blog.html" class="btn btn-primary">View All Posts →</a>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
   <section class="cta" aria-labelledby="cta-heading">
-    <div class="container">
-      <h2 id="cta-heading">Ready to Create?</h2>
-      <p>Jump into any tool — no signup needed, 100% free.</p>
-      <a href="#main-content" class="cta-btn">Explore Tools ↑</a>
+    <div class="cta-inner">
+      <h2 id="cta-heading">Ready to <span style="color: var(--golden-yellow)">Create?</span></h2>
+      <p>Jump into any tool — no signup needed, 100% free, forever.</p>
+      <a href="#tools-start" class="btn btn-primary">Explore All Tools ↑</a>
     </div>
   </section>
 
 </main>
 
-<!-- Footer -->
+<!-- ═══ FOOTER ═══ -->
 <footer role="contentinfo">
   <div class="footer-grid">
-    <div class="footer-col">
-      <h4>⚡ ToolsMediaDownload</h4>
-      <p style="color:#ccc;font-size:0.9rem;">Free browser-based tools for creators, developers & everyone.</p>
+    <div class="footer-brand">
+      <div class="logo">
+        <span class="logo-bolt">⚡</span>
+        ToolsMedia<span style="color: var(--golden-yellow)">Download</span>
+      </div>
+      <p>Free browser-based tools for creators, developers &amp; everyone. 100% private processing, zero signup, forever free.</p>
     </div>
     <div class="footer-col">
       <h4>Quick Links</h4>
@@ -1238,7 +1512,7 @@ footer {
         <li><a href="video-to-gif.html">Video to GIF</a></li>
         <li><a href="qr-generator.html">QR Generator</a></li>
         <li><a href="image-converter.html">Image Converter</a></li>
-        <li><a href="password-generator.html">Password Generator</a></li>
+        <li><a href="gif-compressor.html">GIF Compressor</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -1250,84 +1524,64 @@ footer {
       </ul>
     </div>
   </div>
-  <div class="footer-bottom">© <span id="footerYear"></span> ToolsMediaDownload. All rights reserved.</div>
+  <div class="footer-bottom">
+    © <span id="footerYear"></span> ToolsMediaDownload. All rights reserved.
+  </div>
 </footer>
 
 <script>
 // Dynamic year
 document.getElementById('footerYear').textContent = new Date().getFullYear();
 
-// Mobile menu
+// ─── Mobile Menu ───
 const mobileMenu = document.getElementById('mobileMenu');
 const menuToggle = document.getElementById('menuToggle');
-const menuClose = document.getElementById('menuClose');
+const menuClose  = document.getElementById('menuClose');
 let lastFocused = null;
 
 function openMenu() {
   lastFocused = document.activeElement;
   mobileMenu.classList.add('active');
   menuToggle.setAttribute('aria-expanded', 'true');
-  menuClose.focus();
   document.body.style.overflow = 'hidden';
-  trapFocus(mobileMenu);
+  setTimeout(() => menuClose.focus(), 100);
 }
-
 function closeMenu() {
   mobileMenu.classList.remove('active');
   menuToggle.setAttribute('aria-expanded', 'false');
   document.body.style.overflow = '';
   if (lastFocused) lastFocused.focus();
 }
-
 menuToggle.addEventListener('click', openMenu);
 menuClose.addEventListener('click', closeMenu);
+mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) closeMenu(); });
+mobileMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', closeMenu));
 
-// Close on overlay click
-mobileMenu.addEventListener('click', function(e) {
-  if (e.target === mobileMenu) closeMenu();
-});
+// ─── Tools Dropdown ───
+const toolsBtn  = document.getElementById('toolsBtn');
+const toolsMenu = document.getElementById('toolsDropdown');
 
-// Close on Escape
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
-    closeMenu();
-  }
-});
-
-// Close menu when a link is clicked
-mobileMenu.querySelectorAll('a').forEach(function(link) {
-  link.addEventListener('click', closeMenu);
-});
-
-// Focus trap
-function trapFocus(element) {
-  const focusableEls = element.querySelectorAll(
-    'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
-  );
-  const firstEl = focusableEls[0];
-  const lastEl = focusableEls[focusableEls.length - 1];
-
-  function handleTab(e) {
-    if (e.key !== 'Tab') return;
-    if (!mobileMenu.classList.contains('active')) {
-      element.removeEventListener('keydown', handleTab);
-      return;
-    }
-    if (e.shiftKey) {
-      if (document.activeElement === firstEl) {
-        lastEl.focus();
-        e.preventDefault();
-      }
-    } else {
-      if (document.activeElement === lastEl) {
-        firstEl.focus();
-        e.preventDefault();
-      }
-    }
-  }
-
-  element.addEventListener('keydown', handleTab);
+function closeDropdown() {
+  toolsMenu.classList.remove('open');
+  toolsBtn.setAttribute('aria-expanded', 'false');
 }
+function toggleDropdown(e) {
+  e.stopPropagation();
+  const isOpen = toolsMenu.classList.toggle('open');
+  toolsBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+}
+toolsBtn.addEventListener('click', toggleDropdown);
+document.addEventListener('click', (e) => {
+  if (!toolsMenu.contains(e.target) && e.target !== toolsBtn) closeDropdown();
+});
+
+// ─── Global Esc ───
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    if (mobileMenu.classList.contains('active')) closeMenu();
+    if (toolsMenu.classList.contains('open')) closeDropdown();
+  }
+});
 </script>
 
 </body>
