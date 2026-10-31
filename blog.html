@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><!-- Google & Browser Round Peach Favicon -->
+<head>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="favicon.svg">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta name="theme-color" content="#E07A5F">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog & Guides - ToolsMediaDownload</title>
 <meta name="description" content="Learn how to build utility tools, monetize with AdSense, repurpose media content, optimize images, improve SEO & protect passwords.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-<meta name="theme-color" content="#E07A5F">
 <style>
 :root{
   --bg-warm:#FAF5EE; --card-bg:#FFFFFF; --primary-peach:#E07A5F;
@@ -21,8 +18,6 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg-warm);color:var(--text-dark);line-height:1.6;overflow-x:hidden;}
 a{text-decoration:none;color:inherit;}
-
-/* Header */
 header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border-warm);z-index:100;padding:0.9rem 1.5rem;}
 .nav-wrap{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
 .logo{font-size:1.4rem;font-weight:800;color:var(--text-dark);display:flex;align-items:center;gap:0.3rem;white-space:nowrap;}
@@ -31,8 +26,6 @@ header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--borde
 .nav-links a{color:var(--text-dark);font-weight:500;transition:color 0.2s;font-size:0.95rem;}
 .nav-links a:hover{color:var(--primary-peach);}
 .hamburger{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--text-dark);padding:0.25rem;}
-
-/* Mobile Menu */
 .mobile-menu{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:200;}
 .mobile-menu.active{display:block;}
 .mobile-menu-panel{background:#fff;width:85%;max-width:320px;height:100%;padding:2rem 1.5rem;}
@@ -40,23 +33,15 @@ header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--borde
 .mobile-menu-panel ul{list-style:none;margin-top:3rem;}
 .mobile-menu-panel li{padding:1rem 0;border-bottom:1px solid var(--border-warm);}
 .mobile-menu-panel a{font-size:1.1rem;font-weight:500;}
-
-/* Blog Hero */
 .blog-hero{background:var(--peach-gradient);color:#fff;padding:3.5rem 1.5rem;text-align:center;}
 .blog-hero h1{font-size:2.5rem;margin-bottom:0.8rem;font-weight:800;}
 .blog-hero p{font-size:1.15rem;max-width:650px;margin:0 auto;opacity:0.95;}
-
-/* Category Filter Bar */
 .filter-bar{background:#fff;border-bottom:1px solid var(--border-warm);padding:1rem 1.5rem;position:sticky;top:61px;z-index:90;}
 .filter-container{max-width:1200px;margin:0 auto;display:flex;gap:0.75rem;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;}
 .filter-container::-webkit-scrollbar{display:none;}
 .filter-btn{padding:0.45rem 1.1rem;border-radius:25px;border:1px solid var(--border-warm);background:var(--bg-warm);color:var(--text-dark);font-size:0.9rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:all 0.2s;}
 .filter-btn:hover,.filter-btn.active{background:var(--primary-peach);color:#fff;border-color:var(--primary-peach);}
-
-/* Content Container */
 .blog-container{max-width:1200px;margin:3rem auto;padding:0 1.5rem;}
-
-/* Featured Post */
 .featured-card{background:#fff;border:1px solid var(--border-warm);border-radius:20px;overflow:hidden;margin-bottom:3rem;display:grid;grid-template-columns:1.1fr 1fr;gap:0;box-shadow:0 8px 24px rgba(0,0,0,0.04);transition:transform 0.3s,box-shadow 0.3s;}
 .featured-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px var(--glow-peach);border-color:var(--primary-peach);}
 .featured-img{width:100%;height:100%;min-height:300px;overflow:hidden;background:var(--peach-gradient);position:relative;}
@@ -68,8 +53,6 @@ header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--borde
 .featured-content p{color:var(--text-muted);margin-bottom:1.5rem;font-size:1.02rem;}
 .post-meta{font-size:0.85rem;color:var(--text-muted);display:flex;gap:1rem;align-items:center;}
 .read-btn{display:inline-block;margin-top:1.5rem;color:var(--primary-peach);font-weight:700;font-size:1rem;}
-
-/* Grid Layout */
 .posts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2rem;}
 .post-card{background:#fff;border:1px solid var(--border-warm);border-radius:16px;overflow:hidden;transition:all 0.3s;display:flex;flex-direction:column;}
 .post-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,0.08);border-color:var(--primary-peach);}
@@ -80,8 +63,6 @@ header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--borde
 .post-body h3{font-size:1.2rem;margin-bottom:0.7rem;line-height:1.35;font-weight:700;}
 .post-body p{color:var(--text-muted);font-size:0.95rem;margin-bottom:1.2rem;flex-grow:1;line-height:1.55;}
 .post-footer{display:flex;justify-content:space-between;align-items:center;padding-top:1rem;border-top:1px solid var(--border-warm);font-size:0.85rem;color:var(--text-muted);}
-
-/* Footer */
 footer{background:var(--dark-footer);color:#fff;padding:3rem 1.5rem 1.5rem;margin-top:4rem;}
 .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-bottom:2rem;}
 .footer-col h4{margin-bottom:1rem;color:var(--primary-peach);}
@@ -90,8 +71,6 @@ footer{background:var(--dark-footer);color:#fff;padding:3rem 1.5rem 1.5rem;margi
 .footer-col a{color:#ccc;font-size:0.95rem;}
 .footer-col a:hover{color:var(--primary-peach);}
 .footer-bottom{text-align:center;padding-top:1.5rem;border-top:1px solid #333;color:#999;font-size:0.9rem;}
-
-/* Mobile */
 @media(max-width:768px){
   .nav-links{display:none;}
   .hamburger{display:block;}
@@ -145,7 +124,6 @@ footer{background:var(--dark-footer);color:#fff;padding:3rem 1.5rem 1.5rem;margi
   <p>Learn how to monetize free web tools, optimize media files, boost social media reach & protect your digital assets.</p>
 </section>
 
-<!-- Filter Bar -->
 <div class="filter-bar">
   <div class="filter-container">
     <button class="filter-btn active" onclick="filterPosts('all', this)">All Posts</button>
@@ -176,251 +154,286 @@ footer{background:var(--dark-footer);color:#fff;padding:3rem 1.5rem 1.5rem;margi
     </div>
   </article>
 
-  <!-- 15 Posts Grid -->
   <div class="posts-grid">
 
-    <!-- Card 1: How Media Downloaders Work -->
+    <!-- Card 1 -->
     <article class="post-card post-item" data-cat="tools">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" alt="How Media Downloaders Work">
-      </div>
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" alt="How Media Downloaders Work"></div>
       <div class="post-body">
         <span class="post-cat">Tool Architecture</span>
         <h3>How Media Downloader Tools Work Under the Hood</h3>
         <p>A technical dive into browser fetching, CORS proxies, media extraction, and client-side stream downloading.</p>
-        <div class="post-footer">
-          <span>Jan 14, 2026</span>
-          <a href="blog-build-media-downloader-tools.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
+        <div class="post-footer"><span>Jan 14, 2026</span><a href="blog-build-media-downloader-tools.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
       </div>
     </article>
 
-    <!-- Card 2: Repurpose Content for Passive Income -->
+    <!-- Card 2 -->
     <article class="post-card post-item" data-cat="creators">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=600&q=80" alt="Repurpose Content for Passive Income">
-      </div>
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=600&q=80" alt="Repurpose Content"></div>
       <div class="post-body">
         <span class="post-cat">Creator Growth</span>
         <h3>How to Repurpose Content for Passive Income</h3>
         <p>Turn long-form YouTube videos into Shorts, Reels, TikToks & Blog posts using simple free web utilities.</p>
-        <div class="post-footer">
-          <span>Jan 12, 2026</span>
-          <a href="blog-repurpose-content-passive-income.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
+        <div class="post-footer"><span>Jan 12, 2026</span><a href="blog-repurpose-content-passive-income.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
       </div>
     </article>
 
-    <!-- Card 3: Image Compression Guide (FIXED NEW HD IMAGE) -->
+    <!-- Card 3 -->
     <article class="post-card post-item" data-cat="tutorials">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=600&q=80" alt="Image & GIF Compression Guide">
-      </div>
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=600&q=80" alt="Image Compression"></div>
       <div class="post-body">
         <span class="post-cat">Optimization</span>
         <h3>Complete Guide to Image & GIF Compression</h3>
         <p>Learn how lossy and lossless algorithms shrink image file size up to 80% without losing visual quality.</p>
-        <div class="post-footer">
-          <span>Jan 10, 2026</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
+        <div class="post-footer"><span>Jan 10, 2026</span><a href="blog-image-compression-guide.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
       </div>
     </article>
 
-    <!-- Card 4: Social Media Image Sizes 2026 -->
+    <!-- Card 4 -->
     <article class="post-card post-item" data-cat="creators">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=600&q=80" alt="Social Media Sizes 2026">
-      </div>
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=600&q=80" alt="Social Media Sizes"></div>
       <div class="post-body">
         <span class="post-cat">Cheat Sheet</span>
         <h3>Social Media Image Sizes Cheat Sheet 2026</h3>
         <p>Exact pixel dimensions for Instagram, YouTube, TikTok, Facebook, Twitter & LinkedIn posts, headers & stories.</p>
-        <div class="post-footer">
-          <span>Jan 08, 2026</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
+        <div class="post-footer"><span>Jan 08, 2026</span><a href="blog-social-media-sizes.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
       </div>
     </article>
 
-    <!-- Card 5: PDF Tools Guide -->
+    <!-- Card 5 -->
     <article class="post-card post-item" data-cat="tutorials">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&w=600&q=80" alt="PDF Tools Guide">
-      </div>
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&w=600&q=80" alt="PDF Tools"></div>
       <div class="post-body">
         <span class="post-cat">Productivity</span>
         <h3>Top PDF Tools Every Creator & Freelancer Needs</h3>
         <p>How client-side JavaScript PDF manipulation makes merging, splitting, and image conversion fast & secure.</p>
-        <div class="post-footer">
-          <span>Jan 05, 2026</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
+        <div class="post-footer"><span>Jan 05, 2026</span><a href="blog-pdf-tools-guide.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
       </div>
     </article>
 
-    <!-- Card 6: QR Code Marketing -->
+    <!-- Card 6 -->
     <article class="post-card post-item" data-cat="creators">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80" alt="QR Code Marketing">
-      </div>
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80" alt="QR Marketing"></div>
       <div class="post-body">
         <span class="post-cat">Marketing</span>
         <h3>How to Use QR Codes for Marketing in 2026</h3>
         <p>Drive offline traffic to your online pages, social channels, WiFi networks, and email campaigns effortlessly.</p>
-        <div class="post-footer">
-          <span>Jan 03, 2026</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
+        <div class="post-footer"><span>Jan 03, 2026</span><a href="blog-qr-code-marketing.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
       </div>
     </article>
 
-    <!-- Card 7: Password Security Guide -->
+    <!-- Card 7 -->
     <article class="post-card post-item" data-cat="tutorials">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80" alt="Password Security Guide">
-      </div>
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80" alt="Password Security"></div>
       <div class="post-body">
         <span class="post-cat">Cybersecurity</span>
         <h3>Password Security Guide: Protecting Your Digital Life</h3>
         <p>Understanding password entropy, brute-force resistance, multi-factor auth & how to generate unbreakable keys.</p>
-        <div class="post-footer">
-          <span>Jan 01, 2026</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
+        <div class="post-footer"><span>Jan 01, 2026</span><a href="blog-password-security.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
       </div>
     </article>
 
-    <!-- Card 8: SEO Strategies for Web Tools -->
+    <!-- Card 8 -->
     <article class="post-card post-item" data-cat="seo">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="SEO Strategies for Web Tools">
-      </div>
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="SEO Strategies"></div>
       <div class="post-body">
         <span class="post-cat">SEO & Ranking</span>
         <h3>SEO Strategies for Web Tool Websites</h3>
         <p>Rank #1 on Google for high-intent keywords like 'free image compressor' and 'QR generator online'.</p>
-        <div class="post-footer">
-          <span>Dec 28, 2025</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
+        <div class="post-footer"><span>Dec 28, 2025</span><a href="blog-seo-strategies.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
       </div>
     </article>
 
-    <!-- Card 9: Google AdSense Approval Tips -->
+    <!-- Card 9 -->
     <article class="post-card post-item" data-cat="monetization">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&q=80" alt="Google AdSense Approval Tips">
-      </div>
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&q=80" alt="AdSense Approval"></div>
       <div class="post-body">
         <span class="post-cat">Monetization</span>
         <h3>Google AdSense Approval Tips for Free Tool Sites</h3>
         <p>Avoid 'Valueless Inventory' rejections. Essential legal pages, navigation, and content ratios required by Google.</p>
-        <div class="post-footer">
-          <span>Dec 25, 2025</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
+        <div class="post-footer"><span>Dec 25, 2025</span><a href="blog-adsense-approval.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
       </div>
     </article>
 
-    <!-- Card 10: WebP vs JPG vs PNG -->
+    <!-- Card 10 -->
     <article class="post-card post-item" data-cat="tutorials">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80" alt="WebP vs JPG vs PNG">
-      </div>
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80" alt="WebP vs JPG"></div>
       <div class="post-body">
         <span class="post-cat">Web Formats</span>
         <h3>WebP vs JPG vs PNG: Which Image Format to Use?</h3>
         <p>Compare compression speed, file sizes, transparency support, and browser compatibility across modern web image formats.</p>
-        <div class="post-footer">
-          <span>Dec 20, 2025</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
+        <div class="post-footer"><span>Dec 20, 2025</span><a href="blog-webp-vs-jpg.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
       </div>
     </article>
 
-    <!-- Card 11: Instagram Reels Growth -->
+    <!-- Card 11 -->
     <article class="post-card post-item" data-cat="creators">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1611162616475-46b635cb6868?auto=format&fit=crop&w=600&q=80" alt="Instagram Reels Growth">
-      </div>
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1611162616475-46b635cb6868?auto=format&fit=crop&w=600&q=80" alt="Instagram Reels"></div>
       <div class="post-body">
         <span class="post-cat">Social Media</span>
         <h3>Instagram Reels Growth Strategies for 2026</h3>
         <p>Hook formulas, trending audio selection, watch-time optimization, and editing techniques that trigger viral reach.</p>
-        <div class="post-footer">
-          <span>Dec 18, 2025</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
+        <div class="post-footer"><span>Dec 18, 2025</span><a href="blog-instagram-reels-growth.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
       </div>
     </article>
 
-    <!-- Card 12: Decoding TikTok Algorithm -->
+    <!-- Card 12 -->
     <article class="post-card post-item" data-cat="creators">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1596558450255-7c0b7be9d56a?auto=format&fit=crop&w=600&q=80" alt="Decoding TikTok Algorithm">
-      </div>
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1596558450255-7c0b7be9d56a?auto=format&fit=crop&w=600&q=80" alt="TikTok Algorithm"></div>
       <div class="post-body">
         <span class="post-cat">Social Media</span>
         <h3>Decoding the TikTok Algorithm in 2026</h3>
         <p>A breakdown of completion rate metrics, SEO search keywords on TikTok, sound signals, and batch testing rules.</p>
-        <div class="post-footer">
-          <span>Dec 15, 2025</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
+        <div class="post-footer"><span>Dec 15, 2025</span><a href="blog-tiktok-algorithm.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
       </div>
     </article>
 
-    <!-- Card 13: Free Online Tools vs Paid SaaS Alternatives -->
+    <!-- Card 13 -->
     <article class="post-card post-item" data-cat="tools">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="Free Online Tools vs Paid SaaS">
-      </div>
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="Free Tools vs SaaS"></div>
       <div class="post-body">
         <span class="post-cat">SaaS Comparison</span>
         <h3>Free Online Tools vs Paid SaaS Alternatives</h3>
         <p>Why browser-based client-side micro-tools are disrupting expensive monthly subscription software models.</p>
-        <div class="post-footer">
-          <span>Dec 10, 2025</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
+        <div class="post-footer"><span>Dec 10, 2025</span><a href="blog-free-vs-paid-tools.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
       </div>
     </article>
 
-    <!-- Card 14: Color Theory Basics for Content Creators -->
+    <!-- Card 14 -->
     <article class="post-card post-item" data-cat="creators">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?auto=format&fit=crop&w=600&q=80" alt="Color Theory Basics">
-      </div>
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?auto=format&fit=crop&w=600&q=80" alt="Color Theory"></div>
       <div class="post-body">
         <span class="post-cat">Design Tips</span>
         <h3>Color Theory Basics for Content Creators</h3>
         <p>How to choose brand colors, complementary palettes, and HEX codes that invoke emotion & click actions.</p>
-        <div class="post-footer">
-          <span>Dec 05, 2025</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
+        <div class="post-footer"><span>Dec 05, 2025</span><a href="blog-color-theory.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
       </div>
     </article>
 
-    <!-- Card 15: Designing YouTube Thumbnails That Get High CTR -->
+    <!-- Card 15 -->
     <article class="post-card post-item" data-cat="creators">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="High CTR Thumbnails">
-      </div>
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?auto=format&fit=crop&w=600&q=80" alt="YouTube Thumbnails"></div>
       <div class="post-body">
         <span class="post-cat">YouTube Growth</span>
         <h3>Designing YouTube Thumbnails That Get High CTR</h3>
         <p>Color contrast ratios, facial expressions, bold typography rules, and thumbnail sizing tips to double video impressions.</p>
-        <div class="post-footer">
-          <span>Dec 01, 2025</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
+        <div class="post-footer"><span>Dec 01, 2025</span><a href="blog-youtube-thumbnails.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
+      </div>
+    </article>
+
+    <!-- =============== 10 NEW ARTICLES =============== -->
+
+    <!-- Card 16 -->
+    <article class="post-card post-item" data-cat="monetization">
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=600&q=80" alt="Affiliate Marketing"></div>
+      <div class="post-body">
+        <span class="post-cat">Monetization</span>
+        <h3>Affiliate Marketing for Tool Websites: Complete Guide</h3>
+        <p>Combine AdSense with high-ticket affiliate programs like SaaS, hosting, and software to maximize revenue per visitor.</p>
+        <div class="post-footer"><span>Nov 28, 2025</span><a href="blog-affiliate-marketing.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
+      </div>
+    </article>
+
+    <!-- Card 17 -->
+    <article class="post-card post-item" data-cat="seo">
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=600&q=80" alt="Core Web Vitals"></div>
+      <div class="post-body">
+        <span class="post-cat">Performance</span>
+        <h3>Core Web Vitals: Boost Your Site Speed & SEO Rank</h3>
+        <p>Master LCP, FID, CLS metrics and learn optimization techniques that get your site in Google's top results.</p>
+        <div class="post-footer"><span>Nov 25, 2025</span><a href="blog-core-web-vitals.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
+      </div>
+    </article>
+
+    <!-- Card 18 -->
+    <article class="post-card post-item" data-cat="tools">
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=600&q=80" alt="Build Chrome Extension"></div>
+      <div class="post-body">
+        <span class="post-cat">Development</span>
+        <h3>How to Build a Chrome Extension in 2026</h3>
+        <p>Step-by-step guide to building, packaging, and publishing a Chrome extension to the Web Store for passive growth.</p>
+        <div class="post-footer"><span>Nov 22, 2025</span><a href="blog-chrome-extension.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
+      </div>
+    </article>
+
+    <!-- Card 19 -->
+    <article class="post-card post-item" data-cat="tutorials">
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=600&q=80" alt="AI Content Tools"></div>
+      <div class="post-body">
+        <span class="post-cat">AI & Tools</span>
+        <h3>Best AI Content Tools for Bloggers in 2026</h3>
+        <p>Comparison of ChatGPT, Claude, Gemini, and specialized AI writing tools - which actually boost your productivity?</p>
+        <div class="post-footer"><span>Nov 20, 2025</span><a href="blog-ai-content-tools.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
+      </div>
+    </article>
+
+    <!-- Card 20 -->
+    <article class="post-card post-item" data-cat="monetization">
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=600&q=80" alt="Email List Building"></div>
+      <div class="post-body">
+        <span class="post-cat">Email Marketing</span>
+        <h3>Email List Building for Tool Websites</h3>
+        <p>Convert anonymous tool users into subscribers with lead magnets, exit intents, and smart popup strategies.</p>
+        <div class="post-footer"><span>Nov 18, 2025</span><a href="blog-email-list-building.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
+      </div>
+    </article>
+
+    <!-- Card 21 -->
+    <article class="post-card post-item" data-cat="seo">
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=600&q=80" alt="Backlink Strategies"></div>
+      <div class="post-body">
+        <span class="post-cat">Link Building</span>
+        <h3>White-Hat Backlink Strategies That Work in 2026</h3>
+        <p>Guest posting, HARO, broken link building, and skyscraper technique - proven methods for authority building.</p>
+        <div class="post-footer"><span>Nov 15, 2025</span><a href="blog-backlink-strategies.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
+      </div>
+    </article>
+
+    <!-- Card 22 -->
+    <article class="post-card post-item" data-cat="tutorials">
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80" alt="JavaScript APIs"></div>
+      <div class="post-body">
+        <span class="post-cat">Development</span>
+        <h3>10 JavaScript APIs Every Tool Developer Should Know</h3>
+        <p>From File API to Clipboard, Web Share, Canvas, and more - essential browser APIs for building modern tools.</p>
+        <div class="post-footer"><span>Nov 12, 2025</span><a href="blog-javascript-apis.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
+      </div>
+    </article>
+
+    <!-- Card 23 -->
+    <article class="post-card post-item" data-cat="creators">
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?auto=format&fit=crop&w=600&q=80" alt="Content Calendar"></div>
+      <div class="post-body">
+        <span class="post-cat">Content Strategy</span>
+        <h3>How to Create a Content Calendar That Scales</h3>
+        <p>Plan, schedule, and automate your blog & social media posts for consistent audience growth.</p>
+        <div class="post-footer"><span>Nov 10, 2025</span><a href="blog-content-calendar.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
+      </div>
+    </article>
+
+    <!-- Card 24 -->
+    <article class="post-card post-item" data-cat="tools">
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&w=600&q=80" alt="PWA Tools"></div>
+      <div class="post-body">
+        <span class="post-cat">Web Tech</span>
+        <h3>Progressive Web Apps: The Future of Online Tools</h3>
+        <p>Why PWAs offer app-like experiences, offline support, and push notifications without app store barriers.</p>
+        <div class="post-footer"><span>Nov 08, 2025</span><a href="blog-pwa-guide.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
+      </div>
+    </article>
+
+    <!-- Card 25 -->
+    <article class="post-card post-item" data-cat="monetization">
+      <div class="post-thumb"><img src="https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?auto=format&fit=crop&w=600&q=80" alt="YouTube Monetization"></div>
+      <div class="post-body">
+        <span class="post-cat">YouTube</span>
+        <h3>YouTube Monetization: From 0 to Partner Program</h3>
+        <p>Complete roadmap to reach 1000 subscribers, 4000 watch hours, and start earning ad revenue on YouTube.</p>
+        <div class="post-footer"><span>Nov 05, 2025</span><a href="blog-youtube-monetization.html" style="color:var(--primary-peach);font-weight:700;">Read →</a></div>
       </div>
     </article>
 
   </div>
-
 </main>
 
 <footer>
