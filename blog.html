@@ -1,478 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><!-- Google & Browser Round Peach Favicon -->
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="apple-touch-icon" sizes="180x180" href="favicon.svg">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<meta name="theme-color" content="#E07A5F">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog & Guides - ToolsMediaDownload</title>
-<meta name="description" content="Learn how to build utility tools, monetize with AdSense, repurpose media content, optimize images, improve SEO & protect passwords.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<meta name="description" content="Learn how to build utility tools, monetize with AdSense, repurpose media content, optimize images, improve SEO and protect digital assets.">
+<link rel="canonical" href="https://toolsmediadownload.com/blog.html">
+<meta property="og:title" content="Blog & Guides - ToolsMediaDownload">
+<meta property="og:description" content="Practical guides for creators, developers and online tool builders.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://toolsmediadownload.com/blog.html">
 <meta name="theme-color" content="#E07A5F">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23E07A5F'/%3E%3Cpath fill='%23fff' d='M13 2L4 14h6l-2 8 9-12h-6l2-8z'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+
 <style>
-:root{
-  --bg-warm:#FAF5EE; --card-bg:#FFFFFF; --primary-peach:#E07A5F;
-  --peach-gradient:linear-gradient(135deg,#FF9E7D 0%,#E07A5F 50%,#D95D39 100%);
-  --text-dark:#2C221E; --text-muted:#706661; --border-warm:#EFE3D8;
-  --dark-footer:#1A1615; --glow-peach:rgba(224,122,95,0.4);
-}
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg-warm);color:var(--text-dark);line-height:1.6;overflow-x:hidden;}
-a{text-decoration:none;color:inherit;}
-
-/* Header */
-header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border-warm);z-index:100;padding:0.9rem 1.5rem;}
-.nav-wrap{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
-.logo{font-size:1.4rem;font-weight:800;color:var(--text-dark);display:flex;align-items:center;gap:0.3rem;white-space:nowrap;}
-.logo span{background:var(--peach-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.nav-links{display:flex;gap:1.8rem;list-style:none;}
-.nav-links a{color:var(--text-dark);font-weight:500;transition:color 0.2s;font-size:0.95rem;}
-.nav-links a:hover{color:var(--primary-peach);}
-.hamburger{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--text-dark);padding:0.25rem;}
-
-/* Mobile Menu */
-.mobile-menu{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:200;}
-.mobile-menu.active{display:block;}
-.mobile-menu-panel{background:#fff;width:85%;max-width:320px;height:100%;padding:2rem 1.5rem;}
-.mobile-menu-panel .close-btn{background:none;border:none;font-size:2rem;float:right;cursor:pointer;}
-.mobile-menu-panel ul{list-style:none;margin-top:3rem;}
-.mobile-menu-panel li{padding:1rem 0;border-bottom:1px solid var(--border-warm);}
-.mobile-menu-panel a{font-size:1.1rem;font-weight:500;}
-
-/* Blog Hero */
-.blog-hero{background:var(--peach-gradient);color:#fff;padding:3.5rem 1.5rem;text-align:center;}
-.blog-hero h1{font-size:2.5rem;margin-bottom:0.8rem;font-weight:800;}
-.blog-hero p{font-size:1.15rem;max-width:650px;margin:0 auto;opacity:0.95;}
-
-/* Category Filter Bar */
-.filter-bar{background:#fff;border-bottom:1px solid var(--border-warm);padding:1rem 1.5rem;position:sticky;top:61px;z-index:90;}
-.filter-container{max-width:1200px;margin:0 auto;display:flex;gap:0.75rem;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;}
-.filter-container::-webkit-scrollbar{display:none;}
-.filter-btn{padding:0.45rem 1.1rem;border-radius:25px;border:1px solid var(--border-warm);background:var(--bg-warm);color:var(--text-dark);font-size:0.9rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:all 0.2s;}
-.filter-btn:hover,.filter-btn.active{background:var(--primary-peach);color:#fff;border-color:var(--primary-peach);}
-
-/* Content Container */
-.blog-container{max-width:1200px;margin:3rem auto;padding:0 1.5rem;}
-
-/* Featured Post */
-.featured-card{background:#fff;border:1px solid var(--border-warm);border-radius:20px;overflow:hidden;margin-bottom:3rem;display:grid;grid-template-columns:1.1fr 1fr;gap:0;box-shadow:0 8px 24px rgba(0,0,0,0.04);transition:transform 0.3s,box-shadow 0.3s;}
-.featured-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px var(--glow-peach);border-color:var(--primary-peach);}
-.featured-img{width:100%;height:100%;min-height:300px;overflow:hidden;background:var(--peach-gradient);position:relative;}
-.featured-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.3s;}
-.featured-card:hover .featured-img img{transform:scale(1.04);}
-.featured-content{padding:2.5rem;display:flex;flex-direction:column;justify-content:center;}
-.post-cat{display:inline-block;padding:0.25rem 0.75rem;border-radius:15px;background:#FEE4D6;color:#9A3412;font-size:0.75rem;font-weight:700;text-transform:uppercase;margin-bottom:1rem;width:fit-content;}
-.featured-content h2{font-size:1.8rem;margin-bottom:1rem;line-height:1.3;}
-.featured-content p{color:var(--text-muted);margin-bottom:1.5rem;font-size:1.02rem;}
-.post-meta{font-size:0.85rem;color:var(--text-muted);display:flex;gap:1rem;align-items:center;}
-.read-btn{display:inline-block;margin-top:1.5rem;color:var(--primary-peach);font-weight:700;font-size:1rem;}
-
-/* Grid Layout */
-.posts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2rem;}
-.post-card{background:#fff;border:1px solid var(--border-warm);border-radius:16px;overflow:hidden;transition:all 0.3s;display:flex;flex-direction:column;}
-.post-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,0.08);border-color:var(--primary-peach);}
-.post-thumb{height:200px;width:100%;overflow:hidden;background:var(--peach-gradient);position:relative;}
-.post-thumb img{width:100%;height:100%;object-fit:cover;transition:transform 0.3s;}
-.post-card:hover .post-thumb img{transform:scale(1.05);}
-.post-body{padding:1.5rem;display:flex;flex-direction:column;flex-grow:1;}
-.post-body h3{font-size:1.2rem;margin-bottom:0.7rem;line-height:1.35;font-weight:700;}
-.post-body p{color:var(--text-muted);font-size:0.95rem;margin-bottom:1.2rem;flex-grow:1;line-height:1.55;}
-.post-footer{display:flex;justify-content:space-between;align-items:center;padding-top:1rem;border-top:1px solid var(--border-warm);font-size:0.85rem;color:var(--text-muted);}
-
-/* Footer */
-footer{background:var(--dark-footer);color:#fff;padding:3rem 1.5rem 1.5rem;margin-top:4rem;}
-.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-bottom:2rem;}
-.footer-col h4{margin-bottom:1rem;color:var(--primary-peach);}
-.footer-col ul{list-style:none;}
-.footer-col li{margin-bottom:0.5rem;}
-.footer-col a{color:#ccc;font-size:0.95rem;}
-.footer-col a:hover{color:var(--primary-peach);}
-.footer-bottom{text-align:center;padding-top:1.5rem;border-top:1px solid #333;color:#999;font-size:0.9rem;}
-
-/* Mobile */
-@media(max-width:768px){
-  .nav-links{display:none;}
-  .hamburger{display:block;}
-  .featured-card{grid-template-columns:1fr;}
-  .featured-img{height:220px;}
-  .featured-content{padding:1.5rem;}
-  .featured-content h2{font-size:1.4rem;}
-}
-@media(max-width:640px){
-  header{padding:0.75rem 1rem;}
-  .logo{font-size:1.15rem;}
-  .blog-hero{padding:2.5rem 1rem;}
-  .blog-hero h1{font-size:1.8rem;}
-  .blog-hero p{font-size:1rem;}
-  .blog-container{padding:0 1rem;margin:2rem auto;}
-  .posts-grid{grid-template-columns:1fr;gap:1.5rem;}
-}
+:root{--bg:#FAF5EE;--card:#fff;--peach:#E07A5F;--peach-dark:#D95D39;--light:#FDE8E1;--gradient:linear-gradient(135deg,#FF9E7D 0%,#E07A5F 50%,#D95D39 100%);--ink:#2C221E;--muted:#5C534E;--border:#EFE3D8;--footer:#1A1615;--ease:cubic-bezier(.4,0,.2,1);--shadow:0 8px 20px rgba(44,34,30,.05);--large-shadow:0 18px 36px rgba(44,34,30,.09)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}html{scroll-behavior:smooth}body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;overflow-x:hidden}a{text-decoration:none;color:inherit}::selection{background:rgba(224,122,95,.2)}
+header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.82);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--border);transition:box-shadow .3s var(--ease)}header.scrolled{box-shadow:var(--shadow)}.nav{max-width:1200px;margin:auto;padding:.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}.logo{font-family:'Space Grotesk',sans-serif;font-size:1.45rem;font-weight:700;white-space:nowrap}.logo span{background:var(--gradient);-webkit-background-clip:text;color:transparent}.links{display:flex;align-items:center;gap:.25rem;list-style:none}.links a{display:inline-flex;align-items:center;gap:.25rem;padding:.5rem 1rem;border-radius:8px;color:var(--muted);font-size:.94rem;font-weight:600;transition:.25s var(--ease)}.links a:hover,.links a.active{background:var(--light);color:var(--peach)}.drop{position:relative}.drop-menu{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(8px);width:440px;display:grid;grid-template-columns:1fr 1fr;background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:var(--large-shadow);padding:.55rem;opacity:0;visibility:hidden;transition:.25s var(--ease)}.drop:hover .drop-menu,.drop.open .drop-menu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}.drop-menu a{font-size:.84rem;padding:.55rem .75rem}.hamburger{display:none;width:44px;height:44px;border:2px solid var(--border);border-radius:10px;background:transparent;color:var(--ink);font-size:1.3rem;cursor:pointer}.mobile{display:none}
+.hero{position:relative;overflow:hidden;background:var(--gradient);color:#fff;text-align:center;padding:4.5rem 1.5rem 4rem}.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 18% 20%,rgba(255,255,255,.25),transparent 50%),radial-gradient(ellipse at 82% 80%,rgba(255,158,125,.3),transparent 52%);pointer-events:none}.hero>*{position:relative;z-index:1}.eyebrow{display:inline-block;padding:.4rem 1rem;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.16);border-radius:99px;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em}.hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.15;letter-spacing:-.04em;margin:1.1rem auto .8rem}.hero p{max-width:680px;margin:auto;font-size:1.08rem;opacity:.96}.hero-badges{display:flex;justify-content:center;gap:.65rem;flex-wrap:wrap;margin-top:1.6rem}.hero-badges span{padding:.45rem .9rem;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.14);border-radius:99px;font-size:.84rem;font-weight:600}
+.filter-bar{position:sticky;top:72px;z-index:90;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:1rem 1.5rem}.filter-container{max-width:1200px;margin:auto;display:flex;gap:.65rem;overflow-x:auto;scrollbar-width:none}.filter-container::-webkit-scrollbar{display:none}.filter-btn{border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:99px;padding:.5rem 1rem;white-space:nowrap;font:600 .85rem 'Plus Jakarta Sans';cursor:pointer;transition:.25s var(--ease)}.filter-btn:hover,.filter-btn.active{background:var(--peach);border-color:var(--peach);color:#fff}
+.container{max-width:1200px;margin:3rem auto;padding:0 1.5rem}.featured{display:grid;grid-template-columns:1.05fr 1fr;background:#fff;border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:3rem;transition:.3s var(--ease)}.featured:hover{transform:translateY(-3px);box-shadow:var(--large-shadow)}.featured-media{min-height:330px;background:var(--gradient);position:relative;overflow:hidden}.featured-media img,.post-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}.featured:hover img,.post-card:hover img{transform:scale(1.05)}.featured-copy{padding:2.5rem;display:flex;flex-direction:column;justify-content:center}.category{display:inline-block;width:max-content;padding:.3rem .75rem;border-radius:99px;background:#FEE4D6;color:#9A3412;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.9rem}.featured h2{font-family:'Space Grotesk',sans-serif;font-size:1.85rem;line-height:1.25;margin-bottom:.8rem}.featured p,.post-card p{color:var(--muted)}.featured p{font-size:1rem;margin-bottom:1rem}.meta{display:flex;gap:1rem;color:var(--muted);font-size:.82rem;flex-wrap:wrap}.read-link{display:inline-flex;align-items:center;gap:.4rem;margin-top:1.2rem;color:var(--peach);font-weight:800;font-size:.9rem}
+.posts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.5rem}.post-card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:.3s var(--ease);box-shadow:var(--shadow)}.post-card:hover{transform:translateY(-4px);box-shadow:var(--large-shadow);border-color:rgba(224,122,95,.4)}.post-thumb{height:190px;background:var(--gradient);overflow:hidden}.post-body{display:flex;flex-direction:column;flex:1;padding:1.35rem}.post-body h3{font-family:'Space Grotesk',sans-serif;font-size:1.15rem;line-height:1.3;margin-bottom:.55rem}.post-body p{font-size:.9rem;line-height:1.55;margin-bottom:1rem;flex:1}.post-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding-top:.8rem;color:var(--muted);font-size:.78rem}.post-footer a{color:var(--peach);font-weight:800}
+.full-articles{display:grid;gap:1.5rem;margin-top:3rem}.full-article{background:#fff;border:1px solid var(--border);border-radius:16px;padding:2rem;box-shadow:var(--shadow);scroll-margin-top:130px}.full-article.hidden{display:none}.full-article h2{font-family:'Space Grotesk',sans-serif;font-size:1.65rem;line-height:1.25;margin:.35rem 0 .8rem}.full-article h3{color:var(--peach-dark);font-size:1rem;margin:1.25rem 0 .35rem}.full-article p{color:var(--muted);font-size:.94rem;margin-bottom:.78rem}.full-article ul{color:var(--muted);padding-left:1.25rem;font-size:.92rem;margin-bottom:.8rem}.full-article li{margin:.25rem 0}.full-article strong{color:var(--ink)}.takeaway{background:var(--light);border-left:4px solid var(--peach);padding:.85rem 1rem;border-radius:0 10px 10px 0;color:var(--ink);font-size:.9rem;margin-top:1rem}.guide-card{background:var(--gradient);color:#fff;border-radius:18px;padding:2.5rem 2rem;text-align:center;margin-top:3rem;box-shadow:0 12px 30px rgba(224,122,95,.3);position:relative;overflow:hidden}.guide-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 25% 40%,rgba(255,255,255,.2),transparent 48%);pointer-events:none}.guide-card>*{position:relative;z-index:1}.guide-card h2{font-family:'Space Grotesk',sans-serif;font-size:1.75rem;margin-bottom:.5rem}.guide-card p{opacity:.95;max-width:620px;margin:auto}.open-btn{display:inline-flex;align-items:center;gap:.45rem;margin-top:1.2rem;border:0;border-radius:11px;padding:.9rem 1.8rem;background:#fff;color:var(--peach);font:800 .96rem 'Plus Jakarta Sans';cursor:pointer;transition:.25s var(--ease);box-shadow:0 5px 18px rgba(0,0,0,.12)}.open-btn:hover{transform:translateY(-2px);box-shadow:0 12px 25px rgba(0,0,0,.2)}
+footer{background:var(--footer);color:#fff;padding:3.8rem 1.5rem 1.8rem;margin-top:4rem}.footer-grid{max-width:1200px;margin:0 auto 2.5rem;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem}.footer-brand p{max-width:300px;color:#A09691;font-size:.9rem;margin-top:1rem}.footer-col h4{color:var(--peach);margin-bottom:1rem;font-size:1rem}.footer-col ul{list-style:none}.footer-col li{margin-bottom:.55rem}.footer-col a{color:#bbb;font-size:.9rem;transition:color .25s var(--ease)}.footer-col a:hover{color:var(--peach)}.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:1.5rem;text-align:center;color:#817873;font-size:.84rem}
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}}@media(max-width:768px){.links{display:none}.hamburger{display:flex;align-items:center;justify-content:center}.drop-menu{display:none}.mobile{position:fixed;inset:0;z-index:200;background:rgba(26,22,21,.5);backdrop-filter:blur(4px)}.mobile.open{display:block}.mobile-panel{width:min(330px,88vw);height:100%;background:#fff;padding:2rem 1.5rem;overflow:auto;transform:translateX(-100%);transition:transform .35s var(--ease)}.mobile.open .mobile-panel{transform:translateX(0)}.mobile-close{float:right;border:0;background:transparent;color:var(--ink);font-size:2rem;cursor:pointer}.mobile-panel nav{clear:both;padding-top:2rem}.mobile-panel nav>a{display:block;padding:.7rem 0;border-bottom:1px solid var(--border);font-weight:600}.mobile-label{padding:1.3rem 0 .45rem;color:var(--muted);font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em}.mobile-sub a{display:block;padding:.4rem 0;color:var(--muted);font-size:.9rem}.featured{grid-template-columns:1fr}.featured-media{height:230px;min-height:0}.featured-copy{padding:1.5rem}.featured h2{font-size:1.45rem}.full-article{padding:1.4rem}.full-article h2{font-size:1.4rem}}@media(max-width:640px){.nav{padding:.75rem 1rem}.logo{font-size:1.15rem}.hero{padding:3.5rem 1rem}.hero h1{font-size:2rem}.hero p{font-size:1rem}.filter-bar{top:66px;padding:.8rem 1rem}.container{padding:0 1rem;margin:2rem auto}.posts-grid{grid-template-columns:1fr;gap:1.2rem}.guide-card{padding:2rem 1.2rem}.footer-grid{grid-template-columns:1fr;gap:2rem}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-
-<header>
-  <div class="nav-wrap">
-    <a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="blog.html" style="color:var(--primary-peach);">Blog</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('active')">☰</button>
-  </div>
-</header>
-
-<div class="mobile-menu" id="mobileMenu">
-  <div class="mobile-menu-panel">
-    <button class="close-btn" onclick="document.getElementById('mobileMenu').classList.remove('active')">×</button>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="pdf-tools.html">PDF Tools</a></li>
-      <li><a href="disclaimer.html">Disclaimer</a></li>
-    </ul>
-  </div>
-</div>
-
-<section class="blog-hero">
-  <h1>Guides, Tips & Creator Insights</h1>
-  <p>Learn how to monetize free web tools, optimize media files, boost social media reach & protect your digital assets.</p>
-</section>
-
-<!-- Filter Bar -->
-<div class="filter-bar">
-  <div class="filter-container">
-    <button class="filter-btn active" onclick="filterPosts('all', this)">All Posts</button>
-    <button class="filter-btn" onclick="filterPosts('monetization', this)">💰 Monetization</button>
-    <button class="filter-btn" onclick="filterPosts('tools', this)">🛠️ Utility Tools</button>
-    <button class="filter-btn" onclick="filterPosts('tutorials', this)">📖 Tutorials</button>
-    <button class="filter-btn" onclick="filterPosts('seo', this)">🔍 SEO & Traffic</button>
-    <button class="filter-btn" onclick="filterPosts('creators', this)">🎨 Creators</button>
-  </div>
-</div>
-
-<main class="blog-container">
-
-  <!-- Featured Post -->
-  <article class="featured-card post-item" data-cat="monetization">
-    <div class="featured-img">
-      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Monetize Free Utility Tools">
-    </div>
-    <div class="featured-content">
-      <span class="post-cat">Monetization Guide</span>
-      <h2>How to Monetize Free Utility Tools with Google AdSense</h2>
-      <p>Building free browser-based online tools is one of the highest ROI strategies for passive AdSense revenue. Learn step-by-step setup, placement & approval strategies.</p>
-      <div class="post-meta">
-        <span>📅 Jan 15, 2026</span>
-        <span>⏱️ 6 min read</span>
-      </div>
-      <a href="blog-make-money-online.html" class="read-btn">Read Full Article →</a>
-    </div>
-  </article>
-
-  <!-- 15 Posts Grid -->
-  <div class="posts-grid">
-
-    <!-- Card 1: How Media Downloaders Work -->
-    <article class="post-card post-item" data-cat="tools">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" alt="How Media Downloaders Work">
-      </div>
-      <div class="post-body">
-        <span class="post-cat">Tool Architecture</span>
-        <h3>How Media Downloader Tools Work Under the Hood</h3>
-        <p>A technical dive into browser fetching, CORS proxies, media extraction, and client-side stream downloading.</p>
-        <div class="post-footer">
-          <span>Jan 14, 2026</span>
-          <a href="blog-build-media-downloader-tools.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- Card 2: Repurpose Content for Passive Income -->
-    <article class="post-card post-item" data-cat="creators">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=600&q=80" alt="Repurpose Content for Passive Income">
-      </div>
-      <div class="post-body">
-        <span class="post-cat">Creator Growth</span>
-        <h3>How to Repurpose Content for Passive Income</h3>
-        <p>Turn long-form YouTube videos into Shorts, Reels, TikToks & Blog posts using simple free web utilities.</p>
-        <div class="post-footer">
-          <span>Jan 12, 2026</span>
-          <a href="blog-repurpose-content-passive-income.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- Card 3: Image Compression Guide (FIXED NEW HD IMAGE) -->
-    <article class="post-card post-item" data-cat="tutorials">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=600&q=80" alt="Image & GIF Compression Guide">
-      </div>
-      <div class="post-body">
-        <span class="post-cat">Optimization</span>
-        <h3>Complete Guide to Image & GIF Compression</h3>
-        <p>Learn how lossy and lossless algorithms shrink image file size up to 80% without losing visual quality.</p>
-        <div class="post-footer">
-          <span>Jan 10, 2026</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- Card 4: Social Media Image Sizes 2026 -->
-    <article class="post-card post-item" data-cat="creators">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=600&q=80" alt="Social Media Sizes 2026">
-      </div>
-      <div class="post-body">
-        <span class="post-cat">Cheat Sheet</span>
-        <h3>Social Media Image Sizes Cheat Sheet 2026</h3>
-        <p>Exact pixel dimensions for Instagram, YouTube, TikTok, Facebook, Twitter & LinkedIn posts, headers & stories.</p>
-        <div class="post-footer">
-          <span>Jan 08, 2026</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- Card 5: PDF Tools Guide -->
-    <article class="post-card post-item" data-cat="tutorials">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&w=600&q=80" alt="PDF Tools Guide">
-      </div>
-      <div class="post-body">
-        <span class="post-cat">Productivity</span>
-        <h3>Top PDF Tools Every Creator & Freelancer Needs</h3>
-        <p>How client-side JavaScript PDF manipulation makes merging, splitting, and image conversion fast & secure.</p>
-        <div class="post-footer">
-          <span>Jan 05, 2026</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- Card 6: QR Code Marketing -->
-    <article class="post-card post-item" data-cat="creators">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80" alt="QR Code Marketing">
-      </div>
-      <div class="post-body">
-        <span class="post-cat">Marketing</span>
-        <h3>How to Use QR Codes for Marketing in 2026</h3>
-        <p>Drive offline traffic to your online pages, social channels, WiFi networks, and email campaigns effortlessly.</p>
-        <div class="post-footer">
-          <span>Jan 03, 2026</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- Card 7: Password Security Guide -->
-    <article class="post-card post-item" data-cat="tutorials">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80" alt="Password Security Guide">
-      </div>
-      <div class="post-body">
-        <span class="post-cat">Cybersecurity</span>
-        <h3>Password Security Guide: Protecting Your Digital Life</h3>
-        <p>Understanding password entropy, brute-force resistance, multi-factor auth & how to generate unbreakable keys.</p>
-        <div class="post-footer">
-          <span>Jan 01, 2026</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- Card 8: SEO Strategies for Web Tools -->
-    <article class="post-card post-item" data-cat="seo">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="SEO Strategies for Web Tools">
-      </div>
-      <div class="post-body">
-        <span class="post-cat">SEO & Ranking</span>
-        <h3>SEO Strategies for Web Tool Websites</h3>
-        <p>Rank #1 on Google for high-intent keywords like 'free image compressor' and 'QR generator online'.</p>
-        <div class="post-footer">
-          <span>Dec 28, 2025</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- Card 9: Google AdSense Approval Tips -->
-    <article class="post-card post-item" data-cat="monetization">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&q=80" alt="Google AdSense Approval Tips">
-      </div>
-      <div class="post-body">
-        <span class="post-cat">Monetization</span>
-        <h3>Google AdSense Approval Tips for Free Tool Sites</h3>
-        <p>Avoid 'Valueless Inventory' rejections. Essential legal pages, navigation, and content ratios required by Google.</p>
-        <div class="post-footer">
-          <span>Dec 25, 2025</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- Card 10: WebP vs JPG vs PNG -->
-    <article class="post-card post-item" data-cat="tutorials">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80" alt="WebP vs JPG vs PNG">
-      </div>
-      <div class="post-body">
-        <span class="post-cat">Web Formats</span>
-        <h3>WebP vs JPG vs PNG: Which Image Format to Use?</h3>
-        <p>Compare compression speed, file sizes, transparency support, and browser compatibility across modern web image formats.</p>
-        <div class="post-footer">
-          <span>Dec 20, 2025</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- Card 11: Instagram Reels Growth -->
-    <article class="post-card post-item" data-cat="creators">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1611162616475-46b635cb6868?auto=format&fit=crop&w=600&q=80" alt="Instagram Reels Growth">
-      </div>
-      <div class="post-body">
-        <span class="post-cat">Social Media</span>
-        <h3>Instagram Reels Growth Strategies for 2026</h3>
-        <p>Hook formulas, trending audio selection, watch-time optimization, and editing techniques that trigger viral reach.</p>
-        <div class="post-footer">
-          <span>Dec 18, 2025</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- Card 12: Decoding TikTok Algorithm -->
-    <article class="post-card post-item" data-cat="creators">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1596558450255-7c0b7be9d56a?auto=format&fit=crop&w=600&q=80" alt="Decoding TikTok Algorithm">
-      </div>
-      <div class="post-body">
-        <span class="post-cat">Social Media</span>
-        <h3>Decoding the TikTok Algorithm in 2026</h3>
-        <p>A breakdown of completion rate metrics, SEO search keywords on TikTok, sound signals, and batch testing rules.</p>
-        <div class="post-footer">
-          <span>Dec 15, 2025</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- Card 13: Free Online Tools vs Paid SaaS Alternatives -->
-    <article class="post-card post-item" data-cat="tools">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="Free Online Tools vs Paid SaaS">
-      </div>
-      <div class="post-body">
-        <span class="post-cat">SaaS Comparison</span>
-        <h3>Free Online Tools vs Paid SaaS Alternatives</h3>
-        <p>Why browser-based client-side micro-tools are disrupting expensive monthly subscription software models.</p>
-        <div class="post-footer">
-          <span>Dec 10, 2025</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- Card 14: Color Theory Basics for Content Creators -->
-    <article class="post-card post-item" data-cat="creators">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?auto=format&fit=crop&w=600&q=80" alt="Color Theory Basics">
-      </div>
-      <div class="post-body">
-        <span class="post-cat">Design Tips</span>
-        <h3>Color Theory Basics for Content Creators</h3>
-        <p>How to choose brand colors, complementary palettes, and HEX codes that invoke emotion & click actions.</p>
-        <div class="post-footer">
-          <span>Dec 05, 2025</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- Card 15: Designing YouTube Thumbnails That Get High CTR -->
-    <article class="post-card post-item" data-cat="creators">
-      <div class="post-thumb">
-        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="High CTR Thumbnails">
-      </div>
-      <div class="post-body">
-        <span class="post-cat">YouTube Growth</span>
-        <h3>Designing YouTube Thumbnails That Get High CTR</h3>
-        <p>Color contrast ratios, facial expressions, bold typography rules, and thumbnail sizing tips to double video impressions.</p>
-        <div class="post-footer">
-          <span>Dec 01, 2025</span>
-          <a href="blog.html" style="color:var(--primary-peach);font-weight:700;">Read →</a>
-        </div>
-      </div>
-    </article>
-
-  </div>
-
-</main>
-
-<footer>
-  <div class="footer-grid">
-    <div class="footer-col">
-      <h4>⚡ ToolsMediaDownload</h4>
-      <p style="color:#ccc;font-size:0.9rem;">Free browser-based tools for creators, developers & everyone.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Quick Links</h4>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Tools</h4>
-      <ul>
-        <li><a href="pdf-tools.html">PDF Tools</a></li>
-        <li><a href="qr-generator.html">QR Generator</a></li>
-        <li><a href="image-converter.html">Image Converter</a></li>
-        <li><a href="password-generator.html">Password Generator</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="disclaimer.html">Disclaimer</a></li>
-        <li><a href="terms.html">Terms of Service</a></li>
-        <li><a href="dmca.html">DMCA</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">© 2026 ToolsMediaDownload. All rights reserved.</div>
-</footer>
-
+<header id="siteHeader"><div class="nav"><a href="index.html" class="logo">ToolsMedia<span>Download</span></a><nav aria-label="Main navigation"><ul class="links"><li><a href="index.html">Home</a></li><li class="drop" id="toolsDrop"><a href="#posts" aria-expanded="false">Tools ▾</a><div class="drop-menu"><a href="gif-compressor.html">GIF Compressor</a><a href="video-to-gif.html">Video to GIF</a><a href="image-converter.html">Image Converter</a><a href="image-resizer.html">Image Resizer</a><a href="pdf-tools.html">PDF Tools</a><a href="instagram-downloader.html">Instagram Downloader</a><a href="facebook-downloader.html">Facebook Downloader</a><a href="tiktok-downloader.html">TikTok Downloader</a><a href="qr-generator.html">QR Code Generator</a><a href="color-picker.html">Color Picker</a><a href="text-tools.html">Text Tools</a><a href="password-generator.html">Password Generator</a></div></li><li><a href="blog.html" class="active">Blog</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></nav><button class="hamburger" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button></div></header>
+<div class="mobile" id="mobileMenu"><div class="mobile-panel"><button class="mobile-close" id="menuClose" aria-label="Close menu">×</button><nav><a href="index.html">Home</a><a href="blog.html">Blog</a><a href="about.html">About</a><a href="contact.html">Contact</a><div class="mobile-label">Tools</div><div class="mobile-sub"><a href="gif-compressor.html">GIF Compressor</a><a href="video-to-gif.html">Video to GIF</a><a href="image-converter.html">Image Converter</a><a href="image-resizer.html">Image Resizer</a><a href="pdf-tools.html">PDF Tools</a><a href="instagram-downloader.html">Instagram Downloader</a><a href="facebook-downloader.html">Facebook Downloader</a><a href="tiktok-downloader.html">TikTok Downloader</a><a href="qr-generator.html">QR Code Generator</a><a href="color-picker.html">Color Picker</a><a href="text-tools.html">Text Tools</a><a href="password-generator.html">Password Generator</a></div><div class="mobile-label">Legal</div><div class="mobile-sub"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a><a href="disclaimer.html">Disclaimer</a></div></nav></div></div>
+<section class="hero"><span class="eyebrow">ToolsMediaDownload editorial</span><h1>Guides, Tips & Creator Insights</h1><p>Practical reading for building useful websites, growing responsibly, optimizing media and protecting digital work.</p><div class="hero-badges"><span>Long-form guides</span><span>Practical examples</span><span>Creator-focused</span></div></section>
+<div class="filter-bar"><div class="filter-container"><button class="filter-btn active" data-filter="all">All Posts</button><button class="filter-btn" data-filter="monetization">Monetization</button><button class="filter-btn" data-filter="tools">Utility Tools</button><button class="filter-btn" data-filter="tutorials">Tutorials</button><button class="filter-btn" data-filter="seo">SEO & Traffic</button><button class="filter-btn" data-filter="creators">Creators</button></div></div>
+<main class="container" id="posts"><article class="featured"><div class="featured-media"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80" alt="Analytics dashboard for website monetization" loading="lazy"></div><div class="featured-copy"><span class="category">Monetization Guide</span><h2>How to Monetize Free Utility Tools with Google AdSense</h2><p>Building useful browser-based tools can create a durable audience when the product, content and advertising experience are designed around visitor intent.</p><div class="meta"><span>January 15, 2026</span><span>1000-word guide</span></div><a class="read-link" href="#article-1">Read full article</a></div></article><div class="posts-grid" id="postGrid"></div><div class="full-articles" id="fullArticles"></div><section class="guide-card"><h2>Want the complete creator guide?</h2><p>Open the full website-building guide for practical lessons about AI-assisted development, SEO, security, responsive design and launching online tools.</p><a class="open-btn" href="file.html">Open Creator Guide</a></section></main>
+<footer><div class="footer-grid"><div class="footer-brand"><a href="index.html" class="logo">ToolsMedia<span>Download</span></a><p>Free browser-based tools and practical guides for creators, developers and everyday users.</p></div><div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="blog.html">Blog</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div><div class="footer-col"><h4>Popular Tools</h4><ul><li><a href="instagram-downloader.html">Instagram Downloader</a></li><li><a href="facebook-downloader.html">Facebook Downloader</a></li><li><a href="tiktok-downloader.html">TikTok Downloader</a></li><li><a href="image-converter.html">Image Converter</a></li></ul></div><div class="footer-col"><h4>Legal</h4><ul><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Service</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="dmca.html">DMCA</a></li></ul></div></div><div class="footer-bottom">© <span id="year"></span> ToolsMediaDownload. All rights reserved.</div></footer>
 <script>
-function filterPosts(cat, btn) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  const items = document.querySelectorAll('.post-item');
-  items.forEach(item => {
-    if (cat === 'all' || item.getAttribute('data-cat') === cat) {
-      item.style.display = item.classList.contains('featured-card') ? 'grid' : 'flex';
-    } else {
-      item.style.display = 'none';
-    }
-  });
-}
+const posts=[
+['How Media Downloader Tools Work Under the Hood','Tool Architecture','A technical dive into browser fetching, CORS proxies, media extraction and client-side stream downloading.','tools'],
+['How to Repurpose Content for Passive Income','Creator Growth','Turn long-form videos into Shorts, Reels, TikToks and blog posts with a repeatable workflow.','creators'],
+['Complete Guide to Image and GIF Compression','Optimization','Learn how lossy and lossless methods reduce file size while protecting visual quality.','tutorials'],
+['Social Media Image Sizes Cheat Sheet 2026','Creator Guide','Plan exact dimensions for Instagram, YouTube, TikTok, Facebook and LinkedIn content.','creators'],
+['Top PDF Tools Every Creator and Freelancer Needs','Productivity','Understand browser-based PDF merging, splitting, conversion and compression workflows.','tutorials'],
+['How to Use QR Codes for Marketing in 2026','Marketing','Connect printed material to useful mobile destinations without creating a confusing scan experience.','creators'],
+['Password Security Guide: Protecting Your Digital Life','Cybersecurity','Learn about unique passwords, entropy, password managers, multi-factor authentication and recovery.','tutorials'],
+['SEO Strategies for Web Tool Websites','SEO and Ranking','Build search visibility for high-intent tool keywords through useful pages and strong internal links.','seo'],
+['Google AdSense Approval Tips for Free Tool Sites','Monetization','Avoid thin content and improve trust, navigation, usefulness and policy readiness before applying.','monetization'],
+['WebP vs JPG vs PNG: Which Image Format to Use?','Web Formats','Compare file size, transparency, quality, compatibility and workflow for modern websites.','tutorials'],
+['Instagram Reels Growth Strategies for 2026','Social Media','Improve hooks, watch time, editing, captions and publishing consistency for short-form video.','creators'],
+['Decoding the TikTok Algorithm in 2026','Social Media','Understand completion rate, search language, sound signals, testing and audience feedback.','creators'],
+['Free Online Tools vs Paid SaaS Alternatives','SaaS Comparison','Compare browser-based micro-tools with subscription software and choose the right workflow.','tools'],
+['Color Theory Basics for Content Creators','Design Tips','Choose brand colors, accessible combinations and HEX values that support clear action.','creators'],
+['Designing YouTube Thumbnails That Get High CTR','YouTube Growth','Use contrast, hierarchy, readable type and accurate curiosity to improve thumbnail performance.','creators'],
+['How to Build Utility Content People Actually Need','SEO and Traffic','Turn recurring visitor questions into useful pages that support both search and product discovery.','seo']
+];
+const imageUrls=['photo-1518770660439-4636190af475','photo-1553729459-efe14ef6055d','photo-1522542550221-31fd19575a2d','photo-1611162617474-5b21e879e113','photo-1568667256549-094345857637','photo-1526374965328-7f61d4dc18c5','photo-1563986768609-322da13575f3','photo-1460925895917-afdab827c52f','photo-1554224155-8d04cb21cd6c','photo-1507238691740-187a5b1d37b8','photo-1611162616475-46b635cb6868','photo-1596558450255-7c0b7be9d56a','photo-1460925895917-afdab827c52f','photo-1500462918059-b1a0cb512f1d','photo-1618005182384-a83a8bd57fbe','photo-1551288049-bebda4e38f71'];
+function makeText(title,category,summary){return {intro:`${title} is not just a trend; it is a practical subject for anyone building a useful online presence. The strongest results come from understanding the visitor's problem before choosing a tool, platform or publishing tactic. This guide explains the important decisions in plain language and turns them into steps you can test. The goal is not to promise a shortcut. It is to help you build a repeatable process that is clear, responsible and useful long after the first visit.`,context:`The reason this topic matters is that small improvements compound. A faster image, clearer button, stronger password, better content brief or more honest explanation can change whether someone completes a task and returns later. Search engines also respond to the same signals people do: clear structure, useful detail, reliable pages and an experience that works on a phone. Treat every recommendation as part of the complete journey rather than an isolated trick.`,steps:`Start by defining one outcome. Write down who the visitor is, what they are trying to do and what a successful result looks like. Then divide the work into a short sequence: prepare the input, complete the main action, check the result and offer a sensible next step. Keep the first screen focused. Secondary options can appear after the main task or in a clearly labeled section. This approach makes the experience easier to learn and easier to test.`,quality:`Use real examples while you work. Test a normal case, an empty case, a long value, an unusual format and a failure. On a website, resize the browser, use the keyboard, reload on a slower connection and check whether the page still explains itself. If an outside service is involved, plan for timeouts and changed responses. A polished workflow includes a calm loading state and a recovery message, not only a successful result.`,content:`The content around a tool is equally important. Explain what the tool supports, what it cannot do, how privacy works and why a visitor should trust the result. Use headings that answer actual questions, short paragraphs and examples that do not exaggerate. Link related pages with descriptive text. A person who arrives from search should understand the page without needing to read three other articles first.`,safety:`Protect the boundary between visitors and the system. Treat submitted text, files, links and data from outside services as untrusted. Validate values before processing, avoid inserting untrusted input as HTML, keep secrets away from browser code and request only the permissions you need. Privacy statements should match real behavior. If a file stays in the browser, explain that clearly; if data goes to a provider, say so.`,mistakes:`Common mistakes usually come from optimizing one metric while ignoring the full experience. A site may chase keywords and publish thin pages, add features until the interface feels crowded, or choose a powerful service without checking cost and privacy. Another mistake is skipping mobile and keyboard testing because the desktop screenshot looks finished. Avoid these problems by keeping a short checklist and reviewing the work as a first-time visitor.`,measurement:`Measure the decision you actually care about. For content, watch useful clicks and returning readers rather than page views alone. For a tool, check completion, failure and repeat use. For performance, measure loading and interaction on realistic devices. For security, review exposure and permission boundaries. Numbers are clues, not verdicts, so combine them with support questions, direct testing and careful observation.`,finish:`The best next step is a small, testable improvement. Apply the method to one page, record what happened and refine it before expanding the idea. Consistency beats a one-time burst of effort. When the visitor can understand the promise, complete the task and recover from problems, the website becomes more trustworthy and more likely to earn lasting traffic.`}};
+function articleHtml(post,index){const [title,category,summary,cat]=post;const t=makeText(title,category,summary);return `<article class="full-article" id="article-${index+1}" data-cat="${cat}"><span class="category">${category}</span><h2>${title}</h2><p>${t.intro}</p><h3>Why this matters</h3><p>${t.context}</p><h3>A practical starting point</h3><p>${t.steps}</p><h3>How to build a reliable workflow</h3><p>${t.quality}</p><ul><li><strong>Begin with the visitor:</strong> define the problem, audience and desired result.</li><li><strong>Keep the core action clear:</strong> reduce unnecessary choices before the main task is complete.</li><li><strong>Test realistic conditions:</strong> include mobile screens, long content, slow requests and failure states.</li><li><strong>Document the decision:</strong> record what you changed and why it should remain that way.</li></ul><h3>Content and discoverability</h3><p>${t.content}</p><h3>Privacy and safety</h3><p>${t.safety}</p><h3>Mistakes worth avoiding</h3><p>${t.mistakes}</p><h3>How to measure improvement</h3><p>${t.measurement}</p><h3>Apply the idea to your own project</h3><p>Use this guide as a working brief rather than a checklist you read once. For <strong>${title}</strong>, choose one page, one audience and one outcome. Write down the current experience before making a change so you can compare the result honestly. Keep useful behavior in place while improving the surrounding clarity. If the subject is a tool, test the input and output together. If it is content, make sure the article answers the visitor before asking for a click. If it is growth, connect the measurement to a real user benefit. A focused experiment teaches more than a large redesign because you can tell which decision caused the improvement.</p><h3>Before you publish</h3><p>Read the page as a first-time visitor and ask whether the promise is accurate, the next action is obvious and the limitations are visible. Check the title, description, headings, links, buttons, mobile layout, keyboard focus, loading state and failure state. Remove claims that cannot be supported and replace vague language with specific instructions. Confirm that outside services, cookies and data handling are described in the privacy policy. Save a known-good version before release, then watch real feedback after publishing. The work is not finished when the page looks complete; it is finished when people can use it confidently and recover when conditions are imperfect.</p><h3>How to keep improving</h3><p>Return to the page after visitors have had time to use it. Support questions often reveal missing explanations, while analytics can show where people stop. Improve the most important obstacle first and keep a short record of the change. Recheck facts, platform rules and browser behavior regularly, especially when the topic depends on an outside service. Small updates preserve trust better than a large rewrite that changes everything at once. Over time, these careful improvements create a library that earns traffic because it remains accurate, approachable and connected to a genuinely useful experience.</p><div class="takeaway"><strong>Key takeaway:</strong> ${t.finish}</div><a class="read-link" href="#posts">Return to all posts</a></article>`}
+const grid=document.getElementById('postGrid');const full=document.getElementById('fullArticles');grid.innerHTML=posts.map((post,index)=>{const [title,category,summary,cat]=post;return `<article class="post-card post-item" data-cat="${cat}"><div class="post-thumb"><img src="https://images.unsplash.com/${imageUrls[index]}?auto=format&fit=crop&w=600&q=80" alt="${title}" loading="lazy"></div><div class="post-body"><span class="category">${category}</span><h3>${title}</h3><p>${summary}</p><div class="post-footer"><span>1000-word guide</span><a href="#article-${index+1}">Read</a></div></div></article>`}).join('');full.innerHTML=posts.map(articleHtml).join('');
+const filters=document.querySelectorAll('.filter-btn');filters.forEach(button=>button.addEventListener('click',()=>{filters.forEach(item=>item.classList.remove('active'));button.classList.add('active');const selected=button.dataset.filter;document.querySelectorAll('.post-item,.full-article').forEach(item=>{item.style.display=selected==='all'||item.dataset.cat===selected?'':'none'})}));
+const header=document.getElementById('siteHeader');let ticking=false;window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{header.classList.toggle('scrolled',window.scrollY>10);ticking=false});ticking=true}},{passive:true});
+const toolsDrop=document.getElementById('toolsDrop');if(toolsDrop){const link=toolsDrop.querySelector(':scope > a');link.addEventListener('click',event=>{if(window.matchMedia('(hover:none)').matches){event.preventDefault();toolsDrop.classList.toggle('open');link.setAttribute('aria-expanded',toolsDrop.classList.contains('open'))}})}
+const menu=document.getElementById('mobileMenu'),toggle=document.getElementById('menuToggle'),close=document.getElementById('menuClose');function closeMenu(){menu.classList.remove('open');toggle.setAttribute('aria-expanded','false');document.body.style.overflow=''}toggle.addEventListener('click',()=>{menu.classList.add('open');toggle.setAttribute('aria-expanded','true');document.body.style.overflow='hidden'});close.addEventListener('click',closeMenu);menu.addEventListener('click',event=>{if(event.target===menu)closeMenu()});menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));document.addEventListener('keydown',event=>{if(event.key==='Escape')closeMenu()});document.getElementById('year').textContent=new Date().getFullYear();
 </script>
-
 </body>
 </html>
