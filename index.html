@@ -13,7 +13,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ToolsMediaDownload - Free Online Tools for Creators">
 <meta name="twitter:description" content="Free browser-based tools for creators. No signup needed.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%23E07A5F'/><path fill='%23fff' d='M13 2L4 14h6l-2 8 9-12h-6l2-8z'/></svg>">
 <meta name="theme-color" content="#E07A5F">
 
 <!-- JSON-LD Structured Data -->
@@ -60,6 +60,8 @@
   --bg-warm: #FAF5EE;
   --card-bg: #FFFFFF;
   --primary-peach: #E07A5F;
+  --peach-hover: #D95D39;
+  --peach-light: #FDE8E1;
   --peach-gradient: linear-gradient(135deg, #FF9E7D 0%, #E07A5F 50%, #D95D39 100%);
   --text-dark: #2C221E;
   --text-muted: #5C534E;
@@ -70,6 +72,7 @@
 
   /* Premium easing & shadows */
   --ease-premium: cubic-bezier(0.4, 0, 0.2, 1);
+  --radius-main: 16px;
   --shadow-sm: 0 1px 2px rgba(44, 34, 30, 0.04), 0 2px 6px rgba(44, 34, 30, 0.03);
   --shadow-md: 0 2px 4px rgba(44, 34, 30, 0.04), 0 8px 20px rgba(44, 34, 30, 0.05);
   --shadow-lg: 0 4px 12px rgba(44, 34, 30, 0.06), 0 20px 40px rgba(44, 34, 30, 0.08);
@@ -163,6 +166,10 @@ header {
   border-bottom: 1px solid rgba(239, 227, 216, 0.6);
   z-index: 100;
   padding: 0.9rem 1.5rem;
+  transition: box-shadow 0.3s var(--ease-premium);
+}
+header.scrolled {
+  box-shadow: var(--shadow-md);
 }
 .nav-wrap {
   max-width: 1200px;
@@ -189,48 +196,108 @@ header {
 }
 nav[aria-label="Main navigation"] .nav-links {
   display: flex;
-  gap: 2rem;
+  gap: 0.25rem;
   list-style: none;
+  align-items: center;
 }
-.nav-links a {
+.nav-links > li > a {
   color: var(--text-dark);
   font-weight: 500;
-  transition: color 0.3s var(--ease-premium);
+  transition: color 0.3s var(--ease-premium), background 0.3s var(--ease-premium);
   font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.nav-links > li > a:hover,
+.nav-links > li > a.active,
+.nav-links > li > a:focus-visible {
+  color: var(--primary-peach);
+  background: var(--peach-light);
+}
+
+/* Tools dropdown */
+.dropdown {
   position: relative;
 }
-.nav-links a::after {
-  content: '';
+.dropdown-menu {
   position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--peach-gradient);
-  border-radius: 2px;
-  transition: width 0.3s var(--ease-premium);
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: var(--card-bg);
+  border: 1px solid var(--border-warm);
+  border-radius: 14px;
+  box-shadow: var(--shadow-lg);
+  padding: 0.6rem 0;
+  min-width: 240px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s var(--ease-premium);
+  z-index: 1100;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.1rem 0;
+  max-width: 480px;
 }
-.nav-links a:hover::after,
-.nav-links a:focus-visible::after {
-  width: 100%;
+.dropdown:hover .dropdown-menu,
+.dropdown.open .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
 }
-.nav-links a:hover,
-.nav-links a:focus-visible {
+.dropdown-menu a {
+  display: block;
+  padding: 0.55rem 1.25rem;
+  color: var(--text-dark);
+  font-weight: 500;
+  font-size: 0.88rem;
+  transition: background 0.2s, color 0.2s;
+  border-radius: 0;
+}
+.dropdown-menu a:hover {
+  background: var(--peach-light);
   color: var(--primary-peach);
 }
+.dropdown-menu a:focus-visible {
+  background: var(--peach-light);
+  color: var(--primary-peach);
+  outline: none;
+}
+.dropdown-chevron {
+  font-size: 0.65rem;
+  transition: transform 0.25s var(--ease-premium);
+}
+.dropdown:hover .dropdown-chevron,
+.dropdown.open .dropdown-chevron {
+  transform: rotate(180deg);
+}
+
 .hamburger {
   display: none;
   background: none;
-  border: none;
-  font-size: 1.6rem;
+  border: 2px solid var(--border-warm);
+  border-radius: 10px;
+  font-size: 1.35rem;
   cursor: pointer;
   color: var(--text-dark);
-  padding: 0.25rem;
+  padding: 0;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: border-color 0.2s, background 0.2s;
+}
+.hamburger:hover {
+  border-color: var(--primary-peach);
+  background: var(--peach-light);
 }
 .hamburger:focus-visible {
   outline: 2px solid var(--primary-peach);
   outline-offset: 2px;
-  border-radius: 4px;
 }
 
 /* Mobile Menu */
@@ -280,19 +347,36 @@ nav[aria-label="Main navigation"] .nav-links {
   outline-offset: 2px;
   border-radius: 4px;
 }
+.mobile-menu-panel .mobile-section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  padding: 1.5rem 0 0.5rem;
+}
 .mobile-menu-panel ul {
   list-style: none;
-  margin-top: 3rem;
 }
-.mobile-menu-panel li {
-  padding: 1rem 0;
+.mobile-menu-panel > ul > li {
+  padding: 0.6rem 0;
   border-bottom: 1px solid var(--border-warm);
+}
+.mobile-menu-panel .mobile-sub li {
+  padding: 0.5rem 0;
+  border: none;
 }
 .mobile-menu-panel a {
   font-size: 1.1rem;
   font-weight: 500;
   display: block;
   transition: transform 0.25s var(--ease-premium), color 0.25s var(--ease-premium);
+}
+.mobile-menu-panel .mobile-sub a {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding-left: 1rem;
 }
 .mobile-menu-panel a:hover,
 .mobile-menu-panel a:focus-visible {
@@ -304,7 +388,7 @@ nav[aria-label="Main navigation"] .nav-links {
 .hero {
   background: var(--peach-gradient);
   color: #fff;
-  padding: 6rem 1.5rem;
+  padding: 5.5rem 1.5rem;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -323,6 +407,35 @@ nav[aria-label="Main navigation"] .nav-links {
   position: relative;
   z-index: 1;
 }
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.4rem 1.1rem;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+.hero-eyebrow .pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #6EE7B7;
+  box-shadow: 0 0 0 0 rgba(110, 231, 183, 0.5);
+  animation: pulse-ring 2s var(--ease-premium) infinite;
+}
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(110, 231, 183, 0.5); }
+  70% { box-shadow: 0 0 0 8px rgba(110, 231, 183, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(110, 231, 183, 0); }
+}
 .hero h1 {
   font-size: 3rem;
   margin-bottom: 1.2rem;
@@ -338,6 +451,42 @@ nav[aria-label="Main navigation"] .nav-links {
   opacity: 0.96;
   font-weight: 400;
   letter-spacing: -0.005em;
+}
+.hero-cta-group {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #fff;
+  color: var(--primary-peach);
+  padding: 0.95rem 2rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  transition: all 0.3s var(--ease-premium);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+.hero-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.2);
+}
+.hero-cta--ghost {
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+.hero-cta--ghost:hover {
+  background: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 .hero-badges {
   display: flex;
@@ -364,6 +513,32 @@ nav[aria-label="Main navigation"] .nav-links {
 }
 .badge-pill:hover {
   transform: translateY(-2px);
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+}
+.hero-stat {
+  text-align: center;
+}
+.hero-stat-num {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+.hero-stat-label {
+  font-size: 0.85rem;
+  opacity: 0.85;
+  font-weight: 500;
+  margin-top: 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 /* Sections */
@@ -768,7 +943,19 @@ footer {
     display: none;
   }
   .hamburger {
-    display: block;
+    display: flex;
+  }
+  .hero {
+    padding: 4rem 1.5rem;
+  }
+  .hero h1 {
+    font-size: 2.3rem;
+  }
+  .hero-stats {
+    gap: 2rem;
+  }
+  .hero-stat-num {
+    font-size: 1.7rem;
   }
 }
 
@@ -778,8 +965,14 @@ footer {
   .hero { padding: 3rem 1rem; }
   .hero h1 { font-size: 2rem; }
   .hero p { font-size: 1rem; }
+  .hero-cta { padding: 0.85rem 1.5rem; font-size: 0.98rem; }
+  .hero-cta-group { flex-direction: column; width: 100%; }
+  .hero-cta-group .hero-cta { width: 100%; justify-content: center; }
   .hero-badges { gap: 0.5rem; margin-top: 1.6rem; }
   .badge-pill { font-size: 0.82rem; padding: 0.4rem 0.9rem; }
+  .hero-stats { gap: 1.5rem; margin-top: 2rem; }
+  .hero-stat-num { font-size: 1.5rem; }
+  .hero-stat-label { font-size: 0.78rem; }
   section { padding: 3rem 1rem; }
   .section-title { font-size: 1.65rem; }
   .section-sub { margin-bottom: 2.5rem; }
@@ -795,6 +988,10 @@ footer {
   .footer-grid { gap: 2rem; }
 }
 
+@media (max-width: 400px) {
+  .hero h1 { font-size: 1.75rem; }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -805,6 +1002,9 @@ footer {
   }
 }
 </style>
+  <meta property="og:image" content="https://bolt.new/static/og_default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
 </head>
 <body>
 
@@ -812,12 +1012,31 @@ footer {
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <!-- Header -->
-<header>
+<header id="siteHeader">
   <div class="nav-wrap">
     <a href="index.html" class="logo" aria-label="ToolsMediaDownload Home">⚡ ToolsMedia<span>Download</span></a>
     <nav aria-label="Main navigation">
       <ul class="nav-links">
         <li><a href="index.html" aria-current="page">Home</a></li>
+        <li class="dropdown" id="toolsDropdown">
+          <a href="#main-content" aria-haspopup="true" aria-expanded="false">Tools <span class="dropdown-chevron">▾</span></a>
+          <div class="dropdown-menu" role="menu">
+            <a href="gif-compressor.html" role="menuitem">GIF Compressor</a>
+            <a href="video-to-gif.html" role="menuitem">Video to GIF</a>
+            <a href="image-converter.html" role="menuitem">Image Converter</a>
+            <a href="image-resizer.html" role="menuitem">Image Resizer</a>
+            <a href="pdf-tools.html" role="menuitem">PDF Tools</a>
+            <a href="instagram-downloader.html" role="menuitem">Instagram Downloader</a>
+            <a href="facebook-downloader.html" role="menuitem">Facebook Downloader</a>
+            <a href="tiktok-downloader.html" role="menuitem">TikTok Downloader</a>
+            <a href="qr-generator.html" role="menuitem">QR Code Generator</a>
+            <a href="color-picker.html" role="menuitem">Color Picker</a>
+            <a href="text-tools.html" role="menuitem">Text Tools</a>
+            <a href="password-generator.html" role="menuitem">Password Generator</a>
+            <a href="json-formatter.html" role="menuitem">JSON Formatter</a>
+            <a href="base64-tool.html" role="menuitem">Base64 Encoder</a>
+          </div>
+        </li>
         <li><a href="blog.html">Blog</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
@@ -837,8 +1056,36 @@ footer {
         <li><a href="blog.html">Blog</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="mobile-section-label">Image & File Tools</div>
+      <ul class="mobile-sub">
+        <li><a href="gif-compressor.html">GIF Compressor</a></li>
+        <li><a href="video-to-gif.html">Video to GIF</a></li>
+        <li><a href="image-converter.html">Image Converter</a></li>
+        <li><a href="image-resizer.html">Image Resizer</a></li>
         <li><a href="pdf-tools.html">PDF Tools</a></li>
+      </ul>
+      <div class="mobile-section-label">Media Downloaders</div>
+      <ul class="mobile-sub">
+        <li><a href="instagram-downloader.html">Instagram Downloader</a></li>
+        <li><a href="facebook-downloader.html">Facebook Downloader</a></li>
+        <li><a href="tiktok-downloader.html">TikTok Downloader</a></li>
+      </ul>
+      <div class="mobile-section-label">Utility Tools</div>
+      <ul class="mobile-sub">
+        <li><a href="qr-generator.html">QR Code Generator</a></li>
+        <li><a href="color-picker.html">Color Picker</a></li>
+        <li><a href="text-tools.html">Text Tools</a></li>
+        <li><a href="password-generator.html">Password Generator</a></li>
+        <li><a href="json-formatter.html">JSON Formatter</a></li>
+        <li><a href="base64-tool.html">Base64 Encoder</a></li>
+      </ul>
+      <div class="mobile-section-label">Legal</div>
+      <ul class="mobile-sub">
+        <li><a href="privacy.html">Privacy Policy</a></li>
         <li><a href="disclaimer.html">Disclaimer</a></li>
+        <li><a href="terms.html">Terms of Service</a></li>
+        <li><a href="dmca.html">DMCA</a></li>
       </ul>
     </nav>
   </div>
@@ -849,12 +1096,34 @@ footer {
 
   <!-- Hero -->
   <section class="hero" aria-labelledby="hero-heading">
+    <div class="hero-eyebrow">
+      <span class="pulse-dot"></span>
+      14+ Free Tools, No Signup Needed
+    </div>
     <h1 id="hero-heading">Free Online Tools for Creators</h1>
     <p>Download media, convert images, generate QR codes & more. 100% browser-based. No signup, no limits.</p>
+    <div class="hero-cta-group">
+      <a href="#main-content" class="hero-cta">Explore Tools</a>
+      <a href="blog.html" class="hero-cta hero-cta--ghost">Read Blog</a>
+    </div>
     <div class="hero-badges" aria-label="Key features">
       <span class="badge-pill">🔒 100% Private</span>
       <span class="badge-pill">⚡ Lightning Fast</span>
       <span class="badge-pill">✨ No Signup Required</span>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">14+</div>
+        <div class="hero-stat-label">Free Tools</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">100%</div>
+        <div class="hero-stat-label">Browser-Based</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">$0</div>
+        <div class="hero-stat-label">Always Free</div>
+      </div>
     </div>
   </section>
 
@@ -1244,6 +1513,7 @@ footer {
     <div class="footer-col">
       <h4>Legal</h4>
       <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
         <li><a href="disclaimer.html">Disclaimer</a></li>
         <li><a href="terms.html">Terms of Service</a></li>
         <li><a href="dmca.html">DMCA</a></li>
@@ -1256,6 +1526,40 @@ footer {
 <script>
 // Dynamic year
 document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+// Header scroll shadow
+const siteHeader = document.getElementById('siteHeader');
+let scrollTicking = false;
+window.addEventListener('scroll', function() {
+  if (!scrollTicking) {
+    requestAnimationFrame(function() {
+      siteHeader.classList.toggle('scrolled', window.scrollY > 10);
+      scrollTicking = false;
+    });
+    scrollTicking = true;
+  }
+}, { passive: true });
+
+// Tools dropdown toggle on click (for touch / keyboard)
+const toolsDropdown = document.getElementById('toolsDropdown');
+if (toolsDropdown) {
+  const dropdownLink = toolsDropdown.querySelector('a');
+  dropdownLink.addEventListener('click', function(e) {
+    if (window.matchMedia('(hover: none)').matches) {
+      e.preventDefault();
+      toolsDropdown.classList.toggle('open');
+      const isOpen = toolsDropdown.classList.contains('open');
+      dropdownLink.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    }
+  });
+  // Close dropdown when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!toolsDropdown.contains(e.target)) {
+      toolsDropdown.classList.remove('open');
+      dropdownLink.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
 
 // Mobile menu
 const mobileMenu = document.getElementById('mobileMenu');
