@@ -1,774 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9596066166074391"
-     crossorigin="anonymous"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service - ToolsMediaDownload</title>
-    <meta name="description" content="Terms of Service for ToolsMediaDownload. Read our terms and conditions for using our free online tools.">
-    <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#E07A5F">
-    <link rel="canonical" href="https://toolsmediadownload.com/terms.html">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon.svg">
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-
-    <style>
-        /* ===== DESIGN SYSTEM (matches index.html) ===== */
-        :root {
-            --bg-warm: #FAF5EE;
-            --card-bg: #FFFFFF;
-            --primary-peach: #E07A5F;
-            --peach-hover: #D95D39;
-            --peach-light: #FDE8E1;
-            --peach-gradient: linear-gradient(135deg, #FF9E7D 0%, #E07A5F 50%, #D95D39 100%);
-            --text-dark: #2C221E;
-            --text-muted: #5C534E;
-            --border-warm: #EFE3D8;
-            --dark-footer: #1A1615;
-            --glow-peach: rgba(224, 122, 95, 0.4);
-            --ease-premium: cubic-bezier(0.4, 0, 0.2, 1);
-            --radius-main: 16px;
-            --shadow-sm: 0 1px 2px rgba(44,34,30,0.04), 0 2px 6px rgba(44,34,30,0.03);
-            --shadow-md: 0 2px 4px rgba(44,34,30,0.04), 0 8px 20px rgba(44,34,30,0.05);
-            --shadow-lg: 0 4px 12px rgba(44,34,30,0.06), 0 20px 40px rgba(44,34,30,0.08);
-        }
-
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            -webkit-text-size-adjust: 100%;
-        }
-
-        body {
-            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-            background: var(--bg-warm);
-            color: var(--text-dark);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
-        body.menu-open {
-            overflow: hidden;
-        }
-
-        /* ===== HEADER (frosted glass, matches index.html) ===== */
-        header {
-            background: rgba(255, 255, 255, 0.82);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-bottom: 1px solid var(--border-warm);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            transition: box-shadow 0.3s var(--ease-premium);
-        }
-
-        header.scrolled {
-            box-shadow: var(--shadow-md);
-        }
-
-        .nav-wrap {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0.9rem 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            flex-shrink: 0;
-            z-index: 1100;
-        }
-
-        .logo span {
-            background: var(--peach-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Desktop nav */
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-weight: 600;
-            font-size: 0.95rem;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: color 0.25s var(--ease-premium), background 0.25s var(--ease-premium);
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--primary-peach);
-            background: var(--peach-light);
-        }
-
-        /* Hamburger */
-        .hamburger {
-            display: none;
-            background: none;
-            border: 2px solid var(--border-warm);
-            border-radius: 10px;
-            font-size: 1.35rem;
-            color: var(--text-dark);
-            cursor: pointer;
-            width: 44px;
-            height: 44px;
-            align-items: center;
-            justify-content: center;
-            z-index: 1100;
-            transition: border-color 0.2s, background 0.2s;
-            line-height: 1;
-        }
-
-        .hamburger:hover {
-            border-color: var(--primary-peach);
-            background: var(--peach-light);
-        }
-
-        /* Mobile overlay */
-        .mobile-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(44, 34, 30, 0.45);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            z-index: 1040;
-            opacity: 0;
-            transition: opacity 0.3s var(--ease-premium);
-        }
-
-        .mobile-overlay.visible {
-            opacity: 1;
-        }
-
-        /* Mobile slide-in panel */
-        .mobile-panel {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            width: min(320px, 85vw);
-            background: var(--card-bg);
-            z-index: 1050;
-            transform: translateX(100%);
-            transition: transform 0.35s var(--ease-premium);
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            padding: 5.5rem 1.5rem 2rem;
-            box-shadow: -8px 0 30px rgba(44,34,30,0.12);
-        }
-
-        .mobile-panel.open {
-            transform: translateX(0);
-        }
-
-        .mobile-panel a {
-            display: block;
-            padding: 0.85rem 1rem;
-            color: var(--text-dark);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.05rem;
-            border-radius: 10px;
-            transition: background 0.2s, color 0.2s;
-        }
-
-        .mobile-panel a:hover,
-        .mobile-panel a.active {
-            background: var(--peach-light);
-            color: var(--primary-peach);
-        }
-
-        .mobile-panel .mobile-section-label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--text-muted);
-            padding: 1.5rem 1rem 0.5rem;
-        }
-
-        .mobile-panel .mobile-sub a {
-            font-size: 0.95rem;
-            font-weight: 500;
-            padding-left: 1.75rem;
-            color: var(--text-muted);
-        }
-
-        /* ===== HERO SECTION ===== */
-        .page-hero {
-            position: relative;
-            text-align: center;
-            padding: 4rem 1.5rem 2rem;
-            overflow: hidden;
-        }
-
-        .page-hero::before {
-            content: '';
-            position: absolute;
-            top: -40%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(255,158,125,0.15) 0%, rgba(224,122,95,0.06) 40%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .page-hero > * {
-            position: relative;
-            z-index: 1;
-        }
-
-        .page-hero h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            letter-spacing: -0.02em;
-        }
-
-        .page-hero h1 span {
-            background: var(--peach-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .page-hero p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            max-width: 560px;
-            margin: 0 auto;
-        }
-
-        .last-updated {
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            padding: 0 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        /* ===== CONTENT ===== */
-        .page-container {
-            max-width: 820px;
-            margin: 0 auto 4rem;
-            padding: 0 1.5rem;
-            flex: 1;
-        }
-
-        .content-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-warm);
-            border-radius: var(--radius-main);
-            padding: 2.5rem;
-            box-shadow: var(--shadow-md);
-        }
-
-        .content-card h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            margin-top: 2rem;
-            color: var(--text-dark);
-        }
-
-        .content-card h2:first-child {
-            margin-top: 0;
-        }
-
-        .content-card p {
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-            line-height: 1.75;
-        }
-
-        .content-card ul {
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-muted);
-        }
-
-        .content-card ul li {
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-            line-height: 1.65;
-        }
-
-        .content-card a {
-            color: var(--primary-peach);
-            font-weight: 600;
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.2s var(--ease-premium);
-        }
-
-        .content-card a:hover {
-            border-bottom-color: var(--primary-peach);
-        }
-
-        /* ===== FOOTER (matches index.html) ===== */
-        footer {
-            background: var(--dark-footer);
-            color: #FFFFFF;
-            padding: 4rem 1.5rem 2rem;
-            margin-top: auto;
-        }
-
-        .footer-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-brand .logo {
-            color: #FFFFFF;
-            margin-bottom: 1rem;
-        }
-
-        .footer-brand .logo span {
-            background: var(--peach-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .footer-brand p {
-            color: #A09691;
-            font-size: 0.9rem;
-            line-height: 1.7;
-            max-width: 300px;
-        }
-
-        .footer-col h4 {
-            color: #FFFFFF;
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 1.25rem;
-        }
-
-        .footer-col ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.7rem;
-        }
-
-        .footer-col a {
-            color: #A09691;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.25s var(--ease-premium);
-        }
-
-        .footer-col a:hover {
-            color: var(--primary-peach);
-        }
-
-        .footer-bottom {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-top: 2rem;
-            border-top: 1px solid #2D2725;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #706661;
-            font-size: 0.85rem;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            color: #706661;
-            font-size: 1.1rem;
-            text-decoration: none;
-            transition: color 0.25s var(--ease-premium);
-        }
-
-        .social-links a:hover {
-            color: var(--primary-peach);
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 900px) {
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-overlay,
-            .mobile-panel {
-                display: block;
-            }
-
-            .page-hero {
-                padding: 3rem 1.25rem 1.5rem;
-            }
-
-            .page-hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .content-card {
-                padding: 1.5rem;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .nav-wrap {
-                padding: 0.75rem 1rem;
-            }
-
-            .logo {
-                font-size: 1.25rem;
-            }
-
-            .page-hero h1 {
-                font-size: 1.85rem;
-            }
-
-            .page-container {
-                padding: 0 1rem;
-            }
-
-            .content-card {
-                padding: 1.25rem;
-            }
-
-            .content-card h2 {
-                font-size: 1.1rem;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .page-hero h1 {
-                font-size: 1.6rem;
-            }
-
-            .logo {
-                font-size: 1.1rem;
-            }
-        }
-
-        /* ===== ACCESSIBILITY ===== */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-
-            html {
-                scroll-behavior: auto;
-            }
-        }
-
-        :focus-visible {
-            outline: 2px solid var(--primary-peach);
-            outline-offset: 2px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9596066166074391" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JRMD3HTESC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-JRMD3HTESC");</script>
+<title>Terms of Service - Tools Media Downloader</title>
+<meta name="description" content="Terms of Service for Tools Media Downloader. Read our terms and conditions for using our free online tools.">
+<link rel="canonical" href="https://toolsmediadownload.online/terms.html">
+<meta property="og:title" content="Terms of Service - Tools Media Downloader">
+<meta property="og:description" content="Terms of Service for Tools Media Downloader. Read our terms and conditions for using our free online tools.">
+<meta property="og:type" content="website"><meta property="og:url" content="https://toolsmediadownload.online/terms.html">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="Terms of Service - Tools Media Downloader"><meta name="twitter:description" content="Terms of Service for Tools Media Downloader. Read our terms and conditions for using our free online tools.">
+<meta name="theme-color" content="#FFFAF5">
+<script>try{var t=localStorage.getItem("tmd_theme");if(!t&&matchMedia("(prefers-color-scheme: dark)").matches)t="dark";if(t==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23FFB454'/%3E%3Cstop offset='1' stop-color='%23E5482E'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M13.5 2L4.5 13.5h6L9 22l10.5-12h-6.5z' fill='url(%23g)' stroke='url(%23g)' stroke-width='1.2' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Tools Media Downloader","url":"https://toolsmediadownload.online/","description":"Free browser-based tools for creators, developers & everyone."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Terms of Service - Tools Media Downloader","url":"https://toolsmediadownload.online/terms.html"}</script>
+<style>
+:root{--bg:#FFFAF5;--ink:#231A16;--mut:#5C534E;--line:#EFE3D8;--p:#C4502F;--pl:#FDE8E1;--g:linear-gradient(135deg,#F2784B,#C4502F);--ease:cubic-bezier(.4,0,.2,1);--sh:0 1px 2px rgba(44,34,30,.05),0 4px 14px rgba(44,34,30,.05)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{font:16px/1.65 "Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}[hidden]{display:none!important}::selection{background:rgba(224,122,95,.25)}
+:focus-visible{outline:3px solid var(--p);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;top:-100%;left:1rem;background:var(--p);color:#fff;padding:.6rem 1.2rem;border-radius:0 0 8px 8px;z-index:999;font-weight:600}.skip:focus{top:0}
+header{position:sticky;top:0;z-index:100;background:rgba(255,250,245,.88);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px);border-bottom:1px solid var(--line);padding:.65rem 1.25rem;transition:box-shadow .3s var(--ease)}
+header.sc{box-shadow:var(--sh)}
+.nw{max-width:1160px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.logo{display:flex;align-items:center;gap:.3rem;font-size:1.3rem;font-weight:800;letter-spacing:-.03em;white-space:nowrap}.logo b{background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}.bolt{width:26px;height:26px;flex:none}
+.nl{display:flex;gap:.2rem;list-style:none;align-items:center}
+.nl>li>a{display:inline-flex;align-items:center;gap:.25rem;padding:.5rem .95rem;border-radius:8px;font-weight:600;font-size:.94rem;transition:.2s}
+.nl>li>a:hover,.nl>li>a[aria-current]{background:var(--pl);color:var(--p)}
+.dd{position:relative}
+.dm{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(6px);width:460px;padding-top:8px;opacity:0;visibility:hidden;transition:.2s var(--ease)}
+.dm>div{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 36px rgba(44,34,30,.14);padding:.5rem;display:grid;grid-template-columns:1fr 1fr}
+.dd:hover .dm,.dd:focus-within .dm,.dd.open .dm{opacity:1;visibility:visible;transform:translateX(-50%)}
+.dm a{display:block;padding:.5rem .8rem;border-radius:8px;font-size:.88rem;font-weight:500}.dm a:hover{background:var(--pl);color:var(--p)}
+.hb{display:none;flex:none;flex-direction:column;gap:4px;width:42px;height:42px;border:1px solid var(--line);border-radius:12px;background:var(--bg);cursor:pointer;align-items:center;justify-content:center;padding:0;transition:.2s}.hb i{display:block;width:18px;height:2px;border-radius:2px;background:var(--ink);transition:.2s}.hb:hover{border-color:var(--p);background:var(--pl)}.hb:hover i{background:var(--p)}
+.mm{position:fixed;inset:0;z-index:200;background:rgba(26,22,21,.5);backdrop-filter:blur(4px);opacity:0;visibility:hidden;transition:opacity .3s var(--ease),visibility .3s}
+.mm.on{opacity:1;visibility:visible}
+.mp{background:#fff;width:85%;max-width:320px;height:100%;padding:1.5rem;overflow-y:auto;transform:translateX(-100%);transition:transform .35s var(--ease)}.mm.on .mp{transform:none}
+.cb{background:none;border:0;font-size:2rem;float:right;cursor:pointer;color:var(--ink);line-height:1;padding:.25rem}
+.ml{clear:both;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;color:var(--mut);padding:1.2rem 0 .3rem}
+.mp a{display:block;padding:.5rem 0;font-weight:500}.mp a:hover{color:var(--p)}.mp .sub a{font-size:.95rem;color:var(--mut);padding-left:.8rem}
+/* hero */
+.hero{position:relative;text-align:center;padding:3.6rem 1.25rem 2.6rem;background:radial-gradient(60% 90% at 50% 0%,#FFE6D8 0,rgba(255,230,216,0) 70%)}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(#E6CDBB 1px,transparent 1.3px) 0 0/24px 24px;-webkit-mask-image:linear-gradient(#000 0,transparent 85%);mask-image:linear-gradient(#000 0,transparent 85%);opacity:.55;pointer-events:none}
+.hero>*{position:relative}
+.pill{display:inline-flex;align-items:center;gap:.5rem;background:#fff;border:1px solid var(--line);padding:.35rem 1rem;border-radius:99px;font-size:.84rem;font-weight:600;color:var(--mut);box-shadow:var(--sh)}
+.pd{width:8px;height:8px;border-radius:50%;background:#22C55E;animation:pr 2.2s infinite}@keyframes pr{0%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}70%,100%{box-shadow:0 0 0 8px rgba(34,197,94,0)}}
+.hero h1{font-size:clamp(2rem,5.2vw,3.2rem);font-weight:800;letter-spacing:-.035em;line-height:1.12;margin:1rem auto .8rem;max-width:760px}
+.hero h1 em{font-style:normal;background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero>p{font-size:1.1rem;color:var(--mut);max-width:600px;margin:0 auto}
+.sr{display:flex;align-items:center;gap:.6rem;max-width:560px;margin:1.6rem auto 1rem;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:.35rem .5rem .35rem 1rem;box-shadow:0 8px 28px rgba(196,80,47,.12);transition:.2s}
+.sr:focus-within{border-color:#E9855F;box-shadow:0 0 0 4px var(--pl),0 8px 28px rgba(196,80,47,.12)}
+.sr svg{flex:none;stroke:var(--mut)}.sr input{flex:1;min-width:0;font:inherit;border:0;outline:0;background:none;padding:.7rem .2rem;color:var(--ink)}
+.chips{display:flex;justify-content:center;flex-wrap:wrap;gap:.5rem;max-width:760px;margin:0 auto}
+.chip{display:inline-flex;align-items:center;gap:.45rem;background:#fff;border:1px solid var(--line);border-radius:99px;padding:.3rem .9rem .3rem .35rem;font-size:.88rem;font-weight:600;transition:.2s}.chip:hover{border-color:#E9A491;transform:translateY(-2px);box-shadow:var(--sh)}
+.trust{display:flex;justify-content:center;flex-wrap:wrap;gap:.4rem 1.5rem;margin-top:1.4rem;color:var(--mut);font-size:.9rem;font-weight:600}.trust span::before{content:"✓";color:#16A34A;margin-right:.35rem;font-weight:800}
+section{padding:3.2rem 1.25rem}.alt{background:#fff}.c{max-width:1160px;margin:auto}
+.st{font-size:1.8rem;font-weight:800;text-align:center;letter-spacing:-.025em;line-height:1.2;margin-bottom:.4rem}.ss{text-align:center;color:var(--mut);max-width:620px;margin:0 auto 2rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1rem}
+.tc{display:flex;gap:1rem;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.1rem 1.2rem;box-shadow:var(--sh);transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s}
+.alt .tc{background:var(--bg)}
+.tc:hover,.tc:focus-visible{transform:translateY(-3px);border-color:#E9A491;box-shadow:0 14px 30px rgba(224,122,95,.18)}
+.ic{flex:none;display:grid;place-items:center;width:50px;height:50px;border-radius:14px;background:linear-gradient(135deg,var(--a),var(--b));box-shadow:0 4px 12px rgba(0,0,0,.15)}.ic.sm{width:28px;height:28px;border-radius:9px;box-shadow:none}
+.tc h3{font-size:1.05rem;letter-spacing:-.01em;display:inline}.tc p{color:var(--mut);font-size:.9rem;margin:.15rem 0 .55rem;line-height:1.5}
+.tag{float:right;margin-left:.5rem;padding:.12rem .6rem;border-radius:99px;font-size:.64rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.t-popular,.t-free{background:#D1FAE5;color:#065F46}.t-new{background:#FEE4D6;color:#9A3412}.t-trending{background:#DBEAFE;color:#1E40AF}.t-hot{background:#FEE2E2;color:#991B1B}
+.go{display:inline-flex;gap:.3rem;color:var(--p);font-weight:700;font-size:.9rem}.go b{transition:transform .2s}.tc:hover .go b,.bc:hover .go b{transform:translateX(4px)}
+.none{display:none;text-align:center;color:var(--mut);padding:2rem 1rem}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem;max-width:960px;margin:auto}
+.steps li{display:flex;gap:1rem;background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.2rem}.n{flex:none;width:38px;height:38px;border-radius:50%;background:var(--g);color:#fff;font-weight:800;display:grid;place-items:center}.steps h3{font-size:1.05rem;margin-bottom:.2rem}.steps p{color:var(--mut);font-size:.92rem}
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.5rem;text-align:center}.fg span{font-size:2.2rem}.fg h3{margin:.3rem 0}.fg p{color:var(--mut);font-size:.95rem}
+.bg{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem}
+.bc{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--sh);transition:transform .25s,box-shadow .25s}.bc:hover,.bc:focus-visible{transform:translateY(-4px);box-shadow:0 16px 32px rgba(44,34,30,.12)}
+.bt{height:190px;background:var(--g);overflow:hidden}.bt img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}.bc:hover img{transform:scale(1.05)}
+.bb{padding:1.2rem 1.3rem 1.3rem}.bb h3{font-size:1.1rem;margin-bottom:.35rem;letter-spacing:-.01em}.bb p{color:var(--mut);font-size:.92rem;margin-bottom:.7rem}
+.more{text-align:center;margin-top:1.8rem}.more a{display:inline-block;background:var(--g);color:#fff;font-weight:700;padding:.8rem 2rem;border-radius:12px;transition:.2s}.more a:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(196,80,47,.35)}
+.ab{max-width:900px;margin:auto;display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;align-items:start}.ab p{color:var(--mut);margin-bottom:.8rem}.ab ul{list-style:none;background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.1rem 1.3rem}.ab li{padding:.45rem 0;font-weight:600;font-size:.95rem}.ab li::before{content:"✓";color:#16A34A;margin-right:.55rem;font-weight:800}.ab a{color:var(--p);font-weight:700}
+.fq{max-width:760px;margin:auto}details{background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:.7rem;padding:.9rem 1.1rem}summary{font-weight:700;cursor:pointer}details p{color:var(--mut);margin-top:.5rem;font-size:.95rem}
+.cta{background:var(--g);color:#fff;text-align:center}.cta h2{font-size:1.8rem;margin-bottom:.5rem}.cta p{margin-bottom:1.4rem}.cta a{display:inline-block;background:#fff;color:var(--p);font-weight:700;padding:.85rem 2.2rem;border-radius:12px}
+footer{background:#1A1615;color:#fff;padding:2.8rem 1.25rem 1.5rem}.fgr{max-width:1160px;margin:0 auto 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:2rem}
+footer h3{color:#FF9E7D;font-size:1rem;margin-bottom:.8rem}footer ul{list-style:none}footer li{margin-bottom:.5rem}footer li a{color:#ccc;font-size:.93rem}footer li a:hover{color:#FF9E7D}
+.fb{max-width:1160px;margin:auto;border-top:1px solid rgba(255,255,255,.1);padding-top:1.3rem;color:#aaa;font-size:.85rem;text-align:center}.fb p+p{margin-top:.3rem}
+.ck{position:fixed;left:1rem;right:1rem;bottom:1rem;z-index:150;max-width:560px;margin:auto;background:#231A16;color:#fff;border-radius:14px;padding:.9rem 1.1rem;display:flex;gap:1rem;align-items:center;box-shadow:0 12px 40px rgba(0,0,0,.35);font-size:.88rem}.ck a{text-decoration:underline}.ck button{flex:none;background:#fff;color:var(--ink);border:0;border-radius:9px;padding:.55rem 1.1rem;font:700 .88rem "Plus Jakarta Sans",sans-serif;cursor:pointer}
+@media(max-width:768px){.nl{display:none}.hb{display:flex}.ab{grid-template-columns:1fr}}
+@media(max-width:640px){section{padding:2.4rem 1rem}.st{font-size:1.5rem}.grid{grid-template-columns:1fr}.hero{padding:2.6rem 1rem 2rem}.ck{flex-direction:column;align-items:stretch;text-align:center}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* header: left group, actions, theme toggle, follow */
+.bl{display:flex;align-items:center;gap:.7rem;min-width:0}.ha{display:flex;align-items:center;gap:.6rem;flex:none}
+.tg{position:relative;flex:none;width:58px;height:32px;padding:0;border-radius:99px;border:1px solid var(--line);background:#F6E9DD;cursor:pointer;transition:background .3s var(--ease),border-color .3s}.tg:hover{border-color:var(--p)}
+.tg .th{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#FFB454,#F2784B);box-shadow:0 2px 6px rgba(196,80,47,.4);transition:left .3s var(--ease),background .3s}
+.tg svg{position:absolute;width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:opacity .2s,transform .3s}.tg .mo{opacity:0;transform:rotate(-40deg) scale(.6)}
+.fl{display:inline-flex;align-items:center;gap:.45rem;height:38px;padding:0 1rem 0 .85rem;border:1px solid transparent;border-radius:99px;background:var(--g);color:#fff;font:700 .88rem "Plus Jakarta Sans",system-ui,sans-serif;cursor:pointer;box-shadow:0 4px 14px rgba(196,80,47,.3);transition:.2s}.fl:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(196,80,47,.38)}
+.fl svg{width:16px;height:16px;flex:none;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.fl.on{background:var(--pl);color:var(--p);border-color:#E9A491;box-shadow:none}.fl.on svg{stroke:var(--p);fill:var(--p)}
+.ts{position:fixed;top:72px;left:50%;transform:translate(-50%,-12px);width:max-content;max-width:min(420px,calc(100% - 2rem));background:#231A16;color:#fff;border:1px solid rgba(255,255,255,.14);padding:.7rem 1.1rem;border-radius:12px;font-size:.88rem;font-weight:600;line-height:1.45;z-index:300;opacity:0;visibility:hidden;transition:.25s var(--ease);box-shadow:0 12px 32px rgba(0,0,0,.3)}.ts.on{opacity:1;visibility:visible;transform:translate(-50%,0)}
+@media(max-width:520px){.fl{padding:0;width:38px;justify-content:center}.fl span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.logo{font-size:.92rem}.bl{gap:.45rem}.ha{gap:.4rem}.hb{width:38px;height:38px}.tg{width:52px}}
+@media(max-width:400px){header{padding:.65rem 1rem}.logo{font-size:.8rem}.bolt{width:20px;height:20px}.tg{width:46px}.hb{width:36px;height:36px}.fl{width:36px;height:36px}}
+/* dark theme */
+:root[data-theme=dark]{color-scheme:dark;--bg:#14100E;--ink:#F4EBE4;--mut:#B8ACA4;--line:#2F2622;--p:#FF8F6B;--pl:#33201A;--sh:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.35)}
+[data-theme=dark] header{background:rgba(20,16,14,.86)}
+[data-theme=dark] .hero{background:radial-gradient(60% 90% at 50% 0%,#3A2118 0,rgba(58,33,24,0) 70%)}
+[data-theme=dark] .hero::before{background:radial-gradient(#3A2E28 1px,transparent 1.3px) 0 0/24px 24px}
+[data-theme=dark] .pill,[data-theme=dark] .chip,[data-theme=dark] .sr,[data-theme=dark] .tc,[data-theme=dark] .steps li,[data-theme=dark] .bc,[data-theme=dark] .ab ul,[data-theme=dark] details,[data-theme=dark] .dm>div,[data-theme=dark] .mp{background:#1E1814}
+[data-theme=dark] .alt{background:#1A1411}[data-theme=dark] .alt .tc{background:var(--bg)}[data-theme=dark] .cta a{color:#C4502F}
+[data-theme=dark] .tg{background:#2B211C}[data-theme=dark] .tg .th{left:calc(100% - 27px);background:linear-gradient(135deg,#5B6BC0,#3949AB);box-shadow:0 2px 6px rgba(0,0,0,.5)}[data-theme=dark] .tg .su{opacity:0;transform:rotate(40deg) scale(.6)}[data-theme=dark] .tg .mo{opacity:1;transform:none}
+[data-theme=dark] .fl.on{border-color:#6B3A2B}
+/* blog */
+button.chip{font:600 .88rem "Plus Jakarta Sans",system-ui,sans-serif;color:var(--ink);cursor:pointer;padding:.4rem .95rem}
+.chip.on{background:var(--g);color:#fff;border-color:transparent}
+.bt.e,.ab2{position:relative;overflow:hidden}.bt.e{display:grid;place-items:center;font-size:3.4rem}.bt.e img,.ab2 img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cl{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--p);background:var(--pl);padding:.15rem .7rem;border-radius:99px;margin-bottom:.55rem}
+.bb .mt{color:var(--mut);font-size:.8rem;margin-bottom:.6rem}
+.btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--g);color:#fff;font:700 .92rem "Plus Jakarta Sans",system-ui,sans-serif;padding:.75rem 1.5rem;border-radius:12px;border:1.5px solid transparent;cursor:pointer;transition:.2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(196,80,47,.3)}.btn.o{background:transparent;color:var(--p);border-color:#E9A491}
+.art{max-width:780px;margin:auto;padding:2rem 1.25rem 3rem}
+.crumb{font-size:.85rem;color:var(--mut);margin-bottom:1.2rem}.crumb a:hover{color:var(--p)}
+.ab2{height:190px;border-radius:18px;display:grid;place-items:center;font-size:4.4rem;margin-bottom:1.6rem;box-shadow:var(--sh)}
+.art h1{font-size:clamp(1.8rem,4.4vw,2.5rem);font-weight:800;letter-spacing:-.03em;line-height:1.18;margin:.3rem 0 .8rem}
+.meta{display:flex;flex-wrap:wrap;gap:.3rem 1.1rem;color:var(--mut);font-size:.88rem;margin-bottom:1.3rem}
+.lead{font-size:1.12rem;color:var(--ink);margin-bottom:1.2rem}
+.prose h2{font-size:1.4rem;letter-spacing:-.02em;line-height:1.25;margin:1.9rem 0 .55rem}
+.prose p{color:var(--mut);font-size:1.02rem;margin-bottom:1rem}
+.prose ul{margin:0 0 1.1rem 1.25rem;color:var(--mut)}.prose li{margin:.35rem 0}
+.tk{background:var(--pl);border-left:4px solid var(--p);border-radius:0 12px 12px 0;padding:.95rem 1.15rem;margin:1.6rem 0;font-size:.97rem}
+.note{font-size:.85rem;color:var(--mut);border-top:1px solid var(--line);padding-top:1rem;margin-top:1.6rem}
+.acts{display:flex;flex-wrap:wrap;gap:.7rem;margin:1.6rem 0 2.4rem}
+.rel{border-top:1px solid var(--line);padding-top:2rem}.rel .st{font-size:1.45rem;margin-bottom:1.2rem}
+.more{margin-top:1.8rem}
+@media(max-width:640px){.art{padding:1.4rem 1rem 2.4rem}.ab2{height:150px;font-size:3.4rem}}
+
+/* clean mobile menu */
+.mp{margin-left:auto;padding:0;display:flex;flex-direction:column;transform:translateX(100%);box-shadow:-14px 0 40px rgba(0,0,0,.2)}.mm.on .mp{transform:none}
+.mh{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.1rem;border-bottom:1px solid var(--line);position:sticky;top:0;background:inherit;z-index:1}
+.mh .mlogo{padding:0;font-weight:800;font-size:1.08rem;letter-spacing:-.02em}.mh .mlogo:hover{background:none}.mlogo b{background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cb{float:none;width:38px;height:38px;display:grid;place-items:center;border:1px solid var(--line);border-radius:10px;font-size:1.4rem;padding:0;transition:.2s}.cb:hover{border-color:var(--p);background:var(--pl)}
+#mn{padding:.5rem .75rem 2rem}
+.mp a{padding:.72rem 1rem;border-radius:10px;font-weight:600;font-size:.98rem}.mp a:hover{background:var(--pl);color:var(--p)}
+.ml{padding:1.3rem 1rem .35rem}
+.mp .sub{margin:0 0 .2rem .9rem;padding-left:.4rem;border-left:2px solid var(--line)}.mp .sub a{font-size:.92rem;font-weight:500;padding:.5rem .8rem;color:var(--mut)}.mp .sub a:hover{color:var(--p)}
+
+/* static pages */
+.prose ol{margin:0 0 1.1rem 1.25rem;color:var(--mut)}.prose h3{font-size:1.05rem;margin:1.3rem 0 .4rem}.prose a{color:var(--p);font-weight:600}.prose a:hover{text-decoration:underline}.prose strong{color:var(--ink)}
+.toc{columns:2;column-gap:2rem;margin:0 0 1.5rem 1.2rem;color:var(--mut);font-size:.93rem}.toc li{margin:.25rem 0}
+.upd{display:inline-block;background:var(--pl);color:var(--p);font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .8rem;border-radius:99px;margin-bottom:1.2rem}
+.ig{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;margin:0 0 1.6rem}.ig div{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1rem 1.1rem}.ig h3{font-size:1rem;margin:0 0 .25rem}.ig p{font-size:.9rem;margin:0}
+.fm{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.5rem;box-shadow:var(--sh)}.fm label{display:block;font-weight:600;font-size:.9rem;margin-bottom:.35rem}
+.fm input,.fm textarea{width:100%;font:inherit;font-size:16px;padding:.8rem 1rem;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);margin-bottom:1rem}.fm textarea{min-height:150px;resize:vertical}.fm input:focus,.fm textarea:focus{outline:0;border-color:#E9855F;box-shadow:0 0 0 3px var(--pl)}
+.fs{display:none;padding:.9rem 1.1rem;border-radius:10px;font-weight:600;font-size:.93rem;margin-bottom:1rem}.fs.ok{display:block;background:#E6F4EA;color:#137333}.fs.bad{display:block;background:#FCE8E6;color:#C5221F}
+[data-theme=dark] .ig div,[data-theme=dark] .fm{background:#1E1814}
+@media(max-width:640px){.toc{columns:1}}
+</style>
 </head>
 <body>
+<a href="#main-content" class="skip">Skip to main content</a>
+<header id="hd"><div class="nw"><div class="bl">
+<a href="index.html" class="logo" aria-label="Tools Media Downloader Home"><svg class="bolt" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="lb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFB454"/><stop offset="1" stop-color="#E5482E"/></linearGradient></defs><path d="M13.500 2L4.500 13.500h6L9 22l10.500-12h-6.500z" fill="url(#lb)" stroke="url(#lb)" stroke-width="1.200" stroke-linejoin="round"/></svg><span>Tools Media <b>Downloader</b></span></a></div>
+<nav aria-label="Main navigation"><ul class="nl">
+<li><a href="index.html">Home</a></li>
+<li class="dd" id="dd"><a href="index.html#tools" aria-haspopup="true" aria-expanded="false">Tools <small aria-hidden="true">▾</small></a><div class="dm" role="menu"><div><a href="gif-compressor.html" role="menuitem">GIF Compressor</a><a href="video-to-gif.html" role="menuitem">Video to GIF</a><a href="image-converter.html" role="menuitem">Image Converter</a><a href="image-resizer.html" role="menuitem">Image Resizer</a><a href="pdf-tools.html" role="menuitem">PDF Tools</a><a href="instagram-downloader.html" role="menuitem">Instagram Downloader</a><a href="facebook-downloader.html" role="menuitem">Facebook Downloader</a><a href="tiktok-downloader.html" role="menuitem">TikTok Downloader</a><a href="qr-generator.html" role="menuitem">QR Code Generator</a><a href="text-tools.html" role="menuitem">Text Tools</a></div></div></li>
+<li><a href="blog.html">Blog</a></li><li><a href="about.html">About</a></li></ul></nav>
+<div class="ha"><button class="tg" id="tg" type="button" role="switch" aria-checked="false" aria-label="Switch to dark mode"><span class="th"><svg class="su" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="mo" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg></span></button><button class="fl" id="fl" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0"/></svg><span id="fx">Follow</span></button><button class="hb" id="mt" aria-label="Open menu" aria-expanded="false" aria-controls="mm"><i></i><i></i><i></i></button></div></div></header>
+<div class="ts" id="ts" role="status" aria-live="polite"></div>
+<div class="mm" id="mm" role="dialog" aria-modal="true" aria-label="Mobile navigation menu"><div class="mp"><div class="mh"><a href="index.html" class="mlogo">Tools Media <b>Downloader</b></a><button class="cb" id="mc" aria-label="Close menu">×</button></div><nav aria-label="Mobile navigation" id="mn"></nav></div></div>
+<main id="main-content" tabindex="-1"><section class="hero"><h1>Terms of <em>Service</em></h1><p>Please read these terms carefully before using our services.</p></section><div class="art prose"><span class="upd">Last updated: November 11, 2026</span><h2 id="1-acceptance-of-terms">1. Acceptance of terms</h2><p>By accessing and using Tools Media Downloader ("the Site"), you accept and agree to be bound by these Terms of Service. If you do not agree with any part of them, you may not use our services.</p><h2 id="2-description-of-service">2. Description of service</h2><p>Tools Media Downloader provides free, browser-based online tools, including:</p><ul><li>Social media video and image downloaders</li><li>GIF, image and video conversion and compression tools</li><li>PDF tools</li><li>QR code generator</li><li>Text tools</li></ul><p>We also publish blog guides for information and education.</p><h2 id="3-user-responsibilities">3. User responsibilities</h2><p>When using our tools, you agree to:</p><ul><li>Use the tools only for lawful purposes</li><li>Respect copyright and intellectual property rights</li><li>Not use our tools to download content you do not have permission to download</li><li>Not attempt to reverse-engineer, hack or disrupt our services</li><li>Not use automated scripts or bots to access our tools</li></ul><h2 id="4-intellectual-property">4. Intellectual property</h2><p>The content, design, code and materials on the Site are owned by us or our licensors and are protected by copyright laws. You may not reproduce, distribute or create derivative works without our written permission.</p><h2 id="5-copyright-and-fair-use">5. Copyright and fair use</h2><p>Our download tools are intended for personal, fair use purposes. You are responsible for making sure you have the right to download any content. We do not host, store or cache downloaded content on our servers.</p><h2 id="6-privacy">6. Privacy</h2><p>Most tools process files in your browser. Downloader tools send the link you paste to third-party services. We use cookies and third-party analytics and advertising services. See our <a href="privacy.html">Privacy Policy</a> for details.</p><h2 id="7-advertisements">7. Advertisements</h2><p>We display advertisements through Google AdSense to support our free services. These third parties may use cookies to show relevant ads. By using the Site, you accept the display of advertisements.</p><h2 id="8-disclaimer-of-warranties">8. Disclaimer of warranties</h2><p>Our tools are provided "as is," without warranties of any kind, express or implied. We do not guarantee that the tools will be error-free, uninterrupted or compatible with every device and browser.</p><h2 id="9-limitation-of-liability">9. Limitation of liability</h2><p>Tools Media Downloader is not liable for indirect, incidental, special or consequential damages arising from the use of, or inability to use, our services, including data loss, file corruption or system damage.</p><h2 id="10-changes-to-terms">10. Changes to terms</h2><p>We may update these Terms of Service at any time. Continued use of the Site after changes means you accept the new terms.</p><h2 id="11-governing-law">11. Governing law</h2><p>These terms are governed by applicable law, without regard to conflict-of-law principles.</p><h2 id="12-contact">12. Contact</h2><p>For questions about these Terms, please <a href="contact.html">contact us</a>.</p></div></main>
+<footer><div class="fgr">
+<div><h3>Tools Media Downloader</h3><p style="color:#ccc;font-size:.92rem">Free browser-based tools for creators, developers & everyone.</p></div>
+<div><h3>Quick Links</h3><ul><li><a href="index.html">Home</a></li><li><a href="blog.html">Blog</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+<div><h3>Tools</h3><ul><li><a href="pdf-tools.html">PDF Tools</a></li><li><a href="video-to-gif.html">Video to GIF</a></li><li><a href="qr-generator.html">QR Generator</a></li><li><a href="image-converter.html">Image Converter</a></li><li><a href="text-tools.html">Text Tools</a></li></ul></div>
+<div><h3>Legal</h3><ul><li><a href="privacy.html">Privacy Policy</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="terms.html">Terms of Service</a></li><li><a href="dmca.html">DMCA</a></li></ul></div></div>
+<div class="fb"><p>© <span id="yr"></span> Tools Media Downloader. All rights reserved.</p><p>This site may show ads from Google AdSense and uses Google Analytics. See our <a href="privacy.html" style="text-decoration:underline">Privacy Policy</a>. Instagram, Facebook and TikTok are trademarks of their owners; we are not affiliated with them.</p></div></footer>
+<div class="ck" id="ck" role="region" aria-label="Cookie notice" hidden><span>We use cookies for analytics and to show ads. See our <a href="privacy.html">Privacy Policy</a>.</span><button id="ckb">Got it</button></div>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+$("yr").textContent=new Date().getFullYear();
+var hd=$("hd"),tk=false;
+addEventListener("scroll",function(){if(!tk){tk=true;requestAnimationFrame(function(){hd.classList.toggle("sc",scrollY>10);tk=false})}},{passive:true});
+var dd=$("dd"),dl=dd.querySelector("a");
+dl.addEventListener("click",function(e){if(matchMedia("(hover: none)").matches){e.preventDefault();dd.classList.toggle("open");dl.setAttribute("aria-expanded",dd.classList.contains("open"))}});
+document.addEventListener("click",function(e){if(!dd.contains(e.target)){dd.classList.remove("open");dl.setAttribute("aria-expanded","false")}});
+var mn=$("mn"),h='<a href="index.html">Home</a><a href="blog.html">Blog</a><a href="about.html">About</a><a href="contact.html">Contact</a><div class="ml">Tools</div><div class="sub">';
+[].forEach.call(dd.querySelectorAll(".dm a"),function(a){h+='<a href="'+a.getAttribute("href")+'">'+a.textContent+'</a>'});
+mn.innerHTML=h+'</div><div class="ml">Legal</div><div class="sub"><a href="privacy.html">Privacy Policy</a><a href="disclaimer.html">Disclaimer</a><a href="terms.html">Terms of Service</a><a href="dmca.html">DMCA</a></div>';
+var mm=$("mm"),mt=$("mt"),mc=$("mc"),last=null;
+function openM(){last=document.activeElement;mm.classList.add("on");mt.setAttribute("aria-expanded","true");document.body.style.overflow="hidden";setTimeout(function(){mc.focus()},50)}
+function closeM(){mm.classList.remove("on");mt.setAttribute("aria-expanded","false");document.body.style.overflow="";if(last)last.focus()}
+mt.addEventListener("click",openM);mc.addEventListener("click",closeM);
+mm.addEventListener("click",function(e){if(e.target===mm||e.target.tagName==="A")closeM()});
+document.addEventListener("keydown",function(e){
+if(!mm.classList.contains("on"))return;
+if(e.key==="Escape")return closeM();
+if(e.key==="Tab"){var f=mm.querySelectorAll("a,button"),a=f[0],z=f[f.length-1];
+if(e.shiftKey&&document.activeElement===a){z.focus();e.preventDefault()}else if(!e.shiftKey&&document.activeElement===z){a.focus();e.preventDefault()}}});
+var root=document.documentElement,tg=$("tg"),tcm=document.querySelector('meta[name="theme-color"]');
+function setT(d){if(d)root.setAttribute("data-theme","dark");else root.removeAttribute("data-theme");tg.setAttribute("aria-checked",d?"true":"false");tg.setAttribute("aria-label",d?"Switch to light mode":"Switch to dark mode");tcm.setAttribute("content",d?"#14100E":"#FFFAF5")}
+setT(root.getAttribute("data-theme")==="dark");
+tg.addEventListener("click",function(){var d=root.getAttribute("data-theme")!=="dark";setT(d);try{localStorage.setItem("tmd_theme",d?"dark":"light")}catch(e){}});
+/* follow + notifications (3 per day) */
+var fl=$("fl"),fx=$("fx"),ts=$("ts"),tt,FK="tmd_follow",LK="tmd_last",SLOTS=[9,14,20];
+var MSG=[{t:"Shrink a GIF in seconds",b:"Compress animated GIFs right in your browser.",u:"gif-compressor.html"},{t:"Merge or split PDFs",b:"Free PDF tools, no signup needed.",u:"pdf-tools.html"},{t:"Make a QR code",b:"Create QR codes for links, WiFi and text.",u:"qr-generator.html"},{t:"Resize for any platform",b:"Instagram, YouTube and more, sized right.",u:"image-resizer.html"},{t:"Convert any image",b:"PNG, JPG, WebP and BMP in one click.",u:"image-converter.html"},{t:"Turn a video into a GIF",b:"Convert MP4 and WebM to animated GIFs.",u:"video-to-gif.html"}];
+function toast(m){ts.textContent=m;ts.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){ts.classList.remove("on")},4800)}
+function sup(){return "Notification" in window&&"serviceWorker" in navigator}
+function isF(){try{return localStorage.getItem(FK)==="1"&&sup()&&Notification.permission==="granted"}catch(e){return false}}
+function paint(){var f=isF();fl.classList.toggle("on",f);fl.setAttribute("aria-pressed",f?"true":"false");fx.textContent=f?"Following":"Follow"}
+function reg(){return navigator.serviceWorker.register("sw.js").then(function(){return navigator.serviceWorker.ready})}
+function show(t,o){return reg().then(function(r){return r.showNotification(t,o)}).catch(function(){try{var n=new Notification(t,{body:o.body,tag:o.tag});n.onclick=function(){n.close();window.focus();location.href=o.data.url}}catch(e){}})}
+function slot(){var h=new Date().getHours(),i=-1;for(var k=0;k<SLOTS.length;k++)if(h>=SLOTS[k])i=k;if(i<0)return null;var n=new Date();return{i:i,k:n.getFullYear()+"-"+(n.getMonth()+1)+"-"+n.getDate()+"-"+i}}
+function mark(){var s=slot();try{if(s)localStorage.setItem(LK,s.k)}catch(e){}}
+function tick(){if(!isF())return;var s=slot();if(!s)return;var l;try{l=localStorage.getItem(LK)}catch(e){}if(l===s.k)return;mark();
+var m=MSG[(Math.floor(Date.now()/864e5)*3+s.i)%MSG.length];show(m.t,{body:m.b,tag:"tmd-"+s.k,data:{url:m.u}})}
+function psync(on){reg().then(function(r){if(!r.periodicSync)return;if(!on)return r.periodicSync.unregister("tmd-tips");return navigator.permissions.query({name:"periodic-background-sync"}).then(function(p){if(p.state==="granted")return r.periodicSync.register("tmd-tips",{minInterval:8*36e5})})}).catch(function(){})}
+fl.addEventListener("click",function(){
+if(isF()){try{localStorage.removeItem(FK)}catch(e){}psync(false);paint();toast("You unfollowed. No more notifications.");return}
+if(!sup()){toast("This browser can't show web notifications. Try Chrome, Edge, Firefox, or add the site to your Home Screen on iPhone.");return}
+if(Notification.permission==="denied"){toast("Notifications are blocked. Allow them in your browser's site settings, then tap Follow again.");return}
+Notification.requestPermission().then(function(p){if(p!=="granted"){toast("Please allow notifications to follow.");return}
+try{localStorage.setItem(FK,"1")}catch(e){}mark();paint();psync(true);
+show("You're following Tools Media Downloader",{body:"You'll get 3 short tool tips a day. Tap Following anytime to stop.",tag:"tmd-welcome",data:{url:"index.html"}});
+toast("Following! You'll get 3 notifications a day.")})});
+paint();tick();setInterval(tick,6e4);document.addEventListener("visibilitychange",function(){if(!document.hidden)tick()});
+var ck=$("ck");try{if(!localStorage.getItem("ck1"))ck.hidden=false}catch(e){ck.hidden=false}
+$("ckb").addEventListener("click",function(){ck.hidden=true;try{localStorage.setItem("ck1","1")}catch(e){}});
+})();
+</script>
 
-    <!-- HEADER -->
-    <header id="siteHeader">
-        <div class="nav-wrap">
-            <a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a>
-
-            <nav aria-label="Main navigation">
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-
-            <button class="hamburger" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
-        </div>
-    </header>
-
-    <!-- Mobile overlay + slide-in panel -->
-    <div class="mobile-overlay" id="mobileOverlay"></div>
-    <div class="mobile-panel" id="mobilePanel" role="dialog" aria-label="Mobile navigation">
-        <a href="index.html">Home</a>
-        <a href="blog.html">Blog</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <div class="mobile-section-label">Tools</div>
-        <div class="mobile-sub">
-            <a href="gif-compressor.html">GIF Compressor</a>
-            <a href="image-converter.html">Image Converter</a>
-            <a href="image-resizer.html">Image Resizer</a>
-            <a href="pdf-tools.html">PDF Tools</a>
-            <a href="instagram-downloader.html">Instagram Downloader</a>
-            <a href="facebook-downloader.html">Facebook Downloader</a>
-            <a href="tiktok-downloader.html">TikTok Downloader</a>
-            <a href="qr-generator.html">QR Code Generator</a>
-            <a href="color-picker.html">Color Picker</a>
-            <a href="text-tools.html">Text Tools</a>
-        </div>
-    </div>
-
-    <!-- HERO -->
-    <section class="page-hero">
-        <h1>Terms of <span>Service</span></h1>
-        <p>Please read these terms carefully before using our services.</p>
-    </section>
-
-    <div class="last-updated">Last Updated: January 1, 2026</div>
-
-    <!-- MAIN CONTENT -->
-    <main class="page-container">
-        <div class="content-card">
-            <h2>1. Acceptance of Terms</h2>
-            <p>By accessing and using ToolsMediaDownload ("the Site"), you accept and agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you may not use our services.</p>
-
-            <h2>2. Description of Service</h2>
-            <p>ToolsMediaDownload provides free, browser-based online tools including but not limited to:</p>
-            <ul>
-                <li>Social media video and image downloaders</li>
-                <li>Image compression and conversion tools</li>
-                <li>PDF manipulation tools</li>
-                <li>QR code generators</li>
-                <li>Text and utility tools</li>
-            </ul>
-
-            <h2>3. User Responsibilities</h2>
-            <p>When using our tools, you agree to:</p>
-            <ul>
-                <li>Use the tools only for lawful purposes</li>
-                <li>Respect copyright and intellectual property rights</li>
-                <li>Not use our tools to download content you don't have permission to download</li>
-                <li>Not attempt to reverse-engineer, hack, or disrupt our services</li>
-                <li>Not use automated scripts or bots to access our tools</li>
-            </ul>
-
-            <h2>4. Intellectual Property</h2>
-            <p>The content, design, code, and all materials on ToolsMediaDownload are owned by us and are protected by copyright laws. You may not reproduce, distribute, or create derivative works without our written permission.</p>
-
-            <h2>5. Copyright &amp; Fair Use</h2>
-            <p>Our download tools are intended for personal, fair use purposes only. Users are responsible for ensuring they have the right to download any content. We do not host, store, or cache any downloaded content on our servers.</p>
-
-            <h2>6. Privacy</h2>
-            <p>All tools process data locally in your browser. We do not collect, store, or transmit your files. We may use cookies and third-party analytics/advertising services. For more details, see our privacy practices on the Disclaimer page.</p>
-
-            <h2>7. Advertisements</h2>
-            <p>We display advertisements through Google AdSense and other ad networks to support our free services. These third-party services may use cookies to serve relevant ads. By using our Site, you consent to the display of advertisements.</p>
-
-            <h2>8. Disclaimer of Warranties</h2>
-            <p>Our tools are provided "as is" without warranties of any kind, either express or implied. We do not guarantee that our tools will be error-free, uninterrupted, or compatible with all devices and browsers.</p>
-
-            <h2>9. Limitation of Liability</h2>
-            <p>ToolsMediaDownload shall not be liable for any indirect, incidental, special, or consequential damages resulting from the use or inability to use our services, including but not limited to data loss, file corruption, or system damage.</p>
-
-            <h2>10. Changes to Terms</h2>
-            <p>We reserve the right to update or modify these Terms of Service at any time. Continued use of the Site after changes constitutes acceptance of the new terms.</p>
-
-            <h2>11. Governing Law</h2>
-            <p>These terms shall be governed by and construed in accordance with applicable laws, without regard to conflict of law principles.</p>
-
-            <h2>12. Contact</h2>
-            <p>For questions about these Terms, please <a href="contact.html">contact us</a>.</p>
-        </div>
-    </main>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <a href="index.html" class="logo">⚡ ToolsMedia<span>Download</span></a>
-                <p>Fast, free, and secure online media downloaders, file converters, and utility tools. 100% client-side processing for ultimate privacy.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Popular Tools</h4>
-                <ul>
-                    <li><a href="gif-compressor.html">GIF Compressor</a></li>
-                    <li><a href="image-converter.html">Image Converter</a></li>
-                    <li><a href="instagram-downloader.html">Instagram Downloader</a></li>
-                    <li><a href="tiktok-downloader.html">TikTok Downloader</a></li>
-                    <li><a href="pdf-tools.html">PDF Tools</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="disclaimer.html">Disclaimer</a></li>
-                    <li><a href="terms.html">Terms of Service</a></li>
-                    <li><a href="dmca.html">DMCA Policy</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 ToolsMediaDownload. All rights reserved.</p>
-            <div class="social-links">
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- FontAwesome (for footer social icons) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <script>
-        /* ===== HEADER SCROLL SHADOW ===== */
-        const siteHeader = document.getElementById('siteHeader');
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                requestAnimationFrame(() => {
-                    siteHeader.classList.toggle('scrolled', window.scrollY > 10);
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        }, { passive: true });
-
-        /* ===== MOBILE MENU (slide-in panel + overlay + focus trap + ESC) ===== */
-        const menuToggle = document.getElementById('menuToggle');
-        const mobileOverlay = document.getElementById('mobileOverlay');
-        const mobilePanel = document.getElementById('mobilePanel');
-        let lastFocused = null;
-
-        function openMenu() {
-            lastFocused = document.activeElement;
-            document.body.classList.add('menu-open');
-            mobileOverlay.style.display = 'block';
-            mobilePanel.style.display = 'block';
-            requestAnimationFrame(() => {
-                mobileOverlay.classList.add('visible');
-                mobilePanel.classList.add('open');
-            });
-            menuToggle.setAttribute('aria-expanded', 'true');
-            menuToggle.textContent = '✕';
-            const firstLink = mobilePanel.querySelector('a');
-            if (firstLink) setTimeout(() => firstLink.focus(), 350);
-        }
-
-        function closeMenu() {
-            mobileOverlay.classList.remove('visible');
-            mobilePanel.classList.remove('open');
-            menuToggle.setAttribute('aria-expanded', 'false');
-            menuToggle.textContent = '☰';
-            document.body.classList.remove('menu-open');
-            setTimeout(() => {
-                mobileOverlay.style.display = 'none';
-                mobilePanel.style.display = 'none';
-            }, 350);
-            if (lastFocused) lastFocused.focus();
-        }
-
-        menuToggle.addEventListener('click', () => {
-            const isOpen = mobilePanel.classList.contains('open');
-            isOpen ? closeMenu() : openMenu();
-        });
-
-        mobileOverlay.addEventListener('click', closeMenu);
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && mobilePanel.classList.contains('open')) {
-                closeMenu();
-            }
-            if (e.key === 'Tab' && mobilePanel.classList.contains('open')) {
-                const focusable = mobilePanel.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
-                const allFocusable = [menuToggle, ...focusable];
-                const first = allFocusable[0];
-                const last = allFocusable[allFocusable.length - 1];
-                if (e.shiftKey && document.activeElement === first) {
-                    e.preventDefault();
-                    last.focus();
-                } else if (!e.shiftKey && document.activeElement === last) {
-                    e.preventDefault();
-                    first.focus();
-                }
-            }
-        });
-
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768 && mobilePanel.classList.contains('open')) {
-                closeMenu();
-            }
-        });
-    </script>
 </body>
 </html>
