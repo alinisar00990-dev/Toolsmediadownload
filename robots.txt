@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /sw.js
 
-Sitemap: https://toolsmediadownload.com/sitemap.xml
+User-agent: Mediapartners-Google
+Allow: /
+
+Sitemap: https://toolsmediadownload.online/sitemap.xml
