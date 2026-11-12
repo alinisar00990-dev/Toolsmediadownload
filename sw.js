@@ -1,12 +1,10 @@
 /* Tools Media Downloader service worker: follow notifications */
 var SLOTS=[9,14,20];
 var MSG=[
-{t:"Shrink a GIF in seconds",b:"Compress animated GIFs right in your browser.",u:"gif-compressor.html"},
 {t:"Merge or split PDFs",b:"Free PDF tools, no signup needed.",u:"pdf-tools.html"},
 {t:"Make a QR code",b:"Create QR codes for links, WiFi and text.",u:"qr-generator.html"},
-{t:"Resize for any platform",b:"Instagram, YouTube and more, sized right.",u:"image-resizer.html"},
-{t:"Convert any image",b:"PNG, JPG, WebP and BMP in one click.",u:"image-converter.html"},
-{t:"Turn a video into a GIF",b:"Convert MP4 and WebM to animated GIFs.",u:"video-to-gif.html"}];
+{t:"Convert any image",b:"PNG, JPG, WebP and BMP in one click.",u:"image-converter.html"}
+];
 self.addEventListener("install",function(){self.skipWaiting()});
 self.addEventListener("activate",function(e){e.waitUntil(self.clients.claim())});
 function slot(){var h=new Date().getHours(),i=-1;for(var k=0;k<SLOTS.length;k++)if(h>=SLOTS[k])i=k;return i}
